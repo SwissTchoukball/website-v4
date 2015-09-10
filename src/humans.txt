@@ -1,0 +1,37 @@
+/* TEAM */
+	Current main developer: David Sandoz
+	Contact: david.sandoz [at] tchoukball.ch
+	Twitter: @DavidSandoz
+	From: Switzerland
+
+	Initial version developer: Romain Schmocker
+	From: Lausanne, Switzerland
+
+/* THANKS */
+
+	News Writer: Jérémie Esteves
+	Contact: jeremie.esteves [at] tchoukball.ch
+	Twitter: @komischao
+	From: Nyon, Switzerland
+
+	IT Translator: Silvio Da Paré
+	From: Neuchâtel, Switzerland
+
+	DE Translator: Friederike Ilschner
+	From: Martigny, Switzerland
+
+	DE Translator: Pascal Kuhn
+	From: Bern, Switzerland
+
+	DE Translator: Erika Mesmer
+	From: Geneva, Switzerland
+
+	EN Translator: David Sandoz
+	Contact: david.sandoz [at] tchoukball.ch
+	Twitter: @DavidSandoz
+	From: Switzerland
+
+
+/* SITE */
+	Language: Français / Deutsch / Italiano / English
+	IDE: Coda
