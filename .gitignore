@@ -56,5 +56,17 @@ sftp-config.json
 config.php
 config-dev.php
 
-
 .htpasswd
+
+# Directories with DB related content #
+#######################################
+documents/
+uploads/
+!uploads/*/
+uploads/vignettes/
+!uploads/vignettes/*.html
+!uploads/vignettes/*.php
+pictures/equipesSuisses/
+pictures/logos/
+pictures/logos_clubs/
+pictures/portraits/
