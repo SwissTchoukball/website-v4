@@ -55,3 +55,6 @@ sftp-config.json
 #######################
 config.php
 config-dev.php
+
+
+.htpasswd
