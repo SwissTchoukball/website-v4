@@ -7,7 +7,7 @@
         <meta name="keywords" content="Tchouk, Tchoukball, Tchouk-ball, Fair-play, Sport, sport pour tous, prix thulin, site officiel, official web site, Swiss Tchoukball, FSTB, Fédération Suisse de Tchoukball, Schweizerischer Tchoukball, Swiss Tchoukball Federation, Federazione Svizzera di Tchoukball" />
         <meta name="description" content="Tchoukball : Sport pour tous. venez decouvrir ce nouveau sport qui est le sport de demain. Site officiel de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?>. En français. Auf Deutsch. In English. In italiano." />
         <meta name="Revisit-after" content="14 days">
-        <meta http-equiv="Content-Language" content="<? echo strtolower($_SESSION["__langue__"]);?>">
+        <meta http-equiv="Content-Language" content="<?php echo strtolower($_SESSION["__langue__"]);?>">
         <meta name="Identifier-url" content="http://www.tchoukball.ch">
         <!-- Icon for Pinned Tabs (Safari 9) -->
         <link rel="icon" sizes="any" mask href="website_icon.svg">
@@ -31,19 +31,19 @@
 		<meta name="msapplication-TileImage" content="/mstile-144x144.png">
         <!-- /Favicons -->
         <!-- Facebook metatags -->
-        <meta property="og:title" content="<? echo VAR_LANG_ASSOCIATION_NAME.$titre; ?>"/>
+        <meta property="og:title" content="<?php echo VAR_LANG_ASSOCIATION_NAME.$titre; ?>"/>
         <meta property="og:image" content="http://www.tchoukball.ch/pictures/Logo-SwissTchoukball_500.png"/>
-		<meta property="og:type" content="<? echo $facebook_type; ?>" />
-		<meta property="og:url" content="<? echo "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>" />
+		<meta property="og:type" content="<?php echo $facebook_type; ?>" />
+		<meta property="og:url" content="<?php echo "http://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"]; ?>" />
 		<meta property="og:site_name" content="<?php echo VAR_LANG_ASSOCIATION_NAME; ?>" />
-		<meta property="og:description" content="<? echo $description; ?>"/>
+		<meta property="og:description" content="<?php echo $description; ?>"/>
 		<meta property="fb:app_id" content="119853652572"/>
 		<meta property="fb:admins" content="817753010"/>
         <!-- /Facebook metatags -->
         <link rel="stylesheet" type="text/css" href="/styles/main.css">
         <link rel="stylesheet" type="text/css" href="/styles/livescores.css"> <!-- For Tchoukball World live scores -->
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="alternate" type="application/rss+xml" href="http://www.tchoukball.ch/rss<? echo $_SESSION["__langue__"]; ?>.php" />
+		<link rel="alternate" type="application/rss+xml" href="http://www.tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php" />
 	</head>
 	<body>
 		<!--<script>
@@ -59,7 +59,7 @@
 				var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) {return;}
 				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/<? echo $locale_code; ?>/sdk.js";
+				js.src = "//connect.facebook.net/<?php echo $locale_code; ?>/sdk.js";
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 	    </script>-->
@@ -69,7 +69,7 @@
 		  var js, fjs = d.getElementsByTagName(s)[0];
 		  if (d.getElementById(id)) return;
 		  js = d.createElement(s); js.id = id;
-		  js.src = "//connect.facebook.net/<? echo $locale_code; ?>/sdk.js#xfbml=1&version=v2.4&appId=119853652572";
+		  js.src = "//connect.facebook.net/<?php echo $locale_code; ?>/sdk.js#xfbml=1&version=v2.4&appId=119853652572";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));</script>
 
