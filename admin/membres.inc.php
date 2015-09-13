@@ -3,8 +3,8 @@
 	statInsererPageSurf(__FILE__);
 	?>
 
-	<p><a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&new"><img src="admin/images/ajouter.png" alt="Ajouter un membre" /> Ajouter un membre</a><br />
-	<a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>"><img src="admin/images/liste.png" alt="Liste des membres détaillée" /> Liste des membres</a></p>
+	<p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img src="admin/images/ajouter.png" alt="Ajouter un membre" /> Ajouter un membre</a><br />
+	<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"><img src="admin/images/liste.png" alt="Liste des membres détaillée" /> Liste des membres</a></p>
 
 	<?php
 

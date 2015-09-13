@@ -1,10 +1,10 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 ?>
 <script src="http://live.tchoukballworld.net/components/event-11/results"></script>
 <div>
-	<?	 	    
+	<?php
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '35' ORDER BY paragrapheNum");
     // affiche le texte
     while($donnees = mysql_fetch_array($retour)) {
@@ -19,8 +19,8 @@ statInsererPageSurf(__FILE__);
                 echo afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
                 echo "</p>";
             }
-    }	 
-	
+    }
+
 	?>
 </div>
 

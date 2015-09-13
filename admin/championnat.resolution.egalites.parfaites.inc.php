@@ -1,7 +1,7 @@
 <div class="insererMatch">
-    <?
+    <?php
 	statInsererPageSurf(__FILE__);
-	
+
 		if(isset($_POST['type'])){
 			if($_POST['type']=='manuel'){
 				$requeteModifierOrdre=array();
@@ -48,16 +48,16 @@
 				echo "<br />ERREUR F1<br />";
 			}
 		}
-	
-		
+
+
 	$requete="SELECT Championnat_Equipes.idEquipe, equipe, saison, categorie".$_SESSION['__langue__']." AS categorie, tour".$_SESSION['__langue__']." AS tour, noGroupe, points FROM Championnat_Equipes_Tours, Championnat_Equipes, Championnat_Categories, Championnat_Types_Tours WHERE egaliteParfaite=1 AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND Championnat_Categories.idCategorie=Championnat_Equipes_Tours.idCategorie AND Championnat_Types_Tours.idTour=Championnat_Equipes_Tours.idTour ORDER BY points, equipe";
 	$retour=mysql_query($requete);
 	if(mysql_num_rows($retour)>0){
-		$pointsAvant=-1;		
+		$pointsAvant=-1;
 		echo "<h3>".VAR_LANG_EGALITE_ORDRE_ALPHABETIQUE."</h3>";
 		echo "<h5>".VAR_LANG_PAS_TOUCHER_POUR_RESOUDRE_EGALITE."</h5>";
 		?>
-			<?
+			<?php
 			$premier=true;
 			while($donnees=mysql_fetch_array($retour)){
 				if($pointsAvant!=$donnees['points']){ // Pour regrouper les équipes à égalités.
@@ -95,20 +95,20 @@
 			echo "</fieldset>";
 			echo "</form>";
 			?>
-		<?		
+		<?php
 	}
 	else{
 		echo "<h3>".VAR_LANG_PAS_EGALITES_PARFAITES."</h3>";
-		
+
 	}
-		
+
 	$requete="SELECT Championnat_Equipes.idEquipe, equipe, saison, categorie".$_SESSION['__langue__']." AS categorie, tour".$_SESSION['__langue__']." AS tour, noGroupe, points, egaliteParfaite FROM Championnat_Equipes_Tours, Championnat_Equipes, Championnat_Categories, Championnat_Types_Tours WHERE egaliteParfaite>1 AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND Championnat_Categories.idCategorie=Championnat_Equipes_Tours.idCategorie AND Championnat_Types_Tours.idTour=Championnat_Equipes_Tours.idTour ORDER BY points, equipe";
 	$retour=mysql_query($requete);
 	if(mysql_num_rows($retour)>0){
-		$pointsAvant=-1;		
+		$pointsAvant=-1;
 		echo "<h4>".VAR_LANG_EGALITES_PARFAITES_RESOLUES_HASARD."</h4><br />";
 		?>
-		<?
+		<?php
 		$premier=true;
 		while($donnees=mysql_fetch_array($retour)){
 			if($pointsAvant!=$donnees['points']){ // Pour regrouper les équipes à égalités.

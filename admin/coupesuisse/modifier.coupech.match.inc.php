@@ -1,4 +1,4 @@
-<?
+<?php
 if(isset($_GET['modAnnee'])){
     include('modifier.coupech.match.etape2.inc.php');
 }

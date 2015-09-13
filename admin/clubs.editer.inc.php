@@ -85,8 +85,8 @@ if ($newClub) {
 }
 if	($canEdit) {
 	?>
-	<h3><? echo $formLegend; ?></h3>
-	<form method="post" onsubmit="return checkClubForm();" name="clubEdit" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>" class="adminForm">
+	<h3><?php echo $formLegend; ?></h3>
+	<form method="post" onsubmit="return checkClubForm();" name="clubEdit" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>" class="adminForm">
 		<fieldset>
 			<label for="shortName">Nom court</label>
 			<?php
@@ -126,11 +126,11 @@ if	($canEdit) {
 			<span class="infobulle">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
 			<span id="addressPreview"><!-- rempli avec du Javascript --></span>
 			<label for="address1">Adresse</label>
-			<textarea id="address" name="address" onkeyup="updateAddressPreview();"><? echo $address; ?></textarea>
+			<textarea id="address" name="address" onkeyup="updateAddressPreview();"><?php echo $address; ?></textarea>
 			<label for="zipCode">NPA</label>
-			<input type="text" id="npa" name="npa" onkeyup="updateAddressPreview();" value="<? echo $npa; ?>" />
+			<input type="text" id="npa" name="npa" onkeyup="updateAddressPreview();" value="<?php echo $npa; ?>" />
 			<label for="city">Ville</label>
-			<input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<? echo $city; ?>" />
+			<input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<?php echo $city; ?>" />
 			<label>Canton</label>
 			<?php
 			if ($_SESSION['__userLevel__'] <= 0) {
@@ -153,16 +153,16 @@ if	($canEdit) {
 			<span class="infobulle">Si aucune information n'est indiquée, celles du ou de la président-e sont utilisées.</span>
 			<span id="infoPreview"><!-- rempli avec du Javascript --></span>
 			<label for="phone">Téléphone</label>
-			<input type="text" id="phone" name="phone" onkeyup="updateInfoPreview();" value="<? echo $phone; ?>" />
+			<input type="text" id="phone" name="phone" onkeyup="updateInfoPreview();" value="<?php echo $phone; ?>" />
 			<label for="email">E-mail</label>
-			<input type="text" id="email" name="email" onkeyup="updateInfoPreview();" value="<? echo $email; ?>" />
+			<input type="text" id="email" name="email" onkeyup="updateInfoPreview();" value="<?php echo $email; ?>" />
 			<label for="url">Site web</label>
-			<input type="text" id="url" name="url" onkeyup="updateInfoPreview();" value="<? echo $url; ?>" />
+			<input type="text" id="url" name="url" onkeyup="updateInfoPreview();" value="<?php echo $url; ?>" />
 		</fieldset>
-		<input type="hidden" name="clubID" value="<? echo $clubID; ?>" />
+		<input type="hidden" name="clubID" value="<?php echo $clubID; ?>" />
 		<input type="hidden" name="postType" value="<?php echo $postType; ?>" />
 
-		<input type="submit" value="<? echo $sendButtonValue; ?>" />
+		<input type="submit" value="<?php echo $sendButtonValue; ?>" />
 		<!-- Hidden inputs useful only for address preview -->
 		<input type="hidden" id="presidentFirstName" value="<?php echo $presidentFirstName; ?>" />
 		<input type="hidden" id="presidentLastName" value="<?php echo $presidentLastName; ?>" />
@@ -173,20 +173,20 @@ if	($canEdit) {
 		<input type="hidden" id="presidentPhone" value="<?php echo $presidentPhone; ?>" />
 		<input type="hidden" id="presidentMobile" value="<?php echo $presidentMobile; ?>" />
 	</form>
-	<?
+	<?php
 	if (!$newMember) {
 		?>
-		<p>Dernière modification le <? echo date_sql2date($lastEdit);?> par <? echo $lastEditorName;?></p>
-		<?
+		<p>Dernière modification le <?php echo date_sql2date($lastEdit);?> par <?php echo $lastEditorName;?></p>
+		<?php
 	}
 }
 ?>
 <script lang="javascript">
 
 	var couleurErreur;
-	couleurErreur='#<? echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
+	couleurErreur='#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
 	var couleurValide;
-	couleurValide='#<? echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+	couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
 
 	function checkClubForm(){
 

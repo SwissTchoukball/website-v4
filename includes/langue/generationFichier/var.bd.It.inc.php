@@ -1,4 +1,4 @@
-<?
+<?php
 //MENU_WEB
 $VAR_TAB_MENU_WEB = array(
 array(new Menu("","","","0","100","1","0","0",""), array(new Menu("","pages/news.inc.php","pages/news.inc.php","0","100","51","0","0",""),
@@ -39,10 +39,10 @@ new Menu("","pages/download.championnat.inc.php","pages/download.championnat.inc
 new Menu("","pages/download.arbitrage.inc.php","pages/download.arbitrage.inc.php","0","100","44","0","0",""),
 new Menu("","pages/download.tournois.inc.php","pages/download.tournois.inc.php","0","100","45","0","0",""),
 new Menu("","pages/download.reglements.inc.php","pages/download.reglements.inc.php","0","100","46","0","0",""),
-new Menu("","pages/download.memoireAOS.inc.php","pages/download.memoireAOS.inc.php","0","100","47","0","0","")))); 
+new Menu("","pages/download.memoireAOS.inc.php","pages/download.memoireAOS.inc.php","0","100","47","0","0",""))));
 ?>
 
-<?
+<?php
 //MENU_ADMIN
 $VAR_TAB_MENU_ADMIN = array(
 array(new Menu("","","","0","10","1","0","0",""), array(new Menu("","admin/mes.infos.inc.php","admin/mes.infos.inc.php","0","10","3","0","0",""),
@@ -76,171 +76,171 @@ new Menu("","admin/statistique.personne.admin.inc.php","admin/statistique.person
 array(new Menu("","","","0","7","40","0","0",""), array(new Menu("","admin/translate.body.inc.php","admin/translate.body.inc.php","0","7","41","0","0",""),
 new Menu("","admin/translate.choix.table.champ.inc.php","admin/translate.choix.table.champ.inc.php","0","0","42","0","0",""))),
 array(new Menu("","http://www.tchoukball.ch/includes/langue/generationFichier/gen.fichier.bd.php","http://www.tchoukball.ch/includes/langue/generationFichier/gen.fichier.bd.php","1","0","5","0","0","")),
-array(new Menu("","pages/testnews.inc.php","pages/testnews.inc.php","0","0","33","0","0",""))); 
+array(new Menu("","pages/testnews.inc.php","pages/testnews.inc.php","0","0","33","0","0","")));
 ?>
 
-<?
+<?php
 //NEWSLETTER
 $VAR_TAB_NEWSLETTER = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //historique
 $VAR_TAB_HISTORIQUE = array(
-"", 
-""); 
+"",
+"");
 ?>
 
-<?
+<?php
 //REGLES_TCHOUKBALL
 $VAR_TAB_REGLES_TCHOUKBALL = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //CHARTE_TCHOUKBALL
 $VAR_TAB_CHARTE_TCHOUKBALL = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //ARBITRE_FEDERATION
 $VAR_TAB_ARBITRE_FEDERATION = array(
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //JUNIOR_FEDERATION
 $VAR_TAB_JUNIOR_FEDERATION = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //PRESENTATION_TCHOUKBALL
 $VAR_TAB_PRESENTATION_TCHOUKBALL = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //FORMATION_ARBITRE
 $VAR_TAB_FORMATION_ARBITRE = array(
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //FORMATION_ARBITRE_JUNIOR
 $FORMATION_ARBITRE_JUNIOR = array(
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //FORMATION_GESTIONNAIRE_CLUB
 $VAR_TAB_FORMATION_GESTIONNAIRE_CLUB = array(
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //FORMATION_JS
 $VAR_TAB_FORMATION_JS = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //FORMATION_SWISSOLYMPIC
 $VAR_TAB_FORMATION_SWISSOLYMPIC = array(
-"", 
-"", 
-""); 
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //COMISSION_SPONSORING
 $VAR_TAB_COMISSION_SPONSORING = array(
-"", 
-"", 
-"", 
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //INTRO_SPONSORS
 $VAR_TAB_INTRO_SPONSORS = array(
-"", 
-""); 
+"",
+"");
 ?>
 
-<?
+<?php
 //MEDIA
 $VAR_TAB_MEDIA = array(
-"", 
-"", 
-"", 
-""); 
+"",
+"",
+"",
+"");
 ?>
 
-<?
+<?php
 //LIENS
 $VAR_TAB_LIENS = array(
 array("",array("http://www.lausannetchoukball.ch/",""),
@@ -269,10 +269,10 @@ array("","")),
 array("",array("http://163.16.47.136/ROCTBA/",""),
 array("http://laida.lzp.ks.edu.tw/tchouk/ball/indexe.htm",""),
 array("http://www3.starcat.ne.jp/~tchouk/",""),
-array("http://www.tchouk.net/",""))); 
+array("http://www.tchouk.net/","")));
 ?>
 
-<?
+<?php
 //VIDEOS
 $VAR_TAB_VIDEOS = array(
 array("","",array("","Videos/spot-low.avi"),
@@ -281,10 +281,10 @@ array("","Videos/spot-high.avi")),
 array("","",array("","Videos/tchoukball_finale_2003.mov"),
 array("","Videos/tchoukball_finale_2003.wmv"),
 array("","Videos/tchoukball_finale_2003_low_quality.mpg"),
-array("","Videos/tchoukball_finale_2003_high_quality.mpg"))); 
+array("","Videos/tchoukball_finale_2003_high_quality.mpg")));
 ?>
 
-<?
+<?php
 //SPONSORS
 $VAR_TAB_SPONSORS = array(
 array("",array("","logos/logo_val_de_travers.gif","http://www.centresportif-vdt.ch"),
@@ -292,6 +292,6 @@ array("","logos/tchoukball_promotion.gif","http://www.tchoukballpromotion.ch/"),
 array("","logos/logo_petroplus.gif","http://www.petroplus.ch/French/")),
 array("",array("","logos/rivella-red.gif","http://www.rivella.ch")),
 array("",array("","logos/logo-respect.gif","http://www.lerespect.ch/"),
-array("","logos/logo_js.gif","http://www.jeunesseetsport.ch/"))); 
+array("","logos/logo_js.gif","http://www.jeunesseetsport.ch/")));
 ?>
 

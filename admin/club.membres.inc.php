@@ -1,4 +1,4 @@
-<div id="membres"><?
+<div id="membres"><?php
 	statInsererPageSurf(__FILE__);
 
 	//$clubRequest = "SELECT nbIdClub AS idClub, gestionMembresClub, club FROM Personne, ClubsFstb WHERE Personne.nom='".$_SESSION["__nom__"]."' AND Personne.prenom='".$_SESSION["__prenom__"]."' AND Personne.idClub=ClubsFstb.id";
@@ -26,11 +26,11 @@
 		echo "<p class='info'>Vous ne pouvez pas faire de modification car le montant de la cotisation est bloqué et en attente de confirmation de paiement.</p>";
 	} else {
 		?>
-<p><a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&new"><img src="admin/images/ajouter.png" alt="Ajouter un membre" /> Ajouter un membre</a><br />
-<a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>"><img src="admin/images/liste.png" alt="Liste des membres simple" /> Liste des membres simple</a><br />
-<a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&details"><img src="admin/images/liste.png" alt="Liste des membres détaillée" /> Liste des membres détaillée</a><br />
+<p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img src="admin/images/ajouter.png" alt="Ajouter un membre" /> Ajouter un membre</a><br />
+<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"><img src="admin/images/liste.png" alt="Liste des membres simple" /> Liste des membres simple</a><br />
+<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"><img src="admin/images/liste.png" alt="Liste des membres détaillée" /> Liste des membres détaillée</a><br />
 <a href="admin/club.export.excel.php"><img src="admin/images/document_excel.png" alt="Liste Excel" /> Liste Excel</a></p>
-		<?
+		<?php
 
 		$newMember = false;
 		$nbError = 0;

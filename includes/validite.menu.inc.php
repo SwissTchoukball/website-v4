@@ -1,4 +1,4 @@
-<?
+<?php
 // regarde si les valeurs des menus sont corrects
 
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";

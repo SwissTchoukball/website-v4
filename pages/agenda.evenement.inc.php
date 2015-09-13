@@ -1,5 +1,5 @@
 
-<?
+<?php
 if(preg_match("#^M#",$_GET['idEvenement'])){ //Championnat
 	$idMatch=substr($_GET['idEvenement'],1);
 	$requete="SELECT equipeA, equipeB, salle, ville, Championnat_Matchs.dateDebut, Championnat_Matchs.dateFin, heureDebut, heureFin, couleur, Calendrier_Categories.nom AS nomCategorie, Calendrier_Vacances.nom AS nomVacances, Calendrier_Cantons.nom AS nomCanton, Championnat_Saisons.saison, Championnat_Categories.categorie".$_SESSION['__langue__'].", Championnat_Types_Tours.tour".$_SESSION['__langue__'].", noGroupe,  Championnat_Types_Matchs.type".$_SESSION['__langue__'].", Championnat_Types_Matchs.idTypeMatch FROM Championnat_Matchs, Championnat_Saisons, Championnat_Categories, Championnat_Types_Tours, Championnat_Types_Matchs, Calendrier_Categories, Calendrier_Vacances, Calendrier_Cantons WHERE idMatch=".$idMatch." AND Calendrier_Categories.id=4 AND Calendrier_Vacances.dateDebut<=Championnat_Matchs.dateDebut AND Calendrier_Vacances.dateFin>=Championnat_Matchs.dateFin AND Calendrier_Vacances.idCanton=Calendrier_Cantons.id AND Championnat_Matchs.saison=Championnat_Saisons.saison AND Championnat_Matchs.idCategorie=Championnat_Categories.idCategorie AND Championnat_Matchs.idTour=Championnat_Types_Tours.idTour AND Championnat_Matchs.idTypeMatch=Championnat_Types_Matchs.idTypeMatch";
@@ -99,4 +99,4 @@ echo "</fieldset>";
 
 $lienRetour="/calendrier/".$annee."/".$mois;
 ?>
-<p><a href="<? echo $lienRetour; ?>"><? echo VAR_LANG_RETOUR ?></a></p>
+<p><a href="<?php echo $lienRetour; ?>"><?php echo VAR_LANG_RETOUR ?></a></p>

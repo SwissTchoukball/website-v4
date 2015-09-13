@@ -1,4 +1,4 @@
-<?
+<?php
 
 function triDifferenceScorePointsInterne($informations,$tableau,$debug){
 	$nouveauTableau=array();
@@ -13,12 +13,12 @@ function triDifferenceScorePointsInterne($informations,$tableau,$debug){
 			if($debug){
 				echo "<br /><strong>Il y a une égalité de points interne</strong><br />";
 			}
-			
+
 			$differenceScorePointsInterne=array();
 			$ordningEquipesEgalitesPoints=array();
 			$ordningEquipesEgalitesId=array();
 			$l=0;
-			
+
 			for($i=1;$i<=count($tableau[$k]);$i++){ // Une boucle par équipe à égalité ==>> $i = EQUIPE EGALITE
 				$differenceScorePointsInterne[$i]=0; // Initialisation des points interne de l'équipe.
 				for($j=1;$j<=count($tableau[$k]);$j++){ // Une boucle pour chaque rencontre possible que cette équipe a fait avec une autre équipe à égalité. Le système calcule uniquement les points de l'équipe sélectionnée ==>> $j = AUTRE EQUIPE EGALITE avec qui on compte les points
@@ -35,7 +35,7 @@ function triDifferenceScorePointsInterne($informations,$tableau,$debug){
 						while($donnees = mysql_fetch_array($retour)){ // Boucle pour chaque match où les équipes ont joués ensemble dans le tour.
 							if($donnees['equipeA']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeA
 								$differenceScorePointsInterne[$i]=$differenceScorePointsInterne[$i]+$donnees['pointsA']-$donnees['pointsB'];
-								
+
 							}
 							elseif($donnees['equipeB']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeB
 								$differenceScorePointsInterne[$i]=$differenceScorePointsInterne[$i]+$donnees['pointsB']-$donnees['pointsA'];
@@ -49,13 +49,13 @@ function triDifferenceScorePointsInterne($informations,$tableau,$debug){
 				if($debug){
 					echo "<br /><br />".$tableau[$k][$i]." : Différence de points(score) Interne :".$differenceScorePointsInterne[$i];
 				}
-				
+
 				$ordningEquipesEgalitesPoints[$i]=$differenceScorePointsInterne[$i];
 				$ordningEquipesEgalitesId[$i]=$tableau[$k][$i];
 				$differenceScorePointsInterne = array();
-				
+
 			} // Fin boucle par équipe égalité
-			
+
 			for($m=max($ordningEquipesEgalitesPoints);$m>=min($ordningEquipesEgalitesPoints);$m--){
 				$compteur=0;
 				for($n=1;$n<=count($tableau[$k]);$n++){
@@ -83,6 +83,6 @@ function triDifferenceScorePointsInterne($informations,$tableau,$debug){
 		$nouveauTableau=$tableau;
 	}
 	return $nouveauTableau;
-	
+
 }
 ?>

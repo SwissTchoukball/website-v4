@@ -1,4 +1,4 @@
-<?
+<?php
 if(isset($_GET['affichage'])){
 	if($_GET['affichage']=="avenir"){
 		$affichage="avenir";
@@ -8,7 +8,7 @@ if(isset($_GET['affichage'])){
 	}
 	else{
 		$affichage="calendrier";
-	}	
+	}
 }
 else{
 	$affichage="calendrier";

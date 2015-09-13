@@ -5,7 +5,7 @@
         /*if ($donnees['paragrapheNum'] == 2) {
             ?>
             <a href='http://www.tchoukball.ch/photoTchouk/main.php?g2_itemId=71753'><img class='imageFlottanteGauche' src='http://www.tchoukball.ch/photoTchouk/main.php?g2_view=core.DownloadItem&g2_itemId=71755&g2_serialNumber=2' alt='Cellules Espoirs M18' width='400px' height='267px' title="La sélection suisse M18 composée des cellules espoirs lors des championnats d'Europe à Usti en République Tchèque"/></a>
-            <?
+            <?php
         }*/
         if ($donnees['paragrapheNum'] == 4) {
             /*echo "<ul>";

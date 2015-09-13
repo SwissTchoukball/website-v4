@@ -1,16 +1,16 @@
 <div class="statistiquesGlobales">
-<?		statInsererPageSurf(__FILE__); ?>
+<?php		statInsererPageSurf(__FILE__); ?>
 <p align="center">
-<img src="<? echo "image_gif.php?image=".FICHIER_GRAPHE_STAT_LANGUE;?>">
+<img src="<?php echo "image_gif.php?image=".FICHIER_GRAPHE_STAT_LANGUE;?>">
 </p>
 <h3>Pages les plus surfées</h3>
 <table class="tableauStatistiquesGlobales">
     <caption>Partie WEB</caption>
-<?
+<?php
 // $TypePage : admin / page normale
 function afficherStatsSurf($typePage,$mois,$annee, $nbPageAffichee){
 	global $VAR_G_MOIS;
-	
+
 	echo "<tr>";
         echo "<td class='moisStatistique' colspan='2'>".$VAR_G_MOIS[$mois-1]." ".$annee."</td>";
 	echo "</tr>";
@@ -18,13 +18,13 @@ function afficherStatsSurf($typePage,$mois,$annee, $nbPageAffichee){
 		echo "<th>Pages</th>";
 		echo "<th>Nombre de fois</th>";
 	echo "</tr>";
-	
+
 	$requeteSQL = "SELECT * FROM `StatistiqueSurf` WHERE `page` LIKE '%".$typePage."%' AND mois='".$mois."' AND annee='".$annee."' ORDER BY `nbFois` DESC LIMIT ".$nbPageAffichee;
 	$recordset = mysql_query($requeteSQL);
 	while($record = mysql_fetch_array($recordset)){
 		$start = strpos($record["page"],$typePage)+strlen($typePage);
 		$page = substr($record["page"],$start,strlen($record["page"])-$start);
-	
+
 		echo "<tr><td>".$page."</td>";
         echo "<td>".$record["nbFois"]."</td></tr>";
 	}
@@ -38,7 +38,7 @@ afficherStatsSurf(VAR_HREF_PATH_PAGE_PRINCIPALE,date('m')-2,date('Y'),$nbPageAff
 ?></table>
 <br>
 <table class="tableauStatistiquesGlobales">
-    <caption>Partie ADMIN</caption><?
+    <caption>Partie ADMIN</caption><?php
 $nbPageAffichee = 5;
 
 afficherStatsSurf(VAR_HREF_PATH_ADMIN,date('m'),date('Y'),$nbPageAffichee);

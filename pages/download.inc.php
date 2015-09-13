@@ -1,4 +1,4 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 
 	//Récupération des catégories

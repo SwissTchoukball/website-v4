@@ -1,8 +1,8 @@
-<?
+<?php
 	include "includes/agenda.utility.inc.php";
 ?>
 
-<?
+<?php
 if(isset($_POST['annee'])){
     if($_POST['annee']=="" OR $_POST['annee']=="Avenir"){
         $annee="Avenir";
@@ -16,21 +16,21 @@ if(isset($_POST['annee'])){
 <form name="affichage" method="post" action="">
 <table class="formagenda">
 	<tr>
-		<td align="right" width="50%"><p><? echo VAR_LANG_ANNEE;?> :</p></td>
+		<td align="right" width="50%"><p><?php echo VAR_LANG_ANNEE;?> :</p></td>
 		<td align="left"> <select name="annee" id="select" onChange="affichage.submit();">
-         <?						
+         <?php
 						// recherche de la premiere date
 						$requeteAnnee = "SELECT MIN( CoupeCH_Categories_Par_Annee.annee ) AS min FROM CoupeCH_Categories_Par_Annee";
 						$recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
 						$anneeMin = mysql_fetch_array($recordset) or die ("<H3>erreur extraction</H3>");
-						
+
 						$anneeDebutCoupeCH=$anneeMin['min'];
-						
+
 						if($annee=="") $annee = "Avenir";
-						
+
 						if($annee=="Avenir") echo "<option selected value='Avenir'>".VAR_LANG_RENCONTRES_A_VENIR."</option>";
 						else echo "<option value='Avenir'>".VAR_LANG_RENCONTRES_A_VENIR."</option>";
-						
+
 						$fin = date('Y')+1;
 						for($i=$anneeDebutCoupeCH;$i<=$fin;$i++){
 							if($annee == $i){
@@ -39,11 +39,11 @@ if(isset($_POST['annee'])){
 							else{
 								echo "<option value='".$i."'>".$i."</option>";
 				            }
-						}			
-				?></select>		
+						}
+				?></select>
 		</td>
 	</tr>
-	<?
+	<?php
 	if($annee=="Avenir"){
 	   $anneeRecherche="annee>=".date('Y');
 	}
@@ -62,11 +62,11 @@ if(isset($_POST['annee'])){
     }
 	?>
 	<tr>
-		<td align="right" width="50%"><p><? echo $titre; ?> :</p></td>
+		<td align="right" width="50%"><p><?php echo $titre; ?> :</p></td>
 		<td align="left">
 			<select name="recherche" onChange="affichage.submit();">
 				<option value="tout">Tout</option>
-				<?
+				<?php
 				if($nbCategories>1){
                     $requeteCategorie = "SELECT CoupeCH_Categories.nom".$_SESSION['__langue__'].", CoupeCH_Categories.idCategorie FROM CoupeCH_Categories, CoupeCH_Categories_Par_Annee WHERE CoupeCH_Categories_Par_Annee.idCategorie=CoupeCH_Categories.idCategorie ORDER BY CoupeCH_Categories.idCategorie";
                     $retourCategorie = mysql_query($requeteCategorie);
@@ -82,7 +82,7 @@ if(isset($_POST['annee'])){
                     }
                     echo "</optgroup>";
 				}
-				
+
 				$requeteEquipes = "SELECT DISTINCT CoupeCH_Equipes.idEquipe, CoupeCH_Equipes.nomEquipe, CoupeCH_Categories.idCategorie, CoupeCH_Categories.nom".$_SESSION['__langue__']." FROM CoupeCH_Equipes, CoupeCH_Categories, CoupeCH_Categories_Par_Annee WHERE ".$anneeRecherche."  AND CoupeCH_Equipes.idCategorie=CoupeCH_Categories.idCategorie ORDER BY CoupeCH_Categories.idCategorie, CoupeCH_Equipes.nomEquipe";
 				$retourEquipes = mysql_query($requeteEquipes);
 				$idCategorie="nothing";
@@ -104,7 +104,7 @@ if(isset($_POST['annee'])){
 				}
 				?>
 			</select>
-			<?
+			<?php
 				// echo $requeteEquipes;
 			?>
 		</td>
@@ -112,29 +112,29 @@ if(isset($_POST['annee'])){
 </table>
 </form>
 
-<?
+<?php
 	// affichage des dates
 	if($annee == "Avenir"){
 		$annee = date_actuelle();
 		$finAffichage = '';
 	}
 	else{
-		$annee = $annee;		
+		$annee = $annee;
 		$jusqua = $annee;
 		$jusqua .= "-12-31";
 		$finAffichage = "AND (dateDebut<='".$jusqua."' OR dateFin<='".$jusqua."')";
 	}
 	?>
-	
+
 	<table class="agenda">
 		<tr>
-			<th width="60px"><? echo $agenda_date;?></th>
-			<th><? echo $agenda_description;?></th>		
-			<th><? echo $agenda_lieu;?></th>		
-			<th width="40px"><? echo $agenda_debut;?></th>			
-			<th width="40px"><? echo $agenda_fin;?></th>
-		</tr>			
-	<?
+			<th width="60px"><?php echo $agenda_date;?></th>
+			<th><?php echo $agenda_description;?></th>
+			<th><?php echo $agenda_lieu;?></th>
+			<th width="40px"><?php echo $agenda_debut;?></th>
+			<th width="40px"><?php echo $agenda_fin;?></th>
+		</tr>
+	<?php
 	if(isset($_POST['recherche'])){
 		if($_POST['recherche']=="tout"){
 			$recherche="";
@@ -156,9 +156,9 @@ if(isset($_POST['annee'])){
 	while($donnees = mysql_fetch_array($retour)){
         ?>
 		<tr>
-			<td class="center"><? echo date_sql2date($donnees['dateDebut']); ?></td>
+			<td class="center"><?php echo date_sql2date($donnees['dateDebut']); ?></td>
 			<td>
-				<?
+				<?php
 				$requeteA = "SELECT * FROM CoupeCH_Equipes WHERE idEquipe=".$donnees['equipeA']."";
 				$retourA = mysql_query($requeteA);
 				$donneesA = mysql_fetch_array($retourA);
@@ -174,29 +174,29 @@ if(isset($_POST['annee'])){
 				?>
 			</td>
 			<td>
-                <? 
+                <?php
                 $requeteJournee = "SELECT * FROM CoupeCH_Journees WHERE idJournee=".$donnees['idJournee']."";
                 $retourJournee = mysql_query($requeteJournee);
                 $donneesJournee = mysql_fetch_array($retourJournee);
-                
+
                 echo $donneesJournee['salle'].", ".$donneesJournee['ville'];
                 ?>
             </td>
-			<td class="center"><? echo heure($donnees['heureDebut']); ?>:<? echo minute($donnees['heureDebut']); ?></td>	
-			<td class="center"><? echo heure($donnees['heureFin']); ?>:<? echo minute($donnees['heureFin']); ?></td>
+			<td class="center"><?php echo heure($donnees['heureDebut']); ?>:<?php echo minute($donnees['heureDebut']); ?></td>
+			<td class="center"><?php echo heure($donnees['heureFin']); ?>:<?php echo minute($donnees['heureFin']); ?></td>
 		</tr>
-        <?	
+        <?php
 	}
 	?>
 		<tr>
-			<th width="60px"><? echo $agenda_date;?></th>
-			<th><? echo $agenda_description;?></th>		
-			<th><? echo $agenda_lieu;?></th>		
-			<th width="40px"><? echo $agenda_debut;?></th>			
-			<th width="40px"><? echo $agenda_fin;?></th>
+			<th width="60px"><?php echo $agenda_date;?></th>
+			<th><?php echo $agenda_description;?></th>
+			<th><?php echo $agenda_lieu;?></th>
+			<th width="40px"><?php echo $agenda_debut;?></th>
+			<th width="40px"><?php echo $agenda_fin;?></th>
 		</tr>
 	</table>
-	
-	
-	
-	
+
+
+
+

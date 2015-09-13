@@ -1,4 +1,4 @@
-<?
+<?php
 	define("inclDatefichier", "isset");
 
 	// test la chronologie entre deux date : dateDebut < dateFin

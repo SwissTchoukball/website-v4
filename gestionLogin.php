@@ -1,4 +1,4 @@
-<?
+<?php
 session_start();
 include "includes/var.href.inc.php";
 

@@ -261,4 +261,4 @@ if ($showPagination) {
 	showPagination($page, $totalNumberOfPages, $href);
 }
 ?>
-<a href="mailto:<? echo implode(',', $adressesEmail); ?>">Envoyer un mail aux personnes affichées et ayant une adresse.</a>
+<a href="mailto:<?php echo implode(',', $adressesEmail); ?>">Envoyer un mail aux personnes affichées et ayant une adresse.</a>

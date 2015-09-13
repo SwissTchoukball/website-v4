@@ -14,9 +14,9 @@
 	echo "</p>";
 ?></td></tr>
 <tr><td>
-					<br><p align='center'>Recherche sur le nom, pr&eacute;nom, adresse, npa, ville, email, club et remarque (s&eacute;par&eacute; par des espaces)<br/>Mode entre les mots de recherches : ET <input type="radio" name="modeInterMots" value="AND" class="couleurCheckBox" <?php if($modeInterMots!="OR")echo "checked"; ?> /> OU <input type="radio" name="modeInterMots" value="OR" class="couleurCheckBox" <?php if($modeInterMots=="OR")echo "checked"; ?> /> : <input type="text" name="motsRecherches" size="35" value='<? echo $motsRecherches; ?>'>&nbsp;<input type="submit" value="Rechercher">
+					<br><p align='center'>Recherche sur le nom, pr&eacute;nom, adresse, npa, ville, email, club et remarque (s&eacute;par&eacute; par des espaces)<br/>Mode entre les mots de recherches : ET <input type="radio" name="modeInterMots" value="AND" class="couleurCheckBox" <?php if($modeInterMots!="OR")echo "checked"; ?> /> OU <input type="radio" name="modeInterMots" value="OR" class="couleurCheckBox" <?php if($modeInterMots=="OR")echo "checked"; ?> /> : <input type="text" name="motsRecherches" size="35" value='<?php echo $motsRecherches; ?>'>&nbsp;<input type="submit" value="Rechercher">
 					</p><p align="right">
-					<?
+					<?php
 						// switch search option
 						if(isset($optionRechercheAvancee) && $optionRechercheAvancee=="true"){
 							$_SESSION["__rechercheAvancee__"]=true;
@@ -38,7 +38,7 @@
 					?>
 					</p>
 </td></tr></table>
-<?
+<?php
 	$nbCondition = 5;
 
 	if($_SESSION["__rechercheAvancee__"]){
@@ -106,7 +106,7 @@ possible avec le distinct
 	}
 </script>
 
-<?
+<?php
 
 //	$tableRequises = "`DBDPersonne`, `DBDStatus`, `DBDOrigineAdresse`, `ClubsFstb`, `DBDLangue`, `DBDRaisonSociale`, `DBDCivilite`, `DBDPays`, `DBDCHTB`, `DBDArbitre`, `DBDMediaType`, `DBDMediaCanton`";
 	$tableRequises = "`DBDPersonne`, `DBDStatus`, `DBDOrigineAdresse`, `ClubsFstb`, `DBDLangue`, `DBDCivilite`, `DBDPays`, `DBDCHTB`, `DBDArbitre`, `DBDTypeCompte`, `DBDMediaType`, `DBDMediaCanton`";
@@ -325,7 +325,7 @@ possible avec le distinct
 ?></table>
 <table align='center' width="92%" cellpadding="0" cellspacing="0" border="0">
 <tr><td align="right"><p>
-<?
+<?php
 	echo "Nombre de contact(s) : $premiereFois";
 ?></p></td></tr></table>
 
@@ -346,7 +346,7 @@ possible avec le distinct
 	</tr>
 	<tr>
 		<td colspan="2">
-			<?
+			<?php
 			$listeEmailSeparationVirgules="";
 			for($k=0;$k<$premiereFois;$k++){
 				if($listeEmail[$k]!=""){
@@ -357,6 +357,6 @@ possible avec le distinct
 				}
 			}
 			?>
-			<a href="mailto:<? echo $listeEmailSeparationVirgules; ?>">Envoyer un mail aux personnes affichées et ayant une adresse.</a>
+			<a href="mailto:<?php echo $listeEmailSeparationVirgules; ?>">Envoyer un mail aux personnes affichées et ayant une adresse.</a>
 	</tr>
 </table>

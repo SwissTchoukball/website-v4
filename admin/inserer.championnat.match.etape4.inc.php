@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_4; ?>
+<?php echo VAR_LANG_ETAPE_4; ?>
 </h3>
-<?
+<?php
 if(!isset($_POST['nbMatchs'])){
 	echo"Erreur: il manque des informations.";
 	$nbMatchs=0;
@@ -69,5 +69,5 @@ else{
 	// l'include ne sert à rien là car on ne peut pas mettre de score en ajoutant un match, donc cela ne change rien aux calculs des points.
 }
 ?>
-<p class="center"><a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>">Insérer d'autres matchs</a></p>
+<p class="center"><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">Insérer d'autres matchs</a></p>
 

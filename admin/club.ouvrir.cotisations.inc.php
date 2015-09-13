@@ -1,9 +1,9 @@
 <script lang="javascript">
 
 	var couleurErreur;
-	couleurErreur='#<? echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
+	couleurErreur='#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
 	var couleurValide;
-	couleurValide='#<? echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+	couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
 
 	function checkForm(form) {
 
@@ -168,7 +168,7 @@
 	?>
 
 	<h4>Ouvrir des cotisations</h4>
-	<form method="POST" onsubmit="return checkForm(this);" name="ouvrirCotisations" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>">
+	<form method="POST" onsubmit="return checkForm(this);" name="ouvrirCotisations" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
 		<label>Saison</label>
 		<select name="annee">
 		<?php

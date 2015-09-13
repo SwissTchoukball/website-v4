@@ -1,14 +1,14 @@
-<?
+<?php
 statInsererPageSurf(__FILE__);
 ?>
 <div class="media">
-<?
+<?php
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '33' ORDER BY paragrapheNum");
     // affiche le texte
     $i=0;
     $j=0;
     while($donnees = mysql_fetch_array($retour)) {
-    	
+
         $i++;
         if($donnees['paragrapheNum'] == 0) {
             echo "<p>";
@@ -45,7 +45,7 @@ statInsererPageSurf(__FILE__);
                 $j++;
             }
         }
-    }	
+    }
 ?>
 </div>
 

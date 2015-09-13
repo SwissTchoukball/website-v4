@@ -1,4 +1,4 @@
-<? /*MODELE
+<?php /*MODELE
 <div class="informationsMatch" style="display:none;" id="infomatch1">
 	<div class="informationsBoxJournee">Journée 1</div>
 	<div class="informationsBoxEquipes">Lausanne 2 - Genève 1</div>
@@ -152,7 +152,7 @@
 	<div class="informationsBoxDate">31.01.2010 à 14h30</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
-<div class="resultatsCoupeCH">  
+<div class="resultatsCoupeCH">
 	<div class="boxTour1">
 		<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('1');" onMouseOut="masquerInfoMatch('1');">
 			<span class="gagnant">Lausanne</span>
@@ -259,7 +259,7 @@
 	</div>
 </div>
 <div class="resultatsCoupeTschatchli">
-	<h3>Coupe Tschachtli</h3> 
+	<h3>Coupe Tschachtli</h3>
 	<div class="boxTour1">
 		<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('21');" onMouseOut="masquerInfoMatch('21');">
 			<span class="gagnant">Vernier</span>
@@ -267,7 +267,7 @@
 		<div class="boxEquipe1B" onMouseOver="afficherInfoMatch('21');" onMouseOut="masquerInfoMatch('21');">
 			<span class="perdant">Chavannes</span>
 		</div>
-	</div>   
+	</div>
 	<div class="boxTour3">
 		<div class="boxEquipe3A" onMouseOver="afficherInfoMatch('17');" onMouseOut="masquerInfoMatch('17');">
 			<span class="perdant">Val-de-Ruz 1</span>

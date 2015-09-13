@@ -1,4 +1,4 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 
 echo "<SCRIPT language='JavaScript'>
@@ -102,8 +102,8 @@ if ($_POST["action"] == "insererUpload"){
                 echo 'Format : '.$lastPos.'<br />';
                 $uploadReussi = true;
                 ?>
-                Votre fichier se trouve &agrave; l'adresse suivante: <a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<? echo $destination_file; ?>" target="_blank">http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<? echo $destination_file; ?></a><br />
-                <?
+                Votre fichier se trouve &agrave; l'adresse suivante: <a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<?php echo $destination_file; ?>" target="_blank">http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<?php echo $destination_file; ?></a><br />
+                <?php
 
                 $url_entier = 'http://'.$_SERVER["HTTP_HOST"].'/uploads/'.$destination_file.'';
 
@@ -156,8 +156,8 @@ if ($_POST["action"] == "insererUpload"){
                         $miniature = imagejpeg($destination, $destination_dir_thumb.$thumb_destination_file);
                     }
                     ?>
-                        <img src="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/vignettes/<? echo $thumb_destination_file; ?>" alt="Miniature de l'image upload»e" /><br /><br />
-                    <?
+                        <img src="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/vignettes/<?php echo $thumb_destination_file; ?>" alt="Miniature de l'image upload»e" /><br /><br />
+                    <?php
                     echo 'Vignette valide et upload&eacute;e correctement.<br />';
 
                 }
@@ -204,7 +204,7 @@ if ($_POST["action"] == "insererUpload"){
    echo "</p>";
     ?>
 
-    <?
+    <?php
 
     if ($uploadReussi AND isset($url_entier) AND isset($_POST['titre']) AND isset($_POST['description']) AND isset($_POST['typeInfo']))
     {
@@ -280,14 +280,14 @@ elseif ($_POST["action"] == "modifierUpload"){
 
 <div class="center">
 
-<form name="modificationUpload" method="post" onSubmit="return controlerSaisie();" action="admin.php?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>" enctype="multipart/form-data">
-<?
+<form name="modificationUpload" method="post" onSubmit="return controlerSaisie();" action="admin.php?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>" enctype="multipart/form-data">
+<?php
 if (!isset($_GET['modif'])) {
 ?>
     <h3>Upload de fichiers</h3><p />
     Votre fichier de doit pas exc&eacute;der 48Mo.<br />
     Formats accept&eacute;s:
-    <? // liste des extensions
+    <?php // liste des extensions
     for ($i = 0; $i < count($authorized_extensions); $i++) {
         if($i != 0) {
             echo ", ";
@@ -300,7 +300,7 @@ if (!isset($_GET['modif'])) {
     <input type="hidden" name="MAX_FILE_SIZE" value="48000000" />
     Veuillez s&eacute;lectionner un fichier &agrave; uploader: <br />
     <input type="file" name="aFile" size="25" maxlength="48000000" /><p />
-<?
+<?php
 $titre = '';
 $description = '';
 $typeInfo = '';
@@ -325,7 +325,7 @@ else {
     }
     ?>
     <h3>Modification d'un fichier upload»</h3><p />
-    <?
+    <?php
 }
         if ($image) {
             echo "<img src='".PATH_UPLOADS."/vignettes/thumb_".$fichier."' alt='".$titre."' />";
@@ -335,20 +335,20 @@ else {
     <table width="80%" border="0" align="center">
         <tr>
             <td align="right"><p>Titre:</p></td>
-            <td><input type="text" name="titre" size="30" value="<? echo $titre; ?>"/><span style="color:red;font-size:10px">*Obligatoire</span></td>
+            <td><input type="text" name="titre" size="30" value="<?php echo $titre; ?>"/><span style="color:red;font-size:10px">*Obligatoire</span></td>
         </tr>
         <tr>
             <td align="right">Description:<br /><span style="color:red;font-size:10px">*Obligatoire</span></td>
-            <td><textarea name="description" cols="50" rows="10"><? echo $description; ?></textarea></td>
+            <td><textarea name="description" cols="50" rows="10"><?php echo $description; ?></textarea></td>
         </tr>
             <td align="right">Type d'information:</td>
             <td><select name="typeInfo">
-                        <?
+                        <?php
                         $retourbis = mysql_query("SELECT * FROM TypeInformation WHERE id>0 ORDER BY description".$_SESSION["__langue__"]."");
                         while($donneesbis = mysql_fetch_array($retourbis)){
                         ?>
-                            <option <? if($donneesbis['idUnique'] == $typeInfo){ echo "selected='selected'"; } ?> value="<? echo $donneesbis["idUnique"]; ?>"><? echo $donneesbis["description".$_SESSION["__langue__"]]; ?></option>
-                        <?
+                            <option <?php if($donneesbis['idUnique'] == $typeInfo){ echo "selected='selected'"; } ?> value="<?php echo $donneesbis["idUnique"]; ?>"><?php echo $donneesbis["description".$_SESSION["__langue__"]]; ?></option>
+                        <?php
                         }
                         ?>
                         </select>
@@ -356,14 +356,14 @@ else {
         </tr>
         <tr>
             <td colspan="2" align="center">
-            <? if (!isset($_GET['modif'])) { ?>
+            <?php if (!isset($_GET['modif'])) { ?>
             <input type="hidden" name="action" value="insererUpload">
             <input type="submit" name="submitFile" value="Envoyer le fichier" /></td>
-            <? } else { ?>
+            <?php } else { ?>
             <input type="hidden" name="action" value="modifierUpload">
-            <input type="hidden" name="id" value="<? echo $id; ?>">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
             <input type="submit" name="submitFile" value="Modifier" /></td>
-            <? } ?>
+            <?php } ?>
         </tr>
     </table>
 </form><p />

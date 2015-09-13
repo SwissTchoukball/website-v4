@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="insererContact">
-<?
+<?php
 
 	if ($_POST["action"]=="inserer"){
 
@@ -37,7 +37,7 @@
 
 
 
-<?
+<?php
 	echo "<SCRIPT language='JavaScript'>
 	 var couleurErreur; couleurErreur='#".VAR_LOOK_COULEUR_ERREUR_SAISIE."';
 	 var couleurValide; couleurValide='#".VAR_LOOK_COULEUR_SAISIE_VALIDE."';
@@ -53,7 +53,7 @@
 		mesInfos.adresse.style.background=couleurValide;
 		mesInfos.ville.style.background=couleurValide;
 
-		<? include "includes/javascript.controle.telephone.inc.php"; ?>
+		<?php include "includes/javascript.controle.telephone.inc.php"; ?>
 
 		if(mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))){
 			nbErreur++;
@@ -159,7 +159,7 @@
 <label>&nbsp;</label>
 <input type="text" style="visibility:hidden;">
 <label>Club</label>
-		<?
+		<?php
 			// attention, pour garder une validité des données, les présidents
 			// de club ne peuvent pas modifier leur club s'il sont de simple utilsiateur
 
@@ -193,7 +193,7 @@
 <input type="text" style="visibility:hidden;">
 <label>Date de naissance</label>
 <div class="birthDate">
-	<?
+	<?php
 		echo "<select name='jour'>";
 		echo creation_liste_jour();
 		echo "</select>";

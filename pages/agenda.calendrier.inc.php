@@ -11,7 +11,7 @@
 		}
 	}
 </script>
-<?
+<?php
 statInsererPageSurf(__FILE__);
 if(isset($_GET['idEvenement'])){
 	include('pages/agenda.evenement.inc.php');
@@ -119,33 +119,33 @@ else{
 	}
 	?>
 	<p>
-		<a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&affichage=calendrier&mois=<? echo $mois; ?>&annee=<? echo $annee; ?>" title="Affichage par mois">
-			<img class="<? echo $classSelectionMois; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par mois" />
-		</a><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<? echo $jourPremierJourSemaine; ?>&mois=<? echo $mois; ?>&annee=<? echo $annee; ?>" title="Affichage par semaine">
-			<img class="<? echo $classSelectionSemaine; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par semaine" />
+		<a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&mois=<?php echo $mois; ?>&annee=<?php echo $annee; ?>" title="Affichage par mois">
+			<img class="<?php echo $classSelectionMois; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par mois" />
+		</a><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourPremierJourSemaine; ?>&mois=<?php echo $mois; ?>&annee=<?php echo $annee; ?>" title="Affichage par semaine">
+			<img class="<?php echo $classSelectionSemaine; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par semaine" />
 		</a>
 	</p>
-	<?
+	<?php
 	*/
 	?>
 	<h4>Abonnements</h4>
 	<p><strong>Abonnez-vous avec votre ordinateur ou votre smartphone aux calendriers de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?> !</strong></p>
 	<p><a id="showHideSubscriptions" href="#" onclick="showHideSubscriptions();">Afficher les abonnements</a></p>
 	<ul id="abonnementsCalendrier" style="display: none;">
-		<li><a href="webcal://<? echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php">Tous les autres événements sauf le championnat</a></li>
-		<li><a href="webcal://<? echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?championnat">Matchs de championnat</a></li>
-		<li><a href="webcal://<? echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?entrainements">Entraînements</a></li>
-		<?
+		<li><a href="webcal://<?php echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php">Tous les autres événements sauf le championnat</a></li>
+		<li><a href="webcal://<?php echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?championnat">Matchs de championnat</a></li>
+		<li><a href="webcal://<?php echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?entrainements">Entraînements</a></li>
+		<?php
 		$getTeams = mysql_query("SELECT idEquipe, equipe FROM Championnat_Equipes WHERE actif=1 ORDER BY equipe");
 		while ($team = mysql_fetch_assoc($getTeams)) {
 			?>
-			<li><a href="webcal://<? echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?championnat&equipe=<? echo $team['idEquipe']; ?>">Matchs de <? echo $team['equipe']; ?></a></li>
-			<?
+			<li><a href="webcal://<?php echo $_SERVER['HTTP_HOST']; ?>/fstb-calendar.php?championnat&equipe=<?php echo $team['idEquipe']; ?>">Matchs de <?php echo $team['equipe']; ?></a></li>
+			<?php
 		}
 		?>
 	</ul>
 
-	<?
+	<?php
 
 	$requeteCategories="SELECT * FROM Calendrier_Categories ORDER BY id";
 	$retourCategories=mysql_query($requeteCategories);
@@ -189,28 +189,28 @@ else{
 	<script language="javascript">
 		function checkAll(mstrchkbx){
 			if(mstrchkbx.checked){
-				<?
+				<?php
 				for($k=1;$k<$c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
 					?>
-					document.getElementById('categorie<? echo $k; ?>').checked=true;
+					document.getElementById('categorie<?php echo $k; ?>').checked=true;
 
-					<?
+					<?php
 				}
 				?>
 			}
 			else{
-				<?
+				<?php
 				for($k=1;$k<$c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
 					?>
-					document.getElementById('categorie<? echo $k; ?>').checked=false;
+					document.getElementById('categorie<?php echo $k; ?>').checked=false;
 
-					<?
+					<?php
 				}
 				?>
 			}
 		}
 	</script>
-	<?
+	<?php
 	echo "<input type='submit' name='envoiSelectionCategories' value='Trier' />&nbsp;&nbsp;&nbsp;
 	<input type='checkbox' id='masterCheckbox' onclick='checkAll(this);' checked='checked' /><label for='masterCheckbox'>Tout (dé)cocher</label>";
 	echo "</form>";

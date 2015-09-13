@@ -1,4 +1,4 @@
-<?
+<?php
 	function getTeamQuery($teamID) {
 		$query = "SELECT p.idDbdPersonne, p.nom, p.prenom, p.idFITBMatchDB, p.idSexe, cnm.numero, cnm.idFonction, cnf.titreH".$_SESSION['__langue__']." AS titreH, cnf.titreF".$_SESSION['__langue__']." AS titreF, clubs.club
 				  FROM CadreNational_Membres cnm

@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="historique">
-<?
+<?php
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '27' ORDER BY paragrapheNum");
     // affiche le texte
     while($donnees = mysql_fetch_array($retour)) {

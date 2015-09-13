@@ -1,24 +1,24 @@
 <div class="classement">
 <form name="classementChampionnat" action="" method="post"><table border="0" align="center">
       <tr>
-        <td><p><? echo $agenda_annee; ?> :</p></td>
+        <td><p><?php echo $agenda_annee; ?> :</p></td>
         <td><select name="annee" id="select" onChange="classementChampionnat.submit();">
-         <? 
+         <?php
 						// recherche de la premiere date
 						$requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
 						$recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
 						$dateMin = mysql_fetch_array($recordset) or die ("<H3>erreur extraction</H3>");
 						$anneeMin = annee($dateMin[0]);
 						$anneeMinAffichee = $anneeMin - annee(date_actuelle());
-						
+
 						// championnat de aout à aout => deux date de différence => il y a deux années.
 						$nbChampionnatExistant = -$anneeMinAffichee;
-						
+
 						// si on est en aout, on peut afficher une option en plus pour le nouveau championnat
 						if(mois(date_actuelle())>7){
 							$nbChampionnatExistant++;
 						}
-						
+
 						$anneeDebutChampionnat=$anneeMin;
 						if($annee == ""){
 							$annee = annee(date_actuelle());
@@ -26,7 +26,7 @@
 								$annee--;
 							}
 						}
-					
+
 						for($i=0;$i<$nbChampionnatExistant;$i++){
 							if($annee == $anneeDebutChampionnat)
 								echo "<option selected value='$anneeDebutChampionnat'>".VAR_LANG_CHAMPIONNAT." $anneeDebutChampionnat-".($anneeDebutChampionnat+1)."</option>";
@@ -34,15 +34,15 @@
 								echo "<option value='$anneeDebutChampionnat'>".VAR_LANG_CHAMPIONNAT." $anneeDebutChampionnat-".($anneeDebutChampionnat+1)."</option>";
 							$anneeDebutChampionnat++;
 						}
-						
+
                         $couleurLigneA = "none";
-                        $couleurLigneB = "none";		
-                        
+                        $couleurLigneB = "none";
+
 				?></select></td>
       </tr>
     </table></form>
 
-		<?
+		<?php
 			// Sélection de la politique des points de l'année choisie.
 			$retour = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=".$annee."");
 			$donnees = mysql_fetch_array($retour);
@@ -54,7 +54,7 @@
 			$nbMatchGagnantPlayoff = $donnees['nbMatchGagnantPlayoff'];
 			$nbMatchGagnantPlayout = $donnees['nbMatchGagnantPlayout'];
 			$nbMatchGagnantPromoReleg = $donnees['nbMatchGagnantPromoReleg'];
-			
+
 			// prendre tous les tours de l'annee choisie
 			$retour = mysql_query("SELECT * FROM Championnat_Tours WHERE saison=".$annee." ORDER BY idCategorie, idTour DESC, idGroupe");
 			$nbCategories = 0;
@@ -63,7 +63,7 @@
 			$tableauCategories = array();
 			while($donnees = mysql_fetch_array($retour)){
 				$idTour = $donnees['idTour'];
-				
+
 				if($tableauCategories[$donnees['idCategorie']] != oui){ // On vérifie si c'est la première fois que cette catégorie apparaît dans la liste des tours. Si c'est le cas, l'id de la categorie n'appartient pas à $tableauCategories donc on affiche le nom de la categorie.
 					$tableauCategories[$donnees['idCategorie']] = oui;
 					$requeteA = "SELECT categorie".$_SESSION['__langue__']." FROM Championnat_Categories WHERE idCategorie=".$donnees['idCategorie']."";
@@ -75,10 +75,10 @@
 					if($idCategorie != -1){
 						echo "<h3>".$nomCategorie."</h3>";
 					}
-				}	
-				
-				if($idTour != 2000){	
-					if($donnees['idGroupe']<2){		
+				}
+
+				if($idTour != 2000){
+					if($donnees['idGroupe']<2){
 						$retourB = mysql_query("SELECT tour".$_SESSION['__langue__']." FROM Championnat_Types_Tours WHERE idTour=".$donnees['idTour']."");
 						$donneesB = mysql_fetch_array($retourB);
 						$nomTour = $donneesB['tour'.$_SESSION['__langue__']];
@@ -90,18 +90,18 @@
 				if($donnees['idGroupe']!=0){
 					echo "<h5>".VAR_LANG_GROUPE." ".$donnees['idGroupe']."</h5>";
 				}
-				
+
 					if(($idTour == 4000 AND $nbMatchGagnantPlayoff>1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout>1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg>1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal>1)) { // Play-off, Play-out, Promotion/Relegation ou tour final de + de 1 match
 						echo "<table class='classementTour'>";
 						?>
 						<tr>
 							<th>
-							<?
+							<?php
 							if($idTour == 2000){
 								echo "Promu";
 							}
 							else{
-								echo "Position";	
+								echo "Position";
 							}
 							?>
 							</th>
@@ -114,7 +114,7 @@
 						   <th>Reçu</th>
 						   <th>Diff.</th>
 					    </tr>
-					    <?
+					    <?php
 					    $requeteC = "SELECT DISTINCT Championnat_Matchs.saison, Championnat_Matchs.idCategorie, Championnat_Matchs.idTour, Championnat_Matchs.noGroupe, Championnat_Equipes_Tours.idEquipe, idTypeMatch, points, goolaverage, nbMatchJoue, nbMatchGagne, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, equipe
 						FROM Championnat_Equipes_Tours, Championnat_Matchs, Championnat_Equipes
 						WHERE Championnat_Equipes_Tours.saison =".$annee."
@@ -130,7 +130,7 @@
 						OR equipeB = Championnat_Equipes_Tours.idEquipe
 						)
 						AND Championnat_Equipes.idEquipe = Championnat_Equipes_Tours.idEquipe
-						ORDER BY Championnat_Matchs.idTypeMatch, nbMatchGagne DESC, Championnat_Equipes_Tours.points DESC , Championnat_Equipes_Tours.goolaverage DESC 
+						ORDER BY Championnat_Matchs.idTypeMatch, nbMatchGagne DESC, Championnat_Equipes_Tours.points DESC , Championnat_Equipes_Tours.goolaverage DESC
 						LIMIT 0 , 30";
 						$retourC = mysql_query($requeteC);
 						$i=1;
@@ -153,22 +153,22 @@
 							}
 							echo "<tr style='".$style."'>";
 							if($idTour == 4000){
-								$nbMatchGagnant = $nbMatchGagnantPlayoff;	
+								$nbMatchGagnant = $nbMatchGagnantPlayoff;
 							}
 							elseif($idTour == 3000){
-								$nbMatchGagnant = $nbMatchGagnantPlayout;	
+								$nbMatchGagnant = $nbMatchGagnantPlayout;
 							}
 							elseif($idTour == 2000){
-								$nbMatchGagnant = $nbMatchGagnantPromoReleg;	
+								$nbMatchGagnant = $nbMatchGagnantPromoReleg;
 							}
 							elseif($idTour == 10000){
-								$nbMatchGagnant = $nbMatchGagnantTourFinal;	
+								$nbMatchGagnant = $nbMatchGagnantTourFinal;
 							}
 							if($idTour == 2000 AND $nbMatchGagne==$nbMatchGagnant){
-								$gagnant = oui;	
+								$gagnant = oui;
 							}
 							elseif($idTour == 2000 AND $nbMatchPerdu==$nbMatchGagnant){
-								$gagnant = non;	
+								$gagnant = non;
 							}
 							else{
 								//$requeteE = "SELECT * FROM Championnat_Matchs WHERE saison=".$annee." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$donnees['idGroupe']." AND (equipeA=".$donneesC["idEquipe"]." OR equipeB=".$donneesC["idEquipe"].") LIMIT 0,1";
@@ -206,7 +206,7 @@
 									$gagnant = "Passe en petite finale";
 								}
 								else{
-									$gagnant = "";	
+									$gagnant = "";
 								}
 							}
 							echo "<td><p align='center'>".$gagnant."</p></td>";
@@ -219,27 +219,27 @@
 							echo "<td><p>".$nbPointRecu."</p></td>";
 							echo "<td><p align='right'>".$goolaverage."</p></td>";
 							echo "</tr>";
-							
+
 							$i++;
-						}	
+						}
 					}
 					elseif(($idTour == 4000 AND $nbMatchGagnantPlayoff==1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout==1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg==1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal==1)){ // Play-off, Play-out, Promotion/Relegation, tour final de 1 match
 						echo "<table class='classementTourFinal'>";
 						?>
 						<tr>
 							<th>
-							<?
+							<?php
 							if($idTour == 2000){
 								echo "Promu";
 							}
 							else{
-								echo "Position";	
+								echo "Position";
 							}
 							?>
 							</th>
 							<th>Equipes</th>
 					    </tr>
-					    <?
+					    <?php
 						$retourC = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=".$annee." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$donnees['idGroupe']." ORDER BY position, points DESC, goolaverage DESC");
 						$i=1;
 						while($donneesC = mysql_fetch_array($retourC)){
@@ -251,12 +251,12 @@
                                 $style = "background-color:".$couleurLigneB.";";
 							}
 							echo "<tr style='".$style."'>";
-							$nbMatchGagnant = 1;	
+							$nbMatchGagnant = 1;
 							if($idTour == 2000 AND $donneesC['nbMatchGagne']==$nbMatchGagnant){ // Match de Promo / Releg gagné
-								$gagnant = oui;	
+								$gagnant = oui;
 							}
 							elseif($idTour == 2000 AND $donneesC['nbMatchPerdu']==$nbMatchGagnant){ // Match de Promo / Releg perdu
-								$gagnant = non;	
+								$gagnant = non;
 							}
 							elseif($donneesC['position']==2000 AND $donneesC['nbMatchGagne']==$nbMatchGagnant){ // Match de demi-finale gagné
 								$gagnant = "Passe en finale";
@@ -280,13 +280,13 @@
 							$donneesD = mysql_fetch_array($retourD);
 							echo "<td><p>".$donneesD["equipe"]."</p></td>";
 							echo "</tr>";
-							
+
 							$i++;
-						}	
-							
+						}
+
 					}
 					else{ // Tour normal
-						echo "<table class='classementTour'>";	
+						echo "<table class='classementTour'>";
 						?>
 						<tr>
 						   <th>Position</th>
@@ -301,7 +301,7 @@
 						   <th>Diff.</th>
 						   <th>Points</th>
 					    </tr>
-						<?
+						<?php
 						$requeteC = "SELECT * FROM Championnat_Equipes_Tours WHERE saison=".$annee." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$donnees['idGroupe']." ORDER BY points DESC, position, goolaverage DESC";
 						// echo $requeteC;
 						$retourC = mysql_query($requeteC);
@@ -338,14 +338,14 @@
 							echo "<td><p>".$goolaverage."</p></td>";
 							echo "<td><p>".$donneesC['points']."</p></td>";
 							echo "</tr>";
-							
+
 							$i++;
 						}
 					}
-					
+
 					echo "</table>";
 			} // fin boucle while tours
-					
+
 
 		?>
 </div>

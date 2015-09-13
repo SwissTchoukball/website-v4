@@ -1,5 +1,5 @@
 <div id="statsClubs">
-	<?
+	<?php
 	echo "<h4>Nombre de clubs</h4>";
 	$requeteNombreClubs="SELECT COUNT(*) AS nbClubsFSTB FROM ClubsFstb WHERE actif=1";
 	$retour=mysql_query($requeteNombreClubs);
@@ -165,21 +165,21 @@
 		</tr>
 		<tr>
 			<th>Actifs</th>
-			<td><? echo $nbHActifs; ?> (<? echo $pourcHActifs; ?>%)</td>
-			<td><? echo $nbFActifs; ?> (<? echo $pourcFActifs; ?>%)</td>
-			<td><? echo $nbIActifs; ?> (<? echo $pourcIActifs; ?>%)</td>
+			<td><?php echo $nbHActifs; ?> (<?php echo $pourcHActifs; ?>%)</td>
+			<td><?php echo $nbFActifs; ?> (<?php echo $pourcFActifs; ?>%)</td>
+			<td><?php echo $nbIActifs; ?> (<?php echo $pourcIActifs; ?>%)</td>
 		</tr>
 		<tr>
 			<th>Juniors</th>
-			<td><? echo $nbHJuniors; ?> (<? echo $pourcHJuniors; ?>%)</td>
-			<td><? echo $nbFJuniors; ?> (<? echo $pourcFJuniors; ?>%)</td>
-			<td><? echo $nbIJuniors; ?> (<? echo $pourcIJuniors; ?>%)</td>
+			<td><?php echo $nbHJuniors; ?> (<?php echo $pourcHJuniors; ?>%)</td>
+			<td><?php echo $nbFJuniors; ?> (<?php echo $pourcFJuniors; ?>%)</td>
+			<td><?php echo $nbIJuniors; ?> (<?php echo $pourcIJuniors; ?>%)</td>
 		</tr>
 		<tr>
 			<th>Actifs + juniors</th>
-			<td><? echo $nbHActifsEtJuniors; ?> (<? echo $pourcHActifsEtJuniors; ?>%)</td>
-			<td><? echo $nbFActifsEtJuniors; ?> (<? echo $pourcFActifsEtJuniors; ?>%)</td>
-			<td><? echo $nbIActifsEtJuniors; ?> (<? echo $pourcIActifsEtJuniors; ?>%)</td>
+			<td><?php echo $nbHActifsEtJuniors; ?> (<?php echo $pourcHActifsEtJuniors; ?>%)</td>
+			<td><?php echo $nbFActifsEtJuniors; ?> (<?php echo $pourcFActifsEtJuniors; ?>%)</td>
+			<td><?php echo $nbIActifsEtJuniors; ?> (<?php echo $pourcIActifsEtJuniors; ?>%)</td>
 		</tr>
 	</table>
 

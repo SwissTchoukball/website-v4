@@ -1,5 +1,5 @@
 <h4>Situation actuelle</h4>
-<form id="etatCotisations" method="post" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>">
+<form id="etatCotisations" method="post" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
 	<table>
 		<tr>
 			<th>Année</th>
@@ -7,7 +7,7 @@
 			<th>Montant</th>
 			<th>Payé</th>
 		</tr>
-		<?
+		<?php
 		$anneePassee = date('Y')-1;
 		$debugMessage = "";
 
@@ -56,39 +56,39 @@
 				}
 			}
 			?>
-			<tr class="<? echo $montantPaye ? "paye" : "nonPaye"; ?>">
-				<td><? echo $annee; ?></td>
-				<td><? echo $club; ?></td>
-				<td><? echo $montantBloque ? $montant." CHF" : "En cours"; ?></td>
+			<tr class="<?php echo $montantPaye ? "paye" : "nonPaye"; ?>">
+				<td><?php echo $annee; ?></td>
+				<td><?php echo $club; ?></td>
+				<td><?php echo $montantBloque ? $montant." CHF" : "En cours"; ?></td>
 				<td>
-				<?
+				<?php
 					if ($montantBloque) {
 						?>
-						<select name="<? echo $annee; ?>:<? echo $idClub; ?>:paye">
-							<option value="1" <? echo $montantPaye ? "selected='selected'" : ""; ?>>Payé</option>
-							<option value="0" <? echo $montantPaye ? "" : "selected='selected'"; ?>>Non-payé</option>
+						<select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:paye">
+							<option value="1" <?php echo $montantPaye ? "selected='selected'" : ""; ?>>Payé</option>
+							<option value="0" <?php echo $montantPaye ? "" : "selected='selected'"; ?>>Non-payé</option>
 						</select>
 						<label> le </label>
-						<select name="<? echo $annee; ?>:<? echo $idClub; ?>:jour">
+						<select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:jour">
 							<?php echo modif_liste_jour($jourPaiement); ?>
 						</select>
-						<select name="<? echo $annee; ?>:<? echo $idClub; ?>:mois">
+						<select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:mois">
 							<?php echo modif_liste_mois($moisPaiement); ?>
 						</select>
-						<select name="<? echo $annee; ?>:<? echo $idClub; ?>:annee">
+						<select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:annee">
 							<?php echo modif_liste_annee(-1, 0, $anneePaiement); ?>
 						</select>
-						<?
+						<?php
 					} else {
 						?>
 						Non-payé
-						<?
+						<?php
 					}
 
 				?>
 				</td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 	</table>

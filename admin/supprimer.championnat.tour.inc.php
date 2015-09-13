@@ -1,28 +1,28 @@
 <div class="supprimerPhase">
-<?
+<?php
 		statInsererPageSurf(__FILE__);
-		
+
 		$tourArray = $_POST['tourArray'];
-		
+
 		if(isset($_POST["action"]) && $_POST["action"]=="supprimerTour"){
-		
-			if(is_array($tourArray)){ 	
-				while( list(,$val) = each($tourArray) ){	
+
+			if(is_array($tourArray)){
+				while( list(,$val) = each($tourArray) ){
 					$tabValeur = preg_split("/[:]+/", $val);
 					$saison = $tabValeur[0];
 					$categorie = $tabValeur[1];
 					$tour = $tabValeur[2];
-					$groupe = $tabValeur[3];		
+					$groupe = $tabValeur[3];
 					//echo "para = ".$saison.";".$tour.";".$groupe;
-					
+
 					$requete =	"DELETE FROM Championnat_Tours WHERE saison=".$saison." AND idCategorie=".$categorie." AND idTour=".$tour." AND idGroupe=".$groupe."";
 					// echo $requete;
-					mysql_query($requete);				
+					mysql_query($requete);
 					$requete =	"DELETE FROM Championnat_Equipes_Tours WHERE saison=".$saison." AND idCategorie=".$categorie." AND idTour=".$tour." AND noGroupe=".$groupe."";
 					// echo $requete;
 					mysql_query($requete);
-				}	
-				
+				}
+
 				echo "<h4>Suppression effectuée avec succès</h4><br /><br />";
 			}
 			else{
@@ -31,7 +31,7 @@
 		}
 ?>
 <form name="supprimerTour" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" onSubmit="return testQqchASupprimer();"><table class="tableauSupprimerPhase">
-<?
+<?php
 	echo "<tr>";
 	   echo "<th>X</th>";
 	   echo "<th>".VAR_LANG_CHAMPIONNAT."</th>";
@@ -39,13 +39,13 @@
 	   echo "<th>".VAR_LANG_TOUR."</th>";
 	   echo "<th>".VAR_LANG_GROUPE."</th>";
     echo "</tr>";
-		
+
 	$aujourdhui = date_actuelle();
 
 	$requete =	"SELECT * FROM Championnat_Tours ORDER BY saison DESC, idCategorie, idTour DESC, idGroupe DESC";
-		
+
 	$retour = mysql_query($requete);
-	
+
 	echo "<script language='JavaScript'>var nbTourChampionnatAfficher=".mysql_affected_rows()."</script>";
 	?>
 <script language="JavaScript">
@@ -60,9 +60,9 @@
 		if(!TourChampionnatCoche)alert("Rien à supprimer");
 		return TourChampionnatCoche;
 	}
-</script>	
-	<?
-	
+</script>
+	<?php
+
 	while($donnees = mysql_fetch_array($retour)){
         echo "<tr>";
 		echo "<td class='center'><input class='couleurRadio' type='checkbox' name='tourArray[]' value='".$donnees['saison'].":".$donnees['idCategorie'].":".$donnees['idTour'].":".$donnees['idGroupe']."' class='couleurCheckBox'></td>";
@@ -85,17 +85,17 @@
 				echo "<td class='center'>".$donneesB["tour".$_SESSION["__langue__"]]."</td>";
 				if($donnees["idGroupe"]==0){
 					echo "<td class='center'>Qualifications</td>";
-				}		
+				}
 				else{
-					echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";	
+					echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";
 				}
 			}
 		}
 		echo "</tr>";
-	}	
+	}
 ?>
 </table><br>
 	<input type="hidden" name="action" value="supprimerTour">
-  <p align="center"><input type="submit" name="Supprimer" value="<? echo VAR_LANG_SUPPRIMER;?>"></p>
+  <p align="center"><input type="submit" name="Supprimer" value="<?php echo VAR_LANG_SUPPRIMER;?>"></p>
 </form>
 </div>

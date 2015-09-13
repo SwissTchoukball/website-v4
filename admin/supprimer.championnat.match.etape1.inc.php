@@ -1,13 +1,13 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_1; ?>
+<?php echo VAR_LANG_ETAPE_1; ?>
 </h3>
 
-<form id="supprimerMatchs" method="post" action="<? echo "?menuselection=".$menuselection."&smenuselection=".$smenuselection.""; ?>" onSubmit="return testQqchAModifier();">
+<form id="supprimerMatchs" method="post" action="<?php echo "?menuselection=".$menuselection."&smenuselection=".$smenuselection.""; ?>" onSubmit="return testQqchAModifier();">
 <p>Phase dans laquelle il y a des matchs à supprimer :</p>
 <table class="tableauModifierPhase">
-<?
+<?php
 echo "<tr>";
     echo "<th>X</th>";
     echo "<th>".VAR_LANG_CHAMPIONNAT."</th>";
@@ -17,9 +17,9 @@ echo "<tr>";
 echo "</tr>";
 
 $requete =	"SELECT * FROM Championnat_Tours ORDER BY saison DESC, idCategorie, idTour DESC, idGroupe DESC";
-    
+
 $retour = mysql_query($requete);
-	
+
 echo "<script language='JavaScript'>var nbTourChampionnatAfficher=".mysql_affected_rows()."</script>";
 ?>
     <script language="JavaScript">
@@ -28,8 +28,8 @@ echo "<script language='JavaScript'>var nbTourChampionnatAfficher=".mysql_affect
             var saison;
             var categorie;
             var tour;
-            var groupe;		
-            var supprimerMatchs = document.getElementById("supprimerMatchs");		
+            var groupe;
+            var supprimerMatchs = document.getElementById("supprimerMatchs");
             for(var i=0;i<nbTourChampionnatAfficher && !TourChampionnatCoche;i++){
                 if(supprimerMatchs.elements[i].checked){
                     TourChampionnatCoche=true;
@@ -42,15 +42,15 @@ echo "<script language='JavaScript'>var nbTourChampionnatAfficher=".mysql_affect
                 }
             }
             if(!TourChampionnatCoche)alert("Rien à modifier");
-            
+
             supprimerMatchs.saison.value = saison;
             supprimerMatchs.categorie.value = categorie;
             supprimerMatchs.tour.value = tour;
-            supprimerMatchs.idGroupe.value = groupe;		
+            supprimerMatchs.idGroupe.value = groupe;
             return TourChampionnatCoche;
         }
     </script>
-<?	
+<?php
 while($donnees = mysql_fetch_array($retour)){
     echo "<tr>";
     echo "<td class='center'><input class='couleurRadio' type='radio' name='tour[]' value='".$donnees['saison'].":".$donnees['idCategorie'].":".$donnees['idTour'].":".$donnees['idGroupe']."' class='couleurCheckBox'></td>";
@@ -73,9 +73,9 @@ while($donnees = mysql_fetch_array($retour)){
             echo "<td class='center'>".$donneesB["tour".$_SESSION["__langue__"]]."</td>";
             if($donnees["idGroupe"]==0){
                 echo "<td class='center'>Qualifications</td>";
-            }		
+            }
             else{
-                echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";	
+                echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";
             }
         }
     }
@@ -85,7 +85,7 @@ while($donnees = mysql_fetch_array($retour)){
 <input type="hidden" name="saison" value="">
 <input type="hidden" name="categorie" value="">
 <input type="hidden" name="tour" value="">
-<input type="hidden" name="idGroupe" value="">	
+<input type="hidden" name="idGroupe" value="">
 <input type="hidden" name="action" value="supprimerMatchs1">
-<p class="center"><input type="submit" name="modifier" value="<? echo VAR_LANG_ETAPE_SUIVANTE;?>"></p>
+<p class="center"><input type="submit" name="modifier" value="<?php echo VAR_LANG_ETAPE_SUIVANTE;?>"></p>
 </form>

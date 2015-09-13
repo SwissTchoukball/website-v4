@@ -1,5 +1,5 @@
 <form name="modifTourChampionnat" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" onSubmit="return testQqchAModifier();"><table class="tableauModifierPhase">
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 	echo "<tr>";
 	   echo "<th>X</th>";
@@ -8,13 +8,13 @@
 	   echo "<th>".VAR_LANG_TOUR."</th>";
 	   echo "<th>".VAR_LANG_GROUPE."</th>";
     echo "</tr>";
-		
+
 	$aujourdhui = date_actuelle();
 
 	$requete =	"SELECT * FROM Championnat_Tours ORDER BY saison DESC, idCategorie, idTour DESC, idGroupe DESC";
-		
+
 	$retour = mysql_query($requete);
-	
+
 	echo "<script language='JavaScript'>var nbTourChampionnatAfficher=".mysql_affected_rows()."</script>";
 	?>
 <script language="JavaScript">
@@ -23,7 +23,7 @@
 		var saison;
 		var categorie;
 		var tour;
-		var groupe;				
+		var groupe;
 		for(var i=0;i<nbTourChampionnatAfficher && !TourChampionnatCoche;i++){
 			if(modifTourChampionnat.elements[i].checked){
 				TourChampionnatCoche=true;
@@ -36,16 +36,16 @@
 			}
 		}
 		if(!TourChampionnatCoche)alert("Rien à modifier");
-		
+
 		modifTourChampionnat.saison.value = saison;
 		modifTourChampionnat.categorie.value = categorie;
 		modifTourChampionnat.tour.value = tour;
-		modifTourChampionnat.idGroupe.value = groupe;		
+		modifTourChampionnat.idGroupe.value = groupe;
 		return TourChampionnatCoche;
 	}
-</script>	
-	<?
-	
+</script>
+	<?php
+
 	while($donnees = mysql_fetch_array($retour)){
 		echo "<tr>";
 		echo "<td class='center'><input class='couleurRadio' type='radio' name='tour[]' value='".$donnees['saison'].":".$donnees['idCategorie'].":".$donnees['idTour'].":".$donnees['idGroupe']."' class='couleurCheckBox'></td>";
@@ -68,19 +68,19 @@
 				echo "<td class='center'>".$donneesB["tour".$_SESSION["__langue__"]]."</td>";
 				if($donnees["idGroupe"]==0){
 					echo "<td class='center'>Qualifications</td>";
-				}		
+				}
 				else{
-					echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";	
+					echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";
 				}
 			}
 		}
-	}	
+	}
 ?>
 </table><br />
 	<input type="hidden" name="saison" value="">
 	<input type="hidden" name="categorie" value="">
 	<input type="hidden" name="tour" value="">
-	<input type="hidden" name="idGroupe" value="">	
+	<input type="hidden" name="idGroupe" value="">
 	<input type="hidden" name="action" value="modifier">
-  <p class="center"><input type="submit" name="modifier" value="<? echo VAR_LANG_MODIFIER;?>"></p>
+  <p class="center"><input type="submit" name="modifier" value="<?php echo VAR_LANG_MODIFIER;?>"></p>
 </form>

@@ -1,4 +1,4 @@
-<?
+<?php
 include("includes/header.inc.php");
 
 ?>
@@ -12,6 +12,6 @@ include("includes/header.inc.php");
 			</tr>
 	</table>
 
-<?
+<?php
 include("includes/footer.inc.php");
 ?>

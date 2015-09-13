@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_2; ?>
+<?php echo VAR_LANG_ETAPE_2; ?>
 </h3>
-<?
+<?php
 
 if(isset($_POST['nbMatchs'])){
 	$nbMatchs=$_POST['nbMatchs'];
@@ -14,20 +14,20 @@ if(isset($_POST['nbMatchs'])){
 		$finPhrase="le match";
 	}
 	?>
-	<p>Phase dans laquelle insérer <? echo $finPhrase; ?> :</p>
+	<p>Phase dans laquelle insérer <?php echo $finPhrase; ?> :</p>
 	<table class="tableauModifierPhase">
-	<?
+	<?php
 	echo "<tr>";
 		echo "<th>".VAR_LANG_CHAMPIONNAT."</th>";
 		echo "<th>".VAR_LANG_CATEGORIE."</th>";
 		echo "<th>".VAR_LANG_TOUR."</th>";
 		echo "<th>".VAR_LANG_GROUPE."</th>";
 	echo "</tr>";
-	
+
 	$requete =	"SELECT * FROM Championnat_Tours ORDER BY saison DESC, idCategorie, idTour DESC, idGroupe DESC";
-		
+
 	$retour = mysql_query($requete);
-	
+
 	while($donnees = mysql_fetch_array($retour)){
 		$lien="?menuselection=".$menuselection."&smenuselection=".$smenuselection."&saison=".$donnees['saison']."&idCat=".$donnees['idCategorie']."&idTour=".$donnees['idTour']."&idGroupe=".$donnees['idGroupe']."&nbMatchs=".$_POST['nbMatchs']."";
 		echo "<tr>";
@@ -50,9 +50,9 @@ if(isset($_POST['nbMatchs'])){
 				echo "<td class='center'><a href='".$lien."'>".$donneesB["tour".$_SESSION["__langue__"]]."</a></td>";
 				if($donnees["idGroupe"]==0){
 					echo "<td class='center'><a href='".$lien."'>Qualifications</a></td>";
-				}		
+				}
 				else{
-					echo "<td class='center'><a href='".$lien."'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</a></td>";	
+					echo "<td class='center'><a href='".$lien."'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</a></td>";
 				} // fin else
 			} // fin else
 		} // fin else

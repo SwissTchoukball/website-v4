@@ -1,12 +1,12 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_1; ?>
+<?php echo VAR_LANG_ETAPE_1; ?>
 </h3>
 
 <p>Phase dans laquelle modifier un match :</p>
 <table class="tableauModifierMatch">
-<?
+<?php
 echo "<tr>";
     echo "<th>".VAR_LANG_CHAMPIONNAT."</th>";
     echo "<th>".VAR_LANG_CATEGORIE."</th>";
@@ -15,7 +15,7 @@ echo "<tr>";
 echo "</tr>";
 
 $requete =	"SELECT * FROM Championnat_Tours ORDER BY saison DESC, idCategorie, idTour DESC, idGroupe DESC";
-    
+
 $retour = mysql_query($requete);
 
 while($donnees = mysql_fetch_array($retour)){
@@ -39,16 +39,16 @@ while($donnees = mysql_fetch_array($retour)){
             echo "<td class='center'><a href='?menuselection=".$menuselection."&smenuselection=".$smenuselection."&saison=".$donnees['saison']."&idCat=".$donnees['idCategorie']."&idTour=".$donnees['idTour']."&idGroupe=".$donnees['idGroupe']."'>".$donneesB["tour".$_SESSION["__langue__"]]."</a></td>";
             if($donnees["idGroupe"]==0){
                 echo "<td class='center'><a href='?menuselection=".$menuselection."&smenuselection=".$smenuselection."&saison=".$donnees['saison']."&idCat=".$donnees['idCategorie']."&idTour=".$donnees['idTour']."&idGroupe=".$donnees['idGroupe']."'>Qualifications</a></td>";
-            }		
+            }
             else{
-                echo "<td class='center'><a href='?menuselection=".$menuselection."&smenuselection=".$smenuselection."&saison=".$donnees['saison']."&idCat=".$donnees['idCategorie']."&idTour=".$donnees['idTour']."&idGroupe=".$donnees['idGroupe']."'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</a></td>";	
+                echo "<td class='center'><a href='?menuselection=".$menuselection."&smenuselection=".$smenuselection."&saison=".$donnees['saison']."&idCat=".$donnees['idCategorie']."&idTour=".$donnees['idTour']."&idGroupe=".$donnees['idGroupe']."'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</a></td>";
             }
         }
     }
 }
 echo "</table>";
 ?>
-<?	/* Ancienne technique avec bouton radio.
+<?php	/* Ancienne technique avec bouton radio.
 while($donnees = mysql_fetch_array($retour)){
     echo "<tr>";
     echo "<td class='center'><input class='couleurRadio' type='radio' name='tour[]' value='".$donnees['saison'].":".$donnees['idCategorie'].":".$donnees['idTour'].":".$donnees['idGroupe']."' class='couleurCheckBox'></td>";
@@ -71,9 +71,9 @@ while($donnees = mysql_fetch_array($retour)){
             echo "<td class='center'>".$donneesB["tour".$_SESSION["__langue__"]]."</td>";
             if($donnees["idGroupe"]==0){
                 echo "<td class='center'>Qualifications</td>";
-            }		
+            }
             else{
-                echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";	
+                echo "<td class='center'>".VAR_LANG_GROUPE." ".$donnees["idGroupe"]."</td>";
             }
         }
     }
@@ -83,10 +83,10 @@ while($donnees = mysql_fetch_array($retour)){
 <input type="hidden" name="saison" value="">
 <input type="hidden" name="categorie" value="">
 <input type="hidden" name="tour" value="">
-<input type="hidden" name="idGroupe" value="">	
+<input type="hidden" name="idGroupe" value="">
 <input type="hidden" name="action" value="modifierMatch1">
-<p class="center"><input type="submit" name="modifier" value="<? echo VAR_LANG_ETAPE_SUIVANTE;?>"></p>
+<p class="center"><input type="submit" name="modifier" value="<?php echo VAR_LANG_ETAPE_SUIVANTE;?>"></p>
 </form>
-<?
+<?php
 */
 ?>

@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_3; ?>
+<?php echo VAR_LANG_ETAPE_3; ?>
 </h3>
-<?
+<?php
 $matchArray = $_POST['matchArray'];
 if(is_array($matchArray)){
 	$saison = $_POST['saison'];
@@ -21,10 +21,10 @@ if(is_array($matchArray)){
         echo "<h3>Aucun match supprimé</h3>";
     }
     elseif($i=1){
-        echo "<h4>Match correctement supprimé</h4>";	
+        echo "<h4>Match correctement supprimé</h4>";
     }
     else{
-        echo "<h4>".$i." matchs correctement supprimés</h4>";	
+        echo "<h4>".$i." matchs correctement supprimés</h4>";
     }
     // Redénomination des variables pour l'include suivant.
 	$categorie = $idCategorie;

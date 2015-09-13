@@ -4,7 +4,7 @@ if ($_SESSION['__userLevel__'] == 0) {
 	//TODO: finir de compléter la BDD avec les matchs des anciennes éditions, puis laisser la possiblité aux visiteurs de sélectionner l'année.
 	?>
 	<div class = "selectionResultatsCoupeCH">
-		<?
+		<?php
 		$mostRecentEditionQuery = "SELECT MAX(annee) AS year FROM CoupeCH_Evenements";
 		$mostRecenteEditionData = mysql_query($mostRecentEditionQuery);
 		$mostRecentEdition = mysql_fetch_assoc($mostRecenteEditionData);
@@ -19,7 +19,7 @@ if ($_SESSION['__userLevel__'] == 0) {
 			<h2 class="alt">
 				Coupe Suisse
 		        <select name = "annee" id = "select" onChange = "resultatsCoupeCH.submit();">
-		            <?
+		            <?php
 		            $requete = "SELECT annee FROM CoupeCH_Evenements ORDER BY annee DESC";
 		            $retour = mysql_query($requete);
 		            while($donnees = mysql_fetch_array($retour)){
@@ -35,7 +35,7 @@ if ($_SESSION['__userLevel__'] == 0) {
 	        </h2>
 	    </form>
 	</div>
-	<?
+	<?php
 } else {
 	$annee = 2015;
 }
@@ -44,7 +44,7 @@ $showSetsScore = $annee > 2010; //Because they are unknown and 15-0 scores were 
 
 ?>
 
-<?
+<?php
 
 // On récupère des informations sur l'édition de la coupe suisse que l'on veut afficher
 $requeteAnnee = "SELECT * FROM CoupeCH_Evenements e, CoupeCH_Categories c WHERE c.idCategorie = e.idCategorie AND e.annee = ".$annee;
@@ -196,12 +196,12 @@ while($donneesAnnee = mysql_fetch_array($retourAnnee)){
         // Tableaux qui apparaissent quand la souris survole le match concerné
         ?>
         <div class="informationsMatch" id="messageInitial">
-	        <div class = "informationsBoxEquipes"><? echo VAR_LANG_SURVOL_TABLEAU; ?></div>
+	        <div class = "informationsBoxEquipes"><?php echo VAR_LANG_SURVOL_TABLEAU; ?></div>
 	    </div>
-        <div class="informationsMatch" id = "infomatch<? echo $donnees['idMatch']; ?>">
-	        <div class = "informationsBoxJournee"><? echo VAR_LANG_JOURNEE." ".$noJournee; ?></div>
-	        <div class = "informationsBoxTypeMatch"><? echo $typeMatch.$numeroMatch; ?></div>
-	        <?
+        <div class="informationsMatch" id = "infomatch<?php echo $donnees['idMatch']; ?>">
+	        <div class = "informationsBoxJournee"><?php echo VAR_LANG_JOURNEE." ".$noJournee; ?></div>
+	        <div class = "informationsBoxTypeMatch"><?php echo $typeMatch.$numeroMatch; ?></div>
+	        <?php
 	        if ($donnees['autoQualification'] == NULL){
 	        	echo '<div class = "informationsBoxEquipes">'.$equipeA.' - '.$equipeB.'</div>';
 	        }
@@ -238,7 +238,7 @@ while($donneesAnnee = mysql_fetch_array($retourAnnee)){
 	        }
 	        ?>
 	        <div class = "informationsBoxDate">
-		        <?
+		        <?php
 			        if ($donnees['dateDebut'] != '0000-00-00') {
 				      	echo $date;
 			        }
@@ -247,9 +247,9 @@ while($donneesAnnee = mysql_fetch_array($retourAnnee)){
 				    }
 				?>
 		    </div>
-	        <div class = "informationsBoxLieu"><a href="/lieu/<?php echo $idLieu; ?>"><? echo $lieu; ?></a></div>
+	        <div class = "informationsBoxLieu"><a href="/lieu/<?php echo $idLieu; ?>"><?php echo $lieu; ?></a></div>
 	    </div>
-	    <?
+	    <?php
 	}
 
 
@@ -391,14 +391,14 @@ while($donneesAnnee = mysql_fetch_array($retourAnnee)){
 	                $resultatB = "ajouer";
 	            }
 	            ?>
-	            <div class="boxEquipe<? echo $c; ?>A" onMouseOver="afficherInfoMatch('<? echo $idMatch; ?>');">
-	                <span class="<? echo $resultatA; ?>"><? echo $equipeA ?></span>
+	            <div class="boxEquipe<?php echo $c; ?>A" onMouseOver="afficherInfoMatch('<?php echo $idMatch; ?>');">
+	                <span class="<?php echo $resultatA; ?>"><?php echo $equipeA ?></span>
 	            </div>
-	            <div class="boxEquipe<? echo $c; ?>B" onMouseOver="afficherInfoMatch('<? echo $idMatch; ?>');">
-	                <span class="<? echo $resultatB; ?>"><? echo $equipeB ?></span>
+	            <div class="boxEquipe<?php echo $c; ?>B" onMouseOver="afficherInfoMatch('<?php echo $idMatch; ?>');">
+	                <span class="<?php echo $resultatB; ?>"><?php echo $equipeB ?></span>
 	            </div>
 
-	            <?
+	            <?php
 				}
 				echo '</div>';
 			    $c++;
@@ -414,7 +414,7 @@ while($donneesAnnee = mysql_fetch_array($retourAnnee)){
 
 <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fcoupesuisse&width=360&colorscheme=light&show_faces=false&stream=false&header=false&height=77" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:360px; height:77px;" allowTransparency="true"></iframe>
 
-<? showCommissionHead(3); ?>
+<?php showCommissionHead(3); ?>
 
 <script language = "JavaScript" type = "text/javascript">
 	// Javascript pour afficher la box d'information sur un match.
