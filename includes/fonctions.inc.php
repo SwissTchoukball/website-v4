@@ -176,8 +176,11 @@ function insererEncadrementBas($nbColonne, $avecSepration, $color = "NULL")
 // dans un tableau <tr>...
 function insererEncadrementGauche($couleur = "NULL")
 {
-    if ($couleur=="NULL") echo "<tr><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
-    else echo "<tr bgcolor='#$couleur'><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
+    if ($couleur=="NULL") {
+        echo "<tr><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
+    } else {
+        echo "<tr bgcolor='#$couleur'><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
+    }
 }
 
 // dans un tableau <tr>...
@@ -198,11 +201,11 @@ function insererEncadrementDroit()
 // $taille : tableau avec la taille des colonnes... si une taille doit être egal => valeur : "NULL"
 // insere une ligne avec séparations verticale entre les éléments du tableau
 // contient <tr></tr>
-function insererEncadrementElementLigne($Tab_Valeur, $align, $classStyle, $taille="NULL", $couleurFondLigne="NULL")
+function insererEncadrementElementLigne($Tab_Valeur, $align, $classStyle, $taille = "NULL", $couleurFondLigne = "NULL")
 {
 
     insererEncadrementGauche($couleurFondLigne);
-    for($i=0;$i<count($Tab_Valeur);$i++){
+    for ($i=0; $i<count($Tab_Valeur); $i++) {
         if ($taille=="NULL" || $taille[$i]=="NULL") {
             echo "<td><p align='".$align."' class='".$classStyle."'>".$Tab_Valeur[$i]."</p></td>";
         } else {
@@ -217,13 +220,13 @@ function insererEncadrementElementLigne($Tab_Valeur, $align, $classStyle, $taill
 }
 
 // ligne avec les bords sur les cotés uniquement
-function insererLigneEspaceDansEncadrement($nbColonne, $nbLigne, $bordure=false)
+function insererLigneEspaceDansEncadrement($nbColonne, $nbLigne, $bordure = false)
 {
 
     if ($bordure) {
-        for($i=0;$i<$nbLigne;$i++){
+        for ($i=0; $i<$nbLigne; $i++) {
             insererEncadrementGauche();
-            for($j=0;$j<$nbColonne;$j++){
+            for ($j=0; $j<$nbColonne; $j++) {
                 echo "<td><p>&nbsp;</p></td>";
                 if ($j<$nbColonne-1) {
                     insererSeparationEncadermentVerticale();
@@ -232,7 +235,7 @@ function insererLigneEspaceDansEncadrement($nbColonne, $nbLigne, $bordure=false)
             insererEncadrementDroit();
         }
     } else {
-        for($i=0;$i<$nbLigne;$i++){
+        for ($i=0; $i<$nbLigne; $i++) {
             insererEncadrementGauche();
             echo "<td colspan='".$nbColonne."'><p>&nbsp;</p></td>";
             insererEncadrementDroit();
@@ -246,10 +249,10 @@ function formatPhoneNumber($rawPhoneNumber)
     $phoneNumber = $rawPhoneNumber;
     $phoneNumber = str_replace(' ', '', $phoneNumber);
     $phoneNumber = str_replace('/', '', $phoneNumber);
-    if (substr($phoneNumber,0,2) != '00' || substr($phoneNumber,0,1) != '+') {
+    if (substr($phoneNumber, 0, 2) != '00' || substr($phoneNumber, 0, 1) != '+') {
         // If no international prefix, we consider it is a Swiss phone number.
         // But if it doesn't start with 0, then we better not touch it.
-        if (substr($phoneNumber,0,1) == 0) {
+        if (substr($phoneNumber, 0, 1) == 0) {
             $phoneNumber = substr($phoneNumber, 1);
             $phoneNumber = '+41' . $phoneNumber;
         }
@@ -261,27 +264,27 @@ function formatPhoneNumber($rawPhoneNumber)
 function encryptageEmail($text)
 {
 
-    $text = str_replace("<A","<a",$text);
-    $text = str_replace("</A>","</a>",$text);
+    $text = str_replace("<A", "<a", $text);
+    $text = str_replace("</A>", "</a>", $text);
 
     $chaineATrouver="mailto:";
     $finTagA="</a>";
     $nbCharAvantMailto=10;
     // tant qu'il reste des mailtos dans le text
-    $debut=strpos($text,$chaineATrouver);
-    while(!($debut===false)){
+    $debut = strpos($text, $chaineATrouver);
+    while (!($debut===false)) {
         // position du tag a... quelques chars avant...
         $debut=$debut<$nbCharAvantMailto?$debut-$debut:$debut-$nbCharAvantMailto;
         // recherche dans les environe du mailto pour trouver le tag <a
-        $positionTagA=strpos($text,"<a",$debut);
+        $positionTagA = strpos($text, "<a", $debut);
         // position du tag de fin
-        $positionFinTagA=strpos($text,$finTagA,$debut)+strlen($finTagA);
+        $positionFinTagA = strpos($text, $finTagA, $debut)+strlen($finTagA);
         // premiere partie de text
-        $textJusquaTagA=substr($text,0,$positionTagA);
+        $textJusquaTagA = substr($text, 0, $positionTagA);
         // partie de text depuis la fin de la balise
-        $textDepuisFinTagA=substr($text,$positionFinTagA,strlen($text)-$positionFinTagA);
+        $textDepuisFinTagA = substr($text, $positionFinTagA, strlen($text)-$positionFinTagA);
         // la balise complete avec le mailto
-        $baliseTotaleA=substr($text,$positionTagA,$positionFinTagA-$positionTagA);
+        $baliseTotaleA = substr($text, $positionTagA, $positionFinTagA-$positionTagA);
 
         // affiche la premiere partie du text
         echo formatterTextEnHTML($textJusquaTagA);
@@ -289,9 +292,9 @@ function encryptageEmail($text)
         // affiche le javascript pour le mailto
         codage($baliseTotaleA);
         // tronquage du text affiché
-        $text=substr($text,$positionFinTagA,strlen($text)-$positionFinTagA);
+        $text = substr($text, $positionFinTagA, strlen($text)-$positionFinTagA);
         // rehcerche d'un mailto dans la suite du text
-        $debut=strpos($text,$chaineATrouver);
+        $debut = strpos($text, $chaineATrouver);
     }
 
     // affiche la fin du text ou le text entier
@@ -307,27 +310,27 @@ function afficherAvecEncryptageEmail($text)
 function afficherAvecEncryptageEmail2($text)
 {
 
-    $text = str_replace("<A","<a",$text);
-    $text = str_replace("</A>","</a>",$text);
+    $text = str_replace("<A", "<a", $text);
+    $text = str_replace("</A>", "</a>", $text);
 
     $chaineATrouver="mailto:";
     $finTagA="</a>";
     $nbCharAvantMailto=10;
     // tant qu'il reste des mailtos dans le text
-    $debut=strpos($text,$chaineATrouver);
-    while(!($debut===false)){
+    $debut = strpos($text, $chaineATrouver);
+    while (!($debut===false)) {
         // position du tag a... quelques chars avant...
-        $debut=$debut<$nbCharAvantMailto?$debut-$debut:$debut-$nbCharAvantMailto;
+        $debut = $debut<$nbCharAvantMailto?$debut-$debut:$debut-$nbCharAvantMailto;
         // recherche dans les environe du mailto pour trouver le tag <a
-        $positionTagA=strpos($text,"<a",$debut);
+        $positionTagA = strpos($text, "<a", $debut);
         // position du tag de fin
-        $positionFinTagA=strpos($text,$finTagA,$debut)+strlen($finTagA);
+        $positionFinTagA = strpos($text, $finTagA, $debut)+strlen($finTagA);
         // premiere partie de text
-        $textJusquaTagA=substr($text,0,$positionTagA);
+        $textJusquaTagA = substr($text, 0, $positionTagA);
         // partie de text depuis la fin de la balise
-        $textDepuisFinTagA=substr($text,$positionFinTagA,strlen($text)-$positionFinTagA);
+        $textDepuisFinTagA = substr($text, $positionFinTagA, strlen($text)-$positionFinTagA);
         // la balise complete avec le mailto
-        $baliseTotaleA=substr($text,$positionTagA,$positionFinTagA-$positionTagA);
+        $baliseTotaleA = substr($text, $positionTagA, $positionFinTagA-$positionTagA);
 
         // affiche la premiere partie du text
         echo formatterTextEnHTML($textJusquaTagA);
@@ -335,9 +338,9 @@ function afficherAvecEncryptageEmail2($text)
         // affiche le javascript pour le mailto
         codage($baliseTotaleA);
         // tronquage du text affiché
-        $text=substr($text,$positionFinTagA,strlen($text)-$positionFinTagA);
+        $text = substr($text, $positionFinTagA, strlen($text)-$positionFinTagA);
         // rehcerche d'un mailto dans la suite du text
-        $debut=strpos($text,$chaineATrouver);
+        $debut = strpos($text, $chaineATrouver);
     }
 
     // affiche la fin du text ou le text entier
@@ -347,9 +350,9 @@ function afficherAvecEncryptageEmail2($text)
 
 // record d'une personne de la table BD
 // mode : "FULL" : nom, prenom, adresse,npa ville, email, tel, natel
-function afficherPersonne($record, $mode="FULL")
+function afficherPersonne($record, $mode = "FULL")
 {
-    if ($mode="FULL") {
+    if ($mode = "FULL") {
         echo stripslashes($record["prenom"])."&nbsp;".stripslashes($record["nom"])."<br />";
         echo $record["adresse"]."<br>";
         echo $record["numPostal"]."&nbsp;".$record["ville"]."<br /><br />";
@@ -357,8 +360,12 @@ function afficherPersonne($record, $mode="FULL")
             echo email($record["email"]);
             echo "<br />";
         }
-        if ($record["telephone"]!= "") echo "<a class='phone sideIcon' href='tel:".formatPhoneNumber($record["telephone"])."'>".$record["telephone"]."</a><br />";
-        if ($record["portable"]!="") echo "<a class='mobile sideIcon' href='tel:".formatPhoneNumber($record["portable"])."'>".$record["portable"]."</a><br />";
+        if ($record["telephone"] != "") {
+            echo "<a class='phone sideIcon' href='tel:".formatPhoneNumber($record["telephone"])."'>".$record["telephone"]."</a><br />";
+        }
+        if ($record["portable"] != "") {
+            echo "<a class='mobile sideIcon' href='tel:".formatPhoneNumber($record["portable"])."'>".$record["portable"]."</a><br />";
+        }
     }
 }
 
@@ -368,7 +375,7 @@ function showPerson($person, $hidePicture = false)
     // Affichage de la photo
     if (!$hidePicture) {
         $imageFile = nomFichierPhotoValide(VAR_IMAGE_PORTRAITS_PATH.rewrite($person["prenom"])."_".rewrite($person["nom"]).".png");
-        strtolower(nomPhotoValide($person["nom"],$person["prenom"],null,"png"));
+        strtolower(nomPhotoValide($person["nom"], $person["prenom"], null, "png"));
         if (is_file($imageFile)) {
             echo "<div class='imagePortrait'>";
                 echo "<img src='http://" .$_SERVER['SERVER_NAME']. "/".$imageFile."' alt='".$person["prenom"]." ".$person["nom"]."' />";
@@ -403,11 +410,11 @@ function showPerson($person, $hidePicture = false)
     $spokenLanguagesData = mysql_query($spokenLanguagesQuery);
     if (mysql_num_rows($spokenLanguagesData) > 0) {
         echo '<div class="spokenLanguages">';
-        while($spokenLanguages = mysql_fetch_array($spokenLanguagesData)) {
+        while ($spokenLanguages = mysql_fetch_array($spokenLanguagesData)) {
             echo "<img src='".VAR_IMAGE_LANGUE.$spokenLanguages["idLangue"].".png' alt='".$spokenLanguages['descriptionLangue']."' /> ";
         }
         echo '</div>';
-        }
+    }
     echo '</div>';
 }
 
@@ -443,8 +450,8 @@ function printRefereesOptionsList($referees, $selectedRefereeID, $addslashes = f
 {
     // It's better not to include the getReferees() function within this function to avoid to many calls if
     // this function is called multiple times on the same page.
-    $refereeLevel = NULL;
-    foreach($referees as $r) {
+    $refereeLevel = null;
+    foreach ($referees as $r) {
         if ($r['niveau'] != $refereeLevel) {
             $refereeLevel = $r['niveau'];
             echo '<optgroup label="Arbitres '.chif_rome($refereeLevel-1).'">';
@@ -469,45 +476,46 @@ function afficherArbitre($record, $photo)
         echo "<tr>";
         if ($photo) {
             echo "<td>";
-                $nomFichierPhoto = nomPhotoValide($record["nom"],$record["prenom"],"_arb", "jpg");
-                if (is_file($nomFichierPhoto)) {
-                    echo "<p class='center'><img src='".$nomFichierPhoto."' alt='".$record["nom"]."&nbsp;".$record["prenom"]."'/>";
-                } else {
-                    echo "";
-                }
+            $nomFichierPhoto = nomPhotoValide($record["nom"], $record["prenom"], "_arb", "jpg");
+            if (is_file($nomFichierPhoto)) {
+                echo "<p class='center'><img src='".$nomFichierPhoto."' alt='".$record["nom"]."&nbsp;".$record["prenom"]."'/>";
+            } else {
+                echo "";
+            }
             echo "</td>";
             echo "<td>";
         } else {
             echo "<td colspan='2'>";
         }
-            echo "<strong>",$record["nom"]."&nbsp;".$record["prenom"]."</strong><br />";
-            if ($record['idClub'] != 0) {
-                $retour = mysql_query("SELECT club FROM `ClubsFstb` WHERE `nbIdClub`='".$record['idClub']."'");
-                $donnees = mysql_fetch_array($retour);
-                echo "Club : ".$donnees['club']."<br />";
-            }
-            if ($record["telPrive"]!="" && $_SESSION['__userLevel__'] <= 10) {
-                echo VAR_LANG_TELEPHONE." : ";
-                echo $record["telPrive"];
-                echo "<br />";
-            }
-            if ($record["portable"]!="" && $_SESSION['__userLevel__'] <= 10) {
-                echo VAR_LANG_PORTABLE." : ";
-                echo $record["portable"];
-                echo "<br />";
-            }
-            if ($record["email"]!="" && $_SESSION['__userLevel__'] <= 10) {
-                echo "Email"." : ";
-                echo email($record["email"]);
-                echo "<br />";
-            }
+        echo "<strong>",$record["nom"]."&nbsp;".$record["prenom"]."</strong><br />";
+        if ($record['idClub'] != 0) {
+            $retour = mysql_query("SELECT club FROM `ClubsFstb` WHERE `nbIdClub`='".$record['idClub']."'");
+            $donnees = mysql_fetch_array($retour);
+            echo "Club : ".$donnees['club']."<br />";
+        }
+        if ($record["telPrive"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            echo VAR_LANG_TELEPHONE." : ";
+            echo $record["telPrive"];
+            echo "<br />";
+        }
+        if ($record["portable"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            echo VAR_LANG_PORTABLE." : ";
+            echo $record["portable"];
+            echo "<br />";
+        }
+        if ($record["email"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            echo "Email"." : ";
+            echo email($record["email"]);
+            echo "<br />";
+        }
         echo "</td></tr>";
     }
 }
 
 function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
 {
-    if ($categoryID == 1 || $categoryID == 2) { // League A or B, the only championship leagues accounted for currently
+    // League A or B, the only championship leagues accounted for currently
+    if ($categoryID == 1 || $categoryID == 2) {
         $pointsComputationQuery = "SELECT p.idDbdPersonne, SUM(tp.pointsArbitrage) AS pointsArbitrageTotal
                                    FROM DBDPersonne p
                                    LEFT OUTER JOIN Championnat_Periodes cp ON p.idDbdPersonne = cp.idArbitreA OR p.idDbdPersonne = cp.idArbitreB OR p.idDbdPersonne = cp.idArbitreC
@@ -574,30 +582,30 @@ function validiteInsertionTextAvecTagHTML($text)
 function formatterText($text)
 {
 
-    $text = str_replace('à','&agrave;',$text);
-    $text = str_replace('é','&eacute;',$text);
-    $text = str_replace('è','&egrave;',$text);
-    $text = str_replace('ü','&uuml;',$text);
-    $text = str_replace('ö','&ouml;',$text);
-    $text = str_replace('ä','&auml;',$text);
-    $text = str_replace('ç','&ccedil;',$text);
-    $text = htmlspecialchars($text,ENT_QUOTES);
+    $text = str_replace('à', '&agrave;', $text);
+    $text = str_replace('é', '&eacute;', $text);
+    $text = str_replace('è', '&egrave;', $text);
+    $text = str_replace('ü', '&uuml;', $text);
+    $text = str_replace('ö', '&ouml;', $text);
+    $text = str_replace('ä', '&auml;', $text);
+    $text = str_replace('ç', '&ccedil;', $text);
+    $text = htmlspecialchars($text, ENT_QUOTES);
 
     $text = nl2br($text);
-    return str_replace('"','\"',$text);
+    return str_replace('"', '\"', $text);
 }
 
 // les representations html des carctère speciaux seront a nouveau direct
 function nomsNormauxSansCodageHTML($text)
 {
 
-    $text = str_replace('&agrave;','à',$text);
-    $text = str_replace('&eacute;','é',$text);
-    $text = str_replace('&egrave;','è',$text);
-    $text = str_replace('&uuml;','ü',$text);
-    $text = str_replace('&ouml;','ö',$text);
-    $text = str_replace('&auml;','ä',$text);
-    $text = str_replace('&ccedil;','ç',$text);
+    $text = str_replace('&agrave;', 'à', $text);
+    $text = str_replace('&eacute;', 'é', $text);
+    $text = str_replace('&egrave;', 'è', $text);
+    $text = str_replace('&uuml;', 'ü', $text);
+    $text = str_replace('&ouml;', 'ö', $text);
+    $text = str_replace('&auml;', 'ä', $text);
+    $text = str_replace('&ccedil;', 'ç', $text);
 
     return $text;
 };
@@ -606,19 +614,19 @@ function nomsNormauxSansCodageHTML($text)
 function formatterTextEnHTML($text)
 {
 
-    $text = str_replace('à','&agrave;',$text);
-    $text = str_replace('é','&eacute;',$text);
-    $text = str_replace('è','&egrave;',$text);
-    $text = str_replace('ü','&uuml;',$text);
-    $text = str_replace('ö','&ouml;',$text);
-    $text = str_replace('ä','&auml;',$text);
-    $text = str_replace('ç','&ccedil;',$text);
+    $text = str_replace('à', '&agrave;', $text);
+    $text = str_replace('é', '&eacute;', $text);
+    $text = str_replace('è', '&egrave;', $text);
+    $text = str_replace('ü', '&uuml;', $text);
+    $text = str_replace('ö', '&ouml;', $text);
+    $text = str_replace('ä', '&auml;', $text);
+    $text = str_replace('ç', '&ccedil;', $text);
 
     $text = nl2br($text);
     return $text;
 }
 
-function gardemenuselection($menuselection,$smenuselection)
+function gardemenuselection($menuselection, $smenuselection)
 {
     $text ="";
     if ($menuselection!="") {
@@ -632,8 +640,10 @@ function gardemenuselection($menuselection,$smenuselection)
 
 function afficherChoixLangue($VAR_TABLEAU_DES_LANGUES, $menuselection, $smenuselection)
 {
-    for($i=0;$i<count($VAR_TABLEAU_DES_LANGUES);$i++){
-        if ($i>0) echo " - ";
+    for ($i=0; $i<count($VAR_TABLEAU_DES_LANGUES); $i++) {
+        if ($i>0) {
+            echo " - ";
+        }
         if ($_SESSION["__langue__"]==$VAR_TABLEAU_DES_LANGUES[$i][0]) {
             echo $VAR_TABLEAU_DES_LANGUES[$i][1];
         } else {
@@ -666,19 +676,18 @@ function afficherdropDownListeDesactivable($nomTable, $nomIdOption, $nomDescript
 
         echo "<select id='".$nomTable."' name='".$nomTable."'".$disabled.">";
 
-            while($recordOption = mysql_fetch_array($recordsetOptions)){
-
-                $option = $recordOption["$nomDescriptionOption".$_SESSION["__langue__"]];
-                if ($option=="") {
-                    $option=VAR_LANG_NON_SPECIFIE;
-                }
-
-                if ($recordOption[$nomIdOption] == $idSelect) {
-                    echo "<option selected value='".$recordOption[$nomIdOption]."'>".$option."</option>";
-                } else {
-                    echo "<option value='".$recordOption[$nomIdOption]."'>".$option."</option>";
-                }
+        while ($recordOption = mysql_fetch_array($recordsetOptions)) {
+            $option = $recordOption["$nomDescriptionOption".$_SESSION["__langue__"]];
+            if ($option=="") {
+                $option=VAR_LANG_NON_SPECIFIE;
             }
+
+            if ($recordOption[$nomIdOption] == $idSelect) {
+                echo "<option selected value='".$recordOption[$nomIdOption]."'>".$option."</option>";
+            } else {
+                echo "<option value='".$recordOption[$nomIdOption]."'>".$option."</option>";
+            }
+        }
         echo "</select>";
     } else {
         $requeteSQLOptions="SELECT * FROM ".$nomTable." ORDER BY $nomDescriptionOption";
@@ -686,18 +695,17 @@ function afficherdropDownListeDesactivable($nomTable, $nomIdOption, $nomDescript
 
         echo "<select id='".$nomTable."' name='".$nomTable."'".$disabled.">";
 
-            while($recordOption = mysql_fetch_array($recordsetOptions)){
-
-                $option = $recordOption["$nomDescriptionOption"];
-                if ($option=="") {
-                    $option=VAR_LANG_NON_SPECIFIE;
-                }
-                if ($recordOption[$nomIdOption] == $idSelect) {
-                    echo "<option selected value='".$recordOption[$nomIdOption]."'>".$option."</option>";
-                } else {
-                    echo "<option value='".$recordOption[$nomIdOption]."'>".$option."</option>";
-                }
+        while ($recordOption = mysql_fetch_array($recordsetOptions)) {
+            $option = $recordOption["$nomDescriptionOption"];
+            if ($option=="") {
+                $option=VAR_LANG_NON_SPECIFIE;
             }
+            if ($recordOption[$nomIdOption] == $idSelect) {
+                echo "<option selected value='".$recordOption[$nomIdOption]."'>".$option."</option>";
+            } else {
+                echo "<option value='".$recordOption[$nomIdOption]."'>".$option."</option>";
+            }
+        }
         echo "</select>";
     }
 }
@@ -709,14 +717,13 @@ function printManualRefereePointsTypesSelect($selectedValue, $selectName)
 
     echo "<select id='".$selectName."' name='".$selectName."'>";
 
-        while($option = mysql_fetch_array($resultOptions)){
-
-            if ($option['id'] == $selectedValue) {
-                echo "<option selected value='".$option['id']."'>".$option['nom']."</option>";
-            } else {
-                echo "<option value='".$option['id']."'>".$option['nom']."</option>";
-            }
+    while ($option = mysql_fetch_array($resultOptions)) {
+        if ($option['id'] == $selectedValue) {
+            echo "<option selected value='".$option['id']."'>".$option['nom']."</option>";
+        } else {
+            echo "<option value='".$option['id']."'>".$option['nom']."</option>";
         }
+    }
     echo "</select>";
 }
 
@@ -779,7 +786,7 @@ function afficherListeMultiple($nomTableRelation, $nomIdRelationSource, $nomIdRe
     $requeteSQLSelection = "SELECT * FROM `$nomTableRelation` WHERE $nomIdRelationSource='$idSourceSelected'";
     $recordsetSelection = mysql_query($requeteSQLSelection) or die ("<H1>afficherListeMultiple : mauvaise requete 1</H1>");
     $tabIdSelected=null;
-    for($i=0;$recordSelection = mysql_fetch_array($recordsetSelection);$i++){
+    for ($i=0; $recordSelection = mysql_fetch_array($recordsetSelection); $i++) {
         $tabIdSelected[$i]=$recordSelection[$nomIdRelationOption];
     }
 
@@ -788,14 +795,14 @@ function afficherListeMultiple($nomTableRelation, $nomIdRelationSource, $nomIdRe
     $recordsetOptions = mysql_query($requeteSQLOptions) or die ("<H1>afficherListeMultiple : mauvaise requete 2</H1>");
 
     echo "<select name='".$nomTableRelation."[]' size='7' multiple>";
-        // affiche les options et selectionne les bonnes valeurs.
-        while($recordOption = mysql_fetch_array($recordsetOptions)){
-            if ($tabIdSelected != null && in_array($recordOption["$nomIdOption"], $tabIdSelected)) {
-                echo "<option selected value='".$recordOption[$nomIdOption]."'>".$recordOption[$nomDescriptionOption.$_SESSION["__langue__"]]."</option>";
-            } else {
-                echo "<option value='".$recordOption[$nomIdOption]."'>".$recordOption[$nomDescriptionOption.$_SESSION["__langue__"]]."</option>";
-            }
+    // affiche les options et selectionne les bonnes valeurs.
+    while ($recordOption = mysql_fetch_array($recordsetOptions)) {
+        if ($tabIdSelected != null && in_array($recordOption["$nomIdOption"], $tabIdSelected)) {
+            echo "<option selected value='".$recordOption[$nomIdOption]."'>".$recordOption[$nomDescriptionOption.$_SESSION["__langue__"]]."</option>";
+        } else {
+            echo "<option value='".$recordOption[$nomIdOption]."'>".$recordOption[$nomDescriptionOption.$_SESSION["__langue__"]]."</option>";
         }
+    }
     echo "</select>";
 }
 
@@ -808,7 +815,7 @@ function supprimerRelationMultiple($nomTableRelation, $nomIdRelationSource, $idS
 function ajouterRelationMultiple($nomTableRelation, $nomIdRelationSource, $nomIdRelationOption, $idSource, $IdsRelationOptionSelected)
 {
     if (is_array($IdsRelationOptionSelected)) {
-        while( list(,$val) = each($IdsRelationOptionSelected) ){
+        while (list(, $val) = each($IdsRelationOptionSelected)) {
             $requeteSQL="INSERT INTO `$nomTableRelation` (`$nomIdRelationSource`,`$nomIdRelationOption`) VALUES ('$idSource','$val')";
             mysql_query($requeteSQL) or die ("<H1>Erreur ajout de la relation : ajouterRelationMultiple($nomTableRelation, $nomIdRelationSource, $nomIdRelationOption, $idSource, $IdsRelationOptionSelected)</H1>");
         }
@@ -819,47 +826,47 @@ function ajouterRelationMultiple($nomTableRelation, $nomIdRelationSource, $nomId
 function afficherConditionRecherce($indexCondition, $tabListe, $tabListeNonLanguee)
 {
     echo "<p>Filtre ".$indexCondition." : ";
-        echo "<select name='conditionChamp".$indexCondition."'>";
-// plus besoin grace au selection distinct : onChange='checkOperator(".$indexCondition.");'
-            echo "<option value='null' selected>-</option>";
-            for($i=0;$i<count($tabListe);$i++){
-                if ($_POST["conditionChamp".$indexCondition]==$tabListe[$i][1]) {
-                    echo "<option value='".$tabListe[$i][1]."' selected>".$tabListe[$i][0]."</option>";
-                } else {
-                    echo "<option value='".$tabListe[$i][1]."'>".$tabListe[$i][0]."</option>";
-                }
+    echo "<select name='conditionChamp".$indexCondition."'>";
+    // plus besoin grace au selection distinct : onChange='checkOperator(".$indexCondition.");'
+    echo "<option value='null' selected>-</option>";
+    for ($i=0; $i<count($tabListe); $i++) {
+        if ($_POST["conditionChamp".$indexCondition]==$tabListe[$i][1]) {
+            echo "<option value='".$tabListe[$i][1]."' selected>".$tabListe[$i][0]."</option>";
+        } else {
+            echo "<option value='".$tabListe[$i][1]."'>".$tabListe[$i][0]."</option>";
+        }
 
-            }
-            for($i=0;$i<count($tabListeNonLanguee);$i++){
-                if ($_POST["conditionChamp".$indexCondition]=="__NL__".$tabListeNonLanguee[$i][1]) {
-                    echo "<option value='__NL__".$tabListeNonLanguee[$i][1]."' selected>".$tabListeNonLanguee[$i][0]."</option>";
-                } else {
-                    echo "<option value='__NL__".$tabListeNonLanguee[$i][1]."'>".$tabListeNonLanguee[$i][0]."</option>";
-                }
-            }
-        echo "</select>";
-        echo "<select name='conditionOperateur".$indexCondition."'>";
-            // like
-            if ($_POST["conditionOperateur".$indexCondition]=="like") {
-                echo "<option value='like' selected>=</option>";
-            } else {
-                echo "<option value='like'>=</option>";
-            }
-            // different
-            if ($_POST["conditionOperateur".$indexCondition]=="different") {
-                echo "<option value='different' selected>&#8800;</option>";
-            } else {
-                echo "<option value='different'>&#8800;</option>";
-            }
-            /*
-            echo "<option value='like' selected>=</option>";
-            echo "<option value='different'>&#8800;</option>";      */
-            /*echo "<option value='like' selected>&#8804;</option>";
-            echo "<option value='like' selected>&#8805;</option>";
-            echo "<option value='like' selected>&lt;</option>";
-            echo "<option value='like' selected>&gt;</option>";             */
-        echo "</select>";
-        echo "<input type='text' name='conditionValeur".$indexCondition."' value='".$_POST["conditionValeur".$indexCondition]."'/>";
+    }
+    for ($i=0; $i<count($tabListeNonLanguee); $i++) {
+        if ($_POST["conditionChamp".$indexCondition]=="__NL__".$tabListeNonLanguee[$i][1]) {
+            echo "<option value='__NL__".$tabListeNonLanguee[$i][1]."' selected>".$tabListeNonLanguee[$i][0]."</option>";
+        } else {
+            echo "<option value='__NL__".$tabListeNonLanguee[$i][1]."'>".$tabListeNonLanguee[$i][0]."</option>";
+        }
+    }
+    echo "</select>";
+    echo "<select name='conditionOperateur".$indexCondition."'>";
+    // like
+    if ($_POST["conditionOperateur".$indexCondition]=="like") {
+        echo "<option value='like' selected>=</option>";
+    } else {
+        echo "<option value='like'>=</option>";
+    }
+    // different
+    if ($_POST["conditionOperateur".$indexCondition]=="different") {
+        echo "<option value='different' selected>&#8800;</option>";
+    } else {
+        echo "<option value='different'>&#8800;</option>";
+    }
+    /*
+    echo "<option value='like' selected>=</option>";
+    echo "<option value='different'>&#8800;</option>";      */
+    /*echo "<option value='like' selected>&#8804;</option>";
+    echo "<option value='like' selected>&#8805;</option>";
+    echo "<option value='like' selected>&lt;</option>";
+    echo "<option value='like' selected>&gt;</option>";             */
+    echo "</select>";
+    echo "<input type='text' name='conditionValeur".$indexCondition."' value='".$_POST["conditionValeur".$indexCondition]."'/>";
     echo "</p>";
     echo "<script language='javascript'>";
 // plus besoin grace au selection distinct :    echo "checkOperator(".$indexCondition.")";
@@ -958,7 +965,7 @@ function showCommission($commission)
     if (mysql_num_rows($membersResult) > 0) {
         echo "Membre(s) :<br/>";
         echo "<ul>";
-        while($member = mysql_fetch_array($membersResult)){
+        while ($member = mysql_fetch_array($membersResult)) {
             echo "<li>";
             echo stripslashes($member["prenom"])." ".stripslashes($member["nom"]);
             if ($member['fonction'] != null) {
@@ -1039,29 +1046,29 @@ function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
     } else {
         $srcImg = VAR_REP_IMAGE_EQUIPE_SUISSE.$prenom."_".$nom.$extensionPhotos.".".$extensionFileName;
     }
-    $srcImg = str_replace("é","e",$srcImg);
-    $srcImg = str_replace("è","e",$srcImg);
-    $srcImg = str_replace("ü","u",$srcImg);
-    $srcImg = str_replace("ä","a",$srcImg);
-    $srcImg = str_replace("ô","o",$srcImg);
-    $srcImg = str_replace("ë","e",$srcImg);
-    $srcImg = str_replace("ï","i",$srcImg);
-    $srcImg = str_replace("ñ","n",$srcImg);
-    $srcImg = str_replace("ç","c",$srcImg);
-    $srcImg = str_replace(" ","",$srcImg);
+    $srcImg = str_replace("é", "e", $srcImg);
+    $srcImg = str_replace("è", "e", $srcImg);
+    $srcImg = str_replace("ü", "u", $srcImg);
+    $srcImg = str_replace("ä", "a", $srcImg);
+    $srcImg = str_replace("ô", "o", $srcImg);
+    $srcImg = str_replace("ë", "e", $srcImg);
+    $srcImg = str_replace("ï", "i", $srcImg);
+    $srcImg = str_replace("ñ", "n", $srcImg);
+    $srcImg = str_replace("ç", "c", $srcImg);
+    $srcImg = str_replace(" ", "", $srcImg);
     return $srcImg;
 }
 function nomFichierPhotoValide($srcImg)
 {
-    $srcImg = str_replace("é","e",$srcImg);
-    $srcImg = str_replace("è","e",$srcImg);
-    $srcImg = str_replace("ü","u",$srcImg);
-    $srcImg = str_replace("ä","a",$srcImg);
-    $srcImg = str_replace("ô","o",$srcImg);
-    $srcImg = str_replace("ë","e",$srcImg);
-    $srcImg = str_replace("ñ","n",$srcImg);
-    $srcImg = str_replace("ç","c",$srcImg);
-    $srcImg = str_replace(" ","",$srcImg);
+    $srcImg = str_replace("é", "e", $srcImg);
+    $srcImg = str_replace("è", "e", $srcImg);
+    $srcImg = str_replace("ü", "u", $srcImg);
+    $srcImg = str_replace("ä", "a", $srcImg);
+    $srcImg = str_replace("ô", "o", $srcImg);
+    $srcImg = str_replace("ë", "e", $srcImg);
+    $srcImg = str_replace("ñ", "n", $srcImg);
+    $srcImg = str_replace("ç", "c", $srcImg);
+    $srcImg = str_replace(" ", "", $srcImg);
     return strtolower($srcImg);
 }
 
@@ -1075,10 +1082,10 @@ function rewrite($label)
     $replace = array ('e','a','i','u','o','c',' ');
     $label =  preg_replace($search, $replace, $label);
     $label = strtolower($label);
-    $label = str_replace(" ",'-',$label);
-    $label = preg_replace('#-+#','-',$label);
-    $label = preg_replace('#([-]+)#','-',$label);
-    trim($label,'-');
+    $label = str_replace(" ", '-', $label);
+    $label = preg_replace('#-+#', '-', $label);
+    $label = preg_replace('#([-]+)#', '-', $label);
+    trim($label, '-');
 
     return $label;
 }
@@ -1118,7 +1125,7 @@ function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $co
                     // delete tag from $open_tags list
                     $pos = array_search($tag_matchings[1], $open_tags);
                     if ($pos !== false) {
-                    unset($open_tags[$pos]);
+                        unset($open_tags[$pos]);
                     }
                 // if tag is an opening tag
                 } else if (preg_match('/^<\s*([^\s>!]+).*?>$/s', $line_matchings[1], $tag_matchings)) {
@@ -1190,7 +1197,7 @@ function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $co
 function sizeNewsManager($text, $nbchar, $newsId)
 {
     if (strlen($text)>$nbchar) {
-        return substr($text,0,$nbchar)."... "."<p class='lireSuiteArticle'><a href='".VAR_HREF_PAGE_PRINCIPALE."?menuselection=1&smenuselection=1&newsIdSelection=".$newsId."'>".VAR_LANG_LIRE_SUITE_ARTICLE."</a></p>";
+        return substr($text, 0, $nbchar)."... "."<p class='lireSuiteArticle'><a href='".VAR_HREF_PAGE_PRINCIPALE."?menuselection=1&smenuselection=1&newsIdSelection=".$newsId."'>".VAR_LANG_LIRE_SUITE_ARTICLE."</a></p>";
     }
     return $text;//"<p align='justify'>".strip_tags($text)."</p>"; //$text;
 }
@@ -1207,9 +1214,9 @@ function getLastYouTubeVideoID($channel)
 
     $xmlStr = $xml->asXML();
 
-    $positionVideo = strpos($xmlStr,"video:");
+    $positionVideo = strpos($xmlStr, "video:");
     $debut = $positionVideo+6;
-    $youtubeID = substr($xmlStr,$debut,11);
+    $youtubeID = substr($xmlStr, $debut, 11);
 
     return $youtubeID;
 }
@@ -1224,14 +1231,14 @@ function getLastYouTubeVideoTitle($channel)
     $xml = simplexml_load_file($RSSurl);
 
     $xmlStr = $xml->asXML();
-    $xmlStr = strstr($xmlStr,"<title>");
-    $xmlStr = substr($xmlStr,7);
-    $xmlStr = strstr($xmlStr,"<title>");
-    $xmlStr = substr($xmlStr,7);
-    $xmlStr = strstr($xmlStr,"<title>");
-    $xmlStr = substr($xmlStr,7);
-    $positionFin = strpos($xmlStr,"</title>");
-    $xmlStr = substr($xmlStr,0,$positionFin);
+    $xmlStr = strstr($xmlStr, "<title>");
+    $xmlStr = substr($xmlStr, 7);
+    $xmlStr = strstr($xmlStr, "<title>");
+    $xmlStr = substr($xmlStr, 7);
+    $xmlStr = strstr($xmlStr, "<title>");
+    $xmlStr = substr($xmlStr, 7);
+    $positionFin = strpos($xmlStr, "</title>");
+    $xmlStr = substr($xmlStr, 0, $positionFin);
     $xmlStr = utf8_decode($xmlStr);
 
     return $xmlStr;
@@ -1239,30 +1246,30 @@ function getLastYouTubeVideoTitle($channel)
 
 function chif_rome($num)
 {
-  //I V X  L  C   D   M
-  //1 5 10 50 100 500 1k
-  $rome =array("","I","II","III","IV","V","VI","VII","VIII","IX");
-  $rome2=array("","X","XX","XXX","XL","L","LX","LXX","LXXX","XC");
-  $rome3=array("","C","CC","CCC","CD","D","DC","DCC","DCCC","CM");
-  $rome4=array("","M","MM","MMM","IVM","VM","VIM","VIIM","VIIIM","IXM");
-  $str=$rome[$num%10];
-  $num-=($num%10);
-  $num/=10;
-  $str=$rome2[$num%10].$str;
-  $num-=($num%10);
-  $num/=10;
-  $str=$rome3[$num%10].$str;
-  $num-=($num%10);
-  $num/=10;
-  $str=$rome4[$num%10].$str;
-  return $str;
+    //I V X  L  C   D   M
+    //1 5 10 50 100 500 1k
+    $rome =array("", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX");
+    $rome2=array("", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC");
+    $rome3=array("", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM");
+    $rome4=array("", "M", "MM", "MMM", "IVM", "VM", "VIM", "VIIM", "VIIIM", "IXM");
+    $str=$rome[$num%10];
+    $num-=($num%10);
+    $num/=10;
+    $str=$rome2[$num%10].$str;
+    $num-=($num%10);
+    $num/=10;
+    $str=$rome3[$num%10].$str;
+    $num-=($num%10);
+    $num/=10;
+    $str=$rome4[$num%10].$str;
+    return $str;
 }
 
 /* from http://php.net/manual/en/function.ucwords.php */
-function ucwordspecific($str,$delimiter)
+function ucwordspecific($str, $delimiter)
 {
     $delimiter_space = '- ';
-    return str_replace($delimiter_space,$delimiter,ucwords(str_replace($delimiter,$delimiter_space,$str)));
+    return str_replace($delimiter_space, $delimiter, ucwords(str_replace($delimiter, $delimiter_space, $str)));
 }
 
 function isValidYear($year)
@@ -1308,10 +1315,10 @@ function isValidSeasonID($id)
 // from http://www.bizinfosys.com/php/php-print-echo-array.html
 function print_array($aArray)
 {
-// Print a nicely formatted array representation:
-  echo '<pre>';
-  print_r($aArray);
-  echo '</pre>';
+    // Print a nicely formatted array representation:
+    echo '<pre>';
+    print_r($aArray);
+    echo '</pre>';
 }
 
 function slugify($str)
@@ -1336,7 +1343,7 @@ function ajouterLogAnnuaireFSTB($idPersonne, $field, $old_value, $new_value)
     }
 }
 
-function ajouterSSiPluriel($word,$number)
+function ajouterSSiPluriel($word, $number)
 {
     if ($number > 1) {
         return $word."s";
@@ -1385,19 +1392,16 @@ function addhttp($url)
  */
 function afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu, $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang)
 {
-    if ($idTour == 2000 AND ($typeClassement==1 OR $typeClassement==2)) {
+    if ($idTour == 2000 && ($typeClassement==1 || $typeClassement==2)) {
         if ($nbMatchGagne==$nbMatchGagnantPromoReleg) {
             $rangAffiche="oui";
-        }
-        elseif ($nbMatchPerdu==$nbMatchGagnantPromoReleg) {
+        } elseif ($nbMatchPerdu==$nbMatchGagnantPromoReleg) {
             $rangAffiche="non";
         }
-    }
-    elseif ($idTour == 4000) {
+    } elseif ($idTour == 4000) {
         if ($nbMatchGagne==$nbMatchGagnantTourFinal) {
             $rangAffiche="Passe en finale";
-        }
-        elseif ($nbMatchPerdu==$nbMatchGagnantTourFinal) {
+        } elseif ($nbMatchPerdu==$nbMatchGagnantTourFinal) {
             $rangAffiche="Passe en petite finale";
         }
     } else {
@@ -1409,5 +1413,3 @@ function afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu, $n
     }
     return $rangAffiche;
 }
-
-?>
