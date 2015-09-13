@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 	$motsRecherches = mysql_escape_string($_POST['motsRecherches']);
 ?>
-<form action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" method="post"><br><p align='center'><input type="text" name="motsRecherches" size="35" value='<? echo $motsRecherches; ?>'>&nbsp;<input type="submit" value="Rechercher"></p></form><p />
+<form action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" method="post"><br><p align='center'><input type="text" name="motsRecherches" size="35" value='<?php echo $motsRecherches; ?>'>&nbsp;<input type="submit" value="Rechercher"></p></form><p />
 
 
 <script language="JavaScript">
@@ -11,7 +11,7 @@
 	}
 </script>
 
-<table class="adminTable"><?
+<table class="adminTable"><?php
 
 	if($motsRecherches!=""){
 

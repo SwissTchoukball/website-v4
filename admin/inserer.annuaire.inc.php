@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="insererAnnuaire">
-<?
+<?php
 
 	if ($_POST["action"]=="insererAnnuaire"){
 	/*
@@ -161,7 +161,7 @@
 
 
 
-<?
+<?php
 
 	echo "<SCRIPT language='JavaScript'>
 	 var couleurErreur; couleurErreur='#".VAR_LOOK_COULEUR_ERREUR_SAISIE."';
@@ -251,58 +251,58 @@
 <form class="formulaireAnnuaire" name="modificationAnnuaire" method="post" onSubmit="return controlerSaisie();" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
 	<label>&nbsp;</label><input type="text" style="visibility:hidden;" />
 	<label>Civilit&eacute;</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDCivilite","idCivilite","descriptionCivilite",$record["idCivilite"],true);
 	?>
 	<label>Nom<span style="color:red;font-size:10px">*</span></label>
-	<input name="nom" type="text" value="<? echo $record["nom"];?>" size="35" maxlength="35">
+	<input name="nom" type="text" value="<?php echo $record["nom"];?>" size="35" maxlength="35">
 	<label>Prénom<span style="color:red;font-size:10px">*</span></label>
-	<input name="prenom" type="text" value="<? echo $record["prenom"];?>" size="35" maxlength="35">
+	<input name="prenom" type="text" value="<?php echo $record["prenom"];?>" size="35" maxlength="35">
 	<label>Adresse</label>
-	<input name="adresse" type="text" value="<? echo $record["adresse"];?>" size="35" maxlength="35">
+	<input name="adresse" type="text" value="<?php echo $record["adresse"];?>" size="35" maxlength="35">
 	<label>Case postale / option rue</label>
-	<input name="cp" type="text" value="<? echo $record["cp"];?>" size="35" maxlength="35">
+	<input name="cp" type="text" value="<?php echo $record["cp"];?>" size="35" maxlength="35">
 	<label>Numéro postal</label>
-	<input name="npa" type="text" value="<? echo $record["npa"];?>" size="35" maxlength="35">
+	<input name="npa" type="text" value="<?php echo $record["npa"];?>" size="35" maxlength="35">
 	<label>Ville</label>
-	<input name="ville" type="text" value="<? echo $record["ville"];?>" size="35" maxlength="35">
+	<input name="ville" type="text" value="<?php echo $record["ville"];?>" size="35" maxlength="35">
 	<label>Pays</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDPays","idPays","descriptionPays",$record["idPays"],true);
 	?>
 	<br />
 	<label>&nbsp;</label><input type="text" style="visibility:hidden;" />
 	<label>Tél. privé</label>
-	<input name="telPrive" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<? echo $record["telPrive"];?>" size="35" maxlength="35">
+	<input name="telPrive" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<?php echo $record["telPrive"];?>" size="35" maxlength="35">
 	<label>Tél. prof.</label>
-	<input name="telProf" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<? echo $record["telProf"];?>" size="35" maxlength="35">
+	<input name="telProf" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<?php echo $record["telProf"];?>" size="35" maxlength="35">
 	<label>Portable</label>
-	<input name="portable" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<? echo $record["portable"];?>" size="35" maxlength="35">
+	<input name="portable" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" type="text" value="<?php echo $record["portable"];?>" size="35" maxlength="35">
 	<label>Fax</label>
-	<input name="fax" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);"  type="text" value="<? echo $record["fax"];?>" size="35" maxlength="35">
+	<input name="fax" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);"  type="text" value="<?php echo $record["fax"];?>" size="35" maxlength="35">
 	<label>Email</label>
-	<input name="email" type="text" value="<? echo $record["email"];?>" size="35" maxlength="80">
+	<input name="email" type="text" value="<?php echo $record["email"];?>" size="35" maxlength="80">
 	<br />
 	<label>&nbsp;</label><input type="text" style="visibility:hidden;" />
 	<label>Club</label>
-	<?
+	<?php
 	//afficherdropDownListe("ClubsFstb","nbIdClub","club",$record["idClub"],false);
 	afficherListeClubs($record["idClub"], "nbIdClub");
 	?>
 	<label>Jour de naissance</label>
-	<?
+	<?php
 	echo "<select name='jour'>";
 	echo modif_liste_jour(jour($record["dateNaissance"]));
 	echo "</select>";
 	?>
 	<label>Mois de naissance</label>
-	<?
+	<?php
 	echo "<select name='mois'>";
 	echo modif_liste_mois(mois($record["dateNaissance"]));
 	echo "</select>";
 	?>
 	<label>Année de naissance</label>
-	<?
+	<?php
 	echo "<select name='annee'>";
 		for ($i = 1900; $i <= date('Y'); $i++){
 		if($i == annee($record["dateNaissance"])){
@@ -317,46 +317,46 @@
 	<br />
 	<label>&nbsp;</label><input type="text" style="visibility:hidden;" />
 	<label>Langue</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDLangue","idLangue","descriptionLangue",$record["idLangue"],true);
 	?>
 	<label>Raison social</label>
-	<input name="raisonSociale" type="text" value="<? echo $record["raisonSociale"];?>" size="35" maxlength="80">
-	<?
+	<input name="raisonSociale" type="text" value="<?php echo $record["raisonSociale"];?>" size="35" maxlength="80">
+	<?php
 	//afficherdropDownListe("DBDRaisonSociale","idRaisonSociale","descriptionRaisonSociale",$record["idCivilite"],true);
 	?>
 	<label>Status</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDStatus","idStatus","descriptionStatus",$record["idStatus"],true);
 	?>
 	<label>Origine de l'adresse</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDOrigineAdresse","idOrigineAdresse","descriptionOrigineAdresse",$record["idOrigineAdresse"],true);
 	?>
 	<label>tchouk<sup>up</sup></label>
-	<?
+	<?php
 	afficherdropDownListe("DBDCHTB","idCHTB","descriptionCHTB",$record["idCHTB"],true);
 	?>
 	<label>Arbitre</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDArbitre","idArbitre","descriptionArbitre",$record["idArbitre"],true);
 	?>
 	<label>Type de compte bancaire</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDTypeCompte","idTypeCompte","TypeCompte",$record["typeCompte"],false);
 	?>
 	<label>Numéro de compte bancaire</label>
-	<textarea name="numeroCompte" cols="50" rows="4"><? echo $record["numeroCompte"];?></textarea>
+	<textarea name="numeroCompte" cols="50" rows="4"><?php echo $record["numeroCompte"];?></textarea>
 	<label>M&eacute;dia type</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDMediaType","idMediaType","descriptionMediaType",$record["idMediaType"],true);
 	?>
 	<label>M&eacute;dia canton/&eacute;tat</label>
-	<?
+	<?php
 	afficherdropDownListe("DBDMediaCanton","idMediaCanton","descriptionMediaCanton",$record["idMediaCanton"],true);
 	?>
 	<label>Formations</label>
-	<? afficherListeMultiple("DBDRegroupementFormation",
+	<?php afficherListeMultiple("DBDRegroupementFormation",
 							 "idBDBPersonne",
 							 "idFormation",
 							 "DBDFormation",
@@ -366,7 +366,7 @@
 							 ); ?>
 	<p>ctrl+click : multi-selection</p>
 	<label>Autres functions</label>
-	<? afficherListeMultiple("DBDRegroupementAutreFonction",
+	<?php afficherListeMultiple("DBDRegroupementAutreFonction",
 							 "idBDBPersonne",
 							 "idAutreFonction",
 							 "DBDAutreFonction",
@@ -378,11 +378,11 @@
 	<label>Remarque</label>
 	<textarea rows="7" cols="80" name="remarque"><?php echo $record["remarque"];?></textarea>
 	<input type="hidden" name="action" value="insererAnnuaire">
-	<input type="hidden" name="idDbdPersonne" value="<? echo $modificationIdAnnuaire;?>">
-	<input type="submit" value="<? echo VAR_LANG_INSERER;?>">
+	<input type="hidden" name="idDbdPersonne" value="<?php echo $modificationIdAnnuaire;?>">
+	<input type="submit" value="<?php echo VAR_LANG_INSERER;?>">
 	<span style="color:red;font-size:10px">*Obligatoire</span>
 </form>
 <form name="annuler" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
-	<input type="submit" value="<? echo VAR_LANG_ANNULER?>">
+	<input type="submit" value="<?php echo VAR_LANG_ANNULER?>">
 </form>
 </div>

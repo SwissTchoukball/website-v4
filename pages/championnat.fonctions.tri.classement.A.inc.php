@@ -1,4 +1,4 @@
-<?
+<?php
 
 function triParPointsInterne($informations,$tableau,$debug){ // fonctionne !
 	$nouveauTableau=array();
@@ -12,12 +12,12 @@ function triParPointsInterne($informations,$tableau,$debug){ // fonctionne !
 			if($debug){
 				echo "<br /><strong>Il y a une égalité de points.</strong><br />";
 			}
-			
+
 			$pointsInterne=array();
 			$ordningEquipesEgalitesPoints=array();
 			$ordningEquipesEgalitesId=array();
 			$l=0;
-			
+
 			for($i=1;$i<=count($tableau[$k]);$i++){ // Une boucle par équipe à égalité ==>> $i = EQUIPE EGALITE
 				$pointsInterne[$i]=0; // Initialisation des points interne de l'équipe.
 				for($j=1;$j<=count($tableau[$k]);$j++){ // Une boucle pour chaque rencontre possible que cette équipe a fait avec une autre équipe à égalité. Le système calcule uniquement les points de l'équipe sélectionnée ==>> $j = AUTRE EQUIPE EGALITE avec qui on compte les points
@@ -85,13 +85,13 @@ function triParPointsInterne($informations,$tableau,$debug){ // fonctionne !
 				if($debug){
 					echo "<br /><br />".$tableau[$k][$i]." : Points Interne :".$pointsInterne[$i];
 				}
-				
+
 				$ordningEquipesEgalitesPoints[$i]=$pointsInterne[$i];
 				$ordningEquipesEgalitesId[$i]=$tableau[$k][$i];
 				$pointsInterne = array();
-				
+
 			} // Fin boucle par équipe égalité
-			
+
 			for($m=max($ordningEquipesEgalitesPoints);$m>=min($ordningEquipesEgalitesPoints);$m--){
 				$compteur=0;
 				for($n=1;$n<=count($tableau[$k]);$n++){
@@ -119,6 +119,6 @@ function triParPointsInterne($informations,$tableau,$debug){ // fonctionne !
 		$nouveauTableau=$tableau;
 	}
 	return $nouveauTableau;
-	
+
 }
 ?>

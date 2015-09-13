@@ -1,16 +1,16 @@
-<? ?>
+<?php ?>
 <h3>
-<? echo VAR_LANG_ETAPE_3; ?>
+<?php echo VAR_LANG_ETAPE_3; ?>
 </h3>
 
 <div class="modifierMatch">
-    <?
+    <?php
     $requete="SELECT * FROM CoupeCH_Matchs WHERE idMatch=".$_GET['modMatch']."";
     $retour=mysql_query($requete) or die($requete." ".mysql_error());
     $donnees=mysql_fetch_array($retour);
-    
+
     $forfait=$donnees['forfait'];
-    
+
     // Détermination du nom des équipes.
     if($donnees['equipeA']==0){
         if($donnees['forfait']==3){
@@ -20,21 +20,21 @@
             $idTypeMatchA=$donnees['idTypeMatch']*2;
             $ordreA1=$donnees['ordre']*2;
             $ordreA2=$ordreA1-1; // pas besoin ici
-            
+
             $requeteIDEquipeA="SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=".$idTypeMatchA." AND ordre=".$ordreA1."";
             $retourIDEquipeA=mysql_query($requeteIDEquipeA);
             $donneesIDEquipeA=mysql_fetch_array($retourIDEquipeA);
-            
+
             $requeteEquipeA="SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=".$donneesIDEquipeA['equipeA']."";
             $retourEquipeA=mysql_query($requeteEquipeA);
             $donneesEquipeA=mysql_fetch_array($retourEquipeA);
-            
+
             $requeteEquipeB="SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=".$donneesIDEquipeA['equipeB']."";
             $retourEquipeB=mysql_query($requeteEquipeB);
             $donneesEquipeB=mysql_fetch_array($retourEquipeB);
-            
+
             $equipeA=$donneesEquipeA['nomEquipe']."<br />ou<br />".$donneesEquipeB['nomEquipe'];
-                
+
         }
     }
     else{
@@ -51,22 +51,22 @@
             $idTypeMatchA=$donnees['idTypeMatch']*2;
             $ordreA1=$donnees['ordre']*2; // besoin juste pour calculer ordreA2
             $ordreA2=$ordreA1-1;
-            
+
             $requeteIDEquipeB="SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=".$idTypeMatchA." AND ordre=".$ordreA2."";
             $retourIDEquipeB=mysql_query($requeteIDEquipeB);
             $donneesIDEquipeB=mysql_fetch_array($retourIDEquipeB);
-            
+
             $requeteEquipeA="SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=".$donneesIDEquipeB['equipeA']."";
             $retourEquipeA=mysql_query($requeteEquipeA);
             $donneesEquipeA=mysql_fetch_array($retourEquipeA);
-            
+
             $requeteEquipeB="SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=".$donneesIDEquipeB['equipeB']."";
             $retourEquipeB=mysql_query($requeteEquipeB);
             $donneesEquipeB=mysql_fetch_array($retourEquipeB);
-            
+
             $equipeB=$donneesEquipeA['nomEquipe']."<br />ou<br />".$donneesEquipeB['nomEquipe'];
-                
-        }    
+
+        }
     }
     else{
         $requeteEquipeB="SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=".$donnees['equipeB']."";
@@ -74,8 +74,8 @@
         $donneesEquipeB=mysql_fetch_array($retourEquipeB);
         $equipeB = $donneesEquipeB['nomEquipe'];
     }
-    
-    
+
+
         // Récupération des informations sur la journée
         $idJournee=$donnees['idJournee'];
         $requeteJournee="SELECT * FROM CoupeCH_Journees WHERE idJournee=".$donnees['idJournee']."";
@@ -87,7 +87,7 @@
         $annee=$donneesJournee['annee'];
         $idCategorie=$donneesJournee['idCategorie'];
         $dateSQL=$donneesJournee['dateDebut'];
-        
+
         //Récupération du score en cas de forfait ou disqualification ainsi que du nombre de set gagnants
         $requeteGenerale="SELECT * FROM CoupeCH_Categories_Par_Annee WHERE annee=".$annee."";
         $retourGeneral=mysql_query($requeteGenerale);
@@ -101,47 +101,47 @@
         	$nbMaxSets=($nbSetsGagnants*2)-1;
         }
         $scoreGagnantParForfait=$donneesGenerales['scoreGagnantParForfait'];
-            
+
         //Type de match
         $requeteTypeMatch="SELECT nom".$_SESSION['__langue__']." FROM CoupeCH_Type_Matchs WHERE idTypeMatch=".$donnees['idTypeMatch']."";
         $retourTypeMatch=mysql_query($requeteTypeMatch);
         $donneesTypeMatch=mysql_fetch_array($retourTypeMatch);
         $typeMatch = $donneesTypeMatch['nom'.$_SESSION["__langue__"]];
-            
-        
+
+
         //JAVASCRIPT pour l'affichage.
         ?>
-        
+
         <script language="javascript">
             function changeEtatForfait(chkbox){
                 if((chkbox != null && chkbox.name == "AGagneParForfait") || (chkbox == null && modifierUnMatch.AGagneParForfait.checked)){
-                    
-                    <?
+
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                         if($k<=$nbSetsGagnants){
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = <? echo $scoreGagnantParForfait; ?>;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = <?php echo $scoreGagnantParForfait; ?>;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                         else
                         {
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                     }
                     ?>
                     if(modifierUnMatch.AGagneParForfait.checked && modifierUnMatch.BGagneParForfait.checked){
                          modifierUnMatch.BGagneParForfait.checked = false;
                     }
-                    <?
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = true;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = true;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = true;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = true;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.ADisqualifie.disabled = true;
@@ -149,47 +149,47 @@
                 }
                 // pas de else, car appele par saison onchange
                 if((chkbox != null && chkbox.name == "BGagneParForfait") || (chkbox == null && modifierUnMatch.BGagneParForfait.checked)){
-                    <?
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                         if($k<=$nbSetsGagnants){
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = <? echo $scoreGagnantParForfait; ?>;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = <?php echo $scoreGagnantParForfait; ?>;
+                        <?php
                         }
                         else
                         {
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                     }
-                    ?>	
+                    ?>
                     if(modifierUnMatch.BGagneParForfait && modifierUnMatch.AGagneParForfait.checked){
                         modifierUnMatch.AGagneParForfait.checked = false;
                     }
-                    <?
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = true;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = true;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = true;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = true;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.ADisqualifie.disabled = true;
                     modifierUnMatch.BDisqualifie.disabled = true;
                 }
                 if(modifierUnMatch.AGagneParForfait.checked==false && modifierUnMatch.BGagneParForfait.checked==false){
-                    
-                    <?
+
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = false;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = false;
-                    modifierUnMatch.scoreA<? echo $k; ?>.value = <? echo $donnees['scoreA'.$k]; ?>;
-                    modifierUnMatch.scoreB<? echo $k; ?>.value = <? echo $donnees['scoreB'.$k]; ?>;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = false;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = false;
+                    modifierUnMatch.scoreA<?php echo $k; ?>.value = <?php echo $donnees['scoreA'.$k]; ?>;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.value = <?php echo $donnees['scoreB'.$k]; ?>;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.ADisqualifie.disabled = false;
@@ -199,33 +199,33 @@
 
             function changeEtatDisqualification(chkbox){
                 if((chkbox != null && chkbox.name == "ADisqualifie") || (chkbox == null && modifierUnMatch.ADisqualifie.checked)){
-                    
-                    <?
+
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                         if($k<=$nbSetsGagnants){
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = <? echo $scoreGagnantParForfait; ?>;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = <?php echo $scoreGagnantParForfait; ?>;
+                        <?php
                         }
                         else
                         {
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                     }
                     ?>
                     if(modifierUnMatch.ADisqualifie.checked && modifierUnMatch.BDisqualifie.checked){
                          modifierUnMatch.BDisqualifie.checked = false;
                     }
-                    <?
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = true;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = true;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = true;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = true;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.AGagneParForfait.disabled = true;
@@ -233,48 +233,48 @@
                 }
                 // pas de else, car appele par saison onchange
                 if((chkbox != null && chkbox.name == "BDisqualifie") || (chkbox == null && modifierUnMatch.BDisqualifie.checked)){
-                    <?
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                         if($k<=$nbSetsGagnants){
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = <? echo $scoreGagnantParForfait; ?>;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = <?php echo $scoreGagnantParForfait; ?>;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                         else
                         {
                         ?>
-                        modifierUnMatch.scoreA<? echo $k; ?>.value = 0;
-                        modifierUnMatch.scoreB<? echo $k; ?>.value = 0;
-                        <?
+                        modifierUnMatch.scoreA<?php echo $k; ?>.value = 0;
+                        modifierUnMatch.scoreB<?php echo $k; ?>.value = 0;
+                        <?php
                         }
                     }
-                    ?>	
+                    ?>
                     if(modifierUnMatch.BDisqualifie && modifierUnMatch.ADisqualifie.checked){
                         modifierUnMatch.ADisqualifie.checked = false;
-                    }		
-                    
-                    <?
+                    }
+
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = true;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = true;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = true;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = true;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.AGagneParForfait.disabled = true;
                     modifierUnMatch.BGagneParForfait.disabled = true;
                 }
                 if(modifierUnMatch.ADisqualifie.checked==false && modifierUnMatch.BDisqualifie.checked==false){
-                    
-                    <?
+
+                    <?php
                     for($k=1;$k<=$nbMaxSets;$k++){
                     ?>
-                    modifierUnMatch.scoreA<? echo $k; ?>.disabled = false;
-                    modifierUnMatch.scoreB<? echo $k; ?>.disabled = false;
-                    modifierUnMatch.scoreA<? echo $k; ?>.value = <? echo $donnees['scoreA'.$k]; ?>;
-                    modifierUnMatch.scoreB<? echo $k; ?>.value = <? echo $donnees['scoreB'.$k]; ?>;
-                    <?
+                    modifierUnMatch.scoreA<?php echo $k; ?>.disabled = false;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.disabled = false;
+                    modifierUnMatch.scoreA<?php echo $k; ?>.value = <?php echo $donnees['scoreA'.$k]; ?>;
+                    modifierUnMatch.scoreB<?php echo $k; ?>.value = <?php echo $donnees['scoreB'.$k]; ?>;
+                    <?php
                     }
                     ?>
                     modifierUnMatch.AGagneParForfait.disabled = false;
@@ -286,10 +286,10 @@
             }
             function selectionAutomatiqueMinute(){
                 modifierUnMatch.finMinute.value = modifierUnMatch.debutMinute.value;
-            } 
+            }
         </script>
-        
-        <?
+
+        <?php
         // Fonction d'affichage du score pour l'affichage
         function optionsScore($scoreEquipeSelected){
             for($i=0;$i<120;$i++){
@@ -302,16 +302,16 @@
                 echo "<option value='".$i."' ".$selected.">$i</option>";
             }
         }
-        
+
         //Transformation de la forme de la date et de l'heure
         $date=date_sql2date($dateSQL); //Date SQL en Date normale
         $date=preg_replace('#(.+)-(.+)-(.+)#', '$1.$2.$3', $date); //Remplacement des - par des .
-        $heureDebut=substr($donnees['heureDebut'],0,2); 
-        $minuteDebut=substr($donnees['heureDebut'],3,2); 
-        $heureFin=substr($donnees['heureFin'],0,2); 
-        $minuteFin=substr($donnees['heureFin'],3,2); 
-        
-        
+        $heureDebut=substr($donnees['heureDebut'],0,2);
+        $minuteDebut=substr($donnees['heureDebut'],3,2);
+        $heureFin=substr($donnees['heureFin'],0,2);
+        $minuteFin=substr($donnees['heureFin'],3,2);
+
+
         //AFFICHAGE
         echo VAR_LANG_EDITION." ".$annee;
         echo "<br />";
@@ -333,58 +333,58 @@
             echo $heure;
         }
         ?>
-        <form name="modifierUnMatch" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>" method="post">
+        <form name="modifierUnMatch" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>" method="post">
         <table border="0" align="center">
-            <?
+            <?php
             if($forfait!=3){
                 ?>
                 <tr>
                     <td>De <select name="debutHeure" id="debutHeure" onChange="selectionAutomatiqueHeure()">
-                            <? echo modif_liste_heure($heureDebut); ?>
+                            <?php echo modif_liste_heure($heureDebut); ?>
                         </select>h<select name="debutMinute" id="debutMinute">
-                            <? echo modif_liste_minute($minuteDebut); ?>
+                            <?php echo modif_liste_minute($minuteDebut); ?>
                         </select>
                     </td>
                     <td>à</td>
                     <td><select name="finHeure" id="finHeure">
-                            <? echo modif_liste_heure($heureFin); ?>
+                            <?php echo modif_liste_heure($heureFin); ?>
                         </select>h<select name="finMinute" id="finMinute">
-                            <? echo modif_liste_minute($minuteFin); ?>
+                            <?php echo modif_liste_minute($minuteFin); ?>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <input type="hidden" name="EquipeA" value="<? echo $equipeA; ?>" />
-                        <strong><? echo $equipeA; ?></strong>
+                        <input type="hidden" name="EquipeA" value="<?php echo $equipeA; ?>" />
+                        <strong><?php echo $equipeA; ?></strong>
                     </td>
                     <td>-</td>
                     <td align="left">
-                        <input type="hidden" name="EquipeB" value="<? echo $equipeB; ?>" />
-                        <strong><? echo $equipeB; ?></strong>
+                        <input type="hidden" name="EquipeB" value="<?php echo $equipeB; ?>" />
+                        <strong><?php echo $equipeB; ?></strong>
                     </td>
                 </tr>
-                <?
+                <?php
                 for($k=1;$k<=$nbMaxSets;$k++){
                 ?>
                 <tr>
                     <td align="right">
-                        <select name="scoreA<? echo $k; ?>">
-                        <? optionsScore($donnees['scoreA'.$k]);	?>
+                        <select name="scoreA<?php echo $k; ?>">
+                        <?php optionsScore($donnees['scoreA'.$k]);	?>
                         </select>
                     </td>
                     <td>-</td>
                     <td align="left">
-                        <select name="scoreB<? echo $k; ?>">
-                        <? optionsScore($donnees['scoreB'.$k]);	?>
+                        <select name="scoreB<?php echo $k; ?>">
+                        <?php optionsScore($donnees['scoreB'.$k]);	?>
                         </select>
                     </td>
                 </tr>
-                <?
+                <?php
                 }
                 ?>
                 <tr>
-                    <?
+                    <?php
                     if($forfait==1){ //forfait
                         $c1=0; // Compteur de sets 15-0
                         $c2=0; // Compteur de sets 0-0
@@ -453,51 +453,51 @@
                     }
                     ?>
                     <td align="right">
-                        <p>Gagne par forfait<input name="AGagneParForfait" type="checkbox" class='couleurCheckBox'  onclick="changeEtatForfait(this);" <? echo $AGagneParForfait; ?> /></p>
+                        <p>Gagne par forfait<input name="AGagneParForfait" type="checkbox" class='couleurCheckBox'  onclick="changeEtatForfait(this);" <?php echo $AGagneParForfait; ?> /></p>
                     </td>
                     <td></td>
                     <td align="left">
-                        <p><input name="BGagneParForfait"  type="checkbox" class='couleurCheckBox' onclick="changeEtatForfait(this);" <? echo $BGagneParForfait; ?> />Gagne par forfait</p>
+                        <p><input name="BGagneParForfait"  type="checkbox" class='couleurCheckBox' onclick="changeEtatForfait(this);" <?php echo $BGagneParForfait; ?> />Gagne par forfait</p>
                     </td>
                 </tr>
                 <tr>
                     <td align="right">
-                        <p>Disqualifié<input name="ADisqualifie" type="checkbox" class='couleurCheckBox'  onclick="changeEtatDisqualification(this);" <? echo $ADisqualifie; ?> /></p>
+                        <p>Disqualifié<input name="ADisqualifie" type="checkbox" class='couleurCheckBox'  onclick="changeEtatDisqualification(this);" <?php echo $ADisqualifie; ?> /></p>
                     </td>
                     <td></td>
                     <td align="left">
-                        <p><input name="BDisqualifie"  type="checkbox" class='couleurCheckBox' onclick="changeEtatDisqualification(this);" <? echo $BDisqualifie; ?> />Disqualifié</p>
+                        <p><input name="BDisqualifie"  type="checkbox" class='couleurCheckBox' onclick="changeEtatDisqualification(this);" <?php echo $BDisqualifie; ?> />Disqualifié</p>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="3">
-                        <input type="hidden" name="idMatch" value="<? echo $_GET['modMatch'];?>">
-                        <input type="hidden" name="nbSetsGagnants" value="<? echo $nbSetsGagnants; ?>">
-                        <input type="hidden" name="nbMaxSets" value="<? echo $nbMaxSets; ?>">
-                        <input type="hidden" name="scoreGagnantParForfait" value="<? echo $scoreGagnantParForfait; ?>">
-                        <input type="hidden" name="annee" value="<? echo $annee; ?>">
-                        <input type="hidden" name="idCategorie" value="<? echo $idCategorie; ?>">
+                        <input type="hidden" name="idMatch" value="<?php echo $_GET['modMatch'];?>">
+                        <input type="hidden" name="nbSetsGagnants" value="<?php echo $nbSetsGagnants; ?>">
+                        <input type="hidden" name="nbMaxSets" value="<?php echo $nbMaxSets; ?>">
+                        <input type="hidden" name="scoreGagnantParForfait" value="<?php echo $scoreGagnantParForfait; ?>">
+                        <input type="hidden" name="annee" value="<?php echo $annee; ?>">
+                        <input type="hidden" name="idCategorie" value="<?php echo $idCategorie; ?>">
                         <input type="hidden" name="action" value="modificationMatch">
-                        <input type='submit' value='<? echo VAR_LANG_MODIFIER;?>'>
+                        <input type='submit' value='<?php echo VAR_LANG_MODIFIER;?>'>
                     </td>
                 </tr>
-                <?
+                <?php
             } // Fin si forfait!=3 == normal
             else{ // Auto-qualification
                 ?>
                 <tr>
-                    <td colspan="3"><strong><? echo $equipeA." est autoqualifié"; ?></strong></td>
+                    <td colspan="3"><strong><?php echo $equipeA." est autoqualifié"; ?></strong></td>
                 </tr>
-                <?
+                <?php
             }
-            ?>			
+            ?>
         </table>
         <script language="javascript">
             changeEtatForfait();
             changeEtatDisqualification();
         </script>
         </form>
-        <?
-    
+        <?php
+
     ?>
 </div>

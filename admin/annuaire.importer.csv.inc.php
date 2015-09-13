@@ -1,4 +1,4 @@
-<?
+<?php
 $tableArrayCache = array();
 
 function getIdValueFromDb($idTable, $idItem , $descriptionName, $chaine, $contextErrorDisplay){
@@ -88,7 +88,7 @@ function validerDateForBd($chaine){
 	<input type="submit" name="Importer" value="Importer">
 	<input type="submit" name="Init" value="Init"> </p>
 
-<?
+<?php
 
 // un peu de cosmétique
 if($_POST["Tester"]=="Tester"){

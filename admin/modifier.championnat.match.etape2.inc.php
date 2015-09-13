@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_2; ?>
+<?php echo VAR_LANG_ETAPE_2; ?>
 </h3>
-<?
+<?php
 if(!isset($_GET['saison']) OR !isset($_GET['idCat']) OR !isset($_GET['idTour']) OR !isset($_GET['idGroupe'])){
 	echo "Erreur: il manque des informations.";
 }
@@ -12,11 +12,11 @@ else{
 	$idCategorie = $_GET['idCat'];
 	$idTour = $_GET['idTour'];
 	$idGroupe = $_GET['idGroupe'];
-	
+
 	$debutSaison = $saison;
 	$finSaison = $saison+1;
 	$nomSaison = $debutSaison."-".$finSaison;
-	
+
 	if($idCategorie==-1){
 	   $nomCategorie = " sans ligues";
     }
@@ -26,7 +26,7 @@ else{
         $donnees = mysql_fetch_array($retour) or die($requete."<br />".mysql_error());
         $nomCategorie = " de ".$donnees["categorie".$_SESSION['__langue__']]."";
     }
-    
+
     if($idTour==2000){ // Promotion Relegation
         $nomTour = "";
     }
@@ -34,17 +34,17 @@ else{
         $requete = "SELECT tour".$_SESSION['__langue__']." FROM Championnat_Types_Tours WHERE idTour=".$idTour."";
         $retour = mysql_query($requete);
         $donnees = mysql_fetch_array($retour);
-        $nomTour = " de ".$donnees["tour".$_SESSION['__langue__']].""; 
+        $nomTour = " de ".$donnees["tour".$_SESSION['__langue__']]."";
     }
     else{
         $requete = "SELECT tour".$_SESSION['__langue__']." FROM Championnat_Types_Tours WHERE idTour=".$idTour."";
         $retour = mysql_query($requete);
         $donnees = mysql_fetch_array($retour) or die($requete."<br />".mysql_error());
-        $nomTour = " du ".$donnees["tour".$_SESSION['__langue__']].""; 
-    
+        $nomTour = " du ".$donnees["tour".$_SESSION['__langue__']]."";
+
     }
     if($idGroupe==0){
-        $nomGroupe = "";   
+        $nomGroupe = "";
     }
     else{
         $nomGroupe = " du groupe ".$idGroupe."";
@@ -60,7 +60,7 @@ else{
 	$retour = mysql_query($requete);
 	$i=1;
 	while($donnees = mysql_fetch_array($retour)){
-	
+
 	   // Choix de la couleur de fond.
         if($donnees['dateReportFin']!="0000-00-00"){
             if($donnees['dateReportFin'] < date('Y\-m\-d') AND $donnees['pointsA']==0 AND $donnees['pointsB']==0){
@@ -93,7 +93,7 @@ else{
                     $couleur = "white";
                 }
             }
-            
+
         }
         else{ // la fin du match est programmé à 0000-00-00
             $couleur = "yellow";

@@ -1,26 +1,26 @@
 <div class="supprimerNews">
-<?
+<?php
 		statInsererPageSurf(__FILE__);
-		
-		if(isset($_GET['supprimerNewsID']) && is_numeric($_GET['supprimerNewsID'])){	
+
+		if(isset($_GET['supprimerNewsID']) && is_numeric($_GET['supprimerNewsID'])){
 			$val = $_GET['supprimerNewsID'];
 			$requeteSQL = "DELETE FROM `RegroupementNews` WHERE `idNews`='$val'";
-			mysql_query($requeteSQL) or die ("<h4>Internal error</h4>");	
+			mysql_query($requeteSQL) or die ("<h4>Internal error</h4>");
 			$requeteSQL = "DELETE FROM `News` WHERE `Id` =$val";
-			mysql_query($requeteSQL) or die ("<h4>Internal error</h4>");		
+			mysql_query($requeteSQL) or die ("<h4>Internal error</h4>");
 			echo "<h4>Suppression effectuée avec succès</h4>";
 		}
 ?>
 <table class="tableauSupprimerNews">
-<?
+<?php
 	echo "<tr>";
 	   echo "<th>Date</th>";
 	   echo "<th>Titre</th>";
     echo "</tr>";
-	
+
 	$requeteSQL = "SELECT * FROM `News` ORDER BY premiereNews DESC, `Date` DESC LIMIT 30";
 	$recordset = mysql_query($requeteSQL);
-	
+
 	while($record = mysql_fetch_array($recordset)){
         echo "<tr>";
 		echo "<td width='75px' class='center'>".date_sql2date($record["date"])."</td>";

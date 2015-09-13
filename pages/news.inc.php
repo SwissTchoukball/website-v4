@@ -54,10 +54,10 @@ if ($newsIdSelection != "") {
 				echo markdown($corps);
 				echo "<br />";
 				?>
-    <a href="http://twitter.com/share" class="twitter-share-button" data-url="/news/<? echo $newsIdSelection; ?>" data-text="FSTB : <? echo strip_tags($titre); ?>" data-count="none" data-via="tchouksuisse" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <!--<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.tchoukball.ch%2Findex.php%3Fmenuselection%3D1%26smenuselection%3D1%26newsIdSelection%3D<? echo $newsIdSelection; ?>&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light&amp;font=arial" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:150px; height:20px"></iframe>-->
-    <fb:like href="http://www.tchoukball.ch/news/<? echo $newsIdSelection; ?>" send="true" layout="button_count" width="450" show_faces="false" font="lucida grande"></fb:like>
-				<?
+    <a href="http://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>" data-text="FSTB : <?php echo strip_tags($titre); ?>" data-count="none" data-via="tchouksuisse" data-lang="fr">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <!--<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.tchoukball.ch%2Findex.php%3Fmenuselection%3D1%26smenuselection%3D1%26newsIdSelection%3D<?php echo $newsIdSelection; ?>&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light&amp;font=arial" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:150px; height:20px"></iframe>-->
+    <fb:like href="http://www.tchoukball.ch/news/<?php echo $newsIdSelection; ?>" send="true" layout="button_count" width="450" show_faces="false" font="lucida grande"></fb:like>
+				<?php
 			echo "</div><br />";
 	}
 

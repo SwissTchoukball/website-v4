@@ -1,8 +1,8 @@
-<?
+<?php
     statInsererPageSurf(__FILE__);
 ?>
 <div class="links">
-<?
+<?php
     $retourcount = mysql_query("SELECT COUNT(*) AS nbrecategories FROM LiensGroupe");
     $donneescount = mysql_fetch_array($retourcount);
     $nbrecategories = $donneescount["nbrecategories"];
@@ -21,13 +21,13 @@ echo "<table>";
             while($donnees = mysql_fetch_array($retour)) {
                 echo "<h4>".$donnees["nomGroupe".$_SESSION["__langue__"]]."</h4>";
                 echo "<ul>";
-                            
+
                 $retourbis = mysql_query("SELECT * FROM Liens WHERE idLiensGroupe = '".$donnees["id"]."' ORDER BY nom".$_SESSION["__langue__"]);
                 while($donneesbis = mysql_fetch_array($retourbis)) {
                     echo "<li><a href='".$donneesbis["source"]."' target='_blank'>".$donneesbis["nom".$_SESSION["__langue__"]]."</a></li>";
                 }
                 echo "</ul>";
-                
+
             }
         echo "</td>";
         echo "<td class='colonneLiens'>";
@@ -35,13 +35,13 @@ echo "<table>";
             while($donnees = mysql_fetch_array($retour)) {
                 echo "<h4>".$donnees["nomGroupe".$_SESSION["__langue__"]]."</h4>";
                 echo "<ul>";
-                            
+
                 $retourbis = mysql_query("SELECT * FROM Liens WHERE idLiensGroupe = '".$donnees["id"]."' ORDER BY nom".$_SESSION["__langue__"]);
                 while($donneesbis = mysql_fetch_array($retourbis)) {
                     echo "<li><a href='".$donneesbis["source"]."' target='_blank'>".$donneesbis["nom".$_SESSION["__langue__"]]."</a></li>";
                 }
                 echo "</ul>";
-                
+
             }
         echo "</td>";
     echo "</tr>";

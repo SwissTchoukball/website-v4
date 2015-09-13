@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_4; ?>
+<?php echo VAR_LANG_ETAPE_4; ?>
 </h3>
-<?
+<?php
 if(!isset($_POST['idMatch'])){
 	echo"Erreur: il manque des informations.";
 }
@@ -239,17 +239,17 @@ else{
 }
 ?>
 <form name="remodification" action="" >
-<input type="hidden" name="menuselection" value="<? echo $menuselection; ?>" />
-<input type="hidden" name="smenuselection" value="<? echo $smenuselection; ?>" />
+<input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>" />
+<input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>" />
 <p class="center"><input type="submit" value="Modifier d'autres matchs" /></p>
 </form>
 <form name="remodificationMemePhase" action="" >
-<input type="hidden" name="menuselection" value="<? echo $menuselection; ?>" />
-<input type="hidden" name="smenuselection" value="<? echo $smenuselection; ?>" />
-<input type="hidden" name="saison" value="<? echo $saison; ?>" />
-<input type="hidden" name="idCat" value="<? echo $idCategorie; ?>" />
-<input type="hidden" name="idTour" value="<? echo $idTour; ?>" />
-<input type="hidden" name="idGroupe" value="<? echo $idGroupe; ?>" />
+<input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>" />
+<input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>" />
+<input type="hidden" name="saison" value="<?php echo $saison; ?>" />
+<input type="hidden" name="idCat" value="<?php echo $idCategorie; ?>" />
+<input type="hidden" name="idTour" value="<?php echo $idTour; ?>" />
+<input type="hidden" name="idGroupe" value="<?php echo $idGroupe; ?>" />
 <p class="center"><input type="submit" value="Modifier d'autres matchs de la même phase" /></p>
 </form>
 

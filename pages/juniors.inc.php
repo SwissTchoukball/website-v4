@@ -1,4 +1,4 @@
-<?
+<?php
     $image = false;
 
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '3' ORDER BY paragrapheNum");

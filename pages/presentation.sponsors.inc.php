@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="introSponsors">
-<?
+<?php
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '11' ORDER BY paragrapheNum");
     // affiche le texte
     while($donnees = mysql_fetch_array($retour)) {
@@ -13,7 +13,7 @@
 ?>
 </div>
 
-<?
+<?php
 	$retour = mysql_query("SELECT * FROM TypeSponsors ORDER BY id DESC");
     while($donnees = mysql_fetch_array($retour)) {
         echo "<div class='presentationSponsors'>";

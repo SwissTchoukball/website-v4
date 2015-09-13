@@ -1,12 +1,12 @@
-<div><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&ajouter"><img src="admin/images/ajouter.png" alt="Ajouter un événement" /> Ajouter un événement</a></div>
-<div><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>"><img src="admin/images/liste.png" alt="Liste des événements" /> Liste des événements</a></div>
+<div><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img src="admin/images/ajouter.png" alt="Ajouter un événement" /> Ajouter un événement</a></div>
+<div><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img src="admin/images/liste.png" alt="Liste des événements" /> Liste des événements</a></div>
 
-<div><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&masques"><img src="admin/images/masquer.png" alt="Liste des événements masqués" /> Liste des événements masqués</a></div>
-<form name="formRechercheEvenement" action="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>" method="post">
+<div><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&masques"><img src="admin/images/masquer.png" alt="Liste des événements masqués" /> Liste des événements masqués</a></div>
+<form name="formRechercheEvenement" action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>" method="post">
 	<div><img src="admin/images/rechercher.png" alt="Rechercher un événement" /> <input type="search" name="rechercheEvenement" /></div><br />
 </form>
 
-<?
+<?php
 
 if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verification'])){
 	?>
@@ -26,11 +26,11 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
         }
         function enregistrerModification(){
         	var editerEvenement = document.getElementById("editerEvenement");
-        	editerEvenement.action="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>";
+        	editerEvenement.action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>";
         }
 	</script>
 
-	<?
+	<?php
 	if(isset($_GET['modifier'])){
 		$requeteAModifier="SELECT Calendrier_Evenements.id AS idEvenement, titre, idCategorie, description, lieu, jourEntier, dateDebut, heureDebut, dateFin, heureFin, visible FROM Calendrier_Evenements, Calendrier_Categories WHERE Calendrier_Categories.id=idCategorie AND Calendrier_Evenements.id=".$_GET['modifier'];
 		$retourAModifier=mysql_query($requeteAModifier);
@@ -131,12 +131,12 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 	</script>
 
 
-	<form class="formulaireAligne" id="editerEvenement" name="editerEvenement" method="post" action="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&modifier=<? echo $_GET['modifier']; ?>">
+	<form class="formulaireAligne" id="editerEvenement" name="editerEvenement" method="post" action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $_GET['modifier']; ?>">
 		<fieldset>
 			<legend>Ajouter un événement</legend>
 			<label for="titre">Titre : </label>
-			<input type="text" id="titre" name="titre" size="30" value="<? echo $titre; ?>" /><br />
-			<?
+			<input type="text" id="titre" name="titre" size="30" value="<?php echo $titre; ?>" /><br />
+			<?php
 			if($jourEntier==1){
 				$checked=" checked='checked'";
 				$visibility=" style='visibility:hidden;'";
@@ -148,12 +148,12 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 			$debutSelectionAnnee = min($anneeDebut - 5, date('Y') - 5);
 			$finSelectionAnnee = max($anneeFin + 10, date('Y') + 10);
 			?>
-			<input type="checkbox" id="jourEntier" name="jourEntier"<? echo $checked; ?> onClick="changeJourEntier(this);" />
+			<input type="checkbox" id="jourEntier" name="jourEntier"<?php echo $checked; ?> onClick="changeJourEntier(this);" />
 			<label for="jourEntier"> L'événement dure toute la journée</label><br />
 			<label>Date de début : </label>
 			<span id="dateDebut">
 				<select name="jourDebut" onChange="selectionAutomatiqueJour()">
-					<?
+					<?php
 					for($jour=1;$jour<=31;$jour++){
 						if($jourDebut==$jour){
 							$selected=" selected='selected'";
@@ -165,7 +165,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 					}
 					?>
 				</select>.<select name="moisDebut" onChange="selectionAutomatiqueMois()">
-					<?
+					<?php
 					for($mois=1;$mois<=12;$mois++){
 						if($moisDebut==$mois){
 							$selected=" selected='selected'";
@@ -177,7 +177,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 					}
 					?>
 				</select>.<select name="anneeDebut" onChange="selectionAutomatiqueAnnee()">
-					<?
+					<?php
 					for($annee=$debutSelectionAnnee;$annee<=$finSelectionAnnee;$annee++){
 						if($anneeDebut==$annee){
 							$selected=" selected='selected'";
@@ -190,10 +190,10 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 					?>
 				</select>
 			</span>
-			<span id="heureDebut"<? echo $visibility; ?>>
+			<span id="heureDebut"<?php echo $visibility; ?>>
 				 à
 				<select name="heureDebut" onChange="selectionAutomatiqueHeure()">
-					<?
+					<?php
 					for($heure=0;$heure<=23;$heure++){
 						if($heureDebut==$heure){
 							$selected=" selected='selected'";
@@ -205,7 +205,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 					}
 					?>
 				</select>h<select name="minuteDebut"onChange="selectionAutomatiqueMinute()">
-					<?
+					<?php
 					for($minute=0;$minute<=59;$minute++){
 						if($minuteDebut==$minute){
 							$selected=" selected='selected'";
@@ -221,7 +221,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 			<label>Date de fin : </label>
 			<span id="dateFin">
 			<select name="jourFin">
-				<?
+				<?php
 				for($jour=1;$jour<=31;$jour++){
 					if($jourFin==$jour){
 						$selected=" selected='selected'";
@@ -233,7 +233,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				}
 				?>
 			</select>.<select name="moisFin">
-				<?
+				<?php
 				for($mois=1;$mois<=12;$mois++){
 					if($moisFin==$mois){
 						$selected=" selected='selected'";
@@ -245,7 +245,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				}
 				?>
 			</select>.<select name="anneeFin">
-				<?
+				<?php
 				for($annee=$debutSelectionAnnee;$annee<=$finSelectionAnnee;$annee++){
 					if($anneeFin==$annee){
 						$selected=" selected='selected'";
@@ -258,10 +258,10 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				?>
 			</select>
 			</span>
-			<span id="heureFin"<? echo $visibility; ?>>
+			<span id="heureFin"<?php echo $visibility; ?>>
 				 à
 				<select name="heureFin">
-					<?
+					<?php
 					for($heure=0;$heure<=23;$heure++){
 						if($heureFin==$heure){
 							$selected=" selected='selected'";
@@ -273,7 +273,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 					}
 					?>
 				</select>h<select name="minuteFin">
-					<?
+					<?php
 					for($minute=0;$minute<=59;$minute++){
 						if($minuteFin==$minute){
 							$selected=" selected='selected'";
@@ -287,12 +287,12 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				</select>
 			</span><br />
 			<label for="lieu">Lieu : </label>
-			<input type="text" id="lieu" name="lieu" size="30" value="<? echo $lieu; ?>" /><br /><br />
+			<input type="text" id="lieu" name="lieu" size="30" value="<?php echo $lieu; ?>" /><br /><br />
 			<label for="description">Description : </label>
-			<textarea id="description" name="description" cols="60" rows="10"><? echo $description; ?></textarea><br />
+			<textarea id="description" name="description" cols="60" rows="10"><?php echo $description; ?></textarea><br />
 			<label for="idCategorie">Catégorie : </label>
 			<select id="idCategorie" name="idCategorie">
-				<?
+				<?php
 				$requeteCategorie="SELECT * FROM Calendrier_Categories ORDER BY nom";
 				$retourCategorie=mysql_query($requeteCategorie);
 				while($donneesCategorie=mysql_fetch_array($retourCategorie)){
@@ -306,7 +306,7 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				}
 				?>
 			</select><br />
-			<?
+			<?php
 			if($visible==1){
 				$checked=" checked='checked'";
 			}
@@ -314,13 +314,13 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 				$checked="";
 			}
 			?>
-			<input type="checkbox" id="visible" name="visible"<? echo $checked; ?> />
+			<input type="checkbox" id="visible" name="visible"<?php echo $checked; ?> />
 			<label for="visible"> Visible</label><br />
 
-			<input type="hidden" name="utilisateur" value="<? echo $_SESSION['__prenom__'].$_SESSION['__nom__'] ?>" />
-			<input type="hidden" name="idEvenement" value="<? echo $idEvenement; ?>" /><br />
+			<input type="hidden" name="utilisateur" value="<?php echo $_SESSION['__prenom__'].$_SESSION['__nom__'] ?>" />
+			<input type="hidden" name="idEvenement" value="<?php echo $idEvenement; ?>" /><br />
 
-			<?
+			<?php
 			if(isset($_POST['verification'])){
 				$dateEntierDebut=$anneeDebut."-".$moisDebut."-".$jourDebut;
 				$dateEntierFin=$anneeFin."-".$moisFin."-".$jourFin;
@@ -375,14 +375,14 @@ if(isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verifica
 			?>
 			<label>&nbsp;</label>
 			<input type="submit" name="verification" value="Vérifier" onClick="return enregistrerModification();"/><br /><br />
-						<? /* Ne devrait pas s'appeler enregistrerModification, mais executer cette fonction permet de ne pas ajouter &modifier= à la fin de l'URL ce qui posait problème.*/ ?>
+						<?php /* Ne devrait pas s'appeler enregistrerModification, mais executer cette fonction permet de ne pas ajouter &modifier= à la fin de l'URL ce qui posait problème.*/ ?>
 
 			<label>&nbsp;</label>
 			<input type="submit" name="enregistrement" value="Enregistrer" onClick="return enregistrerModification();"/>
 		</fieldset>
 	</form>
 
-	<?
+	<?php
 }
 else{
 	if(isset($_POST['idEvenement'])){
@@ -447,18 +447,18 @@ else{
 		<table id="AgendaAVenir">
 			<tr>
 				<th>&nbsp;</th>
-				<th><? echo $agenda_date; ?></th>
-				<th><? echo $agenda_evenement; ?></th>
-				<th><? echo VAR_LANG_MODIFIER; ?></th>
-				<th><? echo VAR_LANG_SUPPRIMER; ?></th>
+				<th><?php echo $agenda_date; ?></th>
+				<th><?php echo $agenda_evenement; ?></th>
+				<th><?php echo VAR_LANG_MODIFIER; ?></th>
+				<th><?php echo VAR_LANG_SUPPRIMER; ?></th>
 			</tr>
-		<?
+		<?php
 		while($donnees=mysql_fetch_array($retour)){
 			?>
 			<tr>
-				<td class="categorie"  style='background-color: #<? echo $donnees['couleur'] ?>'></td>
+				<td class="categorie"  style='background-color: #<?php echo $donnees['couleur'] ?>'></td>
 				<td class="date">
-					<?
+					<?php
 					if($donnees['dateDebut']==$donnees['dateFin']){
 						echo date_sql2date($donnees['dateDebut']);
 						$plusieursJours=false;
@@ -470,22 +470,22 @@ else{
 					?>
 				</td>
 				<td class="titre">
-					<? echo $donnees['titre']; ?>
-					<?
+					<?php echo $donnees['titre']; ?>
+					<?php
 					if($donnees['visible']==0){
 						echo " <img src='admin/images/masquer.png' alt='masqué' />";
 					}
 					?>
 				</td>
-				<td class="modifier"><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&modifier=<? echo $donnees['idEvent']; ?>"><img src="/admin/images/modifier.png" alt="modifier" /></a></td>
-				<td class="supprimer"><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&supprimer=<? echo $donnees['idEvent']; ?>" onClick='return confirm("Vous êtes sur le point de supprimer cet événement \n OK pour supprimer, Annuler pour abandonner.");'><img src="/admin/images/supprimer.png" alt="supprimer" /></a></td>
-				<td class="categorie"  style='background-color: #<? echo $donnees['couleur'] ?>'></td>
+				<td class="modifier"><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $donnees['idEvent']; ?>"><img src="/admin/images/modifier.png" alt="modifier" /></a></td>
+				<td class="supprimer"><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&supprimer=<?php echo $donnees['idEvent']; ?>" onClick='return confirm("Vous êtes sur le point de supprimer cet événement \n OK pour supprimer, Annuler pour abandonner.");'><img src="/admin/images/supprimer.png" alt="supprimer" /></a></td>
+				<td class="categorie"  style='background-color: #<?php echo $donnees['couleur'] ?>'></td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 		</table>
-	<?
+	<?php
 	}
 }
 ?>

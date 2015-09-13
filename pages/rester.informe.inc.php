@@ -1,9 +1,9 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."";
 statInsererPageSurf(__FILE__);
 ?>
 <section>
-<?
+<?php
 
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '14' ORDER BY paragrapheNum");
     // affiche le texte
@@ -42,9 +42,9 @@ statInsererPageSurf(__FILE__);
             <label for="email"><strong>Votre Email:</strong></label>
 			<input type="text" name="Email" id="email" maxlength="60" size="40" />
             <input type="hidden" name="pommo_signup" value="true" />
-            <input type='submit' value='<? echo VAR_LANG_INSCRIPTION;?>'>
+            <input type='submit' value='<?php echo VAR_LANG_INSCRIPTION;?>'>
             </form>
-            <?
+            <?php
         }
     }
 $affichage_twitter=true;

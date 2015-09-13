@@ -1,4 +1,4 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 ?>
@@ -11,16 +11,16 @@ statInsererPageSurf(__FILE__);
 	$editionYear = $edition['year'];
 	$editionVenue = $edition['venue'];
 	$editionCountry = $edition['idA2'];
-	
+
 	echo '<h3>European Winners\' Cup '.$editionYear.'<br />'.$editionVenue.' ('.$editionCountry.')</h3>';
 	?>
-	<p class="EWCScoresLink"><a href="http://live.tchoukballworld.net/ewc2014"><? echo VAR_LANG_RESULTATS; ?></a></p>
+	<p class="EWCScoresLink"><a href="http://live.tchoukballworld.net/ewc2014"><?php echo VAR_LANG_RESULTATS; ?></a></p>
 	<?php
-	
-	
+
+
 	$matchDate = '0000-00-00'; //In order for the first table header to be printed.
 	$matchVenue = ''; //In order for the first table header to be printed.
-	
+
 	$matchesQuery = "SELECT DATE(datetime) AS date,
 							TIME(datetime) AS time,
 							DAYOFWEEK(datetime) AS dayOfWeek,
@@ -63,20 +63,20 @@ statInsererPageSurf(__FILE__);
 		$matchDate = $match['date'];
 		$matchTime = substr($match['time'],0,5);
 		$matchDayOfWeek = $match['dayOfWeek'];
-		
+
 		if ($matchDate != $previousMatchDate OR $matchVenue != $previousMatchVenue) {
 			if ($previousMatchDate != '0000-00-00') { // Not the first table
 				echo "</table>";
 			}
 			?>
-			<h4><? echo ucfirst(date_sql2date_joli($matchDate, "", $_SESSION['__langue__']))." - ".$matchVenue; ?></h4><br />
+			<h4><?php echo ucfirst(date_sql2date_joli($matchDate, "", $_SESSION['__langue__']))." - ".$matchVenue; ?></h4><br />
 			<table class="tableauProgrammeEWC">
 				<tr>
 					<th></th>
-					<th><? echo VAR_LANG_GROUPE; ?></th>
-					<th><? echo VAR_LANG_HEURE; ?></th>
-					<th colspan="3"><? echo VAR_LANG_MATCH; ?></th>
-					<!--<th><? echo VAR_LANG_SCORE; ?></th>-->
+					<th><?php echo VAR_LANG_GROUPE; ?></th>
+					<th><?php echo VAR_LANG_HEURE; ?></th>
+					<th colspan="3"><?php echo VAR_LANG_MATCH; ?></th>
+					<!--<th><?php echo VAR_LANG_SCORE; ?></th>-->
 				</tr>
 			<?php
 		}

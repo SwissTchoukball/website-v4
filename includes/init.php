@@ -58,9 +58,6 @@ if ($_SESSION["__userLevel__"] == 100 && isset($_COOKIE["login"])) {
     }
 }
 
-// classes utilisées
-include "class.inc.php";
-
 // variables "globales"
 include "var.inc.php";
 

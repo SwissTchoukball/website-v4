@@ -1,4 +1,4 @@
-<?
+<?php
 statInsererPageSurf(__FILE__);
 
 if(isset($_GET['idEvenement'])){
@@ -13,32 +13,32 @@ else{
 	<script language="javascript">
 		function decocheLeReste(){
 			var selectionCategoriesCalendrierCategorie4 = document.getElementById("categorie4");
-			<?
+			<?php
 			$requeteCategories="SELECT * FROM Calendrier_Categories ORDER BY nom";
 			$retourCategories=mysql_query($requeteCategories);
 			while($donneesCategories=mysql_fetch_array($retourCategories)){
 				?>
-				var selectionCategoriesCalendrierCategorie<? echo $donneesCategories['id']; ?> = document.getElementById("categorie<? echo $donneesCategories['id']; ?>");
+				var selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?> = document.getElementById("categorie<?php echo $donneesCategories['id']; ?>");
 
 				if(selectionCategoriesCalendrierCategorie4.checked==true){
-				<?
+				<?php
 				if($donneesCategories['id']!=4){
 					?>
-					selectionCategoriesCalendrierCategorie<? echo $donneesCategories['id']; ?>.checked = false;
-					<?
+					selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?>.checked = false;
+					<?php
 				}
 				?>
 				}
 				else{
-				<?
+				<?php
 				if($donneesCategories['id']!=4){
 					?>
-					selectionCategoriesCalendrierCategorie<? echo $donneesCategories['id']; ?>.checked = true;
-					<?
+					selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?>.checked = true;
+					<?php
 				}
 				?>
 				}
-				<?
+				<?php
 			}
 			?>
 		}
@@ -50,7 +50,7 @@ else{
 			}
 		}
 	</script>
-	<?
+	<?php
 
 	$requeteCategories="SELECT * FROM Calendrier_Categories ORDER BY nom";
 	$retourCategories=mysql_query($requeteCategories);
@@ -99,29 +99,29 @@ else{
 	<script language="javascript">
 		function checkAll(mstrchkbx){
 			if(mstrchkbx.checked){
-				<?
+				<?php
 				for($k=1;$k<$c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
 					?>
-					document.getElementById('categorie<? echo $k; ?>').checked=true;
+					document.getElementById('categorie<?php echo $k; ?>').checked=true;
 
-					<?
+					<?php
 				}
 				?>
 				document.getElementById('categorie4').checked=false;
 			}
 			else{
-				<?
+				<?php
 				for($k=1;$k<$c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
 					?>
-					document.getElementById('categorie<? echo $k; ?>').checked=false;
+					document.getElementById('categorie<?php echo $k; ?>').checked=false;
 
-					<?
+					<?php
 				}
 				?>
 			}
 		}
 	</script>
-	<?
+	<?php
 	echo "<br /><br /><input type='submit' name='envoiSelectionCategories' value='Trier' />&nbsp;&nbsp;&nbsp;
 	<input type='checkbox' id='masterCheckbox' onclick='checkAll(this);' checked='checked' /><label for='masterCheckbox'>Tout (dé)cocher</label>";
 	echo "</form>";
@@ -171,12 +171,12 @@ else{
 		<table id="AgendaAVenir">
 			<tr>
 				<th>&nbsp;</th>
-				<th><? echo $agenda_date; ?></th>
-				<th><? echo $agenda_evenement; ?></th>
-				<th><? echo $agenda_lieu; ?></th>
-				<th><? echo $agenda_heure; ?></th>
+				<th><?php echo $agenda_date; ?></th>
+				<th><?php echo $agenda_evenement; ?></th>
+				<th><?php echo $agenda_lieu; ?></th>
+				<th><?php echo $agenda_heure; ?></th>
 			</tr>
-		<?
+		<?php
 		while($donnees=mysql_fetch_array($retour)){
 			if(isset($categorieCochee[4])){
 				$lieu=$donnees['nomLieu'].", ".$donnees['ville'];
@@ -190,9 +190,9 @@ else{
 			}
 			?>
 			<tr>
-				<td class="categorie"  style='background-color: #<? echo $donnees['couleur'] ?>'></td>
+				<td class="categorie"  style='background-color: #<?php echo $donnees['couleur'] ?>'></td>
 				<td class="date">
-				<?
+				<?php
 				if($donnees['dateDebut']==$donnees['dateFin']){
 					echo date_sql2date($donnees['dateDebut']);
 					$plusieursJours=false;
@@ -203,10 +203,10 @@ else{
 				}
 				?>
 				</td>
-				<td class="titre"><a href="<? echo $eventURL; ?>"><? echo $titre; ?></a></td>
-				<td class="lieu"><? echo $lieu; ?></td>
+				<td class="titre"><a href="<?php echo $eventURL; ?>"><?php echo $titre; ?></a></td>
+				<td class="lieu"><?php echo $lieu; ?></td>
 				<td class="heure">
-				<?
+				<?php
 				if($donnees['jourEntier']==1){
 					if($plusieursJours){
 						echo "Journées entières";
@@ -220,13 +220,13 @@ else{
 				}
 				?>
 				</td>
-				<td class="categorie"  style='background-color: #<? echo $donnees['couleur'] ?>'></td>
+				<td class="categorie"  style='background-color: #<?php echo $donnees['couleur'] ?>'></td>
 			</tr>
-			<?
+			<?php
 		}
 		?>
 		</table>
-		<?
+		<?php
 	}
 }
 ?>

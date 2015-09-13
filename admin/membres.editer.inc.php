@@ -2,9 +2,9 @@
 <script lang="javascript">
 
 	var couleurErreur;
-	couleurErreur='#<? echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
+	couleurErreur='#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
 	var couleurValide;
-	couleurValide='#<? echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+	couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
 
 	function checkMemberForm() {
 
@@ -140,7 +140,7 @@
 	function autoStatutUpdate() {
 		autoStatut = document.getElementById("autoStatut");
 		if (memberEdit.statutID.value == 2) {
-			if (<? echo date('Y'); ?> - memberEdit.birthDateYear.value >= 21) {
+			if (<?php echo date('Y'); ?> - memberEdit.birthDateYear.value >= 21) {
 				autoStatut.innerHTML = "Membre actif";
 			} else {
 				autoStatut.innerHTML = "Membre junior";
@@ -217,7 +217,7 @@
 		}
 	}
 </script>
-<?
+<?php
 
 $canEdit = false;
 
@@ -342,8 +342,8 @@ if ($isSuspended) {
 if	($canEdit) {
 	$isFSTBVolunteer = $refereeLevelId > 1 || $isCommitteeMember || $isCommissionMember || $isSwissTeamMember || $isJSExpert;
 	?>
-	<h3><? echo $formLegend; ?></h3>
-	<form method="post" onsubmit="return checkMemberForm();" name="memberEdit" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&details" class="adminForm">
+	<h3><?php echo $formLegend; ?></h3>
+	<form method="post" onsubmit="return checkMemberForm();" name="memberEdit" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details" class="adminForm">
 		<fieldset>
 			<?php
 			if ($isFSTBVolunteer && $_SESSION['__userLevel__'] > 5) {
@@ -354,13 +354,13 @@ if	($canEdit) {
 			}
 			?>
 			<label for="companyName">Raison sociale</label>
-			<input type="text" id="companyName" id="companyName" onkeyup="updateAddressPreview();" name="companyName" value="<? echo $companyName; ?>" <? echo $canEditName ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="companyName" id="companyName" onkeyup="updateAddressPreview();" name="companyName" value="<?php echo $companyName; ?>" <?php echo $canEditName ? '' : 'readonly="readonly"'; ?> />
 			<label for="DBDCivilite">Civilité</label>
-			<? afficherdropDownListeDesactivable("DBDCivilite","idCivilite","descriptionCivilite",$titleID,true, !$canEditName); ?>
+			<?php afficherdropDownListeDesactivable("DBDCivilite","idCivilite","descriptionCivilite",$titleID,true, !$canEditName); ?>
 			<label for="firstname">Prénom</label>
-			<input type="text" id="firstname" name="firstname" onkeyup="updateAddressPreview();" value="<? echo $firstname; ?>" <? echo $canEditName ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="firstname" name="firstname" onkeyup="updateAddressPreview();" value="<?php echo $firstname; ?>" <?php echo $canEditName ? '' : 'readonly="readonly"'; ?> />
 			<label for="lastname">Nom</label>
-			<input type="text" id="lastname" name="lastname" onkeyup="updateAddressPreview();" value="<? echo $lastname; ?>" <? echo $canEditName ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="lastname" name="lastname" onkeyup="updateAddressPreview();" value="<?php echo $lastname; ?>" <?php echo $canEditName ? '' : 'readonly="readonly"'; ?> />
 		</fieldset>
 		<fieldset>
 			<?php
@@ -373,15 +373,15 @@ if	($canEdit) {
 			?>
 			<span id="addressPreview"><!-- rempli avec du Javascript --></span>
 			<label for="address1">Adresse</label>
-			<input type="text" id="address1" name="address1" onkeyup="updateAddressPreview();" value="<? echo $address1; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="address1" name="address1" onkeyup="updateAddressPreview();" value="<?php echo $address1; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label></label>
-			<input type="text" id="address2" name="address2" onkeyup="updateAddressPreview();" value="<? echo $address2; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="address2" name="address2" onkeyup="updateAddressPreview();" value="<?php echo $address2; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label for="zipCode">NPA</label>
-			<input type="text" id="zipCode" name="zipCode" onkeyup="updateAddressPreview();" value="<? echo $zipCode; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="zipCode" name="zipCode" onkeyup="updateAddressPreview();" value="<?php echo $zipCode; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label for="city">Ville</label>
-			<input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<? echo $city; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<?php echo $city; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label for="DBDPays">Pays</label>
-			<?
+			<?php
 
 			$requeteSQLOptions="SELECT * FROM DBDPays ORDER BY descriptionPays".$_SESSION["__langue__"];
 			$recordsetOptions = mysql_query($requeteSQLOptions) or die ("<H1>afficherListe: mauvaise requete sur : $nomIdOption </H1>");
@@ -410,20 +410,20 @@ if	($canEdit) {
 		</fieldset>
 		<fieldset>
 			<label for="privatePhone">Tél. privé</label>
-			<input type="text" id="privatePhone" name="privatePhone" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<? echo $privatePhone; ?>" <? echo $canEditDetails ? '' : 'disabled="disabled"'; ?> />
+			<input type="text" id="privatePhone" name="privatePhone" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<?php echo $privatePhone; ?>" <?php echo $canEditDetails ? '' : 'disabled="disabled"'; ?> />
 			<label for="workPhone">Tél. prof.</label>
-			<input type="text" id="workPhone" name="workPhone" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<? echo $workPhone; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="workPhone" name="workPhone" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<?php echo $workPhone; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label for="mobile">Tél. port.</label>
-			<input type="text" id="mobile" name="mobile" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<? echo $mobile; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="text" id="mobile" name="mobile" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<?php echo $mobile; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<!--<label>Fax</label>-->
-			<input type="hidden" id="fax" name="fax" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<? echo $fax; ?>" <? echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
+			<input type="hidden" id="fax" name="fax" onKeyUp="restreindreNumeroTelFax(this);" onChange="restreindreNumeroTelFax(this);" value="<?php echo $fax; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
 			<label for="email">E-mail</label>
-			<input type="text" id="email" id="email" name="email" value="<? echo $email; ?>" />
-			<?
+			<input type="text" id="email" id="email" name="email" value="<?php echo $email; ?>" />
+			<?php
 			if ($emailFSTB != '') {
 				?>
 				<label for="emailFSTB">E-mail FSTB</label>
-				<?
+				<?php
 				if ($_SESSION['__userLevel__'] <= 5) {
 					echo '<input type="text" id="emailFSTB" id="emailFSTB" name="emailFSTB" value="'.$emailFSTB.'" />';
 				} else {
@@ -438,7 +438,7 @@ if	($canEdit) {
 			<label for="statutID">Statut</label>
 			<select id="statutID" name="statutID" onchange="autoStatutUpdate();">
 				<option value="1">Non spécifié</option>
-				<option value="2"<? echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>Membre actif/junior</option>
+				<option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>Membre actif/junior</option>
 				<?php
 				$queryStatut = "SELECT `idStatus` AS id, `descriptionStatus".$_SESSION['__langue__']."` AS nom FROM `DBDStatus` WHERE `idStatus`!=1 AND `idStatus`!=3 AND `idStatus`!=6 ORDER BY nom";
 				if ($dataStatut = mysql_query($queryStatut)) {
@@ -461,17 +461,17 @@ if	($canEdit) {
 			<div class="birthDate">
 				<select id="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
 					<option value="0">-</option>
-					<? echo modif_liste_jour(jour($birthDate)); ?>
+					<?php echo modif_liste_jour(jour($birthDate)); ?>
 				</select>
 
 				<select id="birthDateMonth" name="birthDateMonth" onchange="autoStatutUpdate();">
 					<option value="0">-</option>
-					<? echo modif_liste_mois(mois($birthDate)); ?>
+					<?php echo modif_liste_mois(mois($birthDate)); ?>
 				</select>
 
 				<select id="birthDateYear" name="birthDateYear" onchange="autoStatutUpdate();">
 					<option value="0">-</option>
-					<?
+					<?php
 					for ($i = date('Y'); $i >= 1900; $i--){
 						if($i == annee($birthDate)){
 					    echo "<option selected value='$i'>$i</option>\n";
@@ -483,7 +483,7 @@ if	($canEdit) {
 					?>
 				</select>
 				<span id="autoStatut">
-					<?
+					<?php
 					if (($statutID == 3 || $statutID == 6) && $birthDate != "0000-00-00") {
 						if (date('Y')-annee($birthDate) >=  21) {
 							echo "Membre actif";
@@ -495,11 +495,11 @@ if	($canEdit) {
 				</span>
 			</div>
 			<label for="DBDSexe">Genre</label>
-			<?
+			<?php
 			afficherdropDownListe("DBDSexe","idSexe","descriptionSexe",$sexID,true);
 			?>
 			<label for="DBDLangue">Langue</label>
-			<?
+			<?php
 			afficherdropDownListe("DBDLangue","idLangue","descriptionLangue",$languageID,true);
 
 			if ($_SESSION['__userLevel__'] <= 5) {
@@ -514,13 +514,13 @@ if	($canEdit) {
 			}
 			?>
 			<label for="DBDCHTB">tchouk<sup>up</sup></label>
-			<?
+			<?php
 			$requeteSQLOptions="SELECT * FROM DBDCHTB ORDER BY descriptionCHTB".$_SESSION["__langue__"];
 			$recordsetOptions = mysql_query($requeteSQLOptions) or die ("<H1>afficherListe: mauvaise requete sur : idCHTB </H1>");
 
 			?>
-			<select id="DBDCHTB" name='DBDCHTB' <? echo $statutID == 4 ? "readonly='readonly'":""; ?> onchange="updateTchoukupDelivery();">
-			<?
+			<select id="DBDCHTB" name='DBDCHTB' <?php echo $statutID == 4 ? "readonly='readonly'":""; ?> onchange="updateTchoukupDelivery();">
+			<?php
 
 				while($recordOption = mysql_fetch_array($recordsetOptions)){
 
@@ -541,7 +541,7 @@ if	($canEdit) {
 			<div id="tchoukupDelivery" class="inlineinfo"></div>
 
 			<label>Niveau d'arbitre</label>
-			<?
+			<?php
 			if ($_SESSION['__userLevel__'] <= 5) {
 				afficherdropDownListe("DBDArbitre","idArbitre","descriptionArbitre",$refereeLevelId,true);
 			} else {
@@ -556,7 +556,7 @@ if	($canEdit) {
 				?>
 
 				<label>Arbitre public</label>
-				<?
+				<?php
 				if ($_SESSION['__userLevel__'] <= 5) {
 					if ($isPublicReferee) {
 						$publicRefereeChecked = 'checked';
@@ -578,7 +578,7 @@ if	($canEdit) {
 			if ($isSuspended || $_SESSION['__userLevel__'] <= 5) {
 				?>
 				<label>Suspendu</label>
-				<?
+				<?php
 				if ($_SESSION['__userLevel__'] <= 5) {
 					if ($isSuspended) {
 						$suspendedChecked = 'checked';
@@ -600,11 +600,11 @@ if	($canEdit) {
 				<label>Type de compte</label>
 				<?php afficherdropDownListe("DBDTypeCompte","idTypeCompte","TypeCompte",$typeCompte,false); ?>
 				<label>Numéro de compte</label>
-				<textarea name="numeroCompte"><? echo $numeroCompte; ?></textarea>
+				<textarea name="numeroCompte"><?php echo $numeroCompte; ?></textarea>
 			</fieldset>
 			<fieldset>
 				<label>Remarques</label>
-				<textarea name="remarques"><? echo $remarques; ?></textarea>
+				<textarea name="remarques"><?php echo $remarques; ?></textarea>
 			</fieldset>
 			<?php
 		}
@@ -612,13 +612,13 @@ if	($canEdit) {
 		<input type="hidden" name="memberID" value="<?php echo $memberID; ?>" />
 		<input type="hidden" name="postType" value="<?php echo $postType; ?>" />
 
-		<input type="submit" value="<? echo $sendButtonValue; ?>" />
+		<input type="submit" value="<?php echo $sendButtonValue; ?>" />
 	</form>
 	<?php
 	if (!$newMember) {
 		?>
 		<p>
-			<a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&transfer-request=<? echo $memberID; ?>">Faire une demande pour transférer <? echo $name; ?> dans un autre club.</a>
+			<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&transfer-request=<?php echo $memberID; ?>">Faire une demande pour transférer <?php echo $name; ?> dans un autre club.</a>
 		</p>
 		<?php
 
@@ -636,13 +636,13 @@ if	($canEdit) {
 
 		if (!$isFSTBVolunteer) {
 			?>
-			<p class="delete-member"><a href="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>&delete=<? echo $memberID; ?>" onclick='return confirm("Voulez-vous vraiment supprimer <? echo $name; ?> ?");'>Supprimer <? echo $name; ?></a><span><strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du tchoukball.<br />Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).</span></p>
-			<?
+			<p class="delete-member"><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&delete=<?php echo $memberID; ?>" onclick='return confirm("Voulez-vous vraiment supprimer <?php echo $name; ?> ?");'>Supprimer <?php echo $name; ?></a><span><strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du tchoukball.<br />Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).</span></p>
+			<?php
 		}
 
 		?>
-		<p>Dernière modification le <? echo date_sql2date($lastEdit);?> par <? echo $lastEditBy;?></p>
-		<?
+		<p>Dernière modification le <?php echo date_sql2date($lastEdit);?> par <?php echo $lastEditBy;?></p>
+		<?php
 	}
 }
 ?>

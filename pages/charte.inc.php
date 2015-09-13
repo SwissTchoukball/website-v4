@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="charte">
-<?
+<?php
 	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '5' ORDER BY paragrapheNum");
     // affiche le texte
     while($donnees = mysql_fetch_array($retour)) {

@@ -9,7 +9,7 @@
 	<div class="g-ytsubscribe" data-channel="tchoukballpromotion" data-layout="full" data-count="default"></div>
 	<div class="g-ytsubscribe" data-channel="youtchouk" data-layout="full" data-count="default"></div>
 </div>
-<?
+<?php
 /*
 
 if(isset($_GET['idVideo'])){
@@ -24,16 +24,16 @@ if(isset($_GET['partie'])){
 }
 ?>
 <p><a href="/videos">Retour à la liste des vidéos</a></p>
-<h2><? echo $donnees['nom'.$_SESSION['__langue__']]; ?></h2>
+<h2><?php echo $donnees['nom'.$_SESSION['__langue__']]; ?></h2>
 <video class="fullsite" controls autoplay>
-	<source src="/Videos/videos/<? echo $fichier; ?>.mp4" type="video/mp4">
+	<source src="/Videos/videos/<?php echo $fichier; ?>.mp4" type="video/mp4">
 </video>
-<?
+<?php
 }
 else{
 	?>
     <table class="videos">
-    <?
+    <?php
     $requeteA = "SELECT * FROM TypeVideos ORDER BY ordre";
     $retourA = mysql_query($requeteA);
     while($donneesA = mysql_fetch_array($retourA)) {
@@ -86,7 +86,7 @@ else{
     }
 	?>
     </table>
-	<?
+	<?php
 }
 */
 ?>

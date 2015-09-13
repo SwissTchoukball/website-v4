@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 <div class="modifierMesInfos">
-<?
+<?php
 	if ($_POST["action"]=="modifier"){
 
 		$requeteSQL = "SELECT * FROM `Personne` WHERE `Personne`.`nom`='".addslashes($_SESSION["__nom__"])."' AND `Personne`.`prenom`='".addslashes($_SESSION["__prenom__"])."'";
@@ -36,14 +36,14 @@
 
 
 
-<?
+<?php
 	$requeteSQL = "SELECT * FROM `Personne` WHERE `Personne`.`nom`='".addslashes($_SESSION["__nom__"])."' AND `Personne`.`prenom`='".addslashes($_SESSION["__prenom__"])."'";
 
 	$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
 	$record = mysql_fetch_array($recordset);
 	/*
-	action="<? echo VAR_HREF_PATH_ADMIN; ?>enregistrer.modification.infos.inc.php"
+	action="<?php echo VAR_HREF_PATH_ADMIN; ?>enregistrer.modification.infos.inc.php"
 	*/
 	echo "<SCRIPT language='JavaScript'>
 	 var couleurErreur; couleurErreur='#".VAR_LOOK_COULEUR_ERREUR_SAISIE."';
@@ -62,7 +62,7 @@
 		mesInfos.ville.style.background=couleurValide;
 		mesInfos.ancienPass.style.background=couleurValide;
 
-		<? include "includes/javascript.controle.telephone.inc.php"; ?>
+		<?php include "includes/javascript.controle.telephone.inc.php"; ?>
 
 		if(mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))){
 			nbErreur++;
@@ -118,29 +118,29 @@
 <form name="mesInfos" class="adminForm" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" onSubmit="return controlerSaisie();">
 <fieldset>
 	<label>Nom d'utilisateur</label>
-	<p><? echo stripslashes($record["username"]);?></p>
+	<p><?php echo stripslashes($record["username"]);?></p>
 	<label>Nom</label>
-	<p><? echo stripslashes($record["nom"]);?></p>
+	<p><?php echo stripslashes($record["nom"]);?></p>
 	<label>Prénom</label>
-	<p><? echo stripslashes($record["prenom"]);?></p>
+	<p><?php echo stripslashes($record["prenom"]);?></p>
 </fieldset>
 <fieldset>
 	<label>Adresse</label>
-	<input name="adresse" type="text" value="<? echo $record["adresse"];?>" size="35" maxlength="35">
+	<input name="adresse" type="text" value="<?php echo $record["adresse"];?>" size="35" maxlength="35">
 	<label>Numéro postal</label>
-	<input name="numPostal" type="text" value="<? echo $record["numPostal"]==0?"":$record["numPostal"];?>" size="35" maxlength="35">
+	<input name="numPostal" type="text" value="<?php echo $record["numPostal"]==0?"":$record["numPostal"];?>" size="35" maxlength="35">
 	<label>Ville</label>
-	<input name="ville" type="text" value="<? echo $record["ville"];?>" size="35" maxlength="35">
+	<input name="ville" type="text" value="<?php echo $record["ville"];?>" size="35" maxlength="35">
 	<label>Tél. privé</label>
-	<input name="telephone" type="text" value="<? echo $record["telephone"];?>" size="35" maxlength="35">
+	<input name="telephone" type="text" value="<?php echo $record["telephone"];?>" size="35" maxlength="35">
 	<label>Tél. mobile</label>
-	<input name="portable" type="text" value="<? echo $record["portable"];?>" size="35" maxlength="35">
+	<input name="portable" type="text" value="<?php echo $record["portable"];?>" size="35" maxlength="35">
 	<label>Email</label>
-	<input name="email" type="text" value="<? echo $record["email"];?>" size="35" maxlength="80" autocomplete="off">
+	<input name="email" type="text" value="<?php echo $record["email"];?>" size="35" maxlength="80" autocomplete="off">
 </fieldset>
 <fieldset>
 	<label>Club</label>
-		<?
+		<?php
 			// attention, pour garder une validité des données, les présidents
 			// de club ou gestionnaire de membres du club ne peuvent pas modifier leur club s'il sont de simple utilsiateur
 			if(($record['gestionMembresClub'] == 0 && $record["contactClub"] == 0) || $_SESSION["__userLevel__"] < 10){
@@ -184,7 +184,7 @@
 		?>
 	<label>Date de naissance</label>
 	<div class="birthDate">
-		<?
+		<?php
 		echo "<select name='jour'>";
 		echo modif_liste_jour(jour($record["dateNaissance"]));
 		echo "</select>.";

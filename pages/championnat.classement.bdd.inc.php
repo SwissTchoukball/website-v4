@@ -1,8 +1,8 @@
 <form name="classementChampionnat" action="" method="post"><table border="0" align="center">
       <tr>
-        <td><p><? echo $agenda_annee; ?> :</p></td>
+        <td><p><?php echo $agenda_annee; ?> :</p></td>
         <td><select name="annee" id="select" onChange="classementChampionnat.submit();">
-         <?
+         <?php
          				$annee = $_POST['annee'];
 						// recherche de la premiere date
 						$requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
@@ -258,7 +258,7 @@ while($donneesNbClassement = mysql_fetch_array($retourNbClassement)){
 		?>
 		<tr>
 			<th>
-			<?
+			<?php
 			if($idTour == 2000 AND $typeClassement==1){
 				echo "Promu";
 			}
@@ -270,22 +270,22 @@ while($donneesNbClassement = mysql_fetch_array($retourNbClassement)){
 			<th>Equipes</th>
 			<th>Joué</th>
 			<th>Gagné</th>
-			<? if($typeClassement==3){ ?> <th>Nul</th> <? } ?>
+			<?php if($typeClassement==3){ ?> <th>Nul</th> <?php } ?>
 			<th>Perdu</th>
 			<th>Forfait</th>
 			<th>Marqué</th>
 			<th>Reçu</th>
 			<th>Diff.</th>
-			<? if($typeClassement==3){ ?> <th>Points</th> <? } ?>
+			<?php if($typeClassement==3){ ?> <th>Points</th> <?php } ?>
 		</tr>
-		<?
+		<?php
 	}
 	elseif($typeClassement==2){
 		echo "<table class='classementTourFinal'>";
 		?>
 		<tr>
 			<th>
-			<?
+			<?php
 			if($idTour == 2000){
 				echo "Promu";
 			}
@@ -296,7 +296,7 @@ while($donneesNbClassement = mysql_fetch_array($retourNbClassement)){
 			</th>
 			<th>Equipes</th>
 		</tr>
-		<?
+		<?php
 	}
 
 

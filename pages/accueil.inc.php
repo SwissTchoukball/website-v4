@@ -1,6 +1,6 @@
 <div id="laDerniereNews">
 
-    <?
+    <?php
     $TAILLE_NEWS = 2500;
 
     $requete = mysql_query("SELECT * FROM News ORDER by premiereNews DESC, Date DESC LIMIT 0,1");
@@ -20,17 +20,17 @@
         if($donnees['image'] != 0){ // On affiche l'image si il y en a une.
             $retourbis = mysql_query("SELECT * FROM Uploads WHERE id='".$donnees['image']."'");
             $donneesbis = mysql_fetch_array($retourbis);
-            echo "<img src='/uploads/".$donneesbis['fichier']."' alt='".$donneesbis['titre']."' />";
+            echo "<img src='" . PATH_TO_ROOT . "uploads/".$donneesbis['fichier']."' alt='".$donneesbis['titre']."' />";
         }
         //afficherAvecEncryptageEmail(sizeNewsManager($corps, $TAILLE_NEWS, $donnees['id']));
         echo truncateHtml(markdown($corps), $TAILLE_NEWS, "... "."<p class='lireSuiteArticle'><a href='/news/".$donnees['id']."'>".VAR_LANG_LIRE_SUITE_ARTICLE."</a></p>");
         echo "<p class='date'>Posté ".date_sql2date_joli($donnees["date"],"le","Fr")."</p>";
         ?>
         <div class="socialButtons">
-	        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.tchoukball.ch/news/<? echo $donnees['id']; ?>" data-text="FSTB : <? echo strip_tags($titre); ?>" data-count="none" data-via="tchouksuisse" data-lang="<? echo strtolower($_SESSION['__langue__']); ?>">Tweet</a><!-- Javascript dans le footer -->
-	        <fb:like href="http://www.tchoukball.ch/news/<? echo $donnees['id']; ?>" send="true" layout="button_count" width="450" show_faces="false" font="lucida grande"></fb:like>
+	        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://www.tchoukball.ch/news/<?php echo $donnees['id']; ?>" data-text="FSTB : <?php echo strip_tags($titre); ?>" data-count="none" data-via="tchouksuisse" data-lang="<?php echo strtolower($_SESSION['__langue__']); ?>">Tweet</a><!-- Javascript dans le footer -->
+	        <fb:like href="http://www.tchoukball.ch/news/<?php echo $donnees['id']; ?>" send="true" layout="button_count" width="450" show_faces="false" font="lucida grande"></fb:like>
         </div>
-        <?
+        <?php
     }
     /*echo "<p class='center'>";
     randompicture(); //Image aléatoire
@@ -45,7 +45,7 @@
 <div id="classementChampionnatAccueil">
 
 	<!--<a class="LienVersInscriptionNewsletter" href="/rester-informe">S'inscrire à la Newsletter</a>-->
-    <?
+    <?php
 
 	// TODO: Use new youtube integration system
     // Vidéo TCHOUKBALL PROMOTION ou FSTB
@@ -58,10 +58,10 @@
     }
     echo "<div class='TitreTPVideo'><a href='http://www.youtube.com/watch?v=".getLastYouTubeVideoID($channel)."'>".getLastYouTubeVideoTitle($channel)."</a></div>";
     ?>
-    <iframe width="200" height="162" src="http://www.youtube.com/embed/<? echo getLastYouTubeVideoID($channel); ?>" frameborder="0" allowfullscreen></iframe>
+    <iframe width="200" height="162" src="http://www.youtube.com/embed/<?php echo getLastYouTubeVideoID($channel); ?>" frameborder="0" allowfullscreen></iframe>
     <!--VIEUX CI-DESSOUS -->
 
-    <?
+    <?php
 	*/
 
     //CHAMPIONNAT
@@ -377,9 +377,9 @@
 
 </div>
 <div id="dernieresNews">
-    <? echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=51'>".VAR_LANG_DERNIERES_NEWS."</a></h4>"; ?>
+    <?php echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=51'>".VAR_LANG_DERNIERES_NEWS."</a></h4>"; ?>
     <ul>
-    <?
+    <?php
     $requete = mysql_query("SELECT * FROM News ORDER by date DESC LIMIT 0,5");
     while($donnees = mysql_fetch_array($requete)) {
         $titre = $donnees['titre'.$_SESSION["__langue__"]];
@@ -396,9 +396,9 @@
     </ul>
 </div>
 <div id="prochainsEvenements">
-    <? echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=4'>".VAR_LANG_PROCHAINS_EVENEMENTS."</a></h4>"; ?>
+    <?php echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=4'>".VAR_LANG_PROCHAINS_EVENEMENTS."</a></h4>"; ?>
     <ul>
-    <?
+    <?php
     $aujourdhui = date_actuelle();
     $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '".$aujourdhui."' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0,5");
     while($donnees = mysql_fetch_array($requete)) {
@@ -413,9 +413,9 @@
     </ul>
 </div>
 <div id="prochainsMatchs">
-    <? echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=22'>".VAR_LANG_PROCHAINS_MATCHS."</a></h4>"; ?>
+    <?php echo "<h4><a href='".VAR_HREF_PAGE_PRINCIPALE."?".VAR_HREF_LIEN_MENU."=22'>".VAR_LANG_PROCHAINS_MATCHS."</a></h4>"; ?>
     <ul>
-    <?
+    <?php
     $aujourdhui = date_actuelle();
     $requete = mysql_query("SELECT * FROM Championnat_Matchs WHERE dateDebut >= '".$aujourdhui."' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0,5");
     while($donnees = mysql_fetch_array($requete)) {

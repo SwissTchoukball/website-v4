@@ -1,8 +1,8 @@
 <form name="resultatsChampionnat" action="" method="post"><table border="0" align="center">
       <tr>
-        <td><p><? echo $agenda_annee; ?> :</p></td>
+        <td><p><?php echo $agenda_annee; ?> :</p></td>
         <td><select name="annee" id="select" onChange="resultatsChampionnat.submit();">
-         <?
+         <?php
          				$annee = $_POST['annee'];
 						// recherche de la premiere date
 						$requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
@@ -121,12 +121,12 @@ else{
 			if($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000){
 				?>
 					Description
-				<?
+				<?php
 			}
 			else{
 				?>
 					Journée
-				<?
+				<?php
 			}
 			?>
 					</th>
@@ -134,7 +134,7 @@ else{
 				    <th class="center">Score</th>
 				    <th>Club visiteur</th>
 				</tr>
-			<?
+			<?php
 			while($donneesC = mysql_fetch_array($retourC)){
 				if ($donneesC['journee']%2 == 0) {
 					$matchClass = 'journeePair';

@@ -1,4 +1,4 @@
-<? /*MODELE
+<?php /*MODELE
 <div class="informationsMatch" style="display:none;" id="infomatch1">
 	<div class="informationsBoxJournee">Journée 1</div>
 	<div class="informationsBoxEquipes">Lausanne 2 - Genève 1</div>
@@ -340,7 +340,7 @@
 	<div class="informationsBoxDate">19.01.2013 à 18h</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
-<div class="resultatsCoupeCH">  
+<div class="resultatsCoupeCH">
 	<div class="boxTour1">
 	<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('1');" onMouseOut="masquerInfoMatch('1');">
 		<span class="gagnant">Chambésy Panthers</span>
@@ -447,7 +447,7 @@
 </div>
 </div>
 <div class="resultatsMatchsClassement">
-	<h3>Matchs de classement</h3> 
+	<h3>Matchs de classement</h3>
 	<div class="boxTour1">
 		<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('25');" onMouseOut="masquerInfoMatch('25');">
 			<span class="perdant">Sion</span>

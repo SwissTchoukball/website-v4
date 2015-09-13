@@ -1,4 +1,4 @@
-<? /*MODELE
+<?php /*MODELE
 <div class="informationsMatch" style="display:none;" id="infomatch1">
 	<div class="informationsBoxJournee">Journée 1</div>
 	<div class="informationsBoxEquipes">Lausanne 2 - Genève 1</div>
@@ -70,7 +70,7 @@
 	<div class="informationsBoxSet">Set 1 : 15 - 08</div>
 	<div class="informationsBoxSet">Set 2 : 15 - 07</div>
 	<div class="informationsBoxSet">Set 3 : 15 - 05</div>
-	<div class="informationsBoxScore">Score final : 3 - 0</div> 
+	<div class="informationsBoxScore">Score final : 3 - 0</div>
 	<div class="informationsBoxDate">23.01.2011 à 09h30</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -87,7 +87,7 @@
 	<div class="informationsBoxSet">Set 2 : 15 - 11</div>
 	<div class="informationsBoxSet">Set 3 : 13 - 15</div>
 	<div class="informationsBoxSet">Set 4 : 15 - 11</div>
-	<div class="informationsBoxScore">Score final : 3 - 1</div> 
+	<div class="informationsBoxScore">Score final : 3 - 1</div>
 	<div class="informationsBoxDate">23.01.2011 à 12h00</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -98,7 +98,7 @@
 	<div class="informationsBoxSet">Set 1 : 11 - 15</div>
 	<div class="informationsBoxSet">Set 2 : 13 - 15</div>
 	<div class="informationsBoxSet">Set 3 : 09 - 15</div>
-	<div class="informationsBoxScore">Score final : 0 - 3</div> 
+	<div class="informationsBoxScore">Score final : 0 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 14h45</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -109,7 +109,7 @@
 	<div class="informationsBoxSet">Set 1 : 15 - 06</div>
 	<div class="informationsBoxSet">Set 2 : 15 - 07</div>
 	<div class="informationsBoxSet">Set 3 : 15 - 08</div>
-	<div class="informationsBoxScore">Score final : 3 - 0</div> 
+	<div class="informationsBoxScore">Score final : 3 - 0</div>
 	<div class="informationsBoxDate">23.01.2011 à 14h00</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -121,7 +121,7 @@
 	<div class="informationsBoxSet">Set 2 : 16 - 18</div>
 	<div class="informationsBoxSet">Set 3 : 11 - 15</div>
 	<div class="informationsBoxSet">Set 4 : 07 - 15</div>
-	<div class="informationsBoxScore">Score final : 1 - 3</div> 
+	<div class="informationsBoxScore">Score final : 1 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 13h30</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -157,7 +157,7 @@
 	<div class="informationsBoxSet">Set 3 : 15 - 17</div>
 	<div class="informationsBoxSet">Set 4 : 15 - 12</div>
 	<div class="informationsBoxSet">Set 5 : 15 - 11</div>
-	<div class="informationsBoxScore">Score final : 3 - 2</div> 
+	<div class="informationsBoxScore">Score final : 3 - 2</div>
 	<div class="informationsBoxDate">04.06.2011 à 20h</div>
 	<div class="informationsBoxLieu">Pommier, Grand-Saconnex (GE)</div>
 </div>
@@ -170,7 +170,7 @@
 	<div class="informationsBoxSet">Set 3 : 15 - 13</div>
 	<div class="informationsBoxSet">Set 4 : 13 - 15</div>
 	<div class="informationsBoxSet">Set 5 : 13 - 15</div>
-	<div class="informationsBoxScore">Score final : 2 - 3</div> 
+	<div class="informationsBoxScore">Score final : 2 - 3</div>
 	<div class="informationsBoxDate">04.06.2011 à 17h</div>
 	<div class="informationsBoxLieu">Pommier, Grand-Saconnex (GE)</div>
 </div>
@@ -207,7 +207,7 @@
 	<div class="informationsBoxSet">Set 3 : 13 - 15</div>
 	<div class="informationsBoxSet">Set 4 : 15 - 06</div>
 	<div class="informationsBoxSet">Set 5 : 13 - 15</div>
-	<div class="informationsBoxScore">Score final : 2 - 3</div> 
+	<div class="informationsBoxScore">Score final : 2 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 12h15</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -218,7 +218,7 @@
 	<div class="informationsBoxSet">Set 1 : 11 - 15</div>
 	<div class="informationsBoxSet">Set 2 : 07 - 15</div>
 	<div class="informationsBoxSet">Set 3 : 08 - 15</div>
-	<div class="informationsBoxScore">Score final : 0 - 3</div> 
+	<div class="informationsBoxScore">Score final : 0 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 13h45</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -229,7 +229,7 @@
 	<div class="informationsBoxSet">Set 1 : 13 - 15</div>
 	<div class="informationsBoxSet">Set 2 : 09 - 15</div>
 	<div class="informationsBoxSet">Set 3 : 09 - 15</div>
-	<div class="informationsBoxScore">Score final : 0 - 3</div> 
+	<div class="informationsBoxScore">Score final : 0 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 17h30</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
@@ -241,11 +241,11 @@
 	<div class="informationsBoxSet">Set 2 : 11 - 15</div>
 	<div class="informationsBoxSet">Set 3 : 15 - 08</div>
 	<div class="informationsBoxSet">Set 4 : 12 - 15</div>
-	<div class="informationsBoxScore">Score final : 1 - 3</div> 
+	<div class="informationsBoxScore">Score final : 1 - 3</div>
 	<div class="informationsBoxDate">23.01.2011 à 16h45</div>
 	<div class="informationsBoxLieu">Vieux-Moulin, Lausanne</div>
 </div>
-<div class="resultatsCoupeCH">  
+<div class="resultatsCoupeCH">
 	<div class="boxTour1">
 		<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('1');" onMouseOut="masquerInfoMatch('1');">
 			<span class="gagnant">Chambésy</span>
@@ -352,7 +352,7 @@
 	</div>
 </div>
 <div class="resultatsMatchsClassement">
-	<h3>Matchs de classement</h3> 
+	<h3>Matchs de classement</h3>
 	<div class="boxTour1">
 		<div class="boxEquipe1A" onMouseOver="afficherInfoMatch('21');" onMouseOut="masquerInfoMatch('21');">
 			<span class="perdant">Chavannes</span>
@@ -381,7 +381,7 @@
 			<span class="gagnant">Vernier</span>
 		</div>
 	</div>
-<!--   
+<!--
 	<div class="boxTour3">
 		<div class="boxEquipe3A" onMouseOver="afficherInfoMatch('17');" onMouseOut="masquerInfoMatch('17');">
 			<span class="perdant">Val-de-Ruz 1</span>
