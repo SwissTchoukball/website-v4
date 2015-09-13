@@ -13,6 +13,8 @@
         ?>
     </div>
     <div class="hashtag">#tchouksuisse</div>
-    <?php /* Do not add any space, new line or even any character after the following closing
-             div tag. This will alter seriously the layout of the website */ ?>
-</div>
+<?php
+echo '</div>';
+// This closing div tag is printed with PHP in order to avoid having any character after.
+// This would alter seriously the layout of the website as the sidebar and the main content
+// are two inline-block elements.
