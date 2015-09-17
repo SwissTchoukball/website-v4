@@ -1,8 +1,4 @@
 <?php
-if ($_SESSION["debug_tracage"]) {
-    echo __FILE__."<BR>";
-}
-
 include "date.inc.php";
 
 function printMessage($message, $type = 'info')
@@ -179,14 +175,16 @@ function insererEncadrementGauche($couleur = "NULL")
     if ($couleur=="NULL") {
         echo "<tr><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
     } else {
-        echo "<tr bgcolor='#$couleur'><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
+        echo "<tr bgcolor='#$couleur'>
+              <td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
     }
 }
 
 // dans un tableau <tr>...
 function insererEncadrementGaucheTrBGColor($trbgcolor)
 {
-        echo "<tr bgcolor='".$trbgcolor."'><td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
+        echo "<tr bgcolor='".$trbgcolor."'>
+              <td width='1px' height='1px' background='".VAR_LOOK_path."agenda_img_gauche.gif'></td>";
 }
 
 // dans un tableau ...</tr>
@@ -209,7 +207,8 @@ function insererEncadrementElementLigne($Tab_Valeur, $align, $classStyle, $taill
         if ($taille=="NULL" || $taille[$i]=="NULL") {
             echo "<td><p align='".$align."' class='".$classStyle."'>".$Tab_Valeur[$i]."</p></td>";
         } else {
-            echo "<td width='".$taille[$i]."'><p align='".$align."' class='".$classStyle."'>".$Tab_Valeur[$i]."</p></td>";
+            echo "<td width='".$taille[$i]."'><p align='".$align."' class='".$classStyle."'>".$Tab_Valeur[$i]."</p>
+                  </td>";
         }
 
         if ($i < count($Tab_Valeur)-1) {

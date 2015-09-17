@@ -12,7 +12,8 @@ $query = "UPDATE DBDPersonne
 //echo $query;
 mysql_query($query);
 
-// Updating Tchoukup status from "Papier + E-mail" to "Papier" for newly "Actif" members who are not member of TBC Genève
+// Updating Tchoukup status from "Papier + E-mail" to "Papier"
+// for newly "Actif" members who are not member of TBC Genève
 $queryTchoukup = "UPDATE DBDPersonne
 				  SET idCHTB = 5
 				  WHERE idCHTB = 2
@@ -22,7 +23,7 @@ $queryTchoukup = "UPDATE DBDPersonne
 //echo $queryTchoukup;
 mysql_query($queryTchoukup);
 
-// TODO avertir automatiquement les clubs par e-mails des membres qui recoivent maintenant le tchoukup par e-mail uniquement et pour il est donc nécessaire d'indiquer une adresse e-mail.
+// TODO avertir automatiquement les clubs par e-mails des membres qui recoivent maintenant le
+//      tchoukup par e-mail uniquement et pour il est donc nécessaire d'indiquer une adresse e-mail.
 
 mysql_close();
-?>
