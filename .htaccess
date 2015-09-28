@@ -3,6 +3,10 @@ php_flag "allow_url_include" "On"
 
 Options +FollowSymlinks
 RewriteEngine on
+
+RewriteCond %{HTTP_HOST} !(tchoukball.ch|localhost)
+RewriteRule (.*) http://tchoukball.ch/$1 [R=301]
+
 RewriteRule ^apple-touch-icon(.*)$ /favicons/apple-touch-icon$1 [L]
 RewriteRule ^favicon([\.-])(.*)$ /favicons/favicon$1$2 [L]
 RewriteRule ^mstile(.*)$ /favicons/mstile$1 [L]
