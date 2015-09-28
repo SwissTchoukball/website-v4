@@ -117,3 +117,7 @@ function hasRefereeManagementAccess()
 {
     return $_SESSION['__userLevel__'] <= 7;
 }
+function hasAllMembersManagementAccess()
+{
+    return $_SESSION['__userLevel__'] <= 8;
+}
