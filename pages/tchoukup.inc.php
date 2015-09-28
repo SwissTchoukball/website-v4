@@ -1,4 +1,4 @@
-<?
+<?php
 //! Texte
 $request="SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '21' ORDER BY paragrapheNum;";
 $recordset = mysql_query($request) or die ("<H3>Paragraphe inconnu</H3>");

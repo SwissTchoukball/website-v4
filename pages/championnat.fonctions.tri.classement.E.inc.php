@@ -1,4 +1,4 @@
-<? 
+<?php
 
 function triScorePointsMarques($informations,$tableau,$debug){
 	$nouveauTableau=array();
@@ -13,12 +13,12 @@ function triScorePointsMarques($informations,$tableau,$debug){
 			if($debug){
 				echo "<br /><strong>Il y a une égalité de goal-average.</strong><br />";
 			}
-			
+
 			$pointsMarques=array();
 			$ordningEquipesEgalitesPoints=array();
 			$ordningEquipesEgalitesId=array();
 			$l=0;
-			
+
 			for($i=1;$i<=count($tableau[$k]);$i++){ // Une boucle par équipe à égalité ==>> $i = EQUIPE EGALITE
 				$pointsMarques[$i]=0; // Initialisation des points interne de l'équipe.
 				$requete = "SELECT equipeA, equipeB, pointsA, pointsB FROM Championnat_Matchs WHERE saison=".$annee." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$noGroupe." AND (equipeA=".$tableau[$k][$i]." OR equipeB=".$tableau[$k][$i].") AND (pointsA!=0 AND pointsB!=0)";
@@ -33,7 +33,7 @@ function triScorePointsMarques($informations,$tableau,$debug){
 				while($donnees = mysql_fetch_array($retour)){ // Boucle pour chaque match où les équipes ont joués ensemble dans le tour.
 					if($donnees['equipeA']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeA
 						$pointsMarques[$i]=$pointsMarques[$i]+$donnees['pointsA'];
-						
+
 					}
 					elseif($donnees['equipeB']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeB
 						$pointsMarques[$i]=$pointsMarques[$i]+$donnees['pointsB'];
@@ -45,13 +45,13 @@ function triScorePointsMarques($informations,$tableau,$debug){
 				if($debug){
 					echo "<br /><br />".$tableau[$k][$i]." : Points marqués :".$pointsMarques[$i];
 				}
-				
+
 				$ordningEquipesEgalitesPoints[$i]=$pointsMarques[$i];
 				$ordningEquipesEgalitesId[$i]=$tableau[$k][$i];
 				$pointsMarques = array();
-				
+
 			} // Fin boucle par équipe égalité
-			
+
 			for($m=max($ordningEquipesEgalitesPoints);$m>=min($ordningEquipesEgalitesPoints);$m--){
 				$compteur=0;
 				for($n=1;$n<=count($tableau[$k]);$n++){

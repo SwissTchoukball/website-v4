@@ -1,4 +1,4 @@
-<?
+<?php
 echo "<table class='tableauModifierNews'>";
     echo "<tr>";
         echo "<th>Date</th>";

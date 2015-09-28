@@ -27,7 +27,7 @@
 	<area shape="poly" coords="229,62,240,66,246,63,260,69,266,66,279,77,275,86,265,88,261,95,255,100,246,91,238,93,235,89,241,85,244,76,241,72,238,71,239,77,237,82,224,87,216,86,214,89,207,81,221,70" href="#canton27"> <!-- Bâle campagne -->
 </map>
 
-<?
+<?php
 echo "<img class='swissMap' src='".VAR_IMAGE_CARTE_SUISSE."' alt='carte de la suisse' border='0' usemap='#carteSuisseCantons' />";
 
 $requeteSQL = "SELECT p.`nom`, p.`prenom`, p.`adresse` AS adressePresident, cl.`adresse` AS adresseClub, p.`npa` AS npaPresident, cl.`npa` AS npaClub, p.`ville` AS villePresident, cl.`ville` AS villeClub, p.`email` AS emailPresident, cl.`email` AS emailClub, cl.`url`, cl.`facebookUsername`, cl.`twitterUsername`, p.`telPrive` AS telephonePresident, cl.`telephone` AS telephoneClub, p.`portable` AS portablePresident, cl.`id` AS idClub, cl.`club`, cl.`nomComplet` AS nomClub, cl.`canton`, ca.`nomCanton".$_SESSION["__langue__"]."` AS nomCanton

@@ -4,7 +4,7 @@
 	}
 </script>
 
-<div id="calculCotisation"><?
+<div id="calculCotisation"><?php
 	statInsererPageSurf(__FILE__);
 
 	//TODO : Vérifier si les statuts correspondent à l'âge des membres.
@@ -54,10 +54,10 @@
 		}
 
 		?>
-	<form name="clubSwitcher" method="post" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>">
+	<form name="clubSwitcher" method="post" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
 		<select name="club" onChange="document.clubSwitcher.submit();">
 			<option value="15">Choisir un club</option>
-			<?
+			<?php
 			$clubsRequest = "SELECT nbIdClub, club FROM ClubsFstb WHERE actif=1 ORDER BY club";
 			$clubsResult = mysql_query($clubsRequest);
 			while($clubsData = mysql_fetch_assoc($clubsResult)) {
@@ -67,13 +67,13 @@
 					$clubName = $clubsData['club'];
 				}
 				?>
-				<option value="<? echo $clubsData['nbIdClub']; ?>"<? echo $selected; ?>><? echo $clubsData['club']; ?></option>
-				<?
+				<option value="<?php echo $clubsData['nbIdClub']; ?>"<?php echo $selected; ?>><?php echo $clubsData['club']; ?></option>
+				<?php
 			}
 			?>
 		</select>
 	</form>
-		<?
+		<?php
 		$isManager = true;
 	} else {
 		if ($clubData['gestionMembresClub'] == 1){
@@ -99,7 +99,7 @@
 			</tr>
 		</thead>
 		<tbody>
-		<?
+		<?php
 
 		/* STATUTS REQUEST */
 		$statutsRequest = "SELECT idStatus, descriptionStatus".$_SESSION['__langue__']." AS name, cotisation FROM DBDStatus ".$statutsRequestPart_WHERE." ORDER BY name";
@@ -138,12 +138,12 @@
 			}
 			?>
 			<tr>
-				<td><? echo $nomStatuts; ?></td>
-				<td>CHF <? echo $cotisationStatuts; ?></td>
-				<td><? echo $nbMembres[$id]; ?></td>
-				<td>CHF <? echo $cotisationTotaleParStatut; ?></td>
+				<td><?php echo $nomStatuts; ?></td>
+				<td>CHF <?php echo $cotisationStatuts; ?></td>
+				<td><?php echo $nbMembres[$id]; ?></td>
+				<td>CHF <?php echo $cotisationTotaleParStatut; ?></td>
 			</tr>
-			<?
+			<?php
 			if ($id == $idVIP) {
 				// Attention, il faut que les membres actifs à compter le soient avant le calcul pour les membres VIPs. Or cela n'est pas vérifié et si ce n'est pas le cas, le calcul sera faux.
 				$nbAbonnementVIPOffertsMax = floor(($nbMembres[$idActifs] + $nbMembres[$idJuniors]) / $nbMembresPourUnAbonnementVIPOffert + 1);
@@ -153,11 +153,11 @@
 				?>
 				<tr>
 					<td>Abonnements VIP offerts</td>
-					<td>CHF -<? echo $cotisationStatuts; ?></td>
-					<td><? echo $nbAbonnementVIPOfferts ?></td>
-					<td>CHF <? echo $reductionVIP; ?></td>
+					<td>CHF -<?php echo $cotisationStatuts; ?></td>
+					<td><?php echo $nbAbonnementVIPOfferts ?></td>
+					<td>CHF <?php echo $reductionVIP; ?></td>
 				</tr>
-				<?
+				<?php
 			}
 		}
 		?>
@@ -167,13 +167,13 @@
 				<td>Total</td>
 				<td></td>
 				<td></td>
-				<td>CHF <? echo $montantCotisation; ?></td>
+				<td>CHF <?php echo $montantCotisation; ?></td>
 			</tr>
 		</tfoot>
 	</table>
-	<p>Total de <? echo $nbMembresTotal; ?> membres</p>
+	<p>Total de <?php echo $nbMembresTotal; ?> membres</p>
 	<br />
-		<?
+		<?php
 		if ($isManager) {
 			//Gestion du blocage de la cotisation
 			if (isset($_POST['annee']) && isset($_POST['montant'])) {
@@ -238,12 +238,12 @@
 						}
 						echo "</p><br />";
 						?>
-						<form method="post" onsubmit="return askForConfirmation();" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>">
-							<input type="hidden" name="montant" value="<? echo $montantCotisation; ?>" />
-							<input type="hidden" name="annee" value="<? echo $saisonCotisationAnneeDebut; ?>" />
-							<input type="submit" value="Bloquer un montant de <? echo $montantCotisation; ?> CHF pour la cotisation <? echo $saisonCotisationAnneeDebut."-".$saisonCotisationAnneeFin; ?> du <? echo $clubName; ?>" />
+						<form method="post" onsubmit="return askForConfirmation();" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
+							<input type="hidden" name="montant" value="<?php echo $montantCotisation; ?>" />
+							<input type="hidden" name="annee" value="<?php echo $saisonCotisationAnneeDebut; ?>" />
+							<input type="submit" value="Bloquer un montant de <?php echo $montantCotisation; ?> CHF pour la cotisation <?php echo $saisonCotisationAnneeDebut."-".$saisonCotisationAnneeFin; ?> du <?php echo $clubName; ?>" />
 						</form>
-						<?
+						<?php
 					}
 					echo "<br />";
 				}
@@ -251,7 +251,7 @@
 		}
 		?>
 	<div id='ccpFSTB'>CCP <?php echo VAR_LANG_ASSOCIATION_NAME; ?><br />20-8957-2</div>
-		<?
+		<?php
 	}
 
 	?>

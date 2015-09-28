@@ -1,4 +1,4 @@
-<? 
+<?php
 
 function triScorePointsMarquesInterne($informations,$tableau,$debug){
 	$nouveauTableau=array();
@@ -13,12 +13,12 @@ function triScorePointsMarquesInterne($informations,$tableau,$debug){
 			if($debug){
 				echo "<br /><strong>Il y a une égalité de différence de points(score) interne.</strong><br />";
 			}
-			
+
 			$pointsMarqueInterne=array();
 			$ordningEquipesEgalitesPoints=array();
 			$ordningEquipesEgalitesId=array();
 			$l=0;
-			
+
 			for($i=1;$i<=count($tableau[$k]);$i++){ // Une boucle par équipe à égalité ==>> $i = EQUIPE EGALITE
 				$pointsMarqueInterne[$i]=0; // Initialisation des points interne de l'équipe.
 				for($j=1;$j<=count($tableau[$k]);$j++){ // Une boucle pour chaque rencontre possible que cette équipe a fait avec une autre équipe à égalité. Le système calcule uniquement les points de l'équipe sélectionnée ==>> $j = AUTRE EQUIPE EGALITE avec qui on compte les points
@@ -35,7 +35,7 @@ function triScorePointsMarquesInterne($informations,$tableau,$debug){
 						while($donnees = mysql_fetch_array($retour)){ // Boucle pour chaque match où les équipes ont joués ensemble dans le tour.
 							if($donnees['equipeA']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeA
 								$pointsMarqueInterne[$i]=$pointsMarqueInterne[$i]+$donnees['pointsA'];
-								
+
 							}
 							elseif($donnees['equipeB']==$tableau[$k][$i]){ // Si l'équipe sélectionnée est equipeB
 								$pointsMarqueInterne[$i]=$pointsMarqueInterne[$i]+$donnees['pointsB'];
@@ -49,13 +49,13 @@ function triScorePointsMarquesInterne($informations,$tableau,$debug){
 				if($debug){
 					echo "<br /><br />".$tableau[$k][$i]." : Points marqués Interne :".$pointsMarqueInterne[$i];
 				}
-				
+
 				$ordningEquipesEgalitesPoints[$i]=$pointsMarqueInterne[$i];
 				$ordningEquipesEgalitesId[$i]=$tableau[$k][$i];
 				$pointsMarqueInterne = array();
-				
+
 			} // Fin boucle par équipe égalité
-			
+
 			for($m=max($ordningEquipesEgalitesPoints);$m>=min($ordningEquipesEgalitesPoints);$m--){
 				$compteur=0;
 				for($n=1;$n<=count($tableau[$k]);$n++){

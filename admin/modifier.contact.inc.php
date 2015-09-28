@@ -1,8 +1,8 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 ?>
 
-<?
+<?php
 	$requeteSQL="SELECT *, p.adresse, p.ville, p.email, p.telephone FROM Personne p, ClubsFstb c WHERE p.id='".$modificationId."' AND p.idClub=c.id";
 	$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete A</H1>");
 	$record = mysql_fetch_array($recordset);
@@ -22,7 +22,7 @@
 		mesInfos.adresse.style.background=couleurValide;
 		mesInfos.ville.style.background=couleurValide;
 
-		<? include "includes/javascript.controle.telephone.inc.php"; ?>
+		<?php include "includes/javascript.controle.telephone.inc.php"; ?>
 
 		if(mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))){
 			nbErreur++;
@@ -88,7 +88,7 @@
 <form name="mesInfos" class="adminForm" method="post" onSubmit="return controlerSaisie();" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
 <fieldset>
 	<label>Nom d'utilisateur</label>
-	<p><? echo stripslashes($record["username"]);?></p>
+	<p><?php echo stripslashes($record["username"]);?></p>
 	<?php
 	if (isAdmin()) {
 		?>
@@ -98,32 +98,32 @@
 	}
 	?>
 	<label>Nom</label>
-	<p><? echo stripslashes($record["nom"]);?></p>
+	<p><?php echo stripslashes($record["nom"]);?></p>
 	<label>Prénom</label>
-	<p><? echo stripslashes($record["prenom"]);?></p>
+	<p><?php echo stripslashes($record["prenom"]);?></p>
 </fieldset>
 <fieldset>
 	<label>Adresse</label>
-	<input name="adresse" type="text" value="<? echo $record["adresse"];?>" size="35" maxlength="35">
+	<input name="adresse" type="text" value="<?php echo $record["adresse"];?>" size="35" maxlength="35">
 	<label>Numéro postal</label>
-	<input name="numPostal" type="text" value="<? echo $record["numPostal"]==0?"":$record["numPostal"];?>" size="35" maxlength="35">
+	<input name="numPostal" type="text" value="<?php echo $record["numPostal"]==0?"":$record["numPostal"];?>" size="35" maxlength="35">
 	<label>Ville</label>
-	<input name="ville" type="text" value="<? echo $record["ville"];?>" size="35" maxlength="35">
+	<input name="ville" type="text" value="<?php echo $record["ville"];?>" size="35" maxlength="35">
 	<label>Tél. privé</label>
-	<input name="telephone" type="text" value="<? echo $record["telephone"];?>" size="35" maxlength="35">
+	<input name="telephone" type="text" value="<?php echo $record["telephone"];?>" size="35" maxlength="35">
 	<label>Tél. mobile</label>
-	<input name="portable" type="text" value="<? echo $record["portable"];?>" size="35" maxlength="35">
+	<input name="portable" type="text" value="<?php echo $record["portable"];?>" size="35" maxlength="35">
 	<label>Email</label>
-	<input name="email" type="text" value="<? echo $record["email"];?>" size="35" maxlength="80" autocomplete="off">
+	<input name="email" type="text" value="<?php echo $record["email"];?>" size="35" maxlength="80" autocomplete="off">
 </fieldset>
 <fieldset>
 	<label>Club</label>
-		<?
+		<?php
 			afficherListeClubs($record["idClub"], "id");
 		?>
 	<label>Date de naissance</label>
 	<div class="birthDate">
-		<?
+		<?php
 		echo "<select name='jour'>";
 		echo modif_liste_jour(jour($record["dateNaissance"]));
 		echo "</select>.";
@@ -153,6 +153,6 @@
 	<input name="nouveauPassBis" type="password" maxlength="255" size="35" autocomplete="off">
 </fieldset>
 <input type="hidden" name="action" value="modifierContact">
-<input type="hidden" name="idPersonne" value="<? echo $modificationId;?>">
+<input type="hidden" name="idPersonne" value="<?php echo $modificationId;?>">
 <input type="submit" value="Modifier">
 </form>

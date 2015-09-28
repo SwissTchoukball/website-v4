@@ -1,4 +1,4 @@
-<?
+<?php
 if(isset($_POST['prochaineEtape'])){
     if($_POST['prochaineEtape']=="etape2"){
         include('inserer.edition.coupech.etape2.inc.php');

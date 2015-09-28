@@ -1,7 +1,7 @@
 <form name="modifNews" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" onSubmit="return testQqchAModifier();">
-<p align="center"><input type="submit" name="Supprimer" value="<? echo VAR_LANG_MODIFIER;?>"></p><br />
+<p align="center"><input type="submit" name="Supprimer" value="<?php echo VAR_LANG_MODIFIER;?>"></p><br />
 <table class="tableauModifierAgenda">
-<?
+<?php
 	echo "<tr>";
 	   echo "<th>X</th>";
 	   echo "<th>Date début</th>";
@@ -12,15 +12,15 @@
 	   echo "<th>Début</th>";
 	   echo "<th>Fin</th>";
     echo "</tr>";
-		
+
 	$aujourdhui = date_actuelle();
 
-	$requeteSQL = "SELECT * FROM `Agenda_Evenement`, `Agenda_TypeEvent` WHERE 
+	$requeteSQL = "SELECT * FROM `Agenda_Evenement`, `Agenda_TypeEvent` WHERE
 							 `Agenda_Evenement`.`id_TypeEve` = `Agenda_TypeEvent`.`id_TypeEve` AND
 							 `dateDebut` >= '".$aujourdhui."' AND `Agenda_Evenement`.`id_TypeEve`<>'5000' ORDER BY `dateDebut` ASC";
-		
+
 	$recordset = mysql_query($requeteSQL);
-	
+
 	echo "<script language='JavaScript'>var nbEventAfficher=".mysql_affected_rows()."</script>";
 	?>
 <script language="JavaScript">
@@ -34,9 +34,9 @@
 		if(!eventCoche)alert("Rien à modifier");
 		return eventCoche;
 	}
-</script>	
-	<?
-	
+</script>
+	<?php
+
 	while($record = mysql_fetch_array($recordset)){
         if($record["affiche"]==0){
             $style = " style='color:#ffffff;'";
@@ -58,5 +58,5 @@
 ?>
 </table><br />
 	<input type="hidden" name="action" value="modifier">
-  <p align="center"><input type="submit" name="Supprimer" value="<? echo VAR_LANG_MODIFIER;?>"></p>
+  <p align="center"><input type="submit" name="Supprimer" value="<?php echo VAR_LANG_MODIFIER;?>"></p>
 </form>

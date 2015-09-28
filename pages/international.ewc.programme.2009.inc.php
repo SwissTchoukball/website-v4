@@ -1,9 +1,9 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 ?>
 <div class="presentation">
-	<h4><? echo $VAR_G_JOURS_SEMAINE[6] ?></h4><br />
+	<h4><?php echo $VAR_G_JOURS_SEMAINE[6] ?></h4><br />
 	<table class="tableauProgrammeEWC">
 		<tr>
 			<td align="center">09:30</td>
@@ -42,7 +42,7 @@ statInsererPageSurf(__FILE__);
 			<td align="left">Genève 1</td>
 		</tr>
 	</table>
-	<h4><? echo $VAR_G_JOURS_SEMAINE[0] ?></h4><br />
+	<h4><?php echo $VAR_G_JOURS_SEMAINE[0] ?></h4><br />
 	<table class="tableauProgrammeEWC">
 		<tr>
 			<td align="center">09:00</td>

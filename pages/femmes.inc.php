@@ -1,16 +1,16 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 
 $afficherNumero = false;
 ?>
 <div class="equipe-es">
-	<div class="photo-equipe-es"><img src="<? echo VAR_IMAGE_PHOTOS_EQUIPES_PATH."femmes_2014.jpg";?>"></div>
+	<div class="photo-equipe-es"><img src="<?php echo VAR_IMAGE_PHOTOS_EQUIPES_PATH."femmes_2014.jpg";?>"></div>
 	<div class="legende-photo-equipe-es"></div>
 </div>
 
 <div class="liste-joueur-es">
-	<?
+	<?php
 		include "affichage.team.inc.php";
 
 		$query = getTeamQuery(2);
@@ -25,4 +25,4 @@ $afficherNumero = false;
 	?>
 </div>
 
-<div class="acceder-bdd-fitb-es"><a href="http://www.fitbcompetitions.org" target="_blank"><? echo VAR_LANG_ACCES_FITB_BDD; ?></a></div>
+<div class="acceder-bdd-fitb-es"><a href="http://www.fitbcompetitions.org" target="_blank"><?php echo VAR_LANG_ACCES_FITB_BDD; ?></a></div>

@@ -1,18 +1,18 @@
-<?
+<?php
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 ?>
 <div class="presentation">
-	<h4><? echo $VAR_G_JOURS_SEMAINE[5] ?> 24.07.2009</h4><br />
+	<h4><?php echo $VAR_G_JOURS_SEMAINE[5] ?> 24.07.2009</h4><br />
 	<table class="tableauProgrammeWG">
 		<tr>
-			<th><? echo VAR_LANG_CATEGORIE; ?></th>
-			<th><? echo VAR_LANG_HEURE; ?></th>
-			<th><? echo VAR_LANG_HEURE_SUISSE; ?></th>
-			<th><? echo VAR_LANG_EQUIPE; ?> A</th>
+			<th><?php echo VAR_LANG_CATEGORIE; ?></th>
+			<th><?php echo VAR_LANG_HEURE; ?></th>
+			<th><?php echo VAR_LANG_HEURE_SUISSE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> A</th>
 			<th>-</th>
-			<th><? echo VAR_LANG_EQUIPE; ?> B</th>
-			<th><? echo VAR_LANG_SCORE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> B</th>
+			<th><?php echo VAR_LANG_SCORE; ?></th>
 		</tr>
 		<tr style="background-color: #ffcccc;">
 			<td align="center">F</td>
@@ -132,16 +132,16 @@ statInsererPageSurf(__FILE__);
 			<td align="center"><strong>55</strong> - 52</td>
 		</tr>
 	</table>
-	<h4><? echo $VAR_G_JOURS_SEMAINE[6] ?> 25.07.2009</h4><br />
+	<h4><?php echo $VAR_G_JOURS_SEMAINE[6] ?> 25.07.2009</h4><br />
 	<table class="tableauProgrammeWG">
 		<tr>
-			<th><? echo VAR_LANG_CATEGORIE; ?></th>
-			<th><? echo VAR_LANG_HEURE; ?></th>
-			<th><? echo VAR_LANG_HEURE_SUISSE; ?></th>
-			<th><? echo VAR_LANG_EQUIPE; ?> A</th>
+			<th><?php echo VAR_LANG_CATEGORIE; ?></th>
+			<th><?php echo VAR_LANG_HEURE; ?></th>
+			<th><?php echo VAR_LANG_HEURE_SUISSE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> A</th>
 			<th>-</th>
-			<th><? echo VAR_LANG_EQUIPE; ?> B</th>
-			<th><? echo VAR_LANG_SCORE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> B</th>
+			<th><?php echo VAR_LANG_SCORE; ?></th>
 		</tr>
 		<tr style="background-color: #ccddff;">
 			<td align="center">H</td>
@@ -252,16 +252,16 @@ statInsererPageSurf(__FILE__);
 			<td align="center"><strong>63</strong> - 52</td>
 		</tr>
 	</table>
-	<h4><? echo $VAR_G_JOURS_SEMAINE[0] ?> 26.07.2009</h4><br />
+	<h4><?php echo $VAR_G_JOURS_SEMAINE[0] ?> 26.07.2009</h4><br />
 	<table class="tableauProgrammeWG">
 		<tr>
-			<th><? echo VAR_LANG_CATEGORIE; ?></th>
-			<th><? echo VAR_LANG_HEURE; ?></th>
-			<th><? echo VAR_LANG_HEURE_SUISSE; ?></th>
-			<th><? echo VAR_LANG_EQUIPE; ?> A</th>
+			<th><?php echo VAR_LANG_CATEGORIE; ?></th>
+			<th><?php echo VAR_LANG_HEURE; ?></th>
+			<th><?php echo VAR_LANG_HEURE_SUISSE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> A</th>
 			<th>-</th>
-			<th><? echo VAR_LANG_EQUIPE; ?> B</th>
-			<th><? echo VAR_LANG_SCORE; ?></th>
+			<th><?php echo VAR_LANG_EQUIPE; ?> B</th>
+			<th><?php echo VAR_LANG_SCORE; ?></th>
 		</tr>
 		<tr style="background-color: #ccddff;">
 			<td align="center">H</td>

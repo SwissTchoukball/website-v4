@@ -1,5 +1,7 @@
 <?php
 
+define("PATH_TO_ROOT", "/");
+
 $sql['hote'] = 'localhost';
 // Enter MySQL username here
 $sql['user'] = '';

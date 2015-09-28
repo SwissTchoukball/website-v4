@@ -1,9 +1,9 @@
-<?
+<?php
 ?>
 <h3>
-<? echo VAR_LANG_ETAPE_3; ?>
+<?php echo VAR_LANG_ETAPE_3; ?>
 </h3>
-<?
+<?php
 if(!isset($_GET['idMatch'])){
 	echo "Erreur: il manque des informations.";
 }
@@ -206,7 +206,7 @@ else{
         }
 
         function changeValeurActionForm(){
-            if(modifierUnMatch.saison.value=='<? echo $saison ?>'){
+            if(modifierUnMatch.saison.value=='<?php echo $saison ?>'){
                 modifierUnMatch.action.value='modifierMatch3';
             }
             else{
@@ -225,10 +225,10 @@ else{
             }
             else{
                 modifierUnMatch.idGroupe.disabled = false;
-                modifierUnMatch.idGroupe.value=<? echo $idGroupe; ?>;
+                modifierUnMatch.idGroupe.value=<?php echo $idGroupe; ?>;
                 modifierUnMatch.idTour.disabled = false;
-                modifierUnMatch.idTour.value=<? echo $idTour; ?>;
-                modifierUnMatch.idTypeMatch.value = <? echo $idTypeMatch; ?>;
+                modifierUnMatch.idTour.value=<?php echo $idTour; ?>;
+                modifierUnMatch.idTypeMatch.value = <?php echo $idTypeMatch; ?>;
             }
         }
         function changeEtatTour(){
@@ -248,7 +248,7 @@ else{
             }
             else{
                 modifierUnMatch.idTypeMatch.disabled = false;
-                modifierUnMatch.idTypeMatch.value = <? echo $idTypeMatch; ?>;
+                modifierUnMatch.idTypeMatch.value = <?php echo $idTypeMatch; ?>;
             }
         }
         function changePartieAgendaReporte(chkbox){
@@ -347,10 +347,10 @@ else{
 		        $('#periodAdder').hide();
 		        if (forfaitFromA) {
 					$('#scoreA').text(0);
-					$('#scoreB').text(<? echo $scoreGagnantParForfait; ?>);
+					$('#scoreB').text(<?php echo $scoreGagnantParForfait; ?>);
 		        }
 		        if (forfaitFromB) {
-					$('#scoreA').text(<? echo $scoreGagnantParForfait; ?>);
+					$('#scoreA').text(<?php echo $scoreGagnantParForfait; ?>);
 					$('#scoreB').text(0);
 		        }
 		    } else {
@@ -406,23 +406,23 @@ else{
         }
 
 	</script>
-	<form name="modifierUnMatch" action="?menuselection=<? echo $menuselection; ?>&smenuselection=<? echo $smenuselection; ?>" method="post" onSubmit="return validateForm();">
+	<form name="modifierUnMatch" action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>" method="post" onSubmit="return validateForm();">
         <table border="0" align="center" id="score">
             <tr>
                 <td>
                     <select name="equipeA">
-                    <? optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeA);	?>
+                    <?php optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeA);	?>
                     </select>
                 </td>
                 <td>-</td>
                 <td>
                     <select name="equipeB">
-                    <? optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeB);	?>
+                    <?php optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeB);	?>
                     </select>
                 </td>
             </tr>
             <tr>
-                <?
+                <?php
                 if($forfait==1){
                     if($scoreA==$scoreGagnantParForfait AND $scoreB==0){
                         $AGagneParForfait = "checked='checked'";
@@ -439,20 +439,20 @@ else{
                 }
                 ?>
                 <td align="right">
-                    <p>Gagne par forfait<input name="AGagneParForfait" type="checkbox" class='couleurCheckBox'  onclick="updateForfaitStatus(this);" <? echo $AGagneParForfait; ?> /></p>
+                    <p>Gagne par forfait<input name="AGagneParForfait" type="checkbox" class='couleurCheckBox'  onclick="updateForfaitStatus(this);" <?php echo $AGagneParForfait; ?> /></p>
                 </td>
                 <td></td>
                 <td>
-                    <p><input name="BGagneParForfait"  type="checkbox" class='couleurCheckBox' onclick="updateForfaitStatus(this);" <? echo $BGagneParForfait; ?> />Gagne par forfait</p>
+                    <p><input name="BGagneParForfait"  type="checkbox" class='couleurCheckBox' onclick="updateForfaitStatus(this);" <?php echo $BGagneParForfait; ?> />Gagne par forfait</p>
                 </td>
             </tr>
             <tr id="score">
                 <td id="scoreA" align="right">
-                    <? echo $scoreA; ?>
+                    <?php echo $scoreA; ?>
                 </td>
                 <td>-</td>
                 <td id="scoreB">
-                    <? echo $scoreB; ?>
+                    <?php echo $scoreB; ?>
                 </td>
             </tr>
             <tr id="periodAdder">
@@ -464,16 +464,16 @@ else{
 	        	<tr class="period">
 	                <td align="right"><?php echo $p; ?>.
 	                    <select name="periodScoreA[<?php echo $p; ?>]">
-	                    <? optionsScore($periodScoreA[$p]);	?>
+	                    <?php optionsScore($periodScoreA[$p]);	?>
 	                    </select>
 	                </td>
 	                <td>-</td>
 	                <td>
 	                    <select name="periodScoreB[<?php echo $p; ?>]">
-	                    <? optionsScore($periodScoreB[$p]);	?>
+	                    <?php optionsScore($periodScoreB[$p]);	?>
 	                    </select>
 	                    <select name="periodTypeId[<?php echo $p; ?>]">
-		                <? optionsPeriodType($periodTypeId[$p], $defaultPeriodTypeID); ?>
+		                <?php optionsPeriodType($periodTypeId[$p], $defaultPeriodTypeID); ?>
 	                    </select>
 	                </td>
 	        	</tr>
@@ -524,7 +524,7 @@ else{
                 <td align="right"><p>Saison :</p></td>
                 <td>
                     <select name="saison" onChange="changeValeurActionForm();">
-                        <?
+                        <?php
                         for($i=$saison-5;$i<=$saison+5;$i++){
                             if($i==$saison){
                                 echo "<option value='$i' SELECTED>$i-".($i+1)."</option>";
@@ -541,7 +541,7 @@ else{
                 <td align="right"><p>Catégorie :</p></td>
                 <td>
                     <select name="idCategorie" onChange="changeEtatCategorie();">
-                        <?
+                        <?php
                             $requete = "SELECT * FROM Championnat_Categories ORDER BY idCategorie";
                             $retour = mysql_query($requete);
                             while($donnees = mysql_fetch_array($retour)){
@@ -561,7 +561,7 @@ else{
                 <td align="right"><p>Tour :</p></td>
                 <td>
                     <select name="idTour" onChange="changeEtatTour();">
-                        <?
+                        <?php
                             $requete = "SELECT * FROM Championnat_Types_Tours ORDER BY idTour";
                             $retour = mysql_query($requete);
                             while($donnees = mysql_fetch_array($retour)){
@@ -582,7 +582,7 @@ else{
                 <td>
                     <select name="idGroupe">
                         <option value='0'>Qualification</option>
-                        <?
+                        <?php
                             for($i=1;$i<=4;$i++){
                                 if($i==$idGroupe){
                                     $selected = "selected='selected'";
@@ -600,7 +600,7 @@ else{
                 <td align="right"><p>Journée :</p></td>
                 <td>
                     <select name="journee">
-                        <? $anneeActuelle = date("Y");
+                        <?php $anneeActuelle = date("Y");
                             for($i=1;$i<50;$i++){
                             if($i==$journee){
                                 $selected = "selected='selected'";
@@ -617,7 +617,7 @@ else{
                 <td align="right"><p>Type de match :</p></td>
                 <td>
                     <select name="idTypeMatch">
-                        <?
+                        <?php
                         $requete = "SELECT * FROM Championnat_Types_Matchs ORDER BY idTypeMatch";
                         $retour = mysql_query($requete);
                         while($donnees = mysql_fetch_array($retour)){
@@ -634,7 +634,7 @@ else{
                 </td>
             </tr>
             <tr>
-            	<?
+            	<?php
             	if($necessiteDefraiementArbitre==1){
             		$checked="checked='checked' ";
             	}
@@ -642,23 +642,23 @@ else{
             		$checked="";
             	}
             	?>
-            	<td align="right"><input type="checkbox" name="necessiteDefraiementArbitre" id="necessiteDefraiementArbitre" <? echo $checked; ?>/></td>
+            	<td align="right"><input type="checkbox" name="necessiteDefraiementArbitre" id="necessiteDefraiementArbitre" <?php echo $checked; ?>/></td>
             	<td><p>Nécessite le défraiement des arbitres</p></td>
             </tr>
         </table><br />
         <table class="tableauLieuDateChampionnat" align="center">
             <!--<tr>
-                <td><p><? echo VAR_LANG_SALLE; ?></p></td>
-                <td><input name="salle" type="text" size="20" value="<? echo $salle; ?>" ></td>
-                <td><p><? echo VAR_LANG_VILLE; ?></p></td>
-                <td><input name="ville" type="text" size="20" value="<? echo $ville; ?>"></td>
+                <td><p><?php echo VAR_LANG_SALLE; ?></p></td>
+                <td><input name="salle" type="text" size="20" value="<?php echo $salle; ?>" ></td>
+                <td><p><?php echo VAR_LANG_VILLE; ?></p></td>
+                <td><input name="ville" type="text" size="20" value="<?php echo $ville; ?>"></td>
             </tr>-->
             <tr>
-                <td><p><? echo $agenda_lieu; ?></p></td>
+                <td><p><?php echo $agenda_lieu; ?></p></td>
                 <td colspan="3">
                     <select name="idLieu">
 	                    <option value="NULL">Non défini</option>
-                        <?
+                        <?php
                             $requete = "SELECT * FROM Lieux ORDER BY nomCourt";
                             $retour = mysql_query($requete);
                             while ($donnees = mysql_fetch_array($retour)) {
@@ -674,18 +674,18 @@ else{
                 </td>
             </tr>
             <tr>
-                <td><p><? echo $agenda_debut;?></p></td>
+                <td><p><?php echo $agenda_debut;?></p></td>
                 <td colspan="3">
                     <p>
-                        <? echo $agenda_date;?> :
+                        <?php echo $agenda_date;?> :
                         <select name="debutJour" id="debutJour" onChange="selectionAutomatiqueJour()">
-                            <? echo modif_liste_jour(jour($dateDebut)); ?>
+                            <?php echo modif_liste_jour(jour($dateDebut)); ?>
                         </select>
                         <select name="debutMois" id="debutMois" onChange="selectionAutomatiqueMois()">
-                            <? echo modif_liste_mois(mois($dateDebut)); ?>
+                            <?php echo modif_liste_mois(mois($dateDebut)); ?>
                         </select>
                         <select name="debutAnnee" id="debutAnnee" onChange="selectionAutomatiqueAnne()">
-                            <?
+                            <?php
                             $anneeActuelle = date('Y');
                             for($i=$saison;$i<=$saison+1;$i++){
                                 if($i==annee($dateDebut)){
@@ -697,29 +697,29 @@ else{
                             }
                             ?>
                         </select>
-                        <? echo $agenda_heure;?> :
+                        <?php echo $agenda_heure;?> :
                         <select name="debutHeure" id="debutHeure" onChange="selectionAutomatiqueHeure()">
-                            <? echo modif_liste_heure(heure($heureDebut)); ?>
+                            <?php echo modif_liste_heure(heure($heureDebut)); ?>
                         </select>
                         <select name="debutMinute" id="debutMinute" onChange="selectionAutomatiqueMinute()">
-                            <? echo modif_liste_minute(minute($heureDebut)); ?>
+                            <?php echo modif_liste_minute(minute($heureDebut)); ?>
                         </select>
                     </p>
                 </td>
             </tr>
             <tr>
-                <td><p><? echo $agenda_fin;?></p></td>
+                <td><p><?php echo $agenda_fin;?></p></td>
                 <td colspan="3">
                     <p>
-                        <? echo $agenda_date;?> :
+                        <?php echo $agenda_date;?> :
                         <select name="finJour" id="finJour">
-                            <? echo modif_liste_jour(jour($dateFin)); ?>
+                            <?php echo modif_liste_jour(jour($dateFin)); ?>
                         </select>
                         <select name="finMois" id="finMois">
-                            <? echo modif_liste_mois(mois($dateFin)); ?>
+                            <?php echo modif_liste_mois(mois($dateFin)); ?>
                         </select>
                         <select name="finAnnee" id="finAnnee">
-                            <?
+                            <?php
                             $anneeActuelle = date('Y');
                             for($i=$saison;$i<=$saison+1;$i++){
                                 if($i==annee($dateDebut)){
@@ -731,12 +731,12 @@ else{
                             }
                             ?>
                         </select>
-                        <? echo $agenda_heure;?> :
+                        <?php echo $agenda_heure;?> :
                         <select name="finHeure" id="finHeure">
-                            <? echo modif_liste_heure(heure($heureFin)); ?>
+                            <?php echo modif_liste_heure(heure($heureFin)); ?>
                         </select>
                         <select name="finMinute" id="finMinute">
-                            <? echo modif_liste_minute(minute($heureFin)); ?>
+                            <?php echo modif_liste_minute(minute($heureFin)); ?>
                         </select>
                     </p>
                 </td>
@@ -746,18 +746,18 @@ else{
         <p class="center">Match report&eacute; <input name="matchReporte" type="checkbox" onClick="changePartieAgendaReporte(this);" class='couleurCheckBox'></p>
         <table class="tableauLieuDateChampionnat" align="center" style="visibility:hidden" id="partieAgendaReporte">
             <tr>
-                <td><p><? echo $agenda_debut;?></p></td>
+                <td><p><?php echo $agenda_debut;?></p></td>
                 <td colspan="3">
                     <p>
-                        <? echo $agenda_date;?> :
+                        <?php echo $agenda_date;?> :
                         <select name="debutJourReport" id="debutJourReport" onChange="selectionAutomatiqueJourReport()">
-                            <? echo modif_liste_jour(jour($dateReportDebut)); ?>
+                            <?php echo modif_liste_jour(jour($dateReportDebut)); ?>
                         </select>
                         <select name="debutMoisReport" id="debutMoisReport" onChange="selectionAutomatiqueMoisReport()">
-                            <? echo modif_liste_mois(mois($dateReportDebut)); ?>
+                            <?php echo modif_liste_mois(mois($dateReportDebut)); ?>
                         </select>
                         <select name="debutAnneeReport" id="debutAnneeReport" onChange="selectionAutomatiqueAnneReport()">
-                            <?
+                            <?php
                             $anneeActuelle = date('Y');
                             for($i=$saison;$i<=$saison+1;$i++){
                                 if($i==annee($dateDebut)){
@@ -769,29 +769,29 @@ else{
                             }
                             ?>
                         </select>
-                        <? echo $agenda_heure;?> :
+                        <?php echo $agenda_heure;?> :
                         <select name="debutHeureReport" id="debutHeureReport" onChange="selectionAutomatiqueHeureReport()">
-                            <? echo modif_liste_heure(heure($heureReportDebut)); ?>
+                            <?php echo modif_liste_heure(heure($heureReportDebut)); ?>
                         </select>
                         <select name="debutMinuteReport" id="debutMinuteReport">
-                            <? echo modif_liste_minute(minute($heureReportDebut)); ?>
+                            <?php echo modif_liste_minute(minute($heureReportDebut)); ?>
                         </select>
                     </p>
                 </td>
             </tr>
             <tr>
-                <td><p><? echo $agenda_fin;?></p></td>
+                <td><p><?php echo $agenda_fin;?></p></td>
                 <td colspan="3">
                     <p>
-                        <? echo $agenda_date;?> :
+                        <?php echo $agenda_date;?> :
                         <select name="finJourReport" id="finJourReport">
-                            <? echo modif_liste_jour(jour($dateReportFin)); ?>
+                            <?php echo modif_liste_jour(jour($dateReportFin)); ?>
                         </select>
                         <select name="finMoisReport" id="finMoisReport">
-                            <? echo modif_liste_mois(mois($dateReportFin)); ?>
+                            <?php echo modif_liste_mois(mois($dateReportFin)); ?>
                         </select>
                         <select name="finAnneeReport" id="finAnneeReport">
-                            <?
+                            <?php
                             $anneeActuelle = date('Y');
                             for($i=$saison;$i<=$saison+1;$i++){
                                 if($i==annee($dateDebut)){
@@ -803,21 +803,21 @@ else{
                             }
                             ?>
                         </select>
-                        <? echo $agenda_heure;?> :
+                        <?php echo $agenda_heure;?> :
                         <select name="finHeureReport" id="finHeureReport">
-                            <? echo modif_liste_heure(heure($heureReportFin)); ?>
+                            <?php echo modif_liste_heure(heure($heureReportFin)); ?>
                         </select>
                         <select name="finMinuteReport" id="finMinuteReport">
-                            <? echo modif_liste_minute(minute($heureReportFin)); ?>
+                            <?php echo modif_liste_minute(minute($heureReportFin)); ?>
                         </select>
                     </p>
                 </td>
             </tr>
         </table><br />
         <p align="center">
-            <input type="hidden" name="idMatch" value="<? echo $idMatch;?>">
+            <input type="hidden" name="idMatch" value="<?php echo $idMatch;?>">
             <input type="hidden" name="action" value="modifierMatch3">
-            <input type='submit' value='<? echo VAR_LANG_MODIFIER;?>'>
+            <input type='submit' value='<?php echo VAR_LANG_MODIFIER;?>'>
         </p>
         <script language="javascript">
             changeEtatCategorie();
@@ -825,6 +825,6 @@ else{
             updateForfaitStatus();
         </script>
     </form>
-<?
+<?php
 }
 ?>

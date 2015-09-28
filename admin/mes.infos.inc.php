@@ -1,4 +1,4 @@
-<div class="pageMesInfos"><?
+<div class="pageMesInfos"><?php
 	statInsererPageSurf(__FILE__);
 
 	$requeteSQL = "SELECT *, p.adresse, p.ville, p.email, p.telephone, c.club FROM `Personne` p,`ClubsFstb` c WHERE p.`nom`='".addslashes($_SESSION["__nom__"])."' AND p.`prenom`='".addslashes($_SESSION["__prenom__"])."' AND p.`idClub`=c.`id`";

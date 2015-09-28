@@ -1,4 +1,4 @@
-<?
+<?php
 	statInsererPageSurf(__FILE__);
 
    // chemin d'accs au rŽpertoire d'upload (vers o le fichier uploadŽ temporaire sera transfŽrŽ)
@@ -48,22 +48,22 @@ echo "</p>";
 <table class="tableauUploads">
     <tr>
         <th>
-        <? echo VAR_LANG_TITRE; ?>
+        <?php echo VAR_LANG_TITRE; ?>
         </th>
         <th width="65px">
-        <? echo VAR_LANG_FORMAT; ?>
+        <?php echo VAR_LANG_FORMAT; ?>
         </th>
         <th width="65px">
-        <? echo VAR_LANG_TAILLE; ?>
+        <?php echo VAR_LANG_TAILLE; ?>
         </th>
         <th width="65px">
-        <? echo VAR_LANG_MODIFIER; ?>
+        <?php echo VAR_LANG_MODIFIER; ?>
         </th>
         <th width="65px">
-        <? echo VAR_LANG_SUPPRIMER; ?>
+        <?php echo VAR_LANG_SUPPRIMER; ?>
         </th>
     </tr>
-<?
+<?php
 $retour = mysql_query("SELECT * FROM ".$typeSource." ".$sansTout." ORDER BY description".$_SESSION["__langue__"]."");
 while($donnees = mysql_fetch_array($retour)) {
     echo "<tr>";

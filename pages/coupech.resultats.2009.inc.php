@@ -1,5 +1,5 @@
 <div class="resultatsCoupeCH">
-	<? /*MODELE
+	<?php /*MODELE
 	<div class="informationsMatch" style="display:none;" id="infomatch1">
 		<div class="informationsBoxJournee">Journée 1</div>
 		<div class="informationsBoxEquipes">Lausanne 2 - Genève 1</div>

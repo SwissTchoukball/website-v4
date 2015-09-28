@@ -1,7 +1,7 @@
 <div class="insererMatch">
-    <?
+    <?php
         statInsererPageSurf(__FILE__);
-        
+
     if(isset($_POST['action']) && $_POST['action']=='goToStep2'){
         include('inserer.championnat.match.etape2.inc.php');
     }
@@ -12,7 +12,7 @@
         include('inserer.championnat.match.etape4.inc.php');
     }
     else{
-		include('inserer.championnat.match.etape1.inc.php');	
+		include('inserer.championnat.match.etape1.inc.php');
 	}
 	?>
 </div>

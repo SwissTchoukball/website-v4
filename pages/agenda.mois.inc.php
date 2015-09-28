@@ -1,5 +1,5 @@
 <div id="navigationCalendrier">
-	<?
+	<?php
 	if($mois==12){
 		$moisSuivant=1;
 		$anneeSuivante=$annee+1;
@@ -27,10 +27,10 @@
 			formSelectionMoisCalendrier.action = selectionMois.value;
 		}
 	</script>
-	<a class="calendrierPrecedant" href="/calendrier/<? echo $anneePrecedante; ?>/<? echo $moisPrecedant; ?>#navigationCalendrier" title="Mois précédant"></a>
+	<a class="calendrierPrecedant" href="/calendrier/<?php echo $anneePrecedante; ?>/<?php echo $moisPrecedant; ?>#navigationCalendrier" title="Mois précédant"></a>
 	<form id="formSelectionMoisCalendrier" name="formSelectionMoisCalendrier" action="" method="post" class="selectionMoisCalendrier">
 		<select name="selectionMoisCalendrier" id="selectionMoisCalendrier" class="titreCalendrier" onChange="defineActionForm();formSelectionMoisCalendrier.submit();">
-			<?
+			<?php
 			for($k=-12;$k<=12;$k++){
 				$moisSelection=$mois+$k;
 				if($moisSelection>12){
@@ -55,7 +55,7 @@
 			?>
 		</select>
 	</form>
-	<a class="calendrierSuivant" href="/calendrier/<? echo $anneeSuivante; ?>/<? echo $moisSuivant; ?>#navigationCalendrier" title="Mois suivant"></a>
+	<a class="calendrierSuivant" href="/calendrier/<?php echo $anneeSuivante; ?>/<?php echo $moisSuivant; ?>#navigationCalendrier" title="Mois suivant"></a>
 </div><br />
 <table id="calendrierMois">
 	<tr>
@@ -66,7 +66,7 @@
 		?>
 	</tr>
 	<tr>
-	<?
+	<?php
 	for($casesVidesDebut=1;$casesVidesDebut<=$nombreCasesVidesPremiereSemaine;$casesVidesDebut++){
 		echo "<td class='caseVide'></td>";
 	}

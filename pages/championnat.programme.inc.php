@@ -20,13 +20,13 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 	?>
 
 	<form name="affichage" method="post" action="">
-	<input type="hidden" name="lien" value="<? echo $idPage; ?>" />
+	<input type="hidden" name="lien" value="<?php echo $idPage; ?>" />
 	<table class="formagenda">
 		<tr>
-			<td align="right" width="50%"><p><? echo VAR_LANG_SAISON;?> :</p></td>
+			<td align="right" width="50%"><p><?php echo VAR_LANG_SAISON;?> :</p></td>
 			<td align="left">
 				<select name="annee" id="select" onChange="affichage.submit();">
-					<?
+					<?php
 					// recherche de la premiere date
 					$requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
 					$recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
@@ -60,7 +60,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 				</select>
 			</td>
 		</tr>
-		<?
+		<?php
 		if($annee=="Avenir"){
 			if(date('m') < 8){
 				$saison=date('Y')-1;
@@ -74,11 +74,11 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 		}
 		?>
 		<tr>
-			<td align="right" width="50%"><p><? echo VAR_LANG_CATEGORIE." / ".VAR_LANG_EQUIPE; ?> :</p></td>
+			<td align="right" width="50%"><p><?php echo VAR_LANG_CATEGORIE." / ".VAR_LANG_EQUIPE; ?> :</p></td>
 			<td align="left">
 				<select name="recherche" onChange="affichage.submit();">
 					<option value="tout">Tout</option>
-					<?
+					<?php
 					$requeteCategorie = "SELECT DISTINCT Championnat_Tours.idCategorie, Championnat_Categories.categorie".$_SESSION['__langue__']." FROM Championnat_Tours, Championnat_Categories WHERE saison=".$saison." AND Championnat_Tours.idCategorie=Championnat_Categories.idCategorie";
 					$retourCategorie = mysql_query($requeteCategorie);
 					echo "<optgroup label='".VAR_LANG_CATEGORIE."'>";
@@ -114,7 +114,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 					}
 					?>
 				</select>
-				<?
+				<?php
 					//echo $requeteEquipes;
 				?>
 			</td>
@@ -125,11 +125,11 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 			</td>
 		</tr>
 	</table>
-	<input type="hidden" name="menuselection" value="<? echo $menuselection; ?>" />
-	<input type="hidden" name="smenuselection" value="<? echo $smenuselection; ?>" />
+	<input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>" />
+	<input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>" />
 	</form>
 
-	<?
+	<?php
 
 	// affichage des dates
 	if($annee == "Avenir"){
@@ -187,13 +187,13 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 
 			<table class="agenda">
 				<tr>
-					<th width="60px"><? echo $agenda_date;?></th>
-					<th><? echo $agenda_description;?></th>
-					<th><? echo $agenda_lieu;?></th>
-					<th width="40px"><? echo $agenda_debut;?></th>
-					<th width="40px"><? echo $agenda_fin;?></th>
+					<th width="60px"><?php echo $agenda_date;?></th>
+					<th><?php echo $agenda_description;?></th>
+					<th><?php echo $agenda_lieu;?></th>
+					<th width="40px"><?php echo $agenda_debut;?></th>
+					<th width="40px"><?php echo $agenda_fin;?></th>
 				</tr>
-			<?
+			<?php
 			while($donnees = mysql_fetch_array($retour)){
 				$arbitresMatchs = array($donnees['idArbitreATiers1'], $donnees['idArbitreATiers2'], $donnees['idArbitreATiers3'], $donnees['idArbitreBTiers1'], $donnees['idArbitreBTiers2'], $donnees['idArbitreBTiers3'], $donnees['idArbitreCTiers1'], $donnees['idArbitreCTiers2'], $donnees['idArbitreCTiers3']);
 				$arbitresMatchs = array_replace($arbitresMatchs,
@@ -218,10 +218,10 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 
 
 		        ?>
-				<tr id="M<? echo $donnees['idMatch']; ?>" class="<? echo $rowClass; ?>">
-					<td class="center"><? echo $dateToPrint; ?></td>
+				<tr id="M<?php echo $donnees['idMatch']; ?>" class="<?php echo $rowClass; ?>">
+					<td class="center"><?php echo $dateToPrint; ?></td>
 					<td>
-						<?
+						<?php
 						echo '<a href="http://' . $_SERVER['SERVER_NAME'] . '/championnat/match/'.$donnees['idMatch'].'">';
 						echo '<strong>'.$donnees['equipeA']." - ".$donnees['equipeB']."</strong> ";
 						echo '</a>';
@@ -264,15 +264,15 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 							}
 						?>
 					</td>
-					<td class="center"><? echo heure($donnees['heureDebut']); ?>:<? echo minute($donnees['heureDebut']); ?></td>
-					<td class="center"><? echo heure($donnees['heureFin']); ?>:<? echo minute($donnees['heureFin']); ?></td>
+					<td class="center"><?php echo heure($donnees['heureDebut']); ?>:<?php echo minute($donnees['heureDebut']); ?></td>
+					<td class="center"><?php echo heure($donnees['heureFin']); ?>:<?php echo minute($donnees['heureFin']); ?></td>
 				</tr>
-		        <?
+		        <?php
 			    $previousMatchDate = $donnees['dateDebut'];
 			}
 			?>
 			</table>
-			<?
+			<?php
 		}
 	}
 }

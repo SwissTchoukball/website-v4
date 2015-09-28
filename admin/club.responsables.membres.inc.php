@@ -7,7 +7,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<?
+	<?php
 	$membersManagersRequest = "SELECT p.nom, p.prenom, c.club, p.email FROM Personne p, ClubsFstb c WHERE p.idClub=c.id AND p.gestionMembresClub=1 ORDER BY c.club";
 	//echo $membersRequest;
 	$allEmails = "";
@@ -19,9 +19,9 @@
 		}
 		?>
 		<tr>
-			<td><? echo $membersManagers['club']; ?></td>
+			<td><?php echo $membersManagers['club']; ?></td>
 			<td>
-				<?
+				<?php
 				if ($membersManagerEmail != "") {
 					echo '<a href="mailto:'.$membersManagerEmail.'">';
 				}
@@ -34,10 +34,10 @@
 				?>
 			</td>
 		</tr>
-		<?
+		<?php
 
 	}
 	?>
 	</tbody>
 </table>
-<p><a href="mailto:<? echo $allEmails; ?>">Envoyer un e-mail à tous</a></p>
+<p><a href="mailto:<?php echo $allEmails; ?>">Envoyer un e-mail à tous</a></p>

@@ -1,4 +1,4 @@
-<?
+<?php
 $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '30' ORDER BY paragrapheNum");
 // affiche le texte
 while($donnees = mysql_fetch_array($retour)) {

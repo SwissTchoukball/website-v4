@@ -1,5 +1,5 @@
 <div class="statistiqueLoginSurf">
-<?
+<?php
 $requeteSQL = "SELECT * , count( id ) nbLogin
 								FROM Personne, HistoriqueLogin
 								WHERE Personne.id = HistoriqueLogin.idPersonne

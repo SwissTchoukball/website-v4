@@ -1,4 +1,4 @@
-<?
+<?php
 
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
@@ -7,8 +7,8 @@ statInsererPageSurf(__FILE__);
 // Arbitres
 
 ?>
-<table class="arbitres-es">	
-	<?
+<table class="arbitres-es">
+	<?php
 		echo "<tr><th colspan='2'>".VAR_LANG_ARBITRE_INTER."</th></tr>";
 		$requeteSQL = "SELECT * FROM `DBDPersonne` WHERE `idArbitre`='3' ORDER BY `nom`, `prenom`"; // arbitres internationaux
 		$recordset = mysql_query($requeteSQL);

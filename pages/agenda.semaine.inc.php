@@ -1,5 +1,5 @@
 <div id="navigationCalendrier">
-	<?
+	<?php
 	if($jour+7>$nombreJoursMois){
 		$jourSuivant=$jour+7-$nombreJoursMois;
 		$jourPrecedant=$jour-7;
@@ -41,9 +41,9 @@
 		$afficheMoisSuivant=false;
 	}
 	?>
-	<span class="calendrierPrecedant"><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<? echo $jourPrecedant; ?>&mois=<? echo $moisPrecedant; ?>&annee=<? echo $anneePrecedante; ?>#navigationCalendrier" title="Semaine précédante"><img src="pictures/calendrier.precedant.png" alt="Semaine précédante" /></a></span>
+	<span class="calendrierPrecedant"><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourPrecedant; ?>&mois=<?php echo $moisPrecedant; ?>&annee=<?php echo $anneePrecedante; ?>#navigationCalendrier" title="Semaine précédante"><img src="pictures/calendrier.precedant.png" alt="Semaine précédante" /></a></span>
 	<span class="titreCalendrier">
-		<?
+		<?php
 		if($afficheMoisSuivant){
 			$bonus="- ".ucfirst($moisDeLAnnee[$moisSuivant])." ".$anneeSuivante." ";
 		}
@@ -53,10 +53,10 @@
 		echo ucfirst($moisDeLAnnee[$mois])." ".$annee." ".$bonus."| Semaine ".$numeroSemaine;
 		?>
 	</span>
-	<span class="calendrierSuivant"><a href="?menuselection=<? echo $_GET['menuselection']; ?>&smenuselection=<? echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<? echo $jourSuivant; ?>&mois=<? echo $moisSuivant; ?>&annee=<? echo $anneeSuivante; ?>#navigationCalendrier" title="Semaine suivante"><img src="pictures/calendrier.suivant.png" alt="Semaine suivante" /></a></span>
+	<span class="calendrierSuivant"><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourSuivant; ?>&mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>#navigationCalendrier" title="Semaine suivante"><img src="pictures/calendrier.suivant.png" alt="Semaine suivante" /></a></span>
 </div>
 <table id="calendrierSemaine">
-	<?
+	<?php
 	for($k=1;$k<=7;$k++){
 		echo "<tr>";
 			$jourAffiche=$jourPremierJourSemaine+$k-1;

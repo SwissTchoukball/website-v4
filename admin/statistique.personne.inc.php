@@ -1,5 +1,5 @@
 <table class="tableauStatistiquePersonne">
-<?
+<?php
 
 function afficherStatistique($ratio){
 	$sizeImage = getimagesize(VAR_LOOK_path."fond_stat_colore.jpg");
@@ -8,7 +8,7 @@ function afficherStatistique($ratio){
 		echo "<td class='noborder' width='1px'><img src='".VAR_LOOK_path."partie_stat_gauche.gif'></td>";
 		echo "<td class='noborder' width='".$sizeImage[0]."px' height='".$sizeImage[1]."px' background='".VAR_LOOK_path."fond_stat_colore.jpg' align='right'>";
 		if($longueurRecouvrement!=0) echo "<img src='".VAR_LOOK_path."partie_stat_centrale_recouvrement.gif' width='".$longueurRecouvrement."px' height='".$sizeImage[1]."px'></td>";
-		else echo "</td>";		
+		else echo "</td>";
 		if($longueurRecouvrement==0) echo "<td class='noborder' width='1px'><img src='".VAR_LOOK_path."partie_stat_droite_full.gif'></td>";
 		else echo "<td class='noborder' width='1px'><img src='".VAR_LOOK_path."partie_stat_droite.gif'></td>";
 	echo "</tr></table>";
@@ -22,7 +22,7 @@ $recordset = mysql_query($requeteSQL);
     <th>User level</th>
     <th>Pourcentage de login</th>
 </tr>
-<?
+<?php
 
 $premiereFois=true;
 $nbLoginMax=0;

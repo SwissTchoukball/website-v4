@@ -1,4 +1,4 @@
-<?
+<?php
 $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '32' ORDER BY paragrapheNum");
 // affiche le texte
 echo "<img class='imageFlottanteDroite' src='logos/logo_EWC15.png' />";

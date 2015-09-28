@@ -1,4 +1,4 @@
-<?
+<?php
 $requestMembre = "SELECT nom, prenom, idArbitre, idClub, c.idFonction AS idFonctionComite, cm.idNom AS idCommissionMembre, cr.id AS idCommissionResponsable, cnm.idEquipe AS idEquipeMembre
 				  FROM DBDPersonne p
 				  LEFT OUTER JOIN Comite_Membres c ON p.idDbdPersonne = c.idPersonne

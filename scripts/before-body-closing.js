@@ -42,7 +42,7 @@ ga('create', 'UA-58722163-1', 'auto');
 ga('send', 'pageview');
 
 // Google+
-window.___gcfg = {lang: '<? echo strtolower($_SESSION["__langue__"]);?>'};
+window.___gcfg = {lang: '<?php echo strtolower($_SESSION["__langue__"]);?>'};
 
 (function() {
 var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;

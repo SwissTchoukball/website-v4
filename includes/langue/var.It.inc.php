@@ -1,4 +1,4 @@
-<?
+<?php
 // fichier de variables en langue "it"
 
 //inclure le fichier generer par la bd.
