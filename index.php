@@ -10,8 +10,7 @@
         <meta http-equiv="Content-Language" content="<?php echo strtolower($_SESSION["__langue__"]);?>">
         <meta name="Identifier-url" content="http://www.tchoukball.ch">
         <!-- Icon for Pinned Tabs (Safari 9) -->
-        <link rel="icon" sizes="any" mask href="website_icon.svg">
-        <meta name="theme-color" content="#e2001a">
+        <link rel="mask-icon" href="website_icon.svg" color="#e2001a">
         <!-- Favicons -->
         <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
