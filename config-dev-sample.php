@@ -17,6 +17,7 @@ $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
 mysql_set_charset('latin1');
 
 setlocale(LC_MONETARY, 'fr_CH');
+date_default_timezone_set('Europe/Zurich');
 
 // Enter Flickr API key here
 define("FLICKR_API_KEY", "");
