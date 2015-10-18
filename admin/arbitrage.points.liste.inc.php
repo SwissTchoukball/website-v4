@@ -79,6 +79,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
 	while ($referee = mysql_fetch_assoc($refereesPoints)) {
 		if ($referee['idArbitre'] != $currentRefereeID) {
 			if ($currentRefereeID != 0) { // Not first line
+                // Computation of the total number of points of the referee in the previous loop.
 				$grandTotalPoints += $totalPoints;
 				if ($totalPoints < $refereeLevels[$currentRefereeLevelID]['pointsPourGarderNiveau']) {
 					$totalPointsClass = ' class="notEnoughPoints"';
@@ -106,7 +107,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
 		$totalPointsTypes[$referee['idTypesPoints']] += $points;
 	}
 	$grandTotalPoints += $totalPoints;
-	echo '<td>' . $totalPoints . '</td>';
+	echo '<td' . $totalPointsClass . '>' . $totalPoints . '</td>';
 	echo '</tr>';
 
 	echo '<tr>';
