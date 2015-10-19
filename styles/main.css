@@ -476,6 +476,12 @@ footer {
 	line-height: 1;
 }
 
+#laDerniereNews img {
+    float: right;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
 .TitreTPVideo{
 	line-height: normal;
 	font-size: 10px;
