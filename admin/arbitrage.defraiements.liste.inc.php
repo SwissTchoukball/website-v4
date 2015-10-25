@@ -94,6 +94,7 @@ if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
             // Conditions for the match to be counted are fullfiled
             $matchesByReferee[$refereeID]['matchesByCategory'][$categoryID]++;
         }
+        $previousRefereeID = $refereeID;
     }
 
     // Getting information about the payments
