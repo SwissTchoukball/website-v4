@@ -88,6 +88,7 @@ if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
             $matchesByReferee[$refereeID]['firstname'] = $refereeMatches['prenom'];
             $matchesByReferee[$refereeID]['lastname'] = $refereeMatches['nom'];
             $matchesByReferee[$refereeID]['level'] = $refereeMatches['niveauArbitre'] - 1;
+            $matchesByReferee[$refereeID]['matchesByCategory'] = array();
         }
         if ($periodType == 4 || $periodType == 8 || ($periodType == 7 && $nbPeriods >= 2) || $nbPeriods >= 3) {
             // Conditions for the match to be counted are fullfiled
