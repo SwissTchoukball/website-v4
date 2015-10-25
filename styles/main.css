@@ -2436,6 +2436,10 @@ table.adminTable td.gender,
 table.adminTable td.canton {
 	width: 20px;
 }
+table.adminTable td.notOK {
+    background-color: #CC3333;
+    color: white;
+}
 
 table.alternateBackground tr:nth-child(even) {
 	background-color: #ffeeee;
@@ -2595,10 +2599,6 @@ tr.clickable-row:hover td {
 	font-size: 20px;
 }
 
-#refereePoints td.notEnoughPoints {
-	background-color: #CC3333;
-	color: white;
-}
 table#refereePoints td {
 	text-align: center;
 }
@@ -2609,6 +2609,14 @@ table#refereePoints td {
 
 .noPointsReferees span:last-child:after {
 	content: "";
+}
+
+#refereeDefrayal .nbMatches span:after {
+    content: ", ";
+}
+
+#refereeDefrayal .nbMatches span:last-child:after {
+    content: "";
 }
 
 

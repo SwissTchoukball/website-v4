@@ -162,6 +162,8 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 				WHERE (dateDebut>='".$annee."' OR dateFin>='".$annee."') AND cea.idEquipe=cm.equipeA AND ceb.idEquipe=cm.equipeB AND cc.idCategorie=cm.idCategorie ".$finAffichage." ".$recherche."
 				ORDER BY dateDebut, heureDebut";*/
 
+	// TODO Remove dependency to referees id in the matches table and take the information from the the periods table.
+	//		Be careful, because doing that will generate a row by period instead of a row by match.
 	$requete = "SELECT m.idMatch, ea.equipe AS equipeA, eb.equipe AS equipeB, c.categorie".$_SESSION['__langue__']." AS categorie,
 					   m.dateDebut, m.heureDebut, m.heureFin, m.dateReportDebut, m.dateReportFin, m.heureReportDebut, m.heureReportFin, l.id AS idLieu, l.nom AS nomLieu, l.ville,
 					   m.idArbitreATiers1, m.idArbitreATiers2, m.idArbitreATiers3, m.idArbitreBTiers1, m.idArbitreBTiers2, m.idArbitreBTiers3, m.idArbitreCTiers1, m.idArbitreCTiers2, m.idArbitreCTiers3
