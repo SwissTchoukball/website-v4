@@ -74,6 +74,7 @@ define("VAR_LANG_LEGENDE","Legenda");
 define("VAR_LANG_RESPONSABLE", "Responsabile");
 define("VAR_LANG_RESPONSABLES", "Responsabili");
 define("VAR_LANG_COMPETITIONS", "Competizioni");
+define("VAR_LANG_MONTANT", "Ammontare");
 
 // AGENDA
 $agenda_annee="Anno";

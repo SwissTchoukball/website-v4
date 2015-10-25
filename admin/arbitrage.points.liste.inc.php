@@ -82,7 +82,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
                 // Computation of the total number of points of the referee in the previous loop.
 				$grandTotalPoints += $totalPoints;
 				if ($totalPoints < $refereeLevels[$currentRefereeLevelID]['pointsPourGarderNiveau']) {
-					$totalPointsClass = ' class="notEnoughPoints"';
+					$totalPointsClass = ' class="notOK"';
 				} else {
 					$totalPointsClass = '';
 				}

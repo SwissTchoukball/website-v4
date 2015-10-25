@@ -39,7 +39,7 @@ if (hasRefereeManagementAccess()) {
 				if (mysql_query($queryEditPoints)) {
 					printSuccessMessage("Modification des points réussie.");
 				} else {
-					printErrorMessage("La modification des points n'a pas aboutie.<br />" . mysql_error() . "<br />" . $queryAddPoints);
+					printErrorMessage("La modification des points n'a pas aboutie.<br />" . mysql_error() . "<br />" . $queryEditPoints);
 				}
 			} else {
 				// Comme il y a de toute façon add ou edit, arriver ici signifique que $pointsID est false.
@@ -54,7 +54,7 @@ if (hasRefereeManagementAccess()) {
 			if(mysql_query($queryDeletePoints)) {
 				printSuccessMessage("Suppression des points effectuée");
 			} else {
-				printErrorMessage("Échec de la suppression des points<br />" . mysql_error() . "<br />" . $queryAddPoints);
+				printErrorMessage("Échec de la suppression des points<br />" . mysql_error() . "<br />" . $queryDeletePoints);
 			}
 		} else {
 			printErrorMessage("ID incorrect");

@@ -81,6 +81,7 @@ define("VAR_LANG_LEGENDE","Key");
 define("VAR_LANG_RESPONSABLE", "Person in charge");
 define("VAR_LANG_RESPONSABLES", "People in charge");
 define("VAR_LANG_COMPETITIONS", "Competitions");
+define("VAR_LANG_MONTANT", "Amount");
 
 // AGENDA
 $agenda_annee="Year";
