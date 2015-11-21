@@ -13,5 +13,5 @@
 			?>
 		</ul>
 	</nav>
-    <a href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>" id="banner"></a>
+    <a href="<?php echo PATH_TO_ROOT; ?>" id="banner"></a>
 </header>

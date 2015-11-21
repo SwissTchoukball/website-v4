@@ -2,7 +2,7 @@
 <?php
 $navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu, sm.nomFr AS sousmenu, m.id AS sousMenuDeId,
                     sm.ordre, m.userLevel AS parentUserLevel, sm.userLevel,
-                    sm.urlRewriting AS link, m.urlRewriting AS parentLink
+                    sm.urlRewriting AS link, m.urlRewriting AS parentLink, sm.lienExterneSite AS isExternalLink
              FROM " . $typemenu . " m
              LEFT OUTER JOIN " . $typemenu . " sm ON sm.sousMenuDeId = m.id
              WHERE m.sousMenuDeId = -1
@@ -22,7 +22,10 @@ if (!$navResult = mysql_query($navQuery)) {
             $navLink = $nav['link'];
         } else {
             $srcFile = $admin ? 'admin.php' : 'index.php';
-            $navLink = PATH_TO_ROOT . $srcFile . '?menuselection=' . $navParentItemID . '&smenuselection=' . $navItemOrder;
+            $navLink = $srcFile . '?menuselection=' . $navParentItemID . '&smenuselection=' . $navItemOrder;
+        }
+        if(!$nav['isExternalLink']) {
+            $navLink = PATH_TO_ROOT . $navLink;
         }
         $navParentLink = $nav['parentLink'];
 
