@@ -694,11 +694,21 @@ if ($canEdit) {
         }
 
         if (!$isFSTBVolunteer) {
-            echo '<p class="delete-member"><a href="?menuselection=' . $menuselection .'&smenuselection=' .
-                 $smenuselection . '&delete=' . $memberID . '" onclick=\'return confirm("Voulez-vous vraiment supprimer
-                 ' . $name . ' ?");\'>Supprimer ' . $name . '</a><span><strong>Attention !</strong> Il ne faut supprimer
-                 un membre que s\'il sort complètement du tchoukball.<br />Si le membre change de club, effectuez une
-                 demande de transfert (voir le lien ci-dessus).</span></p>';
+            ?>
+            <p class="delete-member">
+                <a href="?menuselection=<?php echo $menuselection;
+                       ?>&smenuselection=<?php echo $smenuselection;
+                       ?>&delete=<?php echo $memberID; ?>"
+                   onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
+                    Supprimer <?php echo $name; ?>
+                </a>
+                <span>
+                    <strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du
+                    tchoukball.<br />
+                    Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).
+                </span>
+            </p>
+            <?php
 
         }
 
