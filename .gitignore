@@ -51,6 +51,9 @@ Thumbs.db
 # sftp configuration file
 sftp-config.json
 
+# PhpStorm files
+.idea/*
+
 # Website config file #
 #######################
 config.php
