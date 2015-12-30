@@ -4,8 +4,12 @@ php_flag "allow_url_include" "On"
 Options +FollowSymlinks
 RewriteEngine on
 
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTP_HOST} !localhost
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301]
+
 RewriteCond %{HTTP_HOST} !(tchoukball.ch|localhost)
-RewriteRule (.*) http://tchoukball.ch/$1 [R=301]
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301]
 
 RewriteRule ^document/(.*)$ /documents/$1 [R=301,NC,L]
 

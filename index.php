@@ -72,7 +72,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <?php
         if ($_SESSION['__langue__'] != 'En') {
@@ -88,7 +88,7 @@
                     $datepickerLocale = 'it-CH';
                     break;
             }
-            echo '<script type="text/javascript" src="https://github.com/jquery/jquery-ui/raw/master/ui/i18n/datepicker-' . $datepickerLocale . '.js"></script>';
+            echo '<script type="text/javascript" src="https://raw.githubusercontent.com/jquery/jquery-ui/1.11.4/ui/i18n/datepicker-' . $datepickerLocale . '.js"></script>';
         }
         ?>
 
