@@ -1,4 +1,4 @@
 AuthName "Zone protégée"
 AuthType Basic
-AuthUserFile "/home/clients/6129dcc8ef93de6705be359b5ebc0041/tchoukball/crons/.htpasswd"
+AuthUserFile "/home/clients/6129dcc8ef93de6705be359b5ebc0041/website/crons/.htpasswd"
 Require valid-user
