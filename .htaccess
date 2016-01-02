@@ -6,10 +6,10 @@ RewriteEngine on
 
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteCond %{HTTP_HOST} !localhost
-RewriteRule (.*) https://tchoukball.ch/$1 [R=301]
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} !(tchoukball.ch|localhost)
-RewriteRule (.*) https://tchoukball.ch/$1 [R=301]
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
 
 RewriteRule ^document/(.*)$ /documents/$1 [R=301,NC,L]
 
