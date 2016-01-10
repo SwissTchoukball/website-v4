@@ -2499,8 +2499,10 @@ ul.EWCMatchesTypesKey {
     margin-left: 110px;
 }
 
-.adminForm input[readonly] {
-    background-color: #CCC;
+.adminForm input[readonly],
+.adminForm textarea[readonly] {
+    background-color: #eeeeee;
+    color: #777777;
 }
 
 .adminForm select {

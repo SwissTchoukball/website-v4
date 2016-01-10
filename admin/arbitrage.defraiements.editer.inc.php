@@ -1,6 +1,14 @@
 <?php
 $orderRefereesByLevel = true;
 $referees = getReferees($orderRefereesByLevel);
+$refereesUTF8 = $referees;
+array_walk_recursive(
+    $refereesUTF8,
+    function (&$entry) {
+        $entry = iconv('Windows-1250', 'UTF-8', $entry);
+    }
+);
+$jsonReferees = json_encode($refereesUTF8);
 
 if (date('m') >= 8) {
     $currentSeason = date('Y');
@@ -65,16 +73,43 @@ if (isset($_GET['ajouter'])) {
 ?>
 
 <script>
-$(function() {
-    $.datepicker.setDefaults($.datepicker.regional[ "<?php echo strtolower($_SESSION['__langue__']); ?>" ]);
-    $("#datepicker").datepicker({
-        dateFormat: 'dd.mm.yy',
-        onClose: function(dateText, inst) {
-            $('#description').focus();
+    <?php
+        echo "var referees = " . $jsonReferees . ";\n";
+    ?>
+</script>
+<script>
+    $(function() {
+        $.datepicker.setDefaults($.datepicker.regional[ "<?php echo strtolower($_SESSION['__langue__']); ?>" ]);
+        $("#datepicker").datepicker({
+            dateFormat: 'dd.mm.yy',
+            onClose: function(dateText, inst) {
+                $('#description').focus();
+            }
+        });
+        $("#datepicker").datepicker('setDate', '<?php echo $day . '.' . $month . '.' . $year; ?>');
+
+        $("#refereeAccountNb").focus(function() {
+            var $this = $(this);
+            $this.select();
+
+            // Work around Chrome's little problem
+            $this.mouseup(function() {
+                // Prevent further mouseup intervention
+                $this.unbind("mouseup");
+                return false;
+            });
+        });
+
+        $('#refereeID').change(function() {
+            populateAccountNumber();
+        });
+
+        function populateAccountNumber() {
+            $('#refereeAccountNb').val(referees[$('#refereeID').val()]['numeroCompte']);
         }
+
+        populateAccountNumber();
     });
-    $("#datepicker").datepicker('setDate', '<?php echo $day . '.' . $month . '.' . $year; ?>');
-});
 </script>
 
 <?php
@@ -86,6 +121,8 @@ echo '<label for="refereeID">' . ucfirst(VAR_LANG_ARBITRE) . '</label>';
 echo '<select name="refereeID" id="refereeID">';
 printRefereesOptionsList($referees, $refereeID);
 echo '</select>';
+echo '<label for="refereeAccountNb">Numéro de compte</label>';
+echo '<textarea readonly id="refereeAccountNb"></textarea>';
 
 echo '<label for="seasonID">' . VAR_LANG_SAISON . '</label>';
 echo '<select name="seasonID" id="seasonID">';

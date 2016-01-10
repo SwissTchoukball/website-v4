@@ -421,7 +421,9 @@ function getReferees($orderByLevel = false)
         $order = "";
     }
 
-    $refereesQuery = "SELECT idDbdPersonne AS id, nom, prenom, idArbitre AS niveau, arbitrePublic FROM DBDPersonne WHERE idArbitre > 1" . $order;
+    $refereesQuery = "SELECT idDbdPersonne AS id, nom, prenom, idArbitre AS niveau, arbitrePublic, numeroCompte
+                      FROM DBDPersonne
+                      WHERE idArbitre > 1" . $order;
     if (!$referessData = mysql_query($refereesQuery)) {
         $errorReferee = array();
         $errorReferee['idArbitre'] = 0;
