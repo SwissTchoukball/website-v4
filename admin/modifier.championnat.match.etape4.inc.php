@@ -26,7 +26,7 @@ if (!isset($_POST['idMatch'])) {
         printErrorMessage('Problème lors de la récupération des types de pénalités');
     }
 
-    // Récupération des points de péanlités par type
+    // Récupération des points de pénalités par type
     foreach ($penaltiesTypes as $penaltyType) {
         $penaltyPointsQuery = "SELECT " . $penaltyType['attributPenalite'] . " AS penaltyPoints
                                FROM Championnat_Saisons
@@ -107,14 +107,16 @@ if (!isset($_POST['idMatch'])) {
     $deletedPenaltiesIds = explode(',', $deletedPenaltiesIds);
     $penalties = array();
     foreach ($penaltiesIds as $penaltyId) {
-        $penalties[$penaltyId]['teamId'] = $_POST['penalty-' . $penaltyId . '-teamId'];
-        $penalties[$penaltyId]['typeId'] = $_POST['penalty-' . $penaltyId . '-typeId'];
-        $penalties[$penaltyId]['points'] = $penaltiesTypes[$penalties[$penaltyId]['typeId']]['penaltyPoints'];
+        if ($penaltyId != '') {
+            $penalties[$penaltyId]['teamId'] = $_POST['penalty-' . $penaltyId . '-teamId'];
+            $penalties[$penaltyId]['typeId'] = $_POST['penalty-' . $penaltyId . '-typeId'];
+            $penalties[$penaltyId]['points'] = $penaltiesTypes[$penalties[$penaltyId]['typeId']]['penaltyPoints'];
 
-        if ($penalties[$penaltyId]['teamId'] == $idEquipeA) {
-            $pointsA += $penalties[$penaltyId]['points'];
-        } else if ($penalties[$penaltyId]['teamId'] == $idEquipeB) {
-            $pointsB += $penalties[$penaltyId]['points'];
+            if ($penalties[$penaltyId]['teamId'] == $idEquipeA) {
+                $pointsA += $penalties[$penaltyId]['points'];
+            } else if ($penalties[$penaltyId]['teamId'] == $idEquipeB) {
+                $pointsB += $penalties[$penaltyId]['points'];
+            }
         }
     }
 
@@ -256,7 +258,7 @@ if (!isset($_POST['idMatch'])) {
                 }
             } else {
                 printErrorMessage("La pénalité n'as pas pu être insérée/modifiée
-                                   Les périodes précédentes ont pu être traitées.<br />
+                                   Les pénalités précédentes ont pu être traitées.<br />
                                    Requête : " . $penaltyQuery . "<br />
                                    Message : " . mysql_error());
                 exit;
