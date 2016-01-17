@@ -24,7 +24,7 @@ $PHP_SELF = "/admin.php";
 
 // les champs existent ?
 if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["password"])) {
-    $usernameLogin = strtolower(mysql_escape_string(strip_tags($_POST["username"])));
+    $usernameLogin = strtolower(mysql_real_escape_string(strip_tags($_POST["username"])));
 
     $requeteSQL = "SELECT p.id, nom, prenom, username, userLevel, password, idClub, gestionMembresClub, c.nbIdClub
                    FROM `Personne` p, `ClubsFstb` c

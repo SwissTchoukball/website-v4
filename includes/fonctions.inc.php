@@ -557,7 +557,7 @@ function validiteInsertionTextBd($text)
     $text = ltrim($text);
     $text = rtrim($text);
     $text = strip_tags($text);
-    $text = mysql_escape_string($text);
+    $text = mysql_real_escape_string($text);
     return $text;
 }
 
@@ -566,7 +566,7 @@ function validiteInsertionTextAvecTagHTML($text)
 {
     $text = ltrim($text);
     $text = rtrim($text);
-    //$text = mysql_escape_string($text);
+    //$text = mysql_real_escape_string($text);
     //$text = htmlspecialchars($text,ENT_QUOTES);
     return $text;
 }
@@ -746,6 +746,7 @@ function afficherListeClubs($selectedClubId, $typeId)
     $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requête pour l'affichage de la liste des clubs</h4>");
     echo "<select name='ClubsFstb'>";
     echo "<optgroup label='Clubs adhérants'>";
+    $clubPrecedantEstActif = false;
     while ($donnees = mysql_fetch_assoc($reponse)) {
         $nomClub = $donnees['club'];
         $idClub = $donnees[$typeId];

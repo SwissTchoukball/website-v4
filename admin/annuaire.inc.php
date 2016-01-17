@@ -4,8 +4,8 @@
 	$lettreA = 65;
 	$modeInterMots = $_POST['modeInterMots'];
 	$optionRechercheAvancee = $_GET['optionRechercheAvancee'];
-	$motsRecherches = mysql_escape_string($_POST['motsRecherches']);
-	$lettre = mysql_escape_string($_GET['lettre']);
+	$motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
+	$lettre = mysql_real_escape_string($_GET['lettre']);
 	echo "<p align='center'>";
 	for($i=$lettreA;$i<$lettreA+26;$i++){
 		echo "<a href='?lettre=".chr($i)."&menuselection=$menuselection&smenuselection=$smenuselection'>".chr($i)."</a>-";
