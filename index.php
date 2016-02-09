@@ -88,7 +88,7 @@
                     $datepickerLocale = 'it-CH';
                     break;
             }
-            echo '<script type="text/javascript" src="https://raw.githubusercontent.com/jquery/jquery-ui/1.11.4/ui/i18n/datepicker-' . $datepickerLocale . '.js"></script>';
+            echo '<script type="text/javascript" src="https://rawgit.com/jquery/jquery-ui/1.11.4/ui/i18n/datepicker-' . $datepickerLocale . '.js"></script>';
         }
         ?>
 
