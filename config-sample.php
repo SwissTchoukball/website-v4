@@ -1,16 +1,26 @@
 <?php
 
-define("PATH_TO_ROOT", "/");
+$devWebsite = $_SERVER["HTTP_HOST"] == 'localhost';
 
-$sql['hote'] = 'localhost';
-// Enter MySQL username here
-$sql['user'] = '';
-// Enter MySQL password here
-$sql['password'] = '';
-// Enter MySQL main database name here
-$sql['base'] = '';
-// Enter MySQL "technique" database here
-$sql['basetechnique'] = ''; // TODO: remove the necessity for this database
+if ($devWebsite) {
+    define("PATH_TO_ROOT", "/swisstchoukball/website/");
+
+    $sql['hote'] = '';
+    $sql['user'] = '';
+    $sql['password'] = '';
+    $sql['base'] = '';
+
+    $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
+} else {
+    define("PATH_TO_ROOT", "/");
+
+    $sql['hote'] = '';
+    $sql['user'] = '';
+    $sql['password'] = '';
+    $sql['base'] = '';
+
+    $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
+}
 
 @mysql_pconnect($sql['hote'], $sql['user'], $sql['password']);
 @mysql_select_db($sql['base']);
