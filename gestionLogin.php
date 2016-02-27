@@ -1,13 +1,7 @@
 <?php
 session_start();
 
-if ($_SERVER["HTTP_HOST"] == 'localhost') {
-    require('config-dev.php');
-    $devWebsite = true;
-} else {
-    require('config.php');
-    $devWebsite = false;
-}
+require('config.php');
 
 include "includes/var.href.inc.php";
 

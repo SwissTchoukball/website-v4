@@ -5,14 +5,8 @@ if ($_SESSION["debug_tracage"]) {
     echo __FILE__."<BR>";
 }
 
-// connexion a la bd
-if ($_SERVER["HTTP_HOST"] == 'localhost') {
-    require('config-dev.php');
-    $devWebsite = true;
-} else {
-    require('config.php');
-    $devWebsite = false;
-}
+// DB connexion and other settings
+require('config.php');
 
 // tout utilisateur qui se connect a un niveau 100 pour commencer
 if (!isset($_SESSION["__userLevel__"])) {

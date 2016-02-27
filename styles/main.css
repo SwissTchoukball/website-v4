@@ -2554,7 +2554,7 @@ ul.EWCMatchesTypesKey {
 
 /* !Tableaux administration */
 
-table.adminTable td.action, {
+table.adminTable td.action {
     text-align: center;
 }
 
@@ -2934,6 +2934,11 @@ table#refereePoints td {
 #cahierDesCharges > ul li {
     line-height: 1.5;
     font-size: 15px;
+}
+
+textarea.tchoukup-emails {
+    width: 50%;
+    height: 300px;
 }
 
 /* !@media */
