@@ -42,7 +42,7 @@ $listsHeaders['envois-individuels'] = "Raison sociale \t Civilité \t Nom \t Prén
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
 $listsAttributes['envois-individuels'] = [
     'raisonSociale',
-    'civilite',
+    'descriptionCiviliteFr',
     'nom',
     'prenom',
     'adresse',
