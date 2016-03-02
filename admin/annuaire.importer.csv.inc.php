@@ -206,35 +206,35 @@ if($_POST["Importer"]=="Importer" || $_POST["Tester"]=="Tester"){
 						Status;							Tchouk Up
 					*/
 
-					$origineAdresse=htmlspecialchars(validiteInsertionTextBd($cols[0]));
+					$origineAdresse=validiteInsertionTextBd($cols[0]);
 					$idOrigineAdresse = getIdValueFromDb("DBDOrigineAdresse","idOrigineAdresse","descriptionOrigineAdresse",$cols[0],"origine");
 
-					$club=htmlspecialchars(validiteInsertionTextBd($cols[1]));
+					$club=validiteInsertionTextBd($cols[1]);
 					$idClub = getIdValueFromDb("ClubsFstb","nbIdClub","club",$cols[1],"club");
 
-					$raisonSociale=htmlspecialchars(validiteInsertionTextBd($cols[2]));
+					$raisonSociale=validiteInsertionTextBd($cols[2]);
 					$idCivilite = getIdValueFromDb("DBDCivilite","idCivilite","descriptionCivilite",$cols[3],"civili&eacute");
-					$nom=ucwordspecific(strtolower(htmlspecialchars(validiteInsertionTextBd($cols[4]))),'-');
-					$prenom=ucwordspecific(strtolower(htmlspecialchars(validiteInsertionTextBd($cols[5]))),'-');
-					$adresse=htmlspecialchars(validiteInsertionTextBd($cols[6]));
-					$cp=htmlspecialchars(validiteInsertionTextBd($cols[7]));
-					$npa=htmlspecialchars(validiteInsertionTextBd($cols[8]));
-					$ville=htmlspecialchars(validiteInsertionTextBd($cols[9]));
-					$pays = htmlspecialchars(validiteInsertionTextBd($cols[10]));
+					$nom=ucwordspecific(strtolower(validiteInsertionTextBd($cols[4])),'-');
+					$prenom=ucwordspecific(strtolower(validiteInsertionTextBd($cols[5])),'-');
+					$adresse=validiteInsertionTextBd($cols[6]);
+					$cp=validiteInsertionTextBd($cols[7]);
+					$npa=validiteInsertionTextBd($cols[8]);
+					$ville=validiteInsertionTextBd($cols[9]);
+					$pays = validiteInsertionTextBd($cols[10]);
 
 					if($pays) { $idPays = getIdValueFromDb("DBDPays","idPays","descriptionPays",$cols[10],"pays");
 					} else { $idPays=42;}
 
-					$telPrive=htmlspecialchars(validiteInsertionTextBd($cols[11]));
-					$telProf=htmlspecialchars(validiteInsertionTextBd($cols[12]));
-					$portable=htmlspecialchars(validiteInsertionTextBd($cols[13]));
-					$fax=htmlspecialchars(validiteInsertionTextBd($cols[14]));
-					$email=htmlspecialchars(validiteInsertionTextBd($cols[15]));
+					$telPrive=validiteInsertionTextBd($cols[11]);
+					$telProf=validiteInsertionTextBd($cols[12]);
+					$portable=validiteInsertionTextBd($cols[13]);
+					$fax=validiteInsertionTextBd($cols[14]);
+					$email=validiteInsertionTextBd($cols[15]);
 					$dateNaissance=validerDateForBd($cols[16]);
-					$langue=htmlspecialchars(validiteInsertionTextBd($cols[17]));
+					$langue=validiteInsertionTextBd($cols[17]);
 					$idLangue = getIdValueFromDb("DBDLangue","idLangue","descriptionLangue",$cols[17],"langue");
 
-					$statut=htmlspecialchars(validiteInsertionTextBd($cols[18]));
+					$statut=validiteInsertionTextBd($cols[18]);
 					$idStatus = getIdValueFromDb("DBDStatus","idStatus","descriptionStatus",$cols[18],"status");
 					$CHTB = $cols[19];
 					$idCHTB= getIdValueFromDb("DBDCHTB","idCHTB","descriptionCHTB",$cols[19], "tchoukup");

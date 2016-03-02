@@ -26,7 +26,7 @@ echo '<?xml version="1.0" encoding="iso-8859-1" ?>
 // on veut 10 afficher news
 for ($i = 0; $i < 10; $i++) {
     @$row = mysql_fetch_array($result1); // fonction pour la boucle
-    $titre = htmlspecialchars($row["titreFr"]); // fonction pour le titre
+    $titre = htmlspecialchars($row["titreFr"], ENT_COMPAT, 'ISO-8859-1'); // fonction pour le titre
     $auteur = "info@tchoukball.ch"; // fonction pour l'auteur
     $lien = "http://www.tchoukball.ch/index.php?lien=51&amp;newsIdSelection=".$row["id"]; // fonction pour le lien
     $description = markdown($row["corpsFr"]); // fonction pour le contenu de la news

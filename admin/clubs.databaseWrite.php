@@ -3,21 +3,21 @@
 if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 
 	$clubID = $_POST['clubID']; //validity already checked in clubs.inc.php
-	$shortName = htmlspecialchars(validiteInsertionTextBd($_POST['shortName']));
-	$fullName = htmlspecialchars(validiteInsertionTextBd($_POST['fullName']));
-	$nameForSorting = htmlspecialchars(validiteInsertionTextBd($_POST['nameForSorting']));
-	$address = htmlspecialchars(validiteInsertionTextBd($_POST['address']));
+	$shortName = validiteInsertionTextBd($_POST['shortName']);
+	$fullName = validiteInsertionTextBd($_POST['fullName']);
+	$nameForSorting = validiteInsertionTextBd($_POST['nameForSorting']);
+	$address = validiteInsertionTextBd($_POST['address']);
 	if (isValidNPA($_POST['npa'])) {
 		$npa = $_POST['npa'];
 	} else {
 		$npa = 'NULL';
 	}
-	$city = htmlspecialchars(validiteInsertionTextBd($_POST['city']));
-	$cantonID = htmlspecialchars(validiteInsertionTextBd($_POST['Canton']));
+	$city = validiteInsertionTextBd($_POST['city']);
+	$cantonID = validiteInsertionTextBd($_POST['Canton']);
 	$active = isset($_POST['active']) ? 1 : 0;
-	$phone = htmlspecialchars(validiteInsertionTextBd($_POST['phone']));
-	$email = htmlspecialchars(validiteInsertionTextBd($_POST['email']));
-	$url = htmlspecialchars(validiteInsertionTextBd($_POST['url']));
+	$phone = validiteInsertionTextBd($_POST['phone']);
+	$email = validiteInsertionTextBd($_POST['email']);
+	$url = validiteInsertionTextBd($_POST['url']);
 
 
 	if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
@@ -55,8 +55,8 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 														   `url`,
 														   `actif`,
 														   `lastEdit`,
-														   `lastEditorID`";
-			$clubInsertRequest .= ") VALUES ('".$newClubID."',
+														   `lastEditorID`)";
+			$clubInsertRequest .= " VALUES ('".$newClubID."',
 											   '".$shortName."',
 											   '".$fullName."',
 											   '".$nameForSorting."',
@@ -69,8 +69,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 											   '".$url."',
 											   ".$active.",
 											   '".date('Y-m-d')."',
-											   ".$_SESSION['__idUser__'];
-			$clubInsertRequest .= ")";
+											   ".$_SESSION['__idUser__'].")";
 			$clubInsertResult = mysql_query($clubInsertRequest);
 			if ($clubInsertResult) { // Tout s'est bien passé.
 				echo "<p class='success'>Insertion réussie.</p>";

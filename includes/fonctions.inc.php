@@ -558,6 +558,7 @@ function validiteInsertionTextBd($text)
     $text = rtrim($text);
     $text = strip_tags($text);
     $text = mysql_real_escape_string($text);
+    $text = htmlspecialchars($text, ENT_COMPAT, 'ISO-8859-1');
     return $text;
 }
 
@@ -583,7 +584,7 @@ function formatterText($text)
     $text = str_replace('ö','&ouml;',$text);
     $text = str_replace('ä','&auml;',$text);
     $text = str_replace('ç','&ccedil;',$text);
-    $text = htmlspecialchars($text,ENT_QUOTES);
+    $text = htmlspecialchars($text, ENT_QUOTES, 'ISO-8859-1');
 
     $text = nl2br($text);
     return str_replace('"','\"',$text);

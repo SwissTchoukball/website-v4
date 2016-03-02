@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td width="60"><p>titre :</p></td>
-            <td width=""><input name="titre<?php echo $VAR_TABLEAU_DES_LANGUES[$i][0];?>" type="text" size="70" maxlength="80" value="<?php echo htmlspecialchars($record["titre".$VAR_TABLEAU_DES_LANGUES[$i][0]],ENT_QUOTES)?>"></td>
+            <td width=""><input name="titre<?php echo $VAR_TABLEAU_DES_LANGUES[$i][0];?>" type="text" size="70" maxlength="80" value="<?php echo htmlspecialchars($record["titre".$VAR_TABLEAU_DES_LANGUES[$i][0]], ENT_QUOTES, 'ISO-8859-1')?>"></td>
         </tr>
         <tr>
             <td valign="top"><p>corps :</p></td>

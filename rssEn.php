@@ -37,10 +37,10 @@ for ($i = 0; $i < 10; $i++) {
     } else {
         $corps=$row["corpsEn"];
     }
-    $titre = htmlspecialchars($titre); // fonction pour le titre
+    $titre = htmlspecialchars($titre, ENT_COMPAT, 'ISO-8859-1'); // fonction pour le titre
     $auteur = "info@tchoukball.ch"; // fonction pour l'auteur
     $lien = "http://www.tchoukball.ch/index.php?lien=51&amp;newsIdSelection=".$row["id"]; // fonction pour le lien
-    $description = htmlspecialchars($corps); // fonction pour le contenu de la news
+    $description = htmlspecialchars($corps, ENT_COMPAT, 'ISO-8859-1'); // fonction pour le contenu de la news
     $description = str_replace('<', '&lt;', $description);
     $description = str_replace('>', '&gt;', $description);
     $date = date_sql2RFC_2822($row["date"]); // fonction pour la date de publication de la news
