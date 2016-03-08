@@ -598,6 +598,10 @@ if (!isset($_GET['idMatch'])) {
                 </tr>
                 <?php
             }
+            ?>
+            </table>
+            <table border="0" align="center" id="score">
+            <?php
 
             // Récupération des pénalités pour le match
             $penaltiesQuery = "SELECT pen.id, pen.idTypePenalite, pen.idEquipePenalise, e.equipe,
