@@ -547,7 +547,7 @@ function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
             printErrorMessage('Problème lors du calcul des points d\'arbitre.');
         }
     } else {
-        printInfoMessage('Les points d\'arbitres ne sont pas comptés pour la catégorie souhaitée.');
+        printMessage('Les points d\'arbitres ne sont pas comptés pour la catégorie souhaitée.');
     }
 }
 
