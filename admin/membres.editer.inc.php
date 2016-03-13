@@ -609,31 +609,25 @@ if ($canEdit) {
                 echo '<p>'.$refereeLevelName.'</p>';
                 echo '<input type="hidden" name="idArbitre" value="'.$refereeLevelId.'" />';
             }
+            ?>
 
-            if ($refereeLevelId > 1) {
-                // Il n'est ainsi pas possible de définir si un membre est suspendu ou arbitre public lors de son
-                // insertion ou lorsqu'il est fait arbitre.
-                // Cela évite aussi de peupler le formulaire de champs inutiles pour les non-arbitres
-                ?>
-
-                <label>Arbitre public</label>
-                <?php
-                if (hasAllMembersManagementAccess()) {
-                    if ($isPublicReferee) {
-                        $publicRefereeChecked = 'checked';
-                    } else {
-                        $publicRefereeChecked = '';
-                    }
-                    echo '<input type="checkbox" name="arbitrePublic" '.$publicRefereeChecked.' />';
+            <label>Arbitre public</label>
+            <?php
+            if (hasAllMembersManagementAccess()) {
+                if ($isPublicReferee) {
+                    $publicRefereeChecked = 'checked';
                 } else {
-                    echo '<p>';
-                    if ($isPublicReferee) {
-                        echo 'Oui';
-                    } else {
-                        echo 'Non';
-                    }
-                    echo '</p>';
+                    $publicRefereeChecked = '';
                 }
+                echo '<input type="checkbox" name="arbitrePublic" '.$publicRefereeChecked.' />';
+            } else {
+                echo '<p>';
+                if ($isPublicReferee) {
+                    echo 'Oui';
+                } else {
+                    echo 'Non';
+                }
+                echo '</p>';
             }
 
             if ($isSuspended || hasAllMembersManagementAccess()) {
