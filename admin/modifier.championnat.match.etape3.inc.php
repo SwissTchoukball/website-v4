@@ -160,8 +160,17 @@ if (!isset($_GET['idMatch'])) {
         }
     }
 
-    function optionsPeriodType($periodTypeSelected, $defaultPeriodType) {
-        $query = "SELECT * FROM Championnat_Types_Periodes WHERE duree > 0 ORDER BY nom, duree";
+    function optionsPeriodType($periodTypeSelected, $defaultPeriodType, $season) {
+        if (is_null($season)) {
+            $season = date('Y');
+        }
+
+        $query = "SELECT *
+                  FROM Championnat_Types_Periodes
+                  WHERE duree > 0
+                  AND saisonDebut <= " . $season . "
+                  AND (saisonFin >= " . $season . " OR ISNULL(saisonFin))
+                  ORDER BY nom, duree";
         $result = mysql_query($query);
         while ($periodType = mysql_fetch_assoc($result)) {
             if (!$periodTypeSelected) {
@@ -414,7 +423,7 @@ if (!isset($_GET['idMatch'])) {
             var selectA = $('<select name="periodScoreA[' + newPeriodNo + ']"></select>').appendTo(scoreA);
             var selectB = $('<select name="periodScoreB[' + newPeriodNo + ']"></select>').appendTo(scoreB);
             scoreB.append(' ');
-            $('<select name="periodTypeId[' + newPeriodNo + ']"><?php echo optionsPeriodType(null, $defaultPeriodTypeID) ?></select>').appendTo(scoreB);
+            $('<select name="periodTypeId[' + newPeriodNo + ']"><?php echo optionsPeriodType(null, $defaultPeriodTypeID, $saison) ?></select>').appendTo(scoreB);
 
             var options = [];
             for (n = 0; n <= 128; n++) {
@@ -592,7 +601,7 @@ if (!isset($_GET['idMatch'])) {
                             <?php optionsScore($periodScoreB[$p]); ?>
                         </select>
                         <select name="periodTypeId[<?php echo $p; ?>]" onchange="updateScore()">
-                            <?php optionsPeriodType($periodTypeId[$p], $defaultPeriodTypeID); ?>
+                            <?php optionsPeriodType($periodTypeId[$p], $defaultPeriodTypeID, $saison); ?>
                         </select>
                     </td>
                 </tr>
