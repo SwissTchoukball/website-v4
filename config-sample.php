@@ -12,7 +12,7 @@ if ($devWebsite) {
 
     $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
 } else {
-    define("PATH_TO_ROOT", "/");
+    define("PATH_TO_ROOT", "");
 
     $sql['hote'] = '';
     $sql['user'] = '';
