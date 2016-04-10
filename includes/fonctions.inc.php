@@ -1053,6 +1053,7 @@ function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
     $srcImg = str_replace("ñ","n",$srcImg);
     $srcImg = str_replace("ç","c",$srcImg);
     $srcImg = str_replace(" ","",$srcImg);
+    $srcImg = str_replace("'","",$srcImg);
     return $srcImg;
 }
 function nomFichierPhotoValide($srcImg)
@@ -1066,6 +1067,7 @@ function nomFichierPhotoValide($srcImg)
     $srcImg = str_replace("ñ","n",$srcImg);
     $srcImg = str_replace("ç","c",$srcImg);
     $srcImg = str_replace(" ","",$srcImg);
+    $srcImg = str_replace("'","",$srcImg);
     return strtolower($srcImg);
 }
 

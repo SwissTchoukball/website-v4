@@ -20,7 +20,7 @@
         if($donnees['image'] != 0){ // On affiche l'image si il y en a une.
             $retourbis = mysql_query("SELECT * FROM Uploads WHERE id='".$donnees['image']."'");
             $donneesbis = mysql_fetch_array($retourbis);
-            echo "<img src='" . PATH_TO_ROOT . "uploads/".$donneesbis['fichier']."' alt='".$donneesbis['titre']."' />";
+            echo "<img src='" . PATH_TO_ROOT . "/uploads/".$donneesbis['fichier']."' alt='".$donneesbis['titre']."' />";
         }
         //afficherAvecEncryptageEmail(sizeNewsManager($corps, $TAILLE_NEWS, $donnees['id']));
         echo truncateHtml(markdown($corps), $TAILLE_NEWS, "... "."<p class='lireSuiteArticle'><a href='/news/".$donnees['id']."'>".VAR_LANG_LIRE_SUITE_ARTICLE."</a></p>");

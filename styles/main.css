@@ -2089,60 +2089,49 @@ cite:before {
 }
 
 .liste-joueur-es {
-    width: 650px;
+    width: 850px;
+    position: relative;
+    left: -20px;
     border: none;
     margin: auto;
 }
 
 .joueur-es {
-    margin-top: -518px;
+    margin-bottom: 10px;
+}
+
+.joueur-es > * {
+    vertical-align: top;
 }
 
 .equipe-es {
-    margin-bottom: 518px;
 }
 
 .photo-joueur-es {
-    height: 340px;
-    border: 1px solid #e2001a;
+    width: 425px;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .infos-joueur-es {
-    padding: 5px;
-    padding-top: 15px;
-    position: relative;
-    text-align: right;
-    left: 340px;
-    bottom: 342px;
-    /*background-color: #fff5f5;*/
-    background-image: url('../../pictures/equipesSuisses/fond_infos_joueur-es.png');
-    width: 300px;
-    height: 320px;
-    border: 1px solid #e2001a;
-    line-height: 20px;
+    padding: 10px;
+    display: inline-block;
 }
 
 .nom-joueur-es {
     font-size: 27px;
     font-weight: bold;
-    line-height: 20px;
 }
 
 .numero-joueur-es {
     color: #e2001a;
-    position: relative;
-    bottom: 490px;
-    left: 20px;
-    font-size: 180px;
     font-weight: bold;
-    text-align: right;
-    padding: 0px;
-    height: 200px;
+    font-size: 20px;
 }
 
 .acceder-bdd-fitb-es {
     text-align: center;
-    margin-top: -318px;
+    margin-top: 30px;
 }
 
 .photo-equipe-es {
@@ -2150,7 +2139,9 @@ cite:before {
 }
 
 .photo-equipe-es img {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    left: -20px;
 }
 
 .legende-photo-equipe-es {

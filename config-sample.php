@@ -3,7 +3,7 @@
 $devWebsite = $_SERVER["HTTP_HOST"] == 'localhost';
 
 if ($devWebsite) {
-    define("PATH_TO_ROOT", "/swisstchoukball/website/");
+    define("PATH_TO_ROOT", "/swisstchoukball/website");
 
     $sql['hote'] = '';
     $sql['user'] = '';

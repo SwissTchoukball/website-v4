@@ -10,22 +10,22 @@
     <div id="adminLinks">
     <?php
     if ($_SESSION["__userLevel__"] < 100) {
-        echo "<a href='" . PATH_TO_ROOT . "logout'>".VAR_LANG_DECONNEXION."</a>";
+        echo "<a href='" . PATH_TO_ROOT . "/logout'>".VAR_LANG_DECONNEXION."</a>";
 
         if ($admin) {
             echo " &loz; <a href='".VAR_HREF_PAGE_PRINCIPALE."'>".VAR_LANG_ACCUEIL."</a>";
         } else {
-            echo " &loz; <a href='" . PATH_TO_ROOT . "admin'>".VAR_LANG_ADMINISTRATION."</a>";
+            echo " &loz; <a href='" . PATH_TO_ROOT . "/admin'>".VAR_LANG_ADMINISTRATION."</a>";
         }
     } else {
-        echo "<a href='" . PATH_TO_ROOT . "login'>".VAR_LANG_SE_LOGUER."</a>";
+        echo "<a href='" . PATH_TO_ROOT . "/login'>".VAR_LANG_SE_LOGUER."</a>";
     }
     ?>
     </div>
 
     <div id="footerLinks">
-        <a href="<?php echo PATH_TO_ROOT; ?>contact">Contact</a>
-        &loz; <a href="<?php echo PATH_TO_ROOT; ?>impressum">Impressum</a>
+        <a href="<?php echo PATH_TO_ROOT; ?>/contact">Contact</a>
+        &loz; <a href="<?php echo PATH_TO_ROOT; ?>/impressum">Impressum</a>
         &loz; <a href='rss<?php echo $_SESSION[__langue__].".php"; ?>'>RSS</a>
         &loz; <?php echo VAR_LANG_ASSOCIATION_NAME; ?>, 1000 Lausanne
     </div>

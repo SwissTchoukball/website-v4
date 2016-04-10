@@ -25,7 +25,7 @@ if (!$navResult = mysql_query($navQuery)) {
             $navLink = $srcFile . '?menuselection=' . $navParentItemID . '&smenuselection=' . $navItemOrder;
         }
         if(!$nav['isExternalLink']) {
-            $navLink = PATH_TO_ROOT . $navLink;
+            $navLink = PATH_TO_ROOT . '/' . $navLink;
         }
         $navParentLink = $nav['parentLink'];
 
@@ -39,7 +39,7 @@ if (!$navResult = mysql_query($navQuery)) {
                 echo $menuselection == $navParentItemID ? '<h1 class="open">' : '<h1>';
 
                 if (is_null($navItemOrder) && $navParentLink != '') {
-                    echo '<a href="'. PATH_TO_ROOT . $navParentLink . '">' . $navParentItemName . '</a>';
+                    echo '<a href="'. PATH_TO_ROOT . '/' . $navParentLink . '">' . $navParentItemName . '</a>';
                 } else {
                     echo $navParentItemName;
                 }

@@ -7,7 +7,7 @@
         $recordset= mysql_query($requeteSQL);
         while ($record = mysql_fetch_array($recordset)) {
             echo "<a href='".$record["lienWeb"]."' target='_blank'>";
-            echo "<img class='logoSponsorsMenu' src='" . PATH_TO_ROOT . "".$record["lienLogoSidebar"]."' />";
+            echo "<img class='logoSponsorsMenu' src='" . PATH_TO_ROOT . "/" .$record["lienLogoSidebar"]."' />";
             echo "</a>";
         }
         ?>
