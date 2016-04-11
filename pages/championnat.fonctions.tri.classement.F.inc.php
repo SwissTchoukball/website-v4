@@ -84,7 +84,7 @@ function triEgaliteParfaite($informations,$tableau,$debug){
 				$from = "From:no-reply@tchoukball.ch\n";
 				$from .= "MIME-version: 1.0\n";
 				$from .= "Content-type: text/html; charset= iso-8859-1\n";
-				$destinataireMail ="technique@tchoukball.ch, webmaster@tchoukball.ch";
+				$destinataireMail ="resp.championnat@tchoukball.ch, webmaster@tchoukball.ch";
 				mail($destinataireMail, "Égalité parfaite au championnat", "Les équipes ".$boutMail." sont à égalité parfaite au championnat.",$from);
 				if($debug){
 					echo "<br /><br />Un mail a été envoyé à ".$destinataireMail." vu qu'il y a une égalité parfaite et qu'un tirage au sort doit être effectué.</strong>";
