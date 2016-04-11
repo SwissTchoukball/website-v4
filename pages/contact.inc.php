@@ -2,6 +2,7 @@
 if($_SESSION["debug_tracage"])echo __FILE__."<BR>";
 statInsererPageSurf(__FILE__);
 ?>
+<!--suppress ALL -->
 <div id="pageContact">
 
 	<div class="typeContact">Adresse postale</div>
@@ -16,21 +17,17 @@ statInsererPageSurf(__FILE__);
 	<div class="typeContact">Vice-présidence</div>
 	<div class="contenuContact"><?php email("vice-presidence@tchoukball.ch"); ?></div>
 	<div class="typeContact">Comité</div>
-	<div class="contenuContact"><a href="/comiteFSTB">Page des membres du comité</a></div>
+	<div class="contenuContact"><a href="/comite-executif">Page des membres du comité</a></div>
 	<div class="typeContact">Commissions</div>
 	<div class="contenuContact"><a href="/commissions">Page des commissions</a></div>
-	<div class="typeContact" title="Contact Presse">Communication</div>
+	<div class="typeContact">Responsable Communication</div>
 	<div class="contenuContact"><?php email("communication@tchoukball.ch"); ?></div>
-	<div class="typeContact">Sponsoring</div>
+	<div class="typeContact">Responsable Sponsoring</div>
 	<div class="contenuContact"><?php email("sponsoring@tchoukball.ch"); ?></div>
-	<div class="typeContact" title="Compétitions et Arbitrage">Technique</div>
-	<div class="contenuContact"><?php email("technique@tchoukball.ch"); ?></div>
-	<div class="typeContact">Responsable Championnat</div>
-	<div class="contenuContact"><?php email("resp.championnat@tchoukball.ch"); ?></div>
-	<div class="typeContact">Responsable Coupe Suisse</div>
-	<div class="contenuContact"><?php email("resp.coupesuisse@tchoukball.ch"); ?></div>
+	<div class="typeContact">Responsable Compétitions</div>
+	<div class="contenuContact"><?php email("competitions@tchoukball.ch"); ?></div>
 	<div class="typeContact">Responsable Arbitrage</div>
-	<div class="contenuContact"><?php email("resp.arbitrage@tchoukball.ch"); ?></div>
+	<div class="contenuContact"><?php email("arbitrage@tchoukball.ch"); ?></div>
 	<div class="typeContact">Juniors</div>
 	<div class="contenuContact"><?php email("juniors@tchoukball.ch"); ?></div>
 	<div class="typeContact" title="Photo et vidéo">Multimédia</div>
