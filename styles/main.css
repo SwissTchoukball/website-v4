@@ -850,6 +850,11 @@ input[type=submit]:active {
 input.couleurCheckBox, input.couleurRadio {
 }
 
+.paypal-button input {
+    border: none;
+    margin: 20px 0;
+}
+
 .news_body {
     line-height: 1.5;
     text-align: justify;
