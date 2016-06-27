@@ -38,12 +38,10 @@ statInsererPageSurf(__FILE__);
         if ($donnees['paragrapheNum'] == 4) {
             // formulaire inscription
             ?>
-            <form class="newsletterForm" method="post" action="http://newsletter.sharedbox.com/user/process.php?sExternalid=dcb9e3937752002925deb32307becae3" name="signup" accept-charset="utf-8">
-            <label for="email"><strong>Votre Email:</strong></label>
-			<input type="text" name="Email" id="email" maxlength="60" size="40" />
-            <input type="hidden" name="pommo_signup" value="true" />
-            <input type='submit' value='<?php echo VAR_LANG_INSCRIPTION;?>'>
-            </form>
+            <div class="newsletterForm">
+                <script type="text/javascript" src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
+            </div>
+
             <?php
         }
     }
