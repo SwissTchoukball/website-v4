@@ -1,6 +1,6 @@
 <?php include_once('includes/init.php'); ?>
 <!DOCTYPE html>
-<html>
+<html lang="<?php echo strtolower($_SESSION["__langue__"]); ?>">
     <head>
         <title><?php echo $title; ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -39,30 +39,13 @@
         <meta property="fb:app_id" content="119853652572"/>
         <meta property="fb:admins" content="817753010"/>
         <!-- /Facebook metatags -->
+        <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/build/lib.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/main.css">
         <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/livescores.css"> <!-- For Tchoukball World live scores -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="alternate" type="application/rss+xml" href="http://www.tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php" />
     </head>
     <body>
-        <!--<script>
-            window.fbAsyncInit = function() {
-                FB.init({
-                    appId      : '119853652572',
-                    xfbml      : true,
-                    version    : 'v2.1'
-                });
-            };
-
-            (function(d, s, id){
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) {return;}
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/<?php echo $locale_code; ?>/sdk.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        </script>-->
-
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
@@ -72,7 +55,7 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+        <script src="//code.jquery.com/jquery-3.0.0.min.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <?php
         if ($_SESSION['__langue__'] != 'En') {
@@ -117,8 +100,8 @@
         }
         ?>
 
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/retina.js/1.3.0/retina.min.js"></script> <!-- Pour afficher les images @2x si elles existent -->
+        <script src="build/lib.min.js"></script>
+        <script src="build/app.min.js"></script>
         <script src="<?php echo PATH_TO_ROOT; ?>/scripts/before-body-closing.js"></script>
 
         <?php

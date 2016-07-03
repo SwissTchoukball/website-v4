@@ -10,8 +10,8 @@
 body {
     background-color: #CCCCCC;
     font-family: Arial, Helvetica, sans-serif;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 0;
+    margin-bottom: 0;
     font-size: 12px;
     color: #444;
 }
@@ -37,7 +37,7 @@ footer {
 }
 
 #site > * {
-    margin: 0px;
+    margin: 0;
 }
 
 #site > header #banner {
@@ -61,8 +61,8 @@ footer {
     font-size: 16px;
     color: white;
     text-align: center;
-    padding: 5px 0px;
-    margin: 5px 0px;
+    padding: 5px 0;
+    margin: 5px 0;
     background-color: #e2001a;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -89,19 +89,19 @@ footer {
 
 #language-switcher {
     position: absolute;
-    top: 0px;
+    top: 0;
     text-align: right;
 }
 
 #language-switcher ul {
     list-style-type: none;
-    margin: 0px;
+    margin: 0;
     padding: 5px;
     font-size: 11px;
     background-color: rgba(255, 255, 255, .8);
     width: 187px;
     position: absolute;
-    right: 0px;
+    right: 0;
     border-bottom-left-radius: 5px;
 }
 
@@ -123,7 +123,7 @@ footer {
 
 #main-nav h1 {
     font-size: 13px;
-    margin: 0px 0px 0px 5px;
+    margin: 0 0 0 5px;
     cursor: pointer;
     color: #444;
 }
@@ -137,7 +137,7 @@ footer {
 }
 
 #main-nav ul {
-    margin: 0px;
+    margin: 0;
     display: none;
     list-style-type: none;
     list-style-type: none;
@@ -156,7 +156,7 @@ footer {
 #main-nav li a:hover, #main-nav li a.open {
     background-color: white;
     padding: 2px;
-    margin-left: 0px;
+    margin-left: 0;
     border: 1px solid #e2001a;
     border-right: none;
     position: relative;
@@ -188,7 +188,7 @@ footer {
 
 #site > main h1, #site > main h2, #site > main h3, #site > main h4, #site > main h5 {
     color: black;
-    margin-top: 0px;
+    margin-top: 0;
     line-height: 1;
     margin-bottom: 10px;
     border-left: 5px solid #CC3333;
@@ -202,7 +202,7 @@ footer {
 #site > main h1.alt, #site > main h2.alt, #site > main h3.alt, #site > main h4.alt, #site > main h5.alt {
     border-left: none;
     text-align: center;
-    padding-left: 0px;
+    padding-left: 0;
     background: -moz-linear-gradient(#eeeeee 0%, #ffffff 100%);
     background: -webkit-linear-gradient(#eeeeee 0%, #ffffff 100%);
     padding-top: 10px;
@@ -254,177 +254,7 @@ footer {
 }
 
 /* END NEW SKELETON*/
-/*
-.entete {
-    width: 930px;
-    margin: auto;
-    padding-top: 5px;
-    color: #CC3333;
-    font-size: 10px;
-}
 
-.afficherDate {
-    float: right;
-}
-
-.banniere {
-    clear: both;
-    margin: auto;
-}
-
-
-#fond {
-
-    margin: auto;
-    width: 980px;
-	border-right: 2px solid #e2001a;
-	background-color: white;
-	padding-bottom: 50px;
-}
-#header {
-
-    height: 160px;
-    width: 978px;
-    background-color: #ddd;
-	position: absolute;
-	z-index: 11;
-	margin-left: 2px;
-}
-#milieu {
-    width: 980px;
-}
-#menu {
-    float: left;
-    width: 150px;
-    background-repeat: no-repeat;
-    color: #666666;
-	border-right: 1px solid #e2001a;
-	border-left: 2px solid #e2001a;
-	position: fixed;
-	top:0px;
-	bottom: 0px;
-	padding-top: 160px;
-	background-color: #ddd;
-	z-index: 10;
-}
-#menu ul {
-    width: 150px;
-    position: relative;
-    top: 0px;
-    left: -38px;
-    font-size: 13px;
-    list-style-type: none;
-    cursor: pointer;
-    line-height: 15px;
-}
-#menu ul li strong:hover {
-    color: #CC3333;
-}
-#menu ul ul a {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 1px;
-    font-size: 10px;
-    list-style-type: none;
-    text-decoration: none;
-    color: #666666;
-    width: 144px;
-    height: 12px;
-    line-height: 10px;
-    border: 1px solid transparent;
-    cursor: pointer;
-    padding: 1px;
-    margin: 1px;
-}
-#menu ul ul a:hover {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 1px;
-    font-size: 10px;
-    list-style-type: none;
-    text-decoration: none;
-    color: #666666;
-    background-color: white;
-    border: 1px solid #CC3333;
-    border-right: none;
-    width: 142px;
-    height: 12px;
-    cursor: pointer;
-    padding: 1px;
-    line-height: 10px;
-}
-.menu_selectionne {
-    display: block;
-    position: relative;
-    top: 0px;
-    left: 2px;
-    font-size: 10px;
-    list-style-type: none;
-    text-decoration: none;
-    color: #666666;
-    background-color: white;
-    border: 1px solid #e2001a;
-    border-right: none;
-    width: 142px;
-    height: 12px;
-    cursor: pointer;
-    padding: 1px;
-    line-height: 10px;
-}
-#menu ul ul .menu_selectionne a:hover{
-    border: 1px solid transparent;
-}
-#sous-menu {
-    float: left;
-    width: 150px;
-    color: #666666;
-    padding: 2px;
-    margin-bottom: 5px;
-}
-#sous-menu h5 {
-    font-weight: bold;
-    font-size: 10px;
-    margin-bottom: -5px;
-}
-#sous-menu ul {
-    list-style-type: disc;
-    position: relative;
-    left: -23px;
-    width: 131px;
-}
-#sous-menu a {
-    text-decoration: none;
-    color: #666666;
-    font-size: 10px;
-}
-#sous-menu a:hover {
-    text-decoration: none;
-    color: #333333;
-    font-size: 10px;
-}
-#sous-menu em {
-    display: block;
-    font-size: 10px;
-    padding-top: 10px;
-}
-#bloc_contenu {
-    margin-left: 150px;
-    background: url('images/fond_titre_page.png') no-repeat;
-    width: 830px;
-	position: relative;
-	top: 160px;
-}
-#contenu {
-    padding-right: 30px;
-    padding-left: 30px;
-    padding-top: 1px;
-    padding-bottom: 10px;
-    color: #333;
-    width: 770px;
-}
-*/
 .rssCorps {
     width: 32px;
     height: 32px;
@@ -465,7 +295,7 @@ footer {
     font-size: 10px;
     color: #666;
     text-align: left;
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 #laDerniereNews p {
@@ -553,7 +383,7 @@ footer {
 }
 
 #copyright, #footerLinks, #adminLinks, #socialButtons {
-    padding: 7px 0px;
+    padding: 7px 0;
 }
 
 .googlePlusLink {
@@ -584,9 +414,10 @@ a img {
     border: none;
 }
 
-a:link {
+a:link, .asLink {
     color: #CC3333;
     text-decoration: none;
+    cursor: pointer;
 }
 
 a:visited {
@@ -594,11 +425,11 @@ a:visited {
     text-decoration: none;
 }
 
-a:hover {
+a:hover, .asLink:hover {
     color: #FF9999;
 }
 
-a:active {
+a:active, .asLink:active {
     color: #CC3333;
 }
 
@@ -610,7 +441,7 @@ p {
 }
 
 fieldset p {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 label {
@@ -629,7 +460,7 @@ blockquote {
 }
 
 ul {
-    margin-top: 0px;
+    margin-top: 0;
 }
 
 .error, .info, .success {
@@ -674,7 +505,7 @@ ul {
     background-size: 16px;
     width: 16px;
     height: 16px;
-    padding: 3px 6px 3px 0px;
+    padding: 3px 6px 3px 0;
     fill: #f07f8b;
     vertical-align: -20%;
 }
@@ -708,7 +539,7 @@ ul {
     margin-left: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .imageFlottanteGauche {
@@ -716,7 +547,7 @@ ul {
     margin-right: 10px;
     margin-bottom: 5px;
     margin-top: 5px;
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 .randomPicture {
@@ -779,7 +610,7 @@ ul {
     font-weight: normal;
     border-left: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
-    margin-bottom: 0px;
+    margin-bottom: 0;
     text-align: left;
 }*/
 
@@ -809,45 +640,72 @@ ul {
 
 ul.pagination {
     margin: 5px;
-    padding: 0px;
+    padding: 0;
     text-align: center;
 }
 
 ul.pagination li {
     display: inline-block;
     list-style-type: none;
-    padding: 0px 3px;
+    padding: 0 3px;
 }
 
 select, input, textarea {
     font-size: 10px;
-    background-color: #FFFFFF;
     color: #333333;
     border: 1px solid #E2001A;
 }
 
-input[type=submit] {
+.button {
     border-radius: 5px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    background-color: #cc3333;
-    background: -moz-linear-gradient(top, #ff6666, #cc3333);
-    background: -webkit-linear-gradient(top, #ff6666, #cc3333);
+    font-size: 14px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 5px #FF9999;
+}
+
+.button--primary {
+    background-color: #e2001a;
     font-weight: bold;
     color: white;
-    border: 1px solid #CC3333;
+    border: none;
+}
+
+.button--primary:active {
+    background-color: #e0384c;
+}
+
+.button--primary[disabled] {
+    background-color: #999999;
+}
+
+.button--cancel {
+    border: 1px solid #999999;
+    background-color: transparent;
+    color: #999999;
+}
+
+.button--cancel:active {
+    background-color: #efefef;
+}
+
+/*TODO replace the usage of this by button--primary*/
+input[type=submit] {
+    border-radius: 5px;
+    background-color: #e2001a;
+    font-weight: bold;
+    color: white;
+    border: none;
     font-size: 14px;
     cursor: pointer;
-
 }
 
 input[type=submit]:active {
-    background-color: #e2001a;
-    background: -moz-linear-gradient(top, #cc3333, #ff6666);
-    background: -webkit-linear-gradient(top, #cc3333, #ff6666);
-}
-
-input.couleurCheckBox, input.couleurRadio {
+    background-color: #e0384c;
 }
 
 .paypal-button input {
@@ -898,7 +756,7 @@ input.couleurCheckBox, input.couleurRadio {
     border: 1px solid #000;
     width: 120px;
     height: 120px;
-    padding: 0px;
+    padding: 0;
     border-collapse: collapse;
     vertical-align: top;
     font-size: 10px;
@@ -908,7 +766,7 @@ input.couleurCheckBox, input.couleurRadio {
     border: 1px solid #000;
     width: 765px;
     height: 70px;
-    padding: 0px;
+    padding: 0;
     border-collapse: collapse;
     vertical-align: top;
 }
@@ -917,7 +775,7 @@ input.couleurCheckBox, input.couleurRadio {
     border: 1px solid #000;
     width: 765px;
     height: 30px;
-    padding: 0px;
+    padding: 0;
     border-collapse: collapse;
     vertical-align: top;
 }
@@ -1003,7 +861,7 @@ td.supprimer {
     background-image: url('images/selection_calendrier_semaine.png');
     background-repeat: no-repeat;
     margin-left: -3px;
-    padding: 0px;
+    padding: 0;
 }
 
 .boutonAfficherMois {
@@ -1012,7 +870,7 @@ td.supprimer {
     background-image: url('images/selection_calendrier_mois.png');
     background-repeat: no-repeat;
     margin-right: -3px;
-    padding: 0px;
+    padding: 0;
 }
 
 .boutonAfficherSemaine:hover {
@@ -1031,7 +889,7 @@ td.supprimer {
     background-image: url('images/selection_calendrier_semaine_selected.png');
     background-repeat: no-repeat;
     margin-left: -3px;
-    padding: 0px;
+    padding: 0;
 }
 
 .boutonAfficherMoisSelected {
@@ -1040,7 +898,7 @@ td.supprimer {
     background-image: url('images/selection_calendrier_mois_selected.png');
     background-repeat: no-repeat;
     margin-right: -3px;
-    padding: 0px;
+    padding: 0;
 }
 
 .titreCalendrier {
@@ -1058,8 +916,8 @@ a.calendrierPrecedant, a.calendrierSuivant {
     display: inline-block;
     width: 23px;
     height: 23px;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-size: 23px;
     background-repeat: no-repeat;
 }
@@ -1087,30 +945,30 @@ a.calendrierSuivant {
 }
 
 .calendrierMoisEvenement {
-    margin: 0px;
+    margin: 0;
     padding: 1px;
 }
 
 .calendrierMoisEvenement span {
     font-size: 10px;
     line-height: 10px;
-    margin: 0px;
+    margin: 0;
 }
 
 .calendrierMoisEvenement span a {
-    margin: 0px;
+    margin: 0;
 }
 
 .calendrierSemaineEvenement {
     width: 765px;
-    margin: 0px;
+    margin: 0;
     padding: 2px;
 
 }
 
 .calendrierJourEvenement {
     width: 765px;
-    margin: 0px;
+    margin: 0;
     padding: 5px;
 }
 
@@ -1249,7 +1107,7 @@ a.calendrierSuivant {
     background-image: url('images/whistle.svg');
     background-size: 10px;
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    background-position: 0 5px;
 }
 
 /*.media {
@@ -1286,7 +1144,7 @@ a.calendrierSuivant {
 }
 
 ul.tchoukupList {
-    padding-left: 0px;
+    padding-left: 0;
     text-align: justify;
 }
 
@@ -1427,11 +1285,11 @@ cite:before {
 .responsabiliteComite ul, .membresCommission ul {
     position: relative;
     left: 20px;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .spokenLanguages {
-    margin: 10px 0px;
+    margin: 10px 0;
 }
 
 .presentationSponsors {
@@ -1551,10 +1409,10 @@ cite:before {
 	padding-left: 9px;
 }
 .banniereYouTubeTP img{
-	margin: 0px;
+	margin: 0;
 }
 .banniereYouTubeTP a{
-	margin: 0px;
+	margin: 0;
 }*/
 
 .tailleFichierVideo {
@@ -1632,12 +1490,12 @@ cite:before {
 }
 
 .classement h5, .resultats h5 {
-	margin-top: 0px;
+	margin-top: 0;
 	margin-bottom: 5px;
 }*/
 
 .listeLigues {
-    padding-left: 0px;
+    padding-left: 0;
     text-align: center;
 }
 
@@ -1725,8 +1583,8 @@ cite:before {
 
 #site > main .match h1 {
     text-align: center;
-    border-left: 0px;
-    padding-left: 0px;
+    border-left: 0;
+    padding-left: 0;
     width: auto;
     height: auto;
     background: none;
@@ -1867,7 +1725,7 @@ cite:before {
 }
 
 .banniereSiteCoupeSuisse a {
-    margin: 0px;
+    margin: 0;
 }
 
 #coupesuisse .descriptionJournee {
@@ -1882,7 +1740,7 @@ cite:before {
     width: 100%;
     height: 680px;
     background-image: url('images/fond-tableau-coupe-suisse.png');
-    background-position: 0px -64px;
+    background-position: 0 -64px;
     /*border: black solid 1px;*/
 }
 
@@ -2021,7 +1879,7 @@ cite:before {
     height: 16px;
     text-align: center;
     padding: 5px;
-    margin: 0px;
+    margin: 0;
     background-color: white;
 }
 
@@ -2075,7 +1933,7 @@ cite:before {
 }
 
 .colonneFinales .boxEquipe1B, .colonneFinales .boxEquipe2B, .colonneFinales .boxEquipe3B, .colonneFinales .boxEquipe4B {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 /* Admin Coupe Suisse */
@@ -2270,11 +2128,11 @@ cite:before {
 }
 
 .EWCScoresLink a:hover {
-    box-shadow: 0px 0px 3px #f07f8b;
+    box-shadow: 0 0 3px #f07f8b;
 }
 
 .EWCScoresLink a:active {
-    box-shadow: 0px 0px 6px #f07f8b;
+    box-shadow: 0 0 6px #f07f8b;
     background: url('http://tchoukball.ch/pictures/logoTBW.png') left center no-repeat, -webkit-linear-gradient(#d51f1f 0%, #ff9d9d 100%);
     background: url('http://tchoukball.ch/pictures/logoTBW.png') left center no-repeat, -moz-linear-gradient(#d51f1f 0%, #ff9d9d 100%);
     background: url('http://tchoukball.ch/pictures/logoTBW.png') left center no-repeat, -o-linear-gradient(#d51f1f 0%, #ff9d9d 100%);
@@ -2320,8 +2178,8 @@ ul.EWCMatchesTypesKey {
 
 #adminPopUp {
     position: fixed;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     padding: 3px;
     text-align: center;
     font-weight: bold;
@@ -2378,6 +2236,10 @@ ul.EWCMatchesTypesKey {
     margin: auto
 }
 
+.formActions {
+    text-align: center;
+}
+
 .formulaireAnnuaire fieldset {
     padding: 5px;
     margin: 5px;
@@ -2389,7 +2251,9 @@ ul.EWCMatchesTypesKey {
     width: 210px;
 }
 
-.formulaireAnnuaire input, .formulaireAnnuaire textarea, .formulaireAnnuaire select {
+.formulaireAnnuaire input,
+.formulaireAnnuaire textarea,
+.formulaireAnnuaire select {
     display: block;
     margin-left: 220px;
     margin-top: 10px;
@@ -2399,7 +2263,7 @@ ul.EWCMatchesTypesKey {
 /* !Formulaires administration */
 
 .adminForm fieldset {
-    width: 400px;
+    width: 100%;
     margin: auto;
     position: relative;
     margin-top: 30px;
@@ -2425,8 +2289,8 @@ ul.EWCMatchesTypesKey {
     position: absolute;
     width: 100px;
 
-    top: 0px; /* On positionne notre infobulle. */
-    left: 430px;
+    top: 0; /* On positionne notre infobulle. */
+    right: 20px;
 
     background: white;
 
@@ -2445,8 +2309,8 @@ ul.EWCMatchesTypesKey {
 .adminForm span#infoPreview {
     position: absolute;
     width: 180px;
-    top: 0px;
-    left: -180px;
+    top: 0;
+    left: 0;
     padding: 3px;
     color: #333333;
     border: 1px solid #e2001a;
@@ -2463,46 +2327,97 @@ ul.EWCMatchesTypesKey {
     color: #CC3333;
 }
 
-.adminForm input, .adminForm select, .adminForm textarea, .adminForm p, .adminForm h4 {
+.adminForm input,
+.adminForm select,
+.adminForm textarea,
+.adminForm .givenData,
+.adminForm h4 {
     display: block;
-    width: 285px;
+    width: 400px;
     margin-bottom: 10px;
-    font-size: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
-.adminForm input, .adminForm select {
+.adminForm .tags {
+    margin-bottom: 10px;
+    width: 400px;
+}
+
+.adminForm .tags input {
+    width: 20px;
+}
+
+.adminForm .tags input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.adminForm table {
+    border-collapse: collapse;
+    width: 400px;
+    margin-bottom: 10px;
+}
+
+.adminForm table td {
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
+
+.adminForm table td.notCell {
+    border: none;
+}
+
+.adminForm table td.amountTotal {
+    font-weight: bold;
+}
+
+.adminForm input,
+.adminForm select,
+.adminForm textarea{
     border-color: #CCCCCC;
     -webkit-font-smoothing: antialiased;
-    height: 20px;
+    padding: 8px;
+    margin-top: 0;
 }
 
-.adminForm textarea {
-    border-color: #CCCCCC;
-    width: 280px;
+.adminForm .tags {
+    border-color: #cccccc;
 }
 
 .adminForm input:focus, .adminForm select:focus, .adminForm textarea:focus {
     border-color: #FF9999;
     outline: none;
-    -webkit-box-shadow: 0px 0px 5px #FF9999;
-    -moz-box-shadow: 0px 0px 5px #FF9999;
-    box-shadow: 0px 0px 5px #FF9999;
+    -webkit-box-shadow: 0 0 5px #FF9999;
+    -moz-box-shadow: 0 0 5px #FF9999;
+    box-shadow: 0 0 5px #FF9999;
 }
 
-.adminForm input[type=text], .adminForm textarea {
+.adminForm input[type=text],
+.adminForm textarea,
+.adminForm .tags {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
 }
 
+.adminForm input.ng-invalid.ng-touched,
+.adminForm textarea.ng-invalid.ng-touched,
+.adminForm tags-input.ng-invalid.ng-touched .tags {
+    background-color: #FF9999;
+    box-shadow: none;
+}
+
 .adminForm input[type=submit] {
-    margin-top: 20px;
     width: auto;
     margin: auto;
+    margin-top: 20px;
 }
 
 .adminForm input[type=checkbox] {
-    margin-left: 110px;
+    margin-left: 260px;
+    height: 30px;
 }
 
 .adminForm input[readonly],
@@ -2512,19 +2427,19 @@ ul.EWCMatchesTypesKey {
 }
 
 .adminForm select {
-    height: 24px;
+    height: 35px;
 }
 
 .adminForm label {
     float: left;
     display: block;
-    font-size: 12px;
-    width: 100px;
+    font-size: 14px;
+    width: 250px;
     height: 20px;
     color: #666;
     text-align: right;
     padding-right: 10px;
-    padding-top: 6px;
+    padding-top: 10px;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -2539,7 +2454,6 @@ ul.EWCMatchesTypesKey {
 }
 
 .adminForm .birthDate {
-    width: 310px;
     margin-left: 90px;
 }
 
@@ -2552,11 +2466,30 @@ ul.EWCMatchesTypesKey {
     padding-left: 5px;
 }
 
-.adminForm p {
-    padding-top: 3px;
+.adminForm .givenData {
+    padding-top: 10px;
+    width: auto;
 }
 
 /* Fin formulaires administration */
+
+/* ngTagsInput override */
+tags-input .tags {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+tags-input.ng-invalid.ng-untouched .tags {
+    box-shadow: none;
+}
+
+tags-input .tags .tag-item {
+    background: #efefef;
+}
+
+tags-input .tags input {
+    background-color: transparent;
+}
 
 /* !Tableaux administration */
 
@@ -2934,7 +2867,7 @@ table#refereePoints td {
 
 #cahierDesCharges > ul {
     list-style-type: none;
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 #cahierDesCharges > ul li {

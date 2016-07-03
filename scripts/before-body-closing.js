@@ -1,4 +1,5 @@
 function equalsSidebarAndMain() {
+	'use strict';
 	var sidebar = $('#sidebar');
 	var main = $('#site > main');
 
@@ -11,6 +12,7 @@ function equalsSidebarAndMain() {
 }
 
 $(function(){ // Wait that the page is ready
+	'use strict';
 	//Navigation
 	$('nav#main-nav h1').click(function() {
 		$(this).next('ul').toggle();
@@ -27,10 +29,13 @@ $(function(){ // Wait that the page is ready
     });
 });
 
-$(window).load(function() { // Wait that all the images are loaded
+$(window).on('load', function() { // Wait that all the images are loaded
+	'use strict';
 	// Make the sidebar and the main content the same height
 	equalsSidebarAndMain();
 });
+
+/* jshint ignore:start */
 
 // Google Analytics
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -44,15 +49,21 @@ ga('send', 'pageview');
 // Google+
 window.___gcfg = {lang: '<?php echo strtolower($_SESSION["__langue__"]);?>'};
 
+/* jshint ignore:end */
+
 (function() {
-var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-po.src = 'https://apis.google.com/js/platform.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	'use strict';
+	var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	po.src = 'https://apis.google.com/js/platform.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
 })();
 
 (function() {
-	$('#footer').css('top', $('#footer').outerHeight());
+	'use strict';
 
-	var contentHeight = $(window).height() - $('#header').outerHeight() - $('#footer').outerHeight();
+	var footer = $('#footer');
+	footer.css('top', footer.outerHeight());
+
+	var contentHeight = $(window).height() - $('#header').outerHeight() - footer.outerHeight();
 	$('#contenu').css('min-height', contentHeight);
 })();

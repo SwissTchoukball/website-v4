@@ -1,0 +1,80 @@
+<h2>Saison {{$ctrl.categoryBySeason.seasonName}}, {{$ctrl.categoryBySeason.category.name}}</h2>
+<form name="championshipRegistrationForm" class="adminForm" novalidate>
+    <label>Club</label>
+    <div class="givenData">{{$ctrl.club.fullName}}</div>
+
+    <label for="teamName">Nom de l'équipe</label>
+    <input id="teamName" type="text" ng-model="$ctrl.teamName" ng-required="true"/>
+
+    <label>Responsable d'équipe</label>
+    <tags-input ng-model="$ctrl.teamManager"
+                add-from-autocomplete-only="true"
+                display-property="fullName"
+                display-key="id"
+                min-tags="1"
+                max-tags="1"
+                replace-spaces-with-dashes="false">
+        <auto-complete source="$ctrl.loadMembersForTeamManager($query)"
+                       display-property="fullName"
+                       template="angular/championshipRegistration/managerAutocomplete.tpl.html">
+        </auto-complete>
+    </tags-input>
+
+    <label for="jerseyColorHome">Couleur maillot domicile</label>
+    <input id="jerseyColorHome" type="text" ng-model="$ctrl.jerseyColorHome" ng-required="true"/>
+
+    <label for="jerseyColorAway">Couleur maillot extérieur</label>
+    <input id="jerseyColorAway" type="text" ng-model="$ctrl.jerseyColorAway" ng-required="true"/>
+
+    <label>Salle(s) pour les matchs à domicile</label>
+    <tags-input ng-model="$ctrl.homeVenue"
+                add-from-autocomplete-only="true"
+                display-property="name"
+                display-key="id"
+                min-tags="1"
+                max-tags="1"
+                replace-spaces-with-dashes="false">
+        <auto-complete source="$ctrl.loadVenues($query)"
+                       display-property="name"
+                       template="angular/championshipRegistration/venueAutocomplete.tpl.html">
+        </auto-complete>
+    </tags-input>
+
+    <label>Joueurs</label>
+    <tags-input ng-model="$ctrl.players"
+                add-from-autocomplete-only="true"
+                display-property="fullName"
+                display-key="id"
+                min-tags="5"
+                replace-spaces-with-dashes="false">
+        <auto-complete source="$ctrl.loadMembersForPlayers($query)"
+                       display-property="fullName">
+        </auto-complete>
+    </tags-input>
+    <label>Coûts</label>
+    <table>
+        <tr>
+            <td>Frais d'inscription ({{$ctrl.categoryBySeason.category.name}})</td>
+            <td>CHF {{$ctrl.categoryBySeason.teamRegistrationFee}}</td>
+        </tr>
+        <tr>
+            <td>{{$ctrl.players.length}} licences à CHF {{$ctrl.categoryBySeason.playerLicenseFee}}</td>
+            <td>CHF {{$ctrl.getTotalLicensesCost()}}</td>
+        </tr>
+        <tr>
+            <td class="notCell"></td>
+            <td class="amountTotal">CHF {{$ctrl.getTotalCost()}}</td>
+        </tr>
+    </table>
+    <div class="formActions">
+        <button class="button button--cancel"
+                ng-click="$ctrl.goBack()">
+            Annuler
+        </button>
+        <button class="button button--primary"
+                ng-click="$ctrl.submitForm()"
+                ng-disabled="championshipRegistrationForm.$invalid || $ctrl.sending">
+            Envoyer l'inscription
+        </button>
+    </div>
+</form>

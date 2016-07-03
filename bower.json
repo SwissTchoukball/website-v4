@@ -2,6 +2,8 @@
   "name": "swisstchoukball-website",
   "dependencies": {
     "angular": "1.5.7",
-    "jspdf": "1.2.61"
+    "ng-tags-input": "3.1.1",
+    "jspdf": "1.2.61",
+    "retina.js": "2.1.0"
   }
 }

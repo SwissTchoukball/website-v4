@@ -77,3 +77,7 @@ pictures/portraits/
 ##########
 vendor/
 node_modules/
+
+# Build files #
+###############
+build/*

@@ -33,16 +33,16 @@ echo '</form>';
 
 $categoriesQuery = "SELECT c.idCategorie,
                            c.categorie{$_SESSION['__langue__']} AS nomCategorie,
-                           d.montantDefraiementArbitre
-                    FROM Championnat_Categories c, Championnat_Defraiements d
-                    WHERE c.idCategorie = d.idCategorie
-                      AND d.saison = $season";
+                           cps.refereeDefrayalAmount
+                    FROM Championnat_Categories c, Championnat_Categories_Par_Saison cps
+                    WHERE c.idCategorie = cps.categoryId
+                      AND cps.season = $season";
 $categories = array();
 if ($result = mysql_query($categoriesQuery)) {
     while ($category = mysql_fetch_assoc($result)) {
         $cid = $category['idCategorie'];
         $categories[$cid]['name'] = $category['nomCategorie'];
-        $categories[$cid]['defrayalAmount'] = $category['montantDefraiementArbitre'];
+        $categories[$cid]['defrayalAmount'] = $category['refereeDefrayalAmount'];
     }
 } else {
     printErrorMessage("Problème lors de la récupération de la liste des catégories");

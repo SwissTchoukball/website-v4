@@ -285,7 +285,8 @@ if ($newMember) {
                              a.descriptionArbitre".$_SESSION['__langue__']." AS niveauArbitre, arbitrePublic, suspendu,
                              typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
-                             cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert
+                             cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
+                             cj.id AS idParticipationChampionnat
                       FROM DBDPersonne p
                       LEFT OUTER JOIN DBDArbitre a ON p.idArbitre = a.idArbitre
                       LEFT OUTER JOIN Comite_Membres c ON p.idDbdPersonne = c.idPersonne
@@ -293,6 +294,7 @@ if ($newMember) {
                       LEFT OUTER JOIN Commission_Nom cn ON p.idDbdPersonne = cn.idResponsable
                       LEFT OUTER JOIN CadreNational_Membres cnm ON p.idDbdPersonne = cnm.idPersonne
                       LEFT OUTER JOIN ExpertsJS exp ON p.idDbdPersonne = exp.idPersonne
+                      LEFT OUTER JOIN Championnat_Joueurs cj ON p.idDbdPersonne = cj.personId
                       WHERE idDbdPersonne=".$idMemberToEdit."
                       LIMIT 1";
     $memberResult = mysql_query($memberRequest);
@@ -336,6 +338,7 @@ if ($newMember) {
             $isCommissionMember = $member['idCommissionMembre'] != null || $member['idCommissionResponsable'] != null;
             $isSwissTeamMember = $member['idEquipeMembre'] != null;
             $isJSExpert = $member['idExpert'] != null;
+            $isChampionshipPlayer = $member['idParticipationChampionnat'] != null;
             $typeCompte = $member['typeCompte'];
             $numeroCompte = $member['numeroCompte'];
             $remarques = $member['remarque'];
@@ -362,11 +365,12 @@ if ($isSuspended) {
 }
 
 if ($canEdit) {
-    $isFSTBVolunteer = $refereeLevelId > 1 ||
-                       $isCommitteeMember ||
-                       $isCommissionMember ||
-                       $isSwissTeamMember ||
-                       $isJSExpert;
+    $personCanBeDeleted = $refereeLevelId > 1 ||
+        $isCommitteeMember ||
+        $isCommissionMember ||
+        $isSwissTeamMember ||
+        $isJSExpert ||
+        $isChampionshipPlayer;
     ?>
     <h3><?php echo $formLegend; ?></h3>
     <form method="post"
@@ -376,7 +380,7 @@ if ($canEdit) {
           class="adminForm">
         <fieldset>
             <?php
-            if ($isFSTBVolunteer && !hasAllMembersManagementAccess()) {
+            if ($personCanBeDeleted && !hasAllMembersManagementAccess()) {
                 $canEditName = false;
             } else {
                 $canEditName = true;
@@ -675,7 +679,7 @@ if ($canEdit) {
              '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
              </a></p>';
 
-        if ($isFSTBVolunteer) {
+        if ($personCanBeDeleted) {
             echo '<p>'.$name.' est, ou a été :</p>';
             echo '<ul>';
             echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
@@ -683,11 +687,12 @@ if ($canEdit) {
             echo $isJSExpert ? '<li>Expert J+S</li>' : '';
             echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
             echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
+            echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
             echo '</ul>';
             echo '<p>et ne peut donc pas être supprimé.</p>';
         }
 
-        if (!$isFSTBVolunteer) {
+        if (!$personCanBeDeleted) {
             ?>
             <p class="delete-member">
                 <a href="?menuselection=<?php echo $menuselection;

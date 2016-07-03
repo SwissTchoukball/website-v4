@@ -88,7 +88,7 @@
 <form name="mesInfos" class="adminForm" method="post" onSubmit="return controlerSaisie();" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
 <fieldset>
 	<label>Nom d'utilisateur</label>
-	<p><?php echo stripslashes($record["username"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["username"]);?></div>
 	<?php
 	if (isAdmin()) {
 		?>
@@ -98,9 +98,9 @@
 	}
 	?>
 	<label>Nom</label>
-	<p><?php echo stripslashes($record["nom"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["nom"]);?></div>
 	<label>Prénom</label>
-	<p><?php echo stripslashes($record["prenom"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["prenom"]);?></div>
 </fieldset>
 <fieldset>
 	<label>Adresse</label>
