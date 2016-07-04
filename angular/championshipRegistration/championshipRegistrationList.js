@@ -15,6 +15,10 @@ angular
 
                 var $ctrl = this;
 
+                // TODO: List the submitted registration
+                // TODO: Add possibility to edit submitted registration
+                // TODO: Hide access to the form of a category a club cannot register (anymore) (e.g. ligue A)
+
                 backendService.getOpenCategoriesBySeason()
                     .then(function(openCategoriesBySeason) {
                         $ctrl.openCategoriesBySeason = openCategoriesBySeason;

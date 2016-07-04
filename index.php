@@ -97,6 +97,13 @@
             echo "<br /><a href='http://comite.tchoukball.ch' title='Accéder au Forum \"Comité et Commissions " . VAR_LANG_ASSOCIATION_NAME . "\"'>Forum</a>";
             echo "<br /><a href='" . PATH_TO_ROOT . "/logout'>".VAR_LANG_DECONNEXION."</a>";
             echo "</div>";
+            ?>
+            
+            <script type="text/javascript">
+                var stAuthdata = '<?php echo $_SESSION['__authdata__']; ?>';
+            </script>
+            
+            <?php
         }
         ?>
 

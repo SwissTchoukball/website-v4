@@ -4,6 +4,9 @@
  * @copyright   Swiss Tchoukball 2016
  * @author      David Sandoz <david.sandoz@tchoukball.ch>
  */
+
+/* globals stAuthdata */
+
 (function() {
     'use strict';
 
@@ -20,14 +23,23 @@
 
                 var apiUrl = 'http://localhost:8082'; //TODO handle dev/production separation
                 var lang = document.documentElement.lang;
+                var basicAuth;
+
+                if (stAuthdata && stAuthdata.length > 0) {
+                    basicAuth = 'Basic ' + stAuthdata;
+                }
 
                 var sendGetRequest = function(url) {
                     var deferred = $q.defer();
+                    var headers = {
+                        'Accept-Language': lang
+                    };
+                    // Add Authorization headers if user is connected
+                    if (basicAuth) {
+                        headers['Authorization'] = basicAuth; // jshint ignore: line
+                    }
                     $http.get(apiUrl + url, {
-                        headers: {
-                            //'Authorization': 'ST-AUTH username="", hash=""', //TODO fill username and hash
-                            'Accept-Language': lang
-                        }
+                        headers: headers
                     })
                         .success(function(data) {
                             deferred.resolve(data);
@@ -41,11 +53,15 @@
 
                 var sendPostRequest = function(url, payload) {
                     var deferred = $q.defer();
+                    var headers = {
+                        'Accept-Language': lang
+                    };
+                    // Add Authorization headers if user is connected
+                    if (basicAuth) {
+                        headers['Authorization'] = basicAuth; // jshint ignore: line
+                    }
                     $http.post(apiUrl + url, payload, {
-                        headers: {
-                            //'Authorization': 'ST-AUTH username="", hash=""', //TODO fill username and hash
-                            'Content-Type': 'application/json'
-                        }
+                        headers: headers
                     }).success(function(data) {
                         deferred.resolve(data);
                     }).error(function(data) {
