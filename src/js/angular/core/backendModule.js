@@ -79,16 +79,20 @@
                     return sendGetRequest('/club/' + idClub);
                 };
 
+                BackendService.prototype.getClubMembers = function(idClub, query) {
+                    return sendGetRequest('/club/' + idClub + '/members?query=' + query);
+                };
+
+                BackendService.prototype.getClubTeams = function(idClub) {
+                    return sendGetRequest('/club/' + idClub + '/teams');
+                };
+
                 BackendService.prototype.getOpenCategoriesBySeason = function() {
                     return sendGetRequest('/championship/categories-by-season');
                 };
 
                 BackendService.prototype.getVenues = function(query) {
                     return sendGetRequest('/venues?query=' + query);
-                };
-
-                BackendService.prototype.getClubMembers = function(idClub, query) {
-                    return sendGetRequest('/club/' + idClub + '/members?query=' + query);
                 };
 
 

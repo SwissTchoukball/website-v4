@@ -7,9 +7,13 @@ var sourcemaps = require('gulp-sourcemaps');
 
 var files = {
     js: [
-        'angular/**/*Module.js',
-        'angular/**/*Config.js',
-        'angular/**/*.js'
+        'src/js/polyfills/*.js',
+        'src/js/angular/**/*Module.js',
+        'src/js/angular/**/*Config.js',
+        'src/js/angular/**/*.js'
+    ],
+    less: [
+        'src/less/**/*.js'
     ],
     jsLib: [
         'vendor/bower/angular/angular.min.js',

@@ -1,0 +1,34 @@
+<div ng-if="!$ctrl.selectedCategoryBySeason">
+    <!-- Open registrations forms -->
+    <h2>Formulaires d'inscriptions</h2>
+    <ul>
+        <li ng-repeat="categoryBySeason in $ctrl.openCategoriesBySeason">
+            <span class="asLink"
+                  ng-click="$ctrl.selectCategoryBySeason(categoryBySeason)">
+                Saison {{categoryBySeason.season.name}}, {{categoryBySeason.category.name}}
+            </span>
+        </li>
+    </ul>
+
+    <!-- Registered teams -->
+    <h2>Équipes inscrites</h2>
+    <ul>
+        <li ng-repeat="team in $ctrl.teams">
+            <span class="asLink"
+                  ng-click="$ctrl.selectTeam(team.id)">
+                Saison {{team.season.name}}, {{team.category.name}} : {{team.name}}
+            </span>
+            <span class="label label--ok" ng-if="team.feePaymentDate">Payé</span>
+            <span class="label label--error" ng-if="!team.feePaymentDate">Non-payé</span>
+        </li>
+    </ul>
+</div>
+
+
+<st-championship-registration-form
+        ng-if="$ctrl.selectedCategoryBySeason"
+        st-category-by-season="$ctrl.selectedCategoryBySeason"
+        st-club="$ctrl.club"
+        st-go-back="$ctrl.unselectCategoryBySeason()"
+        st-send-registration="$ctrl.sendRegistration(registration)">
+</st-championship-registration-form>

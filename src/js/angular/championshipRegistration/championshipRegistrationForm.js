@@ -8,7 +8,7 @@ angular
     .component('stChampionshipRegistrationForm', {
         bindings: {
             categoryBySeason: '<stCategoryBySeason',
-            clubId: '@stClubId',
+            club: '<stClub',
             goBack: '&stGoBack',
             sendRegistration: '&stSendRegistration'
         },
@@ -22,11 +22,6 @@ angular
                 $ctrl.teamManager = [];
                 $ctrl.players = [];
                 $ctrl.sending = false;
-
-                backendService.getClub($ctrl.clubId)
-                    .then(function(club) {
-                        $ctrl.club = club;
-                    });
 
                 $ctrl.getTotalLicensesCost = function() {
                     return $ctrl.players.length * $ctrl.categoryBySeason.playerLicenseFee;
@@ -82,6 +77,6 @@ angular
                 };
 
             }],
-        templateUrl: 'angular/championshipRegistration/championshipRegistrationForm.tpl.html'
+        templateUrl: 'src/js/angular/championshipRegistration/championshipRegistrationForm.tpl.html'
     });
 
