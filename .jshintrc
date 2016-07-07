@@ -89,6 +89,7 @@
   // Custom Globals
   "globals"       : {
     "angular"     : false,
+    "_"           : false,
     "$"           : false
   }        // additional predefined global variables
 }

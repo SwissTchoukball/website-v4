@@ -16,7 +16,7 @@
                 replace-spaces-with-dashes="false">
         <auto-complete source="$ctrl.loadMembersForTeamManager($query)"
                        display-property="fullName"
-                       template="angular/championshipRegistration/managerAutocomplete.tpl.html">
+                       template="src/js/angular/championshipRegistration/managerAutocomplete.tpl.html">
         </auto-complete>
     </tags-input>
 
@@ -26,7 +26,7 @@
     <label for="jerseyColorAway">Couleur maillot extérieur</label>
     <input id="jerseyColorAway" type="text" ng-model="$ctrl.jerseyColorAway" ng-required="true"/>
 
-    <label>Salle(s) pour les matchs à domicile</label>
+    <label>Salle pour les matchs à domicile</label>
     <tags-input ng-model="$ctrl.homeVenue"
                 add-from-autocomplete-only="true"
                 display-property="name"
@@ -36,7 +36,7 @@
                 replace-spaces-with-dashes="false">
         <auto-complete source="$ctrl.loadVenues($query)"
                        display-property="name"
-                       template="angular/championshipRegistration/venueAutocomplete.tpl.html">
+                       template="src/js/angular/championshipRegistration/venueAutocomplete.tpl.html">
         </auto-complete>
     </tags-input>
 

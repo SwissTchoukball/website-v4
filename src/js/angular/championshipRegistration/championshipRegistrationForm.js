@@ -43,13 +43,13 @@ angular
                 $ctrl.loadMembersForTeamManager = function(query) {
                     //If there is already one team manager, we don't return any other suggestion
                     if($ctrl.teamManager.length < 1) {
-                        return backendService.getClubMembers($ctrl.clubId, query);
+                        return backendService.getClubMembers($ctrl.club.id, query);
                     }
                     return [];
                 };
 
                 $ctrl.loadMembersForPlayers = function(query) {
-                    return backendService.getClubMembers($ctrl.clubId, query);
+                    return backendService.getClubMembers($ctrl.club.id, query);
                 };
 
                 $ctrl.submitForm = function() {
@@ -57,7 +57,7 @@ angular
                     $ctrl.sendRegistration({
                         'registration': {
                             'categoryBySeasonId': $ctrl.categoryBySeason.id,
-                            'clubId': $ctrl.clubId,
+                            'clubId': $ctrl.club.id,
                             'teamName': $ctrl.teamName,
                             'teamManagerId': $ctrl.teamManager[0].id,
                             'jerseyColorHome': $ctrl.jerseyColorHome,
@@ -73,7 +73,6 @@ angular
                     }, function() {
                         $ctrl.sending = false;
                     });
-
                 };
 
             }],

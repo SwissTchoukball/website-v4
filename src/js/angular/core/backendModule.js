@@ -75,16 +75,20 @@
                 |* GET requests *|
                 \*--------------*/
 
-                BackendService.prototype.getClub = function(idClub) {
-                    return sendGetRequest('/club/' + idClub);
+                BackendService.prototype.getClub = function(clubId) {
+                    return sendGetRequest('/club/' + clubId);
                 };
 
-                BackendService.prototype.getClubMembers = function(idClub, query) {
-                    return sendGetRequest('/club/' + idClub + '/members?query=' + query);
+                BackendService.prototype.getClubMembers = function(clubId, query) {
+                    return sendGetRequest('/club/' + clubId + '/members?query=' + query);
                 };
 
-                BackendService.prototype.getClubTeams = function(idClub) {
-                    return sendGetRequest('/club/' + idClub + '/teams');
+                BackendService.prototype.getClubTeams = function(clubId) {
+                    return sendGetRequest('/club/' + clubId + '/teams');
+                };
+
+                BackendService.prototype.getClubTeam = function(clubId, teamId) {
+                    return sendGetRequest('/club/' + clubId + '/team/' + teamId);
                 };
 
                 BackendService.prototype.getOpenCategoriesBySeason = function() {
@@ -102,6 +106,10 @@
 
                 BackendService.prototype.postChampionshipTeamRegistration = function(registration) {
                     return sendPostRequest('/championship/register-team', registration);
+                };
+
+                BackendService.prototype.postChampionshipPlayersRegistration = function(registration) {
+                    return sendPostRequest('/championship/register-players', registration);
                 };
 
 

@@ -15,9 +15,6 @@ angular
 
                 var $ctrl = this;
 
-                // TODO: Add possibility to see submitted registration (or simply to see team)
-                // TODO: Add possibility to add players
-
                 backendService.getClub($ctrl.clubId)
                     .then(function(club) {
                         $ctrl.club = club;
@@ -60,6 +57,21 @@ angular
                         });
                     });
 
+                $ctrl.loadMembersForNewPlayers = function(query) {
+                    return backendService.getClubMembers($ctrl.club.id, query)
+                        .then(function(members) {
+                            var deferred = $q.defer();
+
+                            // Removing the members that are already in the team
+                            deferred.resolve(members.filter(function(member) {
+                                return !_.some($ctrl.selectedTeam.players, {id: member.id});
+                            }));
+
+                            return deferred.promise;
+                        });
+                };
+
+                // The four methods below are a BAD way of doing routing.
                 $ctrl.selectCategoryBySeason = function(categoryBySeason) {
                     $ctrl.selectedCategoryBySeason = categoryBySeason;
                 };
@@ -68,8 +80,35 @@ angular
                     $ctrl.selectedCategoryBySeason = undefined;
                 };
 
+                $ctrl.selectTeam = function(teamId) {
+                    backendService.getClubTeam($ctrl.club.id, teamId)
+                        .then(function(team) {
+                            $ctrl.selectedTeam = team;
+                        });
+                };
+
+                $ctrl.unselectTeam = function() {
+                    $ctrl.selectedTeam = undefined;
+                };
+
                 $ctrl.sendRegistration = function(registration) {
                     return backendService.postChampionshipTeamRegistration(registration);
+                };
+
+                $ctrl.submitNewPlayers = function() {
+                    $ctrl.sendingNewPlayers = true;
+                    backendService.postChampionshipPlayersRegistration({
+                        'teamId': $ctrl.selectedTeam.id,
+                        'playersId': $ctrl.newPlayers.map(function(player) {
+                            return player.id;
+                        })
+                    }).then(function() {
+                        $ctrl.selectedTeam.players = $ctrl.selectedTeam.players.concat($ctrl.newPlayers);
+                        $ctrl.newPlayers = [];
+                        $ctrl.sendingNewPlayers = false;
+                    }, function() {
+                        $ctrl.sendingNewPlayers = false;
+                    });
                 };
 
             }],

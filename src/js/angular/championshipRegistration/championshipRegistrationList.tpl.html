@@ -1,4 +1,4 @@
-<div ng-if="!$ctrl.selectedCategoryBySeason">
+<div ng-if="!$ctrl.selectedCategoryBySeason && !$ctrl.selectedTeam">
     <!-- Open registrations forms -->
     <h2>Formulaires d'inscriptions</h2>
     <ul>
@@ -32,3 +32,53 @@
         st-go-back="$ctrl.unselectCategoryBySeason()"
         st-send-registration="$ctrl.sendRegistration(registration)">
 </st-championship-registration-form>
+
+<!-- Selected team -->
+<div ng-if="$ctrl.selectedTeam">
+    <p><span class="asLink" ng-click="$ctrl.unselectTeam()">Retour</span></p>
+    <h2>{{$ctrl.selectedTeam.name}}, saison {{$ctrl.selectedTeam.season.name}}, {{$ctrl.selectedTeam.category.name}}</h2>
+    <h3>Frais d'inscription</h3>
+    <p>
+        <span ng-if="$ctrl.selectedTeam.feePaymentDate">
+            Payés le {{$ctrl.selectedTeam.feePaymentDate}}
+        </span>
+        <span ng-if="!$ctrl.selectedTeam.feePaymentDate">
+            Non-payés
+        </span>
+    </p>
+    <h3>Responsable d'équipe</h3>
+    <p>
+        {{$ctrl.selectedTeam.manager.firstName}} {{$ctrl.selectedTeam.manager.lastName}}<br />
+        {{$ctrl.selectedTeam.manager.email}}<br />
+        {{$ctrl.selectedTeam.manager.phoneNumber}} / {{$ctrl.selectedTeam.manager.mobileNumber}}
+    </p>
+    <h3>Salle pour les matchs à domicile</h3>
+    <p><a href="/lieu/{{$ctrl.selectedTeam.homeVenue.id}}">{{$ctrl.selectedTeam.homeVenue.name}}</a></p>
+    <h3>Joueuses et joueurs</h3>
+    <ul>
+        <li ng-repeat="player in $ctrl.selectedTeam.players">
+            {{player.firstName}} {{player.lastName}} :
+            <span class="label label--ok" ng-if="player.licensePaymentDate">Payé</span>
+            <span class="label label--error" ng-if="!player.licensePaymentDate">Non-payé</span>
+        </li>
+    </ul>
+    <form name="addPlayersForm" class="adminForm" novalidate>
+        <label>Ajouter des joueurs</label>
+        <tags-input ng-model="$ctrl.newPlayers"
+                    add-from-autocomplete-only="true"
+                    display-property="fullName"
+                    display-key="id"
+                    replace-spaces-with-dashes="false">
+            <auto-complete source="$ctrl.loadMembersForNewPlayers($query)"
+                           display-property="fullName">
+            </auto-complete>
+        </tags-input>
+        <div class="formActions">
+            <button class="button button--primary"
+                    ng-click="$ctrl.submitNewPlayers()"
+                    ng-disabled="addPlayersForm.$invalid || $ctrl.sendingNewPlayers">
+                Ajouter
+            </button>
+        </div>
+    </form>
+</div>

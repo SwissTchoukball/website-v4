@@ -18,6 +18,7 @@ var files = {
     jsLib: [
         'vendor/bower/angular/angular.min.js',
         'vendor/bower/ng-tags-input/ng-tags-input.min.js',
+        'vendor/bower/lodash/dist/lodash.min.js',
         'vendor/bower/jspdf/dist/jspdf.min.js',
         'vendor/bower/retina.js/dist/retina.min.js'
     ],
