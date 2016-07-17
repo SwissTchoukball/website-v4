@@ -2,5 +2,6 @@
 <div>
     <span ng-if="data.phoneNumber">{{data.phoneNumber}},</span>
     <span ng-if="data.mobileNumber">{{data.mobileNumber}},</span>
-    <span ng-if="data.email">{{data.email}}</span>
+    <span ng-if="data.emailFSTB">{{data.emailFSTB}}</span>
+    <span ng-if="!data.emailFSTB && data.email">{{data.email}}</span>
 </div>

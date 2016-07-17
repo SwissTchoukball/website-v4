@@ -43,13 +43,11 @@
                     }
                     $http.get(apiUrl + url, {
                         headers: headers
-                    })
-                        .success(function(data) {
-                            deferred.resolve(data);
-                        })
-                        .error(function(data) {
-                            deferred.reject(data);
-                        });
+                    }).then(function(response) {
+                        deferred.resolve(response.data);
+                    }, function(response) {
+                        deferred.reject(response.data);
+                    });
 
                     return deferred.promise;
                 };
@@ -65,18 +63,18 @@
                     }
                     $http.post(apiUrl + url, payload, {
                         headers: headers
-                    }).success(function(data) {
-                        deferred.resolve(data);
-                    }).error(function(data) {
-                        deferred.reject(data);
+                    }).then(function(response) {
+                        deferred.resolve(response);
+                    }, function(response) {
+                        deferred.reject(response);
                     });
 
                     return deferred.promise;
                 };
 
-                /*--------------*\
-                |* GET requests *|
-                \*--------------*/
+                /*--------------*
+                 * GET requests *
+                 *--------------*/
 
                 BackendService.prototype.getClub = function(clubId) {
                     return sendGetRequest('/club/' + clubId);
@@ -90,8 +88,12 @@
                     return sendGetRequest('/club/' + clubId + '/teams');
                 };
 
-                BackendService.prototype.getOpenCategoriesBySeason = function() {
+                BackendService.prototype.getCategoriesBySeason = function() {
                     return sendGetRequest('/championship/categories-by-season');
+                };
+
+                BackendService.prototype.getOpenCategoriesBySeason = function() {
+                    return sendGetRequest('/championship/categories-by-season?status=open');
                 };
 
                 BackendService.prototype.getTeams = function() {
@@ -107,9 +109,9 @@
                 };
 
 
-                /*---------------*\
-                |* POST requests *|
-                \*---------------*/
+                /*---------------*
+                 * POST requests *
+                 *---------------*/
 
                 BackendService.prototype.postChampionshipTeamRegistration = function(registration) {
                     return sendPostRequest('/championship/register-team', registration);

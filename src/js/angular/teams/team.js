@@ -18,6 +18,16 @@ angular
 
                 // List of the players shown to the user. Assigning a new variable so that it can be changed
                 $ctrl.players = $ctrl.team.players;
+                $ctrl.unpaidLicensesCost = 0;
+
+                $ctrl.updateUnpaidLicensesCost = function() {
+                    $ctrl.unpaidLicensesCost = 0;
+                    $ctrl.players.map(function(player) {
+                        if(!player.licensePaymentDate) {
+                            $ctrl.unpaidLicensesCost += $ctrl.team.categoryBySeason.playerLicenseFee;
+                        }
+                    });
+                };
 
                 $ctrl.loadMembersForNewPlayers = function(query) {
                     return backendService.getClubMembers($ctrl.team.club.id, query)
@@ -47,12 +57,14 @@ angular
                             return player;
                         }));
                         $ctrl.newPlayers = [];
+                        $ctrl.updateUnpaidLicensesCost();
                         $ctrl.sendingNewPlayers = false;
                     }, function() {
-                        // TODO: handle error (show message to user)
                         $ctrl.sendingNewPlayers = false;
                     });
                 };
+
+                $ctrl.updateUnpaidLicensesCost();
 
             }],
         templateUrl: 'src/js/angular/teams/team.tpl.html'

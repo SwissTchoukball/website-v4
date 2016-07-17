@@ -2473,24 +2473,6 @@ ul.EWCMatchesTypesKey {
 
 /* Fin formulaires administration */
 
-/* ngTagsInput override */
-tags-input .tags {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-tags-input.ng-invalid.ng-untouched .tags {
-    box-shadow: none;
-}
-
-tags-input .tags .tag-item {
-    background: #efefef;
-}
-
-tags-input .tags input {
-    background-color: transparent;
-}
-
 /* !Tableaux administration */
 
 table.adminTable td.action {

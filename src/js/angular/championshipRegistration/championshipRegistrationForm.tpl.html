@@ -1,5 +1,26 @@
-<h2>Saison {{$ctrl.categoryBySeason.seasonName}}, {{$ctrl.categoryBySeason.category.name}}</h2>
-<form name="championshipRegistrationForm" class="adminForm" novalidate>
+<h2>Saison {{$ctrl.categoryBySeason.season.name}}, {{$ctrl.categoryBySeason.category.name}}</h2>
+
+<!-- Confirmation screen -->
+<div ng-if="$ctrl.submitted">
+    <p class="success">
+        Inscription de l'équipe <em>{{$ctrl.teamName}}</em> correctement enregistrée.
+    </p>
+    <p class="info">
+        Merci d'effectuer le paiement des <strong>CHF {{$ctrl.getTotalCost()}}</strong>
+        d'ici au <strong>{{$ctrl.categoryBySeason.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
+        sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
+    </p>
+    <button class="button button--primary"
+            ng-click="$ctrl.goBack()">
+        Retour
+    </button>
+</div>
+
+<!-- Registration Form -->
+<form ng-if="!$ctrl.submitted"
+      name="championshipRegistrationForm"
+      class="adminForm"
+      novalidate>
     <label>Club</label>
     <div class="givenData">{{$ctrl.club.fullName}}</div>
 
@@ -45,7 +66,7 @@
                 add-from-autocomplete-only="true"
                 display-property="fullName"
                 display-key="id"
-                min-tags="5"
+                min-tags="1"
                 replace-spaces-with-dashes="false">
         <auto-complete source="$ctrl.loadMembersForPlayers($query)"
                        display-property="fullName">

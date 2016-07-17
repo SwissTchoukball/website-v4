@@ -6,5 +6,6 @@
 angular
     .module('swisstchoukball.website', [
         'swisstchoukball.backend',
+        'angularMoment',
         'ngTagsInput'
     ]);

@@ -9,8 +9,21 @@ angular
         function($httpProvider, tagsInputConfigProvider) {
             'use strict';
 
+            $httpProvider.interceptors.push('stHttpInterceptor');
+
             tagsInputConfigProvider.setDefaults('tagsInput', {
                 placeholder: ''
             });
+        }
+    ]);
+
+
+angular
+    .module('swisstchoukball.website')
+    .run(['amMoment',
+        function(amMoment) {
+            'use strict';
+
+            amMoment.changeLocale(document.documentElement.lang);
         }
     ]);

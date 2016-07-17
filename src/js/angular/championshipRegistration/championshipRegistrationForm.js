@@ -22,6 +22,7 @@ angular
                 $ctrl.teamManager = [];
                 $ctrl.players = [];
                 $ctrl.sending = false;
+                $ctrl.submitted = false;
 
                 $ctrl.getTotalLicensesCost = function() {
                     return $ctrl.players.length * $ctrl.categoryBySeason.playerLicenseFee;
@@ -49,7 +50,9 @@ angular
                 };
 
                 $ctrl.loadMembersForPlayers = function(query) {
-                    // TODO: filter out members already selected in other teams (only between ligue A and B)
+                    // TODO: filter out members already selected in other teams
+                    // This is necessary only for league A and B. It would be better to have an intermediate
+                    // grouping to do that.
                     return backendService.getClubMembers($ctrl.club.id, query);
                 };
 
@@ -69,10 +72,9 @@ angular
                             })
                         }
                     }).then(function() {
-                        $ctrl.goBack();
                         $ctrl.sending = false;
+                        $ctrl.submitted = true;
                     }, function() {
-                        // TODO: handle error (show message to user)
                         $ctrl.sending = false;
                     });
                 };

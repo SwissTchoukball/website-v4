@@ -31,37 +31,54 @@ angular
 
                 var gotClubTeams = getClubTeams();
 
+                /**
+                 * Filters out the categoriesBySeason where a club is not allowed to register a team
+                 *
+                 * @param categoriesBySeason
+                 * @returns {promise}
+                 */
+                var filterAllowedEditions = function(categoriesBySeason) {
+                    return categoriesBySeason.filter(function(categoryBySeason) {
+                        if (!categoryBySeason.category.isNbSpotLimitedByClub) {
+                            // If there is no limitation in number of registrations
+                            return true;
+                        } else {
+                            // If there is a limitation in number of registrations
+                            // We get the number of spots that the club is allowed to take
+                            var championshipSpotsInThisCategoryBySeason = $ctrl.club.championshipSpots.find(function(category) {
+                                return category.categoryId === categoryBySeason.category.id;
+                            });
+                            var nbSpots = 0;
+                            if (championshipSpotsInThisCategoryBySeason) {
+                                nbSpots = championshipSpotsInThisCategoryBySeason.nbSpots;
+                            }
+
+                            // We get the number of teams the club has already registered
+                            var teamsInThisCategoryBySeason = $ctrl.teams.filter(function(team) {
+                                return team.categoryBySeasonId === categoryBySeason.id;
+                            }).length;
+
+                            if (nbSpots - teamsInThisCategoryBySeason > 0) {
+                                return true;
+                            }
+                        }
+                        return false;
+                    });
+                };
+
                 // We load the categories by season only when the club and its teams are loaded.
                 $q.all([gotClub, gotClubTeams]).then(function() {
                     backendService.getOpenCategoriesBySeason()
                         .then(function(openCategoriesBySeason) {
                             $ctrl.openCategoriesBySeason = openCategoriesBySeason;
                             // We take only the form where a club is allowed to register a team
-                            $ctrl.openCategoriesBySeason = $ctrl.openCategoriesBySeason.filter(function(categoryBySeason) {
-                                if (!categoryBySeason.category.isNbSpotLimitedByClub) {
-                                    // If there is no limitation in number of registrations
-                                    return true;
-                                } else {
-                                    // If there is a limitation in number of registrations
-                                    // We get the number of spots that the club is allowed to take
-                                    var championshipSpotsInThisCategoryBySeason = $ctrl.club.championshipSpots.find(function(category) {
-                                        return category.categoryId === categoryBySeason.category.id;
-                                    });
-                                    var nbSpots = 0;
-                                    if (championshipSpotsInThisCategoryBySeason) {
-                                        nbSpots = championshipSpotsInThisCategoryBySeason.nbSpots;
-                                    }
+                            $ctrl.openCategoriesBySeason = filterAllowedEditions($ctrl.openCategoriesBySeason);
 
-                                    // We get the number of teams the club has already registered
-                                    var teamsInThisCategoryBySeason = $ctrl.teams.filter(function(team) {
-                                        return team.categoryBySeasonId === categoryBySeason.id;
-                                    }).length;
-
-                                    if (nbSpots - teamsInThisCategoryBySeason > 0) {
-                                        return true;
-                                    }
-                                }
-                                return false;
+                            //instantiating the date objects
+                            $ctrl.openCategoriesBySeason = $ctrl.openCategoriesBySeason.map(function(categoryBySeason) {
+                                categoryBySeason.registrationDeadline = new Date(categoryBySeason.registrationDeadline);
+                                categoryBySeason.paymentDeadline = new Date(categoryBySeason.paymentDeadline);
+                                return categoryBySeason;
                             });
                         });
                     });
@@ -73,7 +90,9 @@ angular
 
                 $ctrl.unselectCategoryBySeason = function() {
                     $ctrl.selectedCategoryBySeason = undefined;
-                    getClubTeams();
+                    getClubTeams().then(function() {
+                        $ctrl.openCategoriesBySeason = filterAllowedEditions($ctrl.openCategoriesBySeason);
+                    });
                 };
 
                 $ctrl.selectTeam = function(teamId) {

@@ -39,8 +39,8 @@
         <meta property="fb:app_id" content="119853652572"/>
         <meta property="fb:admins" content="817753010"/>
         <!-- /Facebook metatags -->
-        <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/build/lib.min.css">
-        <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/main.css">
+        <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/main.css"> <!-- legacy -->
+        <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/build/master.css">
         <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/livescores.css"> <!-- For Tchoukball World live scores -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <link rel="alternate" type="application/rss+xml" href="http://www.tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php" />

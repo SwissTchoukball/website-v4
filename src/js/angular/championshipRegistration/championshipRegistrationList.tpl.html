@@ -19,8 +19,8 @@
                   ng-click="$ctrl.selectTeam(team.id)">
                 Saison {{team.season.name}}, {{team.category.name}} : {{team.name}}
             </span>
-            <span class="label label--ok" ng-if="team.feePaymentDate">Payé</span>
-            <span class="label label--error" ng-if="!team.feePaymentDate">Non-payé</span>
+            <span class="label label--positive" ng-if="team.feePaymentDate">Payé</span>
+            <span class="label label--negative" ng-if="!team.feePaymentDate">Non-payé</span>
         </li>
     </ul>
 </div>

@@ -12,9 +12,23 @@ angular
 
                 var $ctrl = this;
 
-                backendService.getTeams()
-                    .then(function(teams) {
-                        $ctrl.teams = teams;
+                backendService.getCategoriesBySeason()
+                    .then(function(categoriesBySeason) {
+                        $ctrl.categoriesBySeason = categoriesBySeason.map(function(categoryBySeason) {
+                            categoryBySeason.teams = [];
+                            return categoryBySeason;
+                        });
+
+                        backendService.getTeams()
+                            .then(function(teams) {
+                                // Distributing the teams in the matching categoryBySeason
+                                teams.map(function(team) {
+                                    var categoryBySeasonIndex = $ctrl.categoriesBySeason.findIndex(function(categoryBySeason) {
+                                        return categoryBySeason.id === team.categoryBySeasonId;
+                                    });
+                                    $ctrl.categoriesBySeason[categoryBySeasonIndex].teams.push(team);
+                                });
+                            });
                     });
 
                 $ctrl.selectTeam = function(teamId) {
