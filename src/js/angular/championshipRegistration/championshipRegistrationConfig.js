@@ -4,12 +4,13 @@
  */
 
 angular
-    .module('swisstchoukball.championshipRegistration')
-    .config(['tagsInputConfigProvider',
-        function(tagsInputConfigProvider) {
+    .module('swisstchoukball.website')
+    .config(['$httpProvider', 'tagsInputConfigProvider',
+        function($httpProvider, tagsInputConfigProvider) {
             'use strict';
 
             tagsInputConfigProvider.setDefaults('tagsInput', {
                 placeholder: ''
             });
-    }]);
+        }
+    ]);

@@ -16,12 +16,15 @@
     angular
         .module('swisstchoukball.backend')
         .factory('backendService', [
-            '$q', '$http',
-            function($q, $http) {
+            '$q', '$http', '$window',
+            function($q, $http, $window) {
                 var BackendService = function() {
                 };
 
-                var apiUrl = 'http://localhost:8082'; //TODO handle dev/production separation
+                var apiUrl = 'https://api.tchoukball.ch';
+                if ($window.location.hostname === 'localhost') {
+                    apiUrl = 'http://localhost:8082';
+                }
                 var lang = document.documentElement.lang;
                 var basicAuth;
 
@@ -87,12 +90,16 @@
                     return sendGetRequest('/club/' + clubId + '/teams');
                 };
 
-                BackendService.prototype.getClubTeam = function(clubId, teamId) {
-                    return sendGetRequest('/club/' + clubId + '/team/' + teamId);
-                };
-
                 BackendService.prototype.getOpenCategoriesBySeason = function() {
                     return sendGetRequest('/championship/categories-by-season');
+                };
+
+                BackendService.prototype.getTeams = function() {
+                    return sendGetRequest('/championship/teams');
+                };
+
+                BackendService.prototype.getTeam = function(teamId) {
+                    return sendGetRequest('/championship/team/' + teamId);
                 };
 
                 BackendService.prototype.getVenues = function(query) {

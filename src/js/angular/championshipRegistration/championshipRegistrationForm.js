@@ -4,7 +4,7 @@
  */
 
 angular
-    .module('swisstchoukball.championshipRegistration')
+    .module('swisstchoukball.website')
     .component('stChampionshipRegistrationForm', {
         bindings: {
             categoryBySeason: '<stCategoryBySeason',
@@ -49,6 +49,7 @@ angular
                 };
 
                 $ctrl.loadMembersForPlayers = function(query) {
+                    // TODO: filter out members already selected in other teams (only between ligue A and B)
                     return backendService.getClubMembers($ctrl.club.id, query);
                 };
 
@@ -71,6 +72,7 @@ angular
                         $ctrl.goBack();
                         $ctrl.sending = false;
                     }, function() {
+                        // TODO: handle error (show message to user)
                         $ctrl.sending = false;
                     });
                 };

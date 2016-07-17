@@ -4,7 +4,7 @@
  */
 
 angular
-    .module('swisstchoukball.championshipRegistration', [
+    .module('swisstchoukball.website', [
         'swisstchoukball.backend',
         'ngTagsInput'
     ]);
