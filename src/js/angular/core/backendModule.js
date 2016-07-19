@@ -88,12 +88,12 @@
                     return sendGetRequest('/club/' + clubId + '/teams');
                 };
 
-                BackendService.prototype.getCategoriesBySeason = function() {
-                    return sendGetRequest('/championship/categories-by-season');
+                BackendService.prototype.getEditions = function() {
+                    return sendGetRequest('/championship/editions');
                 };
 
-                BackendService.prototype.getOpenCategoriesBySeason = function() {
-                    return sendGetRequest('/championship/categories-by-season?status=open');
+                BackendService.prototype.getOpenEditions = function() {
+                    return sendGetRequest('/championship/editions?status=open');
                 };
 
                 BackendService.prototype.getTeams = function() {

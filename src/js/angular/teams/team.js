@@ -24,7 +24,7 @@ angular
                     $ctrl.unpaidLicensesCost = 0;
                     $ctrl.players.map(function(player) {
                         if(!player.licensePaymentDate) {
-                            $ctrl.unpaidLicensesCost += $ctrl.team.categoryBySeason.playerLicenseFee;
+                            $ctrl.unpaidLicensesCost += $ctrl.team.edition.playerLicenseFee;
                         }
                     });
                 };

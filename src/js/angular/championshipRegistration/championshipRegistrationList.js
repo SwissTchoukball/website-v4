@@ -32,33 +32,33 @@ angular
                 var gotClubTeams = getClubTeams();
 
                 /**
-                 * Filters out the categoriesBySeason where a club is not allowed to register a team
+                 * Filters out the editions where a club is not allowed to register a team
                  *
-                 * @param categoriesBySeason
+                 * @param editions
                  * @returns {promise}
                  */
-                var filterAllowedEditions = function(categoriesBySeason) {
-                    return categoriesBySeason.filter(function(categoryBySeason) {
-                        if (!categoryBySeason.category.isNbSpotLimitedByClub) {
+                var filterAllowedEditions = function(editions) {
+                    return editions.filter(function(edition) {
+                        if (!edition.category.isNbSpotLimitedByClub) {
                             // If there is no limitation in number of registrations
                             return true;
                         } else {
                             // If there is a limitation in number of registrations
                             // We get the number of spots that the club is allowed to take
-                            var championshipSpotsInThisCategoryBySeason = $ctrl.club.championshipSpots.find(function(category) {
-                                return category.categoryId === categoryBySeason.category.id;
+                            var championshipSpotsInThisEdition = $ctrl.club.championshipSpots.find(function(category) {
+                                return category.categoryId === edition.category.id;
                             });
                             var nbSpots = 0;
-                            if (championshipSpotsInThisCategoryBySeason) {
-                                nbSpots = championshipSpotsInThisCategoryBySeason.nbSpots;
+                            if (championshipSpotsInThisEdition) {
+                                nbSpots = championshipSpotsInThisEdition.nbSpots;
                             }
 
                             // We get the number of teams the club has already registered
-                            var teamsInThisCategoryBySeason = $ctrl.teams.filter(function(team) {
-                                return team.categoryBySeasonId === categoryBySeason.id;
+                            var teamsInThisEdition = $ctrl.teams.filter(function(team) {
+                                return team.editionId === edition.id;
                             }).length;
 
-                            if (nbSpots - teamsInThisCategoryBySeason > 0) {
+                            if (nbSpots - teamsInThisEdition > 0) {
                                 return true;
                             }
                         }
@@ -68,30 +68,30 @@ angular
 
                 // We load the categories by season only when the club and its teams are loaded.
                 $q.all([gotClub, gotClubTeams]).then(function() {
-                    backendService.getOpenCategoriesBySeason()
-                        .then(function(openCategoriesBySeason) {
-                            $ctrl.openCategoriesBySeason = openCategoriesBySeason;
+                    backendService.getOpenEditions()
+                        .then(function(openEditions) {
+                            $ctrl.openEditions = openEditions;
                             // We take only the form where a club is allowed to register a team
-                            $ctrl.openCategoriesBySeason = filterAllowedEditions($ctrl.openCategoriesBySeason);
+                            $ctrl.openEditions = filterAllowedEditions($ctrl.openEditions);
 
                             //instantiating the date objects
-                            $ctrl.openCategoriesBySeason = $ctrl.openCategoriesBySeason.map(function(categoryBySeason) {
-                                categoryBySeason.registrationDeadline = new Date(categoryBySeason.registrationDeadline);
-                                categoryBySeason.paymentDeadline = new Date(categoryBySeason.paymentDeadline);
-                                return categoryBySeason;
+                            $ctrl.openEditions = $ctrl.openEditions.map(function(edition) {
+                                edition.registrationDeadline = new Date(edition.registrationDeadline);
+                                edition.paymentDeadline = new Date(edition.paymentDeadline);
+                                return edition;
                             });
                         });
                     });
 
                 // The four methods below are a BAD way of doing routing.
-                $ctrl.selectCategoryBySeason = function(categoryBySeason) {
-                    $ctrl.selectedCategoryBySeason = categoryBySeason;
+                $ctrl.selectEdition = function(edition) {
+                    $ctrl.selectedEdition = edition;
                 };
 
-                $ctrl.unselectCategoryBySeason = function() {
-                    $ctrl.selectedCategoryBySeason = undefined;
+                $ctrl.unselectEdition = function() {
+                    $ctrl.selectedEdition = undefined;
                     getClubTeams().then(function() {
-                        $ctrl.openCategoriesBySeason = filterAllowedEditions($ctrl.openCategoriesBySeason);
+                        $ctrl.openEditions = filterAllowedEditions($ctrl.openEditions);
                     });
                 };
 

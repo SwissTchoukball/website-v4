@@ -31,12 +31,12 @@ echo '</select>';
 echo '</h2>';
 echo '</form>';
 
-$categoriesQuery = "SELECT c.idCategorie,
-                           c.categorie{$_SESSION['__langue__']} AS nomCategorie,
-                           cps.refereeDefrayalAmount
-                    FROM Championnat_Categories c, Championnat_Categories_Par_Saison cps
-                    WHERE c.idCategorie = cps.categoryId
-                      AND cps.season = $season";
+$categoriesQuery = "SELECT cc.idCategorie,
+                           cc.categorie{$_SESSION['__langue__']} AS nomCategorie,
+                           ced.refereeDefrayalAmount
+                    FROM Championnat_Categories cc, Championnat_Editions ced
+                    WHERE cc.idCategorie = ced.categoryId
+                      AND ced.season = $season";
 $categories = array();
 if ($result = mysql_query($categoriesQuery)) {
     while ($category = mysql_fetch_assoc($result)) {

@@ -1,12 +1,12 @@
 <div ng-if="!$ctrl.selectedTeam">
     <!-- Registered teams -->
     <h3>Équipes inscrites</h3>
-    <div ng-repeat="categoryBySeason in $ctrl.categoriesBySeason">
-        <h2 ng-if="categoryBySeason.teams.length > 0">
-            Saison {{categoryBySeason.season.name}}, {{categoryBySeason.category.name}}
+    <div ng-repeat="edition in $ctrl.editions">
+        <h2 ng-if="edition.teams.length > 0">
+            Saison {{edition.season.name}}, {{edition.category.name}}
         </h2>
         <ul>
-            <li ng-repeat="team in categoryBySeason.teams">
+            <li ng-repeat="team in edition.teams">
             <span class="asLink"
                   ng-click="$ctrl.selectTeam(team.id)">
                 {{team.name}}

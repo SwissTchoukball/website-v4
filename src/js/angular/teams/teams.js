@@ -12,21 +12,21 @@ angular
 
                 var $ctrl = this;
 
-                backendService.getCategoriesBySeason()
-                    .then(function(categoriesBySeason) {
-                        $ctrl.categoriesBySeason = categoriesBySeason.map(function(categoryBySeason) {
-                            categoryBySeason.teams = [];
-                            return categoryBySeason;
+                backendService.getEditions()
+                    .then(function(editions) {
+                        $ctrl.editions = editions.map(function(edition) {
+                            edition.teams = [];
+                            return edition;
                         });
 
                         backendService.getTeams()
                             .then(function(teams) {
-                                // Distributing the teams in the matching categoryBySeason
+                                // Distributing the teams in the matching edition
                                 teams.map(function(team) {
-                                    var categoryBySeasonIndex = $ctrl.categoriesBySeason.findIndex(function(categoryBySeason) {
-                                        return categoryBySeason.id === team.categoryBySeasonId;
+                                    var editionIndex = $ctrl.editions.findIndex(function(edition) {
+                                        return edition.id === team.editionId;
                                     });
-                                    $ctrl.categoriesBySeason[categoryBySeasonIndex].teams.push(team);
+                                    $ctrl.editions[editionIndex].teams.push(team);
                                 });
                             });
                     });

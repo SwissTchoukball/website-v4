@@ -8,8 +8,8 @@
     <div ng-if="!$ctrl.team.feePaymentDate">
         <p>Non-payés</p>
         <p class="info">
-            Merci d'effectuer le paiement des <strong>CHF {{$ctrl.team.categoryBySeason.teamRegistrationFee}}</strong>
-            d'ici au <strong>{{$ctrl.team.categoryBySeason.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
+            Merci d'effectuer le paiement des <strong>CHF {{$ctrl.team.edition.teamRegistrationFee}}</strong>
+            d'ici au <strong>{{$ctrl.team.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
             sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
         </p>
     </div>

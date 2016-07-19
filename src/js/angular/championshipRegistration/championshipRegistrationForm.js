@@ -7,7 +7,7 @@ angular
     .module('swisstchoukball.website')
     .component('stChampionshipRegistrationForm', {
         bindings: {
-            categoryBySeason: '<stCategoryBySeason',
+            edition: '<stEdition',
             club: '<stClub',
             goBack: '&stGoBack',
             sendRegistration: '&stSendRegistration'
@@ -25,12 +25,12 @@ angular
                 $ctrl.submitted = false;
 
                 $ctrl.getTotalLicensesCost = function() {
-                    return $ctrl.players.length * $ctrl.categoryBySeason.playerLicenseFee;
+                    return $ctrl.players.length * $ctrl.edition.playerLicenseFee;
                 };
 
                 $ctrl.getTotalCost = function() {
-                    return ($ctrl.players.length * $ctrl.categoryBySeason.playerLicenseFee) +
-                        $ctrl.categoryBySeason.teamRegistrationFee;
+                    return ($ctrl.players.length * $ctrl.edition.playerLicenseFee) +
+                        $ctrl.edition.teamRegistrationFee;
                 };
 
                 $ctrl.loadVenues = function(query) {
@@ -60,7 +60,7 @@ angular
                     $ctrl.sending = true;
                     $ctrl.sendRegistration({
                         'registration': {
-                            'categoryBySeasonId': $ctrl.categoryBySeason.id,
+                            'editionId': $ctrl.edition.id,
                             'clubId': $ctrl.club.id,
                             'teamName': $ctrl.teamName,
                             'teamManagerId': $ctrl.teamManager[0].id,
