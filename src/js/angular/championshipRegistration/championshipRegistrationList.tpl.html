@@ -1,0 +1,42 @@
+<div ng-if="!$ctrl.selectedEdition && !$ctrl.selectedTeam">
+    <h2>{{$ctrl.club.name}}</h2>
+    <!-- Open registrations forms -->
+    <h3>Formulaires d'inscriptions</h3>
+    <ul>
+        <li ng-repeat="edition in $ctrl.openEditions">
+            <span class="asLink"
+                  ng-click="$ctrl.selectEdition(edition)">
+                Saison {{edition.season.name}}, {{edition.category.name}}
+            </span>
+        </li>
+    </ul>
+
+    <!-- Registered teams -->
+    <h3>Équipes inscrites</h3>
+    <ul>
+        <li ng-repeat="team in $ctrl.teams">
+            <span class="asLink"
+                  ng-click="$ctrl.selectTeam(team.id)">
+                Saison {{team.season.name}}, {{team.category.name}} : {{team.name}}
+            </span>
+            <span class="label label--positive" ng-if="team.feePaymentDate">Payé</span>
+            <span class="label label--negative" ng-if="!team.feePaymentDate">Non-payé</span>
+        </li>
+    </ul>
+</div>
+
+
+<st-championship-registration-form
+        ng-if="$ctrl.selectedEdition"
+        st-edition="$ctrl.selectedEdition"
+        st-club="$ctrl.club"
+        st-go-back="$ctrl.unselectEdition()"
+        st-send-registration="$ctrl.sendRegistration(registration)">
+</st-championship-registration-form>
+
+<!-- Selected team -->
+<st-team
+        ng-if="$ctrl.selectedTeam"
+        st-team="$ctrl.selectedTeam"
+        st-go-back="$ctrl.unselectTeam()">
+</st-team>

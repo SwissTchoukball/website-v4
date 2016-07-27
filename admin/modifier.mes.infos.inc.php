@@ -118,11 +118,11 @@
 <form name="mesInfos" class="adminForm" method="post" action="<?php echo"?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" onSubmit="return controlerSaisie();">
 <fieldset>
 	<label>Nom d'utilisateur</label>
-	<p><?php echo stripslashes($record["username"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["username"]);?></div>
 	<label>Nom</label>
-	<p><?php echo stripslashes($record["nom"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["nom"]);?></div>
 	<label>Prénom</label>
-	<p><?php echo stripslashes($record["prenom"]);?></p>
+	<div class="givenData"><?php echo stripslashes($record["prenom"]);?></div>
 </fieldset>
 <fieldset>
 	<label>Adresse</label>

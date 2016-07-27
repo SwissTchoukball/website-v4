@@ -1,0 +1,28 @@
+<div ng-if="!$ctrl.selectedTeam">
+    <!-- Registered teams -->
+    <h3>Équipes inscrites</h3>
+    <div ng-repeat="edition in $ctrl.editions">
+        <h2 ng-if="edition.teams.length > 0">
+            Saison {{edition.season.name}}, {{edition.category.name}}
+        </h2>
+        <ul>
+            <li ng-repeat="team in edition.teams">
+            <span class="asLink"
+                  ng-click="$ctrl.selectTeam(team.id)">
+                {{team.name}}
+            </span>
+                <span ng-if="team.feePaymentDate !== undefined">
+                <span class="label label--positive" ng-if="team.feePaymentDate">Payé</span>
+                <span class="label label--negative" ng-if="!team.feePaymentDate">Non-payé</span>
+            </span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Selected team -->
+<st-team
+        ng-if="$ctrl.selectedTeam"
+        st-team="$ctrl.selectedTeam"
+        st-go-back="$ctrl.unselectTeam()">
+</st-team>
