@@ -1,6 +1,8 @@
 /**
  * @copyright   Swiss Tchoukball 2016
  * @author      David Sandoz <david.sandoz@tchoukball.ch>
+ *
+ * TODO: use the Access control matrix to define what is visible or not
  */
 
 angular
