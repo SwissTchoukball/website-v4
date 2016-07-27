@@ -279,14 +279,15 @@ if ($newMember) {
     // Le LIMIT 1 de la requête permet de n'avoir qu'une seule entrée car il pourrait y en avoir plusieurs si le
     // membre a, par exemple, été a plusieurs postes au comité. Pour nous il est juste intéressant de savoir s'il a
     // été au comité, mais pas à quels postes.
-    $memberRequest = "SELECT idStatus, derniereModification, modificationPar, idClub, idLangue, idSexe, idCivilite,
+    $memberRequest = "SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
                              nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
                              dateNaissance, raisonSociale, idPays, idCHTB, a.idArbitre AS niveauArbitreID,
                              a.descriptionArbitre".$_SESSION['__langue__']." AS niveauArbitre, arbitrePublic, suspendu,
                              typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
                              cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
-                             cj.id AS idParticipationChampionnat
+                             cj.id AS idParticipationChampionnat,
+                             ce.idEquipe AS idEquipeChampionnatResponsable
                       FROM DBDPersonne p
                       LEFT OUTER JOIN DBDArbitre a ON p.idArbitre = a.idArbitre
                       LEFT OUTER JOIN Comite_Membres c ON p.idDbdPersonne = c.idPersonne
@@ -295,6 +296,7 @@ if ($newMember) {
                       LEFT OUTER JOIN CadreNational_Membres cnm ON p.idDbdPersonne = cnm.idPersonne
                       LEFT OUTER JOIN ExpertsJS exp ON p.idDbdPersonne = exp.idPersonne
                       LEFT OUTER JOIN Championnat_Joueurs cj ON p.idDbdPersonne = cj.personId
+                      LEFT OUTER JOIN Championnat_Equipes ce ON p.idDbdPersonne = ce.idResponsable
                       WHERE idDbdPersonne=".$idMemberToEdit."
                       LIMIT 1";
     $memberResult = mysql_query($memberRequest);
@@ -339,6 +341,7 @@ if ($newMember) {
             $isSwissTeamMember = $member['idEquipeMembre'] != null;
             $isJSExpert = $member['idExpert'] != null;
             $isChampionshipPlayer = $member['idParticipationChampionnat'] != null;
+            $isChampionshipTeamManager = $member['idEquipeChampionnatResponsable'] != null;
             $typeCompte = $member['typeCompte'];
             $numeroCompte = $member['numeroCompte'];
             $remarques = $member['remarque'];
@@ -370,7 +373,8 @@ if ($canEdit) {
         $isCommissionMember ||
         $isSwissTeamMember ||
         $isJSExpert ||
-        $isChampionshipPlayer;
+        $isChampionshipPlayer ||
+        $isChampionshipTeamManager;
     ?>
     <h3><?php echo $formLegend; ?></h3>
     <form method="post"
@@ -688,6 +692,7 @@ if ($canEdit) {
             echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
             echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
             echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
+            echo $isChampionshipTeamManager ? '<li>Responsable d\'équipe de championnat</li>' : '';
             echo '</ul>';
             echo '<p>et ne peut donc pas être supprimé.</p>';
         }
