@@ -34,8 +34,8 @@
     <li ng-repeat="player in $ctrl.players">
         {{player.firstName}} {{player.lastName}}
         <span ng-if="player.licensePaymentDate !== undefined">
-            <span class="label label--positive" ng-if="player.licensePaymentDate">Payé</span>
-            <span class="label label--negative" ng-if="!player.licensePaymentDate">Non-payé</span>
+            <span class="label label--positive" ng-if="player.licensePaymentDate">Licencié</span>
+            <span class="label label--negative" ng-if="!player.licensePaymentDate">Non-licencié</span>
         </span>
     </li>
 </ul>
