@@ -33,10 +33,10 @@
 											p.`numPostal` LIKE '%".$tok."%'";
 			$tok = strtok(" ");
 		}
-		$requeteSQL = "SELECT *, p.`email`, p.`adresse`, p.`ville`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE (".$possibilite.") AND p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
+		$requeteSQL = "SELECT *, p.`telephone`, p.`email`, p.`adresse`, p.`ville`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE (".$possibilite.") AND p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
 	}
 	else{
-		$requeteSQL = "SELECT *, p.`email`, p.`adresse`, p.`ville`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
+		$requeteSQL = "SELECT *, p.`telephone`, p.`email`, p.`adresse`, p.`ville`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
 	}
 	//echo $requeteSQL;
 	$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
