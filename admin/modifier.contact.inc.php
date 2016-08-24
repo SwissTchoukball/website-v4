@@ -93,7 +93,7 @@
 	if (isAdmin()) {
 		?>
 		<label>Niveau d'accès</label>
-	    <p><?php echo $record["userLevel"]; ?></p>
+		<div class="givenData"><?php echo $record["userLevel"]; ?></div>
 		<?php
 	}
 	?>
