@@ -498,9 +498,13 @@ function afficherArbitre($record, $photo)
                 echo $record["portable"];
                 echo "<br />";
             }
-            if ($record["email"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            if (($record["email"]!="" || $record["emailFSTB"]!="") && $_SESSION['__userLevel__'] <= 10) {
+                $email = $record["email"];
+                if ($record["emailFSTB"]!="") {
+                    $email = $record["emailFSTB"];
+                }
                 echo "Email"." : ";
-                echo email($record["email"]);
+                echo email($email);
                 echo "<br />";
             }
         echo "</td></tr>";
