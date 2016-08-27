@@ -29,40 +29,22 @@
 			//$prenom=validiteInsertionTextBd($_POST["prenom"]);
 			$userLevel=10;
 			$password=md5($_POST["nouveauPass"]);
-			$adresse=validiteInsertionTextBd($_POST["adresse"]);
-			$numPostal=validiteInsertionTextBd($_POST["numPostal"]);
-			$ville=validiteInsertionTextBd($_POST["ville"]);
-			$telephone=validiteInsertionTextBd($_POST["telephone"]);
-			$portable=validiteInsertionTextBd($_POST["portable"]);
 			$email=validiteInsertionTextBd($_POST["email"]);
 			$idClub=validiteInsertionTextBd($_POST["ClubsFstb"]);
-			$dateNaissance=date_date2sql($_POST["jour"]."-".$_POST["mois"]."-".$_POST["annee"]);
 
 			// selection pour le prochain affichage par lettre
 			$lettre = substr($record["nom"],0,1);
 
 			if($_POST["nouveauPass"]==""){
 					$requeteSQL = "UPDATE `Personne` SET
-								`adresse`='$adresse',
-								`numPostal`='$numPostal',
-								`ville`='$ville',
-								`telephone`='$telephone',
-								`portable`='$portable',
 								`email`='$email',
 								`idClub`='$idClub',
-								`dateNaissance`='$dateNaissance'
 								WHERE Personne.id='".$idPersonne."'";
 			} else {
 				$requeteSQL = "UPDATE `Personne` SET
-								`password`='$password',
-								`adresse`='$adresse',
-								`numPostal`='$numPostal',
-								`ville`='$ville',
-								`telephone`='$telephone',
-								`portable`='$portable',
+								`password`='$password'
 								`email`='$email',
-								`idClub`='$idClub',
-								`dateNaissance`='$dateNaissance'
+								`idClub`='$idClub'
 								WHERE Personne.id='".$idPersonne."'";
 			}
 
