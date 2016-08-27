@@ -42,7 +42,7 @@
 								WHERE Personne.id='".$idPersonne."'";
 			} else {
 				$requeteSQL = "UPDATE `Personne` SET
-								`password`='$password'
+								`password`='$password',
 								`email`='$email',
 								`idClub`='$idClub'
 								WHERE Personne.id='".$idPersonne."'";

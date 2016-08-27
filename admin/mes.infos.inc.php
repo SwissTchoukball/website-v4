@@ -7,23 +7,13 @@
 
 	$record = mysql_fetch_array($recordset);
 
-	echo "<h4>".VAR_LANG_USERNAME."</h4>";
+	echo "<h4>" . $record["nom"]."&nbsp;".$record["prenom"] . "</h4>";
 	echo "<div class='mesInfos'>";
-		echo $record["username"]."<br />";
-    echo "</div>";
-	echo "<h4>Informations personnelles</h4>";
-	echo "<div class='mesInfos'>";
-		echo $record["nom"]."&nbsp;".$record["prenom"]."<br />";
-		echo $record["adresse"]."<br />";
-		echo $record["numPostal"]."&nbsp;".$record["ville"]."<br /><br />";
-		echo "Date de naissance"." : ".date_sql2date($record["dateNaissance"]);
-    echo "</div>";
-	echo "<h4>Informations de contact</h4>";
-	echo "<div class='mesInfos'>";
-		echo "Email"." : "; echo email($record["email"]); echo "<br />";
-		echo "Téléphone"." : ".$record["telephone"]."<br />";
-		echo "Portable"." : ".$record["portable"]."<br />";
-		echo "Club"." : ".$record["club"]."<br />";
+    echo VAR_LANG_USERNAME . " : " . $record["username"]."<br />";
+    echo "Email : ";
+    email($record["email"]);
+    echo "<br />";
+    echo "Club : " . $record["club"]."<br />";
 	echo "</div>";
 
 	// personne avec experience
@@ -32,6 +22,5 @@
 		echo "<div class='mesInfos'>";
 			echo nl2br($record["experience"])."<br />";
 		echo "</div>";
-
 	}
 ?></div>
