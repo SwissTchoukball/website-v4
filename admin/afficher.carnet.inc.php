@@ -38,7 +38,7 @@
 			if($_POST["nouveauPass"]==""){
 					$requeteSQL = "UPDATE `Personne` SET
 								`email`='$email',
-								`idClub`='$idClub',
+								`idClub`='$idClub'
 								WHERE Personne.id='".$idPersonne."'";
 			} else {
 				$requeteSQL = "UPDATE `Personne` SET
