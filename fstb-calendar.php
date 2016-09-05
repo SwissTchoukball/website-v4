@@ -1,6 +1,7 @@
 <?php
 
 include('config.php');
+mysql_set_charset('utf8');
 
 
 function incrementDay($year, $month, $day)
