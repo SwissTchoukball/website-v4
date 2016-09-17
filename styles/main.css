@@ -2771,7 +2771,10 @@ table#refereePoints td {
 }
 
 #membres td, #clubs td {
-    width: 200px;
+    /* I don't know why there was this rule that was just breaking the layout.
+     * I leave it commented for now if I find later why it was there.
+     */
+    /*width: 200px;*/
 }
 
 #membres table.adminTable tr.suspendu {
