@@ -855,52 +855,6 @@ td.supprimer {
     width: 100px;
 }
 
-.boutonAfficherSemaine {
-    width: 60px;
-    height: 20px;
-    background-image: url('images/selection_calendrier_semaine.png');
-    background-repeat: no-repeat;
-    margin-left: -3px;
-    padding: 0;
-}
-
-.boutonAfficherMois {
-    width: 40px;
-    height: 20px;
-    background-image: url('images/selection_calendrier_mois.png');
-    background-repeat: no-repeat;
-    margin-right: -3px;
-    padding: 0;
-}
-
-.boutonAfficherSemaine:hover {
-    background-image: url('images/selection_calendrier_semaine_hover.png');
-    background-repeat: no-repeat;
-}
-
-.boutonAfficherMois:hover {
-    background-image: url('images/selection_calendrier_mois_hover.png');
-    background-repeat: no-repeat;
-}
-
-.boutonAfficherSemaineSelected {
-    width: 60px;
-    height: 20px;
-    background-image: url('images/selection_calendrier_semaine_selected.png');
-    background-repeat: no-repeat;
-    margin-left: -3px;
-    padding: 0;
-}
-
-.boutonAfficherMoisSelected {
-    width: 40px;
-    height: 20px;
-    background-image: url('images/selection_calendrier_mois_selected.png');
-    background-repeat: no-repeat;
-    margin-right: -3px;
-    padding: 0;
-}
-
 .titreCalendrier {
     color: #333;
     font-size: 20px;
@@ -2736,7 +2690,6 @@ table#refereePoints td {
 }
 
 #calculCotisation table, #etatCotisations table, #ouvrirCotisations table {
-    width: 500px;
     margin: auto;
     border-collapse: collapse;
     text-align: left;
@@ -2746,8 +2699,18 @@ table#refereePoints td {
     width: 600px;
 }
 
-#calculCotisation table td, #etatCotisations table td.action, #ouvrirCotisations table td {
+#calculCotisation table td,
+#ouvrirCotisations table td {
     text-align: center;
+}
+
+#calculCotisation table td,
+#etatCotisations table td,
+#ouvrirCotisations table td,
+#calculCotisation table th,
+#etatCotisations table th,
+#ouvrirCotisations table th {
+    padding: 5px;
 }
 
 #calculCotisation table tr, #etatCotisations table tr, #ouvrirCotisations table tr {
@@ -2839,7 +2802,7 @@ table#refereePoints td {
     margin: auto;
 }
 
-#clubs table tr.inactif {
+#clubs table tr.dimmed {
     opacity: 0.75;
 }
 
@@ -2879,13 +2842,6 @@ textarea.tchoukup-emails {
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (   min--moz-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (     -o-min-device-pixel-ratio: 2/1)    and (min-width: 1300px), only screen and (        min-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (                min-resolution: 192dpi) and (min-width: 1300px), only screen and (                min-resolution: 2dppx)  and (min-width: 1300px) {
-
-    /* Large screen, retina, stuff to override above media query */
-    #bloc_contenu {
-        background: url('images/fond_titre_page@2x.png') no-repeat;
-        background-size: 830px;
-    }
-
     #site > header #banner {
         background: url('images/banniere@2x.png') no-repeat;
         background-size: 1000px;

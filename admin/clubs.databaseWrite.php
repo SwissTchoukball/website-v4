@@ -14,7 +14,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 	}
 	$city = validiteInsertionTextBd($_POST['city']);
 	$cantonID = validiteInsertionTextBd($_POST['Canton']);
-	$active = isset($_POST['active']) ? 1 : 0;
+	$status = isValidID($_POST['clubs_status']) ? $_POST['clubs_status'] : 3;
 	$phone = validiteInsertionTextBd($_POST['phone']);
 	$email = validiteInsertionTextBd($_POST['email']);
 	$url = validiteInsertionTextBd($_POST['url']);
@@ -42,34 +42,39 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 
 
 			$memberID = $_POST['memberID'];
-			$clubInsertRequest = "INSERT INTO `ClubsFstb` (`id`,
-														   `club`,
-														   `nomComplet`,
-														   `nomPourTri`,
-														   `adresse`,
-														   `npa`,
-														   `ville`,
-														   `canton`,
-														   `telephone`,
-														   `email`,
-														   `url`,
-														   `actif`,
-														   `lastEdit`,
-														   `lastEditorID`)";
-			$clubInsertRequest .= " VALUES ('".$newClubID."',
-											   '".$shortName."',
-											   '".$fullName."',
-											   '".$nameForSorting."',
-											   '".$address."',
-											   ".$npa.",
-											   '".$city."',
-											   ".$cantonID.",
-											   '".$phone."',
-											   '".$email."',
-											   '".$url."',
-											   ".$active.",
-											   '".date('Y-m-d')."',
-											   ".$_SESSION['__idUser__'].")";
+			$clubInsertRequest =
+                "INSERT INTO `ClubsFstb`(
+                    `id`,
+                    `club`,
+                    `nomComplet`,
+                    `nomPourTri`,
+                    `adresse`,
+                    `npa`,
+                    `ville`,
+                    `canton`,
+                    `telephone`,
+                    `email`,
+                    `url`,
+                    `statusId`,
+                    `lastEdit`,
+                    `lastEditorID`
+                )
+                VALUES (
+                    '".$newClubID."',
+                    '".$shortName."',
+                    '".$fullName."',
+                    '".$nameForSorting."',
+                    '".$address."',
+                    ".$npa.",
+                    '".$city."',
+                    ".$cantonID.",
+                    '".$phone."',
+                    '".$email."',
+                    '".$url."',
+                    ".$status.",
+                    '".date('Y-m-d')."',
+                    ".$_SESSION['__idUser__']."
+                )";
 			$clubInsertResult = mysql_query($clubInsertRequest);
 			if ($clubInsertResult) { // Tout s'est bien passé.
 				echo "<p class='success'>Insertion réussie.</p>";
@@ -96,7 +101,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 										 , nomComplet='".$fullName."'
 										 , nomPourTri='".$nameForSorting."'
 										 , canton=".$cantonID."
-										 , actif=".$active."";
+										 , statusId=".$status."";
 			}
 			$clubUpdateRequest .= " WHERE id=".$clubID;
 			//echo "<p class='info'>".$clubUpdateRequest."</p>";

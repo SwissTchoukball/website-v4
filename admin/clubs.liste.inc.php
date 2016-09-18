@@ -8,7 +8,12 @@
 	</thead>
 	<tbody>
 		<?php
-		$queryClubs = "SELECT c.id, c.nomComplet, c.adresse, c.npa, c.ville, c.email, c.telephone, c.actif, c.url FROM ClubsFstb c WHERE c.id!=0 ORDER BY c.actif DESC, c.nomPourTri";
+		$queryClubs =
+			"SELECT c.id, c.nomComplet, c.adresse, c.npa, c.ville, c.email, c.telephone, c.statusId, cs.name" . $_SESSION['__langue__'] . " AS status, c.url
+			 FROM ClubsFstb c, clubs_status cs
+			 WHERE c.id!=0
+			 	AND c.statusId = cs.id
+			 ORDER BY c.statusId, c.nomPourTri";
 		$dataClubs = mysql_query($queryClubs);
 		while ($club = mysql_fetch_assoc($dataClubs)) {
 			$clubID = $club['id'];
@@ -19,12 +24,14 @@
 			$clubEmail = $club['email'];
 			$clubPhone = $club['telephone'];
 			$clubURL = $club['url'];
-			$clubIsActiv = $club['actif'] == 1;
+			$clubStatus = $club['statusId'];
 
-			if ($clubIsActiv) {
+			$clubIsAffiliated = $clubStatus == 1 || $clubStatus == 2;
+
+			if ($clubIsAffiliated) {
 				echo '<tr>';
 			} else {
-				echo '<tr class="inactif">';
+				echo '<tr class="dimmed">';
 			}
 			?>
 				<td>

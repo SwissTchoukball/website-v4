@@ -14,7 +14,7 @@ $currentStatsQuery = "SELECT ClubsFstb.club,
 				 COUNT(idDbdPersonne) AS nbMembresTotal
 		  FROM DBDPersonne
 		  JOIN ClubsFstb ON ClubsFstb.nbIdClub=DBDPersonne.idClub
-		  WHERE actif=1
+		  WHERE statusId = 1 OR statusId = 2
 		  GROUP BY DBDPersonne.idClub";
 
 $clubsStats = mysql_query($currentStatsQuery);

@@ -65,7 +65,7 @@ $queries['nb-tchoukup-colis-par-club'] =
     AND dbd.`idClub` = c.`nbIdClub`
     AND c.`id` = p.`idClub`
     AND p.`contactClub` = 1
-    AND c.`actif` = 1 -- Membre d'un club actif
+    AND c.`statusId` = 1 -- Membre d'un club actif
     AND (dbd.`idStatus` = 3 OR dbd.`idStatus` = 6) -- membre actif ou junior
     AND dbd.`idClub` != 4 -- Pas membre du TBC Genève (car dans les envois individuels)
     AND !(dbd.`idClub` = 29 AND dbd.`idStatus` = 6) -- Pas membre junior du TBC Vernier (car dans les envois individuels)

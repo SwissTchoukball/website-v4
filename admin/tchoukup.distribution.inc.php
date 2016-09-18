@@ -12,16 +12,16 @@ if ($_SESSION['__nbIdClub__'] == 15 && !isAdmin()) { //15 = Club indéfini
     }
 
     $distributionQuery =
-        "SELECT `ClubsFstb`.`club`,
-               `DBDPersonne`.`nom`,
-               `DBDPersonne`.`prenom`
-        FROM `DBDPersonne`, `ClubsFstb`
-        WHERE `idCHTB` = 2
-        AND `DBDPersonne`.`idClub` = `ClubsFstb`.`nbIdClub`
-        AND `ClubsFstb`.`actif` = 1 -- Membre d'un club actif
-        AND (`DBDPersonne`.`idStatus` = 3 OR `DBDPersonne`.`idStatus` = 6) -- membre actif ou junior
-        AND `idClub` = " . $clubId . "
-        ORDER BY `nom`, `prenom`";
+        "SELECT c.`club`,
+               p.`nom`,
+               p.`prenom`
+        FROM `DBDPersonne` p, `ClubsFstb` c
+        WHERE p.`idCHTB` = 2
+        AND p.`idClub` = c.`nbIdClub`
+        AND c.`statusId` = 1 -- Membre d'un club adhérent actif
+        AND (p.`idStatus` = 3 OR p.`idStatus` = 6) -- membre actif ou junior
+        AND p.`idClub` = " . $clubId . "
+        ORDER BY p.`nom`, p.`prenom`";
 
     $distributionResult = mysql_query($distributionQuery);
     $nbPeople = mysql_num_rows($distributionResult);

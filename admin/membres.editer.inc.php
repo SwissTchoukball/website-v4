@@ -1,4 +1,3 @@
-
 <script lang="javascript">
 
     var couleurErreur;
@@ -214,24 +213,31 @@
     }
 
     function updateTchoukupDelivery() {
-        tupd = document.getElementById("tchoukupDelivery");
+        tupd = $("#tchoukupDelivery");
         if (memberEdit.DBDCHTB.value == 2) { // TUP Papier + E-mail
-            $(tupd).show();
+            tupd.show();
             if (memberEdit.statutID.value == 2) { // Membre actif ou junior
-                tupd.innerHTML = "tchouk<sup>up</sup> envoyé au club";
+                tupd.find("p").html("tchouk<sup>up</sup> envoyé au club");
             } else {
-                tupd.innerHTML = "tchouk<sup>up</sup> envoyé à l'adresse indiqué ci-dessus."
+                tupd.find("p").html("tchouk<sup>up</sup> envoyé à l'adresse indiqué ci-dessus.");
             }
         } else {
-            $(tupd).hide();
+            tupd.hide();
         }
     }
 </script>
 <?php
+/** @var integer $idMemberToEdit */
 
 $canEdit = false;
+$canDelete = false;
 
 if ($newMember) {
+    $formLegend = "Nouveau membre";
+    $sendButtonValue = VAR_LANG_INSERER;
+    $postType = "newMember";
+    $canEdit = true;
+
     $memberID = 0;
     if ($nbError == 0) { //Initialisation uniquement si premier remplissage.
         $statutID = 3; //Membre actif
@@ -271,18 +277,16 @@ if ($newMember) {
         $numeroCompte = "";
         $remarques = "";
     }
-    $formLegend = "Nouveau membre";
-    $sendButtonValue = VAR_LANG_INSERER;
-    $postType = "newMember";
-    $canEdit = true;
 } else {
     // Le LIMIT 1 de la requête permet de n'avoir qu'une seule entrée car il pourrait y en avoir plusieurs si le
     // membre a, par exemple, été a plusieurs postes au comité. Pour nous il est juste intéressant de savoir s'il a
     // été au comité, mais pas à quels postes.
+    // Toute modification de cette requête devrait être aussi appliquée dans le fichier membres.supprimer.inc.php
+    // TODO: Make it DRY
     $memberRequest = "SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
                              nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
                              dateNaissance, raisonSociale, idPays, idCHTB, a.idArbitre AS niveauArbitreID,
-                             a.descriptionArbitre".$_SESSION['__langue__']." AS niveauArbitre, arbitrePublic, suspendu,
+                             a.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, arbitrePublic, suspendu,
                              typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
                              cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
@@ -297,7 +301,7 @@ if ($newMember) {
                       LEFT OUTER JOIN ExpertsJS exp ON p.idDbdPersonne = exp.idPersonne
                       LEFT OUTER JOIN Championnat_Joueurs cj ON p.idDbdPersonne = cj.personId
                       LEFT OUTER JOIN Championnat_Equipes ce ON p.idDbdPersonne = ce.idResponsable
-                      WHERE idDbdPersonne=".$idMemberToEdit."
+                      WHERE idDbdPersonne=" . $idMemberToEdit . "
                       LIMIT 1";
     $memberResult = mysql_query($memberRequest);
     if (!$memberResult) {
@@ -308,6 +312,36 @@ if ($newMember) {
         $member = mysql_fetch_assoc($memberResult);
         if (($_SESSION['__nbIdClub__'] == $member['idClub'] && $_SESSION["__gestionMembresClub__"]) ||
                 hasAllMembersManagementAccess()) {
+            if (hasAllMembersManagementAccess()) {
+                $canDelete = true;
+            } else {
+                // Any changes to the definition of deletion period should be applied in membres.supprimer.inc.php
+                // TODO: Make it DRY
+
+                // Retrieving information to know if we are in the deletion period
+                $deletionPeriodQuery =
+                    "SELECT ccLastYear.datePaiement AS datePaiementAnneePassee, c.delaiSupprimerMembres
+                     FROM Cotisations c
+                     LEFT OUTER JOIN Cotisations_Clubs ccLastYear
+                      ON ccLastYear.annee = c.annee - 1
+                      AND ccLastYear.idClub = " . $member['idClub'] . "
+                     WHERE c.annee <= '" . date('Y') . "'
+                     ORDER BY c.annee DESC
+                     LIMIT 1";
+
+                $deletionPeriodResult = mysql_query($deletionPeriodQuery);
+                $deletionPeriodData = mysql_fetch_assoc($deletionPeriodResult);
+
+                $today = date('Y-m-d');
+
+                $canDelete = $today < $deletionPeriodData['delaiSupprimerMembres'] &&
+                    $deletionPeriodData['datePaiementAnneePassee'] != NULL;
+            }
+
+            $sendButtonValue = VAR_LANG_MODIFIER;
+            $postType = "editMember";
+            $canEdit = true;
+
             $memberID = $idMemberToEdit;
             $statutID = $member['idStatus'];
             $lastEditBy = $member['modificationPar'];
@@ -351,10 +385,7 @@ if ($newMember) {
             } else {
                 $name .= $companyName;
             }
-            $formLegend = $name;
-            $sendButtonValue = VAR_LANG_MODIFIER;
-            $postType = "editMember";
-            $canEdit = true;
+            $formLegend .= $name;
         } else {
             printErrorMessage("Vous n'êtes pas le responsable de la gestion des membres du club de la personne que vous
                                souhaitez éditer.");
@@ -368,7 +399,9 @@ if ($isSuspended) {
 }
 
 if ($canEdit) {
-    $personCanBeDeleted = $refereeLevelId > 1 ||
+    // Any changes to the definition of the variable $isInvolvedInFederation should be applied in membres.supprimer.inc.php
+    // TODO: Make it DRY
+    $isInvolvedInFederation = $refereeLevelId > 1 ||
         $isCommitteeMember ||
         $isCommissionMember ||
         $isSwissTeamMember ||
@@ -384,7 +417,7 @@ if ($canEdit) {
           class="adminForm">
         <fieldset>
             <?php
-            if ($personCanBeDeleted && !hasAllMembersManagementAccess()) {
+            if ($isInvolvedInFederation && !hasAllMembersManagementAccess()) {
                 $canEditName = false;
             } else {
                 $canEditName = true;
@@ -607,14 +640,17 @@ if ($canEdit) {
             }
             ?>
             </select>
-            <div id="tchoukupDelivery" class="inlineinfo"></div>
+            <div id="tchoukupDelivery">
+                <label></label>
+                <p class="givenData"></p>
+            </div>
 
             <label>Niveau d'arbitre</label>
             <?php
             if (hasAllMembersManagementAccess()) {
                 afficherdropDownListe("DBDArbitre", "idArbitre", "descriptionArbitre", $refereeLevelId, true);
             } else {
-                echo '<p>'.$refereeLevelName.'</p>';
+                echo '<p class="givenData">'.$refereeLevelName.'</p>';
                 echo '<input type="hidden" name="idArbitre" value="'.$refereeLevelId.'" />';
             }
             ?>
@@ -629,7 +665,7 @@ if ($canEdit) {
                 }
                 echo '<input type="checkbox" name="arbitrePublic" '.$publicRefereeChecked.' />';
             } else {
-                echo '<p>';
+                echo '<p class="givenData">';
                 if ($isPublicReferee) {
                     echo 'Oui';
                 } else {
@@ -683,37 +719,38 @@ if ($canEdit) {
              '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
              </a></p>';
 
-        if ($personCanBeDeleted) {
-            echo '<p>'.$name.' est, ou a été :</p>';
-            echo '<ul>';
-            echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
-            echo $isCommissionMember ? '<li>Membre d\'une Commission</li>' : '';
-            echo $isJSExpert ? '<li>Expert J+S</li>' : '';
-            echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
-            echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
-            echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
-            echo $isChampionshipTeamManager ? '<li>Responsable d\'équipe de championnat</li>' : '';
-            echo '</ul>';
-            echo '<p>et ne peut donc pas être supprimé.</p>';
-        }
+        if ($canDelete) {
+            if ($isInvolvedInFederation) {
+                echo '<p>'.$name.' est, ou a été :</p>';
+                echo '<ul>';
+                echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
+                echo $isCommissionMember ? '<li>Membre d\'une Commission</li>' : '';
+                echo $isJSExpert ? '<li>Expert J+S</li>' : '';
+                echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
+                echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
+                echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
+                echo $isChampionshipTeamManager ? '<li>Responsable d\'équipe de championnat</li>' : '';
+                echo '</ul>';
+                echo '<p>et ne peut donc pas être supprimé.</p>';
+            }
 
-        if (!$personCanBeDeleted) {
-            ?>
-            <p class="delete-member">
-                <a href="?menuselection=<?php echo $menuselection;
-                       ?>&smenuselection=<?php echo $smenuselection;
-                       ?>&delete=<?php echo $memberID; ?>"
-                   onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
-                    Supprimer <?php echo $name; ?>
-                </a>
-                <span>
-                    <strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du
-                    tchoukball.<br />
-                    Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).
-                </span>
-            </p>
-            <?php
-
+            if (!$isInvolvedInFederation) {
+                ?>
+                <p class="delete-member">
+                    <a href="?menuselection=<?php echo $menuselection;
+                    ?>&smenuselection=<?php echo $smenuselection;
+                    ?>&delete=<?php echo $memberID; ?>"
+                       onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
+                        Supprimer <?php echo $name; ?>
+                    </a>
+                    <span>
+                        <strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du
+                        tchoukball.<br/>
+                        Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).
+                    </span>
+                </p>
+                <?php
+            }
         }
 
         ?>

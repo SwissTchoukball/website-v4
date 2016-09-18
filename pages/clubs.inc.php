@@ -30,9 +30,18 @@
 <?php
 echo "<img class='swissMap' src='".VAR_IMAGE_CARTE_SUISSE."' alt='carte de la suisse' border='0' usemap='#carteSuisseCantons' />";
 
-$requeteSQL = "SELECT p.`nom`, p.`prenom`, p.`adresse` AS adressePresident, cl.`adresse` AS adresseClub, p.`npa` AS npaPresident, cl.`npa` AS npaClub, p.`ville` AS villePresident, cl.`ville` AS villeClub, p.`email` AS emailPresident, cl.`email` AS emailClub, cl.`url`, cl.`facebookUsername`, cl.`twitterUsername`, p.`telPrive` AS telephonePresident, cl.`telephone` AS telephoneClub, p.`portable` AS portablePresident, cl.`id` AS idClub, cl.`club`, cl.`nomComplet` AS nomClub, cl.`canton`, ca.`nomCanton".$_SESSION["__langue__"]."` AS nomCanton
-			   FROM `DBDPersonne` p, `ClubsFstb` cl,`Canton` ca
-			   WHERE cl.`idPresident`=p.`idDbdPersonne` AND cl.`canton`=ca.`id` AND cl.`actif`=1 ORDER BY nomCanton, cl.`club`";
+$requeteSQL =
+	"SELECT p.`nom`, p.`prenom`, p.`adresse` AS adressePresident, cl.`adresse` AS adresseClub, p.`npa` AS npaPresident,
+			cl.`npa` AS npaClub, p.`ville` AS villePresident, cl.`ville` AS villeClub, p.`email` AS emailPresident,
+			cl.`email` AS emailClub, cl.`url`, cl.`facebookUsername`, cl.`twitterUsername`,
+			p.`telPrive` AS telephonePresident, cl.`telephone` AS telephoneClub, p.`portable` AS portablePresident,
+			cl.`id` AS idClub, cl.`club`, cl.`nomComplet` AS nomClub, cl.`canton`,
+			ca.`nomCanton{$_SESSION["__langue__"]}` AS nomCanton
+	FROM `DBDPersonne` p, `ClubsFstb` cl, `Canton` ca
+	WHERE cl.`idPresident`=p.`idDbdPersonne`
+		AND cl.`canton`=ca.`id`
+		AND (cl.`statusId`=1 OR cl.`statusId`=2)
+	ORDER BY nomCanton, cl.`club`";
 $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
 echo "<p>";

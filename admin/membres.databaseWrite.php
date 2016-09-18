@@ -2,7 +2,7 @@
 
 if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     if (hasAllMembersManagementAccess()) {
-        $idOrigineAdresse = 2; // FSTB
+        $idOrigineAdresse = 2; // Swiss Tchoukball
     } else {
         $idOrigineAdresse = 11; // Club
     }
@@ -56,7 +56,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
 
     if (!$noName) {
         // Vérification existance nom et prénom (+indication club)
-        //!TODO: Gérez de multiples personnes avec le même nom.
+        // TODO: Gérez de multiples personnes avec le même nom.
         $duplicateNameRequest = "SELECT club, idDbdPersonne FROM `DBDPersonne`, `ClubsFstb` WHERE `nom` LIKE '" . $lastname . "' AND `prenom` LIKE '" . $firstname . "' AND `nbIdClub`=`idClub` AND `idDbdPersonne`!=" . $_POST['memberID'] . " LIMIT 1";
         $duplicateNameResult = mysql_query($duplicateNameRequest);
         if (mysql_num_rows($duplicateNameResult) > 0) {
@@ -109,70 +109,81 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 $memberID = $_POST['memberID'];
                 //TODO: Autoriser la modification du nom, prénom raison sociale que si ce n'est pas un bénévole FSTB
                 //TODO: Autoriser la modification des coordonnées que si ce n'est pas un membre du comité.
-                $memberInsertRequest = "INSERT INTO `DBDPersonne` (`idStatus`,
-                                                               `idOrigineAdresse`,
-                                                               `derniereModification`,
-                                                               `modificationPar`,
-                                                               `editor_id`,
-                                                               `idClub`,
-                                                               `idLangue`,
-                                                               `idSexe`,
-                                                               `idCivilite`,
-                                                               `nom`,
-                                                               `prenom`,
-                                                               `adresse`,
-                                                               `cp`,
-                                                               `npa`,
-                                                               `ville`,
-                                                               `telPrive`,
-                                                               `telProf`,
-                                                               `portable`,
-                                                               `fax`,
-                                                               `email`,
-                                                               `dateNaissance`,
-                                                               `raisonSociale`,
-                                                               `idPays`,
-                                                               `idCHTB`,
-                                                               `dateAjout`";
-                if (hasAllMembersManagementAccess()) {
-                    $memberInsertRequest .= ", `idArbitre`,
-                                           `typeCompte`,
-                                           `numeroCompte`,
-                                           `remarque`";
-                }
-                $memberInsertRequest .= ") VALUES ('" . $statutID . "',
-                                               '" . $idOrigineAdresse . "',
-                                               '" . date('Y-m-d') . "',
-                                               '" . $_SESSION['__nom__'] . " " . $_SESSION['__prenom__'] . "',
-                                               '" . $_SESSION['__idUser__'] . "',
-                                               '" . $clubID . "',
-                                               '" . $languageID . "',
-                                               '" . $sexID . "',
-                                               '" . $titleID . "',
-                                               '" . $lastname . "',
-                                               '" . $firstname . "',
-                                               '" . $address1 . "',
-                                               '" . $address2 . "',
-                                               '" . $zipCode . "',
-                                               '" . $city . "',
-                                               '" . $privatePhone . "',
-                                               '" . $workPhone . "',
-                                               '" . $mobile . "',
-                                               '" . $fax . "',
-                                               '" . $email . "',
-                                               '" . $birthDate . "',
-                                               '" . $companyName . "',
-                                               '" . $countryID . "',
-                                               '" . $tchoukupID . "',
-                                               '" . date('Y-m-d') . "'";
 
                 if (hasAllMembersManagementAccess()) {
-                    $memberInsertRequest .= ", '" . $refereeID . "',
-                                           '" . $typeCompte . "',
-                                           '" . $numeroCompte . "',
-                                           '" . $remarques . "'";
+                    $sensitiveAttributesForQuery =
+                        ", `idArbitre`,
+                           `typeCompte`,
+                           `numeroCompte`,
+                           `remarque`";
+                    $sensitiveValuesForQuery =
+                        ", '" . $refereeID . "',
+                           '" . $typeCompte . "',
+                           '" . $numeroCompte . "',
+                           '" . $remarques . "'";
+                } else {
+                    $sensitiveAttributesForQuery = "";
+                    $sensitiveValuesForQuery = "";
                 }
-                $memberInsertRequest .= ")";
+
+
+                $memberInsertRequest =
+                    "INSERT INTO `DBDPersonne` (
+                        `idStatus`,
+                        `idOrigineAdresse`,
+                        `derniereModification`,
+                        `modificationPar`,
+                        `editor_id`,
+                        `idClub`,
+                        `idLangue`,
+                        `idSexe`,
+                        `idCivilite`,
+                        `nom`,
+                        `prenom`,
+                        `adresse`,
+                        `cp`,
+                        `npa`,
+                        `ville`,
+                        `telPrive`,
+                        `telProf`,
+                        `portable`,
+                        `fax`,
+                        `email`,
+                        `dateNaissance`,
+                        `raisonSociale`,
+                        `idPays`,
+                        `idCHTB`,
+                        `dateAjout`
+                        $sensitiveAttributesForQuery
+                     )
+                     VALUES (
+                        '" . $statutID . "',
+                        '" . $idOrigineAdresse . "',
+                        '" . date('Y-m-d') . "',
+                        '" . $_SESSION['__nom__'] . " " . $_SESSION['__prenom__'] . "',
+                        '" . $_SESSION['__idUser__'] . "',
+                        '" . $clubID . "',
+                        '" . $languageID . "',
+                        '" . $sexID . "',
+                        '" . $titleID . "',
+                        '" . $lastname . "',
+                        '" . $firstname . "',
+                        '" . $address1 . "',
+                        '" . $address2 . "',
+                        '" . $zipCode . "',
+                        '" . $city . "',
+                        '" . $privatePhone . "',
+                        '" . $workPhone . "',
+                        '" . $mobile . "',
+                        '" . $fax . "',
+                        '" . $email . "',
+                        '" . $birthDate . "',
+                        '" . $companyName . "',
+                        '" . $countryID . "',
+                        '" . $tchoukupID . "',
+                        '" . date('Y-m-d') . "'
+                        $sensitiveValuesForQuery
+                     )";
                 $memberInsertResult = mysql_query($memberInsertRequest);
                 if ($memberInsertResult) { // Tout s'est bien passé.
                     echo "<p class='success'>Insertion réussie.</p>";

@@ -745,24 +745,29 @@ function printSeasonsOptionsForSelect($from, $to, $selectedSeason)
     }
 }
 
+/**
+ * Prints a dropdown list with all the clubs
+ * @param {int} $selectedClubId The club id selected in the list
+ * @param {string} $typeId Must be 'id' or 'nbIdClub'
+ */
 function afficherListeClubs($selectedClubId, $typeId)
 {
-    $requeteListeClubs = "SELECT * FROM ClubsFstb ORDER BY actif DESC, club";
+    $requeteListeClubs =
+        "SELECT c.id, c.nbIdClub, c.club, c.statusId, cs.name" . $_SESSION['__langue__'] . " AS statusName
+         FROM ClubsFstb c, clubs_status cs
+         WHERE c.statusId = cs.id
+         ORDER BY statusId, club";
     $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requête pour l'affichage de la liste des clubs</h4>");
     echo "<select name='ClubsFstb'>";
-    echo "<optgroup label='Clubs adhérants'>";
-    $clubPrecedantEstActif = false;
-    while ($donnees = mysql_fetch_assoc($reponse)) {
-        $nomClub = $donnees['club'];
-        $idClub = $donnees[$typeId];
-        if ($donnees['actif']==0) {
-            $clubEstActif = false;
-        } else {
-            $clubEstActif = true;
-        }
-
-        if (!$clubEstActif && $clubPrecedantEstActif) {
-            echo "<optgroup label='Clubs non-adhérants'>";
+    $previousClubStatusId = 0;
+    while ($club = mysql_fetch_assoc($reponse)) {
+        $nomClub = $club['club'];
+        $idClub = $club[$typeId];
+        if ($previousClubStatusId != $club['statusId']) {
+            if ($previousClubStatusId != 0) {
+                echo "</optgroup>";
+            }
+            echo "<optgroup label='" . $club['statusName'] . "'>";
         }
 
         if ($nomClub=="") {
@@ -775,7 +780,7 @@ function afficherListeClubs($selectedClubId, $typeId)
             $selected = "";
         }
         echo "<option value='".$idClub."'".$selected.">".$nomClub."</option>";
-        $clubPrecedantEstActif = $clubEstActif;
+        $previousClubStatusId = $club['statusId'];
     }
     echo "</select>";
 }

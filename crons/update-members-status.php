@@ -12,7 +12,7 @@ $query = "UPDATE DBDPersonne
 //echo $query;
 mysql_query($query);
 
-// Updating Tchoukup status from "Papier + E-mail" to "Papier" for newly "Actif" members who are not member of TBC Genève
+// Updating Tchoukup status from "Papier + E-mail" to "E-mail" for newly "Actif" members who are not member of TBC Genève
 $queryTchoukup = "UPDATE DBDPersonne
 				  SET idCHTB = 5
 				  WHERE idCHTB = 2

@@ -1,5 +1,6 @@
 <div class="afficherAnnuaire">
 <?php
+    /* ------------------ OLD VERSION ------------------ */
 	if (isset($_GET['modificationIdAnnuaire']) && is_numeric($_GET['modificationIdAnnuaire'])) {
 		$modificationIdAnnuaire = $_GET['modificationIdAnnuaire'];
 	}
