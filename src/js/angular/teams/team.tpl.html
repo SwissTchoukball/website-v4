@@ -23,7 +23,7 @@
 </p>
 <h3>Salle pour les matchs à domicile</h3>
 <p><a href="/lieu/{{$ctrl.team.homeVenue.id}}">{{$ctrl.team.homeVenue.name}}</a></p>
-<h3>Joueuses et joueurs</h3>
+<h3>{{$ctrl.players.length}} joueuses ou joueurs</h3>
 <!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
 <p class="info" ng-if="$ctrl.unpaidLicensesCost > 0">
     Merci d'effectuer le paiement des <strong>CHF {{$ctrl.unpaidLicensesCost}}</strong> restant
