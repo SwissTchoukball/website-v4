@@ -55,7 +55,7 @@
 		$requeteNombreMembresParClub.=", club ASC";
 	}
 	else{
-		$requeteNombreMembresParClub.="ORDER BY ClubsFstb.nomPourTri ASC";
+		$requeteNombreMembresParClub.="ORDER BY c.nomPourTri ASC";
 	}
 
 	//echo $requeteNombreMembresParClub;
