@@ -62,7 +62,7 @@ if (!$resultMembre) {
 
 	$today = date('Y-m-d');
 
-	$isDeletionPeriod = ($today < $deletionPeriodData['delaiSupprimerMembres'] &&
+	$isDeletionPeriod = ($today <= $deletionPeriodData['delaiSupprimerMembres'] &&
 		$deletionPeriodData['datePaiementAnneePassee'] != NULL) ||
         $deletionPeriodData['idClub'] == NULL; //S'il ne s'agit pas d'un club ou d'un club qui n'a pas de cotisations (non-adhérent)
 
@@ -70,8 +70,8 @@ if (!$resultMembre) {
 		printErrorMessage("Vous ne pouvez pas supprimer un membre qui ne fait pas parti de votre club.");
 	} elseif ($isInvolvedInFederation) {
 		printErrorMessage("Vous ne pouvez pas supprimer un membre qui impliqué au sein de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".");
-	} elseif(!$isDeletionPeriod) {
-		printErrorMessage("Vous ne pouvez pas supprimer un membre en dehors de la période de suppression en début de saison.");
+	} elseif(!$isDeletionPeriod && $_SESSION['__userLevel__'] > 5) {
+		printErrorMessage("Vous ne pouvez pas supprimer un membre en dehors de la période de suppression qui se situe en début de saison.");
 	} else {
 		$memberDeleteRequest = "DELETE FROM DBDPersonne WHERE idDbdPersonne=".$_GET['delete']." LIMIT 1";
 		$memberDeleteResult = mysql_query($memberDeleteRequest);
