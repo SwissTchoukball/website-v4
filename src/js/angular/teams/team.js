@@ -37,6 +37,8 @@ angular
                             var deferred = $q.defer();
 
                             // Removing the members that are already in the team
+                            // TODO: Also remove members that are already in another team of the same club
+                            //       Hint: Could be a solution to have a field, in the data coming from backend, saying if the member is already member of a championship team this season
                             deferred.resolve(members.filter(function(member) {
                                 return !_.some($ctrl.team.players, {id: member.id});
                             }));

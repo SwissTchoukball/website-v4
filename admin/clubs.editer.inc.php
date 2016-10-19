@@ -35,11 +35,11 @@ if ($newClub) {
 } else {
 	$clubRequest = "SELECT c.id, c.club, c.nomComplet, c.nomPourTri, c.adresse, c.npa, c.ville, c.email, c.telephone, c.statusId, c.url, c.lastEdit,
 						   ct.id AS idCanton, ct.nomCanton".$_SESSION['__langue__']." AS nomCanton,
-						   pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident, pres.numPostal AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident, pres.telephone AS telephonePresident, pres.portable AS portablePresident,
+						   pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident, pres.npa AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident, pres.telPrive AS telephonePresident, pres.portable AS portablePresident,
 						   CONCAT(editor.prenom, editor.nom) AS lastEditorName
 					FROM ClubsFstb c
 					LEFT OUTER JOIN Canton ct ON c.canton = ct.id
-					LEFT OUTER JOIN Personne pres ON c.id = pres.idClub AND pres.contactClub=1
+					LEFT OUTER JOIN DBDPersonne pres ON c.idPresident = pres.idDbdPersonne
 					LEFT OUTER JOIN Personne editor ON c.lastEditorID = editor.id
 					WHERE c.id=".$idClubToEdit;
 	//echo '<p class="info">'.$clubRequest.'</p>';
