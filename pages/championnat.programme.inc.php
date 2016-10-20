@@ -238,7 +238,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 							foreach($arbitresMatchs as $arbitreID => $nbTiers) {
 								if ($arbitreID != 0) {
 									$referee = $referees[$arbitreID];
-									if ($referee['arbitrePublic']) {
+									if ($referee['public']) {
 										$refereeFullname = $referee['nom'] . ' ' . $referee['prenom'];
 									} else {
 										$refereeFullname =  'Anonyme';

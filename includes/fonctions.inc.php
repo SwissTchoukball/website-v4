@@ -415,23 +415,27 @@ function getReferees($orderByLevel = false)
 {
     $referees = array();
 
+    $queryPartOrderBy = ' ORDER BY ';
     if ($orderByLevel) {
-        $order = " ORDER BY idArbitre DESC, nom, prenom";
-    } else {
-        $order = "";
+        $queryPartOrderBy .= 'a.levelId DESC, ';
     }
+    $queryPartOrderBy .= 'p.nom, p.prenom';
 
-    $refereesQuery = "SELECT idDbdPersonne AS id, nom, prenom, idArbitre AS niveau, arbitrePublic, numeroCompte
-                      FROM DBDPersonne
-                      WHERE idArbitre > 1" . $order;
+    $refereesQuery = "SELECT a.personId, a.levelId, a.hidden, a.public,
+                             p.nom, p.prenom, p.telPrive, p.portable, p.email, p.emailFSTB AS emailFederation, p.numeroCompte,
+                             cl.club AS clubName
+                      FROM Arbitres a
+                      LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = a.personId
+                      LEFT OUTER JOIN ClubsFstb cl ON cl.nbIdClub = p.idClub" .
+                      $queryPartOrderBy;
     if (!$referessData = mysql_query($refereesQuery)) {
         $errorReferee = array();
-        $errorReferee['idArbitre'] = 0;
+        $errorReferee['levelId'] = 0;
         $errorReferee['nom'] = 'Erreur lors de la récupération des arbitres';
         $referees[0] = $errorReferee;
     } else {
         while ($referee = mysql_fetch_assoc($referessData)) {
-            $referees[$referee['id']] = $referee;
+            $referees[$referee['personId']] = $referee;
         }
     }
     return $referees;
@@ -441,85 +445,67 @@ function getReferees($orderByLevel = false)
   * To use this function, it is better that for the $referees array to be sorted by level.
   *
   */
-function printRefereesOptionsList($referees, $selectedRefereeID, $addslashes = false)
-{
-    // It's better not to include the getReferees() function within this function to avoid to many calls if
-    // this function is called multiple times on the same page.
+function printRefereesOptionsList($referees, $selectedRefereeID, $addslashes = false) {
     $refereeLevel = NULL;
-    foreach($referees as $r) {
-        if ($r['niveau'] != $refereeLevel) {
-            $refereeLevel = $r['niveau'];
-            echo '<optgroup label="Arbitres '.chif_rome($refereeLevel-1).'">';
+    foreach($referees as $referee) {
+        if ($referee['levelId'] != $refereeLevel) {
+            $refereeLevel = $referee['levelId'];
+            echo '<optgroup label="Arbitres '.chif_rome($refereeLevel - 1).'">';
         }
-        if ($r['id'] == $selectedRefereeID) {
+        if ($referee['personId'] == $selectedRefereeID) {
             $selected = ' selected';
         } else {
             $selected = '';
         }
         if ($addslashes) {
-            $fullname = addslashes($r['nom'].' '.$r['prenom']);
+            $fullname = addslashes($referee['nom'].' '.$referee['prenom']);
         } else {
-            $fullname = $r['nom'].' '.$r['prenom'];
+            $fullname = $referee['nom'].' '.$referee['prenom'];
         }
-        echo '<option value="'.$r['id'].'"'.$selected.'>'.$fullname.'</option>';
+        echo '<option value="'.$referee['personId'].'"'.$selected.'>'.$fullname.'</option>';
     }
 }
 
-function afficherArbitre($record, $photo)
+function afficherArbitre($referee)
 {
-    if ($record['arbitrePublic'] == 1 || $_SESSION['__userLevel__'] <= 10) {
-        echo "<tr>";
-        if ($photo) {
-            echo "<td>";
-                $nomFichierPhoto = nomPhotoValide($record["nom"],$record["prenom"],"_arb", "jpg");
-                if (is_file($nomFichierPhoto)) {
-                    echo "<p class='center'><img src='".$nomFichierPhoto."' alt='".$record["nom"]."&nbsp;".$record["prenom"]."'/>";
-                } else {
-                    echo "";
-                }
-            echo "</td>";
-            echo "<td>";
-        } else {
-            echo "<td colspan='2'>";
+    if ($referee['public'] == 1 || $_SESSION['__userLevel__'] <= 10) {
+        echo '<div class="referee">';
+        echo "<strong>",$referee["nom"]."&nbsp;".$referee["prenom"]."</strong><br />";
+        if ($referee['clubName'] != '') {
+            echo "Club : ".$referee['clubName']."<br />";
         }
-            echo "<strong>",$record["nom"]."&nbsp;".$record["prenom"]."</strong><br />";
-            if ($record['idClub'] != 0) {
-                $retour = mysql_query("SELECT club FROM `ClubsFstb` WHERE `nbIdClub`='".$record['idClub']."'");
-                $donnees = mysql_fetch_array($retour);
-                echo "Club : ".$donnees['club']."<br />";
+        if ($referee["telPrive"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            echo VAR_LANG_TELEPHONE." : ";
+            echo $referee["telPrive"];
+            echo "<br />";
+        }
+        if ($referee["portable"]!="" && $_SESSION['__userLevel__'] <= 10) {
+            echo VAR_LANG_PORTABLE." : ";
+            echo $referee["portable"];
+            echo "<br />";
+        }
+        if (($referee["email"]!="" || $referee["emailFederation"]!="") && $_SESSION['__userLevel__'] <= 10) {
+            $email = $referee["email"];
+            if ($referee["emailFederation"]!="") {
+                $email = $referee["emailFederation"];
             }
-            if ($record["telPrive"]!="" && $_SESSION['__userLevel__'] <= 10) {
-                echo VAR_LANG_TELEPHONE." : ";
-                echo $record["telPrive"];
-                echo "<br />";
-            }
-            if ($record["portable"]!="" && $_SESSION['__userLevel__'] <= 10) {
-                echo VAR_LANG_PORTABLE." : ";
-                echo $record["portable"];
-                echo "<br />";
-            }
-            if (($record["email"]!="" || $record["emailFSTB"]!="") && $_SESSION['__userLevel__'] <= 10) {
-                $email = $record["email"];
-                if ($record["emailFSTB"]!="") {
-                    $email = $record["emailFSTB"];
-                }
-                echo "Email"." : ";
-                echo email($email);
-                echo "<br />";
-            }
-        echo "</td></tr>";
+            email($email);
+            echo "<br />";
+        }
+        echo "</div>";
     }
 }
 
 function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
 {
     if ($categoryID == 1 || $categoryID == 2) { // League A or B, the only championship leagues accounted for currently
-        $pointsComputationQuery = "SELECT p.idDbdPersonne, SUM(tp.pointsArbitrage) AS pointsArbitrageTotal
-                                   FROM DBDPersonne p
+        $pointsComputationQuery = "SELECT a.personId, SUM(tp.pointsArbitrage) AS pointsArbitrageTotal
+                                   FROM Arbitres a
+                                   LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = a.personId
                                    LEFT OUTER JOIN Championnat_Periodes cp ON p.idDbdPersonne = cp.idArbitreA OR p.idDbdPersonne = cp.idArbitreB OR p.idDbdPersonne = cp.idArbitreC
                                    LEFT OUTER JOIN Championnat_Types_Periodes tp ON cp.idTypePeriode=tp.id
                                    LEFT OUTER JOIN Championnat_Matchs m ON cp.idMatch=m.idMatch
-                                   WHERE p.idArbitre>1 AND m.saison=" . $season . " AND m.idCategorie=" . $categoryID . "
+                                   WHERE m.saison=" . $season . " AND m.idCategorie=" . $categoryID . "
                                    GROUP BY p.idDbdPersonne
                                    ORDER BY p.nom, p.prenom";
 
@@ -527,12 +513,12 @@ function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
             while ($referee = mysql_fetch_assoc($referees)) {
                 // With only league A and B, we can use the $categoryID as idTypePoints, but with new leagues it won't be possible anymore
                 $removingPreviousPointsRecord = "DELETE FROM Arbitres_Points
-                                                 WHERE idArbitre = " . $referee['idDbdPersonne'] . "
+                                                 WHERE idArbitre = " . $referee['personId'] . "
                                                  AND idSaison = " . $season . "
                                                  AND idTypePoints = " . $categoryID;
                 if (mysql_query($removingPreviousPointsRecord)) {
                     $savePointsQuery = "INSERT INTO Arbitres_Points (idArbitre, idSaison, idTypePoints, points, date, creator, lastEditor)
-                                        VALUES (" . $referee['idDbdPersonne'] . ",
+                                        VALUES (" . $referee['personId'] . ",
                                                 " . $season . ", " . $categoryID . ",
                                                 " . $referee['pointsArbitrageTotal'] . ",
                                                 '" . date('Y-m-d') . "',

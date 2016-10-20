@@ -237,7 +237,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 $matchReferees = array_count_values(array_filter($matchReferees)); // counts the number of period refereed by each referee
                 if (count($matchReferees) > 0) {
                     foreach ($matchReferees AS $idArbitre => $nbTiers) {
-                        if ($referees[$idArbitre]['arbitrePublic']) {
+                        if ($referees[$idArbitre]['public']) {
                             echo $referees[$idArbitre]['nom'] . ' ' . $referees[$idArbitre]['prenom'];
                         } else {
                             echo 'Anonyme';

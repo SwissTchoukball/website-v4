@@ -20,7 +20,7 @@ if (!isset($_GET['idMatch'])) {
     $periodScoreA = array();
     $periodScoreB = array();
     $defaultNbPeriods = 3;
-    $defaultPeriodTypeID = 3; // 20 minutes period
+    $defaultPeriodTypeID = 13; // 20 minutes period
 
     while ($donnees = mysql_fetch_array($retour)) {
         if ($firstPeriod) {

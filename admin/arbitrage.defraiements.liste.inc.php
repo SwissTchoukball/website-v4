@@ -54,7 +54,7 @@ if ($result = mysql_query($categoriesQuery)) {
 //             paid to the referee. We would therefore need a table to store that (Arbitres_Defraiements).
 
 $matchesByRefereeQuery =
-    "SELECT COUNT(*) AS nbPeriodes, cp.idMatch, cp.idTypePeriode, cp.idArbitre, cm.idCategorie,
+    "SELECT COUNT(*) AS nbPeriodes, cp.idMatch, cp.idTypePeriode, cp.idArbitre AS personId, cm.idCategorie,
             p.nom, p.prenom, p.idArbitre AS niveauArbitre
      FROM ((SELECT noPeriode, idMatch, idArbitreA AS idArbitre, idTypePeriode
             FROM Championnat_Periodes
@@ -80,7 +80,7 @@ $matchesByReferee = array();
 if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
     $previousRefereeID = 0;
     while ($refereeMatches = mysql_fetch_assoc($matchesByRefereeResult)) {
-        $refereeID = $refereeMatches['idArbitre'];
+        $refereeID = $refereeMatches['personId'];
         $categoryID = $refereeMatches['idCategorie'];
         $periodType = $refereeMatches['idTypePeriode'];
         $nbPeriods = $refereeMatches['nbPeriodes'];
@@ -98,13 +98,13 @@ if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
     }
 
     // Getting information about the payments
-    $paymentsByRefereeQuery = "SELECT idArbitre, montantTotalPaye
+    $paymentsByRefereeQuery = "SELECT idArbitre AS personId, montantTotalPaye
                                FROM Arbitres_VersementsTotauxParArbitreParSaison
                                WHERE saison = $season";
 
     if ($paymentsByRefereeResult = mysql_query($paymentsByRefereeQuery)) {
         while ($referee = mysql_fetch_assoc($paymentsByRefereeResult)) {
-            $matchesByReferee[$referee['idArbitre']]['totalAmountPaid'] = $referee['montantTotalPaye'];
+            $matchesByReferee[$referee['personId']]['totalAmountPaid'] = $referee['montantTotalPaye'];
         }
     } else {
         printErrorMessage("Problème lors de la récupération des informations sur les versements");

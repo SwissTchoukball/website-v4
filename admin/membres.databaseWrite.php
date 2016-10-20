@@ -107,18 +107,16 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $newMember = false;
             if ($_POST['memberID'] == 0 && $_POST['postType'] == "newMember") { // New member to add
                 $memberID = $_POST['memberID'];
-                //TODO: Autoriser la modification du nom, prénom raison sociale que si ce n'est pas un bénévole FSTB
+                //TODO: Autoriser la modification du nom, prénom raison sociale que si ce n'est pas un bénévole Swiss Tchoukball
                 //TODO: Autoriser la modification des coordonnées que si ce n'est pas un membre du comité.
 
                 if (hasAllMembersManagementAccess()) {
                     $sensitiveAttributesForQuery =
-                        ", `idArbitre`,
-                           `typeCompte`,
+                        ", `typeCompte`,
                            `numeroCompte`,
                            `remarque`";
                     $sensitiveValuesForQuery =
-                        ", '" . $refereeID . "',
-                           '" . $typeCompte . "',
+                        ", '" . $typeCompte . "',
                            '" . $numeroCompte . "',
                            '" . $remarques . "'";
                 } else {
@@ -186,15 +184,29 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                      )";
                 $memberInsertResult = mysql_query($memberInsertRequest);
                 if ($memberInsertResult) { // Tout s'est bien passé.
-                    echo "<p class='success'>Insertion réussie.</p>";
+                    printSuccessMessage("Insertion de la personne réussie.");
                     $idMemberToEdit = mysql_insert_id();
+
+                    // Insertion des informations d'arbitrage
+                    if (hasRefereeManagementAccess() && $refereeID > 1) {
+                        $startCountingPointsOnEvenYears = (date('Y') % 2) + 1;
+                        $refereeDataInsertQuery =
+                            "INSERT INTO Arbitres (personId, levelId, startCountingPointsOnEvenYears)
+                             VALUES (" . $idMemberToEdit . ", " . $refereeID . ", " . $startCountingPointsOnEvenYears . ")";
+                        if (!mysql_query($refereeDataInsertQuery)) {
+                            printErrorMessage("Erreur lors de l'enregistrement des informations d'arbitre");
+                        }
+                    }
+
                 } else {
-                    echo "<p class='error'>Erreur lors de l'insertion dans la base de données.";
-                    echo "<br/>Requête: " . $memberInsertRequest;
-                    echo "<br/>Message: " . mysql_error() . "</p>";
+                    $errorMessage = "<p class='error'>Erreur lors de l'insertion dans la base de données.";
+                    $errorMessage .= "<br/>Requête: " . $memberInsertRequest;
+                    $errorMessage .= "<br/>Message: " . mysql_error();
+                    printErrorMessage($errorMessage);
                     $nbError++;
                     $newMember = true;
                 }
+
             } elseif ($_POST['postType'] == "editMember") { // Modification of an already existing member
                 $memberID = $_POST['memberID'];
 
@@ -224,8 +236,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                                         idCHTB=" . $tchoukupID;
                 if (hasAllMembersManagementAccess()) {
                     $memberUpdateRequest .= ", idClub=" . $clubID . "
-                                         , idArbitre=" . $refereeID . "
-                                         , arbitrePublic=" . $publicReferee . "
                                          , suspendu=" . $suspended . "
                                          , typeCompte='" . $typeCompte . "'
                                          , numeroCompte='" . $numeroCompte . "'
@@ -236,6 +246,29 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 $memberUpdateResult = mysql_query($memberUpdateRequest);
                 if ($memberUpdateResult) { // Tout s'est bien passé.
                     echo "<p class='success'>Modification réussie.</p>";
+
+                    // Insertion des informations d'arbitrage
+                    if (hasRefereeManagementAccess()) {
+                        if ($refereeID > 1) {
+                            // When updating a person, this could either be an insert or an update of the referee data
+                            $refereeDataUpsertQuery =
+                                "INSERT INTO Arbitres (personId, levelId, public)
+                                 VALUES (" . $memberID . ", " . $refereeID . ", " . $publicReferee . ")
+                                 ON DUPLICATE KEY
+                                 UPDATE levelId = " . $refereeID . ", public = " . $publicReferee;
+                            if (!mysql_query($refereeDataUpsertQuery)) {
+                                printErrorMessage("Erreur lors de l'enregistrement des informations d'arbitre");
+                            }
+                        }
+                        else {
+                            // The person is not a referee anymore.
+                            // If it wasn't already before, this won't trigger an error
+                            $refereeDataDeleteQuery = "DELETE FROM Arbitres WHERE personId = " . $memberID . " LIMIT 1";
+                            if (!mysql_query($refereeDataDeleteQuery)) {
+                                printErrorMessage("Erreur lors de l'enregistrement des informations d'arbitre");
+                            }
+                        }
+                    }
                 } else {
                     echo "<p class='error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
                     if ($_SESSION['__userLevel__'] == 6) {

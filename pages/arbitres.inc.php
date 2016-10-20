@@ -1,18 +1,16 @@
 <?php
+$referees = getReferees(true);
+$currentLevel = -1;
+echo '<div class="referee-list">';
+foreach ($referees as $referee) {
+    if ($currentLevel != $referee['levelId']) {
+        echo "<h2 class='alt'>" . VAR_LANG_ARBITRES . " " . chif_rome($referee['levelId'] - 1) . "</h2>";
+        $currentLevel = $referee['levelId'];
+    }
 
-$afficherPhoto = false;
-
-for($k=4;$k>=1;$k--){
-	echo "<h2 class='alt'>".VAR_LANG_ARBITRES." ".chif_rome($k)."</h2>";
-	echo '<table class="arbitres-es">';
-	$idArbitreBDD=$k+1;
-	$requeteSQL = "SELECT * FROM `DBDPersonne` WHERE `idArbitre`='".$idArbitreBDD."' ORDER BY `nom`, `prenom`";
-	$recordset = mysql_query($requeteSQL);
-	while($record = mysql_fetch_array($recordset)){
-		if($record['suspendu'] != 1 && $record['arbitreMasque'] != 1){
-			afficherArbitre($record, $afficherPhoto);
-		}
-	}
-	echo '</table>';
+    if ($referee['suspendu'] != 1 && $referee['hidden'] != 1) {
+        afficherArbitre($referee);
+    }
 }
+echo '</div>';
 ?>

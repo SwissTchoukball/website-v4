@@ -62,12 +62,13 @@ foreach ($pointsTypes as $pointType) {
 echo '<th>Total</th>';
 echo '</tr>';
 
-$queryRefereesPoints = "SELECT ap.idArbitre, p.nom, p.prenom, p.idArbitre AS niveauArbitre, atp.id AS idTypesPoints, atp.typesPointsFr,
+$queryRefereesPoints = "SELECT ap.idArbitre AS personId, p.nom, p.prenom, a.levelId AS niveauArbitre, atp.id AS idTypesPoints, atp.typesPointsFr,
 						(SELECT SUM(apo.points) AS points
 						FROM Arbitres_Points apo
 						WHERE apo.idArbitre=ap.idArbitre AND apo.idSaison = " . $season . " AND apo.idTypePoints = atp.id) AS points
 						FROM Arbitres_Types_Points atp, Arbitres_Points ap
 						LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = ap.idArbitre
+						LEFT OUTER JOIN Arbitres a ON a.personId = p.idDbdPersonne
 						WHERE ap.idSaison = " . $season . "
 						GROUP BY p.nom, p.prenom, atp.id
 						ORDER BY p.nom, p.prenom, atp.id";
@@ -77,7 +78,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
 	$currentRefereeLevel = 0;
 	$grandTotalPoints = 0;
 	while ($referee = mysql_fetch_assoc($refereesPoints)) {
-		if ($referee['idArbitre'] != $currentRefereeID) {
+		if ($referee['personId'] != $currentRefereeID) {
 			if ($currentRefereeID != 0) { // Not first line
                 // Computation of the total number of points of the referee in the previous loop.
 				$grandTotalPoints += $totalPoints;
@@ -93,7 +94,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
 			echo '<td>' . $referee['prenom'] . ' ' . $referee['nom'] . '</td>';
 			$refereeLevel = $referee['niveauArbitre'] - 1;
 			echo '<td>' . chif_rome($refereeLevel) . '</td>';
-			$currentRefereeID = $referee['idArbitre'];
+			$currentRefereeID = $referee['personId'];
 			$currentRefereeLevelID = $referee['niveauArbitre'];
 			$totalPoints = 0;
 		}
@@ -125,10 +126,10 @@ echo '</table>';
 
 echo '<h3>Arbitres n\'ayant obtenus aucun points</h3>';
 echo '<p class="noPointsReferees">';
-$queryNoPointsReferees = "SELECT p.idDbdPersonne, p.nom, p.prenom
+$queryNoPointsReferees = "SELECT a.personId, p.nom, p.prenom
 						  FROM DBDPersonne p
-						  WHERE p.idArbitre > 1
-						  AND p.idDbdPersonne NOT IN (SELECT ap.idArbitre
+						  LEFT OUTER JOIN Arbitres a ON a.personId = p.idDbdPersonne
+						  WHERE a.personId NOT IN (SELECT ap.idArbitre
 						  							  FROM Arbitres_Points ap
 						  							  WHERE ap.idSaison=" . $season . ")
 						  ORDER BY p.nom, p.prenom";

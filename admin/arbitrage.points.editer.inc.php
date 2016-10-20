@@ -29,7 +29,8 @@ if (hasRefereeManagementAccess()) {
 		$submitAction = 'Modifier';
 		$pointsID = $_GET['modifier'];
 
-		$queryPoints = "SELECT ap.idArbitre, ap.idSaison, ap.idTypePoints, ap.points, ap.date, ap.description, p1.nom AS nomCreateur, p1.prenom AS prenomCreateur, p2.nom AS nomEditeur, p2.prenom AS prenomEditeur
+		$queryPoints = "SELECT ap.idArbitre AS personId, ap.idSaison, ap.idTypePoints, ap.points, ap.date, ap.description,
+						p1.nom AS nomCreateur, p1.prenom AS prenomCreateur, p2.nom AS nomEditeur, p2.prenom AS prenomEditeur
 						FROM Arbitres_Points ap
 						LEFT OUTER JOIN Personne p1 ON p1.id = ap.creator
 						LEFT OUTER JOIN Personne p2 ON p2.id = ap.lastEditor
@@ -40,7 +41,7 @@ if (hasRefereeManagementAccess()) {
 			if (mysql_num_rows($dataPoints) < 1) {
 				die(printErrorMessage("Données introuvables"));
 			}
-			$refereeID = $p['idArbitre'];
+			$refereeID = $p['personId'];
 			$seasonID = $p['idSaison'];
 			$pointsTypeID = $p['idTypePoints'];
 			$points = $p['points'];

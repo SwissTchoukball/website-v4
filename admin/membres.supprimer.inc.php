@@ -1,16 +1,22 @@
 <?php
+// Le LIMIT 1 de la requête permet de n'avoir qu'une seule entrée car il pourrait y en avoir plusieurs si le
+// membre a, par exemple, été a plusieurs postes au comité. Pour nous il est juste intéressant de savoir s'il a
+// été au comité, mais pas à quels postes.
+// Toute modification de cette requête devrait être aussi appliquée dans le fichier membres.supprimer.inc.php
+// TODO: Make it DRY
 $requestMembre =
 	"SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
 			nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
-			dateNaissance, raisonSociale, idPays, idCHTB, a.idArbitre AS niveauArbitreID,
-			a.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, arbitrePublic, suspendu,
-			typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
+			dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
+			dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
+			suspendu, typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
 			cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
 			cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
 			cj.id AS idParticipationChampionnat,
 			ce.idEquipe AS idEquipeChampionnatResponsable
 	FROM DBDPersonne p
-	LEFT OUTER JOIN DBDArbitre a ON p.idArbitre = a.idArbitre
+	LEFT OUTER JOIN Arbitres a ON p.idDbdPersonne = a.personId
+	LEFT OUTER JOIN DBDArbitre dbda ON a.levelId = dbda.idArbitre
 	LEFT OUTER JOIN Comite_Membres c ON p.idDbdPersonne = c.idPersonne
 	LEFT OUTER JOIN Commission_Membre cm ON p.idDbdPersonne = cm.idPersonne
 	LEFT OUTER JOIN Commission_Nom cn ON p.idDbdPersonne = cn.idResponsable

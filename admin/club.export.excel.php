@@ -5,7 +5,7 @@ require('../config.php');
 
 include('../includes/fonctions.inc.php');
 
-if ($_SESSION['__gestionMembresClub__']){
+if (!$_SESSION['__gestionMembresClub__']){
 	header("HTTP/1.0 403 Forbidden");
 	echo "<h1>Forbidden</h1>";
 	echo "You don't have permission to download the member list of any club.";
@@ -31,7 +31,7 @@ $query = "SELECT `DBDPersonne`.`raisonSociale`,
 				 `DBDStatus`.`descriptionStatusFr` AS 'statut',
 				 `DBDCHTB`.`descriptionCHTBFr` AS 'tchoukup'
 		  FROM `DBDPersonne`, `DBDCivilite`, `DBDPays`, `DBDStatus`, `DBDCHTB`
-		  WHERE (DBDPersonne.idStatus=3 OR .DBDPersonne.idStatus=4 OR DBDPersonne.idStatus=5 OR DBDPersonne.idStatus=6 OR DBDPersonne.idStatus=11 OR DBDPersonne.idStatus=23)
+		  WHERE (DBDPersonne.idStatus=3 OR DBDPersonne.idStatus=4 OR DBDPersonne.idStatus=5 OR DBDPersonne.idStatus=6 OR DBDPersonne.idStatus=11 OR DBDPersonne.idStatus=23)
 		  		AND idClub=".$_SESSION['__nbIdClub__']."
 		  		AND `DBDPersonne`.`idCivilite`= `DBDCivilite`.`idCivilite`
 		  		AND `DBDPersonne`.`idPays`=`DBDPays`.`idPays`
