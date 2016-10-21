@@ -9,6 +9,7 @@ $requestMembre =
 			nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
 			dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
 			dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
+			a.startCountingPointsOnEvenYears,
 			suspendu, typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
 			cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
 			cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,

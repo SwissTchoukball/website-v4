@@ -5,6 +5,27 @@
     var couleurValide;
     couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
 
+    $(function() {
+        refereeLevelSelect = $("#DBDArbitre");
+        refereeLevelSelect.change(updateRefereeFields);
+
+        function updateRefereeFields() {
+            if (refereeLevelSelect.val() > 1) {
+                $("label[for=arbitrePublic]").show();
+                $("#arbitrePublic").show();
+                $("label[for=startCountingPointsOnEvenYears]").show();
+                $("#startCountingPointsOnEvenYears").show();
+            } else {
+                $("label[for=arbitrePublic]").hide();
+                $("#arbitrePublic").hide();
+                $("label[for=startCountingPointsOnEvenYears]").hide();
+                $("#startCountingPointsOnEvenYears").hide();
+            }
+        }
+
+        updateRefereeFields();
+    });
+
     function checkMemberForm() {
 
         var nbError = 0;
@@ -268,6 +289,7 @@ if ($newMember) {
         $refereeLevelId = "1";
         $refereeLevelName = "Pas arbitre";
         $isPublicReferee = true;
+        $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
         $isSuspended = false;
         $isCommitteeMember = false;
         $isCommissionMember = false;
@@ -287,6 +309,7 @@ if ($newMember) {
                              nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
                              dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
                              dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
+                             a.startCountingPointsOnEvenYears,
                              suspendu, typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
                              cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
@@ -367,9 +390,18 @@ if ($newMember) {
             $companyName = $member['raisonSociale'];
             $countryID = $member['idPays'];
             $tchoukupID = $member['idCHTB'];
-            $refereeLevelId = $member['niveauArbitreID'];
-            $refereeLevelName = $member['niveauArbitre'];
-            $isPublicReferee = $member['arbitrePublic'] == 1;
+            $refereeLevelId = $member['niveauArbitreID'] == NULL ? 1 : $member['niveauArbitreID'];
+            $refereeLevelName = $member['niveauArbitre'] == NULL ? 'Pas arbitre' : $member['niveauArbitre'];
+            if ($member['arbitrePublic'] != NULL) {
+                $isPublicReferee = $member['arbitrePublic'] == 1;
+            } else {
+                $isPublicReferee = true;
+            }
+            if ($member['startCountingPointsOnEvenYears'] != NULL) {
+                $startCountingPointsOnEvenYears = $member['startCountingPointsOnEvenYears'] == 1;
+            } else {
+                $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
+            }
             $isSuspended = $member['suspendu'] == 1;
             $isCommitteeMember = $member['idFonctionComite'] != null;
             $isCommissionMember = $member['idCommissionMembre'] != null || $member['idCommissionResponsable'] != null;
@@ -648,7 +680,7 @@ if ($canEdit) {
 
             <label>Niveau d'arbitre</label>
             <?php
-            if (hasAllMembersManagementAccess()) {
+            if (hasRefereeManagementAccess()) {
                 afficherdropDownListe("DBDArbitre", "idArbitre", "descriptionArbitre", $refereeLevelId, true);
             } else {
                 echo '<p class="givenData">'.$refereeLevelName.'</p>';
@@ -656,15 +688,15 @@ if ($canEdit) {
             }
             ?>
 
-            <label>Arbitre public</label>
+            <label for="arbitrePublic">Arbitre public</label>
             <?php
-            if (hasAllMembersManagementAccess()) {
+            if (hasRefereeManagementAccess()) {
                 if ($isPublicReferee) {
                     $publicRefereeChecked = 'checked';
                 } else {
                     $publicRefereeChecked = '';
                 }
-                echo '<input type="checkbox" name="arbitrePublic" '.$publicRefereeChecked.' />';
+                echo '<input type="checkbox" name="arbitrePublic" id="arbitrePublic" '.$publicRefereeChecked.' />';
             } else {
                 echo '<p class="givenData">';
                 if ($isPublicReferee) {
@@ -673,6 +705,42 @@ if ($canEdit) {
                     echo 'Non';
                 }
                 echo '</p>';
+            }
+
+            if (hasRefereeManagementAccess()) {
+                ?>
+                <label for="startCountingPointsOnEvenYears">Volée d'arbitres</label>
+                <?php
+
+                // Computing examples
+                $currentYear = date('Y');
+                $oneEvenYear = 0;
+                $oneOddYear = 1;
+                $isCurrentYearEven = $currentYear % 2 == 0;
+                if ($isCurrentYearEven) {
+                    $oneEvenYear = $currentYear;
+                    $oneOddYear = $currentYear - 1;
+                } else {
+                    $oneEvenYear = $currentYear - 1;
+                    $oneOddYear = $currentYear;
+                }
+                $evenYearsExample = $oneEvenYear . '-' . ($oneEvenYear + 2);
+                $oddYearsExample = $oneOddYear . '-' . ($oneOddYear + 2);
+
+                // Defining which one is selected
+                $evenYearsSelected = '';
+                $oddYearsSelected = '';
+                if ($startCountingPointsOnEvenYears) {
+                    $evenYearsSelected = 'selected="selected"';
+                } else {
+                    $oddYearsSelected = 'selected="selected"';
+                }
+                ?>
+                <select name="startCountingPointsOnEvenYears" id="startCountingPointsOnEvenYears">
+                    <option value="1" <?php echo $evenYearsSelected; ?>>Années paires (p.ex. <?php echo $evenYearsExample; ?>)</option>
+                    <option value="0" <?php echo $oddYearsSelected; ?>>Années impaires (p.ex. <?php echo $oddYearsExample; ?>)</option>
+                </select>
+                <?php
             }
 
             if ($isSuspended || hasAllMembersManagementAccess()) {

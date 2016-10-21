@@ -85,6 +85,11 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     $tchoukupID = validiteInsertionTextBd($_POST['DBDCHTB']);
     $refereeID = validiteInsertionTextBd($_POST['DBDArbitre']);
     $publicReferee = isset($_POST['arbitrePublic']) ? 1 : 0;
+    if (isset($_POST['startCountingPointsOnEvenYears'])) {
+        $startCountingPointsOnEvenYears = $_POST['startCountingPointsOnEvenYears'];
+    } else {
+        $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
+    }
     $suspended = isset($_POST['suspendu']) ? 1 : 0;
     $typeCompte = validiteInsertionTextBd($_POST['DBDTypeCompte']);
     $numeroCompte = validiteInsertionTextBd($_POST['numeroCompte']);
@@ -252,10 +257,12 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         if ($refereeID > 1) {
                             // When updating a person, this could either be an insert or an update of the referee data
                             $refereeDataUpsertQuery =
-                                "INSERT INTO Arbitres (personId, levelId, public)
-                                 VALUES (" . $memberID . ", " . $refereeID . ", " . $publicReferee . ")
+                                "INSERT INTO Arbitres (personId, levelId, startCountingPointsOnEvenYears, public)
+                                 VALUES (" . $memberID . ", " . $refereeID . ", " . $startCountingPointsOnEvenYears . ", " . $publicReferee . ")
                                  ON DUPLICATE KEY
-                                 UPDATE levelId = " . $refereeID . ", public = " . $publicReferee;
+                                 UPDATE levelId = " . $refereeID . ",
+                                    startCountingPointsOnEvenYears = " . $startCountingPointsOnEvenYears . ",
+                                    public = " . $publicReferee;
                             if (!mysql_query($refereeDataUpsertQuery)) {
                                 printErrorMessage("Erreur lors de l'enregistrement des informations d'arbitre");
                             }
