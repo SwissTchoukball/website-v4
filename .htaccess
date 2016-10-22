@@ -19,6 +19,12 @@ RewriteRule ^mstile(.*)$ /favicons/mstile$1 [L]
 RewriteRule ^browserconfig\.xml$ /favicons/browserconfig.xml [L]
 RewriteRule ^website_icon\.svg$ /favicons/website_icon.svg [L]
 
+# Redirect for old RSS files
+RewriteRule ^rssFr\.php$ /rss.php?lang=fr [L]
+RewriteRule ^rssDe\.php$ /rss.php?lang=de [L]
+RewriteRule ^rssIt\.php$ /rss.php?lang=it [L]
+RewriteRule ^rssEn\.php$ /rss.php?lang=en [L]
+
 RewriteRule ^switchlang/(.{2})/?$  /index.php?langchange=$1 [L]
 RewriteRule ^switchlang/(.{2})/([0-9]+)/?$  /index.php?langchange=$1&lien=$2 [L]
 RewriteRule ^news/?$  /index.php?lien=51 [L]
