@@ -13,7 +13,6 @@
 # git has its own built in compression methods
 *.7z
 *.dmg
-*.gz
 *.iso
 *.jar
 *.rar
@@ -51,6 +50,9 @@ Thumbs.db
 # sftp configuration file
 sftp-config.json
 
+# PhpStorm files
+.idea/*
+
 # Website config file #
 #######################
 config.php
@@ -70,3 +72,13 @@ pictures/equipesSuisses/
 pictures/logos/
 pictures/logos_clubs/
 pictures/portraits/
+pictures/schema_championnat_*
+
+# Vendor #
+##########
+vendor/
+node_modules/
+
+# Build files #
+###############
+build/*

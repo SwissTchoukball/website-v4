@@ -4,8 +4,14 @@ php_flag "allow_url_include" "On"
 Options +FollowSymlinks
 RewriteEngine on
 
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTP_HOST} !localhost
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
+
 RewriteCond %{HTTP_HOST} !(tchoukball.ch|localhost)
-RewriteRule (.*) http://tchoukball.ch/$1 [R=301]
+RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
+
+RewriteRule ^document/(.*)$ /documents/$1 [R=301,NC,L]
 
 RewriteRule ^apple-touch-icon(.*)$ /favicons/apple-touch-icon$1 [L]
 RewriteRule ^favicon([\.-])(.*)$ /favicons/favicon$1$2 [L]
@@ -63,6 +69,7 @@ RewriteRule ^wtc/?$  /index.php?lien=77 [L]
 RewriteRule ^etc/?$  /index.php?lien=76 [L]
 RewriteRule ^world-games/?$  /index.php?lien=83 [L]
 RewriteRule ^ewc/?$  /index.php?lien=74 [L]
+RewriteRule ^esc/?$  /index.php?lien=104 [L]
 RewriteRule ^videos/?$  /index.php?lien=36 [L]
 RewriteRule ^videos/([0-9]+)/?$  /index.php?lien=36&idVideo=$1 [L]
 RewriteRule ^partenaires/?$  /index.php?lien=38 [L]

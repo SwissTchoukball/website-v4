@@ -107,26 +107,6 @@ else{
 	$affichageParJour=false;
 	$affichageParSemaine=true;
 
-
-	/* //Désactivation de la sélection par semaine, quasi pas utilisée et buggée quand on est sur une semaine chevauchant deux mois.
-	if(isset($_GET['semaine'])){
-		$classSelectionSemaine="boutonAfficherSemaineSelected";
-		$classSelectionMois="boutonAfficherMois";
-	}
-	else{
-		$classSelectionSemaine="boutonAfficherSemaine";
-		$classSelectionMois="boutonAfficherMoisSelected";
-	}
-	?>
-	<p>
-		<a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&mois=<?php echo $mois; ?>&annee=<?php echo $annee; ?>" title="Affichage par mois">
-			<img class="<?php echo $classSelectionMois; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par mois" />
-		</a><a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourPremierJourSemaine; ?>&mois=<?php echo $mois; ?>&annee=<?php echo $annee; ?>" title="Affichage par semaine">
-			<img class="<?php echo $classSelectionSemaine; ?>" src="pictures/spacer.gif" alt="Bouton pour afficher par semaine" />
-		</a>
-	</p>
-	<?php
-	*/
 	?>
 	<h4>Abonnements</h4>
 	<p><strong>Abonnez-vous avec votre ordinateur ou votre smartphone aux calendriers de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?> !</strong></p>

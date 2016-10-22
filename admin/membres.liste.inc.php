@@ -4,7 +4,7 @@
 
 //Handling search
 if (isset($_POST['keywords'])) {
-	$keywords = mysql_escape_string($_POST['keywords']);
+	$keywords = mysql_real_escape_string($_POST['keywords']);
 
 	// spliting into tokens
 	$tok = strtok($keywords," ");
@@ -33,7 +33,7 @@ if (isset($_POST['keywords'])) {
 
 //Handling pre-selection
 if (isset($_POST['preselectionID'])) {
-	$preselectionID = mysql_escape_string($_POST['preselectionID']);
+	$preselectionID = mysql_real_escape_string($_POST['preselectionID']);
 
 	$preselectionQuery = "SELECT where_clause FROM DBDRequetesPreselection WHERE id=".$preselectionID." LIMIT 1";
 	$preselectionData = mysql_query($preselectionQuery);

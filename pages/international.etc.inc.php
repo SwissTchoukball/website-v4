@@ -24,11 +24,16 @@ statInsererPageSurf(__FILE__);
 </div>
 <img src="pictures/international_championnat_europe.jpg" alt="Championat d'Europe" />
 <h2>Résultats Suisses</h2>
+<!-- TODO: Save this data in the database instead of being hard-coded -->
 <h3 class="alt">Hommes</h3>
 <table class="classementTourFinal">
 	<tr>
 		<th>Position</th>
 		<th>Édition</th>
+	</tr>
+	<tr>
+		<td>5èmes</td>
+		<td>Ji&ccaron;ín (CZ), 2016</td>
 	</tr>
 	<tr>
 		<td>3èmes</td>
@@ -63,6 +68,10 @@ statInsererPageSurf(__FILE__);
 	</tr>
 	<tr>
 		<td>1ères</td>
+		<td>Ji&ccaron;ín (CZ), 2016</td>
+	</tr>
+	<tr>
+		<td>1ères</td>
 		<td>Radevormwald (DE), 2014</td>
 	</tr>
 	<tr>
@@ -91,6 +100,10 @@ statInsererPageSurf(__FILE__);
 	<tr>
 		<th>Position</th>
 		<th>Édition</th>
+	</tr>
+	<tr>
+		<td>2èmes</td>
+		<td>Ji&ccaron;ín (CZ), 2016</td>
 	</tr>
 	<tr>
 		<td>1ers</td>

@@ -10,20 +10,14 @@
 		$prenom=validiteInsertionTextBd($_POST["prenom"]);
 		$username=validiteInsertionTextBd($_POST["username"]);
 		$password=md5($_POST["motDePasse"]);
-		$adresse=validiteInsertionTextBd($_POST["adresse"]);
-		$numPostal=validiteInsertionTextBd($_POST["numPostal"]);
-		$ville=validiteInsertionTextBd($_POST["ville"]);
-		$telephone=validiteInsertionTextBd($_POST["telephone"]);
-		$portable=validiteInsertionTextBd($_POST["portable"]);
 		$email=validiteInsertionTextBd($_POST["email"]);
 		$idClub=validiteInsertionTextBd($_POST["ClubsFstb"]);
-		$dateNaissance=date_date2sql($_POST["jour"]."-".$_POST["mois"]."-".$_POST["annee"]);
 
 		$requeteSQL = "INSERT INTO `Personne` ( `nom` , `prenom`, `username`,
-						`password` , `adresse` , `numPostal` , `ville` , `telephone` , `portable` , `email` , `idClub` , `dateNaissance`)
+						`password` , `email` , `idClub`)
 					VALUES (
-						'$nom', '$prenom', '$username', '$password', '$adresse', '$numPostal', '$ville', '$telephone', '$portable',
-					 '$email', '$idClub', '$dateNaissance')";
+						'$nom', '$prenom', '$username', '$password',
+					 '$email', '$idClub')";
 
 
 		if(mysql_query($requeteSQL)===false){
@@ -61,19 +55,6 @@
 		}
 		else{
 			mesInfos.email.style.background=couleurValide;
-		}
-		if(mesInfos.numPostal.value==""){
-			mesInfos.numPostal.style.background=couleurValide;
-		}
-		else{
-			if(isNaN(mesInfos.numPostal.value) || mesInfos.numPostal.value<1000 || mesInfos.numPostal.value.length!=4){
-				nbErreur++;
-				mesInfos.numPostal.style.background=couleurErreur;
-
-			}
-			else{
-				mesInfos.numPostal.style.background=couleurValide;
-			}
 		}
 
 		if(mesInfos.prenom.value.length==0){
@@ -116,19 +97,6 @@
 			mesInfos.idClub.style.background=couleurValide;
 		}
 
-		var dateN = new Date(mesInfos.annee.value,mesInfos.mois.value-1,mesInfos.jour.value);
-		if(dateN.getFullYear() != mesInfos.annee.value || (dateN.getMonth() != mesInfos.mois.value-1) || dateN.getDate() != mesInfos.jour.value){
-			nbErreur++;
-			mesInfos.annee.style.background=couleurErreur;
-			mesInfos.mois.style.background=couleurErreur;
-			mesInfos.jour.style.background=couleurErreur;
-		}
-		else{
-			mesInfos.annee.style.background=couleurValide;
-			mesInfos.mois.style.background=couleurValide;
-			mesInfos.jour.style.background=couleurValide;
-		}
-
 		return nbErreur==0;
 	}
 </SCRIPT>
@@ -139,25 +107,11 @@
 <label>Nom</label>
 <input name="nom" type="text" value="" size="35" maxlength="35">
 <label>Nom d'utilisateur</label>
-<input name="username" type="text" value="" size="35" maxlength="35">
-<label>Adresse</label>
-<input name="adresse" type="text" value="" size="35" maxlength="35">
-<label>Numéro postal</label>
-<input name="numPostal" type="text" value="" size="35" maxlength="35">
-<label>Ville</label>
-<input name="ville" type="text" value="" size="35" maxlength="35">
+<input name="username" type="text" value="" size="35" maxlength="35" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
 <br />
-<label>&nbsp;</label>
-<input type="text" style="visibility:hidden;">
-<label>Tél. privé</label>
-<input name="telephone" type="text" value="" size="35" maxlength="35">
-<label>Tél. mobile</label>
-<input name="portable" type="text" value="" size="35" maxlength="35">
 <label>E-mail</label>
 <input name="email" type="text" value="" size="35" maxlength="80" autocomplete="off">
 <br />
-<label>&nbsp;</label>
-<input type="text" style="visibility:hidden;">
 <label>Club</label>
 		<?php
 			// attention, pour garder une validité des données, les présidents
@@ -189,31 +143,9 @@
 
 		?>
 <br />
-<label>&nbsp;</label>
-<input type="text" style="visibility:hidden;">
-<label>Date de naissance</label>
-<div class="birthDate">
-	<?php
-		echo "<select name='jour'>";
-		echo creation_liste_jour();
-		echo "</select>";
-		echo "<select name='mois'>";
-		echo creation_liste_mois();
-		echo "</select>";
-		echo "<select name='annee'>";
-		for ($i = 1900; $i <= date('Y'); $i++)
-			 echo "<option value='$i'>$i</option>\n";
-		echo "</select>";
-	?>
-</div>
-<br />
-<label>&nbsp;</label>
-<input type="text" style="visibility:hidden;">
 <label>Mot de passe<br />(min 8 caractères)</label>
 <input name="motDePasse" type="password" maxlength="255" size="35" autocomplete="off">
 <br />
-<label>&nbsp;</label>
-<input type="text" style="visibility:hidden;">
 <input type="hidden" name="action" value="inserer">
 <input type="submit" value="insérer">
 </form>

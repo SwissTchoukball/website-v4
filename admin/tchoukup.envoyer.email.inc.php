@@ -10,21 +10,31 @@ $recipients[1] = 'abonnes.tchoukup@tchoukball.ch';
 // mais l'encodage indiqué par le HTML indique de l'UTF-8.
 // echo '<p><a href="' . $path . '" target="_blank">Voir le template</a></p>';
 
-if (isset($_POST['recipient']) && is_numeric($_POST['recipient'])) {
+if (
+	isset($_POST['recipient']) &&
+	is_numeric($_POST['recipient']) &&
+	isset($_POST['issueNb']) &&
+	is_numeric($_POST['issueNb'])
+	) {
 	//TODO Réfléchir pour plutôt accéder directement à la BDD et envoyer des e-mails individuels.
 	//	   Cela permettrait de choisir entre l'e-mail tchoukball.ch et l'e-mail.
 
 	$to = $recipients[$_POST['recipient']];
 
-	$subject = "Le nouveau numÃ©ro du Tchoukup vous attend !"; // Garder l'accent tel quel. Le site est en ISO Latin et le mail est en UTF-8
+	$templateVars = array();
+	$templateVars['issueNb'] = $_POST['issueNb'];
+
+	// Garder le charactère accentué ci-dessou tel quel. Le site est en ISO Latin et le mail est en UTF-8
+	$subject = "Le nouveau numÃ©ro du Tchoukup vous attend !";
 	$subject = utf8_decode($subject);
 	$subject = mb_encode_mimeheader($subject,"UTF-8");
 	if(file_exists($path)) {
-		ob_start();
-	    require($path);
-	    $message = ob_get_contents();
-	    ob_end_clean();
+	    $message = file_get_contents($path);
 	    $message = utf8_encode($message);
+	    foreach($templateVars as $key => $value)
+		{
+		    $message = str_replace('{{ '.$key.' }}', $value, $message);
+		}
 
 		$headers  = 'MIME-version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
@@ -41,12 +51,17 @@ if (isset($_POST['recipient']) && is_numeric($_POST['recipient'])) {
 }
 
 printMessage("Attention ! En cliquant sur <em>Envoyer</em>, l'e-mail sera envoyé sans autre avertissement.");
-echo '<form action="?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection . '" method="post" class="adminForm">';
-echo '<select name="recipient">';
+printMessage("Ne pas oublier de mettre à jour la liste de discussion avant d'envoyer");
+$formAction = '?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection;
+echo '<form action="' . $formAction . '" method="post" class="adminForm">';
+echo '<label for="recipient">Destinataire</label>';
+echo '<select name="recipient" id="recipient">';
 foreach($recipients as $key => $recipient) {
 	echo '<option value="' . $key . '">' . $recipient . '</option>';
 }
 echo '</select>';
+echo '<label for="issueNb">Numéro</label>';
+echo '<input type="text" name="issueNb" id="issueNb" />';
 echo '<input type="submit" value="Envoyer" />';
 echo '</form>';
 ?>

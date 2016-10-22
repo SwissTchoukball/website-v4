@@ -29,7 +29,7 @@
         <table border="0" align="center">
             <tr>
                 <td width="120px"><p><?php echo VAR_LANG_USERNAME;?> :</p></td>
-                <td><input name="username" type="text" size="35" maxlength="35"></td>
+                <td><input name="username" type="text" autocorrect="off" autocapitalize="off" spellcheck="false" size="35" maxlength="35"></td>
             </tr>
             <tr>
                 <td><p><?php echo VAR_LANG_PASSWORD;?> :</p></td>

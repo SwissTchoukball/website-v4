@@ -16,18 +16,25 @@
 			if($record["idFonction"] == 1){
 				$extensionPhotos = "_coach".$extensionPhotos;
 			}
+			echo "<div class='photo-joueur-es'>";
 			$nomFichierPhoto = nomPhotoValide($record["nom"],$record["prenom"],$extensionPhotos, "jpg");
 			// le fichier existe ?
-			if(is_file($_ENV["DOCUMENT_ROOT"].$nomFichierPhoto)){
-				echo "<div class='photo-joueur-es'><img src='".$nomFichierPhoto."' alt='Photo de ".$record["prenom"]." ".$record["nom"]."'></div>";
+			if(is_file($_SERVER["DOCUMENT_ROOT"].PATH_TO_ROOT.$nomFichierPhoto)){
+				echo "<img src='".PATH_TO_ROOT.$nomFichierPhoto."' alt='Photo de ".$record["prenom"]." ".$record["nom"]."'>";
 
 			}
 			else{
-				echo "<div class='photo-joueur-es'><img src='".VAR_REP_IMAGE_EQUIPE_SUISSE."pas-de-photo_port.jpg' alt='".$record["prenom"]." ".$record["nom"]." n'a pas de photo (".$nomFichierPhoto.")' /></div>";
+				echo '<!-- Fichier ' . $_ENV["DOCUMENT_ROOT"].PATH_TO_ROOT.$nomFichierPhoto . ' inexistant -->';
 			}
+			echo "</div>";
 
 			echo "<div class='infos-joueur-es'>";
-			echo "<span class='nom-joueur-es'>".$record["prenom"]."<br />".$record["nom"]."</span><br />";
+			echo "<div class='nom-joueur-es'>".$record["prenom"]." ".$record["nom"]."</div>";
+			echo "<div class='numero-joueur-es'>";
+			if($afficherNumero && $record['numero'] != null){
+				echo $record['numero'];
+			}
+			echo "</div>";
 			if($record['idFonction'] != 4){
 				if ($record['idSexe'] == 3) {
 					echo $record['titreF']."<br />";
@@ -38,11 +45,6 @@
 			echo $record["club"]."<br />";
 			if($record["idFITBMatchDB"]!=0){
 				echo "<a href='http://www.fitbcompetitions.org/index.php?detail=player&id=".$record["idFITBMatchDB"]."' target='_blank'>Fiche FITB</a><br />";
-			}
-			echo "</div>";
-			echo "<div class='numero-joueur-es'>";
-			if($afficherNumero && $record['numero'] != null){
-				echo $record['numero'];
 			}
 			echo "</div>";
 

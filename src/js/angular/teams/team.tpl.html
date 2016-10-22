@@ -1,0 +1,66 @@
+<p><span class="asLink" ng-click="$ctrl.goBack()">Retour</span></p>
+<h2>{{$ctrl.team.name}}, saison {{$ctrl.team.season.name}}, {{$ctrl.team.category.name}}</h2>
+<div ng-if="$ctrl.team.feePaymentDate !== undefined">
+    <h3>Frais d'inscription</h3>
+    <div ng-if="$ctrl.team.feePaymentDate">
+        <p>Payés le {{$ctrl.team.feePaymentDate | amDateFormat:'DD.MM.YYYY'}}</p>
+    </div>
+    <div ng-if="!$ctrl.team.feePaymentDate">
+        <p>Non-payés</p>
+        <p class="info">
+            Merci d'effectuer le paiement des <strong>CHF {{$ctrl.team.edition.teamRegistrationFee}}</strong>
+            d'ici au <strong>{{$ctrl.team.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
+            sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
+        </p>
+    </div>
+</div>
+<h3>Responsable d'équipe</h3>
+<p>
+    {{$ctrl.team.manager.firstName}} {{$ctrl.team.manager.lastName}}<br />
+    {{$ctrl.team.manager.email}}<br />
+    {{$ctrl.team.manager.phoneNumber}}<br />
+    {{$ctrl.team.manager.mobileNumber}}
+</p>
+<h3>Salle pour les matchs à domicile</h3>
+<p><a href="/lieu/{{$ctrl.team.homeVenue.id}}">{{$ctrl.team.homeVenue.name}}</a></p>
+<h3>{{$ctrl.players.length}} joueuses ou joueurs</h3>
+<!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
+<p class="info" ng-if="$ctrl.unpaidLicensesCost > 0">
+    Merci d'effectuer le paiement des <strong>CHF {{$ctrl.unpaidLicensesCost}}</strong> restant
+    sur le CCP de Swiss Tchoukball, <strong>20-8957-2</strong>,
+    pour valider les licences de vos joueurs.
+</p>
+<ul>
+    <li ng-repeat="player in $ctrl.players">
+        {{player.firstName}} {{player.lastName}}
+        <span ng-if="player.licensePaymentDate !== undefined">
+            <span class="label label--positive" ng-if="player.licensePaymentDate">Licencié</span>
+            <span class="label label--negative" ng-if="!player.licensePaymentDate">Non-licencié</span>
+        </span>
+    </li>
+</ul>
+
+<!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
+<form ng-if="$ctrl.team.feePaymentDate !== undefined"
+      name="addPlayersForm"
+      class="adminForm"
+      novalidate>
+    <label>Ajouter des joueurs</label>
+    <tags-input ng-model="$ctrl.newPlayers"
+                add-from-autocomplete-only="true"
+                display-property="fullName"
+                display-key="id"
+                replace-spaces-with-dashes="false"
+                placeholder="Noms des joueurs">
+        <auto-complete source="$ctrl.loadMembersForNewPlayers($query)"
+                       display-property="fullName">
+        </auto-complete>
+    </tags-input>
+    <div class="formActions">
+        <button class="button button--primary"
+                ng-click="$ctrl.submitNewPlayers()"
+                ng-disabled="addPlayersForm.$invalid || $ctrl.sendingNewPlayers">
+            Ajouter
+        </button>
+    </div>
+</form>

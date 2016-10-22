@@ -1,10 +1,30 @@
-
 <script lang="javascript">
 
     var couleurErreur;
     couleurErreur='#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
     var couleurValide;
     couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+
+    $(function() {
+        refereeLevelSelect = $("#DBDArbitre");
+        refereeLevelSelect.change(updateRefereeFields);
+
+        function updateRefereeFields() {
+            if (refereeLevelSelect.val() > 1) {
+                $("label[for=arbitrePublic]").show();
+                $("#arbitrePublic").show();
+                $("label[for=startCountingPointsOnEvenYears]").show();
+                $("#startCountingPointsOnEvenYears").show();
+            } else {
+                $("label[for=arbitrePublic]").hide();
+                $("#arbitrePublic").hide();
+                $("label[for=startCountingPointsOnEvenYears]").hide();
+                $("#startCountingPointsOnEvenYears").hide();
+            }
+        }
+
+        updateRefereeFields();
+    });
 
     function checkMemberForm() {
 
@@ -214,24 +234,31 @@
     }
 
     function updateTchoukupDelivery() {
-        tupd = document.getElementById("tchoukupDelivery");
+        tupd = $("#tchoukupDelivery");
         if (memberEdit.DBDCHTB.value == 2) { // TUP Papier + E-mail
-            $(tupd).show();
+            tupd.show();
             if (memberEdit.statutID.value == 2) { // Membre actif ou junior
-                tupd.innerHTML = "tchouk<sup>up</sup> envoyé au club";
+                tupd.find("p").html("tchouk<sup>up</sup> envoyé au club");
             } else {
-                tupd.innerHTML = "tchouk<sup>up</sup> envoyé à l'adresse indiqué ci-dessus."
+                tupd.find("p").html("tchouk<sup>up</sup> envoyé à l'adresse indiqué ci-dessus.");
             }
         } else {
-            $(tupd).hide();
+            tupd.hide();
         }
     }
 </script>
 <?php
+/** @var integer $idMemberToEdit */
 
 $canEdit = false;
+$canDelete = false;
 
 if ($newMember) {
+    $formLegend = "Nouveau membre";
+    $sendButtonValue = VAR_LANG_INSERER;
+    $postType = "newMember";
+    $canEdit = true;
+
     $memberID = 0;
     if ($nbError == 0) { //Initialisation uniquement si premier remplissage.
         $statutID = 3; //Membre actif
@@ -262,6 +289,7 @@ if ($newMember) {
         $refereeLevelId = "1";
         $refereeLevelName = "Pas arbitre";
         $isPublicReferee = true;
+        $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
         $isSuspended = false;
         $isCommitteeMember = false;
         $isCommissionMember = false;
@@ -271,29 +299,33 @@ if ($newMember) {
         $numeroCompte = "";
         $remarques = "";
     }
-    $formLegend = "Nouveau membre";
-    $sendButtonValue = VAR_LANG_INSERER;
-    $postType = "newMember";
-    $canEdit = true;
 } else {
     // Le LIMIT 1 de la requête permet de n'avoir qu'une seule entrée car il pourrait y en avoir plusieurs si le
     // membre a, par exemple, été a plusieurs postes au comité. Pour nous il est juste intéressant de savoir s'il a
     // été au comité, mais pas à quels postes.
-    $memberRequest = "SELECT idStatus, derniereModification, modificationPar, idClub, idLangue, idSexe, idCivilite,
+    // Toute modification de cette requête devrait être aussi appliquée dans le fichier membres.supprimer.inc.php
+    // TODO: Make it DRY
+    $memberRequest = "SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
                              nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
-                             dateNaissance, raisonSociale, idPays, idCHTB, a.idArbitre AS niveauArbitreID,
-                             a.descriptionArbitre".$_SESSION['__langue__']." AS niveauArbitre, arbitrePublic, suspendu,
-                             typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
+                             dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
+                             dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
+                             a.startCountingPointsOnEvenYears,
+                             suspendu, typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
-                             cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert
+                             cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
+                             cj.id AS idParticipationChampionnat,
+                             ce.idEquipe AS idEquipeChampionnatResponsable
                       FROM DBDPersonne p
-                      LEFT OUTER JOIN DBDArbitre a ON p.idArbitre = a.idArbitre
+                      LEFT OUTER JOIN Arbitres a ON p.idDbdPersonne = a.personId
+                      LEFT OUTER JOIN DBDArbitre dbda ON a.levelId = dbda.idArbitre
                       LEFT OUTER JOIN Comite_Membres c ON p.idDbdPersonne = c.idPersonne
                       LEFT OUTER JOIN Commission_Membre cm ON p.idDbdPersonne = cm.idPersonne
                       LEFT OUTER JOIN Commission_Nom cn ON p.idDbdPersonne = cn.idResponsable
                       LEFT OUTER JOIN CadreNational_Membres cnm ON p.idDbdPersonne = cnm.idPersonne
                       LEFT OUTER JOIN ExpertsJS exp ON p.idDbdPersonne = exp.idPersonne
-                      WHERE idDbdPersonne=".$idMemberToEdit."
+                      LEFT OUTER JOIN Championnat_Joueurs cj ON p.idDbdPersonne = cj.personId
+                      LEFT OUTER JOIN Championnat_Equipes ce ON p.idDbdPersonne = ce.idResponsable
+                      WHERE idDbdPersonne=" . $idMemberToEdit . "
                       LIMIT 1";
     $memberResult = mysql_query($memberRequest);
     if (!$memberResult) {
@@ -304,6 +336,36 @@ if ($newMember) {
         $member = mysql_fetch_assoc($memberResult);
         if (($_SESSION['__nbIdClub__'] == $member['idClub'] && $_SESSION["__gestionMembresClub__"]) ||
                 hasAllMembersManagementAccess()) {
+            if (hasAllMembersManagementAccess()) {
+                $canDelete = true;
+            } else {
+                // Any changes to the definition of deletion period should be applied in membres.supprimer.inc.php
+                // TODO: Make it DRY
+
+                // Retrieving information to know if we are in the deletion period
+                $deletionPeriodQuery =
+                    "SELECT ccLastYear.datePaiement AS datePaiementAnneePassee, c.delaiSupprimerMembres
+                     FROM Cotisations c
+                     LEFT OUTER JOIN Cotisations_Clubs ccLastYear
+                      ON ccLastYear.annee = c.annee - 1
+                      AND ccLastYear.idClub = " . $member['idClub'] . "
+                     WHERE c.annee <= '" . date('Y') . "'
+                     ORDER BY c.annee DESC
+                     LIMIT 1";
+
+                $deletionPeriodResult = mysql_query($deletionPeriodQuery);
+                $deletionPeriodData = mysql_fetch_assoc($deletionPeriodResult);
+
+                $today = date('Y-m-d');
+
+                $canDelete = $today < $deletionPeriodData['delaiSupprimerMembres'] &&
+                    $deletionPeriodData['datePaiementAnneePassee'] != NULL;
+            }
+
+            $sendButtonValue = VAR_LANG_MODIFIER;
+            $postType = "editMember";
+            $canEdit = true;
+
             $memberID = $idMemberToEdit;
             $statutID = $member['idStatus'];
             $lastEditBy = $member['modificationPar'];
@@ -328,14 +390,25 @@ if ($newMember) {
             $companyName = $member['raisonSociale'];
             $countryID = $member['idPays'];
             $tchoukupID = $member['idCHTB'];
-            $refereeLevelId = $member['niveauArbitreID'];
-            $refereeLevelName = $member['niveauArbitre'];
-            $isPublicReferee = $member['arbitrePublic'] == 1;
+            $refereeLevelId = $member['niveauArbitreID'] == NULL ? 1 : $member['niveauArbitreID'];
+            $refereeLevelName = $member['niveauArbitre'] == NULL ? 'Pas arbitre' : $member['niveauArbitre'];
+            if ($member['arbitrePublic'] != NULL) {
+                $isPublicReferee = $member['arbitrePublic'] == 1;
+            } else {
+                $isPublicReferee = true;
+            }
+            if ($member['startCountingPointsOnEvenYears'] != NULL) {
+                $startCountingPointsOnEvenYears = $member['startCountingPointsOnEvenYears'] == 1;
+            } else {
+                $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
+            }
             $isSuspended = $member['suspendu'] == 1;
             $isCommitteeMember = $member['idFonctionComite'] != null;
             $isCommissionMember = $member['idCommissionMembre'] != null || $member['idCommissionResponsable'] != null;
             $isSwissTeamMember = $member['idEquipeMembre'] != null;
             $isJSExpert = $member['idExpert'] != null;
+            $isChampionshipPlayer = $member['idParticipationChampionnat'] != null;
+            $isChampionshipTeamManager = $member['idEquipeChampionnatResponsable'] != null;
             $typeCompte = $member['typeCompte'];
             $numeroCompte = $member['numeroCompte'];
             $remarques = $member['remarque'];
@@ -345,10 +418,7 @@ if ($newMember) {
             } else {
                 $name .= $companyName;
             }
-            $formLegend = $name;
-            $sendButtonValue = VAR_LANG_MODIFIER;
-            $postType = "editMember";
-            $canEdit = true;
+            $formLegend .= $name;
         } else {
             printErrorMessage("Vous n'êtes pas le responsable de la gestion des membres du club de la personne que vous
                                souhaitez éditer.");
@@ -362,11 +432,15 @@ if ($isSuspended) {
 }
 
 if ($canEdit) {
-    $isFSTBVolunteer = $refereeLevelId > 1 ||
-                       $isCommitteeMember ||
-                       $isCommissionMember ||
-                       $isSwissTeamMember ||
-                       $isJSExpert;
+    // Any changes to the definition of the variable $isInvolvedInFederation should be applied in membres.supprimer.inc.php
+    // TODO: Make it DRY
+    $isInvolvedInFederation = $refereeLevelId > 1 ||
+        $isCommitteeMember ||
+        $isCommissionMember ||
+        $isSwissTeamMember ||
+        $isJSExpert ||
+        $isChampionshipPlayer ||
+        $isChampionshipTeamManager;
     ?>
     <h3><?php echo $formLegend; ?></h3>
     <form method="post"
@@ -376,7 +450,7 @@ if ($canEdit) {
           class="adminForm">
         <fieldset>
             <?php
-            if ($isFSTBVolunteer && !hasAllMembersManagementAccess()) {
+            if ($isInvolvedInFederation && !hasAllMembersManagementAccess()) {
                 $canEditName = false;
             } else {
                 $canEditName = true;
@@ -599,41 +673,74 @@ if ($canEdit) {
             }
             ?>
             </select>
-            <div id="tchoukupDelivery" class="inlineinfo"></div>
+            <div id="tchoukupDelivery">
+                <label></label>
+                <p class="givenData"></p>
+            </div>
 
             <label>Niveau d'arbitre</label>
             <?php
-            if (hasAllMembersManagementAccess()) {
+            if (hasRefereeManagementAccess()) {
                 afficherdropDownListe("DBDArbitre", "idArbitre", "descriptionArbitre", $refereeLevelId, true);
             } else {
-                echo '<p>'.$refereeLevelName.'</p>';
+                echo '<p class="givenData">'.$refereeLevelName.'</p>';
                 echo '<input type="hidden" name="idArbitre" value="'.$refereeLevelId.'" />';
             }
+            ?>
 
-            if ($refereeLevelId > 1) {
-                // Il n'est ainsi pas possible de définir si un membre est suspendu ou arbitre public lors de son
-                // insertion ou lorsqu'il est fait arbitre.
-                // Cela évite aussi de peupler le formulaire de champs inutiles pour les non-arbitres
-                ?>
-
-                <label>Arbitre public</label>
-                <?php
-                if (hasAllMembersManagementAccess()) {
-                    if ($isPublicReferee) {
-                        $publicRefereeChecked = 'checked';
-                    } else {
-                        $publicRefereeChecked = '';
-                    }
-                    echo '<input type="checkbox" name="arbitrePublic" '.$publicRefereeChecked.' />';
+            <label for="arbitrePublic">Arbitre public</label>
+            <?php
+            if (hasRefereeManagementAccess()) {
+                if ($isPublicReferee) {
+                    $publicRefereeChecked = 'checked';
                 } else {
-                    echo '<p>';
-                    if ($isPublicReferee) {
-                        echo 'Oui';
-                    } else {
-                        echo 'Non';
-                    }
-                    echo '</p>';
+                    $publicRefereeChecked = '';
                 }
+                echo '<input type="checkbox" name="arbitrePublic" id="arbitrePublic" '.$publicRefereeChecked.' />';
+            } else {
+                echo '<p class="givenData">';
+                if ($isPublicReferee) {
+                    echo 'Oui';
+                } else {
+                    echo 'Non';
+                }
+                echo '</p>';
+            }
+
+            if (hasRefereeManagementAccess()) {
+                ?>
+                <label for="startCountingPointsOnEvenYears">Volée d'arbitres</label>
+                <?php
+
+                // Computing examples
+                $currentYear = date('Y');
+                $oneEvenYear = 0;
+                $oneOddYear = 1;
+                $isCurrentYearEven = $currentYear % 2 == 0;
+                if ($isCurrentYearEven) {
+                    $oneEvenYear = $currentYear;
+                    $oneOddYear = $currentYear - 1;
+                } else {
+                    $oneEvenYear = $currentYear - 1;
+                    $oneOddYear = $currentYear;
+                }
+                $evenYearsExample = $oneEvenYear . '-' . ($oneEvenYear + 2);
+                $oddYearsExample = $oneOddYear . '-' . ($oneOddYear + 2);
+
+                // Defining which one is selected
+                $evenYearsSelected = '';
+                $oddYearsSelected = '';
+                if ($startCountingPointsOnEvenYears) {
+                    $evenYearsSelected = 'selected="selected"';
+                } else {
+                    $oddYearsSelected = 'selected="selected"';
+                }
+                ?>
+                <select name="startCountingPointsOnEvenYears" id="startCountingPointsOnEvenYears">
+                    <option value="1" <?php echo $evenYearsSelected; ?>>Années paires (p.ex. <?php echo $evenYearsExample; ?>)</option>
+                    <option value="0" <?php echo $oddYearsSelected; ?>>Années impaires (p.ex. <?php echo $oddYearsExample; ?>)</option>
+                </select>
+                <?php
             }
 
             if ($isSuspended || hasAllMembersManagementAccess()) {
@@ -681,25 +788,38 @@ if ($canEdit) {
              '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
              </a></p>';
 
-        if ($isFSTBVolunteer) {
-            echo '<p>'.$name.' est, ou a été :</p>';
-            echo '<ul>';
-            echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
-            echo $isCommissionMember ? '<li>Membre d\'une Commission</li>' : '';
-            echo $isJSExpert ? '<li>Expert J+S</li>' : '';
-            echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
-            echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
-            echo '</ul>';
-            echo '<p>et ne peut donc pas être supprimé.</p>';
-        }
+        if ($canDelete) {
+            if ($isInvolvedInFederation) {
+                echo '<p>'.$name.' est, ou a été :</p>';
+                echo '<ul>';
+                echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
+                echo $isCommissionMember ? '<li>Membre d\'une Commission</li>' : '';
+                echo $isJSExpert ? '<li>Expert J+S</li>' : '';
+                echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
+                echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
+                echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
+                echo $isChampionshipTeamManager ? '<li>Responsable d\'équipe de championnat</li>' : '';
+                echo '</ul>';
+                echo '<p>et ne peut donc pas être supprimé.</p>';
+            }
 
-        if (!$isFSTBVolunteer) {
-            echo '<p class="delete-member"><a href="?menuselection=' . $menuselection .'&smenuselection=' .
-                 $smenuselection . '&delete=' . $memberID . '" onclick=\'return confirm("Voulez-vous vraiment supprimer
-                 ' . $name . ' ?");\'>Supprimer ' . $name . '</a><span><strong>Attention !</strong> Il ne faut supprimer
-                 un membre que s\'il sort complètement du tchoukball.<br />Si le membre change de club, effectuez une
-                 demande de transfert (voir le lien ci-dessus).</span></p>';
-
+            if (!$isInvolvedInFederation) {
+                ?>
+                <p class="delete-member">
+                    <a href="?menuselection=<?php echo $menuselection;
+                    ?>&smenuselection=<?php echo $smenuselection;
+                    ?>&delete=<?php echo $memberID; ?>"
+                       onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
+                        Supprimer <?php echo $name; ?>
+                    </a>
+                    <span>
+                        <strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du
+                        tchoukball.<br/>
+                        Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).
+                    </span>
+                </p>
+                <?php
+            }
         }
 
         ?>

@@ -9,21 +9,21 @@
 	$clubName = $clubData['club'];
 
 	//Vérification si le montant de la cotisation est bloqué et non-payé.
-	$montantBloqueEtNonPaye = false;
-	$resultCheckIfBlocked = mysql_query("SELECT montantBloque, datePaiement FROM Cotisations_Clubs WHERE idClub=".$_SESSION['__nbIdClub__']);
-	while($donnees = mysql_fetch_assoc($resultCheckIfBlocked)) {
-		if ($donnees['montantBloque'] == 1 && $donnees['datePaiement'] == NULL) {
-			$montantBloqueEtNonPaye = true;
+	$unpaidFees = false;
+	$resultCheckIfUnpaidFees = mysql_query("SELECT datePaiement FROM Cotisations_Clubs WHERE idClub=".$_SESSION['__nbIdClub__']);
+	while($donnees = mysql_fetch_assoc($resultCheckIfUnpaidFees)) {
+		if ($donnees['datePaiement'] == NULL) {
+            $unpaidFee = true;
 		}
 	}
 
 
-	echo "<h4>".$clubName." ".$testSubmit."</h4><br />";
+	echo "<h4>" . $clubName . "</h4><br />";
 
 	if (!$_SESSION['__gestionMembresClub__']) {
 		echo "<p class='info'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club (Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes)</p>";
-	} elseif ($montantBloqueEtNonPaye) {
-		echo "<p class='info'>Vous ne pouvez pas faire de modification car le montant de la cotisation est bloqué et en attente de confirmation de paiement.</p>";
+	} elseif ($unpaidFees) {
+		echo "<p class='info'>Vous ne pouvez pas faire de modification car le paiement de la cotisation n'a pas encore été confirmé.</p>";
 	} else {
 		?>
 <p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img src="admin/images/ajouter.png" alt="Ajouter un membre" /> Ajouter un membre</a><br />

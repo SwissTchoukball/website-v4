@@ -1,0 +1,102 @@
+<h2>Saison {{$ctrl.edition.season.name}}, {{$ctrl.edition.category.name}}</h2>
+
+<!-- Confirmation screen -->
+<div ng-if="$ctrl.submitted">
+    <p class="success">
+        Inscription de l'équipe <em>{{$ctrl.teamName}}</em> correctement enregistrée.
+    </p>
+    <p class="info">
+        Merci d'effectuer le paiement des <strong>CHF {{$ctrl.getTotalCost()}}</strong>
+        d'ici au <strong>{{$ctrl.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
+        sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
+    </p>
+    <button class="button button--primary"
+            ng-click="$ctrl.goBack()">
+        Retour
+    </button>
+</div>
+
+<!-- Registration Form -->
+<form ng-if="!$ctrl.submitted"
+      name="championshipRegistrationForm"
+      class="adminForm"
+      novalidate>
+    <label>Club</label>
+    <div class="givenData">{{$ctrl.club.fullName}}</div>
+
+    <label for="teamName">Nom de l'équipe</label>
+    <input id="teamName" type="text" ng-model="$ctrl.teamName" ng-required="true"/>
+
+    <label>Responsable d'équipe</label>
+    <tags-input ng-model="$ctrl.teamManager"
+                add-from-autocomplete-only="true"
+                display-property="fullName"
+                display-key="id"
+                min-tags="1"
+                max-tags="1"
+                replace-spaces-with-dashes="false">
+        <auto-complete source="$ctrl.loadMembersForTeamManager($query)"
+                       display-property="fullName"
+                       template="src/js/angular/championshipRegistration/managerAutocomplete.tpl.html">
+        </auto-complete>
+    </tags-input>
+
+    <label for="jerseyColorHome">Couleur maillot domicile</label>
+    <input id="jerseyColorHome" type="text" ng-model="$ctrl.jerseyColorHome" ng-required="true"/>
+
+    <label for="jerseyColorAway">Couleur maillot extérieur</label>
+    <input id="jerseyColorAway" type="text" ng-model="$ctrl.jerseyColorAway" ng-required="true"/>
+
+    <label>Salle pour les matchs à domicile</label>
+    <tags-input ng-model="$ctrl.homeVenue"
+                add-from-autocomplete-only="true"
+                display-property="name"
+                display-key="id"
+                min-tags="1"
+                max-tags="1"
+                replace-spaces-with-dashes="false">
+        <auto-complete source="$ctrl.loadVenues($query)"
+                       display-property="name"
+                       template="src/js/angular/championshipRegistration/venueAutocomplete.tpl.html">
+        </auto-complete>
+    </tags-input>
+
+    <label>Joueurs</label>
+    <tags-input ng-model="$ctrl.players"
+                add-from-autocomplete-only="true"
+                display-property="fullName"
+                display-key="id"
+                min-tags="1"
+                replace-spaces-with-dashes="false"
+                placeholder="Noms des joueurs">
+        <auto-complete source="$ctrl.loadMembersForPlayers($query)"
+                       display-property="fullName">
+        </auto-complete>
+    </tags-input>
+    <label>Coûts</label>
+    <table>
+        <tr>
+            <td>Frais d'inscription ({{$ctrl.edition.category.name}})</td>
+            <td>CHF {{$ctrl.edition.teamRegistrationFee}}</td>
+        </tr>
+        <tr>
+            <td>{{$ctrl.players.length}} licences à CHF {{$ctrl.edition.playerLicenseFee}}</td>
+            <td>CHF {{$ctrl.getTotalLicensesCost()}}</td>
+        </tr>
+        <tr>
+            <td class="notCell"></td>
+            <td class="amountTotal">CHF {{$ctrl.getTotalCost()}}</td>
+        </tr>
+    </table>
+    <div class="formActions">
+        <button class="button button--cancel"
+                ng-click="$ctrl.goBack()">
+            Annuler
+        </button>
+        <button class="button button--primary"
+                ng-click="$ctrl.submitForm()"
+                ng-disabled="championshipRegistrationForm.$invalid || $ctrl.sending">
+            Envoyer l'inscription
+        </button>
+    </div>
+</form>

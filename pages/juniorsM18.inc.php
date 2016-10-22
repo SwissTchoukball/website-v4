@@ -5,11 +5,10 @@ statInsererPageSurf(__FILE__);
 $afficherNumero = false;
 ?>
 <div class="equipe-es">
-	<div class="photo-equipe-es"><img src="<?php echo VAR_IMAGE_PHOTOS_EQUIPES_PATH."m18_f_2013-02-09.jpg";?>"></div>
-	<div class="legende-photo-equipe-es"></div>
-	<div class="photo-equipe-es"><img src="<?php echo VAR_IMAGE_PHOTOS_EQUIPES_PATH."m18_m_2013-02-09.jpg";?>"></div>
+	<div class="photo-equipe-es"><img src="<?php echo PATH_TO_ROOT.VAR_IMAGE_PHOTOS_EQUIPES_PATH."m18.jpg";?>"></div>
 	<div class="legende-photo-equipe-es"></div>
 </div>
+
 <div class="liste-joueur-es">
 	<?php
 		include "affichage.team.inc.php";

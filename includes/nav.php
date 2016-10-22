@@ -1,6 +1,8 @@
 <nav id="main-nav">
 <?php
-$navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu, sm.nomFr AS sousmenu, m.id AS sousMenuDeId, sm.ordre, m.userLevel AS parentUserLevel, sm.userLevel, sm.urlRewriting AS link, m.urlRewriting AS parentLink
+$navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu, sm.nomFr AS sousmenu, m.id AS sousMenuDeId,
+                    sm.ordre, m.userLevel AS parentUserLevel, sm.userLevel,
+                    sm.urlRewriting AS link, m.urlRewriting AS parentLink, sm.lienExterneSite AS isExternalLink
              FROM " . $typemenu . " m
              LEFT OUTER JOIN " . $typemenu . " sm ON sm.sousMenuDeId = m.id
              WHERE m.sousMenuDeId = -1
@@ -22,6 +24,9 @@ if (!$navResult = mysql_query($navQuery)) {
             $srcFile = $admin ? 'admin.php' : 'index.php';
             $navLink = $srcFile . '?menuselection=' . $navParentItemID . '&smenuselection=' . $navItemOrder;
         }
+        if(!$nav['isExternalLink']) {
+            $navLink = PATH_TO_ROOT . '/' . $navLink;
+        }
         $navParentLink = $nav['parentLink'];
 
 
@@ -34,7 +39,7 @@ if (!$navResult = mysql_query($navQuery)) {
                 echo $menuselection == $navParentItemID ? '<h1 class="open">' : '<h1>';
 
                 if (is_null($navItemOrder) && $navParentLink != '') {
-                    echo '<a href="'. PATH_TO_ROOT . $navParentLink . '">' . $navParentItemName . '</a>';
+                    echo '<a href="'. PATH_TO_ROOT . '/' . $navParentLink . '">' . $navParentItemName . '</a>';
                 } else {
                     echo $navParentItemName;
                 }
@@ -46,7 +51,7 @@ if (!$navResult = mysql_query($navQuery)) {
 
             if ($navUserLevel >= $_SESSION['__userLevel__']) {
                 $navItemClass = ($menuselection == $navParentItemID && $smenuselection == $navItemOrder) ? 'open' : '';
-                echo '<li><a href="' . PATH_TO_ROOT . $navLink . '" class="' . $navItemClass . '">' . $navItemName . '</a></li>';
+                echo '<li><a href="' . $navLink . '" class="' . $navItemClass . '">' . $navItemName . '</a></li>';
             }
         }
 

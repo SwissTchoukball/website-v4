@@ -1,7 +1,7 @@
 <?php
 $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '32' ORDER BY paragrapheNum");
 // affiche le texte
-echo "<img class='imageFlottanteDroite' src='logos/logo_EWC15.png' />";
+echo "<img class='imageFlottanteDroite' src='pictures/logos/logo_EWC.png' />";
 while($donnees = mysql_fetch_array($retour)) {
     echo "<p>";
     echo afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
@@ -13,6 +13,21 @@ while($donnees = mysql_fetch_array($retour)) {
 
 <p style="clear:right;"></p>
 <h2>Résultats suisses</h2>
+<h3 class="alt">Ryb&nacute;ik (PL) 2016</h3>
+<table class="classementTourFinal">
+	<tr>
+		<th>Position</th>
+		<th>Équipe</th>
+	</tr>
+	<tr>
+		<td>4ème</td>
+		<td>Chambésy Panthers</td>
+	</tr>
+	<tr>
+		<td>7ème</td>
+		<td>Val-de-Ruz Flyers</td>
+	</tr>
+</table>
 <h3 class="alt">Saronno & Rescaldina (IT) 2015</h3>
 <table class="classementTourFinal">
 	<tr>
@@ -27,7 +42,6 @@ while($donnees = mysql_fetch_array($retour)) {
 		<td>9ème</td>
 		<td>Piranyon Origin</td>
 	</tr>
-
 </table>
 <h3 class="alt">Neuchâtel (CH) 2014</h3>
 <table class="classementTourFinal">

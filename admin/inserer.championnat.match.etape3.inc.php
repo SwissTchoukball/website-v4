@@ -100,7 +100,7 @@ else{
 		    });
 	        $("[name=debutMinute_all]").change(function() {
 		        $("[name^=debutMinute]").val($("[name=debutMinute_all]").val());
-		        $("[name^=finMinute]").val($("[name=debutMinute_all]").val());
+		        $("[name^=finMinute]").val(parseInt($("[name=debutMinute_all]").val()) + 10);
 		    });
 
 	        $("[name=finJour_all]").change(function() {
@@ -118,7 +118,7 @@ else{
 	        $("[name=finMinute_all]").change(function() {
 		        $("[name^=finMinute]").val($("[name=finMinute_all]").val());
 		    });
-	    })
+	    });
 
 	<?php
 	for($k=1;$k<=$nbMatchs;$k++){
@@ -152,7 +152,7 @@ else{
 				insererMatchForm.finHeure<?php echo $k; ?>.value = parseInt(insererMatchForm.debutHeure<?php echo $k; ?>.value) + 1;
 			}
 			function selectionAutomatiqueMinute<?php echo $k; ?>(){
-				insererMatchForm.finMinute<?php echo $k; ?>.value = insererMatchForm.debutMinute<?php echo $k; ?>.value;
+				insererMatchForm.finMinute<?php echo $k; ?>.value = parseInt(insererMatchForm.debutMinute<?php echo $k; ?>.value) + 10;
 			}
 		<?php
 	}
@@ -288,7 +288,7 @@ else{
 										<?php echo modif_liste_heure("21"); ?>
 									</select>
 									<select name="finMinute_all" id="finMinute">
-										<?php echo modif_liste_minute("45"); ?>
+										<?php echo modif_liste_minute("55"); ?>
 									</select>
 								</p>
 							</td>
@@ -424,7 +424,7 @@ else{
 										<?php echo modif_liste_heure("21"); ?>
 									</select>
 									<select name="finMinute<?php echo $k; ?>" id="finMinute">
-										<?php echo modif_liste_minute("45"); ?>
+										<?php echo modif_liste_minute("55"); ?>
 									</select>
 								</p>
 							</td>

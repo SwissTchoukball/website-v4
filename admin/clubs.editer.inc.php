@@ -16,7 +16,7 @@ if ($newClub) {
 		$email = "";
 		$phone = "";
 		$url = "";
-		$active = true;
+		$status = 1;
 		$lastEdit = "";
 		$lastEditorName = "";
 		$presidentFirstName = "";
@@ -33,13 +33,13 @@ if ($newClub) {
 	$postType = "newClub";
 	$canEdit = true;
 } else {
-	$clubRequest = "SELECT c.id, c.club, c.nomComplet, c.nomPourTri, c.adresse, c.npa, c.ville, c.email, c.telephone, c.actif, c.url, c.lastEdit,
+	$clubRequest = "SELECT c.id, c.club, c.nomComplet, c.nomPourTri, c.adresse, c.npa, c.ville, c.email, c.telephone, c.statusId, c.url, c.lastEdit,
 						   ct.id AS idCanton, ct.nomCanton".$_SESSION['__langue__']." AS nomCanton,
-						   pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident, pres.numPostal AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident, pres.telephone AS telephonePresident, pres.portable AS portablePresident,
+						   pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident, pres.npa AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident, pres.telPrive AS telephonePresident, pres.portable AS portablePresident,
 						   CONCAT(editor.prenom, editor.nom) AS lastEditorName
 					FROM ClubsFstb c
 					LEFT OUTER JOIN Canton ct ON c.canton = ct.id
-					LEFT OUTER JOIN Personne pres ON c.id = pres.idClub AND pres.contactClub=1
+					LEFT OUTER JOIN DBDPersonne pres ON c.idPresident = pres.idDbdPersonne
 					LEFT OUTER JOIN Personne editor ON c.lastEditorID = editor.id
 					WHERE c.id=".$idClubToEdit;
 	//echo '<p class="info">'.$clubRequest.'</p>';
@@ -62,7 +62,7 @@ if ($newClub) {
 			$email = $club['email'];
 			$phone = $club['telephone'];
 			$url = $club['url'];
-			$active = $club['actif'] == 1;
+			$status = $club['statusId'];
 			$lastEdit = $club['lastEdit'];
 			$lastEditorName = $club['lastEditorName'];
 			$presidentFirstName = $club['prenomPresident'];
@@ -96,7 +96,7 @@ if	($canEdit) {
 				<?php
 			} else {
 				?>
-				<p><?php echo $name; ?></p>
+				<p class="givenData"><?php echo $name; ?></p>
 				<?php
 			}
 			?>
@@ -108,7 +108,7 @@ if	($canEdit) {
 				<?php
 			} else {
 				?>
-				<p><?php echo $fullName; ?></p>
+				<p class="givenData"><?php echo $fullName; ?></p>
 				<!-- Hidden inputs useful only for address preview -->
 				<input type="hidden" id="fullName" value="<?php echo $fullName; ?>" />
 				<?php
@@ -137,15 +137,15 @@ if	($canEdit) {
 				afficherdropDownListe("Canton", "id", "nomCanton", $cantonID, true); // => <select name="Canton" ...
 			} else {
 				?>
-				<p><?php echo $cantonName; ?></p>
+				<p class="givenData"><?php echo $cantonName; ?></p>
 				<?php
 			}
 
 			if ($_SESSION['__userLevel__'] <= 0) {
 				?>
-				<label for="active">Actif</label>
-				<input type="checkbox" name="active" id="active" <?php echo $active ? "checked='checked'" : ""; ?> />
+				<label for="status">Statut</label>
 				<?php
+				afficherdropDownListe("clubs_status", "id", "name", $status, true);
 			}
 			?>
 		</fieldset>
