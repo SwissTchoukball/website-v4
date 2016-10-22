@@ -1,6 +1,6 @@
 <?php
 
-require_once('../lib/tcpdf/tcpdf.php');
+require_once('../vendor/composer/tecnickcom/tcpdf/tcpdf.php');
 
 
 // Extend the TCPDF class to create custom Header and Footer
@@ -32,5 +32,3 @@ class SwissTchoukballPDF extends TCPDF {
 		$this->MultiCell(25, 10, $this->PageNo().'/'.$this->getNumPages(), 0, 'R', 0, 0, '', '', true);
 	}
 }
-
-?>

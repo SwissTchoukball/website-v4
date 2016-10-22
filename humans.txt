@@ -11,7 +11,7 @@
 
 	News Writer: Jérémie Esteves
 	Contact: jeremie.esteves [at] tchoukball.ch
-	Twitter: @komischao
+	Twitter: @estejrm
 	From: Nyon, Switzerland
 
 	IT Translator: Silvio Da Paré
@@ -34,4 +34,4 @@
 
 /* SITE */
 	Language: Français / Deutsch / Italiano / English
-	IDE: Coda
+	IDE: PhpStorm

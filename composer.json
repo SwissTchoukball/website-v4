@@ -1,0 +1,20 @@
+{
+  "name": "swisstchoukball/website",
+  "description": "Website of Swiss Tchoukball",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "David Sandoz",
+      "email": "david.sandoz@tchoukball.ch"
+    },
+    {
+      "name": "Romain Schmocker"
+    }
+  ],
+  "config": {
+    "vendor-dir": "vendor/composer"
+  },
+  "require": {
+    "tecnickcom/tcpdf": "6.2.8"
+  }
+}
