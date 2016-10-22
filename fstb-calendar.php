@@ -6,8 +6,7 @@ mysql_set_charset('utf8');
 
 function incrementDay($year, $month, $day)
 {
-    $nbDayinMonth = date('t', strtotime($year."-".$month."-".$day));
-    $date = array();
+    $nbDayinMonth = date('t', strtotime($year . "-" . $month . "-" . $day));
     if ($day != $nbDayinMonth) {
         $day++;
         $date = array($year, $month, $day);
@@ -30,16 +29,16 @@ function dateTime_sql2dateTime_ics($dateIn, $time, $allday, $isEnd)
     $date[1] = substr($dateIn, 5, 2);
     $date[2] = substr($dateIn, 8, 2);
 
-    $heure=substr($time, 0, 2);
-    $minute=substr($time, 3, 2);
+    $heure = substr($time, 0, 2);
+    $minute = substr($time, 3, 2);
 
     if ($allday == 1) {
         if ($isEnd) {
             $date = incrementDay($date[0], $date[1], $date[2]);
         }
-        $dateTimeICS = ";VALUE=DATE:".$date[0].sprintf('%02u', $date[1]).sprintf('%02u', $date[2])."";
+        $dateTimeICS = ";VALUE=DATE:" . $date[0] . sprintf('%02u', $date[1]) . sprintf('%02u', $date[2]) . "";
     } else {
-        $dateTimeICS = ";TZID=Europe/Zurich:".$date[0].$date[1].$date[2]."T".$heure.$minute."00";
+        $dateTimeICS = ";TZID=Europe/Zurich:" . $date[0] . $date[1] . $date[2] . "T" . $heure . $minute . "00";
     }
     return $dateTimeICS;
 }
@@ -59,31 +58,31 @@ function format4ICS($string)
     return $string;
 }
 
-$lastYear = date('Y')-1;
-$oneYearAgo = $lastYear."-".date('m')."-".date('d');
+$lastYear = date('Y') - 1;
+$oneYearAgo = $lastYear . "-" . date('m') . "-" . date('d');
 
 
+$tableauEquipes = array();
 if (isset($_GET['championnat'])) {
     $queryTeamSelect = "";
     if (isset($_GET['equipe']) && is_numeric($_GET['equipe'])) {
-        $queryTeamSelect = "AND (equipeA=".$_GET['equipe']." OR equipeB=".$_GET['equipe'].")";
+        $queryTeamSelect = "AND (equipeA=" . $_GET['equipe'] . " OR equipeB=" . $_GET['equipe'] . ")";
     }
-    $eventsQuery="SELECT m.dateDebut, m.dateFin, m.heureDebut, m.heureFin, l.nom AS salle, l.ville, m.idMatch, m.equipeA, m.equipeB
+    $eventsQuery = "SELECT m.dateDebut, m.dateFin, m.heureDebut, m.heureFin, l.nom AS salle, l.ville, m.idMatch, m.equipeA, m.equipeB
                   FROM Championnat_Matchs m
                   LEFT OUTER JOIN Lieux l ON l.id = m.idLieu
-                  WHERE dateFin>'".$oneYearAgo."' ".$queryTeamSelect."
+                  WHERE dateFin > '" . $oneYearAgo . "' " . $queryTeamSelect . "
                   ORDER BY dateDebut, heureDebut";
-    $requeteEquipes="SELECT * FROM Championnat_Equipes WHERE idEquipe!=11 ORDER BY idEquipe";
-    $retourEquipes=mysql_query($requeteEquipes);
-    $tableauEquipes=array();
-    while ($donneesEquipes=mysql_fetch_array($retourEquipes)) {
-        $tableauEquipes[$donneesEquipes['idEquipe']]=$donneesEquipes['equipe'];
+    $requeteEquipes = "SELECT * FROM Championnat_Equipes WHERE idEquipe!=11 ORDER BY idEquipe";
+    $retourEquipes = mysql_query($requeteEquipes);
+    while ($donneesEquipes = mysql_fetch_array($retourEquipes)) {
+        $tableauEquipes[$donneesEquipes['idEquipe']] = $donneesEquipes['equipe'];
     }
 } elseif (isset($_GET['entrainements'])) {
-    $eventsQuery = "SELECT id, titre, description, lieu, jourEntier, heureDebut, heureFin, dateDebut, dateFin FROM Calendrier_Evenements WHERE idCategorie=2 AND dateFin>'".$oneYearAgo."' AND visible=1 ORDER BY dateDebut, heureDebut";
+    $eventsQuery = "SELECT id, titre, description, lieu, jourEntier, heureDebut, heureFin, dateDebut, dateFin FROM Calendrier_Evenements WHERE idCategorie=2 AND dateFin>'" . $oneYearAgo . "' AND visible=1 ORDER BY dateDebut, heureDebut";
 } else {
     //Request events for 1 year.
-    $eventsQuery = "SELECT Calendrier_Evenements.id AS idEvent, titre, description, lieu, jourEntier, couleur, nom, heureDebut, heureFin, dateDebut, dateFin FROM Calendrier_Evenements, Calendrier_Categories WHERE Calendrier_Evenements.idCategorie=Calendrier_Categories.id AND dateFin>'".$oneYearAgo."' AND visible=1 ORDER BY dateDebut, heureDebut";
+    $eventsQuery = "SELECT Calendrier_Evenements.id AS idEvent, titre, description, lieu, jourEntier, couleur, nom, heureDebut, heureFin, dateDebut, dateFin FROM Calendrier_Evenements, Calendrier_Categories WHERE Calendrier_Evenements.idCategorie=Calendrier_Categories.id AND dateFin>'" . $oneYearAgo . "' AND visible=1 ORDER BY dateDebut, heureDebut";
 }
 $eventsReturn = mysql_query($eventsQuery);
 
@@ -133,9 +132,9 @@ END:VTIMEZONE
 
 while ($event = mysql_fetch_assoc($eventsReturn)) {
     if (isset($_GET['championnat'])) {
-        $titre = format4ICS($tableauEquipes[$event['equipeA']]." - ".$tableauEquipes[$event['equipeB']]);
-        $lieu = format4ICS($event['salle'].", ".$event['ville']);
-        $description =  "";
+        $titre = format4ICS($tableauEquipes[$event['equipeA']] . " - " . $tableauEquipes[$event['equipeB']]);
+        $lieu = format4ICS($event['salle'] . ", " . $event['ville']);
+        $description = "";
     } else {
         $titre = $event['titre'];
         $lieu = format4ICS($event['lieu']);
@@ -144,12 +143,12 @@ while ($event = mysql_fetch_assoc($eventsReturn)) {
 
     $ical .= "BEGIN:VEVENT
 UID:" . md5(uniqid(mt_rand(), true)) . "@tchoukball.ch
-DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
-DTSTART".dateTime_sql2dateTime_ics($event['dateDebut'], $event['heureDebut'], $event['jourEntier'], false)."
-DTEND".dateTime_sql2dateTime_ics($event['dateFin'], $event['heureFin'], $event['jourEntier'], true)."
-SUMMARY:".$titre."
-DESCRIPTION:".$description."
-LOCATION:".$lieu."
+DTSTAMP:" . gmdate('Ymd') . 'T' . gmdate('His') . "Z
+DTSTART" . dateTime_sql2dateTime_ics($event['dateDebut'], $event['heureDebut'], $event['jourEntier'], false) . "
+DTEND" . dateTime_sql2dateTime_ics($event['dateFin'], $event['heureFin'], $event['jourEntier'], true) . "
+SUMMARY:" . $titre . "
+DESCRIPTION:" . $description . "
+LOCATION:" . $lieu . "
 END:VEVENT
 ";
 }
