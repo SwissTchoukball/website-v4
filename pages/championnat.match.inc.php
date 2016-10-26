@@ -69,6 +69,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                          FROM Championnat_Periodes
                          WHERE idMatch = " . $matchID;
         $periodsResult = mysql_query($periodsQuery);
+        $nbPeriods = mysql_num_rows($periodsResult);
         while ($period = mysql_fetch_assoc($periodsResult)) {
             $noPeriod = $period['noPeriode'];
 
@@ -88,6 +89,10 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
             $scoreB = $recordedScoreB;
             $detailedScore = false;
             $noPeriod = 0;
+        }
+
+        if ($nbPeriods <= 1) {
+            $detailedScore = false;
         }
 
 
@@ -187,7 +192,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
             <?php
             if ($detailedScore) {
                 echo '<p class="detailedScore">';
-                for ($p = 1; $p <= $noPeriod; $p++) { // The number of period is equal to the no of the last period
+                for ($p = 1; $p <= $nbPeriods; $p++) {
                     echo '<span class="period">' . $periodScoreA[$p] . '-' . $periodScoreB[$p] . '</span>';
                 }
                 echo '</p>';

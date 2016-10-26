@@ -395,12 +395,12 @@ if (!isset($_GET['idMatch'])) {
                 $('.periodReferees').hide();
                 $('#periodAdder').hide();
                 if (forfaitFromA) {
-                    $('#scoreA').text(0);
-                    $('#scoreB').text(<?php echo $scoreGagnantParForfait; ?>);
-                }
-                if (forfaitFromB) {
                     $('#scoreA').text(<?php echo $scoreGagnantParForfait; ?>);
                     $('#scoreB').text(0);
+                }
+                if (forfaitFromB) {
+                    $('#scoreA').text(0);
+                    $('#scoreB').text(<?php echo $scoreGagnantParForfait; ?>);
                 }
             } else {
                 $('.period').show();
