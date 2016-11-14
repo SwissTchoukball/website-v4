@@ -91,7 +91,8 @@ if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
             $matchesByReferee[$refereeID]['level'] = $refereeMatches['niveauArbitre'] - 1;
             $matchesByReferee[$refereeID]['matchesByCategory'] = array();
         }
-        if ($periodType == 4 || $periodType == 8 || ($periodType == 7 && $nbPeriods >= 2) || $nbPeriods >= 3) {
+        // TODO: find a better way to check the elligible period types.
+        if ($periodType == 4 || $periodType == 14 || $periodType == 8 || ($periodType == 7 && $nbPeriods >= 2) || $nbPeriods >= 3) {
             // Conditions for the match to be counted are fullfiled
             $matchesByReferee[$refereeID]['matchesByCategory'][$categoryID]++;
         }
