@@ -55,7 +55,7 @@ if ($result = mysql_query($categoriesQuery)) {
 
 $matchesByRefereeQuery =
     "SELECT COUNT(*) AS nbPeriodes, cp.idMatch, cp.idTypePeriode, cp.idArbitre AS personId, cm.idCategorie,
-            p.nom, p.prenom, p.idArbitre AS niveauArbitre
+            p.nom, p.prenom, a.levelId AS niveauArbitre
      FROM ((SELECT noPeriode, idMatch, idArbitreA AS idArbitre, idTypePeriode
             FROM Championnat_Periodes
             WHERE !ISNULL(idArbitreA)
@@ -70,9 +70,10 @@ $matchesByRefereeQuery =
             FROM Championnat_Periodes
             WHERE !ISNULL(idArbitreC)
            )
-          ) cp, Championnat_Matchs cm, DBDPersonne p
+          ) cp, Championnat_Matchs cm, DBDPersonne p, Arbitres a
      WHERE cp.idMatch = cm.idMatch
        AND cp.idArbitre = p.idDbdPersonne
+       AND cp.idArbitre = a.personId
        AND cm.saison = $season
      GROUP BY cp.idMatch, cp.idArbitre, cp.idTypePeriode
      ORDER BY cp.idArbitre, cm.idCategorie, cp.idMatch";
