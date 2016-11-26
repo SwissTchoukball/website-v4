@@ -565,34 +565,44 @@ if ($canEdit) {
         <fieldset>
             <span class="infobulle">Pour les membres actifs et juniors, la date de naissance est obligatoire.</span>
             <label for="statutID">Statut</label>
-            <select id="statutID" name="statutID" onchange="autoStatutUpdate();">
-                <option value="1">Non spécifié</option>
-                <option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>
-                    Membre actif/junior
-                </option>
-                <?php
-                $queryStatut = "SELECT `idStatus` AS id, `descriptionStatus".$_SESSION['__langue__']."` AS nom
-                                FROM `DBDStatus`
-                                WHERE `idStatus`!=1 AND `idStatus`!=3 AND `idStatus`!=6 ORDER BY nom";
-                if ($dataStatut = mysql_query($queryStatut)) {
-                    while ($statut = mysql_fetch_assoc($dataStatut)) {
-                        if ($statutID == $statut['id']) {
-                            $statutSelected = "selected";
+            <?php
+                // Out of the deletion period, we can change the status of a member only if he's not active.
+                if ($canDelete || ($statutID != 3 && $statutID != 6)) {
+                    ?>
+                    <select id="statutID" name="statutID" onchange="autoStatutUpdate();">
+                        <option value="1">Non spécifié</option>
+                        <option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>
+                            Membre actif/junior
+                        </option>
+                        <?php
+                        $queryStatut = "SELECT `idStatus` AS id, `descriptionStatus".$_SESSION['__langue__']."` AS nom
+                                        FROM `DBDStatus`
+                                        WHERE `idStatus`!=1 AND `idStatus`!=3 AND `idStatus`!=6 ORDER BY nom";
+                        if ($dataStatut = mysql_query($queryStatut)) {
+                            while ($statut = mysql_fetch_assoc($dataStatut)) {
+                                if ($statutID == $statut['id']) {
+                                    $statutSelected = "selected";
+                                } else {
+                                    $statutSelected = "";
+                                }
+                                if (hasAllMembersManagementAccess() ||
+                                    $statut['id'] == 4 ||
+                                    $statut['id'] == 5 ||
+                                    $statut['id'] == 23) {
+                                    echo '<option value="'.$statut['id'].'" '.$statutSelected.'>'.$statut['nom'].'</option>';
+                                }
+                            }
                         } else {
-                            $statutSelected = "";
+                            echo '<option value="null">ERREUR</option>';
                         }
-                        if (hasAllMembersManagementAccess() ||
-                            $statut['id'] == 4 ||
-                            $statut['id'] == 5 ||
-                            $statut['id'] == 23) {
-                            echo '<option value="'.$statut['id'].'" '.$statutSelected.'>'.$statut['nom'].'</option>';
-                        }
-                    }
+                        ?>
+                    </select>
+                    <?php
                 } else {
-                    echo '<option value="null">ERREUR</option>';
+                    echo '<p class="givenData">Membre actif/junior</p>';
+                    echo '<input type="hidden" name="statutID" value="' . $statutID . '" />';
                 }
-                ?>
-            </select>
+            ?>
             <label for="birthDateDay">Date de naiss.</label>
             <div class="birthDate">
                 <select id="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
@@ -698,7 +708,7 @@ if ($canEdit) {
                 }
                 echo '<input type="checkbox" name="arbitrePublic" id="arbitrePublic" '.$publicRefereeChecked.' />';
             } else {
-                echo '<p class="givenData">';
+                echo '<p id="arbitrePublic" class="givenData">';
                 if ($isPublicReferee) {
                     echo 'Oui';
                 } else {
