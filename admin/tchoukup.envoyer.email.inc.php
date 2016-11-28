@@ -6,9 +6,7 @@ $recipients = array();
 $recipients[0] = 'webmaster@tchoukball.ch';
 $recipients[1] = 'abonnes.tchoukup@tchoukball.ch';
 
-// Le lien direct vers le template n'affiche pas bien les accents car le fichier est en ISO Latin,
-// mais l'encodage indiqué par le HTML indique de l'UTF-8.
-// echo '<p><a href="' . $path . '" target="_blank">Voir le template</a></p>';
+echo '<p><a href="' . $path . '" target="_blank">Voir le template</a></p>';
 
 if (
     isset($_POST['recipient']) &&
