@@ -205,8 +205,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 foreach ($penalties as $penalty) {
                     if ($penalty['idEquipe'] === $teamAId) {
                         echo $teamAName;
-                    }
-                    else if ($penalty['idEquipe'] === $teamBId) {
+                    } else if ($penalty['idEquipe'] === $teamBId) {
                         echo $teamBName;
                     }
                     echo ' : ';
@@ -219,7 +218,8 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
             ?>
             <p class="date sideIcon">
                 <?php
-                echo ucfirst(date_sql2date_joli($dateDebut, 'le', $_SESSION['__langue__']) . ' ' . VAR_LANG_A . ' ' . time_sql2heure($heureDebut));
+                echo ucfirst(date_sql2date_joli($dateDebut, 'le',
+                        $_SESSION['__langue__']) . ' ' . VAR_LANG_A . ' ' . time_sql2heure($heureDebut));
                 ?>
             </p>
             <p class="venue sideIcon">

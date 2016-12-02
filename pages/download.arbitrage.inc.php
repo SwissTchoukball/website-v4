@@ -1,6 +1,6 @@
 <?php
-	statInsererPageSurf(__FILE__);
+statInsererPageSurf(__FILE__);
 
-	getDownloadsList(4);
-	include "download.inc.php";
+getDownloadsList(4);
+include "download.inc.php";
 ?>

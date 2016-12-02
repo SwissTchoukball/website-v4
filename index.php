@@ -1,7 +1,7 @@
 <?php include_once('includes/init.php'); ?>
 <!DOCTYPE html>
 <html lang="<?php echo strtolower($_SESSION["__langue__"]); ?>">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
     <title><?php echo $title; ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <meta name="keywords"

@@ -5,19 +5,19 @@ $query = "SELECT c.id, c.title
 		  ORDER BY c.title";
 ?>
 <ul>
-	<?php
+    <?php
 
-	$data = mysql_query($query);
-	while ($spec = mysql_fetch_assoc($data)) {
-		$idSpec = $spec['id'];
-		$title = $spec['title'];
-		?>
-		<li>
-			<a href="/cahiers-des-charges/<?php echo $idSpec; ?>">
-				<?php echo $title; ?>
-			</a>
-		</li>
-		<?php
-	}
-	?>
+    $data = mysql_query($query);
+    while ($spec = mysql_fetch_assoc($data)) {
+        $idSpec = $spec['id'];
+        $title = $spec['title'];
+        ?>
+        <li>
+            <a href="/cahiers-des-charges/<?php echo $idSpec; ?>">
+                <?php echo $title; ?>
+            </a>
+        </li>
+        <?php
+    }
+    ?>
 </ul>

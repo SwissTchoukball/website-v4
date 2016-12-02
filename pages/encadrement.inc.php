@@ -1,6 +1,6 @@
 <?php
 if ($_SESSION["debug_tracage"]) {
-    echo __FILE__."<BR>";
+    echo __FILE__ . "<BR>";
 }
 statInsererPageSurf(__FILE__);
 ?>
@@ -16,7 +16,8 @@ statInsererPageSurf(__FILE__);
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
     while ($record = mysql_fetch_array($recordset)) {
-        afficherPersonneTeam($record, "_port", 1, 0, $i%2?VAR_LOOK_FONDS_INTERIEUR:VAR_LOOK_FONDS_INTERIEUR_UNE_SUR_DEUX);
+        afficherPersonneTeam($record, "_port", 1, 0,
+            $i % 2 ? VAR_LOOK_FONDS_INTERIEUR : VAR_LOOK_FONDS_INTERIEUR_UNE_SUR_DEUX);
     }
     ?>
 </table>
