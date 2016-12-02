@@ -29,7 +29,7 @@ else{
             $retour = mysql_query($requete);
             $nbLigne = mysql_affected_rows();
             while($donnees=mysql_fetch_array($retour)){
-                $requeteA = "SELECT idEquipe FROM Championnat_Equipes_Tours WHERE saison=".$saison." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$idGroupe."";
+                $requeteA = "SELECT idEquipe FROM Championnat_Equipes_Tours WHERE saison=".$saison." AND idCategorie=".$idCategorie." AND idTour=".$idTour." AND noGroupe=".$idGroupe;
                 // echo $requeteA;
                 $retourA = mysql_query($requeteA);
                 while($donneesA=mysql_fetch_array($retourA)){
@@ -70,9 +70,13 @@ else{
             ?>
         }
 		$(function(){
-	        $("[name=journee_all]").change(function() {
-		        $("[name^=journee]").val($("[name=journee_all]").val());
-		    });
+			$("[name=equipeA_all]").change(function() {
+				$("[name^=equipeA]").val($("[name=equipeA_all]").val());
+			});
+
+			$("[name=journee_all]").change(function() {
+				$("[name^=journee]").val($("[name=journee_all]").val());
+			});
 
 	        $("[name=typeMatch_all]").change(function() {
 		        $("[name^=typeMatch]").val($("[name=typeMatch_all]").val());
@@ -179,6 +183,12 @@ else{
 		echo "<tr>";
 			echo "<td>";
 				echo "<strong>Modifier pour<br />tous les matchs</strong>";
+				echo "<br /><br />";
+				echo "Équipe à domicile";
+				echo "<br /><br />";
+				echo "<select name='equipeA_all'>";
+				optionsParticipant($saison, $idCategorie, $idTour, $idGroupe);
+				echo "</select>";
 			echo "</td>";
 			echo "<td>";
 				echo "<select name='journee_all'>";
