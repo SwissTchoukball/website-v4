@@ -2,7 +2,7 @@
 
 // liste des liens
 if ($_SESSION["debug_tracage"]) {
-    echo __FILE__."<BR>";
+    echo __FILE__ . "<BR>";
 }
 
 define("VAR_HREF_PATH_PAGE_PRINCIPALE", "/pages/");
@@ -23,7 +23,7 @@ define("VAR_IMAGE_LANGUE", "/pictures/langues/");
 define("VAR_HREF_VIDEOS_PATH", "/Videos/videos/");
 
 
-if (stristr($_SERVER["REDIRECT_SCRIPT_URI"], 'admin')!==false) {
+if (stristr($_SERVER["REDIRECT_SCRIPT_URI"], 'admin') !== false) {
     define("VAR_HREF_PAGE_MERE", VAR_HREF_PAGE_ADMIN);
 } else {
     define("VAR_HREF_PAGE_MERE", VAR_HREF_PAGE_PRINCIPALE);
