@@ -2,47 +2,47 @@
 
 if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 
-	$clubID = $_POST['clubID']; //validity already checked in clubs.inc.php
-	$shortName = validiteInsertionTextBd($_POST['shortName']);
-	$fullName = validiteInsertionTextBd($_POST['fullName']);
-	$nameForSorting = validiteInsertionTextBd($_POST['nameForSorting']);
-	$address = validiteInsertionTextBd($_POST['address']);
-	if (isValidNPA($_POST['npa'])) {
-		$npa = $_POST['npa'];
-	} else {
-		$npa = 'NULL';
-	}
-	$city = validiteInsertionTextBd($_POST['city']);
-	$cantonID = validiteInsertionTextBd($_POST['Canton']);
-	$status = isValidID($_POST['clubs_status']) ? $_POST['clubs_status'] : 3;
-	$phone = validiteInsertionTextBd($_POST['phone']);
-	$email = validiteInsertionTextBd($_POST['email']);
-	$url = validiteInsertionTextBd($_POST['url']);
+    $clubID = $_POST['clubID']; //validity already checked in clubs.inc.php
+    $shortName = validiteInsertionTextBd($_POST['shortName']);
+    $fullName = validiteInsertionTextBd($_POST['fullName']);
+    $nameForSorting = validiteInsertionTextBd($_POST['nameForSorting']);
+    $address = validiteInsertionTextBd($_POST['address']);
+    if (isValidNPA($_POST['npa'])) {
+        $npa = $_POST['npa'];
+    } else {
+        $npa = 'NULL';
+    }
+    $city = validiteInsertionTextBd($_POST['city']);
+    $cantonID = validiteInsertionTextBd($_POST['Canton']);
+    $status = isValidID($_POST['clubs_status']) ? $_POST['clubs_status'] : 3;
+    $phone = validiteInsertionTextBd($_POST['phone']);
+    $email = validiteInsertionTextBd($_POST['email']);
+    $url = validiteInsertionTextBd($_POST['url']);
 
 
-	if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
-		echo "<p class='error'>Procédure annulée.</p>";
-		if ($clubID == 0) {
-			$newClub = true;
-		} else {
-			$clubToEditID = $clubID;
-		}
-	} else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
-		$newClub = false;
-		if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) { // New club to add, only by admins
-			//Getting the auto-increment value for the shitty club double ID
-			$autoIncrementQuery = "SELECT `AUTO_INCREMENT`
+    if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
+        echo "<p class='error'>Procédure annulée.</p>";
+        if ($clubID == 0) {
+            $newClub = true;
+        } else {
+            $clubToEditID = $clubID;
+        }
+    } else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+        $newClub = false;
+        if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) { // New club to add, only by admins
+            //Getting the auto-increment value for the shitty club double ID
+            $autoIncrementQuery = "SELECT `AUTO_INCREMENT`
 									FROM  INFORMATION_SCHEMA.TABLES
 									WHERE TABLE_SCHEMA = 'kuix_tchoukball1'
 									AND   TABLE_NAME   = 'ClubsFstb'";
-			$autoIncrementData = mysql_query($autoIncrementQuery);
-			$autoIncrementArray = mysql_fetch_assoc($autoIncrementData);
-			$autoIncrement = $autoIncrementArray['AUTO_INCREMENT'];
-			$newClubID = $autoIncrement - 4;
+            $autoIncrementData = mysql_query($autoIncrementQuery);
+            $autoIncrementArray = mysql_fetch_assoc($autoIncrementData);
+            $autoIncrement = $autoIncrementArray['AUTO_INCREMENT'];
+            $newClubID = $autoIncrement - 4;
 
 
-			$memberID = $_POST['memberID'];
-			$clubInsertRequest =
+            $memberID = $_POST['memberID'];
+            $clubInsertRequest =
                 "INSERT INTO `ClubsFstb`(
                     `id`,
                     `club`,
@@ -60,67 +60,67 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                     `lastEditorID`
                 )
                 VALUES (
-                    '".$newClubID."',
-                    '".$shortName."',
-                    '".$fullName."',
-                    '".$nameForSorting."',
-                    '".$address."',
-                    ".$npa.",
-                    '".$city."',
-                    ".$cantonID.",
-                    '".$phone."',
-                    '".$email."',
-                    '".$url."',
-                    ".$status.",
-                    '".date('Y-m-d')."',
-                    ".$_SESSION['__idUser__']."
+                    '" . $newClubID . "',
+                    '" . $shortName . "',
+                    '" . $fullName . "',
+                    '" . $nameForSorting . "',
+                    '" . $address . "',
+                    " . $npa . ",
+                    '" . $city . "',
+                    " . $cantonID . ",
+                    '" . $phone . "',
+                    '" . $email . "',
+                    '" . $url . "',
+                    " . $status . ",
+                    '" . date('Y-m-d') . "',
+                    " . $_SESSION['__idUser__'] . "
                 )";
-			$clubInsertResult = mysql_query($clubInsertRequest);
-			if ($clubInsertResult) { // Tout s'est bien passé.
-				echo "<p class='success'>Insertion réussie.</p>";
-				$clubToEditID = $newClubID;
-			} else {
-				echo "<p class='error'>Erreur lors de l'insertion dans la base de données.</p>";
-				$nbError++;
-				$newClub = true;
-			}
-		} elseif ($_POST['postType'] == "editClub") { // Modification of an already existing club
+            $clubInsertResult = mysql_query($clubInsertRequest);
+            if ($clubInsertResult) { // Tout s'est bien passé.
+                echo "<p class='success'>Insertion réussie.</p>";
+                $clubToEditID = $newClubID;
+            } else {
+                echo "<p class='error'>Erreur lors de l'insertion dans la base de données.</p>";
+                $nbError++;
+                $newClub = true;
+            }
+        } elseif ($_POST['postType'] == "editClub") { // Modification of an already existing club
 
 
-			$clubUpdateRequest = "UPDATE ClubsFstb
-									SET adresse='".$address."',
-										npa=".$npa.",
-										ville='".$city."',
-										telephone='".$phone."',
-										email='".$email."',
-										url='".$url."',
-										lastEdit='".date('Y-m-d')."',
-										lastEditorID=".$_SESSION['__idUser__'];
-			if ($_SESSION['__userLevel__'] <= 0) {
-				$clubUpdateRequest .= ", club='".$shortName."'
-										 , nomComplet='".$fullName."'
-										 , nomPourTri='".$nameForSorting."'
-										 , canton=".$cantonID."
-										 , statusId=".$status."";
-			}
-			$clubUpdateRequest .= " WHERE id=".$clubID;
-			//echo "<p class='info'>".$clubUpdateRequest."</p>";
-			$clubUpdateResult = mysql_query($clubUpdateRequest);
-			if ($clubUpdateResult) { // Tout s'est bien passé.
-				echo "<p class='success'>Modification réussie.</p>";
-			} else {
-				echo "<p class='error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
-				$nbError++;
-			}
-			$clubToEditID = $clubID;
-		} else {
-			echo '<p class="error">Action indéfinie.</p>';
-			//Ne devrait pas arriver
-		}
-	} else {
-		echo "<p class='error'>Vous n'avez pas le droit d'effectuer cet action.</p>";
-	}
+            $clubUpdateRequest = "UPDATE ClubsFstb
+									SET adresse='" . $address . "',
+										npa=" . $npa . ",
+										ville='" . $city . "',
+										telephone='" . $phone . "',
+										email='" . $email . "',
+										url='" . $url . "',
+										lastEdit='" . date('Y-m-d') . "',
+										lastEditorID=" . $_SESSION['__idUser__'];
+            if ($_SESSION['__userLevel__'] <= 0) {
+                $clubUpdateRequest .= ", club='" . $shortName . "'
+										 , nomComplet='" . $fullName . "'
+										 , nomPourTri='" . $nameForSorting . "'
+										 , canton=" . $cantonID . "
+										 , statusId=" . $status . "";
+            }
+            $clubUpdateRequest .= " WHERE id=" . $clubID;
+            //echo "<p class='info'>".$clubUpdateRequest."</p>";
+            $clubUpdateResult = mysql_query($clubUpdateRequest);
+            if ($clubUpdateResult) { // Tout s'est bien passé.
+                echo "<p class='success'>Modification réussie.</p>";
+            } else {
+                echo "<p class='error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                $nbError++;
+            }
+            $clubToEditID = $clubID;
+        } else {
+            echo '<p class="error">Action indéfinie.</p>';
+            //Ne devrait pas arriver
+        }
+    } else {
+        echo "<p class='error'>Vous n'avez pas le droit d'effectuer cet action.</p>";
+    }
 } else {
-	echo "<p class='error'>Action inconnue</p>";
+    echo "<p class='error'>Action inconnue</p>";
 }
 ?>

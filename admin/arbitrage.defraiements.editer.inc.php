@@ -63,7 +63,7 @@ if (isset($_GET['ajouter'])) {
         $year = annee($paymentDate);
         $month = mois($paymentDate);
         $day = jour($paymentDate);
-        $userName = $p['prenomUtilisateur'] . ' ' .$p['nomUtilisateur'];
+        $userName = $p['prenomUtilisateur'] . ' ' . $p['nomUtilisateur'];
     } else {
         die(printErrorMessage("Problème lors de la récupération des données"));
     }
@@ -74,33 +74,33 @@ if (isset($_GET['ajouter'])) {
 
 <script>
     <?php
-        echo "var referees = " . $jsonReferees . ";\n";
+    echo "var referees = " . $jsonReferees . ";\n";
     ?>
 </script>
 <script>
-    $(function() {
-        $.datepicker.setDefaults($.datepicker.regional[ "<?php echo strtolower($_SESSION['__langue__']); ?>" ]);
+    $(function () {
+        $.datepicker.setDefaults($.datepicker.regional["<?php echo strtolower($_SESSION['__langue__']); ?>"]);
         $("#datepicker").datepicker({
             dateFormat: 'dd.mm.yy',
-            onClose: function(dateText, inst) {
+            onClose: function (dateText, inst) {
                 $('#description').focus();
             }
         });
         $("#datepicker").datepicker('setDate', '<?php echo $day . '.' . $month . '.' . $year; ?>');
 
-        $("#refereeAccountNb").focus(function() {
+        $("#refereeAccountNb").focus(function () {
             var $this = $(this);
             $this.select();
 
             // Work around Chrome's little problem
-            $this.mouseup(function() {
+            $this.mouseup(function () {
                 // Prevent further mouseup intervention
                 $this.unbind("mouseup");
                 return false;
             });
         });
 
-        $('#refereeID').change(function() {
+        $('#refereeID').change(function () {
             populateAccountNumber();
         });
 

@@ -266,8 +266,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                             if (!mysql_query($refereeDataUpsertQuery)) {
                                 printErrorMessage("Erreur lors de l'enregistrement des informations d'arbitre");
                             }
-                        }
-                        else {
+                        } else {
                             // The person is not a referee anymore.
                             // If it wasn't already before, this won't trigger an error
                             $refereeDataDeleteQuery = "DELETE FROM Arbitres WHERE personId = " . $memberID . " LIMIT 1";
