@@ -22,15 +22,15 @@ $clubsStats = mysql_query($currentStatsQuery);
 ?>
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Clubs statistics saving</title>
-        <meta charset="iso-8859-1">
-    </head>
-    <body>
-        <?php
+<head>
+    <title>Clubs statistics saving</title>
+    <meta charset="iso-8859-1">
+</head>
+<body>
+<?php
 
-        while ($clubStats = mysql_fetch_assoc($clubsStats)) {
-            $saveStatisticsQuery = "INSERT INTO DBDStatsClubs (idClub,
+while ($clubStats = mysql_fetch_assoc($clubsStats)) {
+    $saveStatisticsQuery = "INSERT INTO DBDStatsClubs (idClub,
                                                                date,
                                                                nbMembresActifs,
                                                                nbMembresJuniors,
@@ -38,24 +38,24 @@ $clubsStats = mysql_query($currentStatsQuery);
                                                                nbMembresPassifs,
                                                                nbMembresVIP,
                                                                nbMembresAutres)
-                                    VALUES (".$clubStats['id'].",
-                                            '".date('Y-m-d')."',
-                                            ".$clubStats['nbMembresActifs'].",
-                                            ".$clubStats['nbMembresJuniors'].",
-                                            ".$clubStats['nbMembresSoutiens'].",
-                                            ".$clubStats['nbMembresPassifs'].",
-                                            ".$clubStats['nbMembresVIP'].",
-                                            ".$clubStats['nbMembresAutres'].")";
-            //echo $saveStatisticsQuery."<br />";
-            if (mysql_query($saveStatisticsQuery)) {
-                echo "<p><em>".$clubStats['club']."</em> stats saved.</p>";
-            } else {
-                echo "<p>Error while saving <em>".$clubStats['club']."</em> stats.
+                                    VALUES (" . $clubStats['id'] . ",
+                                            '" . date('Y-m-d') . "',
+                                            " . $clubStats['nbMembresActifs'] . ",
+                                            " . $clubStats['nbMembresJuniors'] . ",
+                                            " . $clubStats['nbMembresSoutiens'] . ",
+                                            " . $clubStats['nbMembresPassifs'] . ",
+                                            " . $clubStats['nbMembresVIP'] . ",
+                                            " . $clubStats['nbMembresAutres'] . ")";
+    //echo $saveStatisticsQuery."<br />";
+    if (mysql_query($saveStatisticsQuery)) {
+        echo "<p><em>" . $clubStats['club'] . "</em> stats saved.</p>";
+    } else {
+        echo "<p>Error while saving <em>" . $clubStats['club'] . "</em> stats.
                       Maybe already saved today.</p>";
-            }
-        }
+    }
+}
 
-        mysql_close();
-        ?>
-        </body>
+mysql_close();
+?>
+</body>
 </html>

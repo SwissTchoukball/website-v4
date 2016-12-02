@@ -92,7 +92,7 @@ while ($club = mysql_fetch_assoc($clubsResult)) {
     if (mysql_query($saveClubFeeQuery)) {
         echo "<p><strong>" . $club['name'] . "</strong> Fee: CHF " . $totalFee . "</p>";
     } else {
-        echo "<p>Error while saving the fee for <strong>".$club['name']."</strong>.</p>";
+        echo "<p>Error while saving the fee for <strong>" . $club['name'] . "</strong>.</p>";
         echo "<pre>" . mysql_error() . "</pre>";
     }
 }

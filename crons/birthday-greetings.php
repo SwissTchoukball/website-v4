@@ -29,7 +29,7 @@ $birthdayMessageTemplate = "
 ";
 
 $webmasterTo = 'webmaster@tchoukball.ch';
-$webmasterSubject = "Message d'anniversaire ". VAR_LANG_ASSOCIATION_NAME;
+$webmasterSubject = "Message d'anniversaire " . VAR_LANG_ASSOCIATION_NAME;
 
 $query = "SELECT nom, prenom, dateNaissance, idSexe,
                  TIMESTAMPDIFF(YEAR, dateNaissance, CURDATE()) AS age, email, emailFSTB
@@ -75,7 +75,7 @@ if ($result) {
                 $subject = sprintf($subjectTemplate, $prenom);
                 $birthdayMessage = sprintf($birthdayMessageTemplate, $prenom, $fier, $age);
 
-                $headers  = 'MIME-version: 1.0' . "\r\n";
+                $headers = 'MIME-version: 1.0' . "\r\n";
                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
                 $headers .= 'From: ' . VAR_LANG_ASSOCIATION_NAME . ' <comite@tchoukball.ch>' . "\r\n";
 
