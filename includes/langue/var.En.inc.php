@@ -255,7 +255,6 @@ define("VAR_LANG_FORMAT", "Format");
 define("VAR_LANG_TAILLE", "Size");
 
 // International
-define("VAR_LANG_EQUIPE", "Team");
 define("VAR_LANG_CATEGORIE", "Category");
 define("VAR_LANG_CATEGORIES", "Categories");
 define("VAR_LANG_SCORE", "Score");

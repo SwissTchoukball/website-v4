@@ -54,15 +54,6 @@ if (!is_numeric($menuselection) || $menuselection < 0 || ($_SESSION["__userLevel
     $menuselection = 1;
     $smenuselection = 0;
     $menuTrouve = true;
-    /*
-    $menuTrouve=false;
-    for($i=0;$i < count($VAR_TAB_MENU) && !$menuTrouve;$i++){
-        if ($_SESSION["__userLevel__"] <= $VAR_TAB_MENU[$i][0]->getUserLevel()){
-            $menuselection=$i;
-            $menuTrouve=true;
-        }
-    }
-    */
 
     // ne devrait pas arriver...
     if (!$menuTrouve && !is_numeric($menuselection)) {
@@ -83,21 +74,6 @@ if (($smenuselection == "" && $donneesIssetSsMenu['nbreSsMenu'] > 0) || !is_nume
     $smenuselection = 0;
     $sMenuTrouve = true;
 
-    /*
-        if ($donnees['nbreSsMenu']==0){
-        $sMenuTrouve=true;
-        $smenuselection=0;
-    }
-    else{
-        $sMenuTrouve=false;
-        for($i=0;$i < count($VAR_TAB_MENU[$menuselection][1]) && !$sMenuTrouve;$i++){
-            if ($_SESSION["__userLevel__"] <= $VAR_TAB_MENU[$menuselection][1][$i]->getUserLevel()){
-                $smenuselection=$i;
-                $sMenuTrouve=true;
-            }
-        }
-    }
-        */
     if (!$sMenuTrouve) {
         exit("Erreur 2, vous n'avez aucun droit sur cette partie");
     }

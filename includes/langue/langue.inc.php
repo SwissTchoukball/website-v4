@@ -59,7 +59,10 @@ if(!isset($_SESSION["__langue__"])){
 	$_SESSION["__langue__"]="Fr";
 }*/
 
-$langchange = $_GET['langchange'];
+$langchange = '';
+if (isset($_GET['langchange'])) {
+    $langchange = $_GET['langchange'];
+}
 
 if ($langchange != "" && $langchange != $_SESSION["__langue__"]) {
 
@@ -77,10 +80,6 @@ if ($_SESSION["__langue__"] == "") {
     $_SESSION["__langue__"] = $VAR_TABLEAU_DES_LANGUES[0][0];
 
     //mettreAJourStatistique($VAR_TABLEAU_DES_LANGUES[0][0],$VAR_TABLEAU_DES_LANGUES);
-}
-
-if ($DEBUG) {
-    echo "langue = " . $_SESSION["__langue__"] . "<BR>";
 }
 
 include "var." . $_SESSION["__langue__"] . ".inc.php";

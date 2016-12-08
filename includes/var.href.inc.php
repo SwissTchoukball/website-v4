@@ -23,7 +23,7 @@ define("VAR_IMAGE_LANGUE", "/pictures/langues/");
 define("VAR_HREF_VIDEOS_PATH", "/Videos/videos/");
 
 
-if (stristr($_SERVER["REDIRECT_SCRIPT_URI"], 'admin') !== false) {
+if (array_key_exists("REDIRECT_SCRIPT_URI", $_SERVER) && stristr($_SERVER["REDIRECT_SCRIPT_URI"], 'admin')) {
     define("VAR_HREF_PAGE_MERE", VAR_HREF_PAGE_ADMIN);
 } else {
     define("VAR_HREF_PAGE_MERE", VAR_HREF_PAGE_PRINCIPALE);

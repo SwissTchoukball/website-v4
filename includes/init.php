@@ -5,6 +5,10 @@ if ($_SESSION["debug_tracage"]) {
     echo __FILE__ . "<BR>";
 }
 
+if (!isset($admin)) {
+    $admin = false;
+}
+
 // DB connexion and other settings
 require('config.php');
 
@@ -99,21 +103,14 @@ if ($_SESSION["__userLevel__"] < 100 && $admin) {
     $typemenu = "Menu";
 }
 
-// choisir le bon tableau des menus
-if (stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false) {
-    $VAR_TAB_MENU = $VAR_TAB_MENU_ADMIN;
-} else {
-    $VAR_TAB_MENU = $VAR_TAB_MENU_WEB;
-}
-
 // toujours valider les menus, sauf pour le login
-if (!(stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $_SESSION["__userLevel__"] == 100)) {
+if (!(isset($PHP_SELF) && stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $_SESSION["__userLevel__"] == 100)) {
     // regarder si les numéros des menus et/ou sous menus sont correct
     include "validite.menu.inc.php";
 }
 
 // creation de graphe avant le header via la variable actionSpeciale
-if (stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $actionSpeciale == "creerGraphe") {
+if (isset($PHP_SELF) && stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $actionSpeciale == "creerGraphe") {
     include "creationGraphique.inc.php";
 }
 
@@ -175,7 +172,7 @@ if ($locale_code_ISOlanguage == "en") {
 
 
 // !Login des admins
-if (stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false &&
+if (isset($PHP_SELF) && stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false &&
     $_SESSION["__adminModeUtilise__"] !== true &&
     ($_SESSION["__nom__"] != "" || $_SESSION["__prenom__"] != "")
 ) {
