@@ -14,7 +14,8 @@ $body = @file_get_contents('php://input');
 $commands = array(
     'git pull origin master',
     'git submodule sync',
-    'git submodule update'
+    'git submodule update',
+    'php bin/composer install'
 );
 base64_encode($agent);
 base64_encode($signature);
