@@ -17,6 +17,9 @@ $commands = array(
     'git submodule update',
     'php -d detect_unicode=Off bin/composer install'
 );
+
+$output = "";
+
 base64_encode($agent);
 base64_encode($signature);
 
@@ -26,6 +29,9 @@ if (strpos($agent, 'GitHub-Hookshot') !== false) {
         foreach ($commands as $command) {
             // Run it
             $tmp = shell_exec($command);
+
+            $output .= $command . "\n";
+            $output .= htmlentities(trim($tmp)) . "\n";
         }
     } else {
         header('HTTP/1.1 403 Forbidden');
@@ -62,4 +68,5 @@ function hash_equals($a, $b)
     return $result === 0;
 }
 
-echo "Deploy successful.";
+echo "Deploy successful.\n\n";
+echo $output;
