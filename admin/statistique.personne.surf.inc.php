@@ -1,11 +1,11 @@
 <div class="statistiqueLoginSurf">
-<?php
-$requeteSQL = "SELECT * , count( id ) nbLogin
+    <?php
+    $requeteSQL = "SELECT * , count( id ) nbLogin
 								FROM Personne, HistoriqueLogin
 								WHERE Personne.id = HistoriqueLogin.idPersonne
 								GROUP BY Personne.id
 								ORDER BY nbLogin DESC";
 
-include "statistique.personne.inc.php";
-?>
+    include "statistique.personne.inc.php";
+    ?>
 </div

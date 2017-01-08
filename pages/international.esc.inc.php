@@ -4,9 +4,9 @@ $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '37' OR
 // Mettre le logo, quand un logo officiel sera validé.
 // echo "<img class='imageFlottanteDroite' src='pictures/logos/logo_EWC15.png' />";
 
-while($donnees = mysql_fetch_array($retour)) {
+while ($donnees = mysql_fetch_array($retour)) {
     echo "<p>";
-    echo afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
+    echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
     echo "</p><br />";
 }
 

@@ -40,7 +40,8 @@ function dateDebutFinValide(
 
     // test si les heures sont dans un ordre chronologique
     if (($debutHeure > $finHeure) ||
-        ($debutHeure == $finHeure && $debutMinute > $finMinute)) {
+        ($debutHeure == $finHeure && $debutMinute > $finMinute)
+    ) {
         echo "<p class='titresectiontext' align='center'>Chronologie des heures non respectée : debut = $heureDebut, fin = $heureFin</p>";
         $nbErreur++;
     }
@@ -59,8 +60,8 @@ function dateDebutFinValide(
 function date_sql2MonthYear($date, $monthArray)
 {
     $annee = substr($date, 0, 4);
-    $mois = $monthArray[substr($date, 5, 2)-1];
-    return $mois." ".$annee;
+    $mois = $monthArray[substr($date, 5, 2) - 1];
+    return $mois . " " . $annee;
 }
 
 //£inclDate = "isset";
@@ -76,7 +77,7 @@ function date_sql2date($date)
     $annee = substr($date, 0, 4);
     $mois = substr($date, 5, 2);
     $jour = substr($date, 8, 2);
-    $date = $jour.".".$mois.".".$annee;
+    $date = $jour . "." . $mois . "." . $annee;
     return $date;
 }
 
@@ -109,10 +110,12 @@ function jour($date)
 {
     return substr($date, 8, 2);
 }
+
 function mois($date)
 {
     return substr($date, 5, 2);
 }
+
 function annee($date)
 {
     return substr($date, 0, 4);
@@ -130,10 +133,12 @@ function heure($heure)
 {
     return substr($heure, 0, 2);
 }
+
 function minute($minute)
 {
     return substr($minute, 3, 2);
 }
+
 function seconde($seconde)
 {
     return substr($seconde, 6, 2);
@@ -406,7 +411,7 @@ function creation_liste_annee($debut, $fin)
 {
     $option = "";
     for ($i = date('Y') + $debut; $i <= date('Y') + $fin; $i++) {
-        $option .=  "<option value='$i'>$i</option>\n";
+        $option .= "<option value='$i'>$i</option>\n";
     }
     return $option;
 }
@@ -537,81 +542,80 @@ function modif_liste_minute($minute)
 }
 
 
-
 function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
 {
     $annee = substr($date, 0, 4);
     $mois = substr($date, 5, 2);
     $jour = substr($date, 8, 2);
-    $timestamp=mktime(0, 0, 0, $mois, $jour, $annee);
-    $jourSemaineNumero=date('w', $timestamp);
+    $timestamp = mktime(0, 0, 0, $mois, $jour, $annee);
+    $jourSemaineNumero = date('w', $timestamp);
 
-    $dateEcrite=false;
-    if ($langue=="Fr") {
-        if ($annee==date('Y')) {
-            if ($mois==date('m')) {
-                if ($jour==date('d')-1) {
-                    $dateJoli="hier";
-                    $dateEcrite=true;
-                } elseif ($jour==date('d')) {
-                    $dateJoli="aujourd'hui";
-                    $dateEcrite=true;
-                } elseif ($jour==date('d')+1) {
-                    $dateJoli="demain";
-                    $dateEcrite=true;
+    $dateEcrite = false;
+    if ($langue == "Fr") {
+        if ($annee == date('Y')) {
+            if ($mois == date('m')) {
+                if ($jour == date('d') - 1) {
+                    $dateJoli = "hier";
+                    $dateEcrite = true;
+                } elseif ($jour == date('d')) {
+                    $dateJoli = "aujourd'hui";
+                    $dateEcrite = true;
+                } elseif ($jour == date('d') + 1) {
+                    $dateJoli = "demain";
+                    $dateEcrite = true;
                 }
             }
         }
 
         if ($dateEcrite) {
-            if ($prefixe=="du") {
-                $dateJoli="de ".$date;
-            } elseif ($prefixe=="au") {
-                $dateJoli="à ".$date;
-            } elseif ($prefixe=="le") {
+            if ($prefixe == "du") {
+                $dateJoli = "de " . $date;
+            } elseif ($prefixe == "au") {
+                $dateJoli = "à " . $date;
+            } elseif ($prefixe == "le") {
                 //nothing
             }
         } else {
-            if ($mois==1) {
-                $mois="janvier";
-            } elseif ($mois==2) {
-                $mois="février";
-            } elseif ($mois==3) {
-                $mois="mars";
-            } elseif ($mois==4) {
-                $mois="avril";
-            } elseif ($mois==5) {
-                $mois="mai";
-            } elseif ($mois==6) {
-                $mois="juin";
-            } elseif ($mois==7) {
-                $mois="juillet";
-            } elseif ($mois==8) {
-                $mois="août";
-            } elseif ($mois==9) {
-                $mois="septembre";
-            } elseif ($mois==10) {
-                $mois="octobre";
-            } elseif ($mois==11) {
-                $mois="novembre";
-            } elseif ($mois==12) {
-                $mois="décembre";
+            if ($mois == 1) {
+                $mois = "janvier";
+            } elseif ($mois == 2) {
+                $mois = "février";
+            } elseif ($mois == 3) {
+                $mois = "mars";
+            } elseif ($mois == 4) {
+                $mois = "avril";
+            } elseif ($mois == 5) {
+                $mois = "mai";
+            } elseif ($mois == 6) {
+                $mois = "juin";
+            } elseif ($mois == 7) {
+                $mois = "juillet";
+            } elseif ($mois == 8) {
+                $mois = "août";
+            } elseif ($mois == 9) {
+                $mois = "septembre";
+            } elseif ($mois == 10) {
+                $mois = "octobre";
+            } elseif ($mois == 11) {
+                $mois = "novembre";
+            } elseif ($mois == 12) {
+                $mois = "décembre";
             }
 
-            if ($jourSemaineNumero==0) {
-                $jourSemaine="dimanche";
-            } elseif ($jourSemaineNumero==1) {
-                $jourSemaine="lundi";
-            } elseif ($jourSemaineNumero==2) {
-                $jourSemaine="mardi";
-            } elseif ($jourSemaineNumero==3) {
-                $jourSemaine="mercredi";
-            } elseif ($jourSemaineNumero==4) {
-                $jourSemaine="jeudi";
-            } elseif ($jourSemaineNumero==5) {
-                $jourSemaine="vendredi";
-            } elseif ($jourSemaineNumero==6) {
-                $jourSemaine="samedi";
+            if ($jourSemaineNumero == 0) {
+                $jourSemaine = "dimanche";
+            } elseif ($jourSemaineNumero == 1) {
+                $jourSemaine = "lundi";
+            } elseif ($jourSemaineNumero == 2) {
+                $jourSemaine = "mardi";
+            } elseif ($jourSemaineNumero == 3) {
+                $jourSemaine = "mercredi";
+            } elseif ($jourSemaineNumero == 4) {
+                $jourSemaine = "jeudi";
+            } elseif ($jourSemaineNumero == 5) {
+                $jourSemaine = "vendredi";
+            } elseif ($jourSemaineNumero == 6) {
+                $jourSemaine = "samedi";
             }
 
             $jour = ltrim($jour, '0'); // Removes leading zeros
@@ -619,11 +623,11 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
             $dateJoli = '';
 
             if ($prefixe != "") {
-                $dateJoli .= $prefixe.' ';
+                $dateJoli .= $prefixe . ' ';
             }
 
             if ($dayOfWeek) {
-                $dateJoli .= $jourSemaine.' ';
+                $dateJoli .= $jourSemaine . ' ';
             }
 
             $dateJoli .= $jour;
@@ -632,12 +636,12 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
                 $dateJoli .= '<sup>er</sup>';
             }
 
-            $dateJoli .= ' '.$mois.' '.$annee;
+            $dateJoli .= ' ' . $mois . ' ' . $annee;
         }
     } else {
         $dateJoli = '';
         if ($prefixe != "") {
-            $dateJoli .= $prefixe.' ';
+            $dateJoli .= $prefixe . ' ';
         }
 
         $dateJoli .= date_sql2date($date);
@@ -647,20 +651,21 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
 
 function time_sql2heure($time)
 {
-    $heure=substr($time, 0, 2);
-    $minute=substr($time, 3, 2);
-    $heureTotal=$heure.":".$minute;
+    $heure = substr($time, 0, 2);
+    $minute = substr($time, 3, 2);
+    $heureTotal = $heure . ":" . $minute;
     return $heureTotal;
 }
 
 function commenceAvecVoyelle($mot)
 {
-    if (substr($mot, 0, 1)=='a' || substr($mot, 0, 1)=='A'
-        || substr($mot, 0, 1)=='e' || substr($mot, 0, 1)=='E'
-        || substr($mot, 0, 1)=='i' || substr($mot, 0, 1)=='I'
-        || substr($mot, 0, 1)=='o' || substr($mot, 0, 1)=='O'
-        || substr($mot, 0, 1)=='u' || substr($mot, 0, 1)=='U'
-        || substr($mot, 0, 1)=='y' || substr($mot, 0, 1)=='Y') {
+    if (substr($mot, 0, 1) == 'a' || substr($mot, 0, 1) == 'A'
+        || substr($mot, 0, 1) == 'e' || substr($mot, 0, 1) == 'E'
+        || substr($mot, 0, 1) == 'i' || substr($mot, 0, 1) == 'I'
+        || substr($mot, 0, 1) == 'o' || substr($mot, 0, 1) == 'O'
+        || substr($mot, 0, 1) == 'u' || substr($mot, 0, 1) == 'U'
+        || substr($mot, 0, 1) == 'y' || substr($mot, 0, 1) == 'Y'
+    ) {
         return true;
     } else {
         return false;

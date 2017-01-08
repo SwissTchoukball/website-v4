@@ -116,7 +116,8 @@ if (!isset($_GET['idMatch'])) {
     $penaliteArbitreNiveauInferieur = $donnees['penaliteArbitreNiveauInferieur'];
     $penaliteNonMixiteParTiers = $donnees['penaliteNonMixiteParTiers'];
 
-    function optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeSelected) {
+    function optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeSelected)
+    {
         /*if($saison=='' OR $idCategorie=='' OR $idTour=='' OR $idGroupe==''){
             $requete = "SELECT * FROM Championnat_Equipes ORDER BY equipe";
             $retour = mysql_query($requete);
@@ -149,7 +150,8 @@ if (!isset($_GET['idMatch'])) {
 
     }
 
-    function optionsScore($scoreEquipeSelected) {
+    function optionsScore($scoreEquipeSelected)
+    {
         for ($i = 0; $i <= 128; $i++) {
             if ($i == $scoreEquipeSelected) {
                 $selected = "selected='selected'";
@@ -160,7 +162,8 @@ if (!isset($_GET['idMatch'])) {
         }
     }
 
-    function optionsPeriodType($periodTypeSelected, $defaultPeriodType, $season) {
+    function optionsPeriodType($periodTypeSelected, $defaultPeriodType, $season)
+    {
         if (is_null($season)) {
             $season = date('Y');
         }
@@ -352,7 +355,7 @@ if (!isset($_GET['idMatch'])) {
             });
 
             //Handling the penalties
-            penalties.forEach(function(penaltyId) {
+            penalties.forEach(function (penaltyId) {
                 var teamId = $('.penalty select[name=penalty-' + penaltyId + '-teamId]').val();
                 var typeId = $('.penalty select[name=penalty-' + penaltyId + '-typeId]').val();
                 if (teamId == idEquipeA) {
@@ -423,7 +426,8 @@ if (!isset($_GET['idMatch'])) {
             var selectA = $('<select name="periodScoreA[' + newPeriodNo + ']"></select>').appendTo(scoreA);
             var selectB = $('<select name="periodScoreB[' + newPeriodNo + ']"></select>').appendTo(scoreB);
             scoreB.append(' ');
-            $('<select name="periodTypeId[' + newPeriodNo + ']"><?php echo optionsPeriodType(null, $defaultPeriodTypeID, $saison) ?></select>').appendTo(scoreB);
+            $('<select name="periodTypeId[' + newPeriodNo + ']"><?php echo optionsPeriodType(null, $defaultPeriodTypeID,
+                    $saison) ?></select>').appendTo(scoreB);
 
             var options = [];
             for (n = 0; n <= 128; n++) {
@@ -439,9 +443,12 @@ if (!isset($_GET['idMatch'])) {
             var refereeA = $('<td></td>').appendTo(newPeriodReferees);
             var refereeB = $('<td></td>').appendTo(newPeriodReferees);
             var refereeC = $('<td></td>').appendTo(newPeriodReferees);
-            var refereeSelectA = $('<select name="periodRefereeA[' + newPeriodNo + ']" id="periodRefereeA[' + newPeriodNo + ']"><option value="">Arbitre A</option><?php printRefereesOptionsList($referees, null, true); ?></select>').appendTo(refereeA);
-            var refereeSelectB = $('<select name="periodRefereeB[' + newPeriodNo + ']" id="periodRefereeB[' + newPeriodNo + ']"><option value="">Arbitre B</option><?php printRefereesOptionsList($referees, null, true); ?></select>').appendTo(refereeB);
-            var refereeSelectC = $('<select name="periodRefereeC[' + newPeriodNo + ']" id="periodRefereeC[' + newPeriodNo + ']"><option value="">Arbitre C</option><?php printRefereesOptionsList($referees, null, true); ?></select>').appendTo(refereeC);
+            var refereeSelectA = $('<select name="periodRefereeA[' + newPeriodNo + ']" id="periodRefereeA[' + newPeriodNo + ']"><option value="">Arbitre A</option><?php printRefereesOptionsList($referees,
+                    null, true); ?></select>').appendTo(refereeA);
+            var refereeSelectB = $('<select name="periodRefereeB[' + newPeriodNo + ']" id="periodRefereeB[' + newPeriodNo + ']"><option value="">Arbitre B</option><?php printRefereesOptionsList($referees,
+                    null, true); ?></select>').appendTo(refereeB);
+            var refereeSelectC = $('<select name="periodRefereeC[' + newPeriodNo + ']" id="periodRefereeC[' + newPeriodNo + ']"><option value="">Arbitre C</option><?php printRefereesOptionsList($referees,
+                    null, true); ?></select>').appendTo(refereeC);
 
         }
 
@@ -459,10 +466,10 @@ if (!isset($_GET['idMatch'])) {
         var deletedPenalties = [];
         var penaltiesTypes = [];
         <?php
-            // Transposing PHP array to Javascript
-            foreach($penaltiesTypes as $penaltyType) {
-                echo 'penaltiesTypes[' . $penaltyType['id'] . '] = ' . $penaltyType['penaltyPoints'] . ';';
-            }
+        // Transposing PHP array to Javascript
+        foreach ($penaltiesTypes as $penaltyType) {
+            echo 'penaltiesTypes[' . $penaltyType['id'] . '] = ' . $penaltyType['penaltyPoints'] . ';';
+        }
         ?>
 
         function addPenalty(penaltyId) {
@@ -608,8 +615,8 @@ if (!isset($_GET['idMatch'])) {
                 <?php
             }
             ?>
-            </table>
-            <table border="0" align="center" id="score">
+        </table>
+        <table border="0" align="center" id="score">
             <?php
 
             // Récupération des pénalités pour le match

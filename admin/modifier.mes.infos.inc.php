@@ -26,8 +26,7 @@ statInsererPageSurf(__FILE__);
                 $requeteModifierMotDePasse = "UPDATE `Personne` SET `password`='" . md5($_POST["nouveauPass"]) . "' WHERE `Personne`.`id`='" . $record["id"] . "'";
                 mysql_query($requeteModifierMotDePasse);
                 echo "<h4>Modification du mot de passe réussi</h4>";
-            }
-            else {
+            } else {
                 echo "<h4>Votre ancien mot de passe n'est pas valide, impossible de modifier votre mot de passe</h4>";
             }
         }
@@ -149,15 +148,13 @@ statInsererPageSurf(__FILE__);
 
                     if ($recordClub["id"] == $record["idClub"]) {
                         echo "<option selected value='" . $recordClub["id"] . "'>" . $club . "</option>";
-                    }
-                    else {
+                    } else {
                         echo "<option value='" . $recordClub["id"] . "'>" . $club . "</option>";
                     }
 
                 }
                 echo "</select>";
-            }
-            // interdiction de modifier le club
+            } // interdiction de modifier le club
             else {
                 $requeteSQLClub = "SELECT * FROM `Personne`, `ClubsFstb` WHERE `Personne`.`id`='" . $record["id"] . "' AND `Personne`.`idClub`=`ClubsFstb`.`id`";
                 $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");

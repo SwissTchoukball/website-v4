@@ -12,7 +12,7 @@ if (isset($_POST['season']) and is_numeric($_POST['season'])) {
 
 $seasonEnd = $season + 1;
 echo '<form name="seasonSelector" action="" method="post">';
-echo '<h2>'.VAR_LANG_SAISON;
+echo '<h2>' . VAR_LANG_SAISON;
 echo ' <select name="season" onChange="seasonSelector.submit();">';
 $selectorStart = date('Y') - 3;
 $selectorEnd = date('Y');
@@ -23,8 +23,8 @@ for ($s = $selectorStart; $s <= $selectorEnd; ++$s) {
     } else {
         $selected = '';
     }
-    echo '<option value="'.$s.'"'.$selected.'>';
-    echo $s.' - '.$sEnd;
+    echo '<option value="' . $s . '"' . $selected . '>';
+    echo $s . ' - ' . $sEnd;
     echo '</option>';
 }
 echo '</select>';

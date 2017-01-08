@@ -21,14 +21,14 @@
     if (isset($_GET['login'])) {
         echo "<h1>Login administration</h1>";
     } elseif (isset($menuselection) && $showTitle) {
-        if ($typemenu=='menu' && ($menuselection=='4' || $menuselection=='10' || $menuselection=='12' || $menuselection=='13')) {
+        if ($typemenu == 'menu' && ($menuselection == '4' || $menuselection == '10' || $menuselection == '12' || $menuselection == '13')) {
             // N'ont pas de sous-menus.
-            echo "<h1>".$titrepage."</h1>";
+            echo "<h1>" . $titrepage . "</h1>";
         } else {
             if (isset($smenuselection)) {
-                echo "<h1>".$titrepagebis."</h1>";
+                echo "<h1>" . $titrepagebis . "</h1>";
             } else {
-                echo "<h1>".$titrepage."</h1>";
+                echo "<h1>" . $titrepage . "</h1>";
             }
         }
     }

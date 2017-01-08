@@ -4,9 +4,9 @@ if (isset($_POST['add']) || isset($_POST['edit'])) {
     $refereeID = isValidID($_POST['refereeID']) ? $_POST['refereeID'] : false;
     $seasonID = isValidSeasonID($_POST['seasonID']) ? $_POST['seasonID'] : false;
     $amountPaid = is_numeric($_POST['amountPaid']) ? $_POST['amountPaid'] : false;
-    $year = substr($_POST['paymentDate'],6,4);
-    $month = substr($_POST['paymentDate'],3,2);
-    $day = substr($_POST['paymentDate'],0,2);
+    $year = substr($_POST['paymentDate'], 6, 4);
+    $month = substr($_POST['paymentDate'], 3, 2);
+    $day = substr($_POST['paymentDate'], 0, 2);
     if (checkdate($month, $day, $year)) {
         $paymentDate = $year . '-' . $month . '-' . $day;
     } else {
@@ -46,7 +46,7 @@ if (isset($_POST['add']) || isset($_POST['edit'])) {
 } elseif (isset($_GET['delete'])) {
     if (isValidID($_GET['delete'])) {
         $queryDeletePayment = "DELETE FROM Arbitres_Versements WHERE id=" . $_GET['delete'];
-        if(mysql_query($queryDeletePayment)) {
+        if (mysql_query($queryDeletePayment)) {
             printSuccessMessage("Suppression du versement effectuée");
         } else {
             printErrorMessage("Échec de la suppression du versement<br />" . mysql_error() . "<br />" . $queryDeletePayment);

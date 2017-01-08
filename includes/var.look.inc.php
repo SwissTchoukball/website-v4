@@ -1,7 +1,7 @@
 <?php
 
 if ($_SESSION["debug_tracage"]) {
-    echo __FILE__."<BR>";
+    echo __FILE__ . "<BR>";
 }
 
 define("VAR_LOOK_BG_BODY", "FFFFFF");

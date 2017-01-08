@@ -12,5 +12,5 @@ if (isset($_COOKIE["login"])) {
 session_destroy();
 
 $host = $_SERVER['HTTP_HOST'];
-$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-header("Location: http://$host$uri/".VAR_HREF_PAGE_PRINCIPALE, true);
+$uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+header("Location: http://$host$uri/" . VAR_HREF_PAGE_PRINCIPALE, true);

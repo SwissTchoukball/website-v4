@@ -10,7 +10,7 @@ $championshipFormulaImagePath = '/pictures/schema_championnat_' . $seasonString 
 <?php
 if (is_file($_SERVER['DOCUMENT_ROOT'] . $championshipFormulaImagePath)) {
     ?>
-    <img src='<?php echo $championshipFormulaImagePath; ?>' alt='Formule du championnat <?php echo $seasonString; ?>' />
+    <img src='<?php echo $championshipFormulaImagePath; ?>' alt='Formule du championnat <?php echo $seasonString; ?>'/>
     <?php
 }
 ?>

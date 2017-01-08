@@ -1,7 +1,7 @@
 <?php
-	statInsererPageSurf(__FILE__);
+statInsererPageSurf(__FILE__);
 
-	$recordset = getDownloadsList("all");
-	$catergorie = true;
-	include "download.inc.php";
+$recordset = getDownloadsList("all");
+$catergorie = true;
+include "download.inc.php";
 ?>

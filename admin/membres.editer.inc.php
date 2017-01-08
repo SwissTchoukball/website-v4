@@ -1,11 +1,11 @@
 <script lang="javascript">
 
     var couleurErreur;
-    couleurErreur='#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
+    couleurErreur = '#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
     var couleurValide;
-    couleurValide='#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+    couleurValide = '#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
 
-    $(function() {
+    $(function () {
         refereeLevelSelect = $("#DBDArbitre");
         refereeLevelSelect.change(updateRefereeFields);
 
@@ -32,133 +32,133 @@
 
         //nom et prénom OU raison sociale
         if (memberEdit.lastname.value.length == 0 &&
-                memberEdit.firstname.value.length == 0 &&
-                memberEdit.companyName.value.length != 0) {
-            memberEdit.lastname.style.background=couleurValide;
-            memberEdit.firstname.style.background=couleurValide;
-            memberEdit.companyName.style.background=couleurValide;
-        } else if(memberEdit.lastname.value.length == 0 &&
-                memberEdit.firstname.value.length == 0 &&
-                memberEdit.companyName.value.length == 0) {
-            memberEdit.lastname.style.background=couleurErreur;
-            memberEdit.firstname.style.background=couleurErreur;
-            memberEdit.companyName.style.background=couleurErreur;
-            if(nbError==0)memberEdit.lastname.focus();
+            memberEdit.firstname.value.length == 0 &&
+            memberEdit.companyName.value.length != 0) {
+            memberEdit.lastname.style.background = couleurValide;
+            memberEdit.firstname.style.background = couleurValide;
+            memberEdit.companyName.style.background = couleurValide;
+        } else if (memberEdit.lastname.value.length == 0 &&
+            memberEdit.firstname.value.length == 0 &&
+            memberEdit.companyName.value.length == 0) {
+            memberEdit.lastname.style.background = couleurErreur;
+            memberEdit.firstname.style.background = couleurErreur;
+            memberEdit.companyName.style.background = couleurErreur;
+            if (nbError == 0)memberEdit.lastname.focus();
             nbError++;
         } else {
             // nom
-            if(memberEdit.lastname.value.length == 0){
-                memberEdit.lastname.style.background=couleurErreur;
-                if(nbError==0)memberEdit.lastname.focus();
+            if (memberEdit.lastname.value.length == 0) {
+                memberEdit.lastname.style.background = couleurErreur;
+                if (nbError == 0)memberEdit.lastname.focus();
                 nbError++;
             }
-            else{
-                memberEdit.lastname.style.background=couleurValide;
+            else {
+                memberEdit.lastname.style.background = couleurValide;
             }
 
             // prenom
-            if(memberEdit.firstname.value.length == 0){
-                memberEdit.firstname.style.background=couleurErreur;
-                if(nbError==0)memberEdit.firstname.focus();
+            if (memberEdit.firstname.value.length == 0) {
+                memberEdit.firstname.style.background = couleurErreur;
+                if (nbError == 0)memberEdit.firstname.focus();
                 nbError++;
             }
-            else{
-                memberEdit.firstname.style.background=couleurValide;
+            else {
+                memberEdit.firstname.style.background = couleurValide;
             }
         }
 
         // NPA
-        var regZipCode = new RegExp("^.*?[0-9]{4,}$","g");
+        var regZipCode = new RegExp("^.*?[0-9]{4,}$", "g");
 
-        if(memberEdit.zipCode.value.length > 0 && !regZipCode.test(memberEdit.zipCode.value)){
-            memberEdit.zipCode.style.background=couleurErreur;
-            if(nbError==0)memberEdit.zipCode.focus();
+        if (memberEdit.zipCode.value.length > 0 && !regZipCode.test(memberEdit.zipCode.value)) {
+            memberEdit.zipCode.style.background = couleurErreur;
+            if (nbError == 0)memberEdit.zipCode.focus();
             nbError++;
-        } else{
-            memberEdit.zipCode.style.background=couleurValide;
+        } else {
+            memberEdit.zipCode.style.background = couleurValide;
         }
 
         // Ville
         /*
-        // Il en fait valide qu'une ville puisse contenir des chiffres. p.ex. : Genève 26
-        var regCityContainNumber = new RegExp("^.*[0-9]+.*$");
+         // Il en fait valide qu'une ville puisse contenir des chiffres. p.ex. : Genève 26
+         var regCityContainNumber = new RegExp("^.*[0-9]+.*$");
 
-        if(memberEdit.city.value.length == 0 || regCityContainNumber.test(memberEdit.city.value)){
-            memberEdit.city.style.background=couleurErreur;
-            if(nbError==0)memberEdit.city.focus();
-            nbError++;
-        }
-        else{
-            memberEdit.city.style.background=couleurValide;
-        }
-        */
+         if(memberEdit.city.value.length == 0 || regCityContainNumber.test(memberEdit.city.value)){
+         memberEdit.city.style.background=couleurErreur;
+         if(nbError==0)memberEdit.city.focus();
+         nbError++;
+         }
+         else{
+         memberEdit.city.style.background=couleurValide;
+         }
+         */
 
         //email
-        var regEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$","g");
+        var regEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$", "g");
 
-        if(regEmail.test(memberEdit.email.value) || memberEdit.email.value==""){
-            memberEdit.email.style.background=couleurValide;
+        if (regEmail.test(memberEdit.email.value) || memberEdit.email.value == "") {
+            memberEdit.email.style.background = couleurValide;
         }
-        else{
-            memberEdit.email.style.background=couleurErreur;
-            if(nbError==0)memberEdit.email.focus();
+        else {
+            memberEdit.email.style.background = couleurErreur;
+            if (nbError == 0)memberEdit.email.focus();
             alert("L'adresse e-mail est invalide. Elle peut contenir des caractères interdits.");
             nbError++;
         }
 
         //date de naissance
         var dateN = new Date(memberEdit.birthDateYear.value,
-                             memberEdit.birthDateMonth.value-1,
-                             memberEdit.birthDateDay.value);
+            memberEdit.birthDateMonth.value - 1,
+            memberEdit.birthDateDay.value);
 
         if (memberEdit.birthDateYear.value == 0 &&
-                memberEdit.birthDateMonth.value == 0 &&
-                memberEdit.birthDateDay.value == 0 &&
-                memberEdit.statutID.value != 2) {
+            memberEdit.birthDateMonth.value == 0 &&
+            memberEdit.birthDateDay.value == 0 &&
+            memberEdit.statutID.value != 2) {
             // Si la date de naissance n'est pas précisé et le statut du membre n'est pas actif/junior alors c'est ok.
-            memberEdit.birthDateYear.style.background=couleurValide;
-            memberEdit.birthDateMonth.style.background=couleurValide;
-            memberEdit.birthDateDay.style.background=couleurValide;
+            memberEdit.birthDateYear.style.background = couleurValide;
+            memberEdit.birthDateMonth.style.background = couleurValide;
+            memberEdit.birthDateDay.style.background = couleurValide;
 
         } else if (dateN.getFullYear() != memberEdit.birthDateYear.value ||
-                (dateN.getMonth() != memberEdit.birthDateMonth.value-1) ||
-                dateN.getDate() != memberEdit.birthDateDay.value){
-            memberEdit.birthDateYear.style.background=couleurErreur;
-            memberEdit.birthDateMonth.style.background=couleurErreur;
-            memberEdit.birthDateDay.style.background=couleurErreur;
-            if(nbError==0)memberEdit.birthDateMonth.focus();
+            (dateN.getMonth() != memberEdit.birthDateMonth.value - 1) ||
+            dateN.getDate() != memberEdit.birthDateDay.value) {
+            memberEdit.birthDateYear.style.background = couleurErreur;
+            memberEdit.birthDateMonth.style.background = couleurErreur;
+            memberEdit.birthDateDay.style.background = couleurErreur;
+            if (nbError == 0)memberEdit.birthDateMonth.focus();
             nbError++;
         } else {
-            memberEdit.birthDateYear.style.background=couleurValide;
-            memberEdit.birthDateMonth.style.background=couleurValide;
-            memberEdit.birthDateDay.style.background=couleurValide;
+            memberEdit.birthDateYear.style.background = couleurValide;
+            memberEdit.birthDateMonth.style.background = couleurValide;
+            memberEdit.birthDateDay.style.background = couleurValide;
         }
 
         //statut
         if (memberEdit.statutID.value == 1) {
-            memberEdit.statutID.style.background=couleurErreur;
-            if(nbError==0)memberEdit.statutID.focus();
+            memberEdit.statutID.style.background = couleurErreur;
+            if (nbError == 0)memberEdit.statutID.focus();
             nbError++;
         } else {
-            memberEdit.statutID.style.background=couleurValide;
+            memberEdit.statutID.style.background = couleurValide;
         }
 
-        return nbError==0;
+        return nbError == 0;
     }
 
     function restreindreNumeroTelFax(input) {
         var posCurseur = input.selectionStart;
         var newString = "";
-        var regExpSpace=new RegExp("[\,-\.\;\:_\*]", "g");
-        var regExpDelete=new RegExp("[a-zA-Z]", "g");
-        for(var i=0;i<input.value.length;i++){
-            if(input.value.charAt(i).match(regExpSpace)){
+        var regExpSpace = new RegExp("[\,-\.\;\:_\*]", "g");
+        var regExpDelete = new RegExp("[a-zA-Z]", "g");
+        for (var i = 0; i < input.value.length; i++) {
+            if (input.value.charAt(i).match(regExpSpace)) {
                 newString += " ";
             }
-            else if(input.value.charAt(i).match(regExpDelete)){
+            else if (input.value.charAt(i).match(regExpDelete)) {
                 newString += "";
             }
-            else{
+            else {
                 newString += input.value.charAt(i);
             }
         }
@@ -170,13 +170,13 @@
     function autoStatutUpdate() {
         autoStatut = document.getElementById("autoStatut");
         if (memberEdit.statutID.value == 2) {
-            if (<?php echo date('Y'); ?> - memberEdit.birthDateYear.value >= 21) {
+            if (<?php echo date('Y'); ?> -memberEdit.birthDateYear.value >= 21) {
                 autoStatut.innerHTML = "Membre actif";
             } else {
                 autoStatut.innerHTML = "Membre junior";
             }
         } else {
-                autoStatut.innerHTML = "<button type='button' onclick='resetBirthdate();'>Réinitialiser</button>";
+            autoStatut.innerHTML = "<button type='button' onclick='resetBirthdate();'>Réinitialiser</button>";
         }
 
         if (memberEdit.statutID.value == 4) { // Membre passif
@@ -208,23 +208,23 @@
 
         var text = "<strong>Aperçu de l'adresse</strong> :<br />";
         if (companyName.value != "") {
-            text += companyName.value+"<br />";
+            text += companyName.value + "<br />";
         }
 
         if (firstname.value != "" || lastname.value != "") {
             if (title.value != 1) {
-                text += title.options[title.selectedIndex].innerHTML+"<br />";
+                text += title.options[title.selectedIndex].innerHTML + "<br />";
             }
-            text += firstname.value+" "+lastname.value+"<br />";
+            text += firstname.value + " " + lastname.value + "<br />";
         }
 
-        text += address1.value+"<br />";
+        text += address1.value + "<br />";
 
         if (address2.value != "") {
-            text += address2.value+"<br />";
+            text += address2.value + "<br />";
         }
 
-        text += zipCode.value+" "+city.value+"<br />";
+        text += zipCode.value + " " + city.value + "<br />";
 
         if (country.value != "42") {
             text += country.options[country.selectedIndex].innerHTML;
@@ -335,7 +335,8 @@ if ($newMember) {
     } else {
         $member = mysql_fetch_assoc($memberResult);
         if (($_SESSION['__nbIdClub__'] == $member['idClub'] && $_SESSION["__gestionMembresClub__"]) ||
-                hasAllMembersManagementAccess()) {
+            hasAllMembersManagementAccess()
+        ) {
             if (hasAllMembersManagementAccess()) {
                 $canDelete = true;
             } else {
@@ -359,7 +360,7 @@ if ($newMember) {
                 $today = date('Y-m-d');
 
                 $canDelete = $today < $deletionPeriodData['delaiSupprimerMembres'] &&
-                    $deletionPeriodData['datePaiementAnneePassee'] != NULL;
+                    $deletionPeriodData['datePaiementAnneePassee'] != null;
             }
 
             $sendButtonValue = VAR_LANG_MODIFIER;
@@ -390,14 +391,14 @@ if ($newMember) {
             $companyName = $member['raisonSociale'];
             $countryID = $member['idPays'];
             $tchoukupID = $member['idCHTB'];
-            $refereeLevelId = $member['niveauArbitreID'] == NULL ? 1 : $member['niveauArbitreID'];
-            $refereeLevelName = $member['niveauArbitre'] == NULL ? 'Pas arbitre' : $member['niveauArbitre'];
-            if ($member['arbitrePublic'] != NULL) {
+            $refereeLevelId = $member['niveauArbitreID'] == null ? 1 : $member['niveauArbitreID'];
+            $refereeLevelName = $member['niveauArbitre'] == null ? 'Pas arbitre' : $member['niveauArbitre'];
+            if ($member['arbitrePublic'] != null) {
                 $isPublicReferee = $member['arbitrePublic'] == 1;
             } else {
                 $isPublicReferee = true;
             }
-            if ($member['startCountingPointsOnEvenYears'] != NULL) {
+            if ($member['startCountingPointsOnEvenYears'] != null) {
                 $startCountingPointsOnEvenYears = $member['startCountingPointsOnEvenYears'] == 1;
             } else {
                 $startCountingPointsOnEvenYears = date('Y') % 2 + 1;
@@ -414,7 +415,7 @@ if ($newMember) {
             $remarques = $member['remarque'];
             $formLegend = "Modification de ";
             if ($firstname != "" && $lastname != "") {
-                $name .= $firstname." ".$lastname;
+                $name .= $firstname . " " . $lastname;
             } else {
                 $name .= $companyName;
             }
@@ -505,24 +506,24 @@ if ($canEdit) {
             <label for="DBDPays">Pays</label>
             <?php
 
-            $requeteSQLOptions="SELECT * FROM DBDPays ORDER BY descriptionPays".$_SESSION["__langue__"];
+            $requeteSQLOptions = "SELECT * FROM DBDPays ORDER BY descriptionPays" . $_SESSION["__langue__"];
             $recordsetOptions = mysql_query($requeteSQLOptions) or
-                                die("<H1>afficherListe: mauvaise requete sur : $nomIdOption </H1>");
+            die("<H1>afficherListe: mauvaise requete sur : $nomIdOption </H1>");
 
             echo "<select id='DBDPays' name='DBDPays' onchange='updateAddressPreview();'";
             echo $canEditDetails ? '' : 'disabled="disabled"';
             echo " >";
 
             while ($recordOption = mysql_fetch_array($recordsetOptions)) {
-                $option = $recordOption["descriptionPays".$_SESSION["__langue__"]];
-                if ($option=="") {
-                    $option=VAR_LANG_NON_SPECIFIE;
+                $option = $recordOption["descriptionPays" . $_SESSION["__langue__"]];
+                if ($option == "") {
+                    $option = VAR_LANG_NON_SPECIFIE;
                 }
 
                 if ($recordOption['idPays'] == $countryID) {
-                    echo "<option selected value='".$recordOption['idPays']."'>".$option."</option>";
+                    echo "<option selected value='" . $recordOption['idPays'] . "'>" . $option . "</option>";
                 } else {
-                    echo "<option value='".$recordOption['idPays']."'>".$option."</option>";
+                    echo "<option value='" . $recordOption['idPays'] . "'>" . $option . "</option>";
                 }
             }
             echo "</select>";
@@ -547,17 +548,17 @@ if ($canEdit) {
                    onChange="restreindreNumeroTelFax(this);"
                    value="<?php echo $fax; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
             <label for="email">E-mail</label>
-            <input type="text" id="email" id="email" name="email" value="<?php echo $email; ?>" />
+            <input type="text" id="email" id="email" name="email" value="<?php echo $email; ?>"/>
             <?php
             if ($emailFSTB != '') {
                 ?>
                 <label for="emailFSTB">E-mail FSTB</label>
                 <?php
                 if (hasAllMembersManagementAccess()) {
-                    echo '<input type="text" id="emailFSTB" id="emailFSTB" name="emailFSTB" value="'.$emailFSTB.'" />';
+                    echo '<input type="text" id="emailFSTB" id="emailFSTB" name="emailFSTB" value="' . $emailFSTB . '" />';
                 } else {
-                    echo '<p><a href="mailto:'.$emailFSTB.'">'.$emailFSTB.'</a></p>';
-                    echo '<input type="hidden" name="emailFSTB" value="'.$emailFSTB.'" />';
+                    echo '<p><a href="mailto:' . $emailFSTB . '">' . $emailFSTB . '</a></p>';
+                    echo '<input type="hidden" name="emailFSTB" value="' . $emailFSTB . '" />';
                 }
             }
             ?>
@@ -566,42 +567,43 @@ if ($canEdit) {
             <span class="infobulle">Pour les membres actifs et juniors, la date de naissance est obligatoire.</span>
             <label for="statutID">Statut</label>
             <?php
-                // Out of the deletion period, we can change the status of a member only if he's not active.
-                if ($canDelete || ($statutID != 3 && $statutID != 6)) {
-                    ?>
-                    <select id="statutID" name="statutID" onchange="autoStatutUpdate();">
-                        <option value="1">Non spécifié</option>
-                        <option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>
-                            Membre actif/junior
-                        </option>
-                        <?php
-                        $queryStatut = "SELECT `idStatus` AS id, `descriptionStatus".$_SESSION['__langue__']."` AS nom
+            // Out of the deletion period, we can change the status of a member only if he's not active.
+            if ($canDelete || ($statutID != 3 && $statutID != 6)) {
+                ?>
+                <select id="statutID" name="statutID" onchange="autoStatutUpdate();">
+                    <option value="1">Non spécifié</option>
+                    <option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>
+                        Membre actif/junior
+                    </option>
+                    <?php
+                    $queryStatut = "SELECT `idStatus` AS id, `descriptionStatus" . $_SESSION['__langue__'] . "` AS nom
                                         FROM `DBDStatus`
                                         WHERE `idStatus`!=1 AND `idStatus`!=3 AND `idStatus`!=6 ORDER BY nom";
-                        if ($dataStatut = mysql_query($queryStatut)) {
-                            while ($statut = mysql_fetch_assoc($dataStatut)) {
-                                if ($statutID == $statut['id']) {
-                                    $statutSelected = "selected";
-                                } else {
-                                    $statutSelected = "";
-                                }
-                                if (hasAllMembersManagementAccess() ||
-                                    $statut['id'] == 4 ||
-                                    $statut['id'] == 5 ||
-                                    $statut['id'] == 23) {
-                                    echo '<option value="'.$statut['id'].'" '.$statutSelected.'>'.$statut['nom'].'</option>';
-                                }
+                    if ($dataStatut = mysql_query($queryStatut)) {
+                        while ($statut = mysql_fetch_assoc($dataStatut)) {
+                            if ($statutID == $statut['id']) {
+                                $statutSelected = "selected";
+                            } else {
+                                $statutSelected = "";
                             }
-                        } else {
-                            echo '<option value="null">ERREUR</option>';
+                            if (hasAllMembersManagementAccess() ||
+                                $statut['id'] == 4 ||
+                                $statut['id'] == 5 ||
+                                $statut['id'] == 23
+                            ) {
+                                echo '<option value="' . $statut['id'] . '" ' . $statutSelected . '>' . $statut['nom'] . '</option>';
+                            }
                         }
-                        ?>
-                    </select>
-                    <?php
-                } else {
-                    echo '<p class="givenData">Membre actif/junior</p>';
-                    echo '<input type="hidden" name="statutID" value="' . $statutID . '" />';
-                }
+                    } else {
+                        echo '<option value="null">ERREUR</option>';
+                    }
+                    ?>
+                </select>
+                <?php
+            } else {
+                echo '<p class="givenData">Membre actif/junior</p>';
+                echo '<input type="hidden" name="statutID" value="' . $statutID . '" />';
+            }
             ?>
             <label for="birthDateDay">Date de naiss.</label>
             <div class="birthDate">
@@ -630,7 +632,7 @@ if ($canEdit) {
                 <span id="autoStatut">
                     <?php
                     if (($statutID == 3 || $statutID == 6) && $birthDate != "0000-00-00") {
-                        if (date('Y')-annee($birthDate) >=  21) {
+                        if (date('Y') - annee($birthDate) >= 21) {
                             echo "Membre actif";
                         } else {
                             echo "Membre junior";
@@ -641,7 +643,7 @@ if ($canEdit) {
             </div>
             <label for="DBDSexe">Genre</label>
             <?php
-                afficherdropDownListe("DBDSexe", "idSexe", "descriptionSexe", $sexID, true);
+            afficherdropDownListe("DBDSexe", "idSexe", "descriptionSexe", $sexID, true);
             ?>
             <label for="DBDLangue">Langue</label>
             <?php
@@ -654,34 +656,34 @@ if ($canEdit) {
                 afficherListeClubs($clubID, "nbIdClub");
             } else {
                 ?>
-                <input type="hidden" name="ClubsFstb" value="<?php echo $clubID; ?>" />
+                <input type="hidden" name="ClubsFstb" value="<?php echo $clubID; ?>"/>
                 <?php
             }
             ?>
             <label for="DBDCHTB">tchouk<sup>up</sup></label>
             <?php
-            $requeteSQLOptions="SELECT * FROM DBDCHTB ORDER BY descriptionCHTB".$_SESSION["__langue__"];
+            $requeteSQLOptions = "SELECT * FROM DBDCHTB ORDER BY descriptionCHTB" . $_SESSION["__langue__"];
             $recordsetOptions = mysql_query($requeteSQLOptions) or
-                                die("<H1>afficherListe: mauvaise requete sur : idCHTB </H1>");
+            die("<H1>afficherListe: mauvaise requete sur : idCHTB </H1>");
 
             ?>
-            <select id="DBDCHTB" name='DBDCHTB' <?php echo $statutID == 4 ? "readonly='readonly'":""; ?>
+            <select id="DBDCHTB" name='DBDCHTB' <?php echo $statutID == 4 ? "readonly='readonly'" : ""; ?>
                     onchange="updateTchoukupDelivery();">
-            <?php
+                <?php
 
-            while ($recordOption = mysql_fetch_array($recordsetOptions)) {
-                $option = $recordOption["descriptionCHTB".$_SESSION["__langue__"]];
-                if ($option=="") {
-                    $option=VAR_LANG_NON_SPECIFIE;
-                }
+                while ($recordOption = mysql_fetch_array($recordsetOptions)) {
+                    $option = $recordOption["descriptionCHTB" . $_SESSION["__langue__"]];
+                    if ($option == "") {
+                        $option = VAR_LANG_NON_SPECIFIE;
+                    }
 
-                if ($recordOption['idCHTB'] == $tchoukupID) {
-                    echo "<option selected value='".$recordOption['idCHTB']."'>".$option."</option>";
-                } else {
-                    echo "<option value='".$recordOption['idCHTB']."'>".$option."</option>";
+                    if ($recordOption['idCHTB'] == $tchoukupID) {
+                        echo "<option selected value='" . $recordOption['idCHTB'] . "'>" . $option . "</option>";
+                    } else {
+                        echo "<option value='" . $recordOption['idCHTB'] . "'>" . $option . "</option>";
+                    }
                 }
-            }
-            ?>
+                ?>
             </select>
             <div id="tchoukupDelivery">
                 <label></label>
@@ -693,8 +695,8 @@ if ($canEdit) {
             if (hasRefereeManagementAccess()) {
                 afficherdropDownListe("DBDArbitre", "idArbitre", "descriptionArbitre", $refereeLevelId, true);
             } else {
-                echo '<p class="givenData">'.$refereeLevelName.'</p>';
-                echo '<input type="hidden" name="idArbitre" value="'.$refereeLevelId.'" />';
+                echo '<p class="givenData">' . $refereeLevelName . '</p>';
+                echo '<input type="hidden" name="idArbitre" value="' . $refereeLevelId . '" />';
             }
             ?>
 
@@ -706,7 +708,7 @@ if ($canEdit) {
                 } else {
                     $publicRefereeChecked = '';
                 }
-                echo '<input type="checkbox" name="arbitrePublic" id="arbitrePublic" '.$publicRefereeChecked.' />';
+                echo '<input type="checkbox" name="arbitrePublic" id="arbitrePublic" ' . $publicRefereeChecked . ' />';
             } else {
                 echo '<p id="arbitrePublic" class="givenData">';
                 if ($isPublicReferee) {
@@ -747,8 +749,12 @@ if ($canEdit) {
                 }
                 ?>
                 <select name="startCountingPointsOnEvenYears" id="startCountingPointsOnEvenYears">
-                    <option value="1" <?php echo $evenYearsSelected; ?>>Années paires (p.ex. <?php echo $evenYearsExample; ?>)</option>
-                    <option value="0" <?php echo $oddYearsSelected; ?>>Années impaires (p.ex. <?php echo $oddYearsExample; ?>)</option>
+                    <option value="1" <?php echo $evenYearsSelected; ?>>Années paires
+                        (p.ex. <?php echo $evenYearsExample; ?>)
+                    </option>
+                    <option value="0" <?php echo $oddYearsSelected; ?>>Années impaires
+                        (p.ex. <?php echo $oddYearsExample; ?>)
+                    </option>
                 </select>
                 <?php
             }
@@ -763,7 +769,7 @@ if ($canEdit) {
                     } else {
                         $suspendedChecked = '';
                     }
-                    echo '<input type="checkbox" name="suspendu" '.$suspendedChecked.' />';
+                    echo '<input type="checkbox" name="suspendu" ' . $suspendedChecked . ' />';
                 } else {
                     echo '<p>Oui</p>';
                     //Si le membre n'est pas suspendu, on affiche rien.
@@ -787,26 +793,26 @@ if ($canEdit) {
             <?php
         }
         ?>
-        <input type="hidden" name="memberID" value="<?php echo $memberID; ?>" />
-        <input type="hidden" name="postType" value="<?php echo $postType; ?>" />
+        <input type="hidden" name="memberID" value="<?php echo $memberID; ?>"/>
+        <input type="hidden" name="postType" value="<?php echo $postType; ?>"/>
 
-        <input type="submit" value="<?php echo $sendButtonValue; ?>" />
+        <input type="submit" value="<?php echo $sendButtonValue; ?>"/>
     </form>
     <?php
     if (!$newMember) {
         echo '<p><a href="?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection .
-             '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
+            '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
              </a></p>';
 
         if ($canDelete) {
             if ($isInvolvedInFederation) {
-                echo '<p>'.$name.' est, ou a été :</p>';
+                echo '<p>' . $name . ' est, ou a été :</p>';
                 echo '<ul>';
                 echo $isCommitteeMember ? '<li>Membre du Comité exécutif</li>' : '';
                 echo $isCommissionMember ? '<li>Membre d\'une Commission</li>' : '';
                 echo $isJSExpert ? '<li>Expert J+S</li>' : '';
                 echo $isSwissTeamMember ? '<li>Membre du Cadre national</li>' : '';
-                echo $refereeLevelId > 1 ? '<li>'.$refereeLevelName.'</li>' : '';
+                echo $refereeLevelId > 1 ? '<li>' . $refereeLevelName . '</li>' : '';
                 echo $isChampionshipPlayer ? '<li>Joueur de championnat</li>' : '';
                 echo $isChampionshipTeamManager ? '<li>Responsable d\'équipe de championnat</li>' : '';
                 echo '</ul>';
@@ -833,7 +839,7 @@ if ($canEdit) {
         }
 
         ?>
-        <p>Dernière modification le <?php echo date_sql2date($lastEdit);?> par <?php echo $lastEditBy;?></p>
+        <p>Dernière modification le <?php echo date_sql2date($lastEdit); ?> par <?php echo $lastEditBy; ?></p>
         <?php
     }
 }

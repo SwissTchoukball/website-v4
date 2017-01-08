@@ -28,7 +28,7 @@ if ($_SESSION['__nbIdClub__'] == 15 && !isAdmin()) { //15 = Club indéfini
 
     echo '<table class="adminTable">';
     echo '<tr><th>Prénom</th><th>Nom</th></tr>';
-    while($person = mysql_fetch_assoc($distributionResult)) {
+    while ($person = mysql_fetch_assoc($distributionResult)) {
         echo '<tr>';
         echo '<td>' . $person['prenom'] . '</td>';
         echo '<td>' . $person['nom'] . '</td>';

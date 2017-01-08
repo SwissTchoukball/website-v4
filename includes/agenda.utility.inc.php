@@ -1,7 +1,7 @@
 <?php
-    /**
-        Module pour gérer des listes des catégories de l'agenda.
-    */
+/**
+ * Module pour gérer des listes des catégories de l'agenda.
+ */
 ?>
 
 <?php

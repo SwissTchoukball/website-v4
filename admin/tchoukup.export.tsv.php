@@ -5,7 +5,7 @@ require('../config.php');
 
 include('../includes/fonctions.inc.php');
 
-if ($_SESSION['__userLevel__'] != 0){
+if ($_SESSION['__userLevel__'] != 0) {
     header("HTTP/1.0 403 Forbidden");
     echo "<h1>Forbidden</h1>";
     echo "You don't have permission to download Tchoukup excel lists.";
@@ -84,7 +84,6 @@ $listsAttributes['nb-tchoukup-colis-par-club'] = [
 ];
 
 
-
 if (isset($_GET['query']) && isset($queries[$_GET['query']])) {
     $query = $queries[$_GET['query']];
     $listHeaders = $listsHeaders[$_GET['query']];
@@ -109,7 +108,7 @@ $excel = $listHeaders;
 
 //Les resultats de la requette
 $lastIndex = sizeof($listAttributes) - 1;
-while($row = mysql_fetch_array($result)) {
+while ($row = mysql_fetch_array($result)) {
     foreach ($listAttributes as $index => $attribute) {
         $excel .= $row[$attribute];
         if ($index < $lastIndex) {
