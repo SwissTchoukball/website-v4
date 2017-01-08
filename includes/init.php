@@ -5,6 +5,8 @@ if ($_SESSION["debug_tracage"]) {
     echo __FILE__ . "<BR>";
 }
 
+header('Content-Type: text/html; charset=ISO-8859-1');
+
 if (!isset($admin)) {
     $admin = false;
 }
