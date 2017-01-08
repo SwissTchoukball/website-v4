@@ -15,7 +15,7 @@ $commands = array(
     'git pull origin master',
     'git submodule sync',
     'git submodule update',
-    'php bin/composer install'
+    'php -d detect_unicode=Off bin/composer install'
 );
 base64_encode($agent);
 base64_encode($signature);
