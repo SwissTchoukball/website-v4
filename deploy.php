@@ -12,9 +12,13 @@ $signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
 $body = @file_get_contents('php://input');
 // The commands
 $commands = array(
+    'echo $PWD',
+    'whoami',
     'git pull origin master',
+    'git status',
     'git submodule sync',
     'git submodule update',
+    'git submodule status',
     'php -d detect_unicode=Off bin/composer install'
 );
 
@@ -31,7 +35,7 @@ if (strpos($agent, 'GitHub-Hookshot') !== false) {
             $tmp = shell_exec($command);
 
             $output .= $command . "\n";
-            $output .= htmlentities(trim($tmp)) . "\n";
+            $output .= htmlentities(trim($tmp)) . "\n\n";
         }
     } else {
         header('HTTP/1.1 403 Forbidden');
