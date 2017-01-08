@@ -568,7 +568,7 @@ if ($canEdit) {
             <label for="statutID">Statut</label>
             <?php
             // Out of the deletion period, we can change the status of a member only if he's not active.
-            if ($canDelete || ($statutID != 3 && $statutID != 6)) {
+            if ($canDelete || ($statutID != 3 && $statutID != 6) || $postType == 'newMember') {
                 ?>
                 <select id="statutID" name="statutID" onchange="autoStatutUpdate();">
                     <option value="1">Non spécifié</option>
