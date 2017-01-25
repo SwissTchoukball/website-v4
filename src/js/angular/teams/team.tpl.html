@@ -17,7 +17,7 @@
 <h3>Responsable d'équipe</h3>
 <p>
     {{$ctrl.team.manager.firstName}} {{$ctrl.team.manager.lastName}}<br />
-    {{$ctrl.team.manager.email}}<br />
+    <a href="mailto:{{$ctrl.team.manager.email}}">{{$ctrl.team.manager.email}}</a><br />
     {{$ctrl.team.manager.phoneNumber}}<br />
     {{$ctrl.team.manager.mobileNumber}}
 </p>
