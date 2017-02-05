@@ -21,11 +21,11 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
     echo "<div class='photo-joueur-es'>";
     $nomFichierPhoto = nomPhotoValide($record["nom"], $record["prenom"], $extensionPhotos, "jpg");
     // le fichier existe ?
-    if (is_file($_SERVER["DOCUMENT_ROOT"] . PATH_TO_ROOT . $nomFichierPhoto)) {
-        echo "<img src='" . PATH_TO_ROOT . $nomFichierPhoto . "' alt='Photo de " . $record["prenom"] . " " . $record["nom"] . "'>";
+    if (is_file($_SERVER["DOCUMENT_ROOT"] . $nomFichierPhoto)) {
+        echo "<img src='" . $nomFichierPhoto . "' alt='Photo de " . $record["prenom"] . " " . $record["nom"] . "'>";
 
     } else {
-        echo '<!-- Fichier ' . $_ENV["DOCUMENT_ROOT"] . PATH_TO_ROOT . $nomFichierPhoto . ' inexistant -->';
+        echo '<!-- Fichier ' . $_ENV["DOCUMENT_ROOT"] . $nomFichierPhoto . ' inexistant -->';
     }
     echo "</div>";
 

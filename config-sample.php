@@ -3,8 +3,6 @@
 $devWebsite = $_SERVER["SERVER_NAME"] == 'localhost';
 
 if ($devWebsite) {
-    define("PATH_TO_ROOT", ""); // TODO remove the use of this constant. It should always be ""
-
     // API
     define('API_HOST', '');
 
@@ -15,8 +13,6 @@ if ($devWebsite) {
 
     $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
 } else {
-    define("PATH_TO_ROOT", ""); // TODO remove the use of this constant. It should always be ""
-
     // API
     define('API_HOST', '');
 

@@ -17,5 +17,5 @@
             ?>
         </ul>
     </nav>
-    <a href="<?php echo PATH_TO_ROOT; ?>" id="banner"></a>
+    <a href="/" id="banner"></a>
 </header>

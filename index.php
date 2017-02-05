@@ -41,9 +41,9 @@
     <meta property="fb:app_id" content="119853652572"/>
     <meta property="fb:admins" content="817753010"/>
     <!-- /Facebook metatags -->
-    <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/main.css"> <!-- legacy -->
-    <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/build/master.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo PATH_TO_ROOT; ?>/styles/livescores.css">
+    <link rel="stylesheet" type="text/css" href="/styles/main.css"> <!-- legacy -->
+    <link rel="stylesheet" type="text/css" href="/build/master.css">
+    <link rel="stylesheet" type="text/css" href="/styles/livescores.css">
     <!-- For Tchoukball World live scores -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="alternate" type="application/rss+xml"
@@ -98,10 +98,10 @@ if ($_SESSION["__userLevel__"] < 100) {
     if ($admin) {
         echo "<a href='" . VAR_HREF_PAGE_PRINCIPALE . "'>" . VAR_LANG_ACCUEIL . "</a>";
     } else {
-        echo "<a href='" . PATH_TO_ROOT . "/admin'>" . VAR_LANG_ADMINISTRATION . "</a>";
+        echo "<a href='/admin'>" . VAR_LANG_ADMINISTRATION . "</a>";
     }
     echo "<br /><a href='http://comite.tchoukball.ch' title='Accéder au Forum \"Comité et Commissions " . VAR_LANG_ASSOCIATION_NAME . "\"'>Forum</a>";
-    echo "<br /><a href='" . PATH_TO_ROOT . "/logout'>" . VAR_LANG_DECONNEXION . "</a>";
+    echo "<br /><a href='/logout'>" . VAR_LANG_DECONNEXION . "</a>";
     echo "</div>";
     ?>
 
@@ -115,7 +115,7 @@ if ($_SESSION["__userLevel__"] < 100) {
 
 <script src="build/lib.min.js"></script>
 <script src="build/app.min.js"></script>
-<script src="<?php echo PATH_TO_ROOT; ?>/scripts/before-body-closing.js"></script>
+<script src="/scripts/before-body-closing.js"></script>
 
 <?php
 if ($affichage_twitter) {
