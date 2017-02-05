@@ -5,17 +5,29 @@
 
 // Settings
 @import "settings/colors";
+@import "settings/global";
 
 // Tools
+@import "tools/retina";
+@import "tools/breakpoints";
 
 // Generic
+@import (inline) "../../vendor/bower/normalize-css/normalize.css";
 
-// Base
+// Elements
+@import "elements/headings";
+@import "elements/page";
 
 // Objects
+@import "objects/layout";
 
 // Components
+@import "components/site-panel";
+@import "components/banner";
+@import "components/sidebar";
 @import "components/labels";
+@import "components/language-switcher";
+@import "components/main-nav";
 
 // Vendors
 @import (inline) "../../vendor/bower/ng-tags-input/ng-tags-input.min.css";

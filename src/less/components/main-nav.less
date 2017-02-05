@@ -1,0 +1,44 @@
+#main-nav {
+  margin-bottom: 10px;
+
+  h1 {
+    font-size: 13px;
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    color: #444;
+
+    &:hover, a:hover, &.open, &.open a {
+      color: #e2001a;
+    }
+
+    a {
+      color: #444;
+    }
+  }
+
+  ul {
+    margin: 0;
+    display: none;
+    list-style-type: none;
+    padding-left: 3px;
+    font-size: 11px;
+
+    li a {
+      color: #444;
+      display: block;
+      padding: 3px;
+      margin-bottom: 1px;
+      margin-left: 1px;
+
+      &:hover, &.open {
+        background-color: white;
+        padding: 2px;
+        margin-left: 0;
+        border: 1px solid #e2001a;
+        border-right: none;
+        position: relative;
+        left: 1px;
+      }
+    }
+  }
+}

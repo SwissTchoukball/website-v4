@@ -305,7 +305,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 <?php
             }
             ?>
-            <div class="map">
+            <div class="map fullWidth">
                 <iframe width="849" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                         src="<?php echo $gMapsURL; ?>"></iframe>
             </div>

@@ -5,163 +5,7 @@
 .zouplaboum {
 }
 
-/* !HEADER */
-
-body {
-    background-color: #CCCCCC;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 12px;
-    color: #444;
-}
-
 /* !NEW SKELETON */
-
-#site, footer, nav#language-switcher {
-    width: 1000px;
-    margin: auto;
-}
-
-#site {
-    border: 2px solid #e2001a;
-    border-top: none;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    background-color: #ddd;
-    margin-bottom: 10px;
-}
-
-footer {
-    text-align: center;
-}
-
-#site > * {
-    margin: 0;
-}
-
-#site > header #banner {
-    width: 1000px;
-    height: 120px;
-    margin: auto;
-    display: block;
-    background: url('images/banniere.png') no-repeat;
-}
-
-#sidebar, #site > main {
-    display: inline-block;
-    vertical-align: top; /* to avoid unwanted space below */
-}
-
-#sidebar {
-    width: 150px;
-}
-
-#sidebar .hashtag {
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 5px 0;
-    margin: 5px 0;
-    background-color: #e2001a;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-#site > main {
-    width: 809px;
-    min-height: 450px;
-    border-left: 1px solid #e2001a;
-    border-top: 1px solid #e2001a;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    padding-bottom: 30px;
-    border-bottom-right-radius: 30px;
-    background-color: white;
-}
-
-#site > main .map, #site > main video.fullsite {
-    position: relative;
-    left: -20px;
-    width: 849px;
-    margin-bottom: 20px;
-}
-
-#language-switcher {
-    position: absolute;
-    top: 0;
-    text-align: right;
-}
-
-#language-switcher ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 5px;
-    font-size: 11px;
-    background-color: rgba(255, 255, 255, .8);
-    width: 187px;
-    position: absolute;
-    right: 0;
-    border-bottom-left-radius: 5px;
-}
-
-#language-switcher ul li {
-    display: inline-block;
-}
-
-#language-switcher ul li:before {
-    content: "\00a0-\00a0";
-}
-
-#language-switcher ul li:first-child:before {
-    content: "";
-}
-
-#main-nav {
-    margin-bottom: 10px;
-}
-
-#main-nav h1 {
-    font-size: 13px;
-    margin: 0 0 0 5px;
-    cursor: pointer;
-    color: #444;
-}
-
-#main-nav h1:hover, #main-nav h1 a:hover, #main-nav h1.open, #main-nav h1.open a {
-    color: #e2001a;
-}
-
-#main-nav h1 a {
-    color: #444;
-}
-
-#main-nav ul {
-    margin: 0;
-    display: none;
-    list-style-type: none;
-    list-style-type: none;
-    padding-left: 3px;
-    font-size: 11px;
-}
-
-#main-nav li a {
-    color: #444;
-    display: block;
-    padding: 3px;
-    margin-bottom: 1px;
-    margin-left: 1px;
-}
-
-#main-nav li a:hover, #main-nav li a.open {
-    background-color: white;
-    padding: 2px;
-    margin-left: 0;
-    border: 1px solid #e2001a;
-    border-right: none;
-    position: relative;
-    left: 1px;
-}
 
 #partners {
     text-align: center;
@@ -184,49 +28,6 @@ footer {
     font-size: 17px;
     color: #666;
     font-weight: bold;
-}
-
-#site > main h1, #site > main h2, #site > main h3, #site > main h4, #site > main h5 {
-    color: black;
-    margin-top: 0;
-    line-height: 1;
-    margin-bottom: 10px;
-    border-left: 5px solid #CC3333;
-    padding-left: 8px;
-}
-
-#site > main h1 a, #site > main h2 a, #site > main h3 a, #site > main h4 a, #site > main h5 a {
-    color: black;
-}
-
-#site > main h1.alt, #site > main h2.alt, #site > main h3.alt, #site > main h4.alt, #site > main h5.alt {
-    border-left: none;
-    text-align: center;
-    padding-left: 0;
-    background: -moz-linear-gradient(#eeeeee 0%, #ffffff 100%);
-    background: -webkit-linear-gradient(#eeeeee 0%, #ffffff 100%);
-    padding-top: 10px;
-    border-top: 2px solid #e2001a;
-}
-
-#site > main h1 {
-    font-size: 30px;
-}
-
-#site > main h2 {
-    font-size: 20px;
-}
-
-#site > main h3 {
-    font-size: 18px;
-}
-
-#site > main h4 {
-    font-size: 16px;
-}
-
-#site > main h5 {
-    font-size: 14px;
 }
 
 #site > main #classementChampionnatAccueil h2 {
@@ -2317,7 +2118,7 @@ ul.EWCMatchesTypesKey {
 
 .adminForm input,
 .adminForm select,
-.adminForm textarea{
+.adminForm textarea {
     border-color: #CCCCCC;
     -webkit-font-smoothing: antialiased;
     padding: 8px;
@@ -2827,12 +2628,4 @@ textarea.tchoukup-emails {
 
     /* Large screen, non-retina */
 
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (   min--moz-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (     -o-min-device-pixel-ratio: 2/1)    and (min-width: 1300px), only screen and (        min-device-pixel-ratio: 2)      and (min-width: 1300px), only screen and (                min-resolution: 192dpi) and (min-width: 1300px), only screen and (                min-resolution: 2dppx)  and (min-width: 1300px) {
-    #site > header #banner {
-        background: url('images/banniere@2x.png') no-repeat;
-        background-size: 1000px;
-
-    }
 }

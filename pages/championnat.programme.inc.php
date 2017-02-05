@@ -230,7 +230,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                         <td class="center"><?php echo $dateToPrint; ?></td>
                         <td>
                             <?php
-                            echo '<a href="http://' . $_SERVER['SERVER_NAME'] . '/championnat/match/' . $donnees['idMatch'] . '">';
+                            echo '<a href="/championnat/match/' . $donnees['idMatch'] . '">';
                             echo '<strong>' . $donnees['equipeA'] . " - " . $donnees['equipeB'] . "</strong> ";
                             echo '</a>';
                             echo "<span class='categorieProgrammeChampionnat'>" . $donnees['categorie'] . "</span>";
@@ -266,7 +266,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                         <td>
                             <?php
                             if ($donnees['idLieu'] > 0) {
-                                echo '<a href="http://' . $_SERVER['SERVER_NAME'] . '/lieu/' . $donnees['idLieu'] . '">' . $donnees['nomLieu'] . ", " . $donnees['ville'] . '</a>';
+                                echo '<a href="/lieu/' . $donnees['idLieu'] . '">' . $donnees['nomLieu'] . ", " . $donnees['ville'] . '</a>';
                             } else {
                                 echo 'Non défini';
                             }

@@ -1,6 +1,6 @@
 <h3>Nos vidéos YouTube</h3>
 
-<iframe class="last-yt-video fullsite"
+<iframe class="last-yt-video fullWidth"
         src="http://www.youtube.com/embed?max-results=1&controls=1&showinfo=1&rel=0&listType=user_uploads&list=tchoukballsuisse"
         frameborder="0" allowfullscreen></iframe>
 
@@ -27,7 +27,7 @@ if(isset($_GET['partie'])){
 ?>
 <p><a href="/videos">Retour à la liste des vidéos</a></p>
 <h2><?php echo $donnees['nom'.$_SESSION['__langue__']]; ?></h2>
-<video class="fullsite" controls autoplay>
+<video class="fullWidth" controls autoplay>
 	<source src="/Videos/videos/<?php echo $fichier; ?>.mp4" type="video/mp4">
 </video>
 <?php

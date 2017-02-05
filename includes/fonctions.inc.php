@@ -128,7 +128,7 @@ function showPerson($person, $hidePicture = false)
         strtolower(nomPhotoValide($person["nom"], $person["prenom"], null, "png"));
         if (is_file($imageFile)) {
             echo "<div class='imagePortrait'>";
-            echo "<img src='https://" . $_SERVER['SERVER_NAME'] . "/" . $imageFile . "' alt='" . $person["prenom"] . " " . $person["nom"] . "' />";
+            echo "<img src='/" . $imageFile . "' alt='" . $person["prenom"] . " " . $person["nom"] . "' />";
             echo "</div>";
         } else {
             echo '<!--' . $imageFile . '-->';
