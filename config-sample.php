@@ -6,22 +6,20 @@ if ($devWebsite) {
     // API
     define('API_HOST', '');
 
+    // MySQL DB
     $sql['hote'] = '';
     $sql['user'] = '';
     $sql['password'] = '';
     $sql['base'] = '';
-
-    $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
 } else {
     // API
     define('API_HOST', '');
 
+    // MySQL DB
     $sql['hote'] = '';
     $sql['user'] = '';
     $sql['password'] = '';
     $sql['base'] = '';
-
-    $sql['basetechnique'] = ''; // TODO: remove the necessity for this database
 }
 
 mysql_pconnect($sql['hote'], $sql['user'], $sql['password']);

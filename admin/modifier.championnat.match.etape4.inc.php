@@ -300,36 +300,6 @@ if (!isset($_POST['idMatch'])) {
     $tour = $idTour;
     $groupe = $idGroupe;
     include('championnat.miseajour.equipes.tour.inc.php');
-
-
-    //Insertion pour technique.tchoukball.ch
-    @mysql_select_db($sql['basetechnique']);
-
-    $idArbitreATiers1 = $idArbitreATiers1 == 'NULL' ? 0 : $idArbitreATiers1;
-    $idArbitreATiers2 = $idArbitreATiers2 == 'NULL' ? 0 : $idArbitreATiers2;
-    $idArbitreATiers3 = $idArbitreATiers3 == 'NULL' ? 0 : $idArbitreATiers3;
-    $idArbitreBTiers1 = $idArbitreBTiers1 == 'NULL' ? 0 : $idArbitreBTiers1;
-    $idArbitreBTiers2 = $idArbitreBTiers2 == 'NULL' ? 0 : $idArbitreBTiers2;
-    $idArbitreBTiers3 = $idArbitreBTiers3 == 'NULL' ? 0 : $idArbitreBTiers3;
-    $idArbitreCTiers1 = $idArbitreCTiers1 == 'NULL' ? 0 : $idArbitreCTiers1;
-    $idArbitreCTiers2 = $idArbitreCTiers2 == 'NULL' ? 0 : $idArbitreCTiers2;
-    $idArbitreCTiers3 = $idArbitreCTiers3 == 'NULL' ? 0 : $idArbitreCTiers3;
-
-    $arbitrages = $idArbitreATiers1 . ";" . $idArbitreBTiers1 . ";" . $idArbitreCTiers1 . ";" . $idArbitreATiers2 . ";" . $idArbitreBTiers2 . ";" . $idArbitreCTiers2 . ";" . $idArbitreATiers3 . ";" . $idArbitreBTiers3 . ";" . $idArbitreCTiers3;
-
-    $requeteSuppressionFeuilleTechnique = "DELETE FROM feuilles WHERE feu_match=" . $idMatch;
-    if (mysql_query($requeteSuppressionFeuilleTechnique)) {
-        $requeteAjoutFeuilleTechnique = "INSERT INTO feuilles(feu_match,feu_arbitres)VALUES(" . $idMatch . ",'" . $arbitrages . "')";
-        if (mysql_query($requeteAjoutFeuilleTechnique)) {
-            echo '<p class="success">Insertion sur technique.tchoukball.ch réussie.</p>';
-        } else {
-            echo '<p class="error">Erreur lors de l\'insertion sur technique.tchoukball.ch<br />Requête : ' . $requeteAjoutFeuilleTechnique . '<br />Message : ' . mysql_error() . '</p>';
-        }
-    } else {
-        echo '<p class="error">Erreur lors de l\'écrasement de précédentes données sur technique.tchoukball.ch<br />Requête : ' . $requeteSuppressionFeuilleTechnique . '<br />Message : ' . mysql_error() . '</p>';
-    }
-
-    @mysql_select_db($sql['base']);
 }
 ?>
 <form name="remodification" action="">
