@@ -1,0 +1,34 @@
+table.adminTable {
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+
+  tr {
+    border-bottom: 1px solid #CC3333;
+  }
+
+  th {
+    padding: 2px 5px;
+  }
+
+  td {
+    padding: 2px 5px;
+    &.action {
+      text-align: center;
+      width: 40px;
+    }
+
+    &.gender, &.canton {
+      width: 20px;
+    }
+
+    &.notOK {
+      background-color: #CC3333;
+      color: white;
+    }
+  }
+
+  &.detailed {
+    font-size: 12px;
+  }
+}

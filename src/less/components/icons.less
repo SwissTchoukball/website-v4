@@ -1,0 +1,69 @@
+// TODO: Build a new icon system from scratch
+
+.side-icon {
+  &-left:before, &-right:after {
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    content: "";
+    display: inline-block;
+    background-size: 16px;
+    width: 16px;
+    height: 16px;
+    padding: 3px 6px 3px 0;
+    fill: #f07f8b;
+    vertical-align: -20%;
+
+    .match & {
+      vertical-align: -8%;
+    }
+
+    a.email& {
+      background-image: url('@{uiImagesPath}email.svg');
+    }
+
+    a.website& {
+      background-image: url('@{uiImagesPath}web.svg');
+    }
+
+    a.facebook& {
+      background-image: url('@{uiImagesPath}facebook.svg');
+    }
+
+    a.twitter& {
+      background-image: url('@{uiImagesPath}twitter.svg');
+    }
+
+    a.phone& {
+      background-image: url('@{uiImagesPath}phone.svg');
+    }
+
+    a.mobile& {
+      background-image: url('@{uiImagesPath}mobile.svg');
+    }
+
+    .date& {
+      background-image: url('@{uiImagesPath}datetime.svg');
+    }
+
+    .venue& {
+      background-image: url('@{uiImagesPath}venue.svg');
+    }
+
+    .price& {
+      background-image: url('@{uiImagesPath}ticket.svg');
+    }
+
+    .referees& {
+      background-image: url('@{uiImagesPath}whistle.svg');
+    }
+
+    .attendance& {
+      background-image: url('@{uiImagesPath}people.svg');
+    }
+
+    .winner& {
+      background-image: url('@{uiImagesPath}check_inversed.svg');
+      vertical-align: 8%;
+    }
+  }
+}

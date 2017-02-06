@@ -15,8 +15,6 @@
                  show_faces="false"></fb:like>
         <div class="g-follow" data-annotation="none" data-height="20"
              data-href="//plus.google.com/118036642572546838455" data-rel="publisher"></div>
-        <!-- <a class="googlePlusLink" href="https://www.google.com/+TchoukballCH" rel="publisher">Google+</a> -->
-        <!-- Necessary to have our URL validated on the page -->
     </div>
 
     <div id="adminLinks">

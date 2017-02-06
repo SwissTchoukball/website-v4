@@ -93,8 +93,8 @@ if ($showPagination) {
         $totalNbMembersData = mysql_fetch_assoc($totalNbMembersResource);
         $totalNbMembers = $totalNbMembersData['totalNbMembers'];
     } else {
-        echo "<p class='error'>Erreur dans le décompte du nombre total de membres.</p>";
-        //echo "<p class='info'>".$queryToCount."</p>";
+        echo "<p class='notification notification--error'>Erreur dans le décompte du nombre total de membres.</p>";
+        //echo "<p class='notification'>".$queryToCount."</p>";
         $totalNbMembers = 0;
     }
     $totalNumberOfPages = ceil($totalNbMembers / $nbMembersPerPage);
@@ -131,7 +131,7 @@ if ($preselectionListData = mysql_query($preselectionListQuery)) {
     </form>
     <?php
 } else {
-    echo "<p class='error'>Erreur lors de la récupération des préselections.</p>";
+    echo "<p class='notification notification--error'>Erreur lors de la récupération des préselections.</p>";
 }
 
 if ($showPagination) {

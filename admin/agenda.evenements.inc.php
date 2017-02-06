@@ -400,17 +400,17 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
             $requeteAAjouter = "INSERT INTO Calendrier_Evenements (`id`, `titre`, `idCategorie`, `description`, `lieu`, `jourEntier`, `dateDebut`, `heureDebut`, `dateFin`, `heureFin`, `visible`, `utilisateur`)
 			VALUES (NULL, '" . addslashes($_POST['titre']) . "', '" . $_POST['idCategorie'] . "', '" . addslashes($_POST['description']) . "', '" . addslashes($_POST['lieu']) . "', '" . $jourEntier . "', '" . $_POST['anneeDebut'] . "-" . $_POST['moisDebut'] . "-" . $_POST['jourDebut'] . "', '" . $_POST['heureDebut'] . ":" . $_POST['minuteDebut'] . ":00', '" . $_POST['anneeFin'] . "-" . $_POST['moisFin'] . "-" . $_POST['jourFin'] . "', '" . $_POST['heureFin'] . ":" . $_POST['minuteFin'] . ":00', '" . $visible . "', '" . $_POST['utilisateur'] . "')";
             mysql_query($requeteAAjouter);
-            echo "<p class='success'>Événement correctement ajouté.</p><br />";
+            echo "<p class='notification notification--success'>Événement correctement ajouté.</p><br />";
         } else { // Modification
             $requeteAModifier = "UPDATE Calendrier_Evenements SET titre='" . addslashes($_POST['titre']) . "', idCategorie='" . $_POST['idCategorie'] . "', description='" . addslashes($_POST['description']) . "', lieu='" . addslashes($_POST['lieu']) . "', jourEntier='" . $jourEntier . "', dateDebut='" . $_POST['anneeDebut'] . "-" . $_POST['moisDebut'] . "-" . $_POST['jourDebut'] . "', heureDebut='" . $_POST['heureDebut'] . ":" . $_POST['minuteDebut'] . ":00', dateFin='" . $_POST['anneeFin'] . "-" . $_POST['moisFin'] . "-" . $_POST['jourFin'] . "', heureFin='" . $_POST['heureFin'] . ":" . $_POST['minuteFin'] . ":00', visible='" . $visible . "', utilisateur='" . $_POST['utilisateur'] . "' WHERE id=" . $_POST['idEvenement'];
             mysql_query($requeteAModifier);
-            echo "<p class='success'>Événement correctement modifié.</p><br />";
+            echo "<p class='notification notification--success'>Événement correctement modifié.</p><br />";
         }
     }
     if (isset($_GET['supprimer'])) { // Suppression
         $requeteASupprimer = "DELETE FROM Calendrier_Evenements WHERE id=" . $_GET['supprimer'] . " LIMIT 1";
         mysql_query($requeteASupprimer);
-        echo "<p class='success'>Événement correctement supprimé.</p><br />";
+        echo "<p class='notification notification--success'>Événement correctement supprimé.</p><br />";
     }
     if (isset($_POST['rechercheEvenement'])) {
         $termeRecherche = $_POST['rechercheEvenement'];

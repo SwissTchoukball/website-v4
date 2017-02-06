@@ -2,6 +2,8 @@
  * @copyright   Swiss Tchoukball 2016
  * @author      David Sandoz <david.sandoz@tchoukball.ch>
  */
+// Following the ITCSS structure
+// https://www.xfive.co/blog/itcss-scalable-maintainable-css-architecture/
 
 // Settings
 @import "settings/colors";
@@ -17,6 +19,11 @@
 // Elements
 @import "elements/headings";
 @import "elements/page";
+@import "elements/links";
+@import "elements/forms";
+@import "elements/quotes";
+@import "elements/lists";
+@import "elements/tables";
 
 // Objects
 @import "objects/layout";
@@ -25,12 +32,43 @@
 @import "components/site-panel";
 @import "components/banner";
 @import "components/sidebar";
-@import "components/labels";
-@import "components/language-switcher";
 @import "components/main-nav";
+@import "components/footer";
+@import "components/language-switcher";
+@import "components/partners";
+@import "components/social-buttons";
+
+@import "components/headings";
+@import "components/labels";
+@import "components/notifications";
+@import "components/icons";
+@import "components/buttons";
+@import "components/pagination";
+@import "components/form-newsletter";
+@import "components/form-admin";
+@import "components/table-juniors-categories";
+@import "components/table-admin";
+
+@import "components/homepage";
+@import "components/match";
+@import "components/news";
+@import "components/calendar";
+@import "components/tchoukup";
+@import "components/clubs";
+@import "components/videos";
+@import "components/downloads";
+@import "components/venue";
+@import "components/contact-page";
+@import "components/championship";
+@import "components/swiss-cup";
+@import "components/team";
+@import "components/referees";
+
 
 // Vendors
 @import (inline) "../../vendor/bower/ng-tags-input/ng-tags-input.min.css";
 
 // Trumps
 @import "trumps/ng-tags-input-override";
+@import "trumps/alignments";
+@import "trumps/semantic";

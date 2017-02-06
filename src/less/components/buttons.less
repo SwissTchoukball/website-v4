@@ -1,0 +1,41 @@
+.button {
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px #FF9999;
+  }
+
+  &--primary {
+    background-color: #e2001a;
+    font-weight: bold;
+    color: white;
+    border: none;
+
+    &:active {
+      background-color: #e0384c;
+    }
+
+    &[disabled] {
+      background-color: #999999;
+    }
+  }
+
+  &--cancel {
+    border: 1px solid #999999;
+    background-color: transparent;
+    color: #999999;
+
+    &:active {
+      background-color: #efefef;
+    }
+  }
+}
+
+.paypal-button input {
+  border: none;
+  margin: 20px 0;
+}

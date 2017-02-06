@@ -42,11 +42,11 @@ if ($newClub) {
 					LEFT OUTER JOIN DBDPersonne pres ON c.idPresident = pres.idDbdPersonne
 					LEFT OUTER JOIN Personne editor ON c.lastEditorID = editor.id
 					WHERE c.id=" . $idClubToEdit;
-    //echo '<p class="info">'.$clubRequest.'</p>';
+    //echo '<p class="notification">'.$clubRequest.'</p>';
     if (!$clubResult = mysql_query($clubRequest)) {
-        echo '<p class="error">' . mysql_error() . '</p>';
+        echo '<p class="notification notification--error">' . mysql_error() . '</p>';
     } else if (mysql_num_rows($clubResult) == 0) {
-        echo '<p class="error">Aucun club correspondant</p>';
+        echo '<p class="notification notification--error">Aucun club correspondant</p>';
     } else {
         $club = mysql_fetch_assoc($clubResult);
         if ($_SESSION['__idClub__'] == $club['id'] || $_SESSION['__userLevel__'] <= 5) {
@@ -79,7 +79,7 @@ if ($newClub) {
             $canEdit = true;
         } else {
             echo "<br />";
-            echo "<p class='error'>Vous ne pouvez modifier que votre club.</p>";
+            echo "<p class='notification notification--error'>Vous ne pouvez modifier que votre club.</p>";
         }
     }
 }

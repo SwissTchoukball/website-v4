@@ -285,7 +285,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
                 if ($donneesEquipes['idEvenement'] == null) {
                     $requeteAjoutEquipe = "INSERT INTO CoupeCH_Participations (`id`, `idEquipe`, `idEvenement`) VALUES (NULL, '" . $donneesEquipes['idEquipe'] . "', '" . $idEdition . "')";
                     if (!mysql_query($requeteAjoutEquipe)) {
-                        echo "<p class='error'>Erreur lors de l'ajout d'équipes.</p>";
+                        echo "<p class='notification notification--error'>Erreur lors de l'ajout d'équipes.</p>";
                     }
                 } else {
                     //l'équipe est déjà participante à cette édition.
@@ -294,7 +294,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
                 if ($donneesEquipes['idEvenement'] == $_POST['idEdition']) { //l'équipe est indiquée comme participante dans la BDD, mais n'est plus cochée => suppression
                     $requeteSuppressionParticipation = "DELETE FROM CoupeCH_Participations WHERE idEvenement=" . $_POST['idEdition'] . " AND idEquipe=" . $donneesEquipes['idEquipe'];
                     if (!mysql_query($requeteSuppressionParticipation)) {
-                        echo "<p class='error'>Erreur lors de la suppression d'équipes.</p>";
+                        echo "<p class='notification notification--error'>Erreur lors de la suppression d'équipes.</p>";
                     }
                 }
             }

@@ -1,0 +1,145 @@
+// Championship programm
+.formagenda {
+  width: 100%;
+  border: none;
+  text-align: center;
+}
+
+.agenda {
+  width: 99%;
+  border: none;
+  margin: 2px;
+  border-collapse: collapse;
+
+  a {
+    color: black;
+
+    &:hover {
+      color: #e2001a;
+    }
+  }
+
+  tr.alt_highlight {
+    background-color: #ffe6e7;
+  }
+
+  th {
+    text-align: center;
+    height: 20px;
+    font-size: 12px;
+    color: #CC3333;
+    font-weight: bold;
+  }
+
+  td {
+    font-size: 11px;
+    padding: 7px;
+  }
+
+  .arbitres {
+    padding-left: 15px;
+    padding-top: 5px;
+    background-image: url('/images/ui/whistle.svg');
+    background-size: 10px;
+    background-repeat: no-repeat;
+    background-position: 0 5px;
+  }
+}
+
+// End of championship program
+
+.listeLigues {
+  padding-left: 0;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    list-style-type: none;
+    margin-left: 2px;
+
+    &:after {
+      content: " -";
+    }
+
+    &:last-child:after {
+      content: "";
+    }
+  }
+}
+
+.resultatsTour,
+.resultatsTourFinal,
+.tableauModifierClassement,
+.tableauModifierPhase,
+.tableauModifierMatch,
+.tableauSupprimerPhase,
+.tableauStatistiquesGlobales,
+.tableauUploads,
+.tableauMatchsModifierMatchCoupeCH {
+  width: 450px;
+  border: none;
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.classementTour,
+.classementPlayoff {
+  width: 100%;
+  border: none;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+}
+
+.classementTourFinal,
+.tableauEditionsModifierMatchCoupeCH {
+  width: 250px;
+  border: none;
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.resultatsTour caption,
+.resultatsTourFinal caption,
+.classementTour caption,
+.classementTourFinal caption,
+.classementPlayoff caption,
+.tableauStatistiquesGlobales caption {
+  font-size: 14px;
+  color: #CC3333;
+  font-weight: bold;
+  line-height: 30px;
+}
+
+.resultatsTour tr.journeePair {
+  background-color: #ffe6e7;
+}
+
+.classementTour th,
+.classementTourFinal th,
+.resultatsTour th,
+.resultatsTourFinal th,
+.classementPlayoff th {
+  text-align: center;
+  height: 20px;
+  font-size: 12px;
+  color: #CC3333;
+  font-weight: bold;
+  border-bottom: 1px solid #f07f8b;
+}
+
+.resultatsTour td,
+.resultatsTourFinal td,
+.classementTour td,
+.classementTourFinal td {
+  font-size: 11px;
+  text-align: center;
+  border-bottom: 1px solid #f07f8b;
+}
+
+.categorieProgrammeChampionnat {
+  font-size: 9px;
+  color: #999;
+  line-height: 1;
+}

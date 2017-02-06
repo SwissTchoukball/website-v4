@@ -2,10 +2,10 @@
 
 <!-- Confirmation screen -->
 <div ng-if="$ctrl.submitted">
-    <p class="success">
+    <p class="notification notification--success">
         Inscription de l'équipe <em>{{$ctrl.teamName}}</em> correctement enregistrée.
     </p>
-    <p class="info">
+    <p class="notification">
         Merci d'effectuer le paiement des <strong>CHF {{$ctrl.getTotalCost()}}</strong>
         d'ici au <strong>{{$ctrl.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
         sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.

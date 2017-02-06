@@ -34,7 +34,7 @@ if ($memberResource = mysql_query($memberQuery)) {
     </form>
     <?php
 } else {
-    echo '<p class="error">Erreur lors de la récupération des données du membre.<br />' . mysql_error() . '</p>';
+    echo '<p class="error">Erreur lors de la récupération des données du membre.<br />' . mysql_notification notification--error() . '</p>';
 }
 
 ?>

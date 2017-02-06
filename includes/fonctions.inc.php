@@ -3,11 +3,11 @@ include "date.inc.php";
 
 function printMessage($message, $type = 'info')
 {
+    $class = 'notification';
     if ($type == 'error' || $type == 'success') {
-        echo '<p class="' . $type . '">' . $message . '</p>';
-    } else {
-        echo '<p class="info">' . $message . '</p>';
+        $class .= ' notification--' . $type;
     }
+    echo '<p class="' . $class . '">' . $message . '</p>';
     return $message;
 }
 
@@ -111,10 +111,10 @@ function afficherPersonne($record, $mode = "FULL")
             echo "<br />";
         }
         if ($record["telephone"] != "") {
-            echo "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($record["telephone"]) . "'>" . $record["telephone"] . "</a><br />";
+            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephone"]) . "'>" . $record["telephone"] . "</a><br />";
         }
         if ($record["portable"] != "") {
-            echo "<a class='mobile sideIcon' href='tel:" . formatPhoneNumber($record["portable"]) . "'>" . $record["portable"] . "</a><br />";
+            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($record["portable"]) . "'>" . $record["portable"] . "</a><br />";
         }
     }
 }
@@ -149,8 +149,8 @@ function showPerson($person, $hidePicture = false)
     }
     email($email);
     echo "<br />";
-    echo $person['telPrive'] != '' ? "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
-    echo $person['portable'] != '' ? "<a class='mobile sideIcon' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
+    echo $person['telPrive'] != '' ? "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
+    echo $person['portable'] != '' ? "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
 
     // Affichage des langues parlées
     $spokenLanguagesQuery = "SELECT l.idLangue, l.descriptionLangue" . $_SESSION['__langue__'] . " as descriptionLangue
@@ -1014,18 +1014,6 @@ function ajouterSSiPluriel($word, $number)
     } else {
         return $word;
     }
-}
-
-function printEWCMatchesTypesKey()
-{
-    echo '<h4>' . VAR_LANG_LEGENDE . '</h4>';
-    echo '<ul class="EWCMatchesTypesKey">';
-    $matchesTypesQuery = 'SELECT name' . $_SESSION['__langue__'] . ' AS name, initial FROM EWC_MatchesTypes ORDER BY `order`';
-    $matchesTypesData = mysql_query($matchesTypesQuery);
-    while ($matchType = mysql_fetch_assoc($matchesTypesData)) {
-        echo '<li><span class="competitionIcon">' . $matchType['initial'] . '</span> ' . $matchType['name'] . '</li>';
-    }
-    echo '</ul>';
 }
 
 

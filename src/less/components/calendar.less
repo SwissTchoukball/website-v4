@@ -1,0 +1,286 @@
+// TODO: To be redone from scratch. I didn't even had the strength to adapt the syntax to LESS.
+
+#calendrierMois, #calendrierSemaine, #calendrierJour {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  position: relative;
+  left: -20px;
+  width: 849px;
+}
+
+#blocCalendrierJour {
+  height: 400px;
+  overflow: scroll;
+}
+
+#AgendaAVenir, .listeTableau {
+  border-collapse: collapse;
+  clear: right;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.listeTableau tr.depasse {
+  background-color: #fdbfbf;
+}
+
+.listeTableau tr.encours {
+  background-color: #fdf7bd;
+}
+
+.listeTableau tr.avenir {
+  background-color: #bdfdc5;
+}
+
+#calendrierMois td {
+  border: 1px solid #000;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border-collapse: collapse;
+  vertical-align: top;
+  font-size: 10px;
+}
+
+#calendrierMois td.caseVide {
+  background-color: white;
+  border: none;
+}
+
+#calendrierMois td.firstDayOfWeek {
+  border-left: none;
+}
+
+#calendrierMois td.lastDayOfWeek {
+  border-right: none;
+}
+
+#calendrierSemaine td {
+  border: 1px solid #000;
+  width: 765px;
+  height: 70px;
+  padding: 0;
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+#calendrierJour td {
+  border: 1px solid #000;
+  width: 765px;
+  height: 30px;
+  padding: 0;
+  border-collapse: collapse;
+  vertical-align: top;
+}
+
+#calendrierJour td.jourEntierJour {
+  text-align: center;
+  height: 16px;
+}
+
+#evenementDetails legend, #telechargementDetails legend {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#evenementDetails, #telechargementDetails {
+  border-style: solid;
+  border-width: 3px;
+}
+
+#AgendaAVenir td, .listeTableau td {
+  height: 30px;
+  padding: 3px;
+  font-size: 12px;
+  border-collapse: collapse;
+  vertical-align: middle;
+  text-align: center;
+  border-collapse: collapse;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#AgendaAVenir td.categorie {
+  width: 5px;
+}
+
+#AgendaAVenir td.date {
+  width: 150px;
+}
+
+#AgendaAVenir td.titre {
+  width: 365px
+}
+
+#AgendaAVenir td.lieu {
+  width: 150px
+}
+
+#AgendaAVenir td.heure {
+  width: 100px;
+}
+
+td.modifier {
+  text-align: center;
+  width: 100px;
+}
+
+td.supprimer {
+  text-align: center;
+  width: 100px;
+}
+
+.titreCalendrier {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+}
+
+#navigationCalendrier {
+  text-align: center;
+}
+
+a.calendrierPrecedant, a.calendrierSuivant {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  margin: 0;
+  padding: 0;
+  background-size: 23px;
+  background-repeat: no-repeat;
+}
+
+a.calendrierPrecedant {
+  background-image: url('/images/ui/nav_left_arrow.svg');
+}
+
+a.calendrierSuivant {
+  background-image: url('/images/ui/nav_right_arrow.svg');
+}
+
+.selectionMoisCalendrier {
+  display: inline-block;
+  position: relative;
+  top: -5px;
+}
+
+.calendrierAujourdhui {
+  background-color: #ffeeee;
+}
+
+.calendrierAujourdhui .jourDuMois {
+  color: #e2001a;
+}
+
+.calendrierMoisEvenement {
+  margin: 0;
+  padding: 1px;
+}
+
+.calendrierMoisEvenement span {
+  font-size: 10px;
+  line-height: 10px;
+  margin: 0;
+}
+
+.calendrierMoisEvenement span a {
+  margin: 0;
+}
+
+.calendrierSemaineEvenement {
+  width: 765px;
+  margin: 0;
+  padding: 2px;
+
+}
+
+.calendrierJourEvenement {
+  width: 765px;
+  margin: 0;
+  padding: 5px;
+}
+
+.evenementJour {
+  float: right;
+  width: 700px;
+}
+
+.selectionCategoriesCalendrier {
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+
+.titreEvenement {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.categorieEvenement, .categorieTelechargement {
+  text-align: right;
+  clear: right;
+}
+
+.libelleEvenement, .libelleTelechargement {
+  text-align: right;
+  width: 100px;
+}
+
+.donneesEvenement, .donneesTelechargement {
+  float: right;
+  clear: right;
+  width: 600px;
+}
+
+.jourDuMois {
+  font-size: 12px;
+  padding: 2px;
+}
+
+.jourDeLaSemaine {
+  padding: 2px;
+}
+
+.heureDuJour {
+  padding: 2px;
+  width: 40px;
+}
+
+.elementAVenir {
+  width: 550px;
+  border: 2px solid #E2001A;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  height: 40px;
+}
+
+.calendarEvent {
+  position: relative;
+}
+
+.calendarEvent span.infobulle {
+  display: none; /* On masque l'infobulle. */
+}
+
+.calendarEvent:hover {
+  background: none; /* Correction d'un bug d'Internet Explorer. */
+  z-index: 500; /* On définit une valeur pour l'ordre d'affichage. */
+}
+
+.calendarEvent:hover span.infobulle {
+  display: inline; /* On affiche l'infobulle. */
+  position: absolute;
+  width: 200px;
+
+  top: -2px; /* On positionne notre infobulle. */
+  left: -2px;
+
+  background: white;
+
+  text-align: left;
+  color: #333333;
+  padding: 3px;
+
+  border: 1px solid;
+  border-left: 4px solid;
+}

@@ -38,37 +38,11 @@
         </div>
         <?php
     }
-    /*echo "<p class='center'>";
-    randompicture(); //Image aléatoire
-    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-    randompicture(); //Image aléatoire
-    echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-    randompicture(); //Image aléatoire
-    echo "</p><br />";  */
     ?>
-    <!--<fb:like-box href="https://www.facebook.com/tchoukballsuisse" width="558" height="450" show_faces="false" header="false" stream="true" show_border="true"></fb:like-box>-->
 </div>
 <div id="classementChampionnatAccueil">
 
-    <!--<a class="LienVersInscriptionNewsletter" href="/rester-informe">S'inscrire à la Newsletter</a>-->
     <?php
-
-    // TODO: Use new youtube integration system
-    // Vidéo TCHOUKBALL PROMOTION ou FSTB
-    /*
-    $channel="TP"; //TP ou FSTB
-    if	($channel=="TP") {
-    	echo "<h2><a href='http://www.youtube.com/tchoukballpromotion'>La dernière vidéo de<br />Tchoukball Promotion</a></h2><br />";
-   	} elseif ($channel=="FSTB") {
-    	echo "<h2><a href='http://www.youtube.com/tchoukballpromotion'>La dernière vidéo de<br />notre chaîne YouTube</a></h2><br />";
-    }
-    echo "<div class='TitreTPVideo'><a href='http://www.youtube.com/watch?v=".getLastYouTubeVideoID($channel)."'>".getLastYouTubeVideoTitle($channel)."</a></div>";
-    ?>
-    <iframe width="200" height="162" src="http://www.youtube.com/embed/<?php echo getLastYouTubeVideoID($channel); ?>" frameborder="0" allowfullscreen></iframe>
-    <!--VIEUX CI-DESSOUS -->
-
-    <?php
-	*/
 
     //CHAMPIONNAT
 
