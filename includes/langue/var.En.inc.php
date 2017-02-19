@@ -131,8 +131,8 @@ define("VAR_LANG_AUCUN_EVENEMENT_A_VENIR", "No coming event in this category.");
 define("VAR_LANG_AUCUNE_VACANCE_PENDANT_EVENEMENT", "No holiday during this event.");
 
 //comite
-define("VAR_LANG_DOMAINES_RESPONSABILITE", "Responsabilies:");
-define("VAR_LANG_DOMAINE_RESPONSABILITE", "Responsability:");
+define("VAR_LANG_DOMAINES_RESPONSABILITE", "Responsabilies");
+define("VAR_LANG_DOMAINE_RESPONSABILITE", "Responsability");
 
 //clubs
 define("VAR_LANG_VISIT_US", "Club's website");

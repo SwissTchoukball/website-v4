@@ -19,24 +19,24 @@ statInsererPageSurf(__FILE__);
             echo "<dfn>" . $donnees["paragraphe" . $_SESSION["__langue__"]] . "</dfn></p><br />";
         } elseif ($j % 2 == 0) {
             if ($i % 2 == 1) {
-                echo "<div class='citationPresseGauche'>";
+                echo "<div class='press-quote'>";
                 echo $donnees["paragraphe" . $_SESSION["__langue__"]] . "<br />";
             } else {
                 echo "<cite>";
                 echo $donnees["paragraphe" . $_SESSION["__langue__"]];
                 echo "</cite>";
-                echo "</div><br />";
+                echo "</div>";
                 $j++;
             }
         } else {
             if ($i % 2 == 1) {
-                echo "<div class='citationPresseDroite'>";
+                echo "<div class='press-quote'>";
                 echo $donnees["paragraphe" . $_SESSION["__langue__"]] . "<br />";
             } else {
                 echo "<cite>";
                 echo $donnees["paragraphe" . $_SESSION["__langue__"]];
                 echo "</cite>";
-                echo "</div><br />";
+                echo "</div>";
                 $j++;
             }
         }

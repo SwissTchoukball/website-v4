@@ -264,7 +264,7 @@
         }
         ?>
         <h3>CCP <?php echo VAR_LANG_ASSOCIATION_NAME; ?></h3>
-        <div class='ccpFSTB'>20-8957-2</div>
+        <div class='ccp-number'>20-8957-2</div>
         <?php
     }
 

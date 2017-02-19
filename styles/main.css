@@ -1,12 +1,7 @@
 /* FICHIER CSS DU SITE DE SWISS TCHOUKBALL */
 
+/* !ADMINISTRATION */
 
-p {
-    font-size: 13px;
-    margin: 1px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
 
 .formulaireAligne label {
     float: left;
@@ -14,112 +9,6 @@ p {
     text-align: right;
     padding-right: 3px;
 }
-
-.citationPresseDroite {
-    font-size: 12px;
-    text-align: right;
-}
-
-.citationPresseGauche {
-    font-size: 12px;
-    text-align: left;
-}
-
-.dossierPresse {
-    color: #CC3333;
-}
-
-.ficheComite, .ficheCommission {
-    width: auto;
-    border: none;
-    min-height: 170px;
-    margin-bottom: 30px;
-    /*border-bottom: 1px solid #e2001a;*/
-}
-
-.ficheCommission .membresCommission .fonction {
-    font-size: 11px;
-    color: #666;
-}
-
-.ficheComite .contenu, .ficheCommission .contenu {
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
-}
-
-.fichePersonne {
-    min-height: 120px;
-    font-size: 13px;
-    margin-bottom: 10px;
-}
-
-.fichePersonne .nomPersonne {
-    font-weight: bold;
-}
-
-.imagePortrait {
-    float: left;
-    position: relative;
-    height: 140px;
-    margin-right: 10px;
-}
-
-.responsabiliteComite, .membresCommission {
-    font-size: 12px;
-    -webkit-column-break-before: always;
-    -moz-column-break-before: always;
-    column-break-before: always;
-}
-
-.responsabiliteComite ul, .membresCommission ul {
-    position: relative;
-    left: 20px;
-    padding-left: 0;
-}
-
-.spokenLanguages {
-    margin: 10px 0;
-}
-
-.presentationSponsors {
-    width: 450px;
-    padding: 10px;
-    margin: auto;
-    font-size: 11px;
-}
-
-.logoSponsorsMenu {
-    width: 130px;
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.ccpFSTB {
-    width: 130px;
-    border: 5px solid black;
-    background-color: #ffcc00;
-    font-weight: bold;
-    font-size: 25px;
-    color: black;
-    text-align: center;
-    padding: 25px;
-    margin-left: 285px;
-}
-
-#adminPopUp {
-    position: fixed;
-    top: 0;
-    right: 0;
-    padding: 3px;
-    text-align: center;
-    font-weight: bold;
-    border-bottom: 1px solid #e2001a;
-    border-left: 1px solid #e2001a;
-    background-color: white;
-}
-
-/* !ADMINISTRATION */
 
 .pageMesInfos, .modifierMesInfos {
     width: 800px;

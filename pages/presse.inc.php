@@ -15,26 +15,26 @@ while ($donnees = mysql_fetch_array($retour)) {
         echo "<dfn>" . $donnees["paragraphe" . $_SESSION["__langue__"]] . "</dfn></p><br />";
     } elseif ($j % 2 == 0) {
         if ($i % 2 == 1) {
-            echo "<div class='citationPresseGauche'>";
+            echo "<div class='press-quote'>";
             echo "<q>";
             echo $donnees["paragraphe" . $_SESSION["__langue__"]] . "</q><br />";
         } else {
             echo "<cite>";
             echo $donnees["paragraphe" . $_SESSION["__langue__"]];
             echo "</cite>";
-            echo "</div><br />";
+            echo "</div>";
             $j++;
         }
     } else {
         if ($i % 2 == 1) {
-            echo "<div class='citationPresseDroite'>";
+            echo "<div class='press-quote'>";
             echo "<q>";
             echo $donnees["paragraphe" . $_SESSION["__langue__"]] . "</q><br />";
         } else {
             echo "<cite>";
             echo $donnees["paragraphe" . $_SESSION["__langue__"]];
             echo "</cite>";
-            echo "</div><br />";
+            echo "</div>";
             $j++;
         }
     }

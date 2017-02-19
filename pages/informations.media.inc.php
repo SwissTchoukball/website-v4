@@ -26,25 +26,14 @@ while ($record = mysql_fetch_array($recordset)) {
     if ($nbFois > 0) {
         $nbFois++;
     }
+    $pressReleaseUrl = PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[0][0] . "_" . $record["fichier"];
     if (is_file($root . PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"])) {
-        if (preg_match("#^Dossier de presse#i", $record["titreFr"])) {
-            echo "<li class='dossierPresse'>";
-        } else {
-            echo "<li>";
-        }
-        echo date_sql2date($record["date"]) . " : <a href='" . PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"] . "'>" . $record["titre" . $_SESSION["__langue__"]] . "</a></li>";
-    } // fichier en francais par defaut
-    else {
-        if (preg_match("#^Dossier de presse#i", $record["titreFr"])) {
-            echo "<li class='dossierPresse'>";
-        } else {
-            echo "<li>";
-        }
-        echo date_sql2date($record["date"]) . " : <a href='" . PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[0][0] . "_" . $record["fichier"] . "'>" . $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]] . "</a></li>";
+        $pressReleaseUrl = PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"];
     }
+
+    echo "<li>" . date_sql2date($record["date"]) . " : <a href='" . $pressReleaseUrl . "'>" . $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]] . "</a></li>";
 }
 echo "</ul>";
-echo "<p class='dossierPresse' align='right'>Dossiers de Presse</p>";
 
 ?>
 

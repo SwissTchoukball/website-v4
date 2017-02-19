@@ -94,14 +94,12 @@ if ($_SESSION['__langue__'] != 'En') {
 include('includes/footer.php');
 
 if ($_SESSION["__userLevel__"] < 100) {
-    echo "<div id='adminPopUp'>";
+    echo "<div class='admin-menu-overlay'>";
     if ($admin) {
         echo "<a href='" . VAR_HREF_PAGE_PRINCIPALE . "'>" . VAR_LANG_ACCUEIL . "</a>";
     } else {
         echo "<a href='/admin'>" . VAR_LANG_ADMINISTRATION . "</a>";
     }
-    echo "<br /><a href='http://comite.tchoukball.ch' title='Accéder au Forum \"Comité et Commissions " . VAR_LANG_ASSOCIATION_NAME . "\"'>Forum</a>";
-    echo "<br /><a href='/logout'>" . VAR_LANG_DECONNEXION . "</a>";
     echo "</div>";
     ?>
 
