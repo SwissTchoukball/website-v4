@@ -100,7 +100,7 @@ statInsererPageSurf(__FILE__);
         }
     </SCRIPT>
 
-    <form class="adminForm" name="mesInfos" method="post"
+    <form class="st-form" name="mesInfos" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return controlerSaisie();">
         <label>Prénom</label>

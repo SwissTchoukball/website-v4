@@ -114,7 +114,7 @@ statInsererPageSurf(__FILE__);
         }
     </SCRIPT>
 
-    <form name="mesInfos" class="adminForm" method="post"
+    <form name="mesInfos" class="st-form" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return controlerSaisie();">
         <fieldset>

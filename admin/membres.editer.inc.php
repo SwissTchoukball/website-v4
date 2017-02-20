@@ -448,7 +448,7 @@ if ($canEdit) {
           onsubmit="return checkMemberForm();"
           name="memberEdit"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"
-          class="adminForm">
+          class="st-form">
         <fieldset>
             <?php
             if ($isInvolvedInFederation && !hasAllMembersManagementAccess()) {
@@ -606,7 +606,7 @@ if ($canEdit) {
             }
             ?>
             <label for="birthDateDay">Date de naiss.</label>
-            <div class="birthDate">
+            <div class="st-form__date">
                 <select id="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
                     <option value="0">-</option>
                     <?php echo modif_liste_jour(jour($birthDate)); ?>

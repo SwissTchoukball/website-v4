@@ -88,7 +88,7 @@ if ($canEdit) {
     <h3><?php echo $formLegend; ?></h3>
     <form method="post" onsubmit="return checkClubForm();" name="clubEdit"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"
-          class="adminForm">
+          class="st-form">
         <fieldset>
             <label for="shortName">Nom court</label>
             <?php

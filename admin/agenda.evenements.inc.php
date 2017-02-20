@@ -138,12 +138,12 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
     </script>
 
 
-    <form class="formulaireAligne" id="editerEvenement" name="editerEvenement" method="post"
+    <form class="st-form" id="editerEvenement" name="editerEvenement" method="post"
           action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $_GET['modifier']; ?>">
         <fieldset>
             <legend>Ajouter un événement</legend>
-            <label for="titre">Titre : </label>
-            <input type="text" id="titre" name="titre" size="30" value="<?php echo $titre; ?>"/><br/>
+            <label for="titre">Titre</label>
+            <input type="text" id="titre" name="titre" size="30" value="<?php echo $titre; ?>"/>
             <?php
             if ($jourEntier == 1) {
                 $checked = " checked='checked'";
@@ -155,15 +155,81 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
             $debutSelectionAnnee = min($anneeDebut - 5, date('Y') - 5);
             $finSelectionAnnee = max($anneeFin + 10, date('Y') + 10);
             ?>
+            <label for="jourEntier"> L'événement dure toute la journée</label>
             <input type="checkbox" id="jourEntier" name="jourEntier"<?php echo $checked; ?>
                    onClick="changeJourEntier(this);"/>
-            <label for="jourEntier"> L'événement dure toute la journée</label><br/>
-            <label>Date de début : </label>
-            <span id="dateDebut">
-				<select name="jourDebut" onChange="selectionAutomatiqueJour()">
-					<?php
+            <label>Date de début</label>
+            <div class="st-form__date">
+                <span id="dateDebut">
+                    <select name="jourDebut" onChange="selectionAutomatiqueJour()">
+                        <?php
+                        for ($jour = 1; $jour <= 31; $jour++) {
+                            if ($jourDebut == $jour) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
+                        }
+                        ?>
+                    </select>.<select name="moisDebut" onChange="selectionAutomatiqueMois()">
+                        <?php
+                        for ($mois = 1; $mois <= 12; $mois++) {
+                            if ($moisDebut == $mois) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
+                        }
+                        ?>
+                    </select>.<select name="anneeDebut" onChange="selectionAutomatiqueAnnee()">
+                        <?php
+                        for ($annee = $debutSelectionAnnee; $annee <= $finSelectionAnnee; $annee++) {
+                            if ($anneeDebut == $annee) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
+                        }
+                        ?>
+                    </select>
+                </span>
+                <span id="heureDebut"<?php echo $visibility; ?>>
+                     à
+                    <select name="heureDebut" onChange="selectionAutomatiqueHeure()">
+                        <?php
+                        for ($heure = 0; $heure <= 23; $heure++) {
+                            if ($heureDebut == $heure) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
+                        }
+                        ?>
+                    </select>h<select name="minuteDebut" onChange="selectionAutomatiqueMinute()">
+                        <?php
+                        for ($minute = 0; $minute <= 59; $minute++) {
+                            if ($minuteDebut == $minute) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
+                        }
+                        ?>
+                    </select>
+                </span>
+            </div>
+            <label>Date de fin</label>
+            <div class="st-form__date">
+                <span id="dateFin">
+                <select name="jourFin">
+                    <?php
                     for ($jour = 1; $jour <= 31; $jour++) {
-                        if ($jourDebut == $jour) {
+                        if ($jourFin == $jour) {
                             $selected = " selected='selected'";
                         } else {
                             $selected = "";
@@ -171,10 +237,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
                     }
                     ?>
-				</select>.<select name="moisDebut" onChange="selectionAutomatiqueMois()">
-					<?php
+                </select>.<select name="moisFin">
+                    <?php
                     for ($mois = 1; $mois <= 12; $mois++) {
-                        if ($moisDebut == $mois) {
+                        if ($moisFin == $mois) {
                             $selected = " selected='selected'";
                         } else {
                             $selected = "";
@@ -182,10 +248,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
                     }
                     ?>
-				</select>.<select name="anneeDebut" onChange="selectionAutomatiqueAnnee()">
-					<?php
+                </select>.<select name="anneeFin">
+                    <?php
                     for ($annee = $debutSelectionAnnee; $annee <= $finSelectionAnnee; $annee++) {
-                        if ($anneeDebut == $annee) {
+                        if ($anneeFin == $annee) {
                             $selected = " selected='selected'";
                         } else {
                             $selected = "";
@@ -193,103 +259,41 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
                     }
                     ?>
-				</select>
-			</span>
-            <span id="heureDebut"<?php echo $visibility; ?>>
-				 à
-				<select name="heureDebut" onChange="selectionAutomatiqueHeure()">
-					<?php
-                    for ($heure = 0; $heure <= 23; $heure++) {
-                        if ($heureDebut == $heure) {
-                            $selected = " selected='selected'";
-                        } else {
-                            $selected = "";
+                </select>
+                </span>
+                <span id="heureFin"<?php echo $visibility; ?>>
+                     à
+                    <select name="heureFin">
+                        <?php
+                        for ($heure = 0; $heure <= 23; $heure++) {
+                            if ($heureFin == $heure) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
                         }
-                        echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
-                    }
-                    ?>
-				</select>h<select name="minuteDebut" onChange="selectionAutomatiqueMinute()">
-					<?php
-                    for ($minute = 0; $minute <= 59; $minute++) {
-                        if ($minuteDebut == $minute) {
-                            $selected = " selected='selected'";
-                        } else {
-                            $selected = "";
+                        ?>
+                    </select>h<select name="minuteFin">
+                        <?php
+                        for ($minute = 0; $minute <= 59; $minute++) {
+                            if ($minuteFin == $minute) {
+                                $selected = " selected='selected'";
+                            } else {
+                                $selected = "";
+                            }
+                            echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
                         }
-                        echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
-                    }
-                    ?>
-				</select>
-			</span><br/>
-            <label>Date de fin : </label>
-            <span id="dateFin">
-			<select name="jourFin">
-				<?php
-                for ($jour = 1; $jour <= 31; $jour++) {
-                    if ($jourFin == $jour) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
-                    }
-                    echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
-                }
-                ?>
-			</select>.<select name="moisFin">
-				<?php
-                for ($mois = 1; $mois <= 12; $mois++) {
-                    if ($moisFin == $mois) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
-                    }
-                    echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
-                }
-                ?>
-			</select>.<select name="anneeFin">
-				<?php
-                for ($annee = $debutSelectionAnnee; $annee <= $finSelectionAnnee; $annee++) {
-                    if ($anneeFin == $annee) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
-                    }
-                    echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
-                }
-                ?>
-			</select>
-			</span>
-            <span id="heureFin"<?php echo $visibility; ?>>
-				 à
-				<select name="heureFin">
-					<?php
-                    for ($heure = 0; $heure <= 23; $heure++) {
-                        if ($heureFin == $heure) {
-                            $selected = " selected='selected'";
-                        } else {
-                            $selected = "";
-                        }
-                        echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
-                    }
-                    ?>
-				</select>h<select name="minuteFin">
-					<?php
-                    for ($minute = 0; $minute <= 59; $minute++) {
-                        if ($minuteFin == $minute) {
-                            $selected = " selected='selected'";
-                        } else {
-                            $selected = "";
-                        }
-                        echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
-                    }
-                    ?>
-				</select>
-			</span><br/>
-            <label for="lieu">Lieu : </label>
-            <input type="text" id="lieu" name="lieu" size="30" value="<?php echo $lieu; ?>"/><br/><br/>
-            <label for="description">Description : </label>
+                        ?>
+                    </select>
+                </span>
+            </div>
+            <label for="lieu">Lieu</label>
+            <input type="text" id="lieu" name="lieu" size="30" value="<?php echo $lieu; ?>"/>
+            <label for="description">Description</label>
             <textarea id="description" name="description" cols="60"
-                      rows="10"><?php echo $description; ?></textarea><br/>
-            <label for="idCategorie">Catégorie : </label>
+                      rows="10"><?php echo $description; ?></textarea>
+            <label for="idCategorie">Catégorie</label>
             <select id="idCategorie" name="idCategorie">
                 <?php
                 $requeteCategorie = "SELECT * FROM Calendrier_Categories ORDER BY nom";
@@ -303,7 +307,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                     echo "<option value='" . $donneesCategorie['id'] . "'" . $selected . ">" . $donneesCategorie['nom'] . "</option>";
                 }
                 ?>
-            </select><br/>
+            </select>
             <?php
             if ($visible == 1) {
                 $checked = " checked='checked'";
@@ -311,12 +315,12 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                 $checked = "";
             }
             ?>
+            <label for="visible"> Visible</label>
             <input type="checkbox" id="visible" name="visible"<?php echo $checked; ?> />
-            <label for="visible"> Visible</label><br/>
 
             <input type="hidden" name="utilisateur"
                    value="<?php echo $_SESSION['__prenom__'] . $_SESSION['__nom__'] ?>"/>
-            <input type="hidden" name="idEvenement" value="<?php echo $idEvenement; ?>"/><br/>
+            <input type="hidden" name="idEvenement" value="<?php echo $idEvenement; ?>"/>
 
             <?php
             if (isset($_POST['verification'])) {
@@ -374,11 +378,9 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                 }
             }
             ?>
-            <label>&nbsp;</label>
-            <input type="submit" name="verification" value="Vérifier" onClick="return enregistrerModification();"/><br/><br/>
+            <input type="submit" name="verification" value="Vérifier" onClick="return enregistrerModification();"/>
             <?php /* Ne devrait pas s'appeler enregistrerModification, mais executer cette fonction permet de ne pas ajouter &modifier= à la fin de l'URL ce qui posait problème.*/ ?>
 
-            <label>&nbsp;</label>
             <input type="submit" name="enregistrement" value="Enregistrer" onClick="return enregistrerModification();"/>
         </fieldset>
     </form>
@@ -400,17 +402,17 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
             $requeteAAjouter = "INSERT INTO Calendrier_Evenements (`id`, `titre`, `idCategorie`, `description`, `lieu`, `jourEntier`, `dateDebut`, `heureDebut`, `dateFin`, `heureFin`, `visible`, `utilisateur`)
 			VALUES (NULL, '" . addslashes($_POST['titre']) . "', '" . $_POST['idCategorie'] . "', '" . addslashes($_POST['description']) . "', '" . addslashes($_POST['lieu']) . "', '" . $jourEntier . "', '" . $_POST['anneeDebut'] . "-" . $_POST['moisDebut'] . "-" . $_POST['jourDebut'] . "', '" . $_POST['heureDebut'] . ":" . $_POST['minuteDebut'] . ":00', '" . $_POST['anneeFin'] . "-" . $_POST['moisFin'] . "-" . $_POST['jourFin'] . "', '" . $_POST['heureFin'] . ":" . $_POST['minuteFin'] . ":00', '" . $visible . "', '" . $_POST['utilisateur'] . "')";
             mysql_query($requeteAAjouter);
-            echo "<p class='notification notification--success'>Événement correctement ajouté.</p><br />";
+            echo "<p class='notification notification--success'>Événement correctement ajouté.</p>";
         } else { // Modification
             $requeteAModifier = "UPDATE Calendrier_Evenements SET titre='" . addslashes($_POST['titre']) . "', idCategorie='" . $_POST['idCategorie'] . "', description='" . addslashes($_POST['description']) . "', lieu='" . addslashes($_POST['lieu']) . "', jourEntier='" . $jourEntier . "', dateDebut='" . $_POST['anneeDebut'] . "-" . $_POST['moisDebut'] . "-" . $_POST['jourDebut'] . "', heureDebut='" . $_POST['heureDebut'] . ":" . $_POST['minuteDebut'] . ":00', dateFin='" . $_POST['anneeFin'] . "-" . $_POST['moisFin'] . "-" . $_POST['jourFin'] . "', heureFin='" . $_POST['heureFin'] . ":" . $_POST['minuteFin'] . ":00', visible='" . $visible . "', utilisateur='" . $_POST['utilisateur'] . "' WHERE id=" . $_POST['idEvenement'];
             mysql_query($requeteAModifier);
-            echo "<p class='notification notification--success'>Événement correctement modifié.</p><br />";
+            echo "<p class='notification notification--success'>Événement correctement modifié.</p>";
         }
     }
     if (isset($_GET['supprimer'])) { // Suppression
         $requeteASupprimer = "DELETE FROM Calendrier_Evenements WHERE id=" . $_GET['supprimer'] . " LIMIT 1";
         mysql_query($requeteASupprimer);
-        echo "<p class='notification notification--success'>Événement correctement supprimé.</p><br />";
+        echo "<p class='notification notification--success'>Événement correctement supprimé.</p>";
     }
     if (isset($_POST['rechercheEvenement'])) {
         $termeRecherche = $_POST['rechercheEvenement'];
