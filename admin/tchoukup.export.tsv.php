@@ -78,7 +78,7 @@ $listsAttributes['nb-tchoukup-colis-par-club'] = [
     'nom',
     'prenom',
     'adresse',
-    'numPostal',
+    'npa',
     'ville'
 ];
 
