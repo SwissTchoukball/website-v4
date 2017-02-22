@@ -111,7 +111,7 @@ while ($row = mysql_fetch_array($result)) {
     foreach ($listAttributes as $index => $attribute) {
         $excel .= $row[$attribute];
         if ($index < $lastIndex) {
-            $excel .= " \t ";
+            $excel .= "\t";
         } else {
             // Last attribute
             $excel .= "\n";
