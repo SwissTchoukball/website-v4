@@ -55,21 +55,20 @@ $listsAttributes['envois-individuels'] = [
 $queries['nb-tchoukup-colis-par-club'] =
     "SELECT COUNT(*) AS 'nbTchoukup',
             c.`club`,
-            p.`nom`,
-            p.`prenom`,
-            p.`adresse`,
-            p.`numPostal`,
-            p.`ville`
-    FROM `DBDPersonne` dbd, `ClubsFstb` c, `Personne` p
-    WHERE dbd.`idCHTB` = 2
-    AND dbd.`idClub` = c.`nbIdClub`
-    AND c.`id` = p.`idClub`
-    AND p.`contactClub` = 1
+            dest.`nom`,
+            dest.`prenom`,
+            dest.`adresse`,
+            dest.`npa`,
+            dest.`ville`
+    FROM `DBDPersonne` membres, `ClubsFstb` c, `DBDPersonne` dest
+    WHERE membres.`idCHTB` = 2
+    AND membres.`idClub` = c.`nbIdClub`
+    AND dest.`idDbdPersonne` = c.`idPresident`
     AND c.`statusId` = 1 -- Membre d'un club actif
-    AND (dbd.`idStatus` = 3 OR dbd.`idStatus` = 6) -- membre actif ou junior
-    AND dbd.`idClub` != 4 -- Pas membre du TBC Genève (car dans les envois individuels)
-    AND !(dbd.`idClub` = 29 AND dbd.`idStatus` = 6) -- Pas membre junior du TBC Vernier (car dans les envois individuels)
-    GROUP BY dbd.`idClub`
+    AND (membres.`idStatus` = 3 OR membres.`idStatus` = 6) -- membre actif ou junior
+    AND membres.`idClub` != 4 -- Pas membre du TBC Genève (car dans les envois individuels)
+    AND !(membres.`idClub` = 29 AND membres.`idStatus` = 6) -- Pas membre junior du TBC Vernier (car dans les envois individuels)
+    GROUP BY membres.`idClub`
     ORDER BY c.`club`";
 $listsHeaders['nb-tchoukup-colis-par-club'] = "Nombre de Tchoukup \t Club \t Nom \t Prénom \t Adresse" .
     "\t NPA \t Localité\n";
@@ -79,7 +78,7 @@ $listsAttributes['nb-tchoukup-colis-par-club'] = [
     'nom',
     'prenom',
     'adresse',
-    'numPostal',
+    'npa',
     'ville'
 ];
 
@@ -112,7 +111,7 @@ while ($row = mysql_fetch_array($result)) {
     foreach ($listAttributes as $index => $attribute) {
         $excel .= $row[$attribute];
         if ($index < $lastIndex) {
-            $excel .= " \t ";
+            $excel .= "\t";
         } else {
             // Last attribute
             $excel .= "\n";

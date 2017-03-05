@@ -17,4 +17,5 @@ while ($donnees = mysql_fetch_array($retour)) {
     }
 }
 showFunctionPerson(2);
+showFunctionPerson(6);
 ?>
