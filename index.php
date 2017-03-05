@@ -113,8 +113,8 @@ if ($_SESSION["__userLevel__"] < 100) {
 }
 ?>
 
-<script src="build/lib.min.js"></script>
-<script src="build/app.min.js"></script>
+<script src="/build/lib.min.js"></script>
+<script src="/build/app.min.js"></script>
 <script src="/scripts/before-body-closing.js"></script>
 
 <?php
