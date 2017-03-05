@@ -32,7 +32,7 @@
     <form name="supprimerTour" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return testQqchASupprimer();">
-        <table class="tableauSupprimerPhase">
+        <table class="adminTable">
             <?php
             echo "<tr>";
             echo "<th>X</th>";

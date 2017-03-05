@@ -1,7 +1,7 @@
 <?php
 statInsererPageSurf(__FILE__);
 ?>
-<div class="modifierMesInfos">
+<div>
     <?php
     if ($_POST["action"] == "modifier") {
 
@@ -173,12 +173,12 @@ statInsererPageSurf(__FILE__);
         </fieldset>
         <fieldset>
             <span class="infobulle">Pour changer de mot de passe, sinon laisser vide. Minimum 8 caractères</span>
-            <label>Ancien mot de passe</label>
-            <input name="ancienPass" type="password" maxlength="255" size="35" autocomplete="off">
-            <label>Nouveau mot de passe</label>
-            <input name="nouveauPass" type="password" maxlength="255" size="35" autocomplete="off">
-            <label>Encore une fois</label>
-            <input name="nouveauPassBis" type="password" maxlength="255" size="35" autocomplete="off">
+            <label for="ancienPass">Ancien mot de passe</label>
+            <input id="ancienPass" name="ancienPass" type="password" maxlength="255" size="35" autocomplete="off">
+            <label for="nouveauPass">Nouveau mot de passe</label>
+            <input id="nouveauPass" name="nouveauPass" type="password" maxlength="255" size="35" autocomplete="off">
+            <label for="nouveauPassBis">Encore une fois</label>
+            <input id="nouveauPassBis" name="nouveauPassBis" type="password" maxlength="255" size="35" autocomplete="off">
         </fieldset>
         <input type="hidden" name="action" value="modifier">
         <input type="submit" value="modifier">

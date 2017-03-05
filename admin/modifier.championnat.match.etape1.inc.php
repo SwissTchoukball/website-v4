@@ -5,7 +5,7 @@
 </h3>
 
 <p>Phase dans laquelle modifier un match :</p>
-<table class="tableauModifierMatch">
+<table class="adminTable">
     <?php
     echo "<tr>";
     echo "<th>" . VAR_LANG_CHAMPIONNAT . "</th>";

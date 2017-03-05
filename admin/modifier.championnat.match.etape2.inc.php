@@ -45,7 +45,7 @@ if (!isset($_GET['saison']) OR !isset($_GET['idCat']) OR !isset($_GET['idTour'])
         $nomGroupe = " du groupe " . $idGroupe . "";
     }
     echo "<h4>Matchs de la saison " . $nomSaison . $nomCategorie . $nomTour . $nomGroupe . "</h4><br />";
-    echo "<table class='tableauModifierMatch'>";
+    echo "<table class='adminTable'>";
     echo "<tr>";
     echo "<th>Match</th>";
     echo "<th>" . VAR_LANG_JOURNEE . "</th>";

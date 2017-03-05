@@ -165,7 +165,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
           action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . ""; ?>"
           onSubmit="return validateForm();">
         <?php
-        echo "<table class='tableauFormInsererMatch'>";
+        echo "<table class='adminTable'>";
         echo "<tr>";
         echo "<th>";
         echo VAR_LANG_EQUIPES;
@@ -219,7 +219,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         echo "</td>";
         echo "<td>";
         ?>
-        <table class="tableauLieuDateChampionnat">
+        <table>
             <tr>
                 <td><p><?php echo $agenda_lieu; ?></p></td>
                 <td colspan="3">
@@ -346,7 +346,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
             echo "</td>";
             echo "<td>";
             ?>
-            <table class="tableauLieuDateChampionnat">
+            <table>
                 <!--<tr>
 							<td><p><?php echo VAR_LANG_SALLE; ?></p></td>
 							<td><input name="salle<?php echo $k; ?>" type="text" size="20" ></td>

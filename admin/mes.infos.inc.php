@@ -1,4 +1,4 @@
-<div class="pageMesInfos"><?php
+<div><?php
     statInsererPageSurf(__FILE__);
 
     $requeteSQL = "SELECT *, p.adresse, p.ville, p.email, p.telephone, c.club FROM `Personne` p,`ClubsFstb` c WHERE p.`nom`='" . addslashes($_SESSION["__nom__"]) . "' AND p.`prenom`='" . addslashes($_SESSION["__prenom__"]) . "' AND p.`idClub`=c.`id`";
@@ -8,7 +8,7 @@
     $record = mysql_fetch_array($recordset);
 
     echo "<h4>" . $record["nom"] . "&nbsp;" . $record["prenom"] . "</h4>";
-    echo "<div class='mesInfos'>";
+    echo "<div>";
     echo VAR_LANG_USERNAME . " : " . $record["username"] . "<br />";
     echo "Email : ";
     email($record["email"]);
@@ -23,4 +23,5 @@
         echo nl2br($record["experience"]) . "<br />";
         echo "</div>";
     }
-    ?></div>
+    ?>
+</div>

@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div id="sidebar" class="sidebar">
     <?php include('includes/nav.php'); ?>
     <div id="partners">
         <?php

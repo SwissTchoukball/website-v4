@@ -1,7 +1,7 @@
 <?php
 statInsererPageSurf(__FILE__);
 ?>
-<div class="insererContact">
+<div>
     <?php
 
     if ($_POST["action"] == "inserer") {

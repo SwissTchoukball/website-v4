@@ -1,4 +1,4 @@
-<div id="statsClubs">
+<div class="stats-clubs">
     <?php
     echo "<h4>Nombre de clubs</h4>";
     $requeteNombreClubs = "SELECT COUNT(*) AS nbClubsFSTB FROM ClubsFstb WHERE statusId = 1 OR statusId = 2";
@@ -108,7 +108,7 @@
     echo "<th>" . $totalMembresVIP . "</th>";
     echo "<th>" . $totalMembresAutre . "</th>";
     $totalMembres = $totalMembresActifs + $totalMembresJuniors + $totalMembresSoutiens + $totalMembresPassifs + $totalMembresVIP + $totalMembresAutre;
-    echo "<th id='totalMembresFSTB' rowspan='2'>" . $totalMembres . "</th>";
+    echo "<th class='stats-clubs__total-members' rowspan='2'>" . $totalMembres . "</th>";
     echo "</tr>";
 
     echo "<tr>";

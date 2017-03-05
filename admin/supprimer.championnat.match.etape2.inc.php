@@ -15,7 +15,7 @@ if (!(isset($_POST['saison']) AND isset($_POST['categorie']) AND isset($_POST['t
     <form name="supprimerMatch" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return testQqchASupprimer();">
-        <table class="tableauSupprimerMatch">
+        <table class="adminTable">
             <?php
             echo "<tr>";
             echo "<th>X</th>";

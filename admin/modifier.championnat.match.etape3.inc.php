@@ -588,7 +588,7 @@ if (!isset($_GET['idMatch'])) {
                     <?php echo $scoreB; ?>
                 </td>
             </tr>
-            <tr id="periodAdder">
+            <tr id="periodAdder" class="clickable">
                 <td align="center" colspan="3"><span onclick="addPeriod();">Ajouter</span>/<span
                         onclick="removePeriod();">supprimer</span> une période
                 </td>
@@ -850,7 +850,7 @@ if (!isset($_GET['idMatch'])) {
             </tr>
         </table>
         <br/>
-        <table class="tableauLieuDateChampionnat" align="center">
+        <table align="center">
             <!--<tr>
                 <td><p><?php echo VAR_LANG_SALLE; ?></p></td>
                 <td><input name="salle" type="text" size="20" value="<?php echo $salle; ?>" ></td>
@@ -952,7 +952,7 @@ if (!isset($_GET['idMatch'])) {
         <p class="center">Match report&eacute; <input name="matchReporte" type="checkbox"
                                                       onClick="changePartieAgendaReporte(this);"
                                                       class='couleurCheckBox'></p>
-        <table class="tableauLieuDateChampionnat" align="center" style="visibility:hidden" id="partieAgendaReporte">
+        <table align="center" style="visibility:hidden" id="partieAgendaReporte">
             <tr>
                 <td><p><?php echo $agenda_debut; ?></p></td>
                 <td colspan="3">

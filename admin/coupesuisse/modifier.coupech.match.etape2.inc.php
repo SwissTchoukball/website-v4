@@ -4,7 +4,7 @@
 </h3>
 <div class="modifierMatch">
     <p>Séléctionnez le match dont vous souhaitez modifier le score.</p>
-    <table class="tableauMatchsModifierMatchCoupeCH">
+    <table class="adminTable">
         <?php
         echo "<tr>";
         echo "<th>" . VAR_LANG_MATCH . "</th>";
