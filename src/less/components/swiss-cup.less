@@ -1,0 +1,232 @@
+.banniereSiteCoupeSuisse {
+  float: left;
+}
+
+.banniereSiteCoupeSuisse a {
+  margin: 0;
+}
+
+#coupesuisse .descriptionJournee {
+  display: inline-block;
+  padding-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  border-left: 5px solid #e2001a;
+}
+
+.resultatsCoupeCH, .arbreCoupeHuitiemes { /* .resultatsCoupeCH utilisé pour d'anciennes pages de la Coupe Suisse. À conserver */
+  width: 100%;
+  height: 680px;
+  background-image: url('/images/ui/fond-tableau-coupe-suisse.png');
+  background-position: 0 -64px;
+  /*border: black solid 1px;*/
+}
+
+.resultatsMatchsClassement, .resultatsCoupeTschatchli { /* utilisé pour d'anciennes pages de la Coupe Suisse. À conserver */
+  width: 100%;
+  height: 680px;
+  /*background-image: url('/images/ui/fond-tableau-coupe-tschatchli.png');*/
+  clear: left;
+}
+
+.arbreCoupeQuarts {
+  width: 100%;
+  height: 370px;
+  background-image: url('/images/ui/fond-tableau-coupe-suisse-quarts.png');
+  clear: left;
+}
+
+.arbreCoupeDemis {
+  width: 100%;
+  height: 240px;
+  background-image: url('/images/ui/fond-tableau-coupe-suisse-demis.png');
+  clear: left;
+}
+
+.selectionResultatsCoupeCH {
+}
+
+.gagnant {
+  font-weight: bold;
+  color: #E2001A;
+}
+
+.perdant {
+  color: #999999;
+  font-weight: normal;
+}
+
+.ajouer {
+  font-weight: bold;
+  color: black;
+}
+
+.sansequipe:before {
+  content: "-";
+  color: #999999;
+  font-weight: normal;
+}
+
+.informationsMatch {
+  position: fixed;
+  margin-left: 380px;
+  display: none;
+  width: 400px;
+  background-color: white;
+  border: 2px solid #e2001a;
+  text-align: center;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.informationsBoxJournee {
+  text-align: left;
+  float: left;
+}
+
+.informationsBoxTypeMatch {
+  text-align: right;
+}
+
+.informationsBoxEquipes {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.informationsBoxScore {
+  font-weight: bold;
+}
+
+.informationsBoxSet {
+}
+
+.informationsBoxLieu {
+  margin-top: 5px;
+  text-align: right;
+}
+
+.informationsBoxDate {
+  margin-top: 5px;
+  text-align: left;
+  float: left;
+}
+
+.boxTour1, .boxTour2, .boxTour3, .boxTour4, .colonneHuitiemes, .colonneQuarts, .colonneDemis, .colonneFinales {
+  width: 130px;
+  padding: 5px;
+}
+
+.boxTour1, .colonneHuitiemes {
+  float: left;
+}
+
+.boxTour2, .colonneQuarts {
+  float: left;
+  margin-left: 30px;
+}
+
+.boxTour3, .colonneDemis {
+  float: left;
+  margin-left: 30px;
+}
+
+.boxTour4, .colonneFinales {
+  float: left;
+  margin-left: 30px;
+}
+
+.boxTour5 { /* ??? P-e une édition précédente utilisait ça ? */
+  width: 120px;
+  padding: 5px;
+  margin-left: 30px;
+}
+
+.arbreCoupeQuarts .colonneQuarts {
+  padding-left: 145px;
+}
+
+.arbreCoupeDemis .colonneDemis {
+  padding-left: 315px;
+}
+
+.boxEquipe1A, .boxEquipe1B, .boxEquipe2A, .boxEquipe2B, .boxEquipe3A, .boxEquipe3B, .boxEquipe4A, .boxEquipe4B, .boxEquipe5A, .boxEquipe5B {
+  border: 1px black solid;
+  width: 140px;
+  height: 16px;
+  text-align: center;
+  padding: 5px;
+  margin: 0;
+  background-color: white;
+}
+
+.boxEquipe1A {
+  margin-top: 8px;
+  margin-bottom: 2px;
+}
+
+.boxEquipe1B {
+  margin-top: 2px;
+  /* margin-bottom: 8px; */
+}
+
+.boxEquipe2A {
+  margin-top: 40px;
+  margin-bottom: 2px;
+}
+
+.boxEquipe2B {
+  margin-top: 2px;
+  margin-bottom: 74px;
+}
+
+.boxEquipe3A {
+  margin-top: 107px;
+  margin-bottom: 2px;
+}
+
+.boxEquipe3B {
+  margin-top: 2px;
+  margin-bottom: 206px;
+}
+
+.boxEquipe4A {
+  margin-top: 240px;
+  margin-bottom: 2px;
+}
+
+.boxEquipe4B {
+  margin-top: 2px;
+  /* margin-bottom: 470px; remettre pour la version php*/
+}
+
+.boxEquipe5A {
+  margin-top: 504px;
+  margin-bottom: 2px;
+}
+
+.boxEquipe5B {
+  margin-top: 2px;
+}
+
+.colonneFinales .boxEquipe1B, .colonneFinales .boxEquipe2B, .colonneFinales .boxEquipe3B, .colonneFinales .boxEquipe4B {
+  margin-bottom: 0;
+}
+
+// ADMIN
+.insererEditionCoupeCH label {
+  float: left;
+  width: 370px;
+  text-align: right;
+}
+
+.insererEditionCoupeCH input, .insererEditionCoupeCH select, .insererEditionCoupeCH textarea, .insererEditionCoupeCH .traceFormulaire {
+  display: block;
+  margin-left: 375px;
+  margin-bottom: 10px;
+}
+
+.insererEditionCoupeCH .traceFormulaire {
+  line-height: 1;
+}

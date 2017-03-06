@@ -3,11 +3,11 @@ include "date.inc.php";
 
 function printMessage($message, $type = 'info')
 {
+    $class = 'notification';
     if ($type == 'error' || $type == 'success') {
-        echo '<p class="' . $type . '">' . $message . '</p>';
-    } else {
-        echo '<p class="info">' . $message . '</p>';
+        $class .= ' notification--' . $type;
     }
+    echo '<p class="' . $class . '">' . $message . '</p>';
     return $message;
 }
 
@@ -111,24 +111,24 @@ function afficherPersonne($record, $mode = "FULL")
             echo "<br />";
         }
         if ($record["telephone"] != "") {
-            echo "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($record["telephone"]) . "'>" . $record["telephone"] . "</a><br />";
+            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephone"]) . "'>" . $record["telephone"] . "</a><br />";
         }
         if ($record["portable"] != "") {
-            echo "<a class='mobile sideIcon' href='tel:" . formatPhoneNumber($record["portable"]) . "'>" . $record["portable"] . "</a><br />";
+            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($record["portable"]) . "'>" . $record["portable"] . "</a><br />";
         }
     }
 }
 
 function showPerson($person, $hidePicture = false)
 {
-    echo '<div class="fichePersonne">';
+    echo '<div class="person-panel">';
     // Affichage de la photo
     if (!$hidePicture) {
         $imageFile = nomFichierPhotoValide(VAR_IMAGE_PORTRAITS_PATH . rewrite($person["prenom"]) . "_" . rewrite($person["nom"]) . ".png");
         strtolower(nomPhotoValide($person["nom"], $person["prenom"], null, "png"));
         if (is_file($imageFile)) {
-            echo "<div class='imagePortrait'>";
-            echo "<img src='https://" . $_SERVER['SERVER_NAME'] . "/" . $imageFile . "' alt='" . $person["prenom"] . " " . $person["nom"] . "' />";
+            echo "<div class='person-panel__photo'>";
+            echo "<img src='/" . $imageFile . "' alt='" . $person["prenom"] . " " . $person["nom"] . "' />";
             echo "</div>";
         } else {
             echo '<!--' . $imageFile . '-->';
@@ -136,7 +136,7 @@ function showPerson($person, $hidePicture = false)
     }
 
     // Affichage des coordonnées
-    echo '<span class="nomPersonne">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
+    echo '<span class="person-panel__name">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
     echo $person["adresse"] . "<br>";
     echo $person["cp"] != '' ? $person["cp"] . "<br>" : '';
     echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
@@ -149,8 +149,8 @@ function showPerson($person, $hidePicture = false)
     }
     email($email);
     echo "<br />";
-    echo $person['telPrive'] != '' ? "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
-    echo $person['portable'] != '' ? "<a class='mobile sideIcon' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
+    echo $person['telPrive'] != '' ? "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
+    echo $person['portable'] != '' ? "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
 
     // Affichage des langues parlées
     $spokenLanguagesQuery = "SELECT l.idLangue, l.descriptionLangue" . $_SESSION['__langue__'] . " as descriptionLangue
@@ -159,7 +159,7 @@ function showPerson($person, $hidePicture = false)
                              AND rlp.idPersonne = '" . $person['idDbdPersonne'] . "'";
     $spokenLanguagesData = mysql_query($spokenLanguagesQuery);
     if (mysql_num_rows($spokenLanguagesData) > 0) {
-        echo '<div class="spokenLanguages">';
+        echo '<div class="person-panel__spoken-languages">';
         while ($spokenLanguages = mysql_fetch_array($spokenLanguagesData)) {
             echo "<img src='" . VAR_IMAGE_LANGUE . $spokenLanguages["idLangue"] . ".png' alt='" . $spokenLanguages['descriptionLangue'] . "' /> ";
         }
@@ -551,7 +551,7 @@ function showDomainHead($domainID)
 
 function showCommitteeMember($committeeMember)
 {
-    echo "<div class='ficheComite'>";
+    echo "<div class='two-col-card'>";
 
     if ($committeeMember['idSexe'] == 3) {
         $functionTitle = $committeeMember['titreF'];
@@ -559,11 +559,11 @@ function showCommitteeMember($committeeMember)
         $functionTitle = $committeeMember['titreH'];
     }
     echo "<h2>" . $functionTitle . "</h2>";
-    echo '<div class="contenu">';
+    echo '<div class="two-col-card__content">';
 
     showPerson($committeeMember);
 
-    echo "<div class='responsabiliteComite'>";
+    echo "<div class='two-col-card__content__second-column'>";
     $responsabilitiesQuery = "SELECT cr.nom" . $_SESSION['__langue__'] . " AS nom, cr.lien
                               FROM Comite_Responsabilites cr
                               WHERE cr.idResponsable=" . $committeeMember['idDbdPersonne'];
@@ -572,11 +572,13 @@ function showCommitteeMember($committeeMember)
                          WHERE comm.idMembreComite=" . $committeeMember['idDbdPersonne'];
     $respAndCommQuery = "(" . $responsabilitiesQuery . ") UNION (" . $commissionsQuery . ")";
     $respAndCommData = mysql_query($respAndCommQuery);
+    echo "<h5>";
     if (mysql_num_rows($respAndCommData) > 1) {
         echo VAR_LANG_DOMAINES_RESPONSABILITE;
     } else {
         echo VAR_LANG_DOMAINE_RESPONSABILITE;
     }
+    echo "</h5>";
     echo "<ul>";
     while ($respAndComm = mysql_fetch_assoc($respAndCommData)) {
         $lien = $respAndComm['lien'];
@@ -594,17 +596,17 @@ function showCommitteeMember($committeeMember)
 
 function showCommission($commission)
 {
-    echo "<div class='ficheCommission' id='c" . $commission["id"] . "'>";
+    echo "<div class='two-col-card' id='c" . $commission["id"] . "'>";
     echo $commission["lien"] != '' ? '<a href="' . $commission["lien"] . '">' : '';
     echo "<h2>" . $commission["nomCommission"] . "</h2>";
     echo $commission["lien"] != '' ? '</a>' : '';
 
-    echo '<div class="contenu">';
+    echo '<div class="two-col-card__content">';
     if ($commission['idDbdPersonne'] != null) {
         showPerson($commission);
     }
 
-    echo "<div class='membresCommission'>";
+    echo "<div class='two-col-card__content__second-column'>";
     $membersQuery = "SELECT *
                     FROM Commission_Membre cm, DBDPersonne p
                     WHERE cm.idPersonne = p.idDbdPersonne
@@ -613,13 +615,13 @@ function showCommission($commission)
     $membersResult = mysql_query($membersQuery);
 
     if (mysql_num_rows($membersResult) > 0) {
-        echo "Membre(s) :<br/>";
+        echo "<h5>Membres</h5>";
         echo "<ul>";
         while ($member = mysql_fetch_array($membersResult)) {
             echo "<li>";
             echo stripslashes($member["prenom"]) . " " . stripslashes($member["nom"]);
             if ($member['fonction'] != null) {
-                echo ' <span class="fonction">' . $member['fonction'] . '</span>';
+                echo ' <span class="li__complement">' . $member['fonction'] . '</span>';
             }
             echo "</li>";
         }
@@ -1014,18 +1016,6 @@ function ajouterSSiPluriel($word, $number)
     } else {
         return $word;
     }
-}
-
-function printEWCMatchesTypesKey()
-{
-    echo '<h4>' . VAR_LANG_LEGENDE . '</h4>';
-    echo '<ul class="EWCMatchesTypesKey">';
-    $matchesTypesQuery = 'SELECT name' . $_SESSION['__langue__'] . ' AS name, initial FROM EWC_MatchesTypes ORDER BY `order`';
-    $matchesTypesData = mysql_query($matchesTypesQuery);
-    while ($matchType = mysql_fetch_assoc($matchesTypesData)) {
-        echo '<li><span class="competitionIcon">' . $matchType['initial'] . '</span> ' . $matchType['name'] . '</li>';
-    }
-    echo '</ul>';
 }
 
 

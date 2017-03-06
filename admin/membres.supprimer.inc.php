@@ -29,9 +29,9 @@ $requestMembre =
 	LIMIT 1";
 $resultMembre = mysql_query($requestMembre);
 if (!$resultMembre) {
-    echo "<p class='error'>Erreur lors de la collecte d'information sur le membre à supprimer.</p>";
+    echo "<p class='notification notification--error'>Erreur lors de la collecte d'information sur le membre à supprimer.</p>";
 } elseif (mysql_num_rows($resultMembre) < 1) {
-    echo "<p class='error'>Le membre que vous voulez supprimer n'existe pas.</p>";
+    echo "<p class='notification notification--error'>Le membre que vous voulez supprimer n'existe pas.</p>";
 } else {
     $member = mysql_fetch_assoc($resultMembre);
 

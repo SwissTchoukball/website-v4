@@ -7,7 +7,7 @@
     </div>
     <div ng-if="!$ctrl.team.feePaymentDate">
         <p>Non-payés</p>
-        <p class="info">
+        <p class="notification">
             Merci d'effectuer le paiement des <strong>CHF {{$ctrl.team.edition.teamRegistrationFee}}</strong>
             d'ici au <strong>{{$ctrl.team.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
             sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
@@ -25,7 +25,7 @@
 <p><a ng-href="/lieu/{{$ctrl.team.homeVenue.id}}">{{$ctrl.team.homeVenue.name}}</a></p>
 <h3>{{$ctrl.players.length}} joueuses ou joueurs</h3>
 <!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
-<p class="info" ng-if="$ctrl.unpaidLicensesCost > 0">
+<p class="notification" ng-if="$ctrl.unpaidLicensesCost > 0">
     Merci d'effectuer le paiement des <strong>CHF {{$ctrl.unpaidLicensesCost}}</strong> restant
     sur le CCP de Swiss Tchoukball, <strong>20-8957-2</strong>,
     pour valider les licences de vos joueurs.
@@ -44,7 +44,7 @@
 <!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
 <form ng-if="$ctrl.team.feePaymentDate !== undefined"
       name="addPlayersForm"
-      class="adminForm"
+      class="st-form"
       novalidate>
     <label>Ajouter des joueurs</label>
     <tags-input ng-model="$ctrl.newPlayers"
@@ -57,7 +57,7 @@
                        display-property="fullName">
         </auto-complete>
     </tags-input>
-    <div class="formActions">
+    <div class="st-form__actions">
         <button class="button button--primary"
                 ng-click="$ctrl.submitNewPlayers()"
                 ng-disabled="addPlayersForm.$invalid || $ctrl.sendingNewPlayers">

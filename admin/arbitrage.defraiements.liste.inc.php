@@ -115,7 +115,7 @@ if ($matchesByRefereeResult = mysql_query($matchesByRefereeQuery)) {
     printErrorMessage("Problème lors de la récupération de la liste des arbitres");
 }
 
-echo '<table id="refereeDefrayal" class="adminTable alternateBackground">';
+echo '<table id="refereeDefrayal" class="st-table st-table--alternate-bg">';
 echo '<tr>';
 echo '<th>' . ucfirst(VAR_LANG_ARBITRE) . '</th>';
 echo '<th>' . ucfirst(VAR_LANG_NIVEAU) . '</th>';
@@ -132,10 +132,11 @@ foreach ($matchesByReferee as $refereeID => $referee) {
     echo '<tr id="referee-' . $refereeID . '">';
     echo '<td>' . $referee['firstname'] . ' ' . $referee['lastname'] . '</td>';
     echo '<td>' . chif_rome($referee['level']) . '</td>';
-    echo '<td class="nbMatches">';
+    echo '<td>';
+    echo '<ul class="inline-list">';
     $refereeDefrayalAmount = 0;
     foreach ($referee['matchesByCategory'] as $category => $nbMatchs) {
-        echo '<span>' . $categories[$category]['name'] . ' : ' . $nbMatchs . '</span>';
+        echo '<li>' . $categories[$category]['name'] . ' : ' . $nbMatchs . '</li>';
 
         $refereeDefrayalAmount += $nbMatchs * $categories[$category]['defrayalAmount'];
         $totalDefrayalAmounts[$category] += $nbMatchs * $categories[$category]['defrayalAmount'];
@@ -143,6 +144,7 @@ foreach ($matchesByReferee as $refereeID => $referee) {
     if ($refereeDefrayalAmount == 0) {
         echo "Pas de matchs entiers";
     }
+    echo '</ul>';
     echo '</td>';
     echo '<td>CHF ' . $refereeDefrayalAmount . '</td>';
     if ($season > 2014) {

@@ -1,4 +1,4 @@
-<div class="supprimerNews">
+<div>
     <?php
     statInsererPageSurf(__FILE__);
 
@@ -11,7 +11,7 @@
         echo "<h4>Suppression effectuée avec succès</h4>";
     }
     ?>
-    <table class="tableauSupprimerNews">
+    <table class="st-table">
         <?php
         echo "<tr>";
         echo "<th>Date</th>";

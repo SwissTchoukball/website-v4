@@ -44,87 +44,91 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
     }
     ?>
 
-    <form class="formulaireAligne" name="editerVacances" method="post"
+    <form class="st-form" name="editerVacances" method="post"
           action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>">
         <fieldset>
-            <label for="nom">Nom : </label>
+            <label for="nom">Nom</label>
             <input type="text" id="nom" name="nom" size="30" autofocus="autofocus"
                    value="<?php echo $nomVacances ?>"/><br/><br/>
-            <label> Date de début : </label>
-            <select name="jourDebut">
-                <?php
-                for ($jour = 1; $jour <= 31; $jour++) {
-                    if ($jourDebut == $jour) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+            <label>Date de début</label>
+            <div class="st-form__date">
+                <select name="jourDebut">
+                    <?php
+                    for ($jour = 1; $jour <= 31; $jour++) {
+                        if ($jourDebut == $jour) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
                     }
-                    echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
-                }
-                ?>
-            </select>
-            <select name="moisDebut">
-                <?php
-                for ($mois = 1; $mois <= 12; $mois++) {
-                    if ($moisDebut == $mois) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+                    ?>
+                </select>
+                <select name="moisDebut">
+                    <?php
+                    for ($mois = 1; $mois <= 12; $mois++) {
+                        if ($moisDebut == $mois) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
                     }
-                    echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
-                }
-                ?>
-            </select>
-            <select name="anneeDebut">
-                <?php
-                for ($annee = 2009; $annee <= 2030; $annee++) {
-                    if ($anneeDebut == $annee) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+                    ?>
+                </select>
+                <select name="anneeDebut">
+                    <?php
+                    for ($annee = 2009; $annee <= 2030; $annee++) {
+                        if ($anneeDebut == $annee) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
                     }
-                    echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
-                }
-                ?>
-            </select><br/><br/>
-            <label> Date de fin : </label>
-            <select name="jourFin">
-                <?php
-                for ($jour = 1; $jour <= 31; $jour++) {
-                    if ($jourFin == $jour) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+                    ?>
+                </select>
+            </div>
+            <label>Date de fin</label>
+            <div class="st-form__date">
+                <select name="jourFin">
+                    <?php
+                    for ($jour = 1; $jour <= 31; $jour++) {
+                        if ($jourFin == $jour) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
                     }
-                    echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
-                }
-                ?>
-            </select>
-            <select name="moisFin">
-                <?php
-                for ($mois = 1; $mois <= 12; $mois++) {
-                    if ($moisFin == $mois) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+                    ?>
+                </select>
+                <select name="moisFin">
+                    <?php
+                    for ($mois = 1; $mois <= 12; $mois++) {
+                        if ($moisFin == $mois) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
                     }
-                    echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
-                }
-                ?>
-            </select>
-            <select name="anneeFin">
-                <?php
-                for ($annee = 2009; $annee <= 2030; $annee++) {
-                    if ($anneeFin == $annee) {
-                        $selected = " selected='selected'";
-                    } else {
-                        $selected = "";
+                    ?>
+                </select>
+                <select name="anneeFin">
+                    <?php
+                    for ($annee = 2009; $annee <= 2030; $annee++) {
+                        if ($anneeFin == $annee) {
+                            $selected = " selected='selected'";
+                        } else {
+                            $selected = "";
+                        }
+                        echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
                     }
-                    echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
-                }
-                ?>
-            </select><br/><br/>
-            <label for="idCanton">Canton : </label>
+                    ?>
+                </select>
+            </div>
+            <label for="idCanton">Canton</label>
             <select id="idCanton" name="idCanton">
                 <?php
                 $requeteCantons = "SELECT * FROM Calendrier_Cantons WHERE id!=100 ORDER BY id";
@@ -140,7 +144,6 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                 ?>
             </select>
             <input type="hidden" name="idVacances" value="<?php echo $idVacances; ?>"/><br/>
-            <label>&nbsp;</label>
             <input type="submit" value="Enregistrer"/>
         </fieldset>
     </form>

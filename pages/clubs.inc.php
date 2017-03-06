@@ -127,25 +127,25 @@ while ($record = mysql_fetch_array($recordset)) {
     }
     echo "<br />";
     if ($record['telephoneClub'] != "") {
-        echo "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($record["telephoneClub"]) . "'>" . $record['telephoneClub'] . "</a><br />";
+        echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephoneClub"]) . "'>" . $record['telephoneClub'] . "</a><br />";
     } else {
         if ($record["telephonePresident"] != "") {
-            echo "<a class='phone sideIcon' href='tel:" . formatPhoneNumber($record["telephonePresident"]) . "'>" . $record["telephonePresident"] . "</a><br />";
+            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephonePresident"]) . "'>" . $record["telephonePresident"] . "</a><br />";
         }
         if ($record["portablePresident"] != "") {
-            echo "<a class='mobile sideIcon' href='tel:" . formatPhoneNumber($record["portablePresident"]) . "'>" . $record["portablePresident"] . "</a><br />";
+            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($record["portablePresident"]) . "'>" . $record["portablePresident"] . "</a><br />";
         }
     }
 
     // lien sur le site du club
     if ($record["url"] != "") {
-        echo "<a class='website sideIcon' href='" . addhttp($record["url"]) . "' target='_blank'>" . $record["url"] . "</a><br />";
+        echo "<a class='website side-icon-left' href='" . addhttp($record["url"]) . "' target='_blank'>" . $record["url"] . "</a><br />";
     }
     if ($record["facebookUsername"] != "") {
-        echo "<a class='facebook sideIcon' href='" . addhttp("facebook.com/" . $record["facebookUsername"]) . "' target='_blank'>" . $record["facebookUsername"] . "</a><br />";
+        echo "<a class='facebook side-icon-left' href='" . addhttp("facebook.com/" . $record["facebookUsername"]) . "' target='_blank'>" . $record["facebookUsername"] . "</a><br />";
     }
     if ($record["twitterUsername"] != "") {
-        echo "<a class='twitter sideIcon' href='" . addhttp("twitter.com/" . $record["twitterUsername"]) . "' target='_blank'>@" . $record["twitterUsername"] . "</a><br />";
+        echo "<a class='twitter side-icon-left' href='" . addhttp("twitter.com/" . $record["twitterUsername"]) . "' target='_blank'>@" . $record["twitterUsername"] . "</a><br />";
     }
     echo '</div>';
     echo "<img class='logoClub' src='" . VAR_IMAGE_LOGO_CLUBS . "" . $idLogo . ".png' />";

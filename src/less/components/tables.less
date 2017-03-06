@@ -1,0 +1,77 @@
+.st-table {
+  margin: auto;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+
+  tr {
+    border-bottom: 1px solid #CC3333;
+
+    &.clickable-row {
+      cursor: pointer;
+
+      &:hover td {
+        background-color: #ffcccc;
+      }
+    }
+  }
+
+  th {
+    padding: 2px 5px;
+  }
+
+  td {
+    padding: 2px 5px;
+    &.action {
+      text-align: center;
+      width: 40px;
+    }
+
+    &.gender, &.canton {
+      width: 20px;
+    }
+
+    &.notOK {
+      background-color: #CC3333;
+      color: white;
+    }
+  }
+
+  tfoot {
+    border-top: 2px solid #CC3333;
+  }
+
+  &--spaced {
+    td, th {
+      padding: 5px;
+    }
+  }
+
+  &--alternate-bg tr:nth-child(even) {
+    background-color: #ffeeee;
+  }
+
+  &--centered-content td {
+    text-align: center;
+  }
+
+  &__ok {
+    background-color: #77ee77;
+  }
+
+  &__wrong {
+    background-color: #ffdddd;
+  }
+
+  &__disabled {
+    background-color: #CCC;
+    color: #888;
+  }
+
+  &__dimmed {
+    opacity: 0.75;
+  }
+
+  &.detailed {
+    font-size: 12px;
+  }
+}

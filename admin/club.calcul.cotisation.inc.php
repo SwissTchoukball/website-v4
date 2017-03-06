@@ -39,7 +39,7 @@
 					GROUP BY p.idClub";
     //echo $clubRequest;
 
-    $clubResult = mysql_query($clubRequest) or die ("<p class='error'>Mauvaise requête</p>");
+    $clubResult = mysql_query($clubRequest) or die ("<p class='notification notification--notification notification--error'>Mauvaise requête</p>");
     $clubData = mysql_fetch_array($clubResult);
 
     $clubId = $clubData['idClub'];
@@ -88,9 +88,9 @@
         }
     }
     if ($_SESSION["__nbIdClub__"] == 15 AND $_SESSION['__userLevel__'] > 5) {
-        echo "<p class='info'>Aucun club n'est associé à votre compte.</p>";
+        echo "<p class='notification'>Aucun club n'est associé à votre compte.</p>";
     } else if (!$isManager) {
-        echo "<p class='info'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes.</p>";
+        echo "<p class='notification'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes.</p>";
     } else {
         echo "<h4>" . $clubName . "</h4>";
 
@@ -101,7 +101,7 @@
         // On affiche le tableau si le club n'est pas adhérent passif
         if ($clubStatusId != 2) {
             ?>
-            <table>
+            <table class="st-table st-table--spaced">
                 <thead>
                 <tr>
                     <th></th>
@@ -264,7 +264,7 @@
         }
         ?>
         <h3>CCP <?php echo VAR_LANG_ASSOCIATION_NAME; ?></h3>
-        <div class='ccpFSTB'>20-8957-2</div>
+        <div class='ccp-number'>20-8957-2</div>
         <?php
     }
 

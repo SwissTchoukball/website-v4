@@ -1,0 +1,192 @@
+.st-form {
+  // TODO: Separate form layout from single elements design
+
+  fieldset {
+    width: 100%;
+    margin: auto;
+    position: relative;
+    margin-top: 30px;
+    border: none;
+
+    &:hover {
+      background: none; /* Correction d'un bug d'Internet Explorer. */
+      z-index: 500; /* On définit une valeur pour l'ordre d'affichage. */
+    }
+  }
+
+  legend {
+    font-size: 20px;
+    font-weight: bold;
+    color: #CC3333;
+  }
+
+  span {
+    &#addressPreview, &#infoPreview {
+      position: absolute;
+      width: 180px;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  div.inlineinfo {
+    margin-left: 110px;
+    margin-bottom: 10px;
+  }
+
+  input, select, textarea, h4, .givenData {
+    display: block;
+    width: 400px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  input, select, textarea {
+    border-color: #CCCCCC;
+    -webkit-font-smoothing: antialiased;
+    padding: 8px;
+    margin-top: 0;
+
+    &:focus {
+      border-color: #FF9999;
+      outline: none;
+      -webkit-box-shadow: 0 0 5px #FF9999;
+      -moz-box-shadow: 0 0 5px #FF9999;
+      box-shadow: 0 0 5px #FF9999;
+    }
+  }
+
+  input, textarea {
+    &.ng-invalid.ng-touched, &.ng-invalid.ng-touched .tags {
+      background-color: #FF9999;
+      box-shadow: none;
+    }
+
+    &[readonly] {
+      background-color: #eeeeee;
+      color: #777777;
+    }
+  }
+
+  input {
+    &[type=submit] {
+      width: auto;
+      margin: auto;
+      margin-top: 20px;
+    }
+
+    &[type=checkbox] {
+      margin-left: 260px;
+      height: 30px;
+    }
+  }
+
+  select {
+    height: 35px;
+  }
+
+  .tags {
+    margin-bottom: 10px;
+    width: 400px;
+    border-color: #cccccc;
+
+    input {
+      width: 20px;
+
+      &:focus {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  label {
+    float: left;
+    display: block;
+    font-size: 14px;
+    width: 250px;
+    height: 20px;
+    color: #666;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 10px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  input[type=text], textarea, .tags {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 400px;
+    margin-bottom: 10px;
+
+    td {
+      border: 1px solid #cccccc;
+      padding: 5px;
+
+      &.notCell {
+        border: none;
+      }
+
+      &.amountTotal {
+        font-weight: bold;
+      }
+    }
+  }
+
+  form h4 {
+    font-size: 14px;
+    margin-top: 15px;
+    color: #CC3333;
+    padding: 2px;
+    border: none;
+    background: none;
+    font-weight: normal;
+  }
+
+  &--oneline {
+    input {
+      display: inline-block;
+    }
+  }
+
+  &__side-info {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 100px;
+  }
+
+  &__date {
+    margin-left: 90px;
+
+    select {
+      width: auto;
+      display: inline;
+    }
+
+    span {
+      padding-left: 5px;
+    }
+  }
+
+  &__actions {
+    text-align: center;
+  }
+
+  .givenData {
+    padding-top: 10px;
+    width: auto;
+  }
+}
+
+textarea.big-field {
+  width: 100%;
+  min-height: 300px;
+}

@@ -1,12 +1,7 @@
-<?php
-if ($_SESSION["debug_tracage"]) {
-    echo __FILE__ . "<BR>";
-}
-statInsererPageSurf(__FILE__);
-?>
+<!-- Keeping this page as archive -->
 <div class="presentation">
     <h4><?php echo $VAR_G_JOURS_SEMAINE[5] ?> 24.07.2009</h4><br/>
-    <table class="tableauProgrammeWG">
+    <table style="width: 550px">
         <tr>
             <th><?php echo VAR_LANG_CATEGORIE; ?></th>
             <th><?php echo VAR_LANG_HEURE; ?></th>
@@ -135,7 +130,7 @@ statInsererPageSurf(__FILE__);
         </tr>
     </table>
     <h4><?php echo $VAR_G_JOURS_SEMAINE[6] ?> 25.07.2009</h4><br/>
-    <table class="tableauProgrammeWG">
+    <table style="width: 550px">
         <tr>
             <th><?php echo VAR_LANG_CATEGORIE; ?></th>
             <th><?php echo VAR_LANG_HEURE; ?></th>
@@ -255,7 +250,7 @@ statInsererPageSurf(__FILE__);
         </tr>
     </table>
     <h4><?php echo $VAR_G_JOURS_SEMAINE[0] ?> 26.07.2009</h4><br/>
-    <table class="tableauProgrammeWG">
+    <table style="width: 550px">
         <tr>
             <th><?php echo VAR_LANG_CATEGORIE; ?></th>
             <th><?php echo VAR_LANG_HEURE; ?></th>

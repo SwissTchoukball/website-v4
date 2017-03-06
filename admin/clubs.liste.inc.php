@@ -1,4 +1,4 @@
-<table class="adminTable">
+<table class="st-table">
     <thead>
     <tr>
         <th>Adresse</th>
@@ -31,7 +31,7 @@
         if ($clubIsAffiliated) {
             echo '<tr>';
         } else {
-            echo '<tr class="dimmed">';
+            echo '<tr class="st-table__dimmed">';
         }
         ?>
         <td>

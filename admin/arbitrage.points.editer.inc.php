@@ -76,7 +76,7 @@ if (hasRefereeManagementAccess()) {
     <?php
     echo '<h2>' . $titleAction . ' de points d\'arbitres</h2>';
 
-    echo '<form name="editRefereePoints" action="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&gerer" method="post" class="adminForm">';
+    echo '<form name="editRefereePoints" action="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&gerer" method="post" class="st-form">';
 
     echo '<label for="refereeID">' . ucfirst(VAR_LANG_ARBITRE) . '</label>';
     echo '<select name="refereeID" id="refereeID">';

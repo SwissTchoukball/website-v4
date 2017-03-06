@@ -1,7 +1,7 @@
 <h4>Situation actuelle</h4>
 <form id="etatCotisations" method="post"
       action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
-    <table>
+    <table class="st-table">
         <tr>
             <th>Saison</th>
             <th>Club</th>
@@ -9,7 +9,7 @@
             <th>Payé</th>
         </tr>
         <?php
-        $anneePassee = date('Y') - 1;
+        $anneePassee = date('Y') - 2;
         $debugMessage = "";
 
         //Affichage de la liste des clubs avec leur état actuel de paiemenet de cotisations
@@ -64,7 +64,7 @@
                 }
             }
             ?>
-            <tr class="<?php echo $montantPaye ? "paye" : "nonPaye"; ?>">
+            <tr class="<?php echo $montantPaye ? "st-table__ok" : "st-table__wrong"; ?>">
                 <td><?php echo $saison; ?></td>
                 <td><?php echo $club; ?></td>
                 <td><?php echo $montant . " CHF"; ?></td>
@@ -89,7 +89,7 @@
         }
         ?>
     </table>
-    <input type="submit" value="Valider"/>
+    <input type="submit" value="Valider" class="button button--primary"/>
 </form>
 <script>
     $(function () {

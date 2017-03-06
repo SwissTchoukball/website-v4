@@ -18,7 +18,7 @@
                 $messageErreurLogin = "Erreur inconnue.";
         }
 
-        echo '<p class="error">' . $messageErreurLogin . '</p>';
+        echo '<p class="notification notification--error">' . $messageErreurLogin . '</p>';
     }
 
     printMessage("Un nom d'utilisateur doit désormais être indiqué en lieu et place de votre nom et prénom.<br />" .

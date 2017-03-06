@@ -21,9 +21,9 @@
     echo "<h4>" . $clubName . "</h4><br />";
 
     if (!$_SESSION['__gestionMembresClub__']) {
-        echo "<p class='info'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club (Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes)</p>";
+        echo "<p class='notification'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club (Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes)</p>";
     } elseif ($unpaidFees) {
-        echo "<p class='info'>Vous ne pouvez pas faire de modification car le paiement de la cotisation n'a pas encore été confirmé.</p>";
+        echo "<p class='notification'>Vous ne pouvez pas faire de modification car le paiement de la cotisation n'a pas encore été confirmé.</p>";
     } else {
         ?>
         <p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img

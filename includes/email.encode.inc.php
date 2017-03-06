@@ -33,7 +33,7 @@ function email($email)
     if ($tout) {
         $email .= "var f='$tout';";
     }
-    $email .= "document.write('<a class=\"email sideIcon\" href=\"mailto:'+e";
+    $email .= "document.write('<a class=\"email side-icon-left\" href=\"mailto:'+e";
     if ($tout) {
         $email .= "+f";
     }
@@ -64,7 +64,7 @@ function emailperso($email, $texte, $sujet)
     if ($tout) {
         $email .= "var f='$tout';";
     }
-    $email .= "document.write('<a class=\"email sideIcon\" href=\"mailto:'+e";
+    $email .= "document.write('<a class=\"email side-icon-left\" href=\"mailto:'+e";
     if ($tout) {
         $email .= "+f";
     }

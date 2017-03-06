@@ -448,14 +448,14 @@ if ($canEdit) {
           onsubmit="return checkMemberForm();"
           name="memberEdit"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"
-          class="adminForm">
+          class="st-form">
         <fieldset>
             <?php
             if ($isInvolvedInFederation && !hasAllMembersManagementAccess()) {
                 $canEditName = false;
             } else {
                 $canEditName = true;
-                echo '<span class="infobulle">Donner soit le nom et le prénom, soit la raison sociale,
+                echo '<span class="st-form__side-info tooltip">Donner soit le nom et le prénom, soit la raison sociale,
                       ou bien les deux.</span>';
             }
             ?>
@@ -486,11 +486,11 @@ if ($canEdit) {
                 $canEditDetails = false;
             } else {
                 $canEditDetails = true;
-                echo '<span class="infobulle">Au moins la première des deux lignes d\'adresse doit être remplie.
+                echo '<span class="st-form__side-info tooltip">Au moins la première des deux lignes d\'adresse doit être remplie.
                       Mettre le numéro sur la même ligne que la rue.</span>';
             }
             ?>
-            <span id="addressPreview"><!-- rempli avec du Javascript --></span>
+            <span id="addressPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
             <label for="address1">Adresse</label>
             <input type="text" id="address1" name="address1" onkeyup="updateAddressPreview();"
                    value="<?php echo $address1; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
@@ -564,7 +564,7 @@ if ($canEdit) {
             ?>
         </fieldset>
         <fieldset>
-            <span class="infobulle">Pour les membres actifs et juniors, la date de naissance est obligatoire.</span>
+            <span class="st-form__side-info tooltip">Pour les membres actifs et juniors, la date de naissance est obligatoire.</span>
             <label for="statutID">Statut</label>
             <?php
             // Out of the deletion period, we can change the status of a member only if he's not active.
@@ -606,7 +606,7 @@ if ($canEdit) {
             }
             ?>
             <label for="birthDateDay">Date de naiss.</label>
-            <div class="birthDate">
+            <div class="st-form__date">
                 <select id="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
                     <option value="0">-</option>
                     <?php echo modif_liste_jour(jour($birthDate)); ?>
@@ -821,14 +821,14 @@ if ($canEdit) {
 
             if (!$isInvolvedInFederation) {
                 ?>
-                <p class="delete-member">
+                <p class="tooltip-container">
                     <a href="?menuselection=<?php echo $menuselection;
                     ?>&smenuselection=<?php echo $smenuselection;
                     ?>&delete=<?php echo $memberID; ?>"
                        onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
                         Supprimer <?php echo $name; ?>
                     </a>
-                    <span>
+                    <span class="tooltip tooltip--visible-on-hover">
                         <strong>Attention !</strong> Il ne faut supprimer un membre que s'il sort complètement du
                         tchoukball.<br/>
                         Si le membre change de club, effectuez une demande de transfert (voir le lien ci-dessus).

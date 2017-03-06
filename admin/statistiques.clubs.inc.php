@@ -1,4 +1,4 @@
-<div id="statsClubs">
+<div class="stats-clubs">
     <?php
     echo "<h4>Nombre de clubs</h4>";
     $requeteNombreClubs = "SELECT COUNT(*) AS nbClubsFSTB FROM ClubsFstb WHERE statusId = 1 OR statusId = 2";
@@ -93,9 +93,9 @@
             $saveStatisticsQuery = "INSERT INTO DBDStatsClubs (idClub, date, nbMembresActifs, nbMembresJuniors, nbMembresSoutiens, nbMembresPassifs, nbMembresVIP, nbMembresAutres) VALUES (".$donnees['id'].", '".date('Y-m-d')."', ".$donnees['nbMembresActifs'].", ".$donnees['nbMembresJuniors'].", ".$donnees['nbMembresSoutiens'].", ".$donnees['nbMembresPassifs'].", ".$donnees['nbMembresVIP'].", ".$donnees['nbMembresAutres'].")";
             //echo $saveStatisticsQuery."<br />";
             if (mysql_query($saveStatisticsQuery)) {
-                echo "<p class='success'>Statistiques de \"".$donnees['club']."\" enregistrées.</p>";
+                echo "<p class='notification notification--success'>Statistiques de \"".$donnees['club']."\" enregistrées.</p>";
             } else {
-                echo "<p class='error'>Erreur lors de l'enregistrement des statistiques pour \"".$donnees['club']."\".<br />Les statistiques ont peut-être déjà été enregistrées aujourd'hui.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de l'enregistrement des statistiques pour \"".$donnees['club']."\".<br />Les statistiques ont peut-être déjà été enregistrées aujourd'hui.</p>";
             }
         }*/
     }
@@ -108,7 +108,7 @@
     echo "<th>" . $totalMembresVIP . "</th>";
     echo "<th>" . $totalMembresAutre . "</th>";
     $totalMembres = $totalMembresActifs + $totalMembresJuniors + $totalMembresSoutiens + $totalMembresPassifs + $totalMembresVIP + $totalMembresAutre;
-    echo "<th id='totalMembresFSTB' rowspan='2'>" . $totalMembres . "</th>";
+    echo "<th class='stats-clubs__total-members' rowspan='2'>" . $totalMembres . "</th>";
     echo "</tr>";
 
     echo "<tr>";

@@ -39,4 +39,4 @@ while ($entry = mysql_fetch_assoc($emailDispatchResult)) {
     $emailsList .= $entry['email'] . ',' . $entry['name'] . "\n";
 }
 ?>
-<textarea title="Adresses pour la mailing-list" class="tchoukup-emails" readonly><?php echo $emailsList ?></textarea>
+<textarea title="Adresses pour la mailing-list" class="big-field" readonly><?php echo $emailsList ?></textarea>

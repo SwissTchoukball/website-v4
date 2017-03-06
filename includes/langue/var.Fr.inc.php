@@ -119,8 +119,8 @@ define("VAR_LANG_AUCUNE_VACANCE_PENDANT_EVENEMENT",
     "Cet événement n'a lieu en même temps qu'aucune vacance répertoriée.");
 
 //comite
-define("VAR_LANG_DOMAINES_RESPONSABILITE", "Domaines de responsabilit&eacute; :");
-define("VAR_LANG_DOMAINE_RESPONSABILITE", "Domaine de responsabilit&eacute; :");
+define("VAR_LANG_DOMAINES_RESPONSABILITE", "Domaines de responsabilit&eacute;");
+define("VAR_LANG_DOMAINE_RESPONSABILITE", "Domaine de responsabilit&eacute;");
 
 //clubs
 define("VAR_LANG_VISIT_US", "Visiter le site du club");

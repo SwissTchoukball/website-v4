@@ -161,7 +161,7 @@
     <form name="insererTour" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return validateForm();">
-        <table class="tableauFormInsererPhase">
+        <table class="st-table">
             <tr>
                 <td class="right">Saison :</td>
                 <td>
@@ -242,7 +242,7 @@
             </tr>
         </table>
         <br/><br/>
-        <table class="tableauNouvellePhase">
+        <table class="st-table">
             <?php
             echo "<tr>";
             echo "<th>X</th>";

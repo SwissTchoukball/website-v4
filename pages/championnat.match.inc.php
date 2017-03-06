@@ -19,7 +19,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
 				   LEFT OUTER JOIN Lieux l ON m.idLieu = l.id
 				   WHERE m.idMatch = " . $matchID;
     if (!$matchData = mysql_query($matchQuery)) {
-        echo '<p class="error">Erreur lors de la récupération des données du match.<br />Requête: ' . $matchQuery . '<br />Message: ' . mysql_error() . '</p>';
+        echo '<p class="notification notification--error">Erreur lors de la récupération des données du match.<br />Requête: ' . $matchQuery . '<br />Message: ' . mysql_error() . '</p>';
     } else {
         $match = mysql_fetch_assoc($matchData);
 
@@ -178,11 +178,11 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 $teamAClass = "host";
                 $teamBClass = "visitor";
                 if ($scoreA > $scoreB) {
-                    $teamAClass .= " winner";
+                    $teamAClass .= " winner side-icon-left";
                     $teamBClass .= " loser";
                 } else if ($scoreA < $scoreB) {
                     $teamAClass .= " loser";
-                    $teamBClass .= " winner";
+                    $teamBClass .= " winner side-icon-right";
                 }
                 echo '<span class="' . $teamAClass . '">' . $teamAName . '</span>';
                 echo $scoreA != 0 ? '<span class="score">' . $scoreA . ' - ' . $scoreB : '<span class="score unplayed">0 - 0';
@@ -216,18 +216,18 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 echo '</div>';
             }
             ?>
-            <p class="date sideIcon">
+            <p class="date side-icon-left">
                 <?php
                 echo ucfirst(date_sql2date_joli($dateDebut, 'le',
                         $_SESSION['__langue__']) . ' ' . VAR_LANG_A . ' ' . time_sql2heure($heureDebut));
                 ?>
             </p>
-            <p class="venue sideIcon">
+            <p class="venue side-icon-left">
                 <?php
                 echo '<a href="/lieu/' . $idLieu . '">' . $nomLieu . ', ', $ville . '</a>';
                 ?>
             </p>
-            <p class="price sideIcon">
+            <p class="price side-icon-left">
                 <?php
                 if ($price == 0) {
                     echo 'Entrée libre';
@@ -236,7 +236,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 }
                 ?>
             </p>
-            <p class="referees sideIcon">
+            <p class="referees side-icon-left">
                 <?php
                 $matchReferees = array_merge($idArbitreA, $idArbitreB, $idArbitreC);
                 $matchReferees = array_count_values(array_filter($matchReferees)); // counts the number of period refereed by each referee
@@ -263,7 +263,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
             <?php
             if ($attendance >= 10) {
                 ?>
-                <p class="attendance sideIcon">
+                <p class="attendance side-icon-left">
                     <?php
                     echo $attendance . ' ' . VAR_LANG_SPECTATEURS;
                     ?>
@@ -305,7 +305,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 <?php
             }
             ?>
-            <div class="map">
+            <div class="map fullWidth">
                 <iframe width="849" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                         src="<?php echo $gMapsURL; ?>"></iframe>
             </div>

@@ -5,8 +5,6 @@ if ($_SESSION["debug_tracage"]) {
 statInsererPageSurf(__FILE__);
 
 showDomainHead(9);
-//echo "<br />";
-//echo "<div id='ccpFSTB'>CCP FSTB<br />20-8957-2</div>";
 ?>
 <h2>Numéro CCP</h2>
-<p class="ccpFSTB">20-8957-2</p>
+<p class="ccp-number">20-8957-2</p>

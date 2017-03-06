@@ -21,7 +21,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 
 
     if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
-        echo "<p class='error'>Procédure annulée.</p>";
+        echo "<p class='notification notification--error'>Procédure annulée.</p>";
         if ($clubID == 0) {
             $newClub = true;
         } else {
@@ -77,10 +77,10 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                 )";
             $clubInsertResult = mysql_query($clubInsertRequest);
             if ($clubInsertResult) { // Tout s'est bien passé.
-                echo "<p class='success'>Insertion réussie.</p>";
+                echo "<p class='notification notification--success'>Insertion réussie.</p>";
                 $clubToEditID = $newClubID;
             } else {
-                echo "<p class='error'>Erreur lors de l'insertion dans la base de données.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de données.</p>";
                 $nbError++;
                 $newClub = true;
             }
@@ -104,23 +104,23 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 										 , statusId=" . $status . "";
             }
             $clubUpdateRequest .= " WHERE id=" . $clubID;
-            //echo "<p class='info'>".$clubUpdateRequest."</p>";
+            //echo "<p class='notification'>".$clubUpdateRequest."</p>";
             $clubUpdateResult = mysql_query($clubUpdateRequest);
             if ($clubUpdateResult) { // Tout s'est bien passé.
-                echo "<p class='success'>Modification réussie.</p>";
+                echo "<p class='notification notification--success'>Modification réussie.</p>";
             } else {
-                echo "<p class='error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
                 $nbError++;
             }
             $clubToEditID = $clubID;
         } else {
-            echo '<p class="error">Action indéfinie.</p>';
+            echo '<p class="notification notification--error">Action indéfinie.</p>';
             //Ne devrait pas arriver
         }
     } else {
-        echo "<p class='error'>Vous n'avez pas le droit d'effectuer cet action.</p>";
+        echo "<p class='notification notification--error'>Vous n'avez pas le droit d'effectuer cet action.</p>";
     }
 } else {
-    echo "<p class='error'>Action inconnue</p>";
+    echo "<p class='notification notification--error'>Action inconnue</p>";
 }
 ?>

@@ -120,8 +120,8 @@ define("VAR_LANG_AUCUNE_VACANCE_PENDANT_EVENEMENT", "No holiday during this even
 
 
 //comite
-define("VAR_LANG_DOMAINES_RESPONSABILITE", "Verantwortungen:");
-define("VAR_LANG_DOMAINE_RESPONSABILITE", "Verantwortung:");
+define("VAR_LANG_DOMAINES_RESPONSABILITE", "Verantwortungen");
+define("VAR_LANG_DOMAINE_RESPONSABILITE", "Verantwortung");
 
 //clubs
 define("VAR_LANG_VISIT_US", "Zur Website");

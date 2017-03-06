@@ -1,5 +1,5 @@
 <?php
-echo "<table class='tableauModifierNews'>";
+echo "<table class='st-table'>";
 echo "<tr>";
 echo "<th>Date</th>";
 echo "<th>Titre</th>";

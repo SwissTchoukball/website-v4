@@ -2,10 +2,10 @@
 
 <!-- Confirmation screen -->
 <div ng-if="$ctrl.submitted">
-    <p class="success">
+    <p class="notification notification--success">
         Inscription de l'équipe <em>{{$ctrl.teamName}}</em> correctement enregistrée.
     </p>
-    <p class="info">
+    <p class="notification">
         Merci d'effectuer le paiement des <strong>CHF {{$ctrl.getTotalCost()}}</strong>
         d'ici au <strong>{{$ctrl.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
         sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
@@ -19,7 +19,7 @@
 <!-- Registration Form -->
 <form ng-if="!$ctrl.submitted"
       name="championshipRegistrationForm"
-      class="adminForm"
+      class="st-form"
       novalidate>
     <label>Club</label>
     <div class="givenData">{{$ctrl.club.fullName}}</div>
@@ -88,7 +88,7 @@
             <td class="amountTotal">CHF {{$ctrl.getTotalCost()}}</td>
         </tr>
     </table>
-    <div class="formActions">
+    <div class="st-form__actions">
         <button class="button button--cancel"
                 ng-click="$ctrl.goBack()">
             Annuler

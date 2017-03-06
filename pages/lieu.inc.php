@@ -13,7 +13,7 @@ if (isset($_GET['venueID']) && isValidMatchID($_GET['venueID'])) {
 				   WHERE l.id = " . $venueID . "
 				   LIMIT 1";
     if (!$venueData = mysql_query($venueQuery)) {
-        echo '<p class="error">Erreur lors de la récupération des données du lieu.<br />Requête: ' . $venueQuery . '<br />Message: ' . mysql_error() . '</p>';
+        echo '<p class="notification notification--error">Erreur lors de la récupération des données du lieu.<br />Requête: ' . $venueQuery . '<br />Message: ' . mysql_error() . '</p>';
     } else {
         $venue = mysql_fetch_assoc($venueData);
         $gMapsURL = 'https://maps.google.com/maps?q=' . urlencode($venue['adresse'] . ', ' . $venue['npa'] . ' ' . $venue['ville']) . '&amp;num=1&amp;t=m&amp;ie=UTF8&amp;output=embed';
@@ -33,7 +33,7 @@ if (isset($_GET['venueID']) && isValidMatchID($_GET['venueID'])) {
             }
             if (!is_null($venue['adresse']) && !is_null($venue['npa']) && !is_null($venue['ville'])) {
                 ?>
-                <div class="map">
+                <div class="map fullWidth">
                     <iframe width="849" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                             src="<?php echo $gMapsURL; ?>"></iframe>
                 </div>

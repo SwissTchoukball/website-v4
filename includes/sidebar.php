@@ -1,4 +1,4 @@
-<div id="sidebar">
+<div id="sidebar" class="sidebar">
     <?php include('includes/nav.php'); ?>
     <div id="partners">
         <?php
@@ -7,12 +7,12 @@
         $recordset = mysql_query($requeteSQL);
         while ($record = mysql_fetch_array($recordset)) {
             echo "<a href='" . $record["lienWeb"] . "' target='_blank'>";
-            echo "<img class='logoSponsorsMenu' src='/" . $record["lienLogoSidebar"] . "' />";
+            echo "<img class='sidebar__sponsor-logo' src='/" . $record["lienLogoSidebar"] . "' />";
             echo "</a>";
         }
         ?>
     </div>
-    <div class="hashtag">#tchouksuisse</div>
+    <div class="sidebar__hashtag">#tchouksuisse</div>
 <?php
 echo '</div>';
 // This closing div tag is printed with PHP in order to avoid having any character after.
