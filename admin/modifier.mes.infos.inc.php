@@ -172,7 +172,7 @@ statInsererPageSurf(__FILE__);
             ?>
         </fieldset>
         <fieldset>
-            <span class="infobulle">Pour changer de mot de passe, sinon laisser vide. Minimum 8 caractères</span>
+            <span class="st-form__side-info tooltip">Pour changer de mot de passe, sinon laisser vide. Minimum 8 caractères</span>
             <label for="ancienPass">Ancien mot de passe</label>
             <input id="ancienPass" name="ancienPass" type="password" maxlength="255" size="35" autocomplete="off">
             <label for="nouveauPass">Nouveau mot de passe</label>

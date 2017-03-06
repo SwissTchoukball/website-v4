@@ -14,7 +14,7 @@ $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
     }
 </script>
 
-<table class="adminTable"><?php
+<table class="st-table"><?php
 
     if ($motsRecherches != "") {
 

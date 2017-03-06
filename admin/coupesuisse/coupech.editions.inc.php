@@ -307,7 +307,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
     $retourListe = mysql_query($requeteListe);
     ?>
 
-    <table class="adminTable">
+    <table class="st-table">
         <tr>
             <th>Année</th>
             <th>Catégorie</th>

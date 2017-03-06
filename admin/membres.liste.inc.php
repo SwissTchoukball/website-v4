@@ -102,7 +102,7 @@ if ($showPagination) {
 
 //Search form
 ?>
-<form class="members-search" method="post"
+<form class="st-form st-form--oneline" method="post"
       action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details">
     <input type="search" name="keywords" placeholder="Recherche"/>
     <input type="submit" value="Rechercher"/>
@@ -113,7 +113,7 @@ if ($showPagination) {
 $preselectionListQuery = "SELECT * FROM DBDRequetesPreselection ORDER BY nom";
 if ($preselectionListData = mysql_query($preselectionListQuery)) {
     ?>
-    <form class="members-search" method="post"
+    <form class="st-form" method="post"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
         <select name="preselectionID" onchange="submit();">
             <option value="0">-</option>
@@ -138,7 +138,7 @@ if ($showPagination) {
     showPagination($page, $totalNumberOfPages, $href);
 }
 
-echo $showDetails ? '<table class="adminTable detailed">' : '<table class="adminTable">';
+echo $showDetails ? '<table class="st-table detailed">' : '<table class="st-table">';
 ?>
 <thead>
 <tr>
@@ -189,7 +189,7 @@ while ($member = mysql_fetch_assoc($data)) {
     }
 
     if ($isSuspended) {
-        echo '<tr class="suspendu">';
+        echo '<tr class="st-table__disabled">';
     } else {
         echo "<tr>";
     }

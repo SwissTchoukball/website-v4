@@ -125,8 +125,8 @@ if ($canEdit) {
             ?>
         </fieldset>
         <fieldset>
-            <span class="infobulle">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
-            <span id="addressPreview"><!-- rempli avec du Javascript --></span>
+            <span class="st-form__side-info tooltip">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
+            <span id="addressPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
             <label for="address1">Adresse</label>
             <textarea id="address" name="address" onkeyup="updateAddressPreview();"><?php echo $address; ?></textarea>
             <label for="zipCode">NPA</label>
@@ -153,8 +153,8 @@ if ($canEdit) {
         </fieldset>
         <fieldset>
             <span
-                class="infobulle">Si aucune information n'est indiquée, celles du ou de la président-e sont utilisées.</span>
-            <span id="infoPreview"><!-- rempli avec du Javascript --></span>
+                class="st-form__side-info tooltip">Si aucune information n'est indiquée, celles du ou de la président-e sont utilisées.</span>
+            <span id="infoPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
             <label for="phone">Téléphone</label>
             <input type="text" id="phone" name="phone" onkeyup="updateInfoPreview();" value="<?php echo $phone; ?>"/>
             <label for="email">E-mail</label>

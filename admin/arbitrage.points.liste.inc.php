@@ -39,7 +39,7 @@ echo '</select>';
 echo '</h2>';
 echo '</form>';
 
-echo '<table id="refereePoints" class="adminTable alternateBackground">';
+echo '<table class="st-table st-table--alternate-bg st-table--centered-content">';
 echo '<tr>';
 echo '<th>' . ucfirst(VAR_LANG_ARBITRE) . '</th>';
 echo '<th>' . ucfirst(VAR_LANG_NIVEAU) . '</th>';
@@ -133,7 +133,7 @@ if ($refereesPoints = mysql_query($queryRefereesPoints)) {
 echo '</table>';
 
 echo '<h3>Arbitres n\'ayant obtenus aucun points</h3>';
-echo '<p class="noPointsReferees">';
+echo '<ul class="inline-list">';
 $queryNoPointsReferees =
     "SELECT a.personId, p.nom, p.prenom
     FROM DBDPersonne p
@@ -148,13 +148,13 @@ if ($dataNoPointsReferees = mysql_query($queryNoPointsReferees)) {
         echo "Aucun arbitre n'a pas obtenu de points dans cette volée.";
     } else {
         while ($referee = mysql_fetch_assoc($dataNoPointsReferees)) {
-            echo '<span>' . $referee['prenom'] . ' ' . $referee['nom'] . '</span>';
+            echo '<li>' . $referee['prenom'] . ' ' . $referee['nom'] . '</li>';
         }
     }
 } else {
     die(printErrorMessage("Problème lors de la récupération des arbitres sans points."));
 }
-echo '</p>';
+echo '</ul>';
 
 echo '<h3>Nombre de points à obtenir sur deux saisons pour conserver son titre d\'arbitre</h3>';
 echo '<ul>';

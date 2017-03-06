@@ -41,7 +41,6 @@
     <meta property="fb:app_id" content="119853652572"/>
     <meta property="fb:admins" content="817753010"/>
     <!-- /Facebook metatags -->
-    <link rel="stylesheet" type="text/css" href="/styles/main.css"> <!-- legacy -->
     <link rel="stylesheet" type="text/css" href="/build/master.css">
     <link rel="stylesheet" type="text/css" href="/styles/livescores.css">
     <!-- For Tchoukball World live scores -->

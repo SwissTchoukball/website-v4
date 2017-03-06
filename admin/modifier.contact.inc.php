@@ -81,7 +81,7 @@ echo "<SCRIPT language='JavaScript'>
         ?>
     </fieldset>
     <fieldset>
-        <span class="infobulle">Minimum 8 caractères</span>
+        <span class="st-form__side-info tooltip">Minimum 8 caractères</span>
         <label>Nouveau mot de passe</label>
         <input name="nouveauPass" type="password" maxlength="255" size="35" autocomplete="off">
         <label>Encore une fois</label>

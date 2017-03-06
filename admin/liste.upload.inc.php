@@ -42,7 +42,7 @@ echo "</p>";
 
 ?>
 <br/>
-<table class="adminTable">
+<table class="st-table">
     <tr>
         <th>
             <?php echo VAR_LANG_TITRE; ?>

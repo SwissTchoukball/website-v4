@@ -1,5 +1,5 @@
 <?php
-echo "<table class='adminTable'>";
+echo "<table class='st-table'>";
 echo "<tr>";
 echo "<th>Date</th>";
 echo "<th>Titre</th>";

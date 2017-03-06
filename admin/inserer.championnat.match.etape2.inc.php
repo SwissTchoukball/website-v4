@@ -14,7 +14,7 @@ if ($nbMatchs > 1) {
 }
 ?>
 <p>Phase dans laquelle insérer <?php echo $finPhrase; ?> :</p>
-<table class="adminTable">
+<table class="st-table">
     <?php
     echo "<tr>";
     echo "<th>" . VAR_LANG_CHAMPIONNAT . "</th>";

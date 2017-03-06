@@ -101,7 +101,7 @@
         // On affiche le tableau si le club n'est pas adhérent passif
         if ($clubStatusId != 2) {
             ?>
-            <table>
+            <table class="st-table st-table--spaced">
                 <thead>
                 <tr>
                     <th></th>

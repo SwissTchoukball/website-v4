@@ -165,7 +165,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
           action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . ""; ?>"
           onSubmit="return validateForm();">
         <?php
-        echo "<table class='adminTable'>";
+        echo "<table class='st-table'>";
         echo "<tr>";
         echo "<th>";
         echo VAR_LANG_EQUIPES;

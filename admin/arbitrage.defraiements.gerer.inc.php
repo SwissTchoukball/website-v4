@@ -3,7 +3,7 @@
 // TODO : pagination
 
 echo '<h2>Gestion des versements</h2>';
-echo '<table class="adminTable alternateBackground">';
+echo '<table class="st-table st-table--alternate-bg">';
 echo '<tr>';
 echo '<th>' . ucfirst(VAR_LANG_ARBITRE) . '</th>';
 echo '<th>' . ucfirst(VAR_LANG_DATE) . '</th>';

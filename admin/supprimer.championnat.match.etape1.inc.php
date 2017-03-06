@@ -8,7 +8,7 @@
       action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . ""; ?>"
       onSubmit="return testQqchAModifier();">
     <p>Phase dans laquelle il y a des matchs à supprimer :</p>
-    <table class="adminTable">
+    <table class="st-table">
         <?php
         echo "<tr>";
         echo "<th>X</th>";

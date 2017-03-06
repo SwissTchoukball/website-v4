@@ -11,7 +11,7 @@
         echo "<h4>Suppression effectuée avec succès</h4>";
     }
     ?>
-    <table class="adminTable">
+    <table class="st-table">
         <?php
         echo "<tr>";
         echo "<th>Date</th>";

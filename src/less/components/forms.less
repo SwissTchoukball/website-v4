@@ -1,4 +1,6 @@
 .st-form {
+  // TODO: Separate form layout from single elements design
+
   fieldset {
     width: 100%;
     margin: auto;
@@ -10,27 +12,6 @@
       background: none; /* Correction d'un bug d'Internet Explorer. */
       z-index: 500; /* On définit une valeur pour l'ordre d'affichage. */
     }
-
-    span.infobulle { /* décommenter le hover si on veut que les infobulles ne s'affichent que si on survole la zone concernée. */
-      display: inline; /* On affiche l'infobulle. */
-      position: absolute;
-      width: 100px;
-
-      top: 0; /* On positionne notre infobulle. */
-      right: 20px;
-
-      background: white;
-
-      text-align: left;
-      color: #333333;
-      padding: 3px;
-
-      border: 1px solid #e2001a;
-      border-left: 4px solid #e2001a;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      border-radius: 3px;
-    }
   }
 
   legend {
@@ -40,23 +21,11 @@
   }
 
   span {
-    &.infobulle {
-      display: none; /* On masque l'infobulle. */
-    }
-
     &#addressPreview, &#infoPreview {
       position: absolute;
       width: 180px;
       top: 0;
       left: 0;
-      padding: 3px;
-      color: #333333;
-      border: 1px solid #e2001a;
-      border-left-width: 4px;
-      -webkit-border-radius: 3px;
-      -moz-border-radius: 3px;
-      border-radius: 3px;
-      overflow: hidden;
     }
   }
 
@@ -181,6 +150,19 @@
     font-weight: normal;
   }
 
+  &--oneline {
+    input {
+      display: inline-block;
+    }
+  }
+
+  &__side-info {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 100px;
+  }
+
   &__date {
     margin-left: 90px;
 
@@ -202,4 +184,9 @@
     padding-top: 10px;
     width: auto;
   }
+}
+
+textarea.big-field {
+  width: 100%;
+  min-height: 300px;
 }
