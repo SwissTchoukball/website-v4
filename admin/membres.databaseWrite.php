@@ -315,7 +315,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 echo '<p class="notification notification--error">La demande de transfert a été enregistrée, mais dû à une erreur, le webmaster n\'a pas automatiquement été averti, veuillez <a href="mailto:webmaster@tchoukball.ch">le contacter</a> s\'il vous plaît.</p>';
             }
         } else {
-            echo '<p class="error">Erreur lors de l\'enregistrement de la demande de transfert.<br />' . mysql_notification notification--error() . '</p>';
+            echo '<p class="error">Erreur lors de l\'enregistrement de la demande de transfert.<br />' . mysql_error() . '</p>';
         }
     } else {
         echo '<p class="notification notification--error">ID invalide<br />' . htmlentities($_POST['currentClubID'] . ' ' . $_POST['ClubsFstb']) . '</p>';
