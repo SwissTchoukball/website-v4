@@ -179,12 +179,26 @@
             autoStatut.innerHTML = "<button type='button' onclick='resetBirthdate();'>Réinitialiser</button>";
         }
 
+        // Change of status for the Tchoukup
         if (memberEdit.statutID.value == 4) { // Membre passif
             memberEdit.DBDCHTB.value = 5; // TUP E-mail
             memberEdit.DBDCHTB.disabled = true;
         } else {
             memberEdit.DBDCHTB.disabled = false;
         }
+
+        // Change of status and visibility for the Kids sport category
+        var age = computeAge();
+        if (memberEdit.statutID.value == 2 && age.years <= 15) {
+            $(memberEdit.kidsSportCat).show();
+            $('[for=kidsSportCat]').show();
+        }
+        else {
+            memberEdit.kidsSportCat.value = 'null';
+            $(memberEdit.kidsSportCat).hide();
+            $('[for=kidsSportCat]').hide();
+        }
+
         updateTchoukupDelivery();
     }
 
@@ -246,6 +260,43 @@
             tupd.hide();
         }
     }
+
+    function computeAge() {
+        var now = new Date();
+
+        var yearNow = now.getFullYear();
+        var monthNow = now.getMonth();
+        var dayNow = now.getDate();
+
+        var yearBirth = memberEdit.birthDateYear.value;
+        var monthBirth = memberEdit.birthDateMonth.value - 1;
+        var dayBirth = memberEdit.birthDateDay.value;
+
+        var age = {};
+
+        age.years = yearNow - yearBirth;
+
+        if (monthNow >= monthBirth)
+            age.months = monthNow - monthBirth;
+        else {
+            age.years--;
+            age.months = 12 + monthNow -monthBirth;
+        }
+
+        if (dayNow >= dayBirth)
+            age.days = dayNow - dayBirth;
+        else {
+            age.months--;
+            age.days = 31 + dayNow - dayBirth;
+
+            if (age.months < 0) {
+                age.months = 11;
+                age.years--;
+            }
+        }
+
+        return age;
+    }
 </script>
 <?php
 /** @var integer $idMemberToEdit */
@@ -297,6 +348,7 @@ if ($newMember) {
         $isJSExpert = false;
         $typeCompte = 1;
         $numeroCompte = "";
+        $kidsSportCatId = null;
         $remarques = "";
     }
 } else {
@@ -310,7 +362,8 @@ if ($newMember) {
                              dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
                              dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
                              a.startCountingPointsOnEvenYears,
-                             suspendu, typeCompte, numeroCompte, remarque, c.idFonction AS idFonctionComite,
+                             suspendu, typeCompte, numeroCompte, kidsSportCatId, remarque,
+                             c.idFonction AS idFonctionComite,
                              cm.idNom AS idCommissionMembre, cn.id AS idCommissionResponsable,
                              cnm.idEquipe AS idEquipeMembre, exp.idPersonne AS idExpert,
                              cj.id AS idParticipationChampionnat,
@@ -412,6 +465,7 @@ if ($newMember) {
             $isChampionshipTeamManager = $member['idEquipeChampionnatResponsable'] != null;
             $typeCompte = $member['typeCompte'];
             $numeroCompte = $member['numeroCompte'];
+            $kidsSportCatId = $member['kidsSportCatId'];
             $remarques = $member['remarque'];
             $formLegend = "Modification de ";
             if ($firstname != "" && $lastname != "") {
@@ -641,6 +695,21 @@ if ($canEdit) {
                     ?>
                 </span>
             </div>
+            <label for="kidsSportCat">Cat. Sport des enfants</label>
+            <select id="kidsSportCat" name="kidsSportCat">
+                <?php
+                $kidsSportCatQuery = "SELECT ksc.id, ksc.name" . $_SESSION["__langue__"] . " AS name FROM DBDKidsSportCat ksc ORDER BY ksc.`order`";
+                $kidsSportCatRes = mysql_query($kidsSportCatQuery) or die(printErrorMessage("Error while retrieving Kids sport categories"));
+                echo "<option value='null'>" . VAR_LANG_NON_DEFINI . "</option>";
+                while ($kidsSportCat = mysql_fetch_array($kidsSportCatRes)) {
+                    $selected = '';
+                    if ($kidsSportCat['id'] == $kidsSportCatId) {
+                        $selected = 'selected="selected"';
+                    }
+                    echo "<option value='{$kidsSportCat['id']}' $selected>" . ucfirst($kidsSportCat['name']) . "</option>";
+                }
+                ?>
+            </select>
             <label for="DBDSexe">Genre</label>
             <?php
             afficherdropDownListe("DBDSexe", "idSexe", "descriptionSexe", $sexID, true);

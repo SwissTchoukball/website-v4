@@ -84,3 +84,4 @@ node_modules/
 build/*
 
 bin/*
+!sql_updates/*.sql

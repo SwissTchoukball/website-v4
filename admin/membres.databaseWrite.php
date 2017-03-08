@@ -56,7 +56,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
 
     if (!$noName) {
         // Vérification existance nom et prénom (+indication club)
-        // TODO: Gérez de multiples personnes avec le même nom.
+        // TODO: Gérer de multiples personnes avec le même nom.
         $duplicateNameRequest = "SELECT club, idDbdPersonne FROM `DBDPersonne`, `ClubsFstb` WHERE `nom` LIKE '" . $lastname . "' AND `prenom` LIKE '" . $firstname . "' AND `nbIdClub`=`idClub` AND `idDbdPersonne`!=" . $_POST['memberID'] . " LIMIT 1";
         $duplicateNameResult = mysql_query($duplicateNameRequest);
         if (mysql_num_rows($duplicateNameResult) > 0) {
@@ -93,6 +93,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     $suspended = isset($_POST['suspendu']) ? 1 : 0;
     $typeCompte = validiteInsertionTextBd($_POST['DBDTypeCompte']);
     $numeroCompte = validiteInsertionTextBd($_POST['numeroCompte']);
+    $kidsSportCatId = validiteInsertionTextBd($_POST['kidsSportCat']);
     $remarques = validiteInsertionTextBd($_POST['remarques']);
     //Si membre passif => tchoukup = E-mail.
     if ($statutID == 4) {
@@ -156,6 +157,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         `raisonSociale`,
                         `idPays`,
                         `idCHTB`,
+                        `kidsSportCatId`,
                         `dateAjout`
                         $sensitiveAttributesForQuery
                      )
@@ -184,6 +186,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         '" . $companyName . "',
                         '" . $countryID . "',
                         '" . $tchoukupID . "',
+                        '" . $kidsSportCatId . "',
                         '" . date('Y-m-d') . "'
                         $sensitiveValuesForQuery
                      )";
@@ -238,7 +241,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                                         dateNaissance='" . $birthDate . "',
                                         raisonSociale='" . $companyName . "',
                                         idPays='" . $countryID . "',
-                                        idCHTB=" . $tchoukupID;
+                                        idCHTB='" . $tchoukupID . "',
+                                        kidsSportCatId=" . $kidsSportCatId;
                 if (hasAllMembersManagementAccess()) {
                     $memberUpdateRequest .= ", idClub=" . $clubID . "
                                          , suspendu=" . $suspended . "
@@ -277,7 +281,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                     }
                 } else {
                     echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
-                    if ($_SESSION['__userLevel__'] == 6) {
+                    if ($_SESSION['__userLevel__'] == 0) {
                         printMessage(mysql_error());
                         printMessage($memberUpdateRequest);
                     }
