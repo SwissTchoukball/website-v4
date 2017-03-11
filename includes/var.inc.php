@@ -13,6 +13,10 @@ $ETAT_PROGRAMME_CHAMPIONNAT_COMMENCE = true;
 // possibilite d'inserer/modifier/supprimer directement un evenement championnat.
 $ETAT_ACCESS_EVENT_CHAMPIONNAT = false;
 
+
+
+$ST_WEBSITE_VERSION = "4.1.0";
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // images définies

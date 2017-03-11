@@ -41,8 +41,8 @@
     <meta property="fb:app_id" content="119853652572"/>
     <meta property="fb:admins" content="817753010"/>
     <!-- /Facebook metatags -->
-    <link rel="stylesheet" type="text/css" href="/build/master.css">
-    <link rel="stylesheet" type="text/css" href="/styles/livescores.css">
+    <link rel="stylesheet" type="text/css" href="/build/master.css?v=<?php echo $ST_WEBSITE_VERSION; ?>">
+    <link rel="stylesheet" type="text/css" href="/styles/livescores.css?v=<?php echo $ST_WEBSITE_VERSION; ?>">
     <!-- For Tchoukball World live scores -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="alternate" type="application/rss+xml"
@@ -110,9 +110,9 @@ if ($_SESSION["__userLevel__"] < 100) {
 }
 ?>
 
-<script src="/build/lib.min.js"></script>
-<script src="/build/app.min.js"></script>
-<script src="/scripts/before-body-closing.js"></script>
+<script src="/build/lib.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
+<script src="/build/app.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
+<script src="/scripts/before-body-closing.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
 
 <?php
 if ($affichage_twitter) {
