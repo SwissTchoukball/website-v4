@@ -606,7 +606,7 @@ if ($canEdit) {
             <?php
             if ($emailFSTB != '') {
                 ?>
-                <label for="emailFSTB">E-mail FSTB</label>
+                <label for="emailFSTB">E-mail fédération</label>
                 <?php
                 if (hasAllMembersManagementAccess()) {
                     echo '<input type="text" id="emailFSTB" id="emailFSTB" name="emailFSTB" value="' . $emailFSTB . '" />';
