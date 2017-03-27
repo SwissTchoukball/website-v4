@@ -125,9 +125,8 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
 
         <?php
         for ($k = 1;$k <= $nbMatchs;$k++) {
-        $selectionTypeMatchFunctionName = 'selectionTypeMatch' . $k;
         ?>
-        function <?php echo $selectionTypeMatchFunctionName; ?>() {
+        function selectionTypeMatch<?php echo $k; ?>() {
             var idTour = <?php echo $idTour; ?>;
             var insererMatchForm = document.getElementById("insererMatchForm");
             if (idTour == 1 || idTour == 2 || idTour == 3 || idTour == 4) {
@@ -143,19 +142,19 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
             }
         }
 
-        function selectionAutomatiqueAnnee <?php echo $k; ?>() {
+        function selectionAutomatiqueAnnee<?php echo $k; ?>() {
             insererMatchForm.finAnnee<?php echo $k; ?>.value = insererMatchForm.debutAnnee<?php echo $k; ?>.value;
         }
-        function selectionAutomatiqueMois <?php echo $k; ?>() {
+        function selectionAutomatiqueMois<?php echo $k; ?>() {
             insererMatchForm.finMois<?php echo $k; ?>.value = insererMatchForm.debutMois<?php echo $k; ?>.value;
         }
-        function selectionAutomatiqueJour <?php echo $k; ?>() {
+        function selectionAutomatiqueJour<?php echo $k; ?>() {
             insererMatchForm.finJour<?php echo $k; ?>.value = insererMatchForm.debutJour<?php echo $k; ?>.value;
         }
-        function selectionAutomatiqueHeure <?php echo $k; ?>() {
+        function selectionAutomatiqueHeure<?php echo $k; ?>() {
             insererMatchForm.finHeure<?php echo $k; ?>.value = parseInt(insererMatchForm.debutHeure<?php echo $k; ?>.value) + 1;
         }
-        function selectionAutomatiqueMinute <?php echo $k; ?>() {
+        function selectionAutomatiqueMinute<?php echo $k; ?>() {
             insererMatchForm.finMinute<?php echo $k; ?>.value = parseInt(insererMatchForm.debutMinute<?php echo $k; ?>.value) + 10;
         }
         <?php
