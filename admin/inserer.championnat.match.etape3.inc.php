@@ -124,9 +124,10 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         });
 
         <?php
-        for($k = 1;$k <= $nbMatchs;$k++){
+        for ($k = 1;$k <= $nbMatchs;$k++) {
+        $selectionTypeMatchFunctionName = 'selectionTypeMatch' . $k;
         ?>
-        function selectionTypeMatch <?php echo $k; ?>() {
+        function <?php echo $selectionTypeMatchFunctionName; ?>() {
             var idTour = <?php echo $idTour; ?>;
             var insererMatchForm = document.getElementById("insererMatchForm");
             if (idTour == 1 || idTour == 2 || idTour == 3 || idTour == 4) {
