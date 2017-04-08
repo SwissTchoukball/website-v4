@@ -327,11 +327,6 @@
                         }
                         $retourEquipeClassement = mysql_query($requete);
                         $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
-                        if ($i % 2 == 0) {
-                            $style = "background-color:" . $couleurLigneA . ";";
-                        } else {
-                            $style = "background-color:" . $couleurLigneB . ";";
-                        }
                         echo "<tr style='" . $style . "'>";
                         if (isset($idTourPrecedenteBoucle) AND $idTourPrecedenteBoucle == $idTour AND $noGroupePrecedenteBoucle != $noGroupe) { //On ne doit pas remettre le classement à zéro !
                             $classement = $k + $dernierClassement - 1;
@@ -391,11 +386,6 @@
                         $goolaverage = $donneesC['goolaverage'];
                         $position = $donneesC['position'];
                         $equipe = $donneesC['equipe'];
-                        if ($i % 2 == 0) {
-                            $style = "background-color:" . $couleurLigneA . ";";
-                        } else {
-                            $style = "background-color:" . $couleurLigneB . ";";
-                        }
                         echo "<tr style='" . $style . "'>";
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
                         echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
