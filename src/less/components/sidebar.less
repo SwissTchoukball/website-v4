@@ -3,6 +3,12 @@
   vertical-align: top; /* to avoid unwanted space below */
   width: @sidebarWidth;
 
+  &__sponsor-logo {
+    width: 130px;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+
   &__hashtag {
     font-size: 16px;
     color: white;
@@ -13,9 +19,31 @@
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 
-  &__sponsor-logo {
-    width: 130px;
-    margin: auto;
-    margin-bottom: 10px;
+  &__social {
+    text-align: center;
+
+    & > * {
+      margin: 5px;
+      width: 32px;
+      height: 32px;
+      display: inline-block;
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    &__facebook {
+      svg {
+        fill: @colorBlueFacebook;
+      }
+    }
+
+    &__twitter {
+      svg {
+        fill: @colorBlueTwitter;
+      }
+    }
   }
 }

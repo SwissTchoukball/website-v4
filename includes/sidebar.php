@@ -13,6 +13,17 @@
         ?>
     </div>
     <div class="sidebar__hashtag">#tchouksuisse</div>
+    <div class="sidebar__social">
+        <a href="https://facebook.com/swisstchoukball" target="_blank" class="sidebar__social__facebook">
+            <?php echo file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/images/ui/facebook.svg"); ?>
+        </a>
+        <a href="https://twitter.com/swisstchoukball" target="_blank" class="sidebar__social__twitter">
+            <?php echo file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/images/ui/twitter.svg"); ?>
+        </a>
+        <a href="https://instagram.com/swisstchoukball" target="_blank" class="sidebar__social__instagram">
+            <?php echo file_get_contents($_SERVER["DOCUMENT_ROOT"] . "/images/ui/instagram.svg"); ?>
+        </a>
+    </div>
 <?php
 echo '</div>';
 // This closing div tag is printed with PHP in order to avoid having any character after.
