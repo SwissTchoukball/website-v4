@@ -305,7 +305,7 @@ if (!isset($_POST['idMatch'])) {
 <form name="remodification" action="">
     <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
     <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
-    <p class="center"><input type="submit" value="Modifier d'autres matchs"/></p>
+    <p class="center"><input type="submit" class="button" value="Modifier d'autres matchs"/></p>
 </form>
 <form name="remodificationMemePhase" action="">
     <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
@@ -314,7 +314,7 @@ if (!isset($_POST['idMatch'])) {
     <input type="hidden" name="idCat" value="<?php echo $idCategorie; ?>"/>
     <input type="hidden" name="idTour" value="<?php echo $idTour; ?>"/>
     <input type="hidden" name="idGroupe" value="<?php echo $idGroupe; ?>"/>
-    <p class="center"><input type="submit" value="Modifier d'autres matchs de la même phase"/></p>
+    <p class="center"><input type="submit" class="button button--primary" value="Modifier d'autres matchs de la même phase"/></p>
 </form>
 
 

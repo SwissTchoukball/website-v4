@@ -94,6 +94,6 @@ $record = mysql_fetch_array($recordset);
     <p align="center" style="clear: both;">
         <input name="action" type="hidden" id="action" value="modifierNews">
         <input name="idNews" type="hidden" id="idNews" value="<?php echo $idNewsCourrante; ?>">
-        <input type="submit" name="Submit" value="<?php echo VAR_LANG_MODIFIER; ?>">
+        <input type="submit" name="Submit" class="button button--primary" value="<?php echo VAR_LANG_MODIFIER; ?>">
     </p>
 </form>

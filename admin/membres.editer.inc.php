@@ -865,7 +865,7 @@ if ($canEdit) {
         <input type="hidden" name="memberID" value="<?php echo $memberID; ?>"/>
         <input type="hidden" name="postType" value="<?php echo $postType; ?>"/>
 
-        <input type="submit" value="<?php echo $sendButtonValue; ?>"/>
+        <input type="submit" class="button button--primary" value="<?php echo $sendButtonValue; ?>"/>
     </form>
     <?php
     if (!$newMember) {

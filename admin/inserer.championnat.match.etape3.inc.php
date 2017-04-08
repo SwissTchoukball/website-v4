@@ -457,7 +457,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         <input type="hidden" name="idTour" value="<?php echo $idTour; ?>">
         <input type="hidden" name="idGroupe" value="<?php echo $idGroupe; ?>">
         <input type="hidden" name="action" value="insererMatchs2">
-        <input type="submit" name="submit" value="<?php echo VAR_LANG_INSERER; ?>">
+        <input type="submit" name="submit" value="<?php echo VAR_LANG_INSERER; ?>" class="button button--primary">
     </form>
     <?php
 }

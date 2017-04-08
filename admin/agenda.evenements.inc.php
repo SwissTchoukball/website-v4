@@ -378,10 +378,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                 }
             }
             ?>
-            <input type="submit" name="verification" value="Vérifier" onClick="return enregistrerModification();"/>
+            <input type="submit" class="button" name="verification" value="Vérifier" onClick="return enregistrerModification();"/>
             <?php /* Ne devrait pas s'appeler enregistrerModification, mais executer cette fonction permet de ne pas ajouter &modifier= à la fin de l'URL ce qui posait problème.*/ ?>
 
-            <input type="submit" name="enregistrement" value="Enregistrer" onClick="return enregistrerModification();"/>
+            <input type="submit" class="button button--primary" name="enregistrement" value="Enregistrer" onClick="return enregistrerModification();"/>
         </fieldset>
     </form>
 

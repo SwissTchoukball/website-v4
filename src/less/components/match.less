@@ -30,11 +30,11 @@
     }
 
     .score {
-      color: #e2001a;
+      color: @colorPrimary;
       width: 129px;
 
       .unplayed {
-        color: #999;
+        color: @colorLessImportant;
       }
     }
   }
@@ -46,7 +46,7 @@
   .detailedScore {
     text-align: center;
     font-size: 18px;
-    color: #999;
+    color: @colorLessImportant;
 
     .period {
       &:after {
@@ -68,7 +68,7 @@
       font-size: 12px;
       font-weight: normal;
       text-decoration: underline;
-      color: #999999;
+      color: @colorLessImportant;
       cursor: pointer;
     }
 

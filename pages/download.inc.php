@@ -1,5 +1,6 @@
 <?php
 statInsererPageSurf(__FILE__);
+echo "<div class='downloads'>";
 
 //Récupération des catégories
 $typesArray = array();
@@ -35,7 +36,7 @@ for ($i = 0; $i < count($VAR_TABLEAU_DES_LANGUES); $i++) {
     $taille_colonne_download[$i + 1] = "65px";
 }
 //Début d'un tableau
-$debut_tableau = "<table class=\"download\">";
+$debut_tableau = '<table class="st-table st-table--alternate-bg">';
 $debut_tableau .= "<tr>";
 for ($i = 0; $i < count($entete_download); $i++) {
     if ($taille_colonne_download == "NULL" || $taille_colonne_download[$i] == "NULL") {
@@ -92,4 +93,5 @@ while ($record = mysql_fetch_array($recordset)) {
     }
 }
 echo $fin_tableau;
+echo "</div>";
 ?>

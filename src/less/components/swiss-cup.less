@@ -11,7 +11,7 @@
   padding-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
-  border-left: 5px solid #e2001a;
+  border-left: 5px solid @colorPrimary;
 }
 
 .resultatsCoupeCH, .arbreCoupeHuitiemes { /* .resultatsCoupeCH utilisé pour d'anciennes pages de la Coupe Suisse. À conserver */
@@ -48,11 +48,11 @@
 
 .gagnant {
   font-weight: bold;
-  color: #E2001A;
+  color: @colorPrimary;
 }
 
 .perdant {
-  color: #999999;
+  color: @colorLessImportant;
   font-weight: normal;
 }
 
@@ -63,7 +63,7 @@
 
 .sansequipe:before {
   content: "-";
-  color: #999999;
+  color: @colorLessImportant;
   font-weight: normal;
 }
 
@@ -73,7 +73,7 @@
   display: none;
   width: 400px;
   background-color: white;
-  border: 2px solid #e2001a;
+  border: 2px solid @colorPrimary;
   text-align: center;
   padding: 10px;
   -webkit-border-radius: 10px;

@@ -2,7 +2,7 @@
     <?php include('includes/nav.php'); ?>
     <div id="partners">
         <?php
-        echo "<a href='/partenaires'>Nos partenaires</a>";
+        echo "Nos partenaires";
         $requeteSQL = "SELECT * FROM Sponsors WHERE afficherFooter>='1' ORDER BY afficherFooter";
         $recordset = mysql_query($requeteSQL);
         while ($record = mysql_fetch_array($recordset)) {

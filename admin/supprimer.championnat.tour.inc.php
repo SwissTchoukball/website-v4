@@ -96,6 +96,6 @@
         </table>
         <br>
         <input type="hidden" name="action" value="supprimerTour">
-        <p align="center"><input type="submit" name="Supprimer" value="<?php echo VAR_LANG_SUPPRIMER; ?>"></p>
+        <p align="center"><input type="submit" class="button button--primary" name="Supprimer" value="<?php echo VAR_LANG_SUPPRIMER; ?>"></p>
     </form>
 </div>

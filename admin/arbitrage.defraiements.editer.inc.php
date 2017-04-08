@@ -136,7 +136,7 @@ echo '<label for="datepicker">' . VAR_LANG_DATE . '</label>';
 echo '<input type="text" name="paymentDate" id="datepicker" value="' . $paymentDate . '" />';
 
 echo '<input type="hidden" name="paymentID" value="' . $paymentID . '" />';
-echo '<input type="submit" name="' . $action . '" value="' . $submitAction . '" />';
+echo '<input type="submit" class="button button--primary" name="' . $action . '" value="' . $submitAction . '" />';
 echo '</form>';
 
 

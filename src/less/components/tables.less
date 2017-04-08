@@ -4,7 +4,7 @@
   margin-bottom: 10px;
 
   tr {
-    border-bottom: 1px solid #CC3333;
+    border-bottom: 1px solid @colorPrimaryDarken;
 
     &.clickable-row {
       cursor: pointer;
@@ -31,13 +31,13 @@
     }
 
     &.notOK {
-      background-color: #CC3333;
+      background-color: @colorPrimaryDarken;
       color: white;
     }
   }
 
   tfoot {
-    border-top: 2px solid #CC3333;
+    border-top: 2px solid @colorPrimaryDarken;
   }
 
   &--spaced {
@@ -47,7 +47,7 @@
   }
 
   &--alternate-bg tr:nth-child(even) {
-    background-color: #ffeeee;
+    background-color: @colorTableAltBackground;
   }
 
   &--centered-content td {
@@ -55,16 +55,16 @@
   }
 
   &__ok {
-    background-color: #77ee77;
+    background-color: lighten(@colorPositive, 50%);
   }
 
   &__wrong {
-    background-color: #ffdddd;
+    background-color: lighten(@colorNegative, 50%);
   }
 
   &__disabled {
-    background-color: #CCC;
-    color: #888;
+    background-color: @colorGrayLight;
+    color: @colorGrayVeryDark;
   }
 
   &__dimmed {

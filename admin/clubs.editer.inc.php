@@ -165,7 +165,7 @@ if ($canEdit) {
         <input type="hidden" name="clubID" value="<?php echo $clubID; ?>"/>
         <input type="hidden" name="postType" value="<?php echo $postType; ?>"/>
 
-        <input type="submit" value="<?php echo $sendButtonValue; ?>"/>
+        <input type="submit" class="button button--primary" value="<?php echo $sendButtonValue; ?>"/>
         <!-- Hidden inputs useful only for address preview -->
         <input type="hidden" id="presidentFirstName" value="<?php echo $presidentFirstName; ?>"/>
         <input type="hidden" id="presidentLastName" value="<?php echo $presidentLastName; ?>"/>

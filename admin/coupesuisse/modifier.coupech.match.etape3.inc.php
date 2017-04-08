@@ -478,7 +478,7 @@
                         <input type="hidden" name="annee" value="<?php echo $annee; ?>">
                         <input type="hidden" name="idCategorie" value="<?php echo $idCategorie; ?>">
                         <input type="hidden" name="action" value="modificationMatch">
-                        <input type='submit' value='<?php echo VAR_LANG_MODIFIER; ?>'>
+                        <input type='submit' value='<?php echo VAR_LANG_MODIFIER; ?>' class="button button--primary">
                     </td>
                 </tr>
                 <?php

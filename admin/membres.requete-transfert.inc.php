@@ -30,7 +30,7 @@ if ($memberResource = mysql_query($memberQuery)) {
         <input type="hidden" name="newClubName"
                value="<?php echo $currentClubName; /* It will change with JavaScript*/ ?>"/>
         <input type="hidden" name="postType" value="transfer-request"/>
-        <input type="submit" value="Envoyer la demande de transfert"/>
+        <input type="submit" class="button button--primary" value="Envoyer la demande de transfert"/>
     </form>
     <?php
 } else {

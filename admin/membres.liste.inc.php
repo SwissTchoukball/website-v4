@@ -105,7 +105,7 @@ if ($showPagination) {
 <form class="st-form st-form--oneline" method="post"
       action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details">
     <input type="search" name="keywords" placeholder="Recherche"/>
-    <input type="submit" value="Rechercher"/>
+    <input type="submit" class="button button--primary" value="Rechercher"/>
 </form>
 <?php
 

@@ -636,6 +636,6 @@ echo "</script>";
     </table>
     <p align="center">
         <input type="hidden" name="action" value="insererMatch">
-        <input name='submit' type='submit' value='<?php echo VAR_LANG_INSERER; ?>'>
+        <input name='submit' class="button button--primary" type='submit' value='<?php echo VAR_LANG_INSERER; ?>'>
     </p>
 </form>

@@ -69,7 +69,25 @@
             if (count($TABLEAU_TRADUCTION[$i]) == 1) {
                 echo "<h4>" . $TABLEAU_TRADUCTION[$i][0] . "</h4>";
             } else {
-                echo "<form name='translateType' action='' method='post'><table><tr><td><input type='submit' value='Traduire les champs'><input type='hidden' name='titre' value='" . $TABLEAU_TRADUCTION[$i][0] . "'/><input type='hidden' name='table' value='" . $TABLEAU_TRADUCTION[$i][1] . "'/><input type='hidden' name='champ' value='" . $TABLEAU_TRADUCTION[$i][2] . "'/><input type='hidden' name='identifier' value='" . $TABLEAU_TRADUCTION[$i][3] . "'/><input type='hidden' name='action' value='afficherTableChamp'/></td><td><p>" . $TABLEAU_TRADUCTION[$i][0] . "</p></td></tr></table></form>";
+                ?>
+                <form name='translateType' action='' method='post'>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type='submit' class="button button--primary" value='Traduire les champs'>
+                                <input type='hidden' name='titre' value='<?php echo $TABLEAU_TRADUCTION[$i][0]; ?>'/>
+                                <input type='hidden' name='table' value='<?php echo $TABLEAU_TRADUCTION[$i][1]; ?>'/>
+                                <input type='hidden' name='champ' value='<?php echo $TABLEAU_TRADUCTION[$i][2]; ?>'/>
+                                <input type='hidden' name='identifier' value='<?php echo $TABLEAU_TRADUCTION[$i][3]; ?>'/>
+                                <input type='hidden' name='action' value='afficherTableChamp'/>
+                            </td>
+                            <td>
+                                <p><?php echo $TABLEAU_TRADUCTION[$i][0]; ?></p>
+                            </td>\
+                        </tr>
+                    </table>
+                </form>
+                <?php
             }
         }
         echo "</td></tr></table>";

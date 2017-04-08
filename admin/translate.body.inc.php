@@ -160,13 +160,12 @@
             <br/>
             <input type="hidden" name="nbSection" value="<?php echo $sectionNum; ?>"/>
             <input type="hidden" name="action" value="modifierText"/>
-            <p align="center"><input type="submit" value="<?php echo VAR_LANG_MODIFIER; ?>"/></p>
+            <p align="center"><input type="submit" class="button button--primary" value="<?php echo VAR_LANG_MODIFIER; ?>"/></p>
         </form>
-        <!-- <input type="submit" value="<?php echo VAR_LANG_ANNULER; ?>"/> -->
         <div align="center">
             <form name="annuler" onsubmit="return validForm();" method="post"
                   action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"><input
-                    type="submit" value="<?php echo VAR_LANG_ANNULER ?>"></form>
+                    type="submit" class="button button--cancel" value="<?php echo VAR_LANG_ANNULER ?>"></form>
         </div>
 
         <?php

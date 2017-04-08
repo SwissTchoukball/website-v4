@@ -87,5 +87,5 @@
     <input type="hidden" name="tour" value="">
     <input type="hidden" name="idGroupe" value="">
     <input type="hidden" name="action" value="supprimerMatchs1">
-    <p class="center"><input type="submit" name="modifier" value="<?php echo VAR_LANG_ETAPE_SUIVANTE; ?>"></p>
+    <p class="center"><input type="submit" class="button button--primary" name="modifier" value="<?php echo VAR_LANG_ETAPE_SUIVANTE; ?>"></p>
 </form>

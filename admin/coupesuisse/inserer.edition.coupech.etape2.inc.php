@@ -187,6 +187,6 @@
     <p>
         <input type="hidden" name="prochaineEtape" value="etape3"/>
         <!-- FAIRE VERIFICATION PAS DOUBLONS EQUIPE + AVERTISSEMENT AUTO QUALIF -->
-        <input type="submit" value="<?php echo VAR_LANG_ETAPE_3; ?>"/>
+        <input type="submit" class="button button--primary" value="<?php echo VAR_LANG_ETAPE_3; ?>"/>
     </p>
 </form>

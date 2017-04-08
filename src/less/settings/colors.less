@@ -1,20 +1,40 @@
 // Descriptive variables
-@colorGreen: #00dd00;
 @colorRed: #dd0000;
-@colorOrange: #FF8800;
 @colorRedSwiss: #f00000;
+@colorGreen: #00dd00;
+@colorGreenDark: #006600;
+@colorBlue: #0000dd;
+@colorOrange: #ff8800;
+@colorYellow: #ffcc00;
 
-@colorGrayLight: #eeeeee;
-@colorGrayMedium: #aaaaaa;
-@colorGrayDark: #666666;
-@colorGrayVeryDark: #222222;
+@colorGrayVeryLight: #eee;
+@colorGrayLight: #ccc;
+@colorGrayMedium: #999;
+@colorGrayDark: #666;
+@colorGrayVeryDark: #333;
 
 // First level function variables
 @colorPrimary: @colorRedSwiss;
+@colorPrimaryDarken: darken(@colorPrimary, 10%);
 @colorPrimaryTextOnLightBg: black;
 @colorPrimaryTextOnDarkBg: white;
-@colorPositive: @colorGreen;
+@colorPositive: @colorGreenDark;
 @colorNegative: @colorRed;
 @colorNeutral: @colorGrayMedium;
+@colorLessImportant: @colorGrayMedium;
 
 // Seconde level function variables
+@colorFocus: lighten(@colorPrimary, 30%);
+@colorTableAltBackground: lighten(@colorPrimary, 30%);
+@colorInvalid: lighten(@colorNegative, 30%);
+@colorInfo: @colorBlue;
+@colorSuccess: @colorPositive;
+@colorError: @colorNegative;
+@colorBackground: @colorGrayLight;
+@colorSideBar: @colorGrayVeryLight;
+@colorReadOnlyBackground: @colorGrayVeryLight;
+@colorReadOnlyForeground: @colorGrayDark;
+@colorQuote: @colorGrayMedium;
+@colorSwissPost: @colorYellow;
+@colorLink: @colorPrimaryDarken;
+@colorLinkHover: @colorPrimary;

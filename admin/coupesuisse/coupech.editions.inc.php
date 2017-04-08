@@ -221,7 +221,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
         <br/>
         <input type="hidden" name="idEdition" value="<?php echo $idEdition; ?>"/>
         <input type="hidden" name="typeEnvoi" value="<?php echo $typeEnvoi; ?>"/>
-        <input type="submit" value="Enregistrer"/>
+        <input type="submit" class="button button--primary" value="Enregistrer"/>
     </form>
     <?php
 } else {

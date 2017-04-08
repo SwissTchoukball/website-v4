@@ -15,6 +15,6 @@
         ?>
     </select>
     <input type="hidden" name="action" value="goToStep2"/>
-    <input type="submit" value="Suivant"/>
+    <input type="submit" class="button button--primary" value="Suivant"/>
 </form>
 </p><br/>

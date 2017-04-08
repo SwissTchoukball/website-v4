@@ -101,7 +101,7 @@ if (hasRefereeManagementAccess()) {
     echo '<textarea name="description" id="description">' . $description . '</textarea>';
 
     echo '<input type="hidden" name="pointsID" value="' . $pointsID . '" />';
-    echo '<input type="submit" name="' . $action . '" value="' . $submitAction . '" />';
+    echo '<input type="submit" class="button button--primary" name="' . $action . '" value="' . $submitAction . '" />';
     echo '</form>';
 
 

@@ -118,7 +118,7 @@ if (isset($_GET['idEvenement'])) {
         }
     </script>
     <?php
-    echo "<br /><br /><input type='submit' name='envoiSelectionCategories' value='Trier' />&nbsp;&nbsp;&nbsp;
+    echo "<br /><br /><input type='submit' name='envoiSelectionCategories' value='Trier' class=\"button button--primary\" />&nbsp;&nbsp;&nbsp;
 	<input type='checkbox' id='masterCheckbox' onclick='checkAll(this);' checked='checked' /><label for='masterCheckbox'>Tout (dé)cocher</label>";
     echo "</form>";
 

@@ -356,11 +356,11 @@ elseif ($_POST["action"] == "modifierUpload") {
         <td colspan="2" align="center">
             <?php if (!isset($_GET['modif'])) { ?>
             <input type="hidden" name="action" value="insererUpload">
-            <input type="submit" name="submitFile" value="Envoyer le fichier"/></td>
+            <input type="submit" name="submitFile" value="Envoyer le fichier" class="button button--primary"/></td>
         <?php } else { ?>
             <input type="hidden" name="action" value="modifierUpload">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
-            <input type="submit" name="submitFile" value="Modifier"/></td>
+            <input type="submit" name="submitFile" value="Modifier" class="button button--primary"/></td>
         <?php } ?>
     </tr>
 </table>

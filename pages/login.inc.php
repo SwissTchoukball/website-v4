@@ -44,7 +44,7 @@
             <tr>
                 <td colspan="2">
                     <div align="center">
-                        <input type="submit" name="login" value="<?php echo VAR_LANG_SE_LOGUER; ?>">
+                        <input type="submit" class="button button--primary" name="login" value="<?php echo VAR_LANG_SE_LOGUER; ?>">
                 </td>
             </tr>
         </table>

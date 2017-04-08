@@ -97,6 +97,7 @@ if (isset($_POST["subaction"]) && $_POST["subaction"] == "modifierText") {
 <div align="center">
     <form name="annuler" onsubmit="return validForm();" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"><input type="submit"
+                                                                                                        class="button button--cancel"
                                                                                                         value="<?php echo VAR_LANG_ANNULER ?>">
     </form>
 </div>
@@ -135,9 +136,8 @@ if (isset($_POST["subaction"]) && $_POST["subaction"] == "modifierText") {
         <input type="hidden" name="champ" value="<?php echo $champ; ?>"/>
         <input type="hidden" name="identifier" value="<?php echo $identifier; ?>"/>
         <input type="hidden" name="titre" value="<?php echo $titre; ?>"/>
-        <p align="center"><input type="submit" value="<?php echo VAR_LANG_APPLIQUER; ?>"/></p>
+        <p align="center"><input type="submit" value="<?php echo VAR_LANG_APPLIQUER; ?>" class="button button--primary"/></p>
     </form>
-    <!-- <input type="submit" value="<?php echo VAR_LANG_ANNULER; ?>"/> -->
     <div align="center">
         <form name="annuler" onsubmit="return validForm();" method="post"
               action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"><input

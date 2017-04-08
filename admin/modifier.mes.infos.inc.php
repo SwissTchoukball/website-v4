@@ -181,6 +181,6 @@ statInsererPageSurf(__FILE__);
             <input id="nouveauPassBis" name="nouveauPassBis" type="password" maxlength="255" size="35" autocomplete="off">
         </fieldset>
         <input type="hidden" name="action" value="modifier">
-        <input type="submit" value="modifier">
+        <input type="submit" class="button button--primary" value="modifier">
     </form>
 </div>

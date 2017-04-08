@@ -283,7 +283,7 @@
         <br/><br/>
         <input type="hidden" name="action" value="insererTour">
         <p align="center">
-            <input name='submit' type='submit' value='<?php echo VAR_LANG_INSERER; ?>'>
+            <input name='submit' class="button button--primary" type='submit' value='<?php echo VAR_LANG_INSERER; ?>'>
         </p>
         </td>
         </tr>

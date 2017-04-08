@@ -21,15 +21,15 @@
 }
 
 .listeTableau tr.depasse {
-  background-color: #fdbfbf;
+  background-color: lighten(@colorError, 50%);
 }
 
 .listeTableau tr.encours {
-  background-color: #fdf7bd;
+  background-color: lighten(@colorBlue, 50%);
 }
 
 .listeTableau tr.avenir {
-  background-color: #bdfdc5;
+  background-color: lighten(@colorSuccess, 60%);
 }
 
 #calendrierMois td {
@@ -131,7 +131,7 @@ td.supprimer {
 }
 
 .titreCalendrier {
-  color: #333;
+  color: @colorGrayVeryDark;
   font-size: 20px;
   font-weight: bold;
   border: none;
@@ -166,11 +166,11 @@ a.calendrierSuivant {
 }
 
 .calendrierAujourdhui {
-  background-color: #ffeeee;
+  background-color: @colorTableAltBackground;
 }
 
 .calendrierAujourdhui .jourDuMois {
-  color: #e2001a;
+  color: @colorPrimary;
 }
 
 .calendrierMoisEvenement {
@@ -248,7 +248,7 @@ a.calendrierSuivant {
 
 .elementAVenir {
   width: 550px;
-  border: 2px solid #E2001A;
+  border: 2px solid @colorPrimary;
   margin-top: 3px;
   margin-bottom: 3px;
   height: 40px;
@@ -278,7 +278,7 @@ a.calendrierSuivant {
   background: white;
 
   text-align: left;
-  color: #333333;
+  color: @colorGrayVeryDark;
   padding: 3px;
 
   border: 1px solid;

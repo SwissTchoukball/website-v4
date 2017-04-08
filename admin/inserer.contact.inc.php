@@ -149,6 +149,6 @@ statInsererPageSurf(__FILE__);
         <input name="motDePasse" type="password" maxlength="255" size="35" autocomplete="off">
         <br/>
         <input type="hidden" name="action" value="inserer">
-        <input type="submit" value="insérer">
+        <input type="submit" class="button button--primary" value="insérer">
     </form>
 </div>

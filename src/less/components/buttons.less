@@ -7,31 +7,31 @@
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 5px #FF9999;
+    box-shadow: 0 0 5px @colorFocus;
   }
 
   &--primary {
-    background-color: #e2001a;
+    background-color: @colorPrimary;
     font-weight: bold;
     color: white;
     border: none;
 
     &:active {
-      background-color: #e0384c;
+      background-color: @colorPrimaryDarken;
     }
 
     &[disabled] {
-      background-color: #999999;
+      background-color: @colorLessImportant;
     }
   }
 
   &--cancel {
-    border: 1px solid #999999;
+    border: 1px solid @colorLessImportant;
     background-color: transparent;
-    color: #999999;
+    color: @colorLessImportant;
 
     &:active {
-      background-color: #efefef;
+      background-color: @colorGrayVeryLight;
     }
   }
 }

@@ -3,20 +3,20 @@
   border: 1px solid;
 
   // Default notification is info message
-  color: #996600;
-  border-color: #996600;
-  background-color: #ffffbb;
+  color: @colorInfo;
+  border-color: @colorInfo;
+  background-color: lighten(@colorInfo, 50%);
 
   &--error {
-    color: #bb0000;
-    border-color: #bb0000;
-    background-color: #ffdddd;
+    color: @colorError;
+    border-color: @colorError;
+    background-color: lighten(@colorError, 50%);
   }
 
   &--success {
-    color: #006600;
-    border-color: #006600;
-    background-color: #77ee77;
+    color: @colorSuccess;
+    border-color: @colorSuccess;
+    background-color: lighten(@colorSuccess, 60%);
   }
 
   a {

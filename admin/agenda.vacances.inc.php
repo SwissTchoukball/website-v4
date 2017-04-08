@@ -144,7 +144,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                 ?>
             </select>
             <input type="hidden" name="idVacances" value="<?php echo $idVacances; ?>"/><br/>
-            <input type="submit" value="Enregistrer"/>
+            <input type="submit" class="button button--primary" value="Enregistrer"/>
         </fieldset>
     </form>
 

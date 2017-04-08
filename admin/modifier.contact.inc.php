@@ -89,5 +89,5 @@ echo "<SCRIPT language='JavaScript'>
     </fieldset>
     <input type="hidden" name="action" value="modifierContact">
     <input type="hidden" name="idPersonne" value="<?php echo $modificationId; ?>">
-    <input type="submit" value="Modifier">
+    <input type="submit" class="button button--primary" value="Modifier">
 </form>

@@ -78,7 +78,7 @@ if (!(isset($_POST['saison']) AND isset($_POST['categorie']) AND isset($_POST['t
         <input type="hidden" name="idTour" value="<?php echo $idTour; ?>">
         <input type="hidden" name="idGroupe" value="<?php echo $idGroupe; ?>">
         <input type="hidden" name="action" value="supprimerMatchs2">
-        <input type="submit" name="submit" value="<?php echo VAR_LANG_SUPPRIMER; ?>">
+        <input type="submit" name="submit" value="<?php echo VAR_LANG_SUPPRIMER; ?>" class="button button--primary">
     </form>
     <?php
 }

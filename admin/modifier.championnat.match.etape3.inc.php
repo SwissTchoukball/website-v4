@@ -1026,7 +1026,7 @@ if (!isset($_GET['idMatch'])) {
         <p align="center">
             <input type="hidden" name="idMatch" value="<?php echo $idMatch; ?>">
             <input type="hidden" name="action" value="modifierMatch3">
-            <input type='submit' value='<?php echo VAR_LANG_MODIFIER; ?>'>
+            <input type='submit' class="button button--primary" value='<?php echo VAR_LANG_MODIFIER; ?>'>
         </p>
         <script language="javascript">
             changeEtatCategorie();

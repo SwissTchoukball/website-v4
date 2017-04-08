@@ -306,14 +306,14 @@
                 if (!isset($idCategoriePrecedenteBoucle) OR $idCategoriePrecedenteBoucle != $idCategorie) {
                     $idTourPrecedenteBoucle = 0;
                     $noGroupePrecedenteBoucle = 0;
-                    echo "<h3>" . $nomCategorie[$idCategorie] . "</h3>";
+                    echo '<h3 class="alt">' . $nomCategorie[$idCategorie] . '</h3>';
                 }
                 if ((!isset($idTourPrecedenteBoucle) OR $idTourPrecedenteBoucle != $idTour) AND $idTour != 2000) {
                     $noGroupePrecedenteBoucle = 0;
-                    echo "<h4>" . $nomTour[$idTour] . "</h4>";
+                    echo '<h4>' . $nomTour[$idTour] . '</h4>';
                 }
                 if ((!isset($noGroupePrecedenteBoucle) OR $noGroupePrecedenteBoucle != $noGroupe) AND $noGroupe != 0) {
-                    echo "<h5>" . VAR_LANG_GROUPE . " " . $noGroupe . "</h5>";
+                    echo '<h5>' . VAR_LANG_GROUPE . ' ' . $noGroupe . '</h5>';
                 }
                 echo "<table class='homepage__championship-ranking__table'>";
 

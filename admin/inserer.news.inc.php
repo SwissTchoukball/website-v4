@@ -131,7 +131,7 @@
 
         <p style="clear: both; " align="center">
             <input name="action" type="hidden" id="action" value="insererNews">
-            <input type="submit" name="Submit" value="<?php echo VAR_LANG_INSERER; ?>">
+            <input type="submit" class="button button--primary" name="Submit" value="<?php echo VAR_LANG_INSERER; ?>">
         </p>
     </form>
 </div>

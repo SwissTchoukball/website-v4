@@ -45,6 +45,6 @@
 
     <p>
         <input type="hidden" name="prochaineEtape" value="etape2"/>
-        <input type="submit" value="<?php echo VAR_LANG_ETAPE_2; ?>"/>
+        <input type="submit" class="button button--primary" value="<?php echo VAR_LANG_ETAPE_2; ?>"/>
     </p>
 </form>

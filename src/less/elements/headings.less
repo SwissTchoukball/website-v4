@@ -5,17 +5,16 @@ h1, h2, h3, h4, h5 {
     margin-top: 0;
     line-height: 1;
     margin-bottom: 10px;
-    border-left: 5px solid #CC3333;
+    border-left: 5px solid @colorPrimaryDarken;
     padding-left: 8px;
 
     &.alt {
       border-left: none;
       text-align: center;
       padding-left: 0;
-      background: -moz-linear-gradient(#eeeeee 0%, #ffffff 100%);
-      background: -webkit-linear-gradient(#eeeeee 0%, #ffffff 100%);
+      .gradient(linear; white, @colorGrayVeryLight);
       padding-top: 10px;
-      border-top: 2px solid #e2001a;
+      border-top: 2px solid @colorPrimary;
     }
 
     a, a:link, a:visited, a:hover {
