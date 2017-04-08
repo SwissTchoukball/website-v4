@@ -41,7 +41,7 @@ if ($newsIdSelection != "") {
         if ($corps == "") {
             $corps = $record['corps' . $VAR_TABLEAU_DES_LANGUES[0][0]];
         }
-        echo "<h2 class='alt'>" . $date . ": " . formatterTextEnHTML($titre) . "</h2>";
+        echo "<h2>" . formatterTextEnHTML($titre) . "</h2>";
         echo "<div class='news_body'>";
         $positionImage = "class='imageFlottanteDroite'";
         if ($record['image'] != 0) { // On affiche l'image si il y en a une.
@@ -51,21 +51,31 @@ if ($newsIdSelection != "") {
         }
         //afficherAvecEncryptageEmail($corps);
         echo markdown($corps);
-        echo "<br />";
+        echo "<p class='date'>Posté " . date_sql2date_joli($donnees["date"], "le", "Fr") . "</p>";
+        echo "</div>";
         ?>
-        <a href="http://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
-           data-text="FSTB : <?php echo strip_tags($titre); ?>" data-count="none" data-via="tchouksuisse"
-           data-lang="fr">Tweet</a>
-        <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-        <!--<iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.tchoukball.ch%2Findex.php%3Fmenuselection%3D1%26smenuselection%3D1%26newsIdSelection%3D<?php echo $newsIdSelection; ?>&amp;layout=button_count&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light&amp;font=arial" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:150px; height:20px"></iframe>-->
-        <fb:like href="http://www.tchoukball.ch/news/<?php echo $newsIdSelection; ?>" send="true" layout="button_count"
-                 width="450" show_faces="false" font="lucida grande"></fb:like>
+        <div class="socialButtons">
+            <a href="http://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
+               data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
+               data-lang="fr">Tweet</a>
+            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <div class="fb-share-button"
+                 data-href="http://www.tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
+                 data-layout="button"
+                 data-size="small"
+                 data-mobile-iframe="true">
+                <a class="fb-xfbml-parse-ignore"
+                   target="_blank"
+                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+                    Share
+                </a>
+            </div>
+        </div>
         <?php
-        echo "</div><br />";
     }
 
 
-    echo "<p class='center'><a href='/news'>" . VAR_LANG_NEWS_BACK_TO_NEWS . "</a><p>";
+    echo "<a href='/news'><button class='button button--cancel'>" . VAR_LANG_NEWS_BACK_TO_NEWS . "</button></a>";
 } else {
     $nbNews = 0;
     // afficher le resultat de la requete
@@ -79,10 +89,12 @@ if ($newsIdSelection != "") {
         if ($corps == "") {
             $corps = $record['corps' . $VAR_TABLEAU_DES_LANGUES[0][0]];
         }
-        echo "<h2 class='alt'>" . $date . ": " . formatterTextEnHTML($titre) . "</h2><br />";
+        echo "<h2 class='alt'>" . formatterTextEnHTML($titre) . "</h2><br />";
         echo "<div class='news_body'>";
         echo truncateHtml(markdown($corps), $TAILLE_NEWS,
-                "... ") . "<p class='lireSuiteArticle'><a href='/news/" . $record['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
+                "... ");
+        echo "<p><a href='/news/" . $record['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
+        echo "<p class='news-date'>Posté " . date_sql2date_joli($record["date"], "le", "Fr", false) . "</p>";
         echo "</div>";
         $nbNews++;
     }

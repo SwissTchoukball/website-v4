@@ -636,7 +636,7 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
                 $dateJoli .= '<sup>er</sup>';
             }
 
-            $dateJoli .= ' ' . $mois . ' ' . $annee;
+            $dateJoli .= '&nbsp;' . $mois . '&nbsp;' . $annee;
         }
     } else {
         $dateJoli = '';

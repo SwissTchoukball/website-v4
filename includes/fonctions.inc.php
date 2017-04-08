@@ -1067,11 +1067,7 @@ function afficherRang(
             $rangAffiche = "Passe en petite finale";
         }
     } else {
-        if ($rang == 1) {
-            $rangAffiche = $rang . "<sup>er</sup>";
-        } else {
-            $rangAffiche = $rang . "<sup>ème</sup>";
-        }
+        $rangAffiche = $rang . '.';
     }
     return $rangAffiche;
 }

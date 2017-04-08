@@ -1,5 +1,5 @@
 <footer xmlns:fb="">
-    <div id="socialButtons">
+    <div class="socialButtons">
         <a href="https://twitter.com/SwissTchoukball" class="twitter-follow-button" data-show-count="false"
            data-lang="<?php echo strtolower($_SESSION["__langue__"]); ?>">Suivre @SwissTchoukball</a>
         <script>!function (d, s, id) {

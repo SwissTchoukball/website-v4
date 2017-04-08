@@ -296,7 +296,6 @@ define("VAR_LANG_CHTB_DOWNLOAD", "Vedere gli archivi di tchoukup");
 
 define("VAR_LANG_ADMINISTRATION", "Amministrazione");
 
-define("VAR_LANG_CLASSEMENT_CHAMPIONNAT", "Classifica del campionato");
 define("VAR_LANG_DERNIERES_NEWS", "Ultime notizie");
 define("VAR_LANG_PROCHAINS_EVENEMENTS", "Prossimi eventi");
 define("VAR_LANG_PROCHAINS_MATCHS", "Prossimi incontro");

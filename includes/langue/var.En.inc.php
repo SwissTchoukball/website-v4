@@ -307,7 +307,6 @@ define("VAR_LANG_CHTB_DOWNLOAD", "Consult the tchoukup archives");
 
 define("VAR_LANG_ADMINISTRATION", "Administration");
 
-define("VAR_LANG_CLASSEMENT_CHAMPIONNAT", "Championship ranking");
 define("VAR_LANG_DERNIERES_NEWS", "Last news");
 define("VAR_LANG_PROCHAINS_EVENEMENTS", "Next events");
 define("VAR_LANG_PROCHAINS_MATCHS", "Next matches");
