@@ -113,15 +113,5 @@ if ($_SESSION["__userLevel__"] < 100) {
 <script src="/build/lib.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
 <script src="/build/app.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
 <script src="/scripts/before-body-closing.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
-
-<?php
-if ($affichage_twitter) {
-    ?>
-    <script type="text/javascript" src="http://twitter.com/javascripts/blogger.js"></script>
-    <script type="text/javascript"
-            src="http://twitter.com/statuses/user_timeline/tchouksuisse.json?callback=twitterCallback2&amp;count=5"></script>
-    <?php
-}
-?>
 </body>
 </html>

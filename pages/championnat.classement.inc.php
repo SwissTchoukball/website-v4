@@ -295,24 +295,24 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             } else {
                 $classement = $k;
             }
-            echo "<td><p align='center'>" . afficherRang($idTour, $typeClassement,
+            echo "<td>" . afficherRang($idTour, $typeClassement,
                     $donneesEquipeClassement['nbMatchGagne'], $donneesEquipeClassement['nbMatchPerdu'],
-                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $classement) . "</p></td>";
-            echo "<td><p>" . $donneesEquipeClassement['equipe'] . "</p></td>";
+                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $classement) . "</td>";
+            echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
             if ($typeClassement != 2) {
                 $nbMatchJoue = $donneesEquipeClassement['nbMatchGagne'] + $donneesEquipeClassement['nbMatchNul'] + $donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait'];
-                echo "<td><p>" . $nbMatchJoue . "</p></td>";
-                echo "<td><p>" . $donneesEquipeClassement['nbMatchGagne'] . "</p></td>";
+                echo "<td>" . $nbMatchJoue . "</td>";
+                echo "<td>" . $donneesEquipeClassement['nbMatchGagne'] . "</td>";
                 if ($typeClassement == 3) {
-                    echo "<td><p>" . $donneesEquipeClassement['nbMatchNul'] . "</p></td>";
+                    echo "<td>" . $donneesEquipeClassement['nbMatchNul'] . "</td>";
                 }
-                echo "<td><p>" . $donneesEquipeClassement['nbMatchPerdu'] . "</p></td>";
-                echo "<td><p>" . $donneesEquipeClassement['nbMatchForfait'] . "</p></td>";
-                echo "<td><p>" . $donneesEquipeClassement['nbPointMarque'] . "</p></td>";
-                echo "<td><p>" . $donneesEquipeClassement['nbPointRecu'] . "</p></td>";
-                echo "<td><p>" . $donneesEquipeClassement['goolaverage'] . "</p></td>";
+                echo "<td>" . $donneesEquipeClassement['nbMatchPerdu'] . "</td>";
+                echo "<td>" . $donneesEquipeClassement['nbMatchForfait'] . "</td>";
+                echo "<td>" . $donneesEquipeClassement['nbPointMarque'] . "</td>";
+                echo "<td>" . $donneesEquipeClassement['nbPointRecu'] . "</td>";
+                echo "<td>" . $donneesEquipeClassement['goolaverage'] . "</td>";
                 if ($typeClassement == 3) {
-                    echo "<td><p>" . $donneesEquipeClassement['points'] . "</p></td>";
+                    echo "<td>" . $donneesEquipeClassement['points'] . "</td>";
                 }
             }
             echo "</tr>";

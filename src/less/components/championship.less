@@ -89,6 +89,10 @@
   border: none;
   border-collapse: collapse;
   margin-bottom: 30px;
+
+  tr:nth-child(even) {
+    background-color: @colorTableAltBackground;
+  }
 }
 
 .classementTourFinal,
@@ -123,7 +127,6 @@
 .classementPlayoff th {
   text-align: center;
   height: 20px;
-  font-size: 12px;
   color: @colorPrimaryDarken;
   font-weight: bold;
   border-bottom: 1px solid lighten(@colorPrimary, 30%);
@@ -133,7 +136,7 @@
 .resultatsTourFinal td,
 .classementTour td,
 .classementTourFinal td {
-  font-size: 11px;
+  padding: 5px;
   text-align: center;
   border-bottom: 1px solid lighten(@colorPrimary, 30%);
 }

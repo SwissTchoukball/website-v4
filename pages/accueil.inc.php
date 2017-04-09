@@ -49,6 +49,11 @@
                 ?>
             </ul>
         </div>
+        <div class="homepage__news__newsletter">
+            <h2>Newsletter</h2>
+                <script type="text/javascript"
+                        src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
+        </div>
     </div>
     <div class="homepage__next-events">
         <div class="homepage__next-events__others">
@@ -56,7 +61,7 @@
             <ul class="homepage__dates-list">
                 <?php
                 $aujourdhui = date_actuelle();
-                $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 6");
+                $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
                 while ($donnees = mysql_fetch_array($requete)) {
                     echo "<li>";
                     echo "<a href='/evenement/" . $donnees['id'] . "'>" . $donnees["titre"] . "</a><br/>";
@@ -75,7 +80,7 @@
             <ul class="homepage__dates-list">
                 <?php
                 $aujourdhui = date_actuelle();
-                $requete = mysql_query("SELECT * FROM Championnat_Matchs WHERE dateDebut >= '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 6");
+                $requete = mysql_query("SELECT * FROM Championnat_Matchs WHERE dateDebut >= '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
                 while ($donnees = mysql_fetch_array($requete)) {
                     echo "<li>";
                     echo "<a href='/championnat/match/" . $donnees['idMatch'] . "'>";
@@ -177,7 +182,7 @@
         }
 
         if ($championnatEnCours) {
-            echo "<h1><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=24'>" . VAR_LANG_CHAMPIONNAT . "</a></h1>";
+            echo "<h1><a href='/championnat/classement'>" . VAR_LANG_CHAMPIONNAT . "</a></h1>";
         }
         while ($donneesNbClassementA = mysql_fetch_array($retourNbClassementA)) {
             $requeteNbClassementB = "SELECT DISTINCT idTour FROM Championnat_Equipes_Tours WHERE saison=" . $annee . " AND idCategorie=" . $donneesNbClassementA['idCategorie'] . " ORDER BY idTour DESC LIMIT 1";

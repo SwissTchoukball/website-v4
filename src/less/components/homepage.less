@@ -48,6 +48,36 @@
     &__rest {
 
     }
+
+    &__newsletter {
+      form {
+        text-align: center;
+
+        .inf-content > * {
+          display: inline-block;
+        }
+
+        .inf-input input {
+          font-size: 1.1em;
+          border-radius: 5px;
+          padding: 5px;
+          width: 145px;
+        }
+
+        .inf-submit input[type=submit] {
+          .button;
+          background-color: @colorPrimary;
+          font-weight: bold;
+          color: white;
+          border: none;
+          padding: 5px 6px;
+
+          &:active {
+            background-color: @colorPrimaryDarken;
+          }
+        }
+      }
+    }
   }
 
   &__championship-ranking {
