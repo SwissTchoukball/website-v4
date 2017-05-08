@@ -362,15 +362,15 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             }
             echo "<td><p align='center'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
                     $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang) . "</p></td>";
-            echo "<td><p>" . $equipe . "</p></td>";
+            echo "<td>" . $equipe . "</td>";
             if ($typeClassement != 2) {
-                echo "<td><p>" . $nbMatchJoue . "</p></td>";
-                echo "<td><p>" . $nbMatchGagne . "</p></td>";
-                echo "<td><p>" . $nbMatchPerdu . "</p></td>";
-                echo "<td><p>" . $nbMatchForfait . "</p></td>";
-                echo "<td><p>" . $nbPointMarque . "</p></td>";
-                echo "<td><p>" . $nbPointRecu . "</p></td>";
-                echo "<td><p>" . $goolaverage . "</p></td>";
+                echo "<td>" . $nbMatchJoue . "</td>";
+                echo "<td>" . $nbMatchGagne . "</td>";
+                echo "<td>" . $nbMatchPerdu . "</td>";
+                echo "<td>" . $nbMatchForfait . "</td>";
+                echo "<td>" . $nbPointMarque . "</td>";
+                echo "<td>" . $nbPointRecu . "</td>";
+                echo "<td>" . $goolaverage . "</td>";
             }
             echo "</tr>";
             $idTypeMatchPrecedant = $idTypeMatch;
