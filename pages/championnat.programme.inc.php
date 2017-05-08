@@ -272,10 +272,12 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                             }
                             ?>
                         </td>
-                        <td class="center"><?php echo heure($donnees['heureDebut']); ?>
-                            :<?php echo minute($donnees['heureDebut']); ?></td>
-                        <td class="center"><?php echo heure($donnees['heureFin']); ?>
-                            :<?php echo minute($donnees['heureFin']); ?></td>
+                        <td class="center">
+                            <?php echo heure($donnees['heureDebut']) . ':' . minute($donnees['heureDebut']); ?>
+                        </td>
+                        <td class="center">
+                            <?php echo heure($donnees['heureFin']) . ':' . minute($donnees['heureFin']); ?>
+                        </td>
                     </tr>
                     <?php
                     $previousMatchDate = $donnees['dateDebut'];
