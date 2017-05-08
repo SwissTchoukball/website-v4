@@ -360,8 +360,8 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             } else {
                 $rang = $position;
             }
-            echo "<td><p align='center'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
-                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang) . "</p></td>";
+            echo "<td>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
+                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang) . "</td>";
             echo "<td>" . $equipe . "</td>";
             if ($typeClassement != 2) {
                 echo "<td>" . $nbMatchJoue . "</td>";
