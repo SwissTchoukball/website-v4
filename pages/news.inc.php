@@ -13,14 +13,20 @@ if ($newsIdSelection != "") {
     $requeteSelect = "SELECT * FROM `News` WHERE `Id`='" . $newsIdSelection . "'";
 } else {
 
-    if ($limitinf == "" || $limitsup == "") {
-        if ($limitinf == "") {
-            $limitinf = 0;
-        }
-        if ($limitsup == "") {
-            $limitsup = $NB_NEWS_AFFICHEES;
-        }
+    if (isset($_GET['limitinf']) and is_numeric($_GET['limitinf'])) {
+        $limitinf = $_GET['limitinf'];
     }
+    else {
+        $limitinf = 0;
+    }
+
+    if (isset($_GET['limitsup']) and is_numeric($_GET['limitsup'])) {
+        $limitsup = $_GET['limitsup'];
+    }
+    else {
+        $limitsup = $NB_NEWS_AFFICHEES;
+    }
+
     $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `Date` DESC LIMIT $limitinf, $limitsup";
 }
 //$recordset = mysql_query($requeteSelect) or die ("<H1>mauvaise requete</H1>");
