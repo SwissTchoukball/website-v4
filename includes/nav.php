@@ -1,6 +1,7 @@
 <nav id="main-nav">
     <?php
-    $navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu, sm.nomFr AS sousmenu, m.id AS sousMenuDeId,
+    $navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu,
+                    sm.nom" . $_SESSION['__langue__'] . " AS sousmenu, m.id AS sousMenuDeId,
                     sm.ordre, m.userLevel AS parentUserLevel, sm.userLevel,
                     sm.urlRewriting AS link, m.urlRewriting AS parentLink, sm.lienExterneSite AS isExternalLink
              FROM " . $typemenu . " m
