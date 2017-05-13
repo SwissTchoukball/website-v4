@@ -20,7 +20,7 @@ if (isset($_GET['type']) && is_numeric($_GET['type'])) {
     $requeteSQL = "SELECT * FROM `Download` WHERE `idType`='" . $_GET['type'] . "' AND `visible`='1' ORDER BY `titre" . $_SESSION["__langue__"] . "`";
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 } else {
-    $requeteSQL = "SELECT * FROM `Download`,`TypeDownload` WHERE `TypeDownload`.`id`= `Download`.`idType` AND `Download`.`visible`=1 ORDER BY `TypeDownload`.`description" . $_SESSION["__langue__"] . "`,`titre" . $_SESSION["__langue__"] . "`,`date`";
+    $requeteSQL = "SELECT * FROM `Download`,`TypeDownload` WHERE `TypeDownload`.`id`= `Download`.`idType` AND `Download`.`visible`=1 AND `TypeDownload`.`visible`=1 ORDER BY `TypeDownload`.`description" . $_SESSION["__langue__"] . "`,`titre" . $_SESSION["__langue__"] . "`,`date`";
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
     //$catergorie = true;
 }
