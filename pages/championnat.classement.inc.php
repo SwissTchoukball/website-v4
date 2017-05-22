@@ -296,7 +296,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
                 $classement = $k;
             }
             echo "<td>" . afficherRang($idTour, $typeClassement,
-                    $donneesEquipeClassement['nbMatchGagne'], $donneesEquipeClassement['nbMatchPerdu'],
+                    $donneesEquipeClassement['nbMatchGagne'], ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
                     $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $classement) . "</td>";
             echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
             if ($typeClassement != 2) {
@@ -360,7 +360,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             } else {
                 $rang = $position;
             }
-            echo "<td>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
+            echo "<td>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                     $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang) . "</td>";
             echo "<td>" . $equipe . "</td>";
             if ($typeClassement != 2) {

@@ -342,7 +342,7 @@
                             $classement = $k;
                         }
                         echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
-                                $donneesEquipeClassement['nbMatchPerdu'], $nbMatchGagnantPromoReleg,
+                                ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']), $nbMatchGagnantPromoReleg,
                                 $nbMatchGagnantTourFinal, $classement) . "</td>";
                         echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
                         echo "</tr>";
@@ -396,7 +396,7 @@
                         $equipe = $donneesC['equipe'];
                         echo "<tr style='" . $style . "'>";
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
-                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu,
+                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                                 $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $position) . "</td>";
                         echo "</tr>";
                         echo "<td>" . $equipe . "</td>";
