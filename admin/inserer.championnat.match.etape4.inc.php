@@ -39,12 +39,12 @@ if (!isset($_POST['nbMatchs'])) {
         $idLieu = isValidVenueID($_POST['idLieu' . $k]) ? $_POST['idLieu' . $k] : 'NULL';
 
         if ($idTypeMatchValide) {
-            $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $_POST['equipeA' . $k] . "";
+            $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $_POST['equipeA' . $k];
             $retourA = mysql_query($requeteA);
             $donneesA = mysql_fetch_array($retourA);
             $nomEquipeA = $donneesA['equipe'];
 
-            $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $_POST['equipeB' . $k] . "";
+            $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $_POST['equipeB' . $k];
             $retourB = mysql_query($requeteB);
             $donneesB = mysql_fetch_array($retourB);
             $nomEquipeB = $donneesB['equipe'];

@@ -548,7 +548,7 @@ if ($canEdit) {
             <label for="address1">Adresse</label>
             <input type="text" id="address1" name="address1" onkeyup="updateAddressPreview();"
                    value="<?php echo $address1; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
-            <label></label>
+            <label for="address2"></label>
             <input type="text" id="address2" name="address2" onkeyup="updateAddressPreview();"
                    value="<?php echo $address2; ?>" <?php echo $canEditDetails ? '' : 'readonly="readonly"'; ?> />
             <label for="zipCode">NPA</label>
@@ -661,17 +661,17 @@ if ($canEdit) {
             ?>
             <label for="birthDateDay">Date de naiss.</label>
             <div class="st-form__date">
-                <select id="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
+                <select id="birthDateDay" title="birthDateDay" name="birthDateDay" onchange="autoStatutUpdate();">
                     <option value="0">-</option>
                     <?php echo modif_liste_jour(jour($birthDate)); ?>
                 </select>
 
-                <select id="birthDateMonth" name="birthDateMonth" onchange="autoStatutUpdate();">
+                <select id="birthDateMonth" title="birthDateMonth" name="birthDateMonth" onchange="autoStatutUpdate();">
                     <option value="0">-</option>
                     <?php echo modif_liste_mois(mois($birthDate)); ?>
                 </select>
 
-                <select id="birthDateYear" name="birthDateYear" onchange="autoStatutUpdate();">
+                <select id="birthDateYear" title="birthDateYear" name="birthDateYear" onchange="autoStatutUpdate();">
                     <option value="0">-</option>
                     <?php
                     for ($i = date('Y'); $i >= 1900; $i--) {
@@ -852,12 +852,12 @@ if ($canEdit) {
             <fieldset>
                 <label>Type de compte</label>
                 <?php afficherdropDownListe("DBDTypeCompte", "idTypeCompte", "TypeCompte", $typeCompte, false); ?>
-                <label>Numéro de compte</label>
-                <textarea name="numeroCompte"><?php echo $numeroCompte; ?></textarea>
+                <label for="accountNumberInput">Numéro de compte</label>
+                <textarea name="numeroCompte" id="accountNumberInput"><?php echo $numeroCompte; ?></textarea>
             </fieldset>
             <fieldset>
-                <label>Remarques</label>
-                <textarea name="remarques"><?php echo $remarques; ?></textarea>
+                <label for="remarksInput">Remarques</label>
+                <textarea name="remarques" id="remarksInput"><?php echo $remarques; ?></textarea>
             </fieldset>
             <?php
         }

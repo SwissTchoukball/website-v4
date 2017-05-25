@@ -59,7 +59,7 @@
         ?>
         <form name="clubSwitcher" method="post"
               action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
-            <select name="club" onChange="document.clubSwitcher.submit();">
+            <select name="club" title="Choisir un club" onChange="document.clubSwitcher.submit();">
                 <option value="15">Choisir un club</option>
                 <?php
                 $clubsRequest = "SELECT nbIdClub, club FROM ClubsFstb WHERE statusId = 1 OR statusId = 2 ORDER BY club";

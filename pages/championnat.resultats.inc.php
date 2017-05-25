@@ -1,8 +1,8 @@
 <form name="resultatsChampionnat" action="" method="post">
     <table border="0" align="center">
         <tr>
-            <td><p><?php echo $agenda_annee; ?> :</p></td>
-            <td><select name="annee" id="select" onChange="resultatsChampionnat.submit();">
+            <td><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
+            <td><select name="annee" id="seasonSelector" onChange="resultatsChampionnat.submit();">
                     <?php
                     $annee = $_POST['annee'];
                     // recherche de la premiere date
@@ -30,9 +30,9 @@
 
                     for ($i = 0; $i < $nbChampionnatExistant; $i++) {
                         if ($annee == $anneDebutChampionnat) {
-                            echo "<option selected value='$anneDebutChampionnat'>" . VAR_LANG_CHAMPIONNAT . " $anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
+                            echo "<option selected value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
                         } else {
-                            echo "<option value='$anneDebutChampionnat'>" . VAR_LANG_CHAMPIONNAT . " $anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
+                            echo "<option value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
                         }
                         $anneDebutChampionnat++;
                     }
@@ -59,7 +59,7 @@ echo "</ul>";
 
 
 // Sélection de la politique des points de l'année choisie.
-$retour = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $annee . "");
+$retour = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $annee);
 $donnees = mysql_fetch_array($retour);
 $pointsMatchGagne = $donnees['pointsMatchGagne'];
 $pointsMatchNul = $donnees['pointsMatchNul'];
@@ -82,9 +82,9 @@ if ($nbTours == 0) {
     while ($donnees = mysql_fetch_array($retour)) {
         $idTour = $donnees['idTour'];
 
-        if ($tableauCategories[$donnees['idCategorie']] != oui) { // On vérifie si c'est la première fois que cette catégorie apparaît dans la liste des tours. Si c'est le cas, l'id de la categorie n'appartient pas à $tableauCategories donc on affiche le nom de la categorie.
-            $tableauCategories[$donnees['idCategorie']] = oui;
-            $requeteA = "SELECT categorie" . $_SESSION['__langue__'] . " FROM Championnat_Categories WHERE idCategorie=" . $donnees['idCategorie'] . "";
+        if ($tableauCategories[$donnees['idCategorie']] != 'oui') { // On vérifie si c'est la première fois que cette catégorie apparaît dans la liste des tours. Si c'est le cas, l'id de la categorie n'appartient pas à $tableauCategories donc on affiche le nom de la categorie.
+            $tableauCategories[$donnees['idCategorie']] = 'oui';
+            $requeteA = "SELECT categorie" . $_SESSION['__langue__'] . " FROM Championnat_Categories WHERE idCategorie=" . $donnees['idCategorie'];
             // echo $requeteA;
             $retourA = mysql_query($requeteA);
             $donneesA = mysql_fetch_array($retourA);
@@ -127,13 +127,11 @@ if ($nbTours == 0) {
                 Journée
                 <?php
             }
-            ?>
-            </th>
-            <th class="right">Club recevant</th>
-            <th class="center">Score</th>
-            <th>Club visiteur</th>
-            </tr>
-            <?php
+            echo '</th>' .
+                '<th class="right">Club recevant</th>' .
+                '<th class="center">Score</th>' .
+                '<th>Club visiteur</th>' .
+                '</tr>';
             while ($donneesC = mysql_fetch_array($retourC)) {
                 if ($donneesC['journee'] % 2 == 0) {
                     $matchClass = 'journeePair';
@@ -143,13 +141,13 @@ if ($nbTours == 0) {
                 echo "<tr class='" . $matchClass . "'>";
                 echo "<td class='center' height='20px'>";
                 if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
-                    $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donneesC['idTypeMatch'] . "";
+                    $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donneesC['idTypeMatch'];
                     $retourD = mysql_query($requeteD);
                     $donneesD = mysql_fetch_array($retourD);
                     echo $donneesD['type' . $_SESSION['__langue__']];
                 } else {
-                    if ($tableauJournees[$donneesC['journee']] != oui) {
-                        $tableauJournees[$donneesC['journee']] = oui;
+                    if ($tableauJournees[$donneesC['journee']] != 'oui') {
+                        $tableauJournees[$donneesC['journee']] = 'oui';
                         if ($donneesC['journee'] != 0) {
                             echo $donneesC['journee'];
                         }
@@ -157,7 +155,7 @@ if ($nbTours == 0) {
                 }
                 echo "</td>";
                 echo "<td class='right'>";
-                $requeteD = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donneesC['equipeA'] . "";
+                $requeteD = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donneesC['equipeA'];
                 $retourD = mysql_query($requeteD);
                 $donneesD = mysql_fetch_array($retourD);
                 if ($donneesC['pointsA'] > $donneesC['pointsB']) {
@@ -176,7 +174,7 @@ if ($nbTours == 0) {
                 }
                 echo "</a></td>";
                 echo "<td>";
-                $requeteD = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donneesC['equipeB'] . "";
+                $requeteD = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donneesC['equipeB'];
                 $retourD = mysql_query($requeteD);
                 $donneesD = mysql_fetch_array($retourD);
                 if ($donneesC['pointsA'] < $donneesC['pointsB']) {

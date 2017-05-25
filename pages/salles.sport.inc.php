@@ -11,7 +11,7 @@ statInsererPageSurf(__FILE__);
     // affiche le texte
     while ($donnees = mysql_fetch_array($retour)) {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
     ?>

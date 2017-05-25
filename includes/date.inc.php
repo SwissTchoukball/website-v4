@@ -164,26 +164,6 @@ function date_actuelle()
     return $date_du_jour;
 }
 
-
-///////////////////////////////////////////////////////////////////////////////
-//Nom: heure_actuelle                                                        //
-//But: retourne l'heure actuelle au format sql (hh:mm:ss)                    //
-//Date: 03.05.2007                                                           //
-//Crée par: David Sandoz                                                     //
-//Remarques:                                                                 //
-///////////////////////////////////////////////////////////////////////////////
-function heure_actuelle()
-{
-    $heure = date('H');
-    if ($jour < 10) {
-        $jour = "$jour";
-    }
-    $minute = date('i');
-    $seconde = date('s');
-    $heure_actuelle = "$heure:$minure:$seconde";
-    return $heure_actuelle;
-}
-
 ///////////////////////////////////////////////////////////////////////////////
 //Nom: date_egale                                                            //
 //But: retourne 1 si les dates sont identiques 0 sinon                       //
@@ -549,6 +529,7 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
     $jour = substr($date, 8, 2);
     $timestamp = mktime(0, 0, 0, $mois, $jour, $annee);
     $jourSemaineNumero = date('w', $timestamp);
+    $dateJoli = '';
 
     $dateEcrite = false;
     if ($langue == "Fr") {
@@ -602,6 +583,7 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
                 $mois = "décembre";
             }
 
+            $jourSemaine = '';
             if ($jourSemaineNumero == 0) {
                 $jourSemaine = "dimanche";
             } elseif ($jourSemaineNumero == 1) {
@@ -639,7 +621,6 @@ function date_sql2date_joli($date, $prefixe, $langue, $dayOfWeek = true)
             $dateJoli .= '&nbsp;' . $mois . '&nbsp;' . $annee;
         }
     } else {
-        $dateJoli = '';
         if ($prefixe != "") {
             $dateJoli .= $prefixe . ' ';
         }

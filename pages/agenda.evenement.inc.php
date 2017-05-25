@@ -35,8 +35,8 @@ while ($donnees = mysql_fetch_array($retour)) {
         $description = $donnees['description'];
     }
     if ($premier) {
-        echo "<fieldset id='evenementDetails' style='border-color: #" . $donnees['couleur'] . "'>";
-        echo "<legend style='color: #" . $donnees['couleur'] . "'>" . $titre . "</legend>";
+        echo "<fieldset id='evenementDetails' style='border-color: " . $donnees['couleur'] . "'>";
+        echo "<legend style='color: " . $donnees['couleur'] . "'>" . $titre . "</legend>";
         echo "<br /><div class='donneesEvenement'>";
         if ($donnees['dateDebut'] == $donnees['dateFin']) {
             echo ucfirst(date_sql2date_joli($donnees['dateDebut'], $agenda_le, $_SESSION['__langue__']));
@@ -86,7 +86,7 @@ while ($donnees = mysql_fetch_array($retour)) {
     $annee = annee($donnees['dateDebut']);
 }
 echo "<div class='libelleEvenement'>" . $agenda_vacances . " : </div><br />";
-echo "<div class='categorieEvenement' style='color: #" . $couleur . "'>" . $nomCategorie . "</div>";
+echo "<div class='categorieEvenement' style='color: " . $couleur . "'>" . $nomCategorie . "</div>";
 echo "</fieldset>";
 
 $lienRetour = "/calendrier/" . $annee . "/" . $mois;

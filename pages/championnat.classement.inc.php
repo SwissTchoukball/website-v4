@@ -1,8 +1,8 @@
 <form name="classementChampionnat" action="" method="post">
     <table border="0" align="center">
         <tr>
-            <td><p><?php echo $agenda_annee; ?> :</p></td>
-            <td><select name="annee" id="select" onChange="classementChampionnat.submit();">
+            <td><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
+            <td><select name="annee" id="seasonSelector" onChange="classementChampionnat.submit();">
                     <?php
                     $annee = $_POST['annee'];
                     // recherche de la premiere date
@@ -30,9 +30,9 @@
 
                     for ($i = 0; $i < $nbChampionnatExistant; $i++) {
                         if ($annee == $anneeDebutChampionnat) {
-                            echo "<option selected value='" . $anneeDebutChampionnat . "'>" . VAR_LANG_CHAMPIONNAT . " " . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
+                            echo "<option selected value='" . $anneeDebutChampionnat . "'>" . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
                         } else {
-                            echo "<option value='" . $anneeDebutChampionnat . "'>" . VAR_LANG_CHAMPIONNAT . " " . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
+                            echo "<option value='" . $anneeDebutChampionnat . "'>" . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
                         }
                         $anneeDebutChampionnat++;
                     }
@@ -59,7 +59,7 @@ $debug = false; // isAdmin()
 
 /* Sélection de la politique des points de l'année choisie. */
 
-$retourAnnee = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $annee . "");
+$retourAnnee = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $annee);
 $donnees = mysql_fetch_array($retourAnnee);
 $pointsMatchGagne = $donnees['pointsMatchGagne'];
 $pointsMatchNul = $donnees['pointsMatchNul'];
@@ -282,7 +282,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     if ($idTour != 10000) { // Pas un tour final
         for ($k = 1; $k < count($tableau); $k++) {
             $idEquipe = $tableau[$k][1];
-            $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe . "";
+            $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
             if ($debug) {
                 echo "<br /><br />Affichage des équipes qui ne sont pas à égalité : " . $requete;
             }

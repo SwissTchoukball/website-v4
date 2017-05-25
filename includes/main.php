@@ -38,10 +38,10 @@
         printMessage('Maintenance en cours. Merci de votre compréhension.');
     } else {
         if (isset($_GET['login'])) {
-            include "pages/login.inc.php";
+            include $_SERVER["DOCUMENT_ROOT"] . "/pages/login.inc.php";
         } elseif (isset($_GET['contact'])) {
-            include "pages/contact.php";
-        } elseif (is_file($contenupage)) {
+            include $_SERVER["DOCUMENT_ROOT"] . "/pages/contact.inc.php";
+        } elseif (!empty($contenupage) && is_file($contenupage)) {
             if ($admin && $_SESSION["__userLevel__"] >= 100) {
                 printErrorMessage('Accès refusé');
             } else {

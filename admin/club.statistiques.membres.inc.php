@@ -44,5 +44,3 @@ if ($nbActiveMembers != 0) {
 }
 
 echo "<br />";
-
-?>

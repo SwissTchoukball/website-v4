@@ -59,4 +59,3 @@ else {
     // affichage du carnet
     include "carnet.adresse.inc.php";
 }
-?>

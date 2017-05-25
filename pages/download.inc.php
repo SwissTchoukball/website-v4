@@ -94,4 +94,3 @@ while ($record = mysql_fetch_array($recordset)) {
 }
 echo $fin_tableau;
 echo "</div>";
-?>

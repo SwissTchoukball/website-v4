@@ -1,5 +1,4 @@
 <?php
-include "includes/agenda.utility.inc.php";
 $categorie = 7; // ==> catergorie championnat
 
 if (isset($_POST['annee'])) {
@@ -22,9 +21,9 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
         <input type="hidden" name="lien" value="<?php echo $idPage; ?>"/>
         <table class="formagenda">
             <tr>
-                <td align="right" width="50%"><p><?php echo VAR_LANG_SAISON; ?> :</p></td>
+                <td align="right" width="50%"><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
                 <td align="left">
-                    <select name="annee" id="select" onChange="affichage.submit();">
+                    <select name="annee" id="seasonSelector" title="Année" onChange="affichage.submit();">
                         <?php
                         // recherche de la premiere date
                         $requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
@@ -55,9 +54,9 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 
                         for ($i = 0; $i < $nbChampionnatExistant; $i++) {
                             if ($annee == $anneDebutChampionnat) {
-                                echo "<option selected value='$anneDebutChampionnat'>" . VAR_LANG_CHAMPIONNAT . " $anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
+                                echo "<option selected value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
                             } else {
-                                echo "<option value='$anneDebutChampionnat'>" . VAR_LANG_CHAMPIONNAT . " $anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
+                                echo "<option value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
                             }
                             $anneDebutChampionnat++;
                         }
@@ -77,9 +76,9 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
             }
             ?>
             <tr>
-                <td align="right" width="50%"><p><?php echo VAR_LANG_CATEGORIE . " / " . VAR_LANG_EQUIPE; ?> :</p></td>
+                <td align="right" width="50%"><label for="categoryTeamSelector"><?php echo VAR_LANG_CATEGORIE . " / " . VAR_LANG_EQUIPE; ?> :</label></td>
                 <td align="left">
-                    <select name="recherche" onChange="affichage.submit();">
+                    <select name="recherche" id="categoryTeamSelector" onChange="affichage.submit();">
                         <option value="tout">Tout</option>
                         <?php
                         $requeteCategorie = "SELECT DISTINCT Championnat_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Tours, Championnat_Categories WHERE saison=" . $saison . " AND Championnat_Tours.idCategorie=Championnat_Categories.idCategorie";
@@ -134,20 +133,20 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 
     // affichage des dates
     if ($annee == "Avenir") {
-        $annee = date_actuelle();
+        $seasonStart = date_actuelle();
         $finAffichage = '';
     } else {
-        $annee = "$annee-08-00";
-        $jusqua = $annee + 1;
-        $jusqua .= "-08-00";
-        $finAffichage = "AND (dateDebut<='" . $jusqua . "' OR dateFin<='" . $jusqua . "')";
+        $seasonStart = "$annee-08-01";
+        $seasonEnd = $annee + 1;
+        $seasonEnd .= "-08-01";
+        $finAffichage = "AND (dateDebut<='" . $seasonEnd . "' OR dateFin<='" . $seasonEnd . "')";
     }
     if (isset($_POST['recherche'])) {
         if ($_POST['recherche'] == "tout") {
             $recherche = "";
         } elseif (preg_match("#^cat#", $_POST['recherche'])) {
             $rechercheCat = preg_replace("#cat(.+)#", "$1", $_POST['recherche']);
-            $recherche = "AND c.idCategorie=" . $rechercheCat . "";
+            $recherche = "AND c.idCategorie=" . $rechercheCat;
         } else {
             $recherche = "AND (equipeA=" . $_POST['recherche'] . " OR equipeB=" . $_POST['recherche'] . ")";
         }
@@ -169,17 +168,17 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 				LEFT OUTER JOIN Championnat_Equipes eb ON m.equipeB = eb.idEquipe
 				LEFT OUTER JOIN Championnat_Categories c ON m.idCategorie = c.idCategorie
 				LEFT OUTER JOIN Lieux l ON m.idLieu = l.id
-				WHERE (dateDebut>='" . $annee . "' OR dateFin>='" . $annee . "') " . $finAffichage . " " . $recherche . "
+				WHERE (dateDebut>='" . $seasonStart . "' OR dateFin>='" . $seasonStart . "') " . $finAffichage . " " . $recherche . "
 				ORDER BY dateDebut, heureDebut";
 
-    //echo $requete;
+    echo $requete;
     $retour = mysql_query($requete);
     if (!$retour) {
         printErrorMessage("Erreur lors de la récupération de la liste des matchs.<br />Message : " . mysql_error() . "<br />Requête : " . $requete);
     } else {
         $nbMatchs = mysql_num_rows($retour);
         if ($nbMatchs == 0) {
-            echo "<h3>Planification en cours...</h3>";
+            printMessage("Aucun futur match planifié.");
         } else {
             ?>
 

@@ -4,7 +4,7 @@ $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '32' OR
 echo "<img class='imageFlottanteDroite' src='pictures/logos/logo_EWC.png' />";
 while ($donnees = mysql_fetch_array($retour)) {
     echo "<p>";
-    echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+    afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
     echo "</p><br />";
 }
 

@@ -1,14 +1,16 @@
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
-            src="admin/images/ajouter.png" alt="Ajouter des vacances"/> Ajouter des vacances</a></div>
+            src="/admin/images/ajouter.png" alt="Ajouter des vacances"/> Ajouter des vacances</a></div>
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
-            src="admin/images/liste.png" alt="Liste des vacances"/> Liste des vacances</a></div>
+            src="/admin/images/liste.png" alt="Liste des vacances"/> Liste des vacances</a></div>
 <form name="formRechercheVacances"
       action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"
       method="post">
-    <div><img src="admin/images/rechercher.png" alt="Rechercher des vacances"/> <input type="search"
-                                                                                       name="rechercheVacances"/></div>
+    <div>
+        <img src="/admin/images/rechercher.png" alt="Rechercher des vacances"/>
+        <input type="search" name="rechercheVacances" title="Search"/>
+    </div>
     <br/>
 </form>
 
@@ -52,7 +54,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                    value="<?php echo $nomVacances ?>"/><br/><br/>
             <label>Date de début</label>
             <div class="st-form__date">
-                <select name="jourDebut">
+                <select name="jourDebut" title="Start day">
                     <?php
                     for ($jour = 1; $jour <= 31; $jour++) {
                         if ($jourDebut == $jour) {
@@ -64,7 +66,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                     }
                     ?>
                 </select>
-                <select name="moisDebut">
+                <select name="moisDebut" title="Start month">
                     <?php
                     for ($mois = 1; $mois <= 12; $mois++) {
                         if ($moisDebut == $mois) {
@@ -76,7 +78,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                     }
                     ?>
                 </select>
-                <select name="anneeDebut">
+                <select name="anneeDebut" title="Start year">
                     <?php
                     for ($annee = 2009; $annee <= 2030; $annee++) {
                         if ($anneeDebut == $annee) {
@@ -91,7 +93,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
             </div>
             <label>Date de fin</label>
             <div class="st-form__date">
-                <select name="jourFin">
+                <select name="jourFin" title="End day">
                     <?php
                     for ($jour = 1; $jour <= 31; $jour++) {
                         if ($jourFin == $jour) {
@@ -103,7 +105,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                     }
                     ?>
                 </select>
-                <select name="moisFin">
+                <select name="moisFin" title="End month">
                     <?php
                     for ($mois = 1; $mois <= 12; $mois++) {
                         if ($moisFin == $mois) {
@@ -115,7 +117,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                     }
                     ?>
                 </select>
-                <select name="anneeFin">
+                <select name="anneeFin" title="End year">
                     <?php
                     for ($annee = 2009; $annee <= 2030; $annee++) {
                         if ($anneeFin == $annee) {
@@ -177,7 +179,11 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
     } else {
         $triRecherche = "";
     }
-    $requete = "SELECT Calendrier_Vacances.nom AS nom, abreviation, Calendrier_Vacances.id AS id, dateDebut, dateFin FROM Calendrier_Vacances, Calendrier_Cantons WHERE Calendrier_Vacances.idCanton=Calendrier_Cantons.id AND Calendrier_Vacances.nom!='false'" . $triRecherche . " ORDER BY dateDebut, Calendrier_Vacances.nom, Calendrier_Cantons.nom";
+    $requete = "SELECT Calendrier_Vacances.nom AS nom, abreviation, Calendrier_Vacances.id AS id, dateDebut, dateFin
+                FROM Calendrier_Vacances, Calendrier_Cantons
+                WHERE Calendrier_Vacances.idCanton=Calendrier_Cantons.id
+                AND Calendrier_Vacances.nom!='false' $triRecherche
+                ORDER BY dateDebut, Calendrier_Vacances.nom, Calendrier_Cantons.nom";
     $retour = mysql_query($requete);
     $nbVacancesAffiche = mysql_num_rows($retour);
     if ($nbVacancesAffiche == 0) {

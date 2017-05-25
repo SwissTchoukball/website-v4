@@ -51,5 +51,3 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
 
     echo "</div>";
 }
-
-?>

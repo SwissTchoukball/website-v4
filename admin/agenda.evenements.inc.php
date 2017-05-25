@@ -1,19 +1,20 @@
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
-            src="admin/images/ajouter.png" alt="Ajouter un événement"/> Ajouter un événement</a></div>
+            src="/admin/images/ajouter.png" alt="Ajouter un événement"/> Ajouter un événement</a></div>
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
-            src="admin/images/liste.png" alt="Liste des événements"/> Liste des événements</a></div>
+            src="/admin/images/liste.png" alt="Liste des événements"/> Liste des événements</a></div>
 
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&masques"><img
-            src="admin/images/masquer.png" alt="Liste des événements masqués"/> Liste des événements masqués</a></div>
+            src="/admin/images/masquer.png" alt="Liste des événements masqués"/> Liste des événements masqués</a></div>
 <form name="formRechercheEvenement"
       action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"
       method="post">
-    <div><img src="admin/images/rechercher.png" alt="Rechercher un événement"/> <input type="search"
-                                                                                       name="rechercheEvenement"/></div>
-    <br/>
+    <div>
+        <img src="/admin/images/rechercher.png" alt="Rechercher un événement"/>
+        <input type="search" name="rechercheEvenement" title="Search"/>
+    </div>
 </form>
 
 <?php
@@ -161,7 +162,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
             <label>Date de début</label>
             <div class="st-form__date">
                 <span id="dateDebut">
-                    <select name="jourDebut" onChange="selectionAutomatiqueJour()">
+                    <select name="jourDebut" title="Start day" onChange="selectionAutomatiqueJour()">
                         <?php
                         for ($jour = 1; $jour <= 31; $jour++) {
                             if ($jourDebut == $jour) {
@@ -169,10 +170,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
+                            echo "<option value='" . $jour . "' " . $selected . ">" . $jour . "</option>";
                         }
                         ?>
-                    </select>.<select name="moisDebut" onChange="selectionAutomatiqueMois()">
+                    </select>.<select name="moisDebut" title="Start month" onChange="selectionAutomatiqueMois()">
                         <?php
                         for ($mois = 1; $mois <= 12; $mois++) {
                             if ($moisDebut == $mois) {
@@ -180,10 +181,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
+                            echo "<option value='" . $mois . "' " . $selected . ">" . $mois . "</option>";
                         }
                         ?>
-                    </select>.<select name="anneeDebut" onChange="selectionAutomatiqueAnnee()">
+                    </select>.<select name="anneeDebut" title="Start year" onChange="selectionAutomatiqueAnnee()">
                         <?php
                         for ($annee = $debutSelectionAnnee; $annee <= $finSelectionAnnee; $annee++) {
                             if ($anneeDebut == $annee) {
@@ -191,14 +192,14 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
+                            echo "<option value='" . $annee . "' " . $selected . ">" . $annee . "</option>";
                         }
                         ?>
                     </select>
                 </span>
                 <span id="heureDebut"<?php echo $visibility; ?>>
                      à
-                    <select name="heureDebut" onChange="selectionAutomatiqueHeure()">
+                    <select name="heureDebut" title="Start hour" onChange="selectionAutomatiqueHeure()">
                         <?php
                         for ($heure = 0; $heure <= 23; $heure++) {
                             if ($heureDebut == $heure) {
@@ -206,10 +207,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
+                            echo "<option value='" . $heure . "' " . $selected . ">" . $heure . "</option>";
                         }
                         ?>
-                    </select>h<select name="minuteDebut" onChange="selectionAutomatiqueMinute()">
+                    </select>h<select name="minuteDebut" title="Start minute" onChange="selectionAutomatiqueMinute()">
                         <?php
                         for ($minute = 0; $minute <= 59; $minute++) {
                             if ($minuteDebut == $minute) {
@@ -217,7 +218,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
+                            echo "<option value='" . $minute . "' " . $selected . ">" . $minute . "</option>";
                         }
                         ?>
                     </select>
@@ -226,7 +227,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
             <label>Date de fin</label>
             <div class="st-form__date">
                 <span id="dateFin">
-                <select name="jourFin">
+                <select name="jourFin" title="End day">
                     <?php
                     for ($jour = 1; $jour <= 31; $jour++) {
                         if ($jourFin == $jour) {
@@ -234,10 +235,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         } else {
                             $selected = "";
                         }
-                        echo "<option value='" . $jour . "'" . $selected . ">" . $jour . "</option>";
+                        echo "<option value='" . $jour . "' " . $selected . ">" . $jour . "</option>";
                     }
                     ?>
-                </select>.<select name="moisFin">
+                </select>.<select name="moisFin" title="End month">
                     <?php
                     for ($mois = 1; $mois <= 12; $mois++) {
                         if ($moisFin == $mois) {
@@ -245,10 +246,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         } else {
                             $selected = "";
                         }
-                        echo "<option value='" . $mois . "'" . $selected . ">" . $mois . "</option>";
+                        echo "<option value='" . $mois . "' " . $selected . ">" . $mois . "</option>";
                     }
                     ?>
-                </select>.<select name="anneeFin">
+                </select>.<select name="anneeFin" title="End year">
                     <?php
                     for ($annee = $debutSelectionAnnee; $annee <= $finSelectionAnnee; $annee++) {
                         if ($anneeFin == $annee) {
@@ -256,14 +257,14 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         } else {
                             $selected = "";
                         }
-                        echo "<option value='" . $annee . "'" . $selected . ">" . $annee . "</option>";
+                        echo "<option value='" . $annee . "' " . $selected . ">" . $annee . "</option>";
                     }
                     ?>
                 </select>
                 </span>
                 <span id="heureFin"<?php echo $visibility; ?>>
                      à
-                    <select name="heureFin">
+                    <select name="heureFin" title="End hour">
                         <?php
                         for ($heure = 0; $heure <= 23; $heure++) {
                             if ($heureFin == $heure) {
@@ -271,10 +272,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $heure . "'" . $selected . ">" . $heure . "</option>";
+                            echo "<option value='" . $heure . "' " . $selected . ">" . $heure . "</option>";
                         }
                         ?>
-                    </select>h<select name="minuteFin">
+                    </select>h<select name="minuteFin" title="End minute">
                         <?php
                         for ($minute = 0; $minute <= 59; $minute++) {
                             if ($minuteFin == $minute) {
@@ -282,7 +283,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                             } else {
                                 $selected = "";
                             }
-                            echo "<option value='" . $minute . "'" . $selected . ">" . $minute . "</option>";
+                            echo "<option value='" . $minute . "' " . $selected . ">" . $minute . "</option>";
                         }
                         ?>
                     </select>
@@ -304,7 +305,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                     } else {
                         $selected = "";
                     }
-                    echo "<option value='" . $donneesCategorie['id'] . "'" . $selected . ">" . $donneesCategorie['nom'] . "</option>";
+                    echo "<option value='" . $donneesCategorie['id'] . "' " . $selected . ">" . $donneesCategorie['nom'] . "</option>";
                 }
                 ?>
             </select>
@@ -468,7 +469,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         <?php echo $donnees['titre']; ?>
                         <?php
                         if ($donnees['visible'] == 0) {
-                            echo " <img src='admin/images/masquer.png' alt='masqué' />";
+                            echo " <img src='/admin/images/masquer.png' alt='masqué' />";
                         }
                         ?>
                     </td>

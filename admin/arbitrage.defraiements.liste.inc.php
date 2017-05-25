@@ -161,7 +161,7 @@ foreach ($matchesByReferee as $refereeID => $referee) {
         if ($leftToPay > 0) {
             echo '<a href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'];
             echo '&ajouter&saison=' . $season . '&id=' . $refereeID . '&montant=' . $leftToPay . '">';
-            echo ' <img src="admin/images/ajouter.png" alt="Ajouter un versement" height="14px" /></a>';
+            echo ' <img src="/admin/images/ajouter.png" alt="Ajouter un versement" height="14px" /></a>';
         }
         echo '</td>';
     }

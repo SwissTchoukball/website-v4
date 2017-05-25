@@ -12,7 +12,7 @@ if (!isset($admin)) {
 }
 
 // DB connexion and other settings
-require('config.php');
+require($_SERVER["DOCUMENT_ROOT"] . '/config.php');
 
 // tout utilisateur qui se connect a un niveau 100 pour commencer
 if (!isset($_SESSION["__userLevel__"])) {
@@ -93,7 +93,7 @@ require_once("phpFlickr.php");
 ///////////////////////
 if ($ETAT_EN_MAINTENANCE_TOTALE) {
     if ($_SESSION["__userLevel__"] > 0) {
-        include "maintenance.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/maintenance.php";
     }
 }
 ///////////////////////
@@ -109,11 +109,6 @@ if ($_SESSION["__userLevel__"] < 100 && $admin) {
 if (!(isset($PHP_SELF) && stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $_SESSION["__userLevel__"] == 100)) {
     // regarder si les numéros des menus et/ou sous menus sont correct
     include "validite.menu.inc.php";
-}
-
-// creation de graphe avant le header via la variable actionSpeciale
-if (isset($PHP_SELF) && stristr($PHP_SELF, VAR_HREF_PAGE_ADMIN) !== false && $actionSpeciale == "creerGraphe") {
-    include "creationGraphique.inc.php";
 }
 
 

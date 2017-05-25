@@ -164,4 +164,3 @@ foreach ($refereeLevels as $refereeLevel) {
     }
 }
 echo '</ul>';
-?>

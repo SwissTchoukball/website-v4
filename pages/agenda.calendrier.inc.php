@@ -2,7 +2,7 @@
     function showHideSubscriptions() {
         var subscriptionsList = document.getElementById("abonnementsCalendrier");
         var switchLink = document.getElementById("showHideSubscriptions");
-        if (subscriptionsList.style.display == "none") {
+        if (subscriptionsList.style.display === "none") {
             subscriptionsList.style.display = "block";
             switchLink.innerHTML = "Masquer les abonnements";
         } else {
@@ -14,7 +14,7 @@
 <?php
 statInsererPageSurf(__FILE__);
 if (isset($_GET['idEvenement'])) {
-    include('pages/agenda.evenement.inc.php');
+    include('agenda.evenement.inc.php');
 } else {
 
     // On fait un listing du nom des équipes avec leur ID.
@@ -162,33 +162,20 @@ if (isset($_GET['idEvenement'])) {
             $checked = "";
         }
         echo "<input type='checkbox' name='categorie" . $donneesCategories['id'] . "' id='categorie" . $donneesCategories['id'] . "'" . $checked . " /> ";
-        echo "<label for='categorie" . $donneesCategories['id'] . "' style='color: #" . $donneesCategories['couleur'] . "; font-weight: bold;'>" . $donneesCategories['nom'] . "</label>";
+        echo "<label for='categorie" . $donneesCategories['id'] . "' style='color: " . $donneesCategories['couleur'] . "; font-weight: bold;'>" . $donneesCategories['nom'] . "</label>";
         $listchkbx[$c] = "categorie" . $donneesCategories['id'];
         $c++;
     }
     ?>
     <script language="javascript">
         function checkAll(mstrchkbx) {
-            if (mstrchkbx.checked) {
-                <?php
-                for($k = 1;$k < $c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
-                ?>
-                document.getElementById('categorie<?php echo $k; ?>').checked = true;
-
-                <?php
-                }
-                ?>
+            <?php
+            for($k = 1;$k < $c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
+            ?>
+            document.getElementById('categorie<?php echo $k; ?>').checked = mstrchkbx.checked;
+            <?php
             }
-            else {
-                <?php
-                for($k = 1;$k < $c;$k++){ // Je met $k<$c et pas $k<=$c car il y a un $c de plus que de catégories.
-                ?>
-                document.getElementById('categorie<?php echo $k; ?>').checked = false;
-
-                <?php
-                }
-                ?>
-            }
+            ?>
         }
     </script>
     <?php
@@ -197,11 +184,11 @@ if (isset($_GET['idEvenement'])) {
     echo "</form>";
 
     if ($affichageSemaine) { // Affichage par semaine
-        include('pages/agenda.semaine.inc.php');
+        include('agenda.semaine.inc.php');
     } elseif ($affichageJour) { // Affichage par jour
-        include('pages/agenda.jour.inc.php');
+        include('agenda.jour.inc.php');
     } else { // Affichage par mois
-        include('pages/agenda.mois.inc.php');
+        include('agenda.mois.inc.php');
     }
 }
 ?>

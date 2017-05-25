@@ -13,10 +13,8 @@ while ($donnees = mysql_fetch_array($retour)) {
         echo "</h3>";
     } else {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
 }
 showCommissionHead(2);
-?>
-</div>

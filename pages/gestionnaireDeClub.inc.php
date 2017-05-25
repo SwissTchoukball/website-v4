@@ -4,18 +4,17 @@ $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '8' ORD
 while ($donnees = mysql_fetch_array($retour)) {
     if ($donnees['paragrapheNum'] == 0) {
         echo "<h2>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</h2>";
         echo "<img width='370px;' class='imageFlottanteDroite' src='" . VAR_IMAGE_FORMATION_GESTIONNAIRE_CLUB . "'>";
     } elseif ($donnees['paragrapheNum'] == 2) {
         echo "<h3>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</h3>";
     } else {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
 }
 showFunctionPerson(1);
-?>

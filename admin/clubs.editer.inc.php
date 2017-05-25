@@ -127,9 +127,9 @@ if ($canEdit) {
         <fieldset>
             <span class="st-form__side-info tooltip">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
             <span id="addressPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
-            <label for="address1">Adresse</label>
+            <label for="address">Adresse</label>
             <textarea id="address" name="address" onkeyup="updateAddressPreview();"><?php echo $address; ?></textarea>
-            <label for="zipCode">NPA</label>
+            <label for="npa">NPA</label>
             <input type="text" id="npa" name="npa" onkeyup="updateAddressPreview();" value="<?php echo $npa; ?>"/>
             <label for="city">Ville</label>
             <input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<?php echo $city; ?>"/>

@@ -5,7 +5,7 @@
 
 <div class="modifierMatch">
     <?php
-    $requete = "SELECT * FROM CoupeCH_Matchs WHERE idMatch=" . $_GET['modMatch'] . "";
+    $requete = "SELECT * FROM CoupeCH_Matchs WHERE idMatch=" . $_GET['modMatch'];
     $retour = mysql_query($requete) or die($requete . " " . mysql_error());
     $donnees = mysql_fetch_array($retour);
 
@@ -20,15 +20,15 @@
             $ordreA1 = $donnees['ordre'] * 2;
             $ordreA2 = $ordreA1 - 1; // pas besoin ici
 
-            $requeteIDEquipeA = "SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=" . $idTypeMatchA . " AND ordre=" . $ordreA1 . "";
+            $requeteIDEquipeA = "SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=" . $idTypeMatchA . " AND ordre=" . $ordreA1;
             $retourIDEquipeA = mysql_query($requeteIDEquipeA);
             $donneesIDEquipeA = mysql_fetch_array($retourIDEquipeA);
 
-            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeA['equipeA'] . "";
+            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeA['equipeA'];
             $retourEquipeA = mysql_query($requeteEquipeA);
             $donneesEquipeA = mysql_fetch_array($retourEquipeA);
 
-            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeA['equipeB'] . "";
+            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeA['equipeB'];
             $retourEquipeB = mysql_query($requeteEquipeB);
             $donneesEquipeB = mysql_fetch_array($retourEquipeB);
 
@@ -36,7 +36,7 @@
 
         }
     } else {
-        $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeA'] . "";
+        $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeA'];
         $retourEquipeA = mysql_query($requeteEquipeA);
         $donneesEquipeA = mysql_fetch_array($retourEquipeA);
         $equipeA = $donneesEquipeA['nomEquipe'];
@@ -49,15 +49,15 @@
             $ordreA1 = $donnees['ordre'] * 2; // besoin juste pour calculer ordreA2
             $ordreA2 = $ordreA1 - 1;
 
-            $requeteIDEquipeB = "SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=" . $idTypeMatchA . " AND ordre=" . $ordreA2 . "";
+            $requeteIDEquipeB = "SELECT equipeA, equipeB FROM CoupeCH_Matchs WHERE idTypeMatch=" . $idTypeMatchA . " AND ordre=" . $ordreA2;
             $retourIDEquipeB = mysql_query($requeteIDEquipeB);
             $donneesIDEquipeB = mysql_fetch_array($retourIDEquipeB);
 
-            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeB['equipeA'] . "";
+            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeB['equipeA'];
             $retourEquipeA = mysql_query($requeteEquipeA);
             $donneesEquipeA = mysql_fetch_array($retourEquipeA);
 
-            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeB['equipeB'] . "";
+            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donneesIDEquipeB['equipeB'];
             $retourEquipeB = mysql_query($requeteEquipeB);
             $donneesEquipeB = mysql_fetch_array($retourEquipeB);
 
@@ -65,7 +65,7 @@
 
         }
     } else {
-        $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeB'] . "";
+        $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeB'];
         $retourEquipeB = mysql_query($requeteEquipeB);
         $donneesEquipeB = mysql_fetch_array($retourEquipeB);
         $equipeB = $donneesEquipeB['nomEquipe'];
@@ -74,7 +74,7 @@
 
     // Récupération des informations sur la journée
     $idJournee = $donnees['idJournee'];
-    $requeteJournee = "SELECT * FROM CoupeCH_Journees WHERE idJournee=" . $donnees['idJournee'] . "";
+    $requeteJournee = "SELECT * FROM CoupeCH_Journees WHERE idJournee=" . $donnees['idJournee'];
     $retourJournee = mysql_query($requeteJournee);
     $donneesJournee = mysql_fetch_array($retourJournee);
     $noJournee = $donneesJournee['no'];
@@ -85,7 +85,7 @@
     $dateSQL = $donneesJournee['dateDebut'];
 
     //Récupération du score en cas de forfait ou disqualification ainsi que du nombre de set gagnants
-    $requeteGenerale = "SELECT * FROM CoupeCH_Categories_Par_Annee WHERE annee=" . $annee . "";
+    $requeteGenerale = "SELECT * FROM CoupeCH_Categories_Par_Annee WHERE annee=" . $annee;
     $retourGeneral = mysql_query($requeteGenerale);
     $donneesGenerales = mysql_fetch_array($retourGeneral);
     $nbSetsGagnants = $donneesGenerales['nbSetsGagnants'];
@@ -98,7 +98,7 @@
     $scoreGagnantParForfait = $donneesGenerales['scoreGagnantParForfait'];
 
     //Type de match
-    $requeteTypeMatch = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Type_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'] . "";
+    $requeteTypeMatch = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Type_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'];
     $retourTypeMatch = mysql_query($requeteTypeMatch);
     $donneesTypeMatch = mysql_fetch_array($retourTypeMatch);
     $typeMatch = $donneesTypeMatch['nom' . $_SESSION["__langue__"]];

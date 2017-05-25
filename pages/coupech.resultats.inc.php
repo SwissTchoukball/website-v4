@@ -60,9 +60,9 @@
         $j = 1;
         while ($donneesJournee = mysql_fetch_array($retourJournee)) {
             if ($j == 1) {
-                $rechercheMatch = "m.idJournee = " . $donneesJournee['idJournee'] . "";
+                $rechercheMatch = "m.idJournee = " . $donneesJournee['idJournee'];
             } else {
-                $rechercheMatch .= " OR m.idJournee = " . $donneesJournee['idJournee'] . "";
+                $rechercheMatch .= " OR m.idJournee = " . $donneesJournee['idJournee'];
             }
             $j++;
             if (!is_null($donneesJournee['dateDebut']) && !is_null($donneesJournee['idLieu'])) {

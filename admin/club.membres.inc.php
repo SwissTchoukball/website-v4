@@ -27,13 +27,13 @@
     } else {
         ?>
         <p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img
-                    src="admin/images/ajouter.png" alt="Ajouter un membre"/> Ajouter un membre</a><br/>
+                    src="/admin/images/ajouter.png" alt="Ajouter un membre"/> Ajouter un membre</a><br/>
             <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"><img
-                    src="admin/images/liste.png" alt="Liste des membres simple"/> Liste des membres simple</a><br/>
+                    src="/admin/images/liste.png" alt="Liste des membres simple"/> Liste des membres simple</a><br/>
             <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"><img
-                    src="admin/images/liste.png" alt="Liste des membres détaillée"/> Liste des membres
+                    src="/admin/images/liste.png" alt="Liste des membres détaillée"/> Liste des membres
                 détaillée</a><br/>
-            <a href="admin/club.export.excel.php"><img src="admin/images/document_excel.png" alt="Liste Excel"/> Liste
+            <a href="admin/club.export.excel.php"><img src="/admin/images/document_excel.png" alt="Liste Excel"/> Liste
                 Excel</a></p>
         <?php
 

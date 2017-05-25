@@ -102,7 +102,7 @@ function afficherAvecEncryptageEmail($text)
 // mode : "FULL" : nom, prenom, adresse,npa ville, email, tel, natel
 function afficherPersonne($record, $mode = "FULL")
 {
-    if ($mode = "FULL") {
+    if ($mode == "FULL") {
         echo stripslashes($record["prenom"]) . "&nbsp;" . stripslashes($record["nom"]) . "<br />";
         echo $record["adresse"] . "<br>";
         echo $record["numPostal"] . "&nbsp;" . $record["ville"] . "<br /><br />";
@@ -147,7 +147,7 @@ function showPerson($person, $hidePicture = false)
     } else {
         $email = '';
     }
-    email($email);
+    echo email($email);
     echo "<br />";
     echo $person['telPrive'] != '' ? "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
     echo $person['portable'] != '' ? "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
@@ -247,7 +247,7 @@ function afficherArbitre($referee)
             if ($referee["emailFederation"] != "") {
                 $email = $referee["emailFederation"];
             }
-            email($email);
+            echo email($email);
             echo "<br />";
         }
         echo "</div>";
@@ -692,7 +692,6 @@ function showPagination($currentPage, $totalNumberOfPages, $href, $pointerName =
 // que pour equipe suisse
 function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
 {
-    $srcImg = "";
     if ($extensionPhotos == null) {
         $srcImg = VAR_REP_IMAGE_EQUIPE_SUISSE . $prenom . "_" . $nom . "." . $extensionFileName;
     } else {

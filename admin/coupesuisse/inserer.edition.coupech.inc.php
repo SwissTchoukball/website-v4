@@ -10,4 +10,3 @@ if (isset($_POST['prochaineEtape'])) {
 } else {
     include('inserer.edition.coupech.etape1.inc.php');
 }
-?>

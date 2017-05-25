@@ -60,4 +60,3 @@ echo '<label for="issueNb">Numéro</label>';
 echo '<input type="text" name="issueNb" id="issueNb" />';
 echo '<input type="submit" class="button button--primary" value="Envoyer" />';
 echo '</form>';
-?>

@@ -101,7 +101,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 										 , nomComplet='" . $fullName . "'
 										 , nomPourTri='" . $nameForSorting . "'
 										 , canton=" . $cantonID . "
-										 , statusId=" . $status . "";
+										 , statusId=" . $status;
             }
             $clubUpdateRequest .= " WHERE id=" . $clubID;
             //echo "<p class='notification'>".$clubUpdateRequest."</p>";
@@ -123,4 +123,3 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 } else {
     echo "<p class='notification notification--error'>Action inconnue</p>";
 }
-?>

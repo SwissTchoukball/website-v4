@@ -10,7 +10,7 @@
                 if (isset($_POST['positionEquipe' . $j])) {
                     $positionEquipe = $_POST['positionEquipe' . $j];
                     if ($positionEquipe > 1 AND $positionEquipe < 10) {
-                        $requeteModifierOrdre[$j] = "UPDATE Championnat_Equipes_Tours SET egaliteParfaite='" . $_POST['positionEquipe' . $j] . "' WHERE points='" . $_POST['points'] . "' AND egaliteParfaite='1' AND idEquipe=" . $j . "";
+                        $requeteModifierOrdre[$j] = "UPDATE Championnat_Equipes_Tours SET egaliteParfaite='" . $_POST['positionEquipe' . $j] . "' WHERE points='" . $_POST['points'] . "' AND egaliteParfaite='1' AND idEquipe=" . $j;
                     } else {
                         echo "<h4>" . $positionEquipe . " n'est pas un chiffre plus grand que un !</h4>";
                         $requeteValide = false;
@@ -31,7 +31,7 @@
             for ($j = 1; $j <= $_POST['idMax']; $j++) {
                 $requeteValide = true;
                 if (isset($_POST['nomEquipe' . $j])) {
-                    $requeteModifierOrdre[$j] = "UPDATE Championnat_Equipes_Tours SET egaliteParfaite='0' WHERE points='" . $_POST['points'] . "' AND egaliteParfaite='" . $_POST['egaliteParfaite' . $j] . "' AND idEquipe=" . $j . "";
+                    $requeteModifierOrdre[$j] = "UPDATE Championnat_Equipes_Tours SET egaliteParfaite='0' WHERE points='" . $_POST['points'] . "' AND egaliteParfaite='" . $_POST['egaliteParfaite' . $j] . "' AND idEquipe=" . $j;
                 }
             }
             for ($j = 1; $j <= $_POST['idMax']; $j++) {

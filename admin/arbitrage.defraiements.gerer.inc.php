@@ -27,4 +27,3 @@ if ($versements = mysql_query($queryVersements)) {
     printErrorMessage("Problème lors de la récupération de la liste des versements");
 }
 echo '</table>';
-?>

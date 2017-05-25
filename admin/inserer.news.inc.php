@@ -68,18 +68,20 @@
         <table class="tableauInsererNews">
             <?php
             for ($i = 0; $i < count($VAR_TABLEAU_DES_LANGUES); $i++) {
+                $titleId = 'titre' . $VAR_TABLEAU_DES_LANGUES[$i][0];
+                $bodyId = 'corps' . $VAR_TABLEAU_DES_LANGUES[$i][0];
                 ?>
                 <tr>
                     <td colspan="2"><h3><?php echo $VAR_TABLEAU_DES_LANGUES[$i][1]; ?></h3></td>
                 </tr>
                 <tr>
-                    <td width="60"><p>titre :</p></td>
-                    <td width=""><input name="titre<?php echo $VAR_TABLEAU_DES_LANGUES[$i][0]; ?>" type="text" size="70"
+                    <td width="60"><label for="<?php echo $titleId; ?>">Titre</label></td>
+                    <td width=""><input name="<?php echo $titleId; ?>" id="<?php echo $titleId; ?>" type="text" size="70"
                                         maxlength="80"></td>
                 </tr>
                 <tr>
-                    <td valign="top"><p>corps :</p></td>
-                    <td><textarea name="corps<?php echo $VAR_TABLEAU_DES_LANGUES[$i][0]; ?>" cols="67"
+                    <td valign="top"><label for="<?php echo $bodyId; ?>">Corps</label></td>
+                    <td><textarea name="<?php echo $bodyId; ?>" id="<?php echo $bodyId; ?>" cols="67"
                                   rows="20"></textarea></td>
                 </tr>
                 <tr>
@@ -100,9 +102,9 @@
         <br/><br/>
         <!-- Ce qui se trouve dans la colonne à gauche commence ici -->
         <div class="listeImagesNews">
-            Image :<br/>
-            <input type='radio' name='image' value='false' id='aucun' checked='checked'/> <label
-                for='aucune'>Aucune</label><br/>
+            <h2>Image</h2>
+            <input type='radio' name='image' value='false' id='aucune' checked='checked'/>
+            <label for='aucune'>Aucune</label><br/>
             <?php
             $retour = mysql_query("SELECT * FROM Uploads WHERE type='jpg' OR type='jpeg' OR type='png' OR type='gif' ORDER BY date DESC");
             while ($donnees = mysql_fetch_array($retour)) {
@@ -111,10 +113,12 @@
             ?>
         </div>
         <div class="optionsNews">
-            <p><input type="checkbox" name="premiereNews" class="couleurCheckBox">
-                Toujours comme premi&egrave;re news</p>
-            <p>Type d'information :</p>
-            <select name="selectInformation[]" size="10" multiple>
+            <input type="checkbox" name="premiereNews" id="firstNewsCheckbox" class="couleurCheckBox">
+            <label for="firstNewsCheckbox">Toujours comme première news</label>
+        </div>
+        <div class="optionsNews">
+            <label for="informationTypeSelector">Type d'information</label><br>
+            <select name="selectInformation[]" id="informationTypeSelector" size="10" multiple>
                 <?php
 
                 $requeteSQL = "SELECT * FROM `TypeInformation` WHERE `id`>'0' ORDER BY `description" . $_SESSION["__langue__"] . "`";
@@ -125,8 +129,8 @@
                 }
                 ?>
             </select>
-            <p>ctrl+click : multi-selection</p>
         </div>
+        <p>ctrl+click : multi-selection</p>
         <!-- Ce qui se trouve dans la colonne à gauche fini ici -->
 
         <p style="clear: both; " align="center">

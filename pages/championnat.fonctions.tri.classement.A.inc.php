@@ -111,5 +111,3 @@ function triParPointsInterne($informations, $tableau, $debug)
     return $nouveauTableau;
 
 }
-
-?>

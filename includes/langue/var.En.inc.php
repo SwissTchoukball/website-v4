@@ -145,7 +145,7 @@ define("VAR_LANG_ES_POSTE_FONCTION", "Post/Function");
 define("VAR_LANG_ES_CLUB", "Club ");
 define("VAR_LANG_ES_EXPERIENCE", "Experience");
 define("VAR_LANG_ACCES_FITB_BDD",
-    "Accéder à la base de données de la <acronym title='Fédération Internationale de Tchoukball'>FITB</acronym>");
+    "Accéder à la base de données de la <abbr title='Fédération Internationale de Tchoukball'>FITB</abbr>");
 define("VAR_LANG_ARBITRE_INTER", "Arbitres internationaux");
 define("VAR_LANG_ARBITRES", "Referees");
 
@@ -180,8 +180,9 @@ define("VAR_LANG_CHAMPIONNAT", "Championship");
 define("VAR_LANG_CHAMPIONNAT_SUISSE", "Swiss Championship");
 define("VAR_LANG_RENCONTRES_A_VENIR", "Comming games");
 define("VAR_LANG_LIGUE", "League");
-define("VAR_LANG_TOUR", "Turn");
-define("VAR_LANG_TOUR_FINAL", "End turn");
+define("VAR_LANG_TOUR", "Tour");
+define("VAR_LANG_TOUR_FINAL", "Final tour");
+define("VAR_LANG_TOUR_PRECEDENT", "Previous tour");
 define("VAR_LANG_GROUPE", "Group");
 define("VAR_LANG_JOURNEE", "Day");
 define("VAR_LANG_ACTE", "Act");
@@ -330,4 +331,3 @@ define("VAR_LANG_DESCRIPTION_COURTE", "Description courte");
 define("VAR_LANG_DESCRIPTION_LONGUE", "Description longue");
 define("VAR_LANG_ADRESSE_EMAIL", "Email adress");
 define("VAR_LANG_SITE_WEB", "Website");
-?>

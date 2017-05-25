@@ -10,7 +10,7 @@ $newsIdSelection = is_numeric($_GET['newsIdSelection']) ? $_GET['newsIdSelection
 
 // developpement d'une seule news ?
 if ($newsIdSelection != "") {
-    $requeteSelect = "SELECT * FROM `News` WHERE `Id`='" . $newsIdSelection . "'";
+    $requeteSelect = "SELECT * FROM `News` WHERE `id`='" . $newsIdSelection . "'";
 } else {
 
     if (isset($_GET['limitinf']) and is_numeric($_GET['limitinf'])) {
@@ -27,7 +27,7 @@ if ($newsIdSelection != "") {
         $limitsup = $NB_NEWS_AFFICHEES;
     }
 
-    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `Date` DESC LIMIT $limitinf, $limitsup";
+    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `date` DESC LIMIT $limitinf, $limitsup";
 }
 //$recordset = mysql_query($requeteSelect) or die ("<H1>mauvaise requete</H1>");
 $recordset = @mysql_query($requeteSelect);
@@ -35,7 +35,7 @@ $recordset = @mysql_query($requeteSelect);
 if ($newsIdSelection != "") {
     if (mysql_num_rows($recordset) == 0) {
         printMessage(VAR_LANG_NEWS_NON_TROUVEE);
-        $requeteSelect = "SELECT * FROM `News` WHERE `Date` >= '" . $YaUneAnnee . "' ORDER BY premiereNews DESC, `Date` DESC LIMIT 6";
+        $requeteSelect = "SELECT * FROM `News` WHERE `date` >= '" . $YaUneAnnee . "' ORDER BY premiereNews DESC, `date` DESC LIMIT 6";
     } else {
         $record = mysql_fetch_array($recordset);
         $date = date_sql2date($record["date"]);
@@ -109,7 +109,7 @@ if ($newsIdSelection != "") {
 // bas de page
 if ($newsIdSelection == "") {
 
-    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `Date` DESC";
+    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `date` DESC";
     $recordset = @mysql_query($requeteSelect);
 
     //&& $limitsup>0 && $limitinf>0

@@ -11,7 +11,7 @@ statInsererPageSurf(__FILE__);
     while ($donnees = mysql_fetch_array($retour)) {
         if ($donnees['paragrapheNum'] == 0) {
             echo "<h3>";
-            echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+            afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
             echo "</h3>";
             echo "<p class='center'><img src='" . VAR_IMAGE_FORMATION_ARBITRE_ENSEMBLE . "' alt='formation arbitre junior' /></p><br />";
             echo "<p>";
@@ -20,17 +20,17 @@ statInsererPageSurf(__FILE__);
             echo "<p>";
             echo "<ul>";
             echo "<li>";
-            echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+            afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
             echo "</li>";
         } elseif ($donnees['paragrapheNum'] == 4) {
             echo "<li>";
-            echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+            afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
             echo "</li>";
             echo "</ul>";
             echo "</p>";
         } else {
             echo "<p>";
-            echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+            afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
             echo "</p>";
         }
         if ($donnees['paragrapheNum'] == 1) {

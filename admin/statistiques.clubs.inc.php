@@ -176,9 +176,9 @@
     <table>
         <tr>
             <th></th>
-            <th><img src="admin/images/male.png" alt="hommes"/></th>
-            <th><img src="admin/images/female.png" alt="femmes"/></th>
-            <th><img src="admin/images/question.png" alt="indéfini"/></th>
+            <th><img src="/admin/images/male.png" alt="hommes"/></th>
+            <th><img src="/admin/images/female.png" alt="femmes"/></th>
+            <th><img src="/admin/images/question.png" alt="indéfini"/></th>
         </tr>
         <tr>
             <th>Actifs</th>

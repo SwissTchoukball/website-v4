@@ -11,4 +11,3 @@ $committeeData = mysql_query($committeeQuery) or die ("<H1>mauvaise requete</H1>
 while ($committeeMember = mysql_fetch_array($committeeData)) {
     showCommitteeMember($committeeMember);
 }
-?>

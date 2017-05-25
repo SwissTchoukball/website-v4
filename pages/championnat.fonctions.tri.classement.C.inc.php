@@ -82,5 +82,3 @@ function triScorePointsMarquesInterne($informations, $tableau, $debug)
     return $nouveauTableau;
 
 }
-
-?>

@@ -8,7 +8,7 @@ while ($donnees = mysql_fetch_array($retour)) {
     $i++;
     if ($donnees['paragrapheNum'] == 0) {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p><br />";
     } elseif ($donnees['paragrapheNum'] == 1) {
         echo "<p class='center'><img src='" . VAR_IMAGE_PRESSE_TSR . "' alt='" . $donnees["paragraphe" . $_SESSION["__langue__"]] . "' /><br />";
@@ -39,6 +39,3 @@ while ($donnees = mysql_fetch_array($retour)) {
         }
     }
 }
-?>
-
-

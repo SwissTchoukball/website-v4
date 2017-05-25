@@ -24,6 +24,7 @@ function codage($html)
  */
 function email($email)
 {
+    $tout = false;
     if (preg_match('/([^?]+)([?].*)/i', $email, $temp)) {
         $email = $temp[1];
         $tout = AddSlashes($temp[2]);
@@ -46,7 +47,7 @@ function email($email)
     eval(unescape( \n'$email')); //-->\n </script><noscript>
           <p><i>" . VAR_LANG_NO_JAVA_SCRIPT_MAIL . "</i></p>
           </noscript>";
-    echo $email;
+    return $email;
 }
 
 /**
@@ -55,6 +56,7 @@ function email($email)
  */
 function emailperso($email, $texte, $sujet)
 {
+    $tout = false;
     if (preg_match('/([^?]+)([?].*)/i', $email, $temp)) {
         $email = $temp[1];
         $tout = AddSlashes($temp[2]);
@@ -77,5 +79,5 @@ function emailperso($email, $texte, $sujet)
     eval(unescape( \n'$email')); //-->\n </script><noscript>
           <p><i>" . VAR_LANG_NO_JAVA_SCRIPT_MAIL . "</i></p>
           </noscript>";
-    echo $email;
+    return $email;
 }

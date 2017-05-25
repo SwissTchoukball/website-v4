@@ -35,7 +35,7 @@ if (hasRefereeManagementAccess()) {
 										date = '" . $date . "',
 										description = '" . $description . "',
 										lastEditor = " . $_SESSION['__idUser__'] . "
-									WHERE id = " . $pointsID . "";
+									WHERE id = " . $pointsID;
                 if (mysql_query($queryEditPoints)) {
                     printSuccessMessage("Modification des points réussie.");
                 } else {
@@ -61,4 +61,3 @@ if (hasRefereeManagementAccess()) {
         }
     }
 }
-?>

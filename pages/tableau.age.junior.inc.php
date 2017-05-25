@@ -26,12 +26,13 @@ while ($i < 3) {
             <th><?php echo VAR_LANG_JEUNESSESPORT; ?></th>
             <th><?php echo VAR_LANG_ASSOCIATION_NAME; ?></th>
         </tr>
-        <td><?php echo $annee - 21; ?> et moins</td>
-        <td>21+</td>
-        <td rowspan="4">Adultes</td>
-        <td>-</td>
-        <td>Membres actifs</td>
         <tr>
+            <td><?php echo $annee - 21; ?> et moins</td>
+            <td>21+</td>
+            <td rowspan="3">Adultes</td>
+            <td>-</td>
+            <td>Membres actifs</td>
+        </tr>
         <tr>
             <td><?php echo $annee - 20; ?></td>
             <td>20</td>
@@ -42,10 +43,11 @@ while ($i < 3) {
             <td><?php echo $annee - 19; ?></td>
             <td>19</td>
         </tr>
+        <tr>
+            <td><?php echo $annee - 18; ?></td>
+            <td>18</td>
+            <td rowspan="3">M18</td>
         </tr>
-        <td><?php echo $annee - 18; ?></td>
-        <td>18</td>
-        <td rowspan="3">M18</td>
         <tr>
             <td><?php echo $annee - 17; ?></td>
             <td>17</td>

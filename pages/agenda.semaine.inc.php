@@ -103,16 +103,16 @@
         $retour = mysql_query($requete);
         while ($donnees = mysql_fetch_array($retour)) {
             if ($donnees['jourEntier'] == 1) {
-                echo "<div class='calendrierSemaineEvenement' style='background-color:#" . $donnees['couleur'] . "; text-align:center;'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white'>" . $donnees['titre'] . "</span></a></div>";
+                echo "<div class='calendrierSemaineEvenement' style='background-color: " . $donnees['couleur'] . "; text-align:center;'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white'>" . $donnees['titre'] . "</span></a></div>";
             } else {
-                echo "<div class='calendrierSemaineEvenement'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:#" . $donnees['couleur'] . "'>" . time_sql2heure($donnees['heureDebut']) . "-" . time_sql2heure($donnees['heureFin']) . " : " . $donnees['titre'] . "</span></a></div>";
+                echo "<div class='calendrierSemaineEvenement'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color: " . $donnees['couleur'] . "'>" . time_sql2heure($donnees['heureDebut']) . "-" . time_sql2heure($donnees['heureFin']) . " : " . $donnees['titre'] . "</span></a></div>";
             }
         }
         if (isset($categorieCochee[4])) { // Championnat{
             $requeteChampionnat = "SELECT idMatch, equipeA, equipeB, couleur FROM Championnat_Matchs, Calendrier_Categories WHERE id=4 AND dateDebut<='" . $annee . "-" . $mois . "-" . $jourAffiche . "' AND dateFin>='" . $annee . "-" . $mois . "-" . $jourAffiche . "' ORDER BY heureDebut";
             $retourChampionnat = mysql_query($requeteChampionnat);
             while ($donneesChampionnat = mysql_fetch_array($retourChampionnat)) {
-                echo "<div class='calendrierSemaineEvenement'><a href='index.php?lien=22&matchID=" . $donneesChampionnat['idMatch'] . "'><span style='color:#" . $donneesChampionnat['couleur'] . "'>&#149; " . $tableauEquipes[$donneesChampionnat['equipeA']] . " - " . $tableauEquipes[$donneesChampionnat['equipeB']] . "</span></a></div>";
+                echo "<div class='calendrierSemaineEvenement'><a href='index.php?lien=22&matchID=" . $donneesChampionnat['idMatch'] . "'><span style='color: " . $donneesChampionnat['couleur'] . "'>&#149; " . $tableauEquipes[$donneesChampionnat['equipeA']] . " - " . $tableauEquipes[$donneesChampionnat['equipeB']] . "</span></a></div>";
             }
         }
 

@@ -31,6 +31,7 @@
     <form id="formSelectionMoisCalendrier" name="formSelectionMoisCalendrier" action="" method="post"
           class="selectionMoisCalendrier">
         <select name="selectionMoisCalendrier" id="selectionMoisCalendrier" class="titreCalendrier"
+                title="Mois"
                 onChange="defineActionForm();formSelectionMoisCalendrier.submit();">
             <?php
             for ($k = -12; $k <= 12; $k++) {
@@ -45,11 +46,11 @@
                     $anneeSelection = $annee;
                 }
                 if ($k == 0) {
-                    $selected = " selected='selected'";
+                    $selected = "selected='selected'";
                 } else {
                     $selected = "";
                 }
-                echo "<option" . $selected . " value='/calendrier/" . $anneeSelection . "/" . $moisSelection . "'>" . ucfirst($moisDeLAnnee[$moisSelection]) . " " . $anneeSelection . "</option>";
+                echo "<option " . $selected . " value='/calendrier/" . $anneeSelection . "/" . $moisSelection . "'>" . ucfirst($moisDeLAnnee[$moisSelection]) . " " . $anneeSelection . "</option>";
             }
             ?>
         </select>
@@ -127,15 +128,15 @@
             $retour = mysql_query($requete);
             while ($donnees = mysql_fetch_array($retour)) {
                 if ($donnees['jourEntier'] == 1) {
-                    echo "<div class='calendrierMoisEvenement calendarEvent' style='background-color:#" . $donnees['couleur'] . "; text-align:center;'>";
+                    echo "<div class='calendrierMoisEvenement calendarEvent' style='background-color: " . $donnees['couleur'] . "; text-align:center;'>";
                     echo "<a href='/evenement/" . $donnees['idEvent'] . "' style='color:white'>" . $donnees['titre'] . '</a>';
                 } else {
                     echo "<div class='calendrierMoisEvenement calendarEvent'>";
-                    echo "<a href='/evenement/" . $donnees['idEvent'] . "' style='color:#" . $donnees['couleur'] . "'>&#149; " . $donnees['titre'] . "</a>";
+                    echo "<a href='/evenement/" . $donnees['idEvent'] . "' style='color: " . $donnees['couleur'] . "'>&#149; " . $donnees['titre'] . "</a>";
                 }
-                echo "<span class='infobulle' style='border-color: #" . $donnees['couleur'] . "'>";
+                echo "<span class='infobulle' style='border-color:  " . $donnees['couleur'] . "'>";
                 echo "<a href='/evenement/" . $donnees['idEvent'] . "'>" . $donnees['titre'] . '</a><br />';
-                echo "<span style='color: #" . $donnees['couleur'] . "'>" . $donnees['nomCategorie'] . "</span><br />";
+                echo "<span style='color:  " . $donnees['couleur'] . "'>" . $donnees['nomCategorie'] . "</span><br />";
                 if ($donnees['lieu'] != "") {
                     echo "Lieu : " . $donnees['lieu'] . "<br />";
                 }
@@ -159,7 +160,7 @@
                 $retourChampionnat = mysql_query($requeteChampionnat);
                 while ($donneesChampionnat = mysql_fetch_array($retourChampionnat)) {
                     echo "<div class='calendrierMoisEvenement'>";
-                    echo "<a href='/championnat/match/" . $donneesChampionnat['idMatch'] . "' style='color:#" . $donneesChampionnat['couleur'] . "' class='calendarEvent'>";
+                    echo "<a href='/championnat/match/" . $donneesChampionnat['idMatch'] . "' style='color: " . $donneesChampionnat['couleur'] . "' class='calendarEvent'>";
                     echo "&#149; " . $tableauEquipes[$donneesChampionnat['equipeA']] . " - " . $tableauEquipes[$donneesChampionnat['equipeB']];
                     echo "</a></div>";
                 }

@@ -4,7 +4,7 @@ $debugClassement = false;
 
 if (isset($saison)) {
     // Sélection de la politique des points de l'année choisie.
-    $retour = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $saison . "");
+    $retour = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $saison);
     $donnees = mysql_fetch_array($retour);
     $pointsMatchGagne = $donnees['pointsMatchGagne'];
     $pointsMatchNul = $donnees['pointsMatchNul'];
@@ -44,7 +44,7 @@ if (isset($saison)) {
         $idGroupe = $donnees['noGroupe'];
 
         //On chercher combien il y a de groupes ? ce tour.
-        $retourZ = mysql_query("SELECT * FROM Championnat_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND idGroupe=" . $idGroupe . "");
+        $retourZ = mysql_query("SELECT * FROM Championnat_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND idGroupe=" . $idGroupe);
         $donneesZ = mysql_fetch_array($retourZ);
 
         // Si c'est le premier tour, promo/releg, playout, playoff ou tour final, les compteurs sont ? 0
@@ -55,17 +55,17 @@ if (isset($saison)) {
             $position = 0;
         } // Si c'est le 2ème, 3ème ou 4ème Tour comptabiliser les points du tour précédent.
         else {
-            $retourA = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . " AND idEquipe=" . $donnees['idEquipe'] . "");
+            $retourA = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . " AND idEquipe=" . $donnees['idEquipe']);
             $donneesA = mysql_fetch_array($retourA);
             $points = $donneesA['points'];
 
             // On cherche le nombre d'équipes au tour précédent
-            $retourB = mysql_query("SELECT COUNT(*) AS nbreEquipesPrecedent FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . "");
+            $retourB = mysql_query("SELECT COUNT(*) AS nbreEquipesPrecedent FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent']);
             $donneesB = mysql_fetch_array($retourB);
             $nbreEquipesPrecedent = $donneesB['nbreEquipesPrecedent'];
 
             // On cherche le nombre d'équipes ? ce tour
-            $retourC = mysql_query("SELECT COUNT(*) AS nbreEquipes FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe . "");
+            $retourC = mysql_query("SELECT COUNT(*) AS nbreEquipes FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe);
             $donneesC = mysql_fetch_array($retourC);
             $nbreEquipes = $donneesC['nbreEquipes'];
             if ($nbreEquipesPrecedent == $nbreEquipes) {
@@ -80,9 +80,9 @@ if (isset($saison)) {
                 $position = 0;
                 if ($systemePassageTours == 1) {
                     echo "Equipes du groupe " . $idGroupe . " du tour " . $idTour . " avec l'équipe " . $donnees['idEquipe'] . " :<br />";
-                    $retourD = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . "");
+                    $retourD = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent']);
                     while ($donneesD = mysql_fetch_array($retourD)) { // Calcul pour faire chaque équipe d'un tour
-                        $retourDbis = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe . "");
+                        $retourDbis = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe);
                         while ($donneesDbis = mysql_fetch_array($retourDbis)) {
                             if ($donnees['idEquipe'] != $donneesD['idEquipe'] AND $donneesD['idEquipe'] == $donneesDbis['idEquipe']) { // On ne prend que les points du tour précédent des équipes qui se trouvent dans le m?me groupe que l'équipe en cours de traitement de ce tour.
                                 echo $donneesD['idEquipe'] . " ";
@@ -159,7 +159,7 @@ if (isset($saison)) {
                     echo "<br />";
                 } // fin if systeme de passage de tour 1
                 elseif ($systemePassageTours == 2) {
-                    $retourD = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . " AND idEquipe=" . $donnees['idEquipe'] . "");
+                    $retourD = mysql_query("SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $donnees['idTourPrecedent'] . " AND idEquipe=" . $donnees['idEquipe']);
                     $donneesD = mysql_fetch_array($retourD);
                     $points = round($donneesD['points'] / 2);
                     $nbPointMarque = 0;
@@ -301,7 +301,7 @@ if (isset($saison)) {
             }
         } // fin boucle donneesE
         $goolaverage = $nbPointMarque - $nbPointRecu;
-        $updateQuery = "UPDATE Championnat_Equipes_Tours SET nbMatchJoue=" . $nbMatchJoue . ", nbMatchGagne=" . $nbMatchGagne . ", nbMatchNul=" . $nbMatchNul . ", nbMatchPerdu=" . $nbMatchPerdu . ", nbMatchForfait=" . $nbMatchForfait . ", nbPointMarque=" . $nbPointMarque . ", nbPointRecu=" . $nbPointRecu . ", goolaverage=" . $goolaverage . ", points=" . $points . "" . $positionPourRequete . " WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe . " AND idEquipe=" . $donnees['idEquipe'] . "";
+        $updateQuery = "UPDATE Championnat_Equipes_Tours SET nbMatchJoue=" . $nbMatchJoue . ", nbMatchGagne=" . $nbMatchGagne . ", nbMatchNul=" . $nbMatchNul . ", nbMatchPerdu=" . $nbMatchPerdu . ", nbMatchForfait=" . $nbMatchForfait . ", nbPointMarque=" . $nbPointMarque . ", nbPointRecu=" . $nbPointRecu . ", goolaverage=" . $goolaverage . ", points=" . $points . $positionPourRequete . " WHERE saison=" . $saison . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $idGroupe . " AND idEquipe=" . $donnees['idEquipe'];
         if ($debugClassement) {
             echo "<p>" . $updateQuery . "</p>";
         }
@@ -311,4 +311,3 @@ if (isset($saison)) {
 else {
     echo "ERREUR D: saison indéfinie.<br />";
 }
-?>

@@ -10,4 +10,3 @@ if ($_SESSION['__nbIdClub__'] == 15) { //15 = Club indéfini
 
     include('admin/membres.liste.inc.php');
 }
-?>

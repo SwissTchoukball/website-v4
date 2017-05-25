@@ -541,13 +541,13 @@ if (!isset($_GET['idMatch'])) {
         <table border="0" align="center" id="score">
             <tr>
                 <td>
-                    <select name="equipeA">
+                    <select name="equipeA" title="Équipe recevante">
                         <?php optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeA); ?>
                     </select>
                 </td>
                 <td>-</td>
                 <td>
-                    <select name="equipeB">
+                    <select name="equipeB" title="Équipe visiteuse">
                         <?php optionsParticipant($saison, $idCategorie, $idTour, $idGroupe, $idEquipeB); ?>
                     </select>
                 </td>
@@ -568,14 +568,18 @@ if (!isset($_GET['idMatch'])) {
                 }
                 ?>
                 <td align="right">
-                    <p>Gagne par forfait<input name="AGagneParForfait" type="checkbox" class='couleurCheckBox'
-                                               onclick="updateForfaitStatus(this);" <?php echo $AGagneParForfait; ?> />
+                    <p>
+                        <label for="AGagneParForfait">Gagne par forfait</label>
+                        <input name="AGagneParForfait" id="AGagneParForfait" type="checkbox" class='couleurCheckBox'
+                               onclick="updateForfaitStatus(this);" <?php echo $AGagneParForfait; ?> />
                     </p>
                 </td>
                 <td></td>
                 <td>
-                    <p><input name="BGagneParForfait" type="checkbox" class='couleurCheckBox'
-                              onclick="updateForfaitStatus(this);" <?php echo $BGagneParForfait; ?> />Gagne par forfait
+                    <p>
+                        <input name="BGagneParForfait" id="BGagneParForfait" type="checkbox" class='couleurCheckBox'
+                               onclick="updateForfaitStatus(this);" <?php echo $BGagneParForfait; ?> />
+                        <label for="BGagneParForfait">Gagne par forfait</label>
                     </p>
                 </td>
             </tr>
@@ -598,16 +602,22 @@ if (!isset($_GET['idMatch'])) {
                 ?>
                 <tr class="period">
                     <td align="right"><?php echo $p; ?>.
-                        <select name="periodScoreA[<?php echo $p; ?>]" onchange="updateScore()">
+                        <select name="periodScoreA[<?php echo $p; ?>]"
+                                title="Score A période <?php echo $p; ?>"
+                                onchange="updateScore()">
                             <?php optionsScore($periodScoreA[$p]); ?>
                         </select>
                     </td>
                     <td>-</td>
                     <td>
-                        <select name="periodScoreB[<?php echo $p; ?>]" onchange="updateScore()">
+                        <select name="periodScoreB[<?php echo $p; ?>]"
+                                title="Score B période <?php echo $p; ?>"
+                                onchange="updateScore()">
                             <?php optionsScore($periodScoreB[$p]); ?>
                         </select>
-                        <select name="periodTypeId[<?php echo $p; ?>]" onchange="updateScore()">
+                        <select name="periodTypeId[<?php echo $p; ?>]"
+                                title="Type de la période <?php echo $p; ?>"
+                                onchange="updateScore()">
                             <?php optionsPeriodType($periodTypeId[$p], $defaultPeriodTypeID, $saison); ?>
                         </select>
                     </td>
@@ -700,6 +710,7 @@ if (!isset($_GET['idMatch'])) {
                     <td><?php echo $p; ?>.</td>
                     <td>
                         <select name="periodRefereeA[<?php echo $p; ?>]"
+                                title="Arbitre A période <?php echo $p; ?>"
                                 id="periodRefereeA[<?php echo $p; ?>]"<?php printf($automaticRefereeSetter, 'A'); ?>>
                             <option value="">Arbitre A</option>
                             <?php printRefereesOptionsList($referees, $periodRefereeA[$p]); ?>
@@ -707,6 +718,7 @@ if (!isset($_GET['idMatch'])) {
                     </td>
                     <td>
                         <select name="periodRefereeB[<?php echo $p; ?>]"
+                                title="Arbitre B période <?php echo $p; ?>"
                                 id="periodRefereeB[<?php echo $p; ?>]"<?php printf($automaticRefereeSetter, 'B'); ?>>
                             <option value="">Arbitre B</option>
                             <?php printRefereesOptionsList($referees, $periodRefereeB[$p]); ?>
@@ -714,6 +726,7 @@ if (!isset($_GET['idMatch'])) {
                     </td>
                     <td>
                         <select name="periodRefereeC[<?php echo $p; ?>]"
+                                title="Arbitre C période <?php echo $p; ?>"
                                 id="periodRefereeC[<?php echo $p; ?>]"<?php printf($automaticRefereeSetter, 'C'); ?>>
                             <option value="">Arbitre C</option>
                             <?php printRefereesOptionsList($referees, $$periodRefereeC[$p]); ?>
@@ -802,9 +815,9 @@ if (!isset($_GET['idMatch'])) {
                 </td>
             </tr>-->
             <tr>
-                <td align="right"><p>Journée :</p></td>
+                <td align="right"><label for="championshipDaySelector">Journée</label></td>
                 <td>
-                    <select name="journee">
+                    <select name="journee" id="championshipDaySelector">
                         <?php $anneeActuelle = date("Y");
                         for ($i = 1; $i < 50; $i++) {
                             if ($i == $journee) {
@@ -818,9 +831,9 @@ if (!isset($_GET['idMatch'])) {
                     </select></td>
             </tr>
             <tr>
-                <td align="right"><p>Type de match :</p></td>
+                <td align="right"><label for="matchTypeSelector">Type de match</label></td>
                 <td>
-                    <select name="idTypeMatch">
+                    <select name="idTypeMatch" id="matchTypeSelector">
                         <?php
                         $requete = "SELECT * FROM Championnat_Types_Matchs ORDER BY idTypeMatch";
                         $retour = mysql_query($requete);
@@ -844,9 +857,13 @@ if (!isset($_GET['idMatch'])) {
                     $checked = "";
                 }
                 ?>
-                <td align="right"><input type="checkbox" name="necessiteDefraiementArbitre"
-                                         id="necessiteDefraiementArbitre" <?php echo $checked; ?>/></td>
-                <td><p>Nécessite le défraiement des arbitres</p></td>
+                <td align="right">
+                    <input type="checkbox" name="necessiteDefraiementArbitre"
+                           id="necessiteDefraiementArbitre" <?php echo $checked; ?>/>
+                </td>
+                <td>
+                    <label for="necessiteDefraiementArbitre">Nécessite le défraiement des arbitres</label>
+                </td>
             </tr>
         </table>
         <br/>
@@ -858,9 +875,9 @@ if (!isset($_GET['idMatch'])) {
                 <td><input name="ville" type="text" size="20" value="<?php echo $ville; ?>"></td>
             </tr>-->
             <tr>
-                <td><p><?php echo $agenda_lieu; ?></p></td>
+                <td><label for="locationSelector"><?php echo $agenda_lieu; ?></label></td>
                 <td colspan="3">
-                    <select name="idLieu">
+                    <select name="idLieu" id="locationSelector">
                         <option value="NULL">Non défini</option>
                         <?php
                         $requete = "SELECT * FROM Lieux ORDER BY nomCourt";
@@ -878,17 +895,20 @@ if (!isset($_GET['idMatch'])) {
                 </td>
             </tr>
             <tr>
-                <td><p><?php echo $agenda_debut; ?></p></td>
+                <td><label><?php echo $agenda_debut; ?></label></td>
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="debutJour" id="debutJour" onChange="selectionAutomatiqueJour()">
+                        <select name="debutJour" id="debutJour" title="Début du match (jour)"
+                                onChange="selectionAutomatiqueJour()">
                             <?php echo modif_liste_jour(jour($dateDebut)); ?>
                         </select>
-                        <select name="debutMois" id="debutMois" onChange="selectionAutomatiqueMois()">
+                        <select name="debutMois" id="debutMois" title="Début du match (mois)"
+                                onChange="selectionAutomatiqueMois()">
                             <?php echo modif_liste_mois(mois($dateDebut)); ?>
                         </select>
-                        <select name="debutAnnee" id="debutAnnee" onChange="selectionAutomatiqueAnne()">
+                        <select name="debutAnnee" id="debutAnnee" title="Début du match (année)"
+                                onChange="selectionAutomatiqueAnne()">
                             <?php
                             $anneeActuelle = date('Y');
                             for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -901,27 +921,29 @@ if (!isset($_GET['idMatch'])) {
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="debutHeure" id="debutHeure" onChange="selectionAutomatiqueHeure()">
+                        <select name="debutHeure" id="debutHeure" title="Début du match (heure)"
+                                onChange="selectionAutomatiqueHeure()">
                             <?php echo modif_liste_heure(heure($heureDebut)); ?>
                         </select>
-                        <select name="debutMinute" id="debutMinute" onChange="selectionAutomatiqueMinute()">
+                        <select name="debutMinute" id="debutMinute" title="Début du match (minute)"
+                                onChange="selectionAutomatiqueMinute()">
                             <?php echo modif_liste_minute(minute($heureDebut)); ?>
                         </select>
                     </p>
                 </td>
             </tr>
             <tr>
-                <td><p><?php echo $agenda_fin; ?></p></td>
+                <td><label><?php echo $agenda_fin; ?></label></td>
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="finJour" id="finJour">
+                        <select name="finJour" id="finJour" title="Fin du match (jour)">
                             <?php echo modif_liste_jour(jour($dateFin)); ?>
                         </select>
-                        <select name="finMois" id="finMois">
+                        <select name="finMois" id="finMois" title="Fin du match (mois)">
                             <?php echo modif_liste_mois(mois($dateFin)); ?>
                         </select>
-                        <select name="finAnnee" id="finAnnee">
+                        <select name="finAnnee" id="finAnnee" title="Fin du match (année)">
                             <?php
                             $anneeActuelle = date('Y');
                             for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -934,10 +956,10 @@ if (!isset($_GET['idMatch'])) {
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="finHeure" id="finHeure">
+                        <select name="finHeure" id="finHeure" title="Fin du match (heure)">
                             <?php echo modif_liste_heure(heure($heureFin)); ?>
                         </select>
-                        <select name="finMinute" id="finMinute">
+                        <select name="finMinute" id="finMinute" title="Fin du match (minute)">
                             <?php echo modif_liste_minute(minute($heureFin)); ?>
                         </select>
                     </p>
@@ -958,13 +980,15 @@ if (!isset($_GET['idMatch'])) {
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="debutJourReport" id="debutJourReport" onChange="selectionAutomatiqueJourReport()">
+                        <select name="debutJourReport" id="debutJourReport" title="Début du match (jour)"
+                                onChange="selectionAutomatiqueJourReport()">
                             <?php echo modif_liste_jour(jour($dateReportDebut)); ?>
                         </select>
-                        <select name="debutMoisReport" id="debutMoisReport" onChange="selectionAutomatiqueMoisReport()">
+                        <select name="debutMoisReport" id="debutMoisReport" title="Début du match (mois)"
+                                onChange="selectionAutomatiqueMoisReport()">
                             <?php echo modif_liste_mois(mois($dateReportDebut)); ?>
                         </select>
-                        <select name="debutAnneeReport" id="debutAnneeReport"
+                        <select name="debutAnneeReport" id="debutAnneeReport" title="Début du match (année)"
                                 onChange="selectionAutomatiqueAnneReport()">
                             <?php
                             $anneeActuelle = date('Y');
@@ -978,11 +1002,11 @@ if (!isset($_GET['idMatch'])) {
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="debutHeureReport" id="debutHeureReport"
+                        <select name="debutHeureReport" id="debutHeureReport" title="Début du match (heure)"
                                 onChange="selectionAutomatiqueHeureReport()">
                             <?php echo modif_liste_heure(heure($heureReportDebut)); ?>
                         </select>
-                        <select name="debutMinuteReport" id="debutMinuteReport">
+                        <select name="debutMinuteReport" id="debutMinuteReport" title="Début du match (minute)">
                             <?php echo modif_liste_minute(minute($heureReportDebut)); ?>
                         </select>
                     </p>
@@ -993,13 +1017,13 @@ if (!isset($_GET['idMatch'])) {
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="finJourReport" id="finJourReport">
+                        <select name="finJourReport" id="finJourReport" title="Fin du match (jour)">
                             <?php echo modif_liste_jour(jour($dateReportFin)); ?>
                         </select>
-                        <select name="finMoisReport" id="finMoisReport">
+                        <select name="finMoisReport" id="finMoisReport" title="Fin du match (mois)">
                             <?php echo modif_liste_mois(mois($dateReportFin)); ?>
                         </select>
-                        <select name="finAnneeReport" id="finAnneeReport">
+                        <select name="finAnneeReport" id="finAnneeReport" title="Fin du match (année)">
                             <?php
                             $anneeActuelle = date('Y');
                             for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -1012,10 +1036,10 @@ if (!isset($_GET['idMatch'])) {
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="finHeureReport" id="finHeureReport">
+                        <select name="finHeureReport" id="finHeureReport" title="Fin du match (heure)">
                             <?php echo modif_liste_heure(heure($heureReportFin)); ?>
                         </select>
-                        <select name="finMinuteReport" id="finMinuteReport">
+                        <select name="finMinuteReport" id="finMinuteReport" title="Fin du match (minute)">
                             <?php echo modif_liste_minute(minute($heureReportFin)); ?>
                         </select>
                     </p>

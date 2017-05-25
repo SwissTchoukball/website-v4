@@ -82,4 +82,4 @@ if ($_SESSION["__langue__"] == "") {
     //mettreAJourStatistique($VAR_TABLEAU_DES_LANGUES[0][0],$VAR_TABLEAU_DES_LANGUES);
 }
 
-include "var." . $_SESSION["__langue__"] . ".inc.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/includes/langue/var." . $_SESSION["__langue__"] . ".inc.php";

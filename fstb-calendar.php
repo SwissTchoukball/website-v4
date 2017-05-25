@@ -36,7 +36,7 @@ function dateTime_sql2dateTime_ics($dateIn, $time, $allday, $isEnd)
         if ($isEnd) {
             $date = incrementDay($date[0], $date[1], $date[2]);
         }
-        $dateTimeICS = ";VALUE=DATE:" . $date[0] . sprintf('%02u', $date[1]) . sprintf('%02u', $date[2]) . "";
+        $dateTimeICS = ";VALUE=DATE:" . $date[0] . sprintf('%02u', $date[1]) . sprintf('%02u', $date[2]);
     } else {
         $dateTimeICS = ";TZID=Europe/Zurich:" . $date[0] . $date[1] . $date[2] . "T" . $heure . $minute . "00";
     }

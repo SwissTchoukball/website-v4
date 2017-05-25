@@ -1,11 +1,11 @@
 <h2>Envois postaux</h2>
 <p>
     <a href="admin/tchoukup.export.tsv.php?query=envois-individuels">
-        <img src="admin/images/document_excel.png" alt="Fichier Excel"/>
+        <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Envois individuels
     </a><br/>
     <a href="admin/tchoukup.export.tsv.php?query=nb-tchoukup-colis-par-club">
-        <img src="admin/images/document_excel.png" alt="Fichier Excel"/>
+        <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Nombre de Tchouk<sup>up</sup> par colis par club
     </a>
 </p>

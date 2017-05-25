@@ -15,7 +15,7 @@
         $idCategorie = $_GET['modCat'];
 
         //Détermination des journées concernées.
-        $requeteJournee = "SELECT idJournee FROM CoupeCH_Journees WHERE annee=" . $annee . " AND idCategorie=" . $idCategorie . "";
+        $requeteJournee = "SELECT idJournee FROM CoupeCH_Journees WHERE annee=" . $annee . " AND idCategorie=" . $idCategorie;
         $retourJournee = mysql_query($requeteJournee);
         while ($donneesJournee = mysql_fetch_array($retourJournee)) {
 
@@ -25,7 +25,7 @@
             while ($donnees = mysql_fetch_array($retour)) {
 
                 // Détermination du type de match
-                $requeteTypeMatch = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Type_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'] . "";
+                $requeteTypeMatch = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Type_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'];
                 $retourTypeMatch = mysql_query($requeteTypeMatch);
                 $donneesTypeMatch = mysql_fetch_array($retourTypeMatch);
                 $typeMatch = $donneesTypeMatch['nom' . $_SESSION['__langue__']];
@@ -38,7 +38,7 @@
                         $equipeA = VAR_LANG_INCONNU;
                     }
                 } else {
-                    $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeA'] . "";
+                    $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeA'];
                     $retourEquipeA = mysql_query($requeteEquipeA);
                     $donneesEquipeA = mysql_fetch_array($retourEquipeA);
                     $equipeA = $donneesEquipeA['nomEquipe'];
@@ -50,7 +50,7 @@
                         $equipeB = VAR_LANG_INCONNU;
                     }
                 } else {
-                    $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeB'] . "";
+                    $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe=" . $donnees['equipeB'];
                     $retourEquipeB = mysql_query($requeteEquipeB);
                     $donneesEquipeB = mysql_fetch_array($retourEquipeB);
                     $equipeB = $donneesEquipeB['nomEquipe'];

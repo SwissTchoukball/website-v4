@@ -30,7 +30,7 @@ if (isset($_POST['add']) || isset($_POST['edit'])) {
                                     montantPaye = " . $amountPaid . ",
                                     datePaiement = '" . $paymentDate . "',
                                     userID = " . $_SESSION['__idUser__'] . "
-                                WHERE id = " . $paymentID . "";
+                                WHERE id = " . $paymentID;
             if (mysql_query($queryEditPayment)) {
                 printSuccessMessage("Modification du versement réussie.");
             } else {
@@ -55,4 +55,3 @@ if (isset($_POST['add']) || isset($_POST['edit'])) {
         printErrorMessage("ID incorrect");
     }
 }
-?>

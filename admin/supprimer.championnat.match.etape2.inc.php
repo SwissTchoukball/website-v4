@@ -44,19 +44,19 @@ if (!(isset($_POST['saison']) AND isset($_POST['categorie']) AND isset($_POST['t
                 echo "<td class='center'><input class='couleurRadio' type='checkbox' name='matchArray[]' value='" . $donnees['idMatch'] . "' class='couleurCheckBox'></td>";
                 echo "<td class='center'>" . date_sql2date($donnees['dateDebut']) . "</td>";
                 echo "<td class='center'>";
-                $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'] . "";
+                $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'];
                 $retourA = mysql_query($requeteA);
                 $donneesA = mysql_fetch_array($retourA);
                 echo $donneesA['equipe'];
                 echo " - ";
-                $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'] . "";
+                $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'];
                 $retourB = mysql_query($requeteB);
                 $donneesB = mysql_fetch_array($retourB);
                 echo $donneesB['equipe'];
                 echo "</td>";
                 echo "<td>";
                 if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
-                    $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'] . "";
+                    $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donnees['idTypeMatch'];
                     $retourD = mysql_query($requeteD);
                     $donneesD = mysql_fetch_array($retourD);
                     echo $donneesD['type' . $_SESSION['__langue__']];

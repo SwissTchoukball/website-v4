@@ -5,7 +5,7 @@
 </h3>
 
 <form id="supprimerMatchs" method="post"
-      action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . ""; ?>"
+      action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection; ?>"
       onSubmit="return testQqchAModifier();">
     <p>Phase dans laquelle il y a des matchs à supprimer :</p>
     <table class="st-table">
@@ -57,14 +57,14 @@
             echo "<tr>";
             echo "<td class='center'><input class='couleurRadio' type='radio' name='tour[]' value='" . $donnees['saison'] . ":" . $donnees['idCategorie'] . ":" . $donnees['idTour'] . ":" . $donnees['idGroupe'] . "' class='couleurCheckBox'></td>";
             echo "<td class='center'>" . VAR_LANG_CHAMPIONNAT . " " . $donnees['saison'] . "-" . ($donnees['saison'] + 1) . "</td>";
-            $requeteA = "SELECT categorie" . $_SESSION["__langue__"] . " FROM Championnat_Categories WHERE idCategorie=" . $donnees['idCategorie'] . "";
+            $requeteA = "SELECT categorie" . $_SESSION["__langue__"] . " FROM Championnat_Categories WHERE idCategorie=" . $donnees['idCategorie'];
             $retourA = mysql_query($requeteA);
             $donneesA = mysql_fetch_array($retourA);
             if ($donnees['idCategorie'] == 0) { // Promotion / Relegation
                 echo "<td colspan='3' class='center'>" . $donneesA["categorie" . $_SESSION["__langue__"]] . "</td>";
             } else {
                 echo "<td class='center'>" . $donneesA["categorie" . $_SESSION["__langue__"]] . "</td>";
-                $requeteB = "SELECT tour" . $_SESSION["__langue__"] . " FROM Championnat_Types_Tours WHERE idTour=" . $donnees['idTour'] . "";
+                $requeteB = "SELECT tour" . $_SESSION["__langue__"] . " FROM Championnat_Types_Tours WHERE idTour=" . $donnees['idTour'];
                 $retourB = mysql_query($requeteB);
                 $donneesB = mysql_fetch_array($retourB);
                 if ($donnees["idTour"] == 10000 OR $donnees["idTour"] == 2000 OR $donnees["idTour"] == 3000 OR $donnees["idTour"] == 4000) {

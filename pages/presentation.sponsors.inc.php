@@ -7,7 +7,7 @@ statInsererPageSurf(__FILE__);
     // affiche le texte
     while ($donnees = mysql_fetch_array($retour)) {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
     ?>
@@ -18,7 +18,7 @@ $retour = mysql_query("SELECT * FROM TypeSponsors WHERE visible = 1 ORDER BY id 
 echo '<div class="sponsor-list">';
 while ($donnees = mysql_fetch_array($retour)) {
     echo "<h4>";
-    echo afficherAvecEncryptageEmail($donnees["nomType" . $_SESSION["__langue__"]]);
+    afficherAvecEncryptageEmail($donnees["nomType" . $_SESSION["__langue__"]]);
     echo "</h4>";
     $retour2 = mysql_query("SELECT * FROM Sponsors WHERE idTypeSponsors = '" . $donnees["id"] . "' ORDER BY ordre");
     $i = 0;
@@ -26,7 +26,7 @@ while ($donnees = mysql_fetch_array($retour)) {
         echo '<div class="sponsor">';
         echo "<div class='sponsor__logo'><a target='_blank' href='" . $donnees2["lienWeb"] . "'><img src='" . $donnees2["lienLogo"] . "' border='0' /></a></div>";
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees2["description" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees2["description" . $_SESSION["__langue__"]]);
         echo "</p>";
         echo '</div>';
         $i++;

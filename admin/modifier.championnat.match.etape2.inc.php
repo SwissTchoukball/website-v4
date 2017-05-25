@@ -19,30 +19,30 @@ if (!isset($_GET['saison']) OR !isset($_GET['idCat']) OR !isset($_GET['idTour'])
     if ($idCategorie == -1) {
         $nomCategorie = " sans ligues";
     } else {
-        $requete = "SELECT categorie" . $_SESSION['__langue__'] . " FROM Championnat_Categories WHERE idCategorie=" . $idCategorie . "";
+        $requete = "SELECT categorie" . $_SESSION['__langue__'] . " FROM Championnat_Categories WHERE idCategorie=" . $idCategorie;
         $retour = mysql_query($requete);
         $donnees = mysql_fetch_array($retour) or die($requete . "<br />" . mysql_error());
-        $nomCategorie = " de " . $donnees["categorie" . $_SESSION['__langue__']] . "";
+        $nomCategorie = " de " . $donnees["categorie" . $_SESSION['__langue__']];
     }
 
     if ($idTour == 2000) { // Promotion Relegation
         $nomTour = "";
     } elseif ($idTour == 3000 OR $idTour == 4000) { //Playout ou Playoff
-        $requete = "SELECT tour" . $_SESSION['__langue__'] . " FROM Championnat_Types_Tours WHERE idTour=" . $idTour . "";
+        $requete = "SELECT tour" . $_SESSION['__langue__'] . " FROM Championnat_Types_Tours WHERE idTour=" . $idTour;
         $retour = mysql_query($requete);
         $donnees = mysql_fetch_array($retour);
-        $nomTour = " de " . $donnees["tour" . $_SESSION['__langue__']] . "";
+        $nomTour = " de " . $donnees["tour" . $_SESSION['__langue__']];
     } else {
-        $requete = "SELECT tour" . $_SESSION['__langue__'] . " FROM Championnat_Types_Tours WHERE idTour=" . $idTour . "";
+        $requete = "SELECT tour" . $_SESSION['__langue__'] . " FROM Championnat_Types_Tours WHERE idTour=" . $idTour;
         $retour = mysql_query($requete);
         $donnees = mysql_fetch_array($retour) or die($requete . "<br />" . mysql_error());
-        $nomTour = " du " . $donnees["tour" . $_SESSION['__langue__']] . "";
+        $nomTour = " du " . $donnees["tour" . $_SESSION['__langue__']];
 
     }
     if ($idGroupe == 0) {
         $nomGroupe = "";
     } else {
-        $nomGroupe = " du groupe " . $idGroupe . "";
+        $nomGroupe = " du groupe " . $idGroupe;
     }
     echo "<h4>Matchs de la saison " . $nomSaison . $nomCategorie . $nomTour . $nomGroupe . "</h4><br />";
     echo "<table class='st-table'>";
@@ -92,11 +92,11 @@ if (!isset($_GET['saison']) OR !isset($_GET['idCat']) OR !isset($_GET['idTour'])
         } else {
             $checked = "";
         }
-        $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'] . "";
+        $requeteA = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'];
         $retourA = mysql_query($requeteA);
         $donneesA = mysql_fetch_array($retourA);
         $nomEquipeA = $donneesA['equipe'];
-        $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'] . "";
+        $requeteB = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'];
         $retourB = mysql_query($requeteB);
         $donneesB = mysql_fetch_array($retourB);
         $nomEquipeB = $donneesB['equipe'];

@@ -1,5 +1,5 @@
 <div id="sidebar" class="sidebar">
-    <?php include('includes/nav.php'); ?>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . '/includes/nav.php'); ?>
     <div id="partners">
         <?php
         echo "Nos partenaires";

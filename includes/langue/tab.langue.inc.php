@@ -5,4 +5,3 @@ $VAR_TABLEAU_DES_LANGUES = array(
     array("En", "English"),
     array("It", "Italiano"),
 );
-?>

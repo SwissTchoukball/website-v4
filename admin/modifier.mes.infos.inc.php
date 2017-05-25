@@ -61,8 +61,6 @@ statInsererPageSurf(__FILE__);
             mesInfos.ville.style.background = couleurValide;
             mesInfos.ancienPass.style.background = couleurValide;
 
-            <?php include "includes/javascript.controle.telephone.inc.php"; ?>
-
             if (mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
                 nbErreur++;
                 mesInfos.email.style.background = couleurErreur;
@@ -85,7 +83,7 @@ statInsererPageSurf(__FILE__);
             }
 
             var epressionReguliereMotDePasse = new RegExp(["^[a-zA-Z0-9_]{8,}"]);
-            var invaliditePassword = !epressionReguliereMotDePasse.test(mesInfos.nouveauPass.value) && mesInfos.nouveauPass.value.length != 0
+            var invaliditePassword = !epressionReguliereMotDePasse.test(mesInfos.nouveauPass.value) && mesInfos.nouveauPass.value.length != 0;
             if (mesInfos.nouveauPass.value != mesInfos.nouveauPassBis.value || invaliditePassword) {
                 if (invaliditePassword)alert("Les caractères spéciaux ne sont pas admis dans le mot de passe (sont également exclus les caractères à accents)");
                 nbErreur++;

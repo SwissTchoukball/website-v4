@@ -46,8 +46,6 @@ statInsererPageSurf(__FILE__);
             mesInfos.adresse.style.background = couleurValide;
             mesInfos.ville.style.background = couleurValide;
 
-            <?php include "includes/javascript.controle.telephone.inc.php"; ?>
-
             if (mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
                 nbErreur++;
                 mesInfos.email.style.background = couleurErreur;
@@ -103,16 +101,16 @@ statInsererPageSurf(__FILE__);
     <form class="st-form" name="mesInfos" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return controlerSaisie();">
-        <label>Prénom</label>
-        <input name="prenom" type="text" value="" size="35" maxlength="35">
-        <label>Nom</label>
-        <input name="nom" type="text" value="" size="35" maxlength="35">
-        <label>Nom d'utilisateur</label>
-        <input name="username" type="text" value="" size="35" maxlength="35" autocomplete="off" autocorrect="off"
+        <label for="firstNameInput">Prénom</label>
+        <input name="prenom" id="firstNameInput" type="text" value="" size="35" maxlength="35">
+        <label for="lastNameInput">Nom</label>
+        <input name="nom" id="lastNameInput" type="text" value="" size="35" maxlength="35">
+        <label for="usernameInput">Nom d'utilisateur</label>
+        <input name="username" id="usernameInput" type="text" value="" size="35" maxlength="35" autocomplete="off" autocorrect="off"
                autocapitalize="off" spellcheck="false">
         <br/>
-        <label>E-mail</label>
-        <input name="email" type="text" value="" size="35" maxlength="80" autocomplete="off">
+        <label for="emailInput">E-mail</label>
+        <input name="email" id="emailInput" type="text" value="" size="35" maxlength="80" autocomplete="off">
         <br/>
         <label>Club</label>
         <?php
@@ -145,8 +143,8 @@ statInsererPageSurf(__FILE__);
 
         ?>
         <br/>
-        <label>Mot de passe<br/>(min 8 caractères)</label>
-        <input name="motDePasse" type="password" maxlength="255" size="35" autocomplete="off">
+        <label for="passwordInput">Mot de passe<br/>(min 8 caractères)</label>
+        <input name="motDePasse" id="passwordInput" type="password" maxlength="255" size="35" autocomplete="off">
         <br/>
         <input type="hidden" name="action" value="inserer">
         <input type="submit" class="button button--primary" value="insérer">

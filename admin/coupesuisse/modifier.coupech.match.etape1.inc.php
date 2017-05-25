@@ -15,7 +15,7 @@
         $retour = mysql_query($requete);
         while ($donnees = mysql_fetch_array($retour)) {
 
-            $requeteCat = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Categories WHERE idCategorie=" . $donnees['idCategorie'] . "";
+            $requeteCat = "SELECT nom" . $_SESSION['__langue__'] . " FROM CoupeCH_Categories WHERE idCategorie=" . $donnees['idCategorie'];
             $retourCat = mysql_query($requeteCat);
             $donneesCat = mysql_fetch_array($retourCat);
             $categorie = $donneesCat['nom' . $_SESSION['__langue__']];

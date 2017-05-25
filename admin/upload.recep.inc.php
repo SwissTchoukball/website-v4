@@ -1,4 +1,4 @@
-<h3>Upload de fichiers</h3><p/>
+<h3>Upload de fichiers</h3>
 <?php
 /**
  * function formatFileName
@@ -204,9 +204,9 @@ if ($uploadReussi AND isset($url_entier) AND isset($_POST['titre']) AND isset($_
     $date = date('Y\-m\-d');
 
     mysql_query("INSERT INTO uploads VALUES('', '" . $titre . "', '" . $url . "', '" . $description . "', '" . $typeInfo . "', '" . $date . "')");
-    echo '<div class="center">L\'upload a &eacute;t&eacute; ajout&eacute; aux t&eacute;l&eacute;chargements.</div><p />';
+    echo '<div class="center">L\'upload a &eacute;t&eacute; ajout&eacute; aux t&eacute;l&eacute;chargements.</div>';
 } else {
-    echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; ajout&eacute; aux t&eacute;l&eacute;chargements.</div><p />';
+    echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; ajout&eacute; aux t&eacute;l&eacute;chargements.</div>';
 }
 ?>
-<a href="index.php?page=upload">Retour &agrave; la page d'upload</a>
+<a href="/index.php?page=upload">Retour &agrave; la page d'upload</a>

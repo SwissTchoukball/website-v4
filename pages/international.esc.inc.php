@@ -6,7 +6,7 @@ $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '37' OR
 
 while ($donnees = mysql_fetch_array($retour)) {
     echo "<p>";
-    echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+    afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
     echo "</p><br />";
 }
 

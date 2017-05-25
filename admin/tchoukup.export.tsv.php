@@ -123,4 +123,3 @@ header("Content-type: text/tab-separated-values");
 header("Content-disposition: attachment; filename=" . $fileName);
 print $excel;
 exit;
-?>

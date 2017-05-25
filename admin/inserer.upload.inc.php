@@ -216,9 +216,9 @@ if ($_POST["action"] == "insererUpload") {
         $date = date('Y\-m\-d');
 
         mysql_query("INSERT INTO Uploads VALUES('', '" . $titre . "', '" . $fichier . "', '" . $type . "', '" . $description . "', '" . $typeInfo . "', '" . $date . "')");
-        echo '<div class="center">L\'upload a &eacute;t&eacute; ajout&eacute; dans la base de donnée.</div><p />';
+        echo '<div class="center">L\'upload a &eacute;t&eacute; ajout&eacute; dans la base de donnée.</div>';
     } else {
-        echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; ajout&eacute; dans la base de données.</div><p />';
+        echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; ajout&eacute; dans la base de données.</div>';
     }
 } // Fin if action = insererUpload
 elseif ($_POST["action"] == "modifierUpload") {
@@ -230,10 +230,10 @@ elseif ($_POST["action"] == "modifierUpload") {
         $typeInfo = addslashes($_POST['typeInfo']);
         $id = $_POST['id'];
 
-        mysql_query("UPDATE Uploads SET titre='" . $titre . "', description='" . $description . "', typeInfo='" . $typeInfo . "' WHERE id=" . $id . "");
-        echo '<div class="center">L\'upload a &eacute;t&eacute; correctement modifié.</div><p />';
+        mysql_query("UPDATE Uploads SET titre='" . $titre . "', description='" . $description . "', typeInfo='" . $typeInfo . "' WHERE id=" . $id);
+        echo '<div class="center">L\'upload a &eacute;t&eacute; correctement modifié.</div>';
     } else {
-        echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; modifié.</div><p />';
+        echo '<div class="center">L\'upload n\'a pas &eacute;t&eacute; modifié.</div>';
     }
 }
 
@@ -280,7 +280,7 @@ elseif ($_POST["action"] == "modifierUpload") {
         <?php
         if (!isset($_GET['modif'])) {
             ?>
-            <h3>Upload de fichiers</h3><p/>
+            <h3>Upload de fichiers</h3>
             Votre fichier de doit pas exc&eacute;der 48Mo.<br/>
             Formats accept&eacute;s:
             <?php // liste des extensions
@@ -294,14 +294,14 @@ elseif ($_POST["action"] == "modifierUpload") {
             <br/><br/>
             <!-- Taille maximale en octets. Non sécurisé car facilement contournable !! -->
             <input type="hidden" name="MAX_FILE_SIZE" value="48000000"/>
-            Veuillez s&eacute;lectionner un fichier &agrave; uploader: <br/>
-            <input type="file" name="aFile" size="25" maxlength="48000000"/><p/>
+            <label for="fileSelector">Veuillez s&eacute;lectionner un fichier &agrave; uploader</label><br/>
+            <input type="file" name="aFile" id="fileSelector" size="25" maxlength="48000000"/>
             <?php
             $titre = '';
             $description = '';
             $typeInfo = '';
         } else {
-            $retour = mysql_query("SELECT * FROM Uploads WHERE id=" . $_GET['modif'] . "");
+            $retour = mysql_query("SELECT * FROM Uploads WHERE id=" . $_GET['modif']);
             $donnees = mysql_fetch_array($retour);
 
             $titre = stripslashes($donnees['titre']);
@@ -318,7 +318,7 @@ elseif ($_POST["action"] == "modifierUpload") {
                 $image = false;
             }
             ?>
-            <h3>Modification d'un fichier uploadÈ</h3><p/>
+            <h3>Modification d'un fichier uploadÈ</h3>
             <?php
         }
         if ($image) {
@@ -328,29 +328,31 @@ elseif ($_POST["action"] == "modifierUpload") {
 </div><br/>
 <table width="80%" border="0" align="center">
     <tr>
-        <td align="right"><p>Titre:</p></td>
-        <td><input type="text" name="titre" size="30" value="<?php echo $titre; ?>"/><span
-                style="color:red;font-size:10px">*Obligatoire</span></td>
+        <td align="right"><label for="titleInput">Titre</label></td>
+        <td>
+            <input type="text" name="titre" id="titleInput" size="30" value="<?php echo $titre; ?>"/>
+            <span class="mandatory">*Obligatoire</span></td>
     </tr>
     <tr>
-        <td align="right">Description:<br/><span style="color:red;font-size:10px">*Obligatoire</span></td>
-        <td><textarea name="description" cols="50" rows="10"><?php echo $description; ?></textarea></td>
+        <td align="right"><label for="descriptionInput">Description</label><br/><span class="mandatory">*Obligatoire</span></td>
+        <td><textarea name="description" id="descriptionInput" cols="50" rows="10"><?php echo $description; ?></textarea></td>
     </tr>
-    <td align="right">Type d'information:</td>
-    <td><select name="typeInfo">
-            <?php
-            $retourbis = mysql_query("SELECT * FROM TypeInformation WHERE id>0 ORDER BY description" . $_SESSION["__langue__"] . "");
-            while ($donneesbis = mysql_fetch_array($retourbis)) {
-                ?>
-                <option <?php if ($donneesbis['idUnique'] == $typeInfo) {
-                    echo "selected='selected'";
-                } ?>
-                    value="<?php echo $donneesbis["idUnique"]; ?>"><?php echo $donneesbis["description" . $_SESSION["__langue__"]]; ?></option>
+    <tr>
+        <td align="right"><label for="informationTypeSelector">Type d'information</label></td>
+        <td><select name="typeInfo" id="informationTypeSelector">
                 <?php
-            }
-            ?>
-        </select>
-    </td>
+                $retourbis = mysql_query("SELECT * FROM TypeInformation WHERE id>0 ORDER BY description" . $_SESSION["__langue__"]);
+                while ($donneesbis = mysql_fetch_array($retourbis)) {
+                    ?>
+                    <option <?php if ($donneesbis['idUnique'] == $typeInfo) {
+                        echo "selected='selected'";
+                    } ?>
+                        value="<?php echo $donneesbis["idUnique"]; ?>"><?php echo $donneesbis["description" . $_SESSION["__langue__"]]; ?></option>
+                    <?php
+                }
+                ?>
+            </select>
+        </td>
     </tr>
     <tr>
         <td colspan="2" align="center">
@@ -364,4 +366,4 @@ elseif ($_POST["action"] == "modifierUpload") {
         <?php } ?>
     </tr>
 </table>
-</form><p/>
+</form>

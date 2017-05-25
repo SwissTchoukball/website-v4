@@ -5,14 +5,12 @@ while ($donnees = mysql_fetch_array($retour)) {
     // entete
     if ($donnees["paragrapheNum"] == 0) {
         echo "<h4>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</h4>";
     } else {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
 }
 echo "<p><a href='/telechargements/3'>Documents officiels</a></p>";
-?>
-

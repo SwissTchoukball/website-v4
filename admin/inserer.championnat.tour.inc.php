@@ -35,7 +35,7 @@
             }
 
             $requete = "SELECT * FROM Championnat_Tours WHERE " .
-                "saison=" . $saison . " AND idCategorie=" . $categorie . " AND idTour=" . $tour . " AND idGroupe=" . $groupe . "";
+                "saison=" . $saison . " AND idCategorie=" . $categorie . " AND idTour=" . $tour . " AND idGroupe=" . $groupe;
             $retour = mysql_query($requete);
             $nbResultat = mysql_affected_rows();
 
@@ -67,7 +67,7 @@
 
     <script language="javascript">
         var nbCaseCoche = 0;
-        var arrayOfSelectionned = new Array();
+        var arrayOfSelectionned = [];
 
         function checkBoxActive(chkBox) {
             var equipe = document.getElementById("equipe_" + chkBox.value);
@@ -163,9 +163,9 @@
           onSubmit="return validateForm();">
         <table class="st-table">
             <tr>
-                <td class="right">Saison :</td>
+                <td class="right"><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?></label></td>
                 <td>
-                    <select name="saison">
+                    <select name="saison" id="seasonSelector">
                         <?php
                         if (date("m") > 7) {
                             $anneeActuelle = date("Y");
@@ -184,9 +184,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="right">Catégorie :</td>
+                <td class="right"><label for="categorySelector"><?php echo VAR_LANG_CATEGORIE; ?></label></td>
                 <td>
-                    <select name="categorie" onChange="changeEtatCategorie();">
+                    <select name="categorie" id="categorySelector" onChange="changeEtatCategorie();">
                         <?php
                         $requete = "SELECT * FROM Championnat_Categories ORDER BY idCategorie";
                         $retour = mysql_query($requete);
@@ -198,9 +198,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="right">Tour :</td>
+                <td class="right"><label for="tourSelector"><?php echo VAR_LANG_TOUR; ?></label></td>
                 <td>
-                    <select name="tour" onChange="changeEtatTour();">
+                    <select name="tour" id="tourSelector" onChange="changeEtatTour();">
                         <option value='none'>Choisissez un tour</option>
                         <?php
                         $requete = "SELECT * FROM Championnat_Types_Tours ORDER BY idTour";
@@ -213,9 +213,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="right">Tour précédent:</td>
+                <td class="right"<label for="previousTourSelector"><?php echo VAR_LANG_TOUR_PRECEDENT; ?></label></td>
                 <td>
-                    <select name="tourPrecedent">
+                    <select name="tourPrecedent" id="previousTourSelector">
                         <option value='0'>Pas de tour précédent</option>
                         <?php
                         $requete = "SELECT * FROM Championnat_Types_Tours WHERE idTour!=2000 ORDER BY idTour";
@@ -228,9 +228,9 @@
                 </td>
             </tr>
             <tr>
-                <td class="right">Groupe n&#186; :</td>
+                <td class="right"><label for="groupSelector"><?php echo VAR_LANG_GROUPE; ?> n&#186;</label></td>
                 <td>
-                    <select name="groupe">
+                    <select name="groupe" id="groupSelector">
                         <option value='0'>Qualification</option>
                         <?php
                         for ($i = 1; $i <= 4; $i++) {
@@ -257,7 +257,7 @@
                 echo "<tr>";
                 echo "<td width='20' class='center'><input onclick='checkBoxActive(this);' type='checkbox' name='participant[]' value='" . $donnees["idEquipe"] . "' class='couleurCheckBox'></td>";
                 echo "<td class='center'>" . $donnees["equipe"] . "</td>";
-                $requeteA = "SELECT * FROM ClubsFstb WHERE id=" . $donnees['idClub'] . "";
+                $requeteA = "SELECT * FROM ClubsFstb WHERE id=" . $donnees['idClub'];
                 $retourA = mysql_query($requeteA);
                 $donneesA = mysql_fetch_array($retourA);
                 echo "<td>" . $donneesA['club'] . "</td>";
@@ -272,7 +272,7 @@
             //creation d'un tableau javascript pour aider l'utiliseur a ne pas entrer un tour existant
             $requeteSQL = "SELECT DISTINCT saison, idTour, idCategorie, idGroupe FROM Championnat_Tours";
             $recordset = mysql_query($requeteSQL);
-            echo "<script language='JavaScript'>var tourChampionnatExistant = new Array();";
+            echo "<script language='JavaScript'>var tourChampionnatExistant = [];";
             while ($record = mysql_fetch_array($recordset)) {
                 echo "tourChampionnatExistant['" . $record["saison"] . ":" . $record["idCategorie"] . ":" . $record["idTour"] . ":" . $record["idGroupe"] . "']=true;";
             }

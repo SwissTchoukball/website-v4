@@ -66,7 +66,7 @@ if (!isset($_POST['idMatch'])) {
     $nomEquipeB = $_POST['EquipeB'];
 
     // ATTENTION !!! Si le nombre de sets gagnant augmente il faut changer le code ici et aussi ajouter des colonnes dans la BDD !!!
-    $requete = "UPDATE `CoupeCH_Matchs` SET scoreA1=" . $score['A1'] . ", scoreB1=" . $score['B1'] . ", scoreA2=" . $score['A2'] . ", scoreB2=" . $score['B2'] . ", scoreA3=" . $score['A3'] . ", scoreB3=" . $score['B3'] . ", scoreA4=" . $score['A4'] . ", scoreB4=" . $score['B4'] . ", scoreA5=" . $score['A5'] . ", scoreB5=" . $score['B5'] . ", forfait=" . $forfait . ", heureDebut='" . $_POST['debutHeure'] . ":" . $_POST['debutMinute'] . ":00', heureFin='" . $_POST['finHeure'] . ":" . $_POST['finMinute'] . ":00', utilisateur='" . $_SESSION['__prenom__'] . $_SESSION['__nom__'] . "' WHERE idMatch=" . $_POST['idMatch'] . "";
+    $requete = "UPDATE `CoupeCH_Matchs` SET scoreA1=" . $score['A1'] . ", scoreB1=" . $score['B1'] . ", scoreA2=" . $score['A2'] . ", scoreB2=" . $score['B2'] . ", scoreA3=" . $score['A3'] . ", scoreB3=" . $score['B3'] . ", scoreA4=" . $score['A4'] . ", scoreB4=" . $score['B4'] . ", scoreA5=" . $score['A5'] . ", scoreB5=" . $score['B5'] . ", forfait=" . $forfait . ", heureDebut='" . $_POST['debutHeure'] . ":" . $_POST['debutMinute'] . ":00', heureFin='" . $_POST['finHeure'] . ":" . $_POST['finMinute'] . ":00', utilisateur='" . $_SESSION['__prenom__'] . $_SESSION['__nom__'] . "' WHERE idMatch=" . $_POST['idMatch'];
     // echo $requete."<br />";
     mysql_query($requete) or die("Erreur, le match " . $nomEquipeA . " - " . $nomEquipeB . " n'a pas été modifié." . mysql_error());
     echo $nomEquipeA . " - " . $nomEquipeB . " : OK !<br />";

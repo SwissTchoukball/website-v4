@@ -78,5 +78,3 @@ function triScorePointsMarques($informations, $tableau, $debug)
     return $nouveauTableau;
 
 }
-
-?>

@@ -1,9 +1,9 @@
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
-            src="admin/images/ajouter.png" alt="Ajouter une édition"/> Ajouter une édition</a></div>
+            src="/admin/images/ajouter.png" alt="Ajouter une édition"/> Ajouter une édition</a></div>
 <div>
     <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
-            src="admin/images/liste.png" alt="Liste des éditions"/> Liste des éditions</a></div>
+            src="/admin/images/liste.png" alt="Liste des éditions"/> Liste des éditions</a></div>
 <br/>
 <?php
 $nbMaxJournees = 10;
@@ -65,7 +65,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
     ?>
     <script type="text/javascript">
         function updateNbJournees(contenuSelect) {
-            var nbJournees = contenuSelect.value
+            var nbJournees = contenuSelect.value;
             nbJournees++;
             for (var i = 1; i < nbJournees; i++) {
                 document.getElementById("journee" + i).style.display = "block";

@@ -31,4 +31,3 @@ if ($points = mysql_query($queryPoints)) {
     printErrorMessage("Problème lors de la récupération de la liste des points");
 }
 echo '</table>';
-?>

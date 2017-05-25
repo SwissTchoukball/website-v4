@@ -115,7 +115,7 @@ if ($preselectionListData = mysql_query($preselectionListQuery)) {
     ?>
     <form class="st-form" method="post"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
-        <select name="preselectionID" onchange="submit();">
+        <select name="preselectionID" onchange="submit();" title="Présélection">
             <option value="0">-</option>
             <?php
             while ($preselection = mysql_fetch_assoc($preselectionListData)) {
@@ -197,8 +197,8 @@ while ($member = mysql_fetch_assoc($data)) {
     if ($showDetails) {
         ?>
         <td class="gender">
-            <?php echo ($nom == "" && $prenom == "" && $idSexe == 1) ? '' : '<img src="admin/images/' . $imageGenre . '" alt="' . $genre . '" />'; ?>
-            <img src="admin/images/langues/<?php echo $idLangue; ?>.png" alt="langue"/>
+            <?php echo ($nom == "" && $prenom == "" && $idSexe == 1) ? '' : '<img src="/admin/images/' . $imageGenre . '" alt="' . $genre . '" />'; ?>
+            <img src="/admin/images/langues/<?php echo $idLangue; ?>.png" alt="langue"/>
         </td>
         <td>
             <?php
@@ -214,10 +214,10 @@ while ($member = mysql_fetch_assoc($data)) {
         </td>
         <td>
             <?php
-            echo $telPrive != "" ? "<img src='admin/images/telPrive.png' alt='Numéro de téléphone privé'/> " . $telPrive . "<br />" : "";
-            echo $telProf != "" ? "<img src='admin/images/telProf.png' alt='Numéro de téléphone professionnel'/> " . $telProf . "<br />" : "";
-            echo $telMobile != "" ? "<img src='admin/images/telMobile.png' alt='Numéro de téléphone mobile'/> " . $telMobile . "<br />" : "";
-            echo $email != "" ? "<img src='admin/images/email.png' alt='Adresse e-mail'/> " . $email : "";
+            echo $telPrive != "" ? "<img src='/admin/images/telPrive.png' alt='Numéro de téléphone privé'/> " . $telPrive . "<br />" : "";
+            echo $telProf != "" ? "<img src='/admin/images/telProf.png' alt='Numéro de téléphone professionnel'/> " . $telProf . "<br />" : "";
+            echo $telMobile != "" ? "<img src='/admin/images/telMobile.png' alt='Numéro de téléphone mobile'/> " . $telMobile . "<br />" : "";
+            echo $email != "" ? "<img src='/admin/images/email.png' alt='Adresse e-mail'/> " . $email : "";
             ?>
         </td>
         <td>
@@ -239,7 +239,7 @@ while ($member = mysql_fetch_assoc($data)) {
     } else {
         ?>
         <td class="gender">
-            <?php echo ($nom == "" && $prenom == "" && $idSexe == 1) ? '' : '<img src="admin/images/' . $imageGenre . '" alt="' . $genre . '" />'; ?>
+            <?php echo ($nom == "" && $prenom == "" && $idSexe == 1) ? '' : '<img src="/admin/images/' . $imageGenre . '" alt="' . $genre . '" />'; ?>
         </td>
         <td><?php echo $raisonSociale; ?></td>
         <td><strong><?php echo $nom; ?></strong> <?php echo $prenom; ?></td>
@@ -250,8 +250,8 @@ while ($member = mysql_fetch_assoc($data)) {
 
     <td class="action">
         <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&edit=<?php echo $idMembre; ?>"><img
-                src="admin/images/modifier.png" alt="Modifier un membre"/></a>
-        <!--<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&delete=<?php echo $membersData['idDbdPersonne']; ?>" onclick='return confirm("Voulez-vous vraiment supprimer<?php echo $membersData['prenom']; ?><?php echo $membersData['nom']; ?> ?");'><img src="admin/images/supprimer.png" alt="Supprimer un membre"/></a>-->
+                src="/admin/images/modifier.png" alt="Modifier un membre"/></a>
+        <!--<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&delete=<?php echo $membersData['idDbdPersonne']; ?>" onclick='return confirm("Voulez-vous vraiment supprimer<?php echo $membersData['prenom']; ?><?php echo $membersData['nom']; ?> ?");'><img src="/admin/images/supprimer.png" alt="Supprimer un membre"/></a>-->
     </td>
     <?php
     echo "</tr>";

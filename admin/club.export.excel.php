@@ -53,4 +53,3 @@ header("Content-type: application/vnd.ms-excel");
 header("Content-disposition: attachment; filename=club-" . slugify($_SESSION['__nbIdClub__']) . ".xls");
 print $excel;
 exit;
-?>

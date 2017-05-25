@@ -69,18 +69,18 @@
                 <td><?php echo $club; ?></td>
                 <td><?php echo $montant . " CHF"; ?></td>
                 <td>
-                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:paye">
+                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:paye" title="Statut">
                         <option value="1" <?php echo $montantPaye ? "selected='selected'" : ""; ?>>Payé</option>
                         <option value="0" <?php echo $montantPaye ? "" : "selected='selected'"; ?>>Non-payé</option>
                     </select>
                     <label> le </label>
-                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:jour">
+                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:jour" title="Date de paiement (jour)">
                         <?php echo modif_liste_jour($jourPaiement); ?>
                     </select>
-                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:mois">
+                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:mois" title="Date de paiement (mois)">
                         <?php echo modif_liste_mois($moisPaiement); ?>
                     </select>
-                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:annee">
+                    <select name="<?php echo $annee; ?>:<?php echo $idClub; ?>:annee" title="Date de paiement (année)">
                         <?php echo modif_liste_annee(-1, 0, $anneePaiement); ?>
                     </select>
                 </td>

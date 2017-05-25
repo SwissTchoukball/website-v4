@@ -29,7 +29,7 @@ if ($classement == 'B') {
 }
 
 $i = 0;
-$retour = mysql_query("SELECT * FROM " . $typeSource . " " . $sansTout . " ORDER BY description" . $_SESSION["__langue__"] . "");
+$retour = mysql_query("SELECT * FROM " . $typeSource . " " . $sansTout . " ORDER BY description" . $_SESSION["__langue__"]);
 echo "<p class='center'>";
 while ($donnees = mysql_fetch_array($retour)) {
     if ($i != 0) {
@@ -61,7 +61,7 @@ echo "</p>";
         </th>
     </tr>
     <?php
-    $retour = mysql_query("SELECT * FROM " . $typeSource . " " . $sansTout . " ORDER BY description" . $_SESSION["__langue__"] . "");
+    $retour = mysql_query("SELECT * FROM " . $typeSource . " " . $sansTout . " ORDER BY description" . $_SESSION["__langue__"]);
     while ($donnees = mysql_fetch_array($retour)) {
         echo "<tr>";
         echo "<td id='cat" . $donnees['id'] . "' colspan='5' align='center'>";

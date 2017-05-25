@@ -11,7 +11,7 @@
     echo "<div>";
     echo VAR_LANG_USERNAME . " : " . $record["username"] . "<br />";
     echo "Email : ";
-    email($record["email"]);
+    echo email($record["email"]);
     echo "<br />";
     echo "Club : " . $record["club"] . "<br />";
     echo "</div>";

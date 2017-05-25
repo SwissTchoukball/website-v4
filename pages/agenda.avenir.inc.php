@@ -2,7 +2,7 @@
 statInsererPageSurf(__FILE__);
 
 if (isset($_GET['idEvenement'])) {
-    include('pages/agenda.evenement.inc.php');
+    include('agenda.evenement.inc.php');
 } else {
 
     // Légende des catégories
@@ -16,28 +16,17 @@ if (isset($_GET['idEvenement'])) {
             $requeteCategories = "SELECT * FROM Calendrier_Categories ORDER BY nom";
             $retourCategories = mysql_query($requeteCategories);
             while($donneesCategories = mysql_fetch_array($retourCategories)){
-            ?>
-            var selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?> = document.getElementById("categorie<?php echo $donneesCategories['id']; ?>");
+                ?>
+                var selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?> =
+                    document.getElementById("categorie<?php echo $donneesCategories['id']; ?>");
 
-            if (selectionCategoriesCalendrierCategorie4.checked == true) {
                 <?php
-                if($donneesCategories['id'] != 4){
-                ?>
-                selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?>.checked = false;
-                <?php
+                if ($donneesCategories['id'] != 4) {
+                    ?>
+                    selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?>.checked =
+                        !selectionCategoriesCalendrierCategorie4.checked;
+                    <?php
                 }
-                ?>
-            }
-            else {
-                <?php
-                if($donneesCategories['id'] != 4){
-                ?>
-                selectionCategoriesCalendrierCategorie<?php echo $donneesCategories['id']; ?>.checked = true;
-                <?php
-                }
-                ?>
-            }
-            <?php
             }
             ?>
         }
@@ -85,8 +74,8 @@ if (isset($_GET['idEvenement'])) {
         } else {
             $specialite = " onClick='verifierCheckbox(this);'";
         }
-        echo "<input type='checkbox' name='categorie" . $donneesCategories['id'] . "' id='categorie" . $donneesCategories['id'] . "'" . $checked . "" . $specialite . " /> ";
-        echo "<label for='categorie" . $donneesCategories['id'] . "' style='color: #" . $donneesCategories['couleur'] . "; font-weight: bold;'>" . $donneesCategories['nom'] . "</label>";
+        echo "<input type='checkbox' name='categorie" . $donneesCategories['id'] . "' id='categorie" . $donneesCategories['id'] . "' " . $checked . " " . $specialite . " /> ";
+        echo "<label for='categorie" . $donneesCategories['id'] . "' style='color: " . $donneesCategories['couleur'] . "; font-weight: bold;'>" . $donneesCategories['nom'] . "</label>";
         $listchkbx[$c] = "categorie" . $donneesCategories['id'];
         $c++;
         $premier = false;

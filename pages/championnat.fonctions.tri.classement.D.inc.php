@@ -81,5 +81,3 @@ function triDifferenceScorePoints($informations, $tableau, $debug)
     return $nouveauTableau;
 
 }
-
-?>

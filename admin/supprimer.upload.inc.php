@@ -13,4 +13,3 @@ if (isset($_GET['suppr'])) { // SUPPRESSION DETECTÉE
         echo "<imp>Suppression effectuée avec succès.</imp>";
     }
 }
-?>

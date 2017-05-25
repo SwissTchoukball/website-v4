@@ -19,15 +19,19 @@ function triEgaliteParfaite($informations, $tableau, $debug)
             $ordningEquipesEgalitesId = array();
             $l = 0;
 
-            $requeteNomsEquipes = "SELECT DISTINCT Championnat_Equipes.idEquipe, equipe, egaliteParfaite FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=Championnat_Equipes_Tours.idEquipe AND saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe . " AND (";
+            $requeteNomsEquipes = "SELECT DISTINCT Championnat_Equipes.idEquipe, equipe, egaliteParfaite
+                                   FROM Championnat_Equipes, Championnat_Equipes_Tours
+                                   WHERE Championnat_Equipes.idEquipe=Championnat_Equipes_Tours.idEquipe
+                                   AND saison=" . $annee . " AND idCategorie=" . $idCategorie . "
+                                   AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
 
+            $requeteNomsEquipes .= " AND (";
             for ($i = 1; $i <= count($tableau[$k]); $i++) { // Une boucle par équipe à égalité ==>> $i = EQUIPE EGALITE
                 $requeteNomsEquipes .= "Championnat_Equipes.idEquipe=" . $tableau[$k][$i] . " ";
                 if ($i != count($tableau[$k])) {
                     $requeteNomsEquipes .= "OR ";
                 }
             } // Fin boucle par équipe égalité
-
             $requeteNomsEquipes .= ") ORDER BY egaliteParfaite, equipe";
 
             if ($debug) {
@@ -50,7 +54,12 @@ function triEgaliteParfaite($informations, $tableau, $debug)
             /* Requête pour vérifier si le mail a déjà été envoyé en allant voir dans la table Championnat_Equipes_Tours si le champ egaliteParfaite est à 1 */
 
             if ($nbEquipesEgaliteParfaite != 0) {
-                $requeteVerificationDejaEnvoye = "SELECT DISTINCT egaliteParfaite FROM Championnat_Equipes_Tours WHERE saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe . " AND (";
+                $requeteVerificationDejaEnvoye = "SELECT DISTINCT egaliteParfaite
+                                                  FROM Championnat_Equipes_Tours
+                                                  WHERE saison=" . $annee . " AND idCategorie=" . $idCategorie . "
+                                                  AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
+
+                $requeteVerificationDejaEnvoye .= " AND (";
                 for ($j = 1; $j <= $nbEquipesEgaliteParfaite; $j++) {
                     $requeteVerificationDejaEnvoye .= "idEquipe=" . $idEquipeEgaliteParfaite[$j];
                     if ($j != $nbEquipesEgaliteParfaite) {
@@ -58,6 +67,7 @@ function triEgaliteParfaite($informations, $tableau, $debug)
                     }
                 }
                 $requeteVerificationDejaEnvoye .= ")";
+
                 if ($debug) {
                     echo "<br />Requête pour vérifier si le champ egaliteParfaite est déjà à 1 : " . $requeteVerificationDejaEnvoye;
                 }
@@ -119,5 +129,3 @@ function triEgaliteParfaite($informations, $tableau, $debug)
     return $nouveauTableau;
 
 }
-
-?>

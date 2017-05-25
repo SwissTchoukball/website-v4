@@ -19,4 +19,3 @@ while ($donnees = mysql_fetch_array($retour)) {
     }
 }
 showDomainHead(6);
-?>

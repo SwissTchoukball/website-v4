@@ -13,4 +13,3 @@ foreach ($referees as $referee) {
     }
 }
 echo '</div>';
-?>

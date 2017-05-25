@@ -14,7 +14,7 @@ if (isset($_GET["menuselection"]) && is_numeric($_GET["menuselection"])) {
     }
 } elseif (isset($_GET[VAR_HREF_LIEN_MENU]) && is_numeric($_GET[VAR_HREF_LIEN_MENU])) {
     // lien interne au site. pour garder une validite de menu
-    $requetelien = mysql_query("SELECT id, sousMenuDeId, ordre FROM " . $typemenu . " WHERE id = " . $_GET[VAR_HREF_LIEN_MENU] . "");
+    $requetelien = mysql_query("SELECT id, sousMenuDeId, ordre FROM " . $typemenu . " WHERE id = " . $_GET[VAR_HREF_LIEN_MENU]);
     if ($donneeslien = mysql_fetch_array($requetelien)) {
         $menuselection = $donneeslien['sousMenuDeId'];
         $smenuselection = $donneeslien['ordre'];
@@ -30,12 +30,12 @@ if (isset($_GET["menuselection"]) && is_numeric($_GET["menuselection"])) {
     $menuselection = 1;
     $smenuselection = 0;
 }
-$requete = "SELECT * FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . " && ordre=" . $smenuselection . "";
-$retour = mysql_query("SELECT * FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . " && ordre=" . $smenuselection . "");
+$requete = "SELECT * FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . " && ordre=" . $smenuselection;
+$retour = mysql_query("SELECT * FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . " && ordre=" . $smenuselection);
 $donnees = mysql_fetch_array($retour);
 
 
-$requeteIssetMenu = mysql_query("SELECT COUNT(*) AS nbreMenu FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . "");
+$requeteIssetMenu = mysql_query("SELECT COUNT(*) AS nbreMenu FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection);
 $donneesIssetMenu = mysql_fetch_array($requeteIssetMenu);
 
 if ($typemenu == "MenuAdmin") {
@@ -64,7 +64,7 @@ if (!is_numeric($menuselection) || $menuselection < 0 || ($_SESSION["__userLevel
         exit("Erreur 1c, vous n'avez aucun droit sur cette partie");
     }
 }
-$requeteIssetSsMenu = mysql_query("SELECT COUNT(*) AS nbreSsMenu FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection . "");
+$requeteIssetSsMenu = mysql_query("SELECT COUNT(*) AS nbreSsMenu FROM " . $typemenu . " WHERE sousMenuDeId=" . $menuselection);
 $donneesIssetSsMenu = mysql_fetch_array($requeteIssetSsMenu);
 
 // regarde la validite du sous-menu.

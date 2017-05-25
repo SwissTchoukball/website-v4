@@ -10,18 +10,18 @@ while ($donnees = mysql_fetch_array($retour)) {
     if ($donnees['paragrapheNum'] == 4) {
         /*echo "<ul>";
         echo "<li>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
         echo "</li>";*/
     } elseif ($donnees['paragrapheNum'] == 5) {
         /*echo "<li>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
         echo "</li>";
         echo "</ul>";*/
     } elseif ($donnees['paragrapheNum'] == 3) {
 
     } else {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
 }
@@ -30,5 +30,3 @@ $donnees = mysql_fetch_array($retour);
 echo "<p><a href='" . PATH_DOCUMENTS . "Fr_" . $donnees["fichier"] . "'>" . $donnees["titre" . $_SESSION["__langue__"]] . "</a></p>";
 
 showCommissionHead(13);
-?>
-

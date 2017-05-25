@@ -162,7 +162,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         ?>
     </script>
     <form id="insererMatchForm" method="post"
-          action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . ""; ?>"
+          action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection; ?>"
           onSubmit="return validateForm();">
         <?php
         echo "<table class='st-table'>";
@@ -221,9 +221,9 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         ?>
         <table>
             <tr>
-                <td><p><?php echo $agenda_lieu; ?></p></td>
+                <td><label for="idLieuAll"><?php echo $agenda_lieu; ?></label></td>
                 <td colspan="3">
-                    <select name="idLieu_all">
+                    <select name="idLieu_all" id="idLieuAll">
                         <option value="NULL">Non défini</option>
                         <?php
                         $requete = "SELECT * FROM Lieux ORDER BY nomCourt";
@@ -236,17 +236,17 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                 </td>
             </tr>
             <tr>
-                <td><p><?php echo $agenda_debut; ?></p></td>
+                <td><label><?php echo $agenda_debut; ?></label></td>
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="debutJour_all" id="debutJour">
+                        <select name="debutJour_all" id="debutJour" title="Date début (jour)">
                             <?php echo creation_liste_jour(); ?>
                         </select>
-                        <select name="debutMois_all" id="debutMois">
+                        <select name="debutMois_all" id="debutMois" title="Date début (mois)">
                             <?php echo creation_liste_mois(); ?>
                         </select>
-                        <select name="debutAnnee_all" id="debutAnnee">
+                        <select name="debutAnnee_all" id="debutAnnee" title="Date début (année)">
                             <?php
                             $anneeActuelle = date('Y');
                             for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -259,27 +259,27 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="debutHeure_all" id="debutHeure">
+                        <select name="debutHeure_all" id="debutHeure" title="Date début (heure)">
                             <?php echo modif_liste_heure("20"); ?>
                         </select>
-                        <select name="debutMinute_all" id="debutMinute">
+                        <select name="debutMinute_all" id="debutMinute" title="Date début (minute)">
                             <?php echo modif_liste_minute("45"); ?>
                         </select>
                     </p>
                 </td>
             </tr>
             <tr>
-                <td><p><?php echo $agenda_fin; ?></p></td>
+                <td><label><?php echo $agenda_fin; ?></label></td>
                 <td colspan="3">
                     <p>
                         <?php echo $agenda_date; ?> :
-                        <select name="finJour_all" id="finJour">
+                        <select name="finJour_all" id="finJour" title="Date fin (jour)">
                             <?php echo creation_liste_jour(); ?>
                         </select>
-                        <select name="finMois_all" id="finMois">
+                        <select name="finMois_all" id="finMois" title="Date fin (mois)">
                             <?php echo creation_liste_mois(); ?>
                         </select>
-                        <select name="finAnnee_all" id="finAnnee">
+                        <select name="finAnnee_all" id="finAnnee" title="Date fin (année)">
                             <?php
                             $anneeActuelle = date('Y');
                             for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -292,10 +292,10 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                             ?>
                         </select>
                         <?php echo $agenda_heure; ?> :
-                        <select name="finHeure_all" id="finHeure">
+                        <select name="finHeure_all" id="finHeure" title="Date fin (heure)">
                             <?php echo modif_liste_heure("21"); ?>
                         </select>
-                        <select name="finMinute_all" id="finMinute">
+                        <select name="finMinute_all" id="finMinute" title="Date fin (minute)">
                             <?php echo modif_liste_minute("55"); ?>
                         </select>
                     </p>
@@ -354,9 +354,9 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
 							<td><input name="ville<?php echo $k; ?>" type="text" size="20" ></td>
 						</tr>-->
                 <tr>
-                    <td><p><?php echo $agenda_lieu; ?></p></td>
+                    <td><label for="locationSelector"><?php echo $agenda_lieu; ?></label></td>
                     <td colspan="3">
-                        <select name="idLieu<?php echo $k; ?>">
+                        <select name="idLieu<?php echo $k; ?>" id="locationSelector">
                             <option value="NULL">Non défini</option>
                             <?php
                             $requete = "SELECT * FROM Lieux ORDER BY nomCourt";
@@ -369,19 +369,19 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                     </td>
                 </tr>
                 <tr>
-                    <td><p><?php echo $agenda_debut; ?></p></td>
+                    <td><label><?php echo $agenda_debut; ?></label></td>
                     <td colspan="3">
                         <p>
                             <?php echo $agenda_date; ?> :
-                            <select name="debutJour<?php echo $k; ?>" id="debutJour"
+                            <select name="debutJour<?php echo $k; ?>" id="debutJour" title="Date début (jour)"
                                     onChange="selectionAutomatiqueJour<?php echo $k; ?>()">
                                 <?php echo creation_liste_jour(); ?>
                             </select>
-                            <select name="debutMois<?php echo $k; ?>" id="debutMois"
+                            <select name="debutMois<?php echo $k; ?>" id="debutMois" title="Date début (mois)"
                                     onChange="selectionAutomatiqueMois<?php echo $k; ?>()">
                                 <?php echo creation_liste_mois(); ?>
                             </select>
-                            <select name="debutAnnee<?php echo $k; ?>" id="debutAnnee"
+                            <select name="debutAnnee<?php echo $k; ?>" id="debutAnnee" title="Date début (année)"
                                     onChange="selectionAutomatiqueAnnee<?php echo $k; ?>()">
                                 <?php
                                 $anneeActuelle = date('Y');
@@ -395,11 +395,11 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                                 ?>
                             </select>
                             <?php echo $agenda_heure; ?> :
-                            <select name="debutHeure<?php echo $k; ?>" id="debutHeure"
+                            <select name="debutHeure<?php echo $k; ?>" id="debutHeure" title="Date début (heure)"
                                     onChange="selectionAutomatiqueHeure<?php echo $k; ?>()">
                                 <?php echo modif_liste_heure("20"); ?>
                             </select>
-                            <select name="debutMinute<?php echo $k; ?>" id="debutMinute"
+                            <select name="debutMinute<?php echo $k; ?>" id="debutMinute" title="Date début (minute)"
                                     onChange="selectionAutomatiqueMinute<?php echo $k; ?>()">
                                 <?php echo modif_liste_minute("45"); ?>
                             </select>
@@ -407,17 +407,17 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                     </td>
                 </tr>
                 <tr>
-                    <td><p><?php echo $agenda_fin; ?></p></td>
+                    <td><label><?php echo $agenda_fin; ?></label></td>
                     <td colspan="3">
                         <p>
                             <?php echo $agenda_date; ?> :
-                            <select name="finJour<?php echo $k; ?>" id="finJour">
+                            <select name="finJour<?php echo $k; ?>" id="finJour" title="Date fin (jour)">
                                 <?php echo creation_liste_jour(); ?>
                             </select>
-                            <select name="finMois<?php echo $k; ?>" id="finMois">
+                            <select name="finMois<?php echo $k; ?>" id="finMois" title="Date fin (mois)">
                                 <?php echo creation_liste_mois(); ?>
                             </select>
-                            <select name="finAnnee<?php echo $k; ?>" id="finAnnee">
+                            <select name="finAnnee<?php echo $k; ?>" id="finAnnee" title="Date fin (année)">
                                 <?php
                                 $anneeActuelle = date('Y');
                                 for ($i = $saison; $i <= $saison + 1; $i++) {
@@ -430,10 +430,10 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
                                 ?>
                             </select>
                             <?php echo $agenda_heure; ?> :
-                            <select name="finHeure<?php echo $k; ?>" id="finHeure">
+                            <select name="finHeure<?php echo $k; ?>" id="finHeure" title="Date fin (heure)">
                                 <?php echo modif_liste_heure("21"); ?>
                             </select>
-                            <select name="finMinute<?php echo $k; ?>" id="finMinute">
+                            <select name="finMinute<?php echo $k; ?>" id="finMinute" title="Date fin (minute)">
                                 <?php echo modif_liste_minute("55"); ?>
                             </select>
                         </p>

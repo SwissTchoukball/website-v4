@@ -7,7 +7,7 @@ $entete = 0;
 while ($donnees = mysql_fetch_array($retour)) {
     // affiche le texte
     echo "<p>";
-    echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+    afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
     echo "</p>";
 }
 ?>

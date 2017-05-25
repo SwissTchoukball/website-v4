@@ -10,4 +10,3 @@ $recordsetCommission = mysql_query($requeteSQLCommission);
 while ($recordCommission = mysql_fetch_array($recordsetCommission)) {
     showCommission($recordCommission);
 }
-?>

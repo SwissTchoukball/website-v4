@@ -4,11 +4,11 @@ $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '1' ORD
 while ($donnees = mysql_fetch_array($retour)) {
     if ($donnees['paragrapheNum'] == 0 || $donnees['paragrapheNum'] == 2 || $donnees['paragrapheNum'] == 4) {
         echo "<h2>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</h2>";
     } else {
         echo "<p>";
-        echo afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
+        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
         echo "</p>";
     }
     if ($donnees['paragrapheNum'] == 1) {
@@ -24,4 +24,3 @@ while ($donnees = mysql_fetch_array($retour)) {
         echo "<p align='center'><img src='" . VAR_IMAGE_RELGES_FAUTE_2 . "'></p>";
     }
 }
-?>

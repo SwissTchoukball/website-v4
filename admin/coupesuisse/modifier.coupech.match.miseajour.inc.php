@@ -197,6 +197,3 @@ while ($Tour > 0) {
         $prochainTour = $Tour / 2;
     }
 } // fin boucle tant que tour > 0
-
-
-?>

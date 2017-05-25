@@ -45,14 +45,14 @@
         </td>
         <td>
             <?php
-            echo $clubPhone != "" ? "<img src='admin/images/telPrive.png' alt='Numéro de téléphone'/> " . $clubPhone . "<br />" : "";
-            echo $clubEmail != "" ? "<img src='admin/images/email.png' alt='Adresse e-mail'/> <a href='mailto:" . $clubEmail . "'>" . $clubEmail . "</a><br />" : "";
-            echo $clubURL != "" ? "<img src='admin/images/globe.png' alt='Adresse e-mail'/> <a href='" . addhttp($clubURL) . "'>" . $clubURL . "</a><br />" : "";
+            echo $clubPhone != "" ? "<img src='/admin/images/telPrive.png' alt='Numéro de téléphone'/> " . $clubPhone . "<br />" : "";
+            echo $clubEmail != "" ? "<img src='/admin/images/email.png' alt='Adresse e-mail'/> <a href='mailto:" . $clubEmail . "'>" . $clubEmail . "</a><br />" : "";
+            echo $clubURL != "" ? "<img src='/admin/images/globe.png' alt='Adresse e-mail'/> <a href='" . addhttp($clubURL) . "'>" . $clubURL . "</a><br />" : "";
             ?>
         </td>
         <td class="action">
             <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&edit=<?php echo $clubID; ?>"><img
-                    src="admin/images/modifier.png" alt="Modifier un club"/></a>
+                    src="/admin/images/modifier.png" alt="Modifier un club"/></a>
         </td>
         </tr>
         <?php

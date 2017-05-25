@@ -48,7 +48,7 @@
         $retour = mysql_query($requete);
         while ($donnees = mysql_fetch_array($retour)) {
             echo "<tr>";
-            echo "<td class='jourEntierJour' style='background-color: #" . $donnees['couleur'] . ";'>";
+            echo "<td class='jourEntierJour' style='background-color: " . $donnees['couleur'] . ";'>";
             echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white;'>" . $donnees['titre'] . "</span></a>";
             echo "</td>";
             echo "</tr>";
@@ -78,7 +78,7 @@
             $requete = "SELECT Calendrier_Evenements.id AS idEvent, titre, description, lieu, jourEntier, couleur, nom, heureDebut, heureFin FROM Calendrier_Evenements, Calendrier_Categories WHERE Calendrier_Evenements.idCategorie=Calendrier_Categories.id AND dateDebut<='" . $annee . "-" . $mois . "-" . $jour . "' AND dateFin>='" . $annee . "-" . $mois . "-" . $jour . "' AND heureDebut<='" . $heure . ":" . $minute . ":00' AND heureFin>'" . $heure . ":" . $minute . ":00' AND jourEntier=0 AND visible=1 ORDER BY jourEntier DESC, heureDebut, titre";
             $retour = mysql_query($requete);
             while ($donnees = mysql_fetch_array($retour)) {
-                echo "<span style='color: #" . $donnees['couleur'] . "'>" . $donnees['titre'] . "</span><br />";
+                echo "<span style='color: " . $donnees['couleur'] . "'>" . $donnees['titre'] . "</span><br />";
             }
             echo "</div>";
             if ($minute != 30) {

@@ -8,4 +8,3 @@ if (isset($_GET['modAnnee'])) {
 } else {
     include('modifier.coupech.match.etape1.inc.php');
 }
-?>
