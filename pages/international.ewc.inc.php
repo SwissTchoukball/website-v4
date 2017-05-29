@@ -16,6 +16,21 @@ while ($donnees = mysql_fetch_array($retour)) {
 
 <p style="clear:right;"></p>
 <h2>Résultats suisses</h2>
+<h3 class="alt">Erfurt (DE) 2017</h3>
+<table class="classementTourFinal">
+    <tr>
+        <th>Position</th>
+        <th>Équipe</th>
+    </tr>
+    <tr>
+        <td>2ème</td>
+        <td>Meyrin Panthers</td>
+    </tr>
+    <tr>
+        <td>5ème</td>
+        <td>Val-de-Ruz Flyers</td>
+    </tr>
+</table>
 <h3 class="alt">Ryb&nacute;ik (PL) 2016</h3>
 <table class="classementTourFinal">
     <tr>
