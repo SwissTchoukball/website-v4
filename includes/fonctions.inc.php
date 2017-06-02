@@ -1052,12 +1052,12 @@ function afficherRang(
     $nbMatchGagnantTourFinal,
     $rang
 ) {
-    $rangAffiche = 'indéfini';
+    $rangAffiche = '-';
     if ($idTour == 2000 && ($typeClassement == 1 || $typeClassement == 2)) {
         if ($nbMatchGagne == $nbMatchGagnantPromoReleg) {
-            $rangAffiche = "oui";
+            $rangAffiche = "Promu";
         } elseif ($nbMatchPerdu == $nbMatchGagnantPromoReleg) {
-            $rangAffiche = "non";
+            $rangAffiche = "Relégué";
         }
     } elseif ($idTour == 4000) {
         if ($nbMatchGagne == $nbMatchGagnantTourFinal) {
