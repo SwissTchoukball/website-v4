@@ -398,8 +398,8 @@
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
                         echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                                 $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $position) . "</td>";
-                        echo "</tr>";
                         echo "<td>" . $equipe . "</td>";
+                        echo "</tr>";
 
                         $i++;
                     }
