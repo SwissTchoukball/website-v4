@@ -207,7 +207,7 @@
 				 	ON cc.annee = c.annee
 				 	AND cc.idClub = ccLastYear.idClub
 				 WHERE c.annee >= '" . $anneePassee . "'
-				 	AND c.annee <= '" . date('Y') . "'
+				 	AND c.annee < '" . date('Y') . "'
 				 ORDER BY c.annee DESC";
             //echo $requeteEtatCotisation;
 
