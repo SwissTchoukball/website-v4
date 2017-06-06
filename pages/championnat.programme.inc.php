@@ -171,7 +171,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
 				WHERE (dateDebut>='" . $seasonStart . "' OR dateFin>='" . $seasonStart . "') " . $finAffichage . " " . $recherche . "
 				ORDER BY dateDebut, heureDebut";
 
-    echo $requete;
+    // echo $requete;
     $retour = mysql_query($requete);
     if (!$retour) {
         printErrorMessage("Erreur lors de la récupération de la liste des matchs.<br />Message : " . mysql_error() . "<br />Requête : " . $requete);
