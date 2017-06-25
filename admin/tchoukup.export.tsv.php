@@ -29,6 +29,7 @@ $queries['envois-individuels'] =
            pa.`descriptionPaysFr`
     FROM `DBDPersonne` p, `DBDCivilite` c, `DBDPays` pa, `ClubsFstb` cl
     WHERE `idCHTB` = 2
+    AND p.`dateOfDeath` IS NULL
     AND p.`idCivilite` = c.`idCivilite`
     AND p.`idPays` = pa.`idPays`
     AND p.`idClub` = cl.`nbIdClub`
@@ -62,6 +63,7 @@ $queries['nb-tchoukup-colis-par-club'] =
             dest.`ville`
     FROM `DBDPersonne` membres, `ClubsFstb` c, `DBDPersonne` dest
     WHERE membres.`idCHTB` = 2
+    AND membres.`dateOfDeath` IS NULL
     AND membres.`idClub` = c.`nbIdClub`
     AND dest.`idDbdPersonne` = c.`idPresident`
     AND c.`statusId` = 1 -- Membre d'un club actif
