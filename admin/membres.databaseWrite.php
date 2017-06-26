@@ -306,9 +306,9 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             //Envoi d'un e-mail pour avertir le webmaster
             $destinataireMail = "webmaster@tchoukball.ch";
             $objectMail = "Auto: Demande de transfert No " . $requestID;
-            $messageMail = $_SESSION['__prenom__'] . " " . $_SESSION['__nom__'] . " demande un transfert pour <strong>" . htmlentities($_POST['memberName']) . "</strong>.<br /><br />";
-            $messageMail .= "Club d'origine : <strong>" . htmlentities($_POST['currentClubName']) . "</strong><br /><br />";
-            $messageMail .= "Nouveau club : <strong>" . htmlentities($_POST['newClubName']) . "</strong><br /><br />";
+            $messageMail = $_SESSION['__prenom__'] . " " . $_SESSION['__nom__'] . " demande un transfert pour <strong>" . htmlentities($_POST['memberName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong>.<br /><br />";
+            $messageMail .= "Club d'origine : <strong>" . htmlentities($_POST['currentClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
+            $messageMail .= "Nouveau club : <strong>" . htmlentities($_POST['newClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
             $from = "From:no-reply@tchoukball.ch\n";
             $from .= "MIME-version: 1.0\n";
             $from .= "Content-type: text/html; charset= iso-8859-1\n";
