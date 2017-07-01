@@ -8,6 +8,9 @@ $idJuniors = 6;
 $idSoutiens = 5;
 $idPassifs = 4;
 $idVIP = 23;
+
+$nbMembersToGetAFreeVIPSubscription = 20;
+
 $idStatutsACompter = array($idActifs, $idJuniors, $idSoutiens, $idPassifs, $idVIP);
 $clubsRequestPart_nbMembresParStatut = "";
 $statutsRequestPart_WHERE = "WHERE ";
@@ -60,13 +63,25 @@ while ($statusData = mysql_fetch_assoc($statutsResult)) {
 <?php
 while ($club = mysql_fetch_assoc($clubsResult)) {
     $totalFee = 0;
+    $VIPFeeAmount = 0;
     if ($club['statusId'] == 1) {
         foreach ($feeAmountByStatus as $statusId => $feeAmount) {
             $totalFee += $feeAmount * $club['nbMembresParStatut' . "[$statusId]"];
+            if ($statusId == $idVIP) {
+                $VIPFeeAmount = $feeAmount;
+            }
         }
     } else {
         $totalFee += $club['fixedFeeAmount'];
     }
+    // Computing the number of offered VIP subscriptions and reducing the fee accordingly.
+    $maxNbOfferedVISubscriptions = floor(($club['nbMembresParStatut' . "[$idActifs]"] + $club['nbMembresParStatut' . "[$idJuniors]"]) / $nbMembersToGetAFreeVIPSubscription + 1);
+    $nbOfferedVISubscriptions = min($maxNbOfferedVISubscriptions, $club['nbMembresParStatut' . "[$idVIP]"]);
+    $VIPReduction = $nbOfferedVISubscriptions * (-$VIPFeeAmount);
+    $totalFee += $VIPReduction;
+
+//    echo $club['name'] . ': ' . $totalFee . '<br>';
+
     $saveClubFeeQuery =
         "INSERT INTO Cotisations_Clubs (
             annee,
