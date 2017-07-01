@@ -79,7 +79,7 @@ while ($club = mysql_fetch_assoc($clubsResult)) {
             nbMembresVIP
          )
          VALUES (
-            '" . date('Y') . "',
+            '" . (date('Y') - 1) . "',
             " . $club['idClub'] . ",
             " . $totalFee . ",
             " . $club['nbMembresParStatut[3]'] . ",
