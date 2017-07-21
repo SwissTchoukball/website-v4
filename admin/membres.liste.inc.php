@@ -3,8 +3,8 @@
 //Requiert les variables $showDetails, $clubToShowId (can be null) et $nbMembersPerPage (can be null)
 
 //Handling search
-if (isset($_POST['keywords'])) {
-    $keywords = mysql_real_escape_string($_POST['keywords']);
+if (isset($_GET['keywords'])) {
+    $keywords = mysql_real_escape_string($_GET['keywords']);
 
     // spliting into tokens
     $tok = strtok($keywords, " ");
@@ -102,9 +102,10 @@ if ($showPagination) {
 
 //Search form
 ?>
-<form class="st-form st-form--oneline" method="post"
-      action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details">
+<form class="st-form st-form--oneline" method="get">
     <input type="search" name="keywords" placeholder="Recherche"/>
+    <input type="hidden" name="menuselection" value="<?php echo $menuselection ?>"/>
+    <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
     <input type="submit" class="button button--primary" value="Rechercher"/>
 </form>
 <?php
