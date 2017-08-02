@@ -92,7 +92,7 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
 
 /* Retrieving transfers data */
 $transferRequestsQuery = "
-  SELECT rcc.id, rcc.accepted, rcc.datetime, u.username,
+  SELECT rcc.id, rcc.accepted, UNIX_TIMESTAMP(rcc.datetime) AS timestamp, u.username,
   p.idDbdPersonne AS idPerson, p.nom AS lastName, p.prenom AS firstName, p.raisonSociale AS companyName,
   co.nbIdClub AS idClubOrigin, co.club AS nameClubOrigin, ct.nbIdClub AS idClubTarget, ct.club AS nameClubTarget
   FROM DBDRequetesChangementClub rcc, DBDPersonne p, ClubsFstb co, ClubsFstb ct, Personne u
@@ -106,6 +106,7 @@ $transferRequestsQuery = "
 <h3>Demandes de transfert</h3>
 <table class="st-table st-table--spaced">
     <tr>
+        <th>Date</th>
         <th>Auteur</th>
         <th>Membre</th>
         <th>Club d'origine</th>
@@ -116,6 +117,7 @@ $transferRequestsQuery = "
     if ($transferRequestsResource = mysql_query($transferRequestsQuery)) {
         while ($transfertRequest = mysql_fetch_assoc($transferRequestsResource)) {
             echo '<tr>';
+            echo '<td>' . date('d.m.y H:i', $transfertRequest['timestamp']) . '</td>';
             echo '<td>' . $transfertRequest['username'] . '</td>';
             echo '<td>' . $transfertRequest['firstName'] . ' ' . $transfertRequest['lastName'] . '</td>';
             echo '<td>' . $transfertRequest['nameClubOrigin'] . '</td>';
