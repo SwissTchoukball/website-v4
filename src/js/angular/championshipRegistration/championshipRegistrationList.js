@@ -17,6 +17,8 @@ angular
 
                 var $ctrl = this;
 
+                $ctrl.hasNoAuthorization = false;
+
                 var gotClub = backendService.getClub($ctrl.clubId)
                     .then(function(club) {
                         $ctrl.club = club;
@@ -67,20 +69,26 @@ angular
                 };
 
                 // We load the categories by season only when the club and its teams are loaded.
-                $q.all([gotClub, gotClubTeams]).then(function() {
-                    backendService.getOpenEditions()
-                        .then(function(openEditions) {
-                            $ctrl.openEditions = openEditions;
-                            // We take only the form where a club is allowed to register a team
-                            $ctrl.openEditions = filterAllowedEditions($ctrl.openEditions);
+                $q.all([gotClub, gotClubTeams])
+                    .then(function() {
+                        backendService.getOpenEditions()
+                            .then(function(openEditions) {
+                                $ctrl.openEditions = openEditions;
+                                // We take only the form where a club is allowed to register a team
+                                $ctrl.openEditions = filterAllowedEditions($ctrl.openEditions);
 
-                            //instantiating the date objects
-                            $ctrl.openEditions = $ctrl.openEditions.map(function(edition) {
-                                edition.registrationDeadline = new Date(edition.registrationDeadline);
-                                edition.paymentDeadline = new Date(edition.paymentDeadline);
-                                return edition;
+                                //instantiating the date objects
+                                $ctrl.openEditions = $ctrl.openEditions.map(function(edition) {
+                                    edition.registrationDeadline = new Date(edition.registrationDeadline);
+                                    edition.paymentDeadline = new Date(edition.paymentDeadline);
+                                    return edition;
+                                });
                             });
-                        });
+                    })
+                    .catch(function(error) {
+                        if (error.status === 403) {
+                            $ctrl.hasNoAuthorization = true;
+                        }
                     });
 
                 // The four methods below are a BAD way of doing routing.

@@ -1,28 +1,33 @@
 <div ng-if="!$ctrl.selectedEdition && !$ctrl.selectedTeam">
     <h2>{{$ctrl.club.name}}</h2>
-    <!-- Open registrations forms -->
-    <h3>Formulaires d'inscriptions</h3>
-    <ul>
-        <li ng-repeat="edition in $ctrl.openEditions">
-            <span class="asLink"
-                  ng-click="$ctrl.selectEdition(edition)">
-                Saison {{edition.season.name}}, {{edition.category.name}}
-            </span>
-        </li>
-    </ul>
+    <p ng-if="$ctrl.hasNoAuthorization" class="notification notification--error">Vous n'avez pas les droits nécessaire pour inscrire une équipe</p>
+    <div ng-if="!$ctrl.hasNoAuthorization">
+        <!-- Open registrations forms -->
+        <h3>Formulaires d'inscriptions</h3>
+        <ul>
+            <li ng-repeat="edition in $ctrl.openEditions">
+                <span class="asLink"
+                      ng-click="$ctrl.selectEdition(edition)">
+                    Saison {{edition.season.name}}, {{edition.category.name}}
+                </span>
+            </li>
+        </ul>
+        <p ng-if="$ctrl.openEditions.length <= 0" class="notification">Aucun formulaire d'inscription disponible</p>
 
-    <!-- Registered teams -->
-    <h3>Équipes inscrites</h3>
-    <ul>
-        <li ng-repeat="team in $ctrl.teams">
-            <span class="asLink"
-                  ng-click="$ctrl.selectTeam(team.id)">
-                Saison {{team.season.name}}, {{team.category.name}} : {{team.name}}
-            </span>
-            <span class="label label--positive" ng-if="team.feePaymentDate">Payé</span>
-            <span class="label label--negative" ng-if="!team.feePaymentDate">Non-payé</span>
-        </li>
-    </ul>
+        <!-- Registered teams -->
+        <h3>Équipes inscrites</h3>
+        <ul>
+            <li ng-repeat="team in $ctrl.teams">
+                <span class="asLink"
+                      ng-click="$ctrl.selectTeam(team.id)">
+                    Saison {{team.season.name}}, {{team.category.name}} : {{team.name}}
+                </span>
+                <span class="label label--positive" ng-if="team.feePaymentDate">Payé</span>
+                <span class="label label--negative" ng-if="!team.feePaymentDate">Non-payé</span>
+            </li>
+        </ul>
+        <p ng-if="$ctrl.teams.length <= 0" class="notification">Aucune équipe inscrite</p>
+    </div>
 </div>
 
 

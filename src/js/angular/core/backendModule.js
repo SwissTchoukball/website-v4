@@ -46,7 +46,7 @@
                     }).then(function(response) {
                         deferred.resolve(response.data);
                     }, function(response) {
-                        deferred.reject(response.data);
+                        deferred.reject(response);
                     });
 
                     return deferred.promise;
