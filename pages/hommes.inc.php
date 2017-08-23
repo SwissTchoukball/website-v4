@@ -32,6 +32,3 @@ $afficherNumero = false;
     }
     ?>
 </div>
-
-<div class="acceder-bdd-fitb-es"><a href="http://www.fitbcompetitions.org"
-                                    target="_blank"><?php echo VAR_LANG_ACCES_FITB_BDD; ?></a></div>
