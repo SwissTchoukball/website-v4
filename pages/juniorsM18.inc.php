@@ -28,3 +28,6 @@ $afficherNumero = false;
     }
     ?>
 </div>
+
+<?php
+showTeamCoaches(3);

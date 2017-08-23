@@ -27,3 +27,6 @@ $afficherNumero = false;
     }
     ?>
 </div>
+
+<?php
+showTeamCoaches(4);

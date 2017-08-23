@@ -142,7 +142,7 @@ function showPerson($person, $hidePicture = false)
     echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
     if ($person["emailFSTB"] != '') {
         $email = $person["emailFSTB"];
-    } elseif ($person["email"] != '') {
+    } else if ($person["email"] != '') {
         $email = $person["email"];
     } else {
         $email = '';
@@ -594,6 +594,32 @@ function showCommitteeMember($committeeMember)
     echo "</div>";
 }
 
+function showTeamCoaches($teamId)
+{
+    $query = "SELECT p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville,
+              p.emailFSTB, p.email, p.telPrive, p.portable, p.idSexe,
+              cnf.titreH" . $_SESSION["__langue__"] . " AS maleTitle, 
+              cnf.titreF" . $_SESSION["__langue__"] . " AS femaleTitle
+              FROM CadreNational_Membres cnm
+              LEFT OUTER JOIN CadreNational_Fonctions cnf ON cnf.id = cnm.idFonction
+              LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = cnm.idPersonne
+              WHERE cnm.idEquipe = " . $teamId . "
+              AND (cnm.idFonction = 1 || cnm.idFonction = 2)
+              AND (ISNULL(cnm.dateFin) OR cnm.dateFin >= CURDATE())";
+    if ($result = mysql_query($query)) {
+        while($coach = mysql_fetch_assoc($result)) {
+            $title = $coach['femaleTitle'];
+            if ($coach['idSexe'] == 2) {
+                $title = $coach['maleTitle'];
+            }
+            echo '<h2>' . $title . '</h2>';
+            showPerson($coach);
+        }
+    } else {
+        printErrorMessage("Erreur lors de la récupération des responsables");
+    }
+}
+
 function showCommission($commission)
 {
     echo "<div class='two-col-card' id='c" . $commission["id"] . "'>";
@@ -862,7 +888,7 @@ function sizeNewsManager($text, $nbchar, $newsId)
 {
     if (strlen($text) > $nbchar) {
         return substr($text, 0,
-            $nbchar) . "... " . "<p class='lireSuiteArticle'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?menuselection=1&smenuselection=1&newsIdSelection=" . $newsId . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
+                $nbchar) . "... " . "<p class='lireSuiteArticle'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?menuselection=1&smenuselection=1&newsIdSelection=" . $newsId . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
     }
     return $text;
 }
@@ -1056,13 +1082,13 @@ function afficherRang(
     if ($idTour == 2000 && ($typeClassement == 1 || $typeClassement == 2)) {
         if ($nbMatchGagne == $nbMatchGagnantPromoReleg) {
             $rangAffiche = "Promu";
-        } elseif ($nbMatchPerdu == $nbMatchGagnantPromoReleg) {
+        } else if ($nbMatchPerdu == $nbMatchGagnantPromoReleg) {
             $rangAffiche = "Relégué";
         }
-    } elseif ($idTour == 4000) {
+    } else if ($idTour == 4000) {
         if ($nbMatchGagne == $nbMatchGagnantTourFinal) {
             $rangAffiche = "Passe en finale";
-        } elseif ($nbMatchPerdu == $nbMatchGagnantTourFinal) {
+        } else if ($nbMatchPerdu == $nbMatchGagnantTourFinal) {
             $rangAffiche = "Passe en petite finale";
         }
     } else {
