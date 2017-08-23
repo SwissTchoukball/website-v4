@@ -119,7 +119,7 @@ function afficherPersonne($record, $mode = "FULL")
     }
 }
 
-function showPerson($person, $hidePicture = false)
+function showPerson($person, $hidePicture = false, $hideLanguages = false)
 {
     echo '<div class="person-panel">';
     // Affichage de la photo
@@ -153,18 +153,21 @@ function showPerson($person, $hidePicture = false)
     echo $person['portable'] != '' ? "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
 
     // Affichage des langues parlées
-    $spokenLanguagesQuery = "SELECT l.idLangue, l.descriptionLangue" . $_SESSION['__langue__'] . " as descriptionLangue
-                             FROM DBDLangue l, RegroupementLangueParle rlp
-                             WHERE l.idLangue = rlp.idLangue
-                             AND rlp.idPersonne = '" . $person['idDbdPersonne'] . "'";
-    $spokenLanguagesData = mysql_query($spokenLanguagesQuery);
-    if (mysql_num_rows($spokenLanguagesData) > 0) {
-        echo '<div class="person-panel__spoken-languages">';
-        while ($spokenLanguages = mysql_fetch_array($spokenLanguagesData)) {
-            echo "<img src='" . VAR_IMAGE_LANGUE . $spokenLanguages["idLangue"] . ".png' alt='" . $spokenLanguages['descriptionLangue'] . "' /> ";
+    if (!$hideLanguages) {
+        $spokenLanguagesQuery = "SELECT l.idLangue, l.descriptionLangue" . $_SESSION['__langue__'] . " as descriptionLangue
+                                 FROM DBDLangue l, RegroupementLangueParle rlp
+                                 WHERE l.idLangue = rlp.idLangue
+                                 AND rlp.idPersonne = '" . $person['idDbdPersonne'] . "'";
+        $spokenLanguagesData = mysql_query($spokenLanguagesQuery);
+        if (mysql_num_rows($spokenLanguagesData) > 0) {
+            echo '<div class="person-panel__spoken-languages">';
+            while ($spokenLanguages = mysql_fetch_array($spokenLanguagesData)) {
+                echo "<img src='" . VAR_IMAGE_LANGUE . $spokenLanguages["idLangue"] . ".png' alt='" . $spokenLanguages['descriptionLangue'] . "' /> ";
+            }
+            echo '</div>';
         }
-        echo '</div>';
     }
+    echo '<div style="clear: both;"></div>';
     echo '</div>';
 }
 
@@ -613,7 +616,7 @@ function showTeamCoaches($teamId)
                 $title = $coach['maleTitle'];
             }
             echo '<h2>' . $title . '</h2>';
-            showPerson($coach);
+            showPerson($coach, false, true);
         }
     } else {
         printErrorMessage("Erreur lors de la récupération des responsables");
