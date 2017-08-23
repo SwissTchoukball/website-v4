@@ -44,9 +44,10 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
         }
     }
     echo $record["club"] . "<br />";
-    if ($record["idFITBMatchDB"] != 0) {
-        echo "<a href='http://www.fitbcompetitions.org/index.php?detail=player&id=" . $record["idFITBMatchDB"] . "' target='_blank'>Fiche FITB</a><br />";
-    }
+    // Hiding the link to the FITB file until they hopefully put it back one day...
+//    if ($record["idFITBMatchDB"] != 0) {
+//        echo "<a href='http://www.fitbcompetitions.org/index.php?detail=player&id=" . $record["idFITBMatchDB"] . "' target='_blank'>Fiche FITB</a><br />";
+//    }
     echo "</div>";
 
     echo "</div>";
