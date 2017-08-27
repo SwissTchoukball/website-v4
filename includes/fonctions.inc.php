@@ -97,7 +97,7 @@ function afficherAvecEncryptageEmail($text)
     echo encryptageEmail($text) . "<br />";
 }
 
-function showPerson($person, $hidePicture = false, $hideLanguages = false)
+function showPerson($person, $hidePicture = false, $hidePostalAddress = false, $hideLanguages = false)
 {
     echo '<div class="person-panel">';
     // Affichage de la photo
@@ -115,9 +115,13 @@ function showPerson($person, $hidePicture = false, $hideLanguages = false)
 
     // Affichage des coordonnées
     echo '<span class="person-panel__name">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
-    echo $person["adresse"] . "<br>";
-    echo $person["cp"] != '' ? $person["cp"] . "<br>" : '';
-    echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
+
+    if ($hidePostalAddress) {
+        echo $person["adresse"] . "<br>";
+        echo $person["cp"] != '' ? $person["cp"] . "<br>" : '';
+        echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
+    }
+
     if ($person["emailFSTB"] != '') {
         $email = $person["emailFSTB"];
     } else if ($person["email"] != '') {
@@ -125,6 +129,7 @@ function showPerson($person, $hidePicture = false, $hideLanguages = false)
     } else {
         $email = '';
     }
+
     echo email($email);
     echo "<br />";
     echo $person['telPrive'] != '' ? "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
@@ -594,7 +599,7 @@ function showTeamCoaches($teamId)
                 $title = $coach['maleTitle'];
             }
             echo '<h2>' . $title . '</h2>';
-            showPerson($coach, false, true);
+            showPerson($coach, false, true, true);
         }
     } else {
         printErrorMessage("Erreur lors de la récupération des responsables");
