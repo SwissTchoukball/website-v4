@@ -97,28 +97,6 @@ function afficherAvecEncryptageEmail($text)
     echo encryptageEmail($text) . "<br />";
 }
 
-
-// record d'une personne de la table BD
-// mode : "FULL" : nom, prenom, adresse,npa ville, email, tel, natel
-function afficherPersonne($record, $mode = "FULL")
-{
-    if ($mode == "FULL") {
-        echo stripslashes($record["prenom"]) . "&nbsp;" . stripslashes($record["nom"]) . "<br />";
-        echo $record["adresse"] . "<br>";
-        echo $record["numPostal"] . "&nbsp;" . $record["ville"] . "<br /><br />";
-        if ($record["email"] != "") {
-            echo email($record["email"]);
-            echo "<br />";
-        }
-        if ($record["telephone"] != "") {
-            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephone"]) . "'>" . $record["telephone"] . "</a><br />";
-        }
-        if ($record["portable"] != "") {
-            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($record["portable"]) . "'>" . $record["portable"] . "</a><br />";
-        }
-    }
-}
-
 function showPerson($person, $hidePicture = false, $hideLanguages = false)
 {
     echo '<div class="person-panel">';
