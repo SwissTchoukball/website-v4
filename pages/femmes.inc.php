@@ -29,5 +29,4 @@ $afficherNumero = false;
 </div>
 
 <?php
-showTeamCoaches(2);
 showCommissionHead(9);
