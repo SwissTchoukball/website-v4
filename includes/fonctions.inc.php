@@ -116,7 +116,7 @@ function showPerson($person, $hidePicture = false, $hidePostalAddress = false, $
     // Affichage des coordonnées
     echo '<span class="person-panel__name">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
 
-    if ($hidePostalAddress) {
+    if (!$hidePostalAddress) {
         echo $person["adresse"] . "<br>";
         echo $person["cp"] != '' ? $person["cp"] . "<br>" : '';
         echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
