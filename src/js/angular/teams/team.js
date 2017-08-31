@@ -70,6 +70,28 @@ angular
 
                 $ctrl.updateUnpaidLicensesCost();
 
+                $ctrl.removeLicense = function(player) {
+                    if (window.confirm(
+                        'Voulez-vous vraiment supprimer ' +
+                        player.firstName + ' ' + player.lastName +
+                        ' de votre équipe ?')) {
+                        backendService.deleteChampionshipLicense(player.licenseId)
+                            .then(function() {
+                                $ctrl._removePlayer(player.id);
+                                $ctrl.updateUnpaidLicensesCost();
+                            }, function() {
+                                window.alert('Erreur lors de la suppression du joueur');
+                            });
+
+                    }
+                };
+
+                $ctrl._removePlayer = function(playerId) {
+                    $ctrl.players = $ctrl.players.filter(function(player) {
+                        return player.id !== playerId;
+                    });
+                };
+
             }],
         templateUrl: 'src/js/angular/teams/team.tpl.html'
     });

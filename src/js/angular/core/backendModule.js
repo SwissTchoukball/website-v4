@@ -72,6 +72,26 @@
                     return deferred.promise;
                 };
 
+                var sendDeleteRequest = function(url) {
+                    var deferred = $q.defer();
+                    var headers = {
+                        'Accept-Language': lang
+                    };
+                    // Add Authorization headers if user is connected
+                    if (basicAuth) {
+                        headers['Authorization'] = basicAuth; // jshint ignore: line
+                    }
+                    $http.delete(apiUrl + url, {
+                        headers: headers
+                    }).then(function(response) {
+                        deferred.resolve(response.data);
+                    }, function(response) {
+                        deferred.reject(response);
+                    });
+
+                    return deferred.promise;
+                };
+
                 /*--------------*
                  * GET requests *
                  *--------------*/
@@ -119,6 +139,15 @@
 
                 BackendService.prototype.postChampionshipPlayersRegistration = function(registration) {
                     return sendPostRequest('/championship/register-players', registration);
+                };
+
+
+                /*---------------*
+                 * DELETE requests *
+                 *---------------*/
+
+                BackendService.prototype.deleteChampionshipLicense = function(licenseId) {
+                    return sendDeleteRequest('/championship/license/' + licenseId);
                 };
 
 

@@ -36,6 +36,12 @@
         <span ng-if="player.licensePaymentDate !== undefined && !player.suspended">
             <span class="label label--positive" ng-if="player.licensePaymentDate">Licencié</span>
             <span class="label label--negative" ng-if="!player.licensePaymentDate">Non-licencié</span>
+            <span class="emoji-button"
+                  ng-click="$ctrl.removeLicense(player)"
+                  ng-if="!player.licensePaymentDate"
+                  title="Supprimer le joueur">
+                &#x274C;
+            </span>
         </span>
         <span class="label label--negative" ng-if="player.suspended">Suspendu</span>
     </li>

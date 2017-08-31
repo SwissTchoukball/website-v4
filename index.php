@@ -108,8 +108,8 @@ if ($_SESSION["__userLevel__"] < 100) {
 }
 ?>
 
-<script src="/build/lib.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
-<script src="/build/app.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
+<script src="/build/lib.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>" charset="utf-8"></script>
+<script src="/build/app.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>" charset="utf-8"></script>
 <script src="/scripts/before-body-closing.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
 </body>
 </html>
