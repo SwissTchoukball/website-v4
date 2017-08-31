@@ -4,10 +4,18 @@
   left: -20px;
   border: none;
   margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .joueur-es {
   margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+  width: 415px;
+  min-height: 280px;
+  background: radial-gradient(white, lightgrey);
 }
 
 .joueur-es > * {
@@ -18,25 +26,47 @@
 }
 
 .photo-joueur-es {
-  width: 425px;
-  overflow: hidden;
-  display: inline-block;
+  width: 100%;
 }
 
 .infos-joueur-es {
   padding: 10px;
   display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 415px;
+  box-sizing: border-box;
 }
 
 .nom-joueur-es {
-  font-size: 27px;
+  font-size: 2.4em;
   font-weight: bold;
 }
 
 .numero-joueur-es {
   color: @colorPrimary;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 3em;
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.titre-joueur-es {
+  font-size: 1.6em;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: white;
+  text-shadow: 0 0 4px black;
+}
+
+.club-joueur-es {
+  font-size: 1.6em;
 }
 
 .acceder-bdd-fitb-es {

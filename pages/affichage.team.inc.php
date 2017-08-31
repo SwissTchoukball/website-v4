@@ -18,16 +18,14 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
     if ($record["idFonction"] == 1) {
         $extensionPhotos = "_coach" . $extensionPhotos;
     }
-    echo "<div class='photo-joueur-es'>";
     $nomFichierPhoto = nomPhotoValide($record["nom"], $record["prenom"], $extensionPhotos, "jpg");
     // le fichier existe ?
     if (is_file($_SERVER["DOCUMENT_ROOT"] . $nomFichierPhoto)) {
-        echo "<img src='" . $nomFichierPhoto . "' alt='Photo de " . $record["prenom"] . " " . $record["nom"] . "'>";
+        echo "<img class='photo-joueur-es' src='" . $nomFichierPhoto . "' alt='Photo de " . $record["prenom"] . " " . $record["nom"] . "'>";
 
     } else {
         echo '<!-- Fichier ' . $_ENV["DOCUMENT_ROOT"] . $nomFichierPhoto . ' inexistant -->';
     }
-    echo "</div>";
 
     echo "<div class='infos-joueur-es'>";
     echo "<div class='nom-joueur-es'>" . $record["prenom"] . " " . $record["nom"] . "</div>";
@@ -36,6 +34,17 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
         echo $record['numero'];
     }
     echo "</div>";
+
+    echo "<div class='club-joueur-es'>";
+    echo $record["club"] . "<br />";
+    // Hiding the link to the FITB file until they hopefully put it back one day...
+//    if ($record["idFITBMatchDB"] != 0) {
+//        echo "<a href='http://www.fitbcompetitions.org/index.php?detail=player&id=" . $record["idFITBMatchDB"] . "' target='_blank'>Fiche FITB</a><br />";
+//    }
+    echo "</div>";
+    echo "</div>";
+
+    echo "<div class='titre-joueur-es'>";
     if ($record['idFonction'] != 4) {
         if ($record['idSexe'] == 3) {
             echo $record['titreF'] . "<br />";
@@ -43,11 +52,6 @@ function afficherPersonneTeam($record, $extensionPhotos, $afficherNumero)
             echo $record['titreH'] . "<br />";
         }
     }
-    echo $record["club"] . "<br />";
-    // Hiding the link to the FITB file until they hopefully put it back one day...
-//    if ($record["idFITBMatchDB"] != 0) {
-//        echo "<a href='http://www.fitbcompetitions.org/index.php?detail=player&id=" . $record["idFITBMatchDB"] . "' target='_blank'>Fiche FITB</a><br />";
-//    }
     echo "</div>";
 
     echo "</div>";
