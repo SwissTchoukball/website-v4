@@ -41,8 +41,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
 
     //Vérification nom et prénom non vide
     $noName = false;
-    $lastname = ucwordspecific(strtolower(validiteInsertionTextBd($_POST['lastname'])), '-');
-    $firstname = ucwordspecific(strtolower(validiteInsertionTextBd($_POST['firstname'])), '-');
+    $lastname = validiteInsertionTextBd(titleCase($_POST['lastname']));
+    $firstname = validiteInsertionTextBd(titleCase($_POST['firstname']));
     $companyName = validiteInsertionTextBd($_POST['companyName']);
     if ($lastname == "" && $firstname == "" && $companyName != "") {
         //C'est ok de ne pas mettre de nom et prénom si raison sociale définie.
