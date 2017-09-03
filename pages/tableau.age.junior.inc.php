@@ -1,24 +1,18 @@
 <?php
-$annee = annee(date_actuelle());
+function showTableYear($year) {
 
-
-$i = 1;
-while ($i < 3) {
-    if ($i == 2) {
-        $annee++;
-    }
     echo "<p>";
     echo "<h3>";
     echo "Saison ";
-    echo $annee - 1;
+    echo $year;
     echo " - ";
-    echo $annee;
+    echo $year + 1;
     echo "</h3>";
     ?>
     <table class="tableauAgeJunior">
         <tr>
             <th rowspan="2"><?php echo VAR_LANG_ANNEE_DE_NAISSANCE; ?></th>
-            <th rowspan="2"><?php echo VAR_LANG_AGE_EN . "<br />" . $annee; ?></th>
+            <th rowspan="2"><?php echo VAR_LANG_AGE_EN . "<br />" . $year; ?></th>
             <th colspan="3"><?php echo VAR_LANG_CATEGORIES; ?></th>
         </tr>
         <tr>
@@ -27,96 +21,98 @@ while ($i < 3) {
             <th><?php echo VAR_LANG_ASSOCIATION_NAME; ?></th>
         </tr>
         <tr>
-            <td><?php echo $annee - 21; ?> et moins</td>
+            <td><?php echo $year - 21; ?> et moins</td>
             <td>21+</td>
-            <td rowspan="3">Adultes</td>
+            <td rowspan="4">Adultes</td>
             <td>-</td>
-            <td>Membres actifs</td>
+            <td rowspan="2">Membres actifs</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 20; ?></td>
+            <td><?php echo $year - 20; ?></td>
             <td>20</td>
             <td rowspan="12">Sport des jeunes</td>
-            <td rowspan="20">Membres juniors</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 19; ?></td>
+            <td><?php echo $year - 19; ?></td>
             <td>19</td>
+            <td rowspan="19">Membres juniors</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 18; ?></td>
+            <td><?php echo $year - 18; ?></td>
             <td>18</td>
+        </tr>
+        <tr>
+            <td><?php echo $year - 17; ?></td>
+            <td>17</td>
             <td rowspan="3">M18</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 17; ?></td>
-            <td>17</td>
-        </tr>
-        <tr>
-            <td><?php echo $annee - 16; ?></td>
+            <td><?php echo $year - 16; ?></td>
             <td>16</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 15; ?></td>
+            <td><?php echo $year - 15; ?></td>
             <td>15</td>
-            <td rowspan="3">M15</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 14; ?></td>
+            <td><?php echo $year - 14; ?></td>
             <td>14</td>
+            <td rowspan="2">M15</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $annee - 13; ?></td>
+            <td rowspan="2"><?php echo $year - 13; ?></td>
             <td rowspan="2">13</td>
         </tr>
         <tr>
             <td rowspan="3">Noir</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 12; ?></td>
+            <td><?php echo $year - 12; ?></td>
             <td>12</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $annee - 11; ?></td>
+            <td rowspan="2"><?php echo $year - 11; ?></td>
             <td rowspan="2">11</td>
         </tr>
         <tr>
             <td rowspan="3">Rouge</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 10; ?></td>
+            <td><?php echo $year - 10; ?></td>
             <td>10</td>
             <td rowspan="9">Sport des enfants</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $annee - 9; ?></td>
+            <td rowspan="2"><?php echo $year - 9; ?></td>
             <td rowspan="2">9</td>
         </tr>
         <tr>
             <td rowspan="3">Bleu</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 8; ?></td>
+            <td><?php echo $year - 8; ?></td>
             <td>8</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $annee - 7; ?></td>
+            <td rowspan="2"><?php echo $year - 7; ?></td>
             <td rowspan="2">7</td>
         </tr>
         <tr>
             <td rowspan="3">Vert</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 6; ?></td>
+            <td><?php echo $year - 6; ?></td>
             <td>6</td>
         </tr>
         <tr>
-            <td><?php echo $annee - 5; ?></td>
+            <td><?php echo $year - 5; ?></td>
             <td>5</td>
         </tr>
     </table>
     <?php
     echo "</p>";
-    $i++;
 }
+
+showTableYear(date('Y') - 1);
+showTableYear(date('Y'));
 ?>
