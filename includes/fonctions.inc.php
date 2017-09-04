@@ -668,6 +668,17 @@ function showFunctionPerson($functionID)
     }
 }
 
+function getSimplePageContent($menuId) {
+    $query = "SELECT p.body" . $_SESSION['__langue__'] . " AS body
+        FROM IdTextCorpPage p
+        WHERE p.menuId = $menuId";
+    $resource = mysql_query($query);
+
+    $pageData = mysql_fetch_assoc($resource);
+
+    return Markdown($pageData['body']);
+}
+
 function showPagination($currentPage, $totalNumberOfPages, $href, $pointerName = "page")
 {
     if ($currentPage < 3) {

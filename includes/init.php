@@ -68,6 +68,9 @@ include "var.href.inc.php";
 // Access Control Matrix
 include "access_control_matrix.inc.php";
 
+// Markdown
+include "markdown.php";
+
 // fonctions
 include "fonctions.inc.php";
 
@@ -82,9 +85,6 @@ include "email.encode.inc.php";
 
 // donnes acces aux fonctions de stats
 include "statistique.inc.php";
-
-// Markdown
-include "markdown.php";
 
 require_once("phpFlickr.php");
 
