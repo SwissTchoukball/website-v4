@@ -1,24 +1,8 @@
 <?php
 $image = false;
 
-$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '3' ORDER BY paragrapheNum");
-// affiche le texte
-while ($donnees = mysql_fetch_array($retour)) {
-    if (!$image) {
-        echo "<img class='imageFlottanteDroite' src=" . VAR_IMAGE_FEDERATION_JUNIORS . " />";
-        $image = true;
-    }
-
-    if ($donnees['paragrapheNum'] == 5) {
-        echo "<h3>";
-        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
-        echo "</h3>";
-    } else {
-        echo "<p>";
-        afficherAvecEncryptageEmail($donnees["paragraphe" . $_SESSION["__langue__"]]);
-        echo "</p>";
-    }
-}
+echo "<img class='imageFlottanteDroite' src=" . VAR_IMAGE_FEDERATION_JUNIORS . " />";
+echo '<div>' . getSimplePageContent(17) . '</div>';
 
 $language = $_SESSION['__langue__'];
 if ($language == 'De' || $language == 'Fr') {
