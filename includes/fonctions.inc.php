@@ -463,13 +463,33 @@ function getSeasonsOptionsForSelect($from, $to, $selectedSeason)
     for ($season = $to; $season >= $from; $season--) {
         $seasonEnd = $season + 1;
         if ($season == $selectedSeason) {
-            $selected = ' selected="selected"';
+            $selected = 'selected="selected"';
         } else {
             $selected = '';
         }
-        $options .= '<option value="' . $season . '"' . $selected . '>' . $season . ' - ' . $seasonEnd . '</option>';
+        $options .= '<option value="' . $season . '" ' . $selected . '>' . $season . '-' . $seasonEnd . '</option>';
     }
     return $options;
+}
+
+function getCurrentSeasonStartYear() {
+    $monthToSwitchSeason = 8; // August
+
+    $currentSeasonStartYear = date('Y');
+    if (date('n') < $monthToSwitchSeason) {
+        $currentSeasonStartYear--;
+    }
+    return $currentSeasonStartYear;
+}
+
+function getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear) {
+    // Retrieving the start year of the first championship season
+    $queryMinYear = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
+    $recordset = mysql_query($queryMinYear) or die ("<h3>Aucune date existe</h3>");
+    $minDate = mysql_fetch_array($recordset) or die ("<h3>erreur extraction</h3>");
+    $minYear = annee($minDate[0]);
+
+    return getSeasonsOptionsForSelect($minYear, $currentSeasonStartYear, $selectedSeasonStartYear);
 }
 
 /**

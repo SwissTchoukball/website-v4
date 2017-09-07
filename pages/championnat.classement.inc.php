@@ -1,43 +1,25 @@
+<?php
+$currentSeasonStartYear = getCurrentSeasonStartYear();
+
+// Set the selected year
+if (isset($_POST['annee']) && is_numeric($_POST['annee'])) {
+    $selectedSeasonStartYear = $_POST['annee'];
+} else {
+    $selectedSeasonStartYear = $currentSeasonStartYear;
+}
+
+?>
 <form name="classementChampionnat" action="" method="post">
     <table border="0" align="center">
         <tr>
             <td><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
-            <td><select name="annee" id="seasonSelector" onChange="classementChampionnat.submit();">
+            <td>
+                <select name="annee" id="seasonSelector" onChange="classementChampionnat.submit();">
                     <?php
-                    $annee = $_POST['annee'];
-                    // recherche de la premiere date
-                    $requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
-                    $recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
-                    $dateMin = mysql_fetch_array($recordset) or die ("<H3>ERREUR extraction</H3>");
-                    $anneeMin = annee($dateMin[0]);
-                    $anneeMinAffichee = $anneeMin - annee(date_actuelle());
-
-                    // championnat de aout à aout => deux date de différence => il y a deux années.
-                    $nbChampionnatExistant = -$anneeMinAffichee;
-
-                    // si on est en aout, on peut afficher une option en plus pour le nouveau championnat
-                    if (mois(date_actuelle()) > 7) {
-                        $nbChampionnatExistant++;
-                    }
-
-                    $anneeDebutChampionnat = $anneeMin;
-                    if ($annee == "") {
-                        $annee = annee(date_actuelle());
-                        if (mois(date_actuelle()) < 8) {
-                            $annee--;
-                        }
-                    }
-
-                    for ($i = 0; $i < $nbChampionnatExistant; $i++) {
-                        if ($annee == $anneeDebutChampionnat) {
-                            echo "<option selected value='" . $anneeDebutChampionnat . "'>" . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
-                        } else {
-                            echo "<option value='" . $anneeDebutChampionnat . "'>" . $anneeDebutChampionnat . "-" . ($anneeDebutChampionnat + 1) . "</option>";
-                        }
-                        $anneeDebutChampionnat++;
-                    }
-
-                    ?></select></td>
+                    echo getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear);
+                    ?>
+                </select>
+            </td>
         </tr>
     </table>
 </form>
@@ -59,7 +41,7 @@ $debug = false; // isAdmin()
 
 /* Sélection de la politique des points de l'année choisie. */
 
-$retourAnnee = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $annee);
+$retourAnnee = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $selectedSeasonStartYear);
 $donnees = mysql_fetch_array($retourAnnee);
 $pointsMatchGagne = $donnees['pointsMatchGagne'];
 $pointsMatchNul = $donnees['pointsMatchNul'];
@@ -88,7 +70,7 @@ while ($donnesNomTour = mysql_fetch_array($retourNomTour)) {
 
 
 /* Requête pour afficher la liste des ligues */
-$requete = "SELECT DISTINCT idCategorie FROM Championnat_Equipes_Tours WHERE saison=" . $annee . " ORDER BY idCategorie";
+$requete = "SELECT DISTINCT idCategorie FROM Championnat_Equipes_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie";
 if ($debug) {
     echo "<br /><br />Liste ligues : " . $requete;
 }
@@ -103,7 +85,7 @@ echo "</ul>";
 
 
 /* Requête définissant les de classements à faire et leur type puis execution d'une boucle pour chaque classement */
-$requete = "SELECT DISTINCT idCategorie, idTour, noGroupe FROM Championnat_Equipes_Tours WHERE saison=" . $annee . " ORDER BY idCategorie, idTour DESC";
+$requete = "SELECT DISTINCT idCategorie, idTour, noGroupe FROM Championnat_Equipes_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie, idTour DESC";
 if ($debug) {
     echo "<br /><br />Tours : " . $requete;
 }
@@ -117,7 +99,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     }
     // Informations pour les fonctions plus bas.
     $informations = array();
-    $informations['annee'] = $annee;
+    $informations['annee'] = $selectedSeasonStartYear;
     $informations['idCategorie'] = $idCategorie;
     $informations['idTour'] = $idTour;
     $informations['noGroupe'] = $noGroupe;
@@ -127,7 +109,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
 
     $groupeTriPoints = array();
 
-    $requete = "SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe . " ORDER BY points DESC";
+    $requete = "SELECT * FROM Championnat_Equipes_Tours WHERE saison=" . $selectedSeasonStartYear . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe . " ORDER BY points DESC";
     if ($debug) {
         echo "<br /><br />Tri par points : " . $requete;
     }
@@ -282,7 +264,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     if ($idTour != 10000) { // Pas un tour final
         for ($k = 1; $k < count($tableau); $k++) {
             $idEquipe = $tableau[$k][1];
-            $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
+            $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $selectedSeasonStartYear . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
             if ($debug) {
                 echo "<br /><br />Affichage des équipes qui ne sont pas à égalité : " . $requete;
             }
@@ -320,8 +302,8 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     } else { //Tour final. Il faut aussi classer par le type de match.
         $requeteC = "SELECT DISTINCT cm.saison, cm.idCategorie, cm.idTour, cm.noGroupe, cet.idEquipe, idTypeMatch, points, goolaverage, nbMatchJoue, nbMatchGagne, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, position, equipe
 					 FROM Championnat_Equipes_Tours cet, Championnat_Matchs cm, Championnat_Equipes ce
-					 WHERE cet.saison =" . $annee . "
-					 AND cm.saison =" . $annee . "
+					 WHERE cet.saison =" . $selectedSeasonStartYear . "
+					 AND cm.saison =" . $selectedSeasonStartYear . "
 					 AND cet.idCategorie =" . $idCategorie . "
 					 AND cm.idCategorie =" . $idCategorie . "
 					 AND cet.idTour =" . $idTour . "

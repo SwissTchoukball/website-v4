@@ -1,10 +1,16 @@
 <?php
 $categorie = 7; // ==> catergorie championnat
 
-if (isset($_POST['annee'])) {
-    $annee = $_POST['annee'];
+$currentSeasonStartYear = getCurrentSeasonStartYear();
+
+$showFutureGamesOnly = true;
+
+// Set the selected year
+if (isset($_POST['annee']) && is_numeric($_POST['annee'])) {
+    $selectedSeasonStartYear = $_POST['annee'];
+    $showFutureGamesOnly = false;
 } else {
-    $annee = "";
+    $selectedSeasonStartYear = $currentSeasonStartYear;
 }
 
 
@@ -25,63 +31,24 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                 <td align="left">
                     <select name="annee" id="seasonSelector" title="Année" onChange="affichage.submit();">
                         <?php
-                        // recherche de la premiere date
-                        $requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
-                        $recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
-                        $dateMin = mysql_fetch_array($recordset) or die ("<H3>erreur extraction</H3>");
-                        $anneeMin = annee($dateMin[0]);
-                        $anneeMinAffichee = $anneeMin - annee(date_actuelle());
-
-                        // championnat de aout à aout => deux date de différence => il y a deux années.
-                        $nbChampionnatExistant = -$anneeMinAffichee;
-
-                        // si on est en aout, on peut afficher une option en plus pour le nouveau championnat
-                        if (mois(date_actuelle()) > 8) {
-                            $nbChampionnatExistant++;
-                        }
-
-                        $anneDebutChampionnat = $anneeMin;
-
-                        if ($annee == "") {
-                            $annee = "Avenir";
-                        }
-
-                        if ($annee == "Avenir") {
+                        if ($showFutureGamesOnly) {
                             echo "<option selected value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
                         } else {
                             echo "<option value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
                         }
 
-                        for ($i = 0; $i < $nbChampionnatExistant; $i++) {
-                            if ($annee == $anneDebutChampionnat) {
-                                echo "<option selected value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
-                            } else {
-                                echo "<option value='$anneDebutChampionnat'>$anneDebutChampionnat-" . ($anneDebutChampionnat + 1) . "</option>";
-                            }
-                            $anneDebutChampionnat++;
-                        }
+                        echo getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear);
                         ?>
                     </select>
                 </td>
             </tr>
-            <?php
-            if ($annee == "Avenir") {
-                if (date('m') < 8) {
-                    $saison = date('Y') - 1;
-                } else {
-                    $saison = date('Y');
-                }
-            } else {
-                $saison = $annee;
-            }
-            ?>
             <tr>
                 <td align="right" width="50%"><label for="categoryTeamSelector"><?php echo VAR_LANG_CATEGORIE . " / " . VAR_LANG_EQUIPE; ?> :</label></td>
                 <td align="left">
                     <select name="recherche" id="categoryTeamSelector" onChange="affichage.submit();">
                         <option value="tout">Tout</option>
                         <?php
-                        $requeteCategorie = "SELECT DISTINCT Championnat_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Tours, Championnat_Categories WHERE saison=" . $saison . " AND Championnat_Tours.idCategorie=Championnat_Categories.idCategorie";
+                        $requeteCategorie = "SELECT DISTINCT Championnat_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Tours, Championnat_Categories WHERE saison=" . $selectedSeasonStartYear . " AND Championnat_Tours.idCategorie=Championnat_Categories.idCategorie";
                         $retourCategorie = mysql_query($requeteCategorie);
                         echo "<optgroup label='" . VAR_LANG_CATEGORIE . "'>";
                         while ($donneesCategorie = mysql_fetch_array($retourCategorie)) {
@@ -94,7 +61,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                         }
                         echo "</optgroup>";
 
-                        $requeteEquipes = "SELECT DISTINCT Championnat_Equipes.idEquipe, Championnat_Equipes.equipe, Championnat_Equipes_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Equipes_Tours, Championnat_Equipes, Championnat_Categories WHERE saison=" . $saison . " AND Championnat_Equipes.idEquipe=Championnat_Equipes_Tours.idEquipe AND Championnat_Equipes_Tours.idCategorie!=0 AND Championnat_Equipes_Tours.idCategorie=Championnat_Categories.idCategorie ORDER BY Championnat_Equipes_Tours.idCategorie, Championnat_Equipes.equipe";
+                        $requeteEquipes = "SELECT DISTINCT Championnat_Equipes.idEquipe, Championnat_Equipes.equipe, Championnat_Equipes_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Equipes_Tours, Championnat_Equipes, Championnat_Categories WHERE saison=" . $selectedSeasonStartYear . " AND Championnat_Equipes.idEquipe=Championnat_Equipes_Tours.idEquipe AND Championnat_Equipes_Tours.idCategorie!=0 AND Championnat_Equipes_Tours.idCategorie=Championnat_Categories.idCategorie ORDER BY Championnat_Equipes_Tours.idCategorie, Championnat_Equipes.equipe";
                         $retourEquipes = mysql_query($requeteEquipes);
                         $idCategorie = "nothing";
                         while ($donneesEquipes = mysql_fetch_array($retourEquipes)) {
@@ -132,12 +99,12 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
     <?php
 
     // affichage des dates
-    if ($annee == "Avenir") {
+    if ($showFutureGamesOnly) {
         $seasonStart = date_actuelle();
         $finAffichage = '';
     } else {
-        $seasonStart = "$annee-08-01";
-        $seasonEnd = $annee + 1;
+        $seasonStart = "$selectedSeasonStartYear-08-01";
+        $seasonEnd = $selectedSeasonStartYear + 1;
         $seasonEnd .= "-08-01";
         $finAffichage = "AND (dateDebut<='" . $seasonEnd . "' OR dateFin<='" . $seasonEnd . "')";
     }
@@ -155,7 +122,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
     }
     /*$requete = "SELECT cm.idMatch, cea.equipe AS equipeA, ceb.equipe AS equipeB, categorie".$_SESSION['__langue__']." AS categorie, dateDebut, heureDebut, heureFin, salle, ville, dateReportDebut, dateReportFin, heureReportDebut, heureReportFin, cm.idArbitreATiers1, cm.idArbitreATiers2, cm.idArbitreATiers3, cm.idArbitreBTiers1, cm.idArbitreBTiers2, cm.idArbitreBTiers3, cm.idArbitreCTiers1, cm.idArbitreCTiers2, cm.idArbitreCTiers3
                 FROM Championnat_Matchs cm, Championnat_Equipes cea, Championnat_Equipes ceb, Championnat_Categories cc
-                WHERE (dateDebut>='".$annee."' OR dateFin>='".$annee."') AND cea.idEquipe=cm.equipeA AND ceb.idEquipe=cm.equipeB AND cc.idCategorie=cm.idCategorie ".$finAffichage." ".$recherche."
+                WHERE (dateDebut>='".$selectedSeasonStartYear."' OR dateFin>='".$selectedSeasonStartYear."') AND cea.idEquipe=cm.equipeA AND ceb.idEquipe=cm.equipeB AND cc.idCategorie=cm.idCategorie ".$finAffichage." ".$recherche."
                 ORDER BY dateDebut, heureDebut";*/
 
     // TODO Remove dependency to referees id in the matches table and take the information from the the periods table.
