@@ -60,6 +60,7 @@
 <!-- TODO: concatenate the libraries that need to be at the beginning of the body tag -->
 <script src="/vendor/bower/jquery/dist/jquery.min.js"></script>
 <script src="/vendor/bower/jquery-ui/jquery-ui.min.js"></script>
+<script src="/scripts/after-body-opening.js?v=<?php echo $ST_WEBSITE_VERSION; ?>"></script>
 <?php
 if ($_SESSION['__langue__'] != 'En') {
     // Datepicker i18n

@@ -6,8 +6,8 @@ $currentSeasonStartYear = getCurrentSeasonStartYear();
 $showFutureGamesOnly = true;
 
 // Set the selected year
-if (isset($_POST['annee']) && is_numeric($_POST['annee'])) {
-    $selectedSeasonStartYear = $_POST['annee'];
+if (isset($_GET['year']) && is_numeric($_GET['year'])) {
+    $selectedSeasonStartYear = $_GET['year'];
     $showFutureGamesOnly = false;
 } else {
     $selectedSeasonStartYear = $currentSeasonStartYear;
@@ -23,21 +23,36 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
     // ------------------------------------------ //
     ?>
 
-    <form name="affichage" method="post" action="">
+    <script type="text/javascript">
+        function updateSelection() {
+            var seasonSelector = document.getElementById('seasonSelector');
+            var categoryTeamSelector = document.getElementById('categoryTeamSelector');
+            var seasonStartYear = parseInt(seasonSelector.value);
+            window.location = '/championnat/programme/' + seasonStartYear + '-' + (seasonStartYear + 1) +
+                '/' + slugify(categoryTeamSelector.options[categoryTeamSelector.selectedIndex].text) +
+                '-' + categoryTeamSelector.value;
+        }
+    </script>
+    <form onsubmit="$event.preventDefault()">
         <input type="hidden" name="lien" value="<?php echo $idPage; ?>"/>
         <table class="formagenda">
             <tr>
                 <td align="right" width="50%"><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
                 <td align="left">
-                    <select name="annee" id="seasonSelector" title="Année" onChange="affichage.submit();">
+                    <select name="annee" id="seasonSelector" title="Année" onChange="updateSelection();">
                         <?php
                         if ($showFutureGamesOnly) {
-                            echo "<option selected value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
+                            echo "<option selected='selected' value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
                         } else {
                             echo "<option value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
                         }
 
-                        echo getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear);
+                        $selectedYearForSelect = $selectedSeasonStartYear;
+                        if ($showFutureGamesOnly) {
+                            $selectedYearForSelect = null;
+                        }
+
+                        echo getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedYearForSelect);
                         ?>
                     </select>
                 </td>
@@ -45,14 +60,14 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
             <tr>
                 <td align="right" width="50%"><label for="categoryTeamSelector"><?php echo VAR_LANG_CATEGORIE . " / " . VAR_LANG_EQUIPE; ?> :</label></td>
                 <td align="left">
-                    <select name="recherche" id="categoryTeamSelector" onChange="affichage.submit();">
-                        <option value="tout">Tout</option>
+                    <select name="recherche" id="categoryTeamSelector" onChange="updateSelection();">
+                        <option value="all">Tout</option>
                         <?php
                         $requeteCategorie = "SELECT DISTINCT Championnat_Tours.idCategorie, Championnat_Categories.categorie" . $_SESSION['__langue__'] . " FROM Championnat_Tours, Championnat_Categories WHERE saison=" . $selectedSeasonStartYear . " AND Championnat_Tours.idCategorie=Championnat_Categories.idCategorie";
                         $retourCategorie = mysql_query($requeteCategorie);
                         echo "<optgroup label='" . VAR_LANG_CATEGORIE . "'>";
                         while ($donneesCategorie = mysql_fetch_array($retourCategorie)) {
-                            if ($_POST['recherche'] == "cat" . $donneesCategorie['idCategorie']) {
+                            if ($_GET['cat-team'] == "cat" . $donneesCategorie['idCategorie']) {
                                 $selected = "selected='selected'";
                             } else {
                                 $selected = "";
@@ -72,7 +87,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                                 echo "<optgroup label='" . $donneesEquipes['categorie' . $_SESSION['__langue__']] . "'>";
                                 $idCategorie = $donneesEquipes['idCategorie'];
                             }
-                            if ($_POST['recherche'] == $donneesEquipes['idEquipe']) {
+                            if ($_GET['cat-team'] == $donneesEquipes['idEquipe']) {
                                 $selected = "selected='selected'";
                             } else {
                                 $selected = "";
@@ -108,14 +123,14 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
         $seasonEnd .= "-08-01";
         $finAffichage = "AND (dateDebut<='" . $seasonEnd . "' OR dateFin<='" . $seasonEnd . "')";
     }
-    if (isset($_POST['recherche'])) {
-        if ($_POST['recherche'] == "tout") {
+    if (isset($_GET['cat-team'])) {
+        if ($_GET['cat-team'] == "all") {
             $recherche = "";
-        } elseif (preg_match("#^cat#", $_POST['recherche'])) {
-            $rechercheCat = preg_replace("#cat(.+)#", "$1", $_POST['recherche']);
+        } elseif (preg_match("#^cat#", $_GET['cat-team'])) {
+            $rechercheCat = preg_replace("#cat(.+)#", "$1", $_GET['cat-team']);
             $recherche = "AND c.idCategorie=" . $rechercheCat;
         } else {
-            $recherche = "AND (equipeA=" . $_POST['recherche'] . " OR equipeB=" . $_POST['recherche'] . ")";
+            $recherche = "AND (equipeA=" . $_GET['cat-team'] . " OR equipeB=" . $_GET['cat-team'] . ")";
         }
     } else {
         $recherche = "";

@@ -2,19 +2,25 @@
 $currentSeasonStartYear = getCurrentSeasonStartYear();
 
 // Set the selected year
-if (isset($_POST['annee']) && is_numeric($_POST['annee'])) {
-    $selectedSeasonStartYear = $_POST['annee'];
+if (isset($_GET['year']) && is_numeric($_GET['year'])) {
+    $selectedSeasonStartYear = $_GET['year'];
 } else {
     $selectedSeasonStartYear = $currentSeasonStartYear;
 }
 
 ?>
-<form name="classementChampionnat" action="" method="post">
+<script type="text/javascript">
+    function switchSeason(select) {
+        var seasonStartYear = parseInt(select.value);
+        window.location = '/championnat/classement/' + seasonStartYear + '-' + (seasonStartYear + 1);
+    }
+</script>
+<form onsubmit="$event.preventDefault()">
     <table border="0" align="center">
         <tr>
             <td><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
             <td>
-                <select name="annee" id="seasonSelector" onChange="classementChampionnat.submit();">
+                <select name="annee" id="seasonSelector" onChange="switchSeason(this);">
                     <?php
                     echo getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear);
                     ?>
