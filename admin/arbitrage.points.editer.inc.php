@@ -85,7 +85,7 @@ if (hasRefereeManagementAccess()) {
 
     echo '<label for="seasonID">' . VAR_LANG_SAISON . '</label>';
     echo '<select name="seasonID" id="seasonID">';
-    printSeasonsOptionsForSelect(1970, date('Y'), $seasonID);
+    echo getSeasonsOptionsForSelect(1970, date('Y'), $seasonID);
     echo '</select>';
 
     echo '<label for="pointsTypeID">' . ucfirst(VAR_LANG_TYPE_POINTS) . '</label>';

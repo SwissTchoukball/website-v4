@@ -451,13 +451,15 @@ function printManualRefereePointsTypesSelect($selectedValue, $selectName)
     echo "</select>";
 }
 
-function printSeasonsOptionsForSelect($from, $to, $selectedSeason)
+function getSeasonsOptionsForSelect($from, $to, $selectedSeason)
 {
     if ($from > $to) {
         $temp = $from;
         $from = $temp;
         $to = $from;
     }
+
+    $options = '';
     for ($season = $to; $season >= $from; $season--) {
         $seasonEnd = $season + 1;
         if ($season == $selectedSeason) {
@@ -465,8 +467,9 @@ function printSeasonsOptionsForSelect($from, $to, $selectedSeason)
         } else {
             $selected = '';
         }
-        echo '<option value="' . $season . '"' . $selected . '>' . $season . ' - ' . $seasonEnd . '</option>';
+        $options .= '<option value="' . $season . '"' . $selected . '>' . $season . ' - ' . $seasonEnd . '</option>';
     }
+    return $options;
 }
 
 /**

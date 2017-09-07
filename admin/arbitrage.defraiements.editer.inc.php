@@ -126,7 +126,7 @@ echo '<textarea readonly id="refereeAccountNb"></textarea>';
 
 echo '<label for="seasonID">' . VAR_LANG_SAISON . '</label>';
 echo '<select name="seasonID" id="seasonID">';
-printSeasonsOptionsForSelect(2015, date('Y'), $seasonID);
+echo getSeasonsOptionsForSelect(2015, date('Y'), $seasonID);
 echo '</select>';
 
 echo '<label for="amountPaid">Montant (CHF)</label>';
