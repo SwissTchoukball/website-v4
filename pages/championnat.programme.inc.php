@@ -145,7 +145,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
     } else {
         $nbMatchs = mysql_num_rows($retour);
         if ($nbMatchs == 0) {
-            printMessage("Aucun futur match planifié.");
+            printBlankSlateMessage("Aucun match planifié pour la sélection.");
         } else {
             ?>
 

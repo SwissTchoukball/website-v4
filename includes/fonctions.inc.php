@@ -4,7 +4,7 @@ include "date.inc.php";
 function printMessage($message, $type = 'info')
 {
     $class = 'notification';
-    if ($type == 'error' || $type == 'success') {
+    if ($type != 'info') {
         $class .= ' notification--' . $type;
     }
     echo '<p class="' . $class . '">' . $message . '</p>';
@@ -19,6 +19,11 @@ function printErrorMessage($message)
 function printSuccessMessage($message)
 {
     return printMessage($message, 'success');
+}
+
+function printBlankSlateMessage($message)
+{
+    return printMessage($message, 'blank-slate');
 }
 
 //nom du fichier

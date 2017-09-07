@@ -19,6 +19,35 @@
     background-color: lighten(@colorSuccess, 60%);
   }
 
+  &--blank-slate {
+    color: @colorBlankSlate;
+    border: none;
+    background-color: transparent;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+
+    &:before, &:after {
+      position: absolute;
+      top: 51%;
+      overflow: hidden;
+      width: 49.5%;
+      height: 1px;
+      content: '\a0';
+      background-color: @colorBlankSlate;
+    }
+
+    &:before {
+      margin-left: -50.5%;
+      text-align: right;
+    }
+
+    &:after {
+      margin-left: 0.5%;
+    }
+  }
+
   a {
     color: black;
   }

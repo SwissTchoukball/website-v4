@@ -60,7 +60,7 @@ $nbTours = mysql_num_rows($retour);
 $nbGroupes = 0;
 $tableauCategories = array();
 if ($nbTours == 0) {
-    printMessage('Planification en cours...');
+    printBlankSlateMessage('Aucun résultats à afficher pour cette saison.');
 } else {
     while ($donnees = mysql_fetch_array($retour)) {
         $idTour = $donnees['idTour'];
@@ -94,7 +94,7 @@ if ($nbTours == 0) {
         $tableauJournees = array();
 
         if ($nbMatchs == 0) {
-            printMessage('Planification en cours...</h5>');
+            printBlankSlateMessage('Aucun résultats à afficher pour cette phase.');
         } else {
             if ($donnees['idGroupe'] != 0) {
                 echo "<h4>" . VAR_LANG_GROUPE . " " . $donnees['idGroupe'] . "</h4>";
