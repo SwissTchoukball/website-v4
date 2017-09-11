@@ -1,4 +1,20 @@
 <?php
+function sendNotification($transferingPersonName, $authorName, $recipientsEmails, $transferStatusString) {
+    array_push($recipientsEmails, 'webmaster@tchoukball.ch');
+    $recipientsEmailsString = implode(',', array_unique($recipientsEmails));
+    $objectMail = "Auto: Demande de transfert " . $transferStatusString . "e";
+    $messageMail = "La demande un transfert pour <strong>" .
+        htmlentities($transferingPersonName, ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') .
+        "</strong> a été " . $transferStatusString . ".<br /><br />";
+    $messageMail .= "Cette demande a été faite par " .
+        htmlentities($authorName, ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . ".<br /><br />";
+    $from = "From:no-reply@tchoukball.ch\n";
+    $from .= "MIME-version: 1.0\n";
+    $from .= "Content-type: text/html; charset= iso-8859-1\n";
+    if (!mail($recipientsEmailsString, $objectMail, $messageMail, $from)) {
+        printErrorMessage('Erreur lors d l\'envoi de l\'e-mail de notification.');
+    }
+}
 
 // Handling transfer validation
 $transferAccepted = null;
@@ -13,7 +29,8 @@ if (isset($_GET['accept-transfer']) && is_numeric($_GET['accept-transfer'])) {
 if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransferId)) {
     // Getting transfer information
     $transferDataQuery = "
-        SELECT rcc.to_clubID, rcc.idDbdPersonne, p.nom AS lastName, p.prenom AS firstName, u.email AS authorEmail
+        SELECT rcc.from_clubID, rcc.to_clubID, rcc.idDbdPersonne, p.nom AS lastName, p.prenom AS firstName,
+        u.email AS authorEmail, CONCAT_WS(' ', u.prenom, u.nom) AS authorName 
         FROM DBDRequetesChangementClub rcc, DBDPersonne p, Personne u
         WHERE rcc.id = $updatedTransferId
         AND rcc.userID = u.id
@@ -31,10 +48,12 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         die();
     } else {
         $transferData = mysql_fetch_assoc($transferDataResource);
+        $sourceClubId = $transferData['from_clubID'];
         $targetClubId = $transferData['to_clubID'];
         $transferingPersonId = $transferData['idDbdPersonne'];
         $transferingPersonName = $transferData['firstName'] . ' ' . $transferData['lastName'];
         $authorEmail = $transferData['authorEmail'];
+        $authorName = $transferData['authorName'];
     }
 
     // Doing the actual transfer if accepted
@@ -61,25 +80,35 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         WHERE id = $updatedTransferId
         LIMIT 1";
     if (mysql_query($updateTransferRequestQuery)) {
-        $transferAcceptedString = 'non-traité'; // Should not happen
+        $transferStatusString = 'non-traité'; // Should not happen
         if ($transferAccepted === 1) {
-            $transferAcceptedString = 'accepté';
+            $transferStatusString = 'accepté';
         }
         else if ($transferAccepted === 0) {
-            $transferAcceptedString = 'refusé';
+            $transferStatusString = 'refusé';
         }
-        printSuccessMessage('Transfert de ' . $transferingPersonName . ' ' . $transferAcceptedString);
-
-        // Sending mail to inform transfer author
-        $destinataireMail = $authorEmail;
-        $objectMail = "Auto: Demande de transfert " . $transferAcceptedString . "e";
-        $messageMail = "La demande un transfert pour <strong>" . htmlentities($transferingPersonName, ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong> a été " . $transferAcceptedString . ".<br /><br />";
-        $from = "From:no-reply@tchoukball.ch\n";
-        $from .= "MIME-version: 1.0\n";
-        $from .= "Content-type: text/html; charset= iso-8859-1\n";
-        if (!mail($destinataireMail, $objectMail, $messageMail, $from)) {
-            printErrorMessage('Erreur lors d l\'envoi de l\'e-mail de notification.');
+        printSuccessMessage('Transfert de ' . $transferingPersonName . ' ' . $transferStatusString);
+        $recipientsEmails = [$authorEmail];
+        if ($transferAccepted) {
+            $getRelatedClubsManagersQuery = "
+                SELECT p.email
+                FROM Personne p, ClubsFstb c
+                WHERE (c.nbIdClub = $targetClubId || c.nbIdClub = $sourceClubId)
+                AND c.id = p.idClub
+                AND p.gestionMembresClub = 1";
+            if ($relatedClubsManagersResource = mysql_query($getRelatedClubsManagersQuery)) {
+                while ($clubManager = mysql_fetch_assoc($relatedClubsManagersResource)) {
+                    array_push($recipientsEmails, $clubManager['email']);
+                }
+            }
+            else {
+                printErrorMessage(
+                    'Erreur lors de la récupération des adresses e-mails des gestionaires de membres des clubs concernés.',
+                    mysql_error()
+                );
+            }
         }
+        sendNotification($transferingPersonName, $authorName, $recipientsEmails, $transferStatusString);
     }
     else {
         printErrorMessage(
