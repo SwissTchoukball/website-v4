@@ -1,11 +1,19 @@
 <?php
-function sendNotification($transferingPersonName, $authorName, $recipientsEmails, $transferStatusString) {
+function sendNotification(
+        $transferingPersonName,
+        $sourceClubName,
+        $targetClubName,
+        $authorName,
+        $recipientsEmails,
+        $transferStatusString) {
     array_push($recipientsEmails, 'webmaster@tchoukball.ch');
     $recipientsEmailsString = implode(',', array_unique($recipientsEmails));
     $objectMail = "Auto: Demande de transfert " . $transferStatusString . "e";
-    $messageMail = "La demande un transfert pour <strong>" .
+    $messageMail = "La demande de transfert pour <strong>" .
         htmlentities($transferingPersonName, ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') .
-        "</strong> a été " . $transferStatusString . ".<br /><br />";
+        "</strong> a été " . $transferStatusString . "e.<br /><br />";
+    $messageMail .= "Club d'origine : " . $sourceClubName . "<br />";
+    $messageMail .= "Club de destination : " . $targetClubName . "<br /><br />";
     $messageMail .= "Cette demande a été faite par " .
         htmlentities($authorName, ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . ".<br /><br />";
     $from = "From:no-reply@tchoukball.ch\n";
@@ -30,10 +38,13 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
     // Getting transfer information
     $transferDataQuery = "
         SELECT rcc.from_clubID, rcc.to_clubID, rcc.idDbdPersonne, p.nom AS lastName, p.prenom AS firstName,
-        u.email AS authorEmail, CONCAT_WS(' ', u.prenom, u.nom) AS authorName 
-        FROM DBDRequetesChangementClub rcc, DBDPersonne p, Personne u
+        u.email AS authorEmail, CONCAT_WS(' ', u.prenom, u.nom) AS authorName,
+        cs.club AS sourceClubName, ct.club AS targetClubName 
+        FROM DBDRequetesChangementClub rcc, DBDPersonne p, Personne u, ClubsFstb cs, ClubsFstb ct
         WHERE rcc.id = $updatedTransferId
         AND rcc.userID = u.id
+        AND rcc.from_clubID = cs.nbIdClub
+        AND rcc.to_clubID = ct.nbIdClub
         AND rcc.idDbdPersonne = p.idDbdPersonne
         AND rcc.accepted IS NULL
         LIMIT 1";
@@ -50,6 +61,8 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         $transferData = mysql_fetch_assoc($transferDataResource);
         $sourceClubId = $transferData['from_clubID'];
         $targetClubId = $transferData['to_clubID'];
+        $sourceClubName = $transferData['sourceClubName'];
+        $targetClubName = $transferData['targetClubName'];
         $transferingPersonId = $transferData['idDbdPersonne'];
         $transferingPersonName = $transferData['firstName'] . ' ' . $transferData['lastName'];
         $authorEmail = $transferData['authorEmail'];
@@ -108,7 +121,7 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
                 );
             }
         }
-        sendNotification($transferingPersonName, $authorName, $recipientsEmails, $transferStatusString);
+        sendNotification($transferingPersonName, $sourceClubName, $targetClubName, $authorName, $recipientsEmails, $transferStatusString);
     }
     else {
         printErrorMessage(
