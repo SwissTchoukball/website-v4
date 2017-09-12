@@ -148,6 +148,8 @@
         $nbMatchGagnantPlayout = $donnees['nbMatchGagnantPlayout'];
         $nbMatchGagnantPromoReleg = $donnees['nbMatchGagnantPromoReleg'];
 
+        $dernierClassement = 0;
+
         /* Requête pour les noms de Catégorie et Tour afin de pas devoir les chercher à chaque fois avec une requête */
 
         $requeteNomCategorie = "SELECT idCategorie AS id, categorie" . $_SESSION['__langue__'] . " AS nom FROM Championnat_Categories";
@@ -327,7 +329,18 @@
 
                 if ($idTour != 10000) { // Pas un tour final
                     $i = 1;
+
+                    $rankingShift = 0;
+                    if ($idTour != 1 &&
+                        isset($idTourPrecedenteBoucle) &&
+                        $idTourPrecedenteBoucle == $idTour &&
+                        $noGroupePrecedenteBoucle != $noGroupe) {
+                        // We continue the ranking from the previous group
+                        $rankingShift = $dernierClassement;
+                    }
+
                     for ($k = 1; $k < count($tableau); $k++) {
+                        $ranking = $k + $rankingShift;
                         $idEquipe = $tableau[$k][1];
                         $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $annee . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
                         if ($debug) {
@@ -336,16 +349,12 @@
                         $retourEquipeClassement = mysql_query($requete);
                         $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
                         echo "<tr style='" . $style . "'>";
-                        if (isset($idTourPrecedenteBoucle) AND $idTourPrecedenteBoucle == $idTour AND $noGroupePrecedenteBoucle != $noGroupe) { //On ne doit pas remettre le classement à zéro !
-                            $classement = $k + $dernierClassement - 1;
-                        } else {
-                            $classement = $k;
-                        }
                         echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
                                 ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']), $nbMatchGagnantPromoReleg,
-                                $nbMatchGagnantTourFinal, $classement) . "</td>";
+                                $nbMatchGagnantTourFinal, $ranking) . "</td>";
                         echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
                         echo "</tr>";
+                        $dernierClassement = $k + $rankingShift;
                         $i++;
                     }
                 } else { //Tour final. Il faut aussi classer par le type de match.
@@ -409,7 +418,6 @@
                 $idCategoriePrecedenteBoucle = $idCategorie;
                 $idTourPrecedenteBoucle = $idTour;
                 $noGroupePrecedenteBoucle = $noGroupe;
-                $dernierClassement = count($tableau);
             }
         }
 
