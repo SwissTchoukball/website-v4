@@ -113,6 +113,9 @@ function showTableYear($year) {
     echo "</p>";
 }
 
-showTableYear(date('Y') - 1);
-showTableYear(date('Y'));
+$currentSeasonStartYear = date('Y');
+if (date('n') < 8) {
+    $currentSeasonStartYear--;
+}
+showTableYear($currentSeasonStartYear);
 ?>
