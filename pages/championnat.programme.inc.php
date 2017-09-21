@@ -27,8 +27,12 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
         function updateSelection() {
             var seasonSelector = document.getElementById('seasonSelector');
             var categoryTeamSelector = document.getElementById('categoryTeamSelector');
-            var seasonStartYear = parseInt(seasonSelector.value);
-            window.location = '/championnat/programme/' + seasonStartYear + '-' + (seasonStartYear + 1) +
+            var period = 'avenir';
+            if (seasonSelector.value !== 'Avenir') {
+                var seasonStartYear = parseInt(seasonSelector.value);
+                period = seasonStartYear + '-' + (seasonStartYear + 1)
+            }
+            window.location = '/championnat/programme/' + period +
                 '/' + slugify(categoryTeamSelector.options[categoryTeamSelector.selectedIndex].text) +
                 '-' + categoryTeamSelector.value;
         }
