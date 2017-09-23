@@ -6,7 +6,7 @@
                 $messageErreurLogin = "Vous n'êtes pas dans la base de données.";
                 break;
             case 2:
-                $messageErreurLogin = "mot de passe incorrect";
+                $messageErreurLogin = "Mot de passe incorrect";
                 break;
             case 3:
                 $messageErreurLogin = "Erreur de sécurité.";
@@ -23,12 +23,20 @@
 
     ?>
     <form name="log" method="post" action="/gestionLogin.php" class="st-form">
-        <label for="usernameInput"><?php echo VAR_LANG_USERNAME; ?></label>
-        <input name="username" id="usernameInput" type="text" autocorrect="off" autocapitalize="off" spellcheck="false"
-               size="35" maxlength="35">
+        <label for="usernameInput"><?php echo VAR_LANG_USERNAME_OR_EMAIL; ?></label>
+        <input name="username"
+               id="usernameInput"
+               type="text"
+               autocorrect="off"
+               autocapitalize="off"
+               spellcheck="false"
+               size="35"/>
 
         <label for="passwordInput"><?php echo VAR_LANG_PASSWORD; ?></label>
-        <input name="password" id="passwordInput" type="password" size="35" maxlength="35">
+        <input name="password"
+               id="passwordInput"
+               type="password"
+               size="35">
 
         <label for="autoConnectCheckbox" align="center"><?php echo VAR_LANG_AUTO_CONNECTION; ?></label>
         <input class="couleurCheckBox" id="autoConnectCheckbox" type="checkbox" name="autoConnect">

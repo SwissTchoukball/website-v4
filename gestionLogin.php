@@ -22,7 +22,8 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
 
     $requeteSQL = "SELECT p.id, nom, prenom, username, userLevel, password, idClub, gestionMembresClub, c.nbIdClub
                    FROM `Personne` p, `ClubsFstb` c
-                   WHERE p.`username`='" . $usernameLogin . "' AND p.`idClub`=c.`id`";
+                   WHERE (p.`username`='" . $usernameLogin . "' OR p.email = '" . $usernameLogin . "')
+                   AND p.`idClub`=c.`id`";
     $resultatSQL = mysql_query($requeteSQL);
     if (!$resultatSQL) {
         header("Location: http://$host$uri/login-fail-4", true);

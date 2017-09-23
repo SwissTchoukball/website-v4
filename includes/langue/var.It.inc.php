@@ -191,6 +191,7 @@ define("VAR_LANG_SURVOL_TABLEAU", "Survolez le tableau pour avoir plus d'informa
 
 // admin
 define("VAR_LANG_USERNAME", "Nome utente");
+define("VAR_LANG_USERNAME_OR_EMAIL", "Nome utente o e-mail");
 define("VAR_LANG_PASSWORD", "Password");
 define("VAR_LANG_AUTO_CONNECTION", "Ricordami");
 define("VAR_LANG_SE_LOGUER", "Collegarsi");
