@@ -11,7 +11,6 @@ if ($_SESSION["debug_tracage"]) {
 define("VAR_LANG_ASSOCIATION_NAME", "Swiss Tchoukball");
 define("VAR_LANG_ASSOCIATION_NAME_ARTICLE", VAR_LANG_ASSOCIATION_NAME);
 define("VAR_LANG_EN_CONSTRUCTION", "In costruzione...");
-define("VAR_LANG_EN_MODIFICATION", "In fase di modifica...");
 
 define("VAR_LANG_NO_JAVA_SCRIPT_MAIL", "Javscript deve essere attivato per visualizzare questo link.");
 
@@ -113,7 +112,6 @@ $agenda_evenement = "Eventi";
 $agenda_toutes = "All";
 $agenda_vacances = "Holiday";
 define("VAR_LANG_DESCRIPTION", "Descrizione");
-define("VAR_LANG_LISTE_EVENEMENTS", "Show coming events list");
 define("VAR_LANG_AUCUN_EVENEMENT_A_VENIR", "No coming event in this category.");
 define("VAR_LANG_AUCUNE_VACANCE_PENDANT_EVENEMENT", "No holiday during this event.");
 
@@ -122,30 +120,12 @@ define("VAR_LANG_DOMAINES_RESPONSABILITE", "Aree di responsabilit&agrave;");
 define("VAR_LANG_DOMAINE_RESPONSABILITE", "Area di responsabilit&agrave;");
 
 //clubs
-define("VAR_LANG_VISIT_US", "Visitare il sito della societ&agrave;");
 define("VAR_LANG_NB_CLUBS", "Ci sono %d membri del club a " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".");
-
-//Equipe suisse
-define("VAR_LANG_ES_PHOTO", "Foto");
-define("VAR_LANG_ES_NOM_PRENOM", "Cognome, Nome");
-define("VAR_LANG_ES_POSTE_FONCTION", "Posto/Funzione");
-define("VAR_LANG_ES_CLUB", "Societ&agrave; ");
-define("VAR_LANG_ES_EXPERIENCE", "Esperienza");
-define("VAR_LANG_ACCES_FITB_BDD",
-    "Accedere alla base di dati della <abbr title='Federazione Internazionale di Tchoukball'>FITB</abbr>");
-define("VAR_LANG_ARBITRE_INTER", "Arbitres internationaux");
-define("VAR_LANG_ARBITRES", "Arbitro");
 
 // Telechargement
 define("VAR_LANG_DOC_NOM_LIEN_FLYER_PRESENTATION",
     "Scaricare il flyer di presentazione (En)"); // nom lien flyer presentation
 define("VAR_LANG_DOC_FLYER_PRESENTATION", "document/En_flyer_presentation.pdf"); // flyer presentation
-
-// championnat
-$aujourd_hui = getdate();
-$anneeStart = $aujourd_hui["year"];
-define("VAR_LANG_CHAMPIONNAT_NON_COMMENCE",
-    "Il campionato " . $anneeStart . "-" . ($anneeStart + 1) . " non ha ancora iniziato.");
 
 // download
 define("DOWNLOAD_ENTETE_DESCRIPTION", "Descrizione del flyer");
@@ -159,10 +139,6 @@ define("VAR_LANG_NEWS_SUIVANTES", "Notizie seguente");
 define("VAR_LANG_NEWS_PRECEDENTES", "Notizie precedente");
 define("VAR_LANG_NEWS_BACK_TO_NEWS", "Ritornare ai news");
 define("VAR_LANG_LIRE_SUITE_ARTICLE", "Leggere l'articolo intero");
-
-// news letter
-define("VAR_LANG_INSCRIPTION", "Iscrizione");
-define("VAR_LANG_DESINSCRIPTION", "Chiudere");
 
 // Championnat
 define("VAR_LANG_CHAMPIONNAT", "Campionato");
@@ -187,6 +163,7 @@ define("VAR_LANG_CLASSEMENT", "Classifica");
 define("VAR_LANG_ANNEE", "Anno");
 define("VAR_LANG_SPECTATEURS", "spettatori");
 define("VAR_LANG_ARBITRE", "arbitro");
+define("VAR_LANG_ARBITRES", "Arbitro");
 define("VAR_LANG_NIVEAU", "livello");
 define("VAR_LANG_TYPE_POINTS", "tipo di punti");
 
@@ -207,39 +184,21 @@ define("VAR_LANG_PAS_TOUCHER_POUR_RESOUDRE_EGALITE",
 define("VAR_LANG_EGALITES_PARFAITES_RESOLUES_HASARD", "Égalitées parfaites résolues grâce au tir au sort");
 
 // Coupe Suisse
-
 define("VAR_LANG_INCONNU", "Inconnu");
 define("VAR_LANG_EDITION", "Edition");
-define("VAR_LANG_PAS_DE_MATCH", "Pas de match");
-define("VAR_LANG_AUTO_QUALIF", "est automatiquement qualifié");
-define("VAR_LANG_DECLARE_FORFAIT", "a déclaré forfait");
-define("VAR_LANG_DISQUALIFIE", "a été disqualifié");
 define("VAR_LANG_SCORE_FINAL", "Score final");
 define("VAR_LANG_SURVOL_TABLEAU", "Survolez le tableau pour avoir plus d'informations");
 
-//quick menu
-define("VAR_LANG_QUICK_NEWS", "Ultime notizie");
-define("VAR_LANG_QUICK_DOWNLOAD", "Scarico rapido");
-define("VAR_LANG_AUCUNE_NEWS_POUR_CATEGORIE", "Nessuna notizia è disponibile in questa categoria");
-define("VAR_LANG_AUCUNE_FICHIER_POUR_CATEGORIE", "Nessun scheda è disponibile in questa categoria");
-
 // admin
-define("VAR_LANG_NOM", "Cognome");
-define("VAR_LANG_PRENOM", "Nome");
 define("VAR_LANG_USERNAME", "Nome utente");
 define("VAR_LANG_PASSWORD", "Password");
 define("VAR_LANG_AUTO_CONNECTION", "Ricordami");
-define("VAR_LANG_SUPPRIMER_AUTO_CONNEXION", "Cancellare la conessione automatica");
 define("VAR_LANG_SE_LOGUER", "Collegarsi");
 define("VAR_LANG_DECONNEXION", "Scollegarsi");
-define("VAR_LANG_MODIFIER_MON_PROFIL", "Modifier mon profil");
 
 define("VAR_LANG_NON_SPECIFIE", "Non specificato");
 define("VAR_LANG_NON_DEFINI", "Indefinito");
-define("VAR_LANG_OPTION_VEROUILLEE", "Opzione bloccato");
 
-define("VAR_LANG_ACCES_INTERDIT", "Accesso proibito");
-define("VAR_LANG_TEXTE_ACCES_INTERDIT", "Non avete l'autorizzazione di accedere à l'amministrazione del sito");
 define("VAR_LANG_TITRE", "Titre");
 define("VAR_LANG_FORMAT", "Format");
 define("VAR_LANG_TAILLE", "Taille");
@@ -255,15 +214,6 @@ define("VAR_LANG_HEURE", "Ora");
 define("VAR_LANG_MATCH", "Incontro");
 define("VAR_LANG_RESULTAT", "Risultato");
 define("VAR_LANG_HEURE_SUISSE", "Ora svizzera");
-define("VAR_LANG_GENEVE_2005", "TORNEO MONDIALE DI BEACH TCHOUKBALL<br>Ginevra 2005");
-define("VAR_LANG_TAIWAN_2004", "TORNEO MONDIALE DI TCHOUKBALL 2004<br>Kaoshiung, Taiwan ROC");
-define("VAR_LANG_ITALIE_2003", "TORNEO EUROPEO DI TCHOUKBALL 2003<br>Rimini, Italia");
-define("VAR_LANG_GENEVE_2005_SHORT", "Ginevra 2005");
-define("VAR_LANG_TAIWAN_2004_SHORT", "Taiwan 2004");
-define("VAR_LANG_ITALIE_2003_SHORT", "Italia 2003");
-
-// Commission
-define("VAR_LANG_LIEN_PAGE_COMMISSION", "Link sulla commissione");
 
 define("VAR_LANG_DBD_ARBITRE", "Arbitro");
 define("VAR_LANG_DBD_AUTRE_FONCTION", "Altra Funzione");
@@ -306,17 +256,3 @@ define("VAR_LANG_ANNEE_DE_NAISSANCE", "Ann&eacute;e de naissance");
 define("VAR_LANG_AGE_EN", "Età nel");
 define("VAR_LANG_JEUNESSESPORT", "Giovani+Sport");
 define("VAR_LANG_J+S", "G+S");
-
-// TCHOUKBALL GAMES
-
-define("VAR_LANG_RETOUR_LISTE_JEUX", "Retour à la liste des jeux");
-define("VAR_LANG_SON_JEU", "Son jeu");
-define("VAR_LANG_SES_JEUX", "Ses jeux");
-define("VAR_LANG_AUTEUR", "Auteur");
-define("VAR_LANG_AUTEURS", "Auteurs");
-define("VAR_LANG_VISITER_SITE", "Visitare il sito");
-define("VAR_LANG_NOM_JEU", "Nom du jeu");
-define("VAR_LANG_DESCRIPTION_COURTE", "Description courte");
-define("VAR_LANG_DESCRIPTION_LONGUE", "Description longue");
-define("VAR_LANG_ADRESSE_EMAIL", "Adresse email");
-define("VAR_LANG_SITE_WEB", "Site web");
