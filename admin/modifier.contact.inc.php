@@ -3,7 +3,7 @@ statInsererPageSurf(__FILE__);
 ?>
 
 <?php
-$requeteSQL = "SELECT *, p.adresse, p.ville, p.email, p.telephone FROM Personne p, ClubsFstb c WHERE p.id='" . $modificationId . "' AND p.idClub=c.id";
+$requeteSQL = "SELECT *, p.email FROM Personne p, ClubsFstb c WHERE p.id='" . $modificationId . "' AND p.idClub=c.id";
 $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete A</H1>");
 $record = mysql_fetch_array($recordset);
 
@@ -19,8 +19,6 @@ echo "<SCRIPT language='JavaScript'>
         var nbErreur;
         nbErreur = 0;
 
-        mesInfos.adresse.style.background = couleurValide;
-        mesInfos.ville.style.background = couleurValide;
 
         if (mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
             nbErreur++;
