@@ -66,7 +66,7 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
 
             header("Location: http://$host$uri" . VAR_HREF_PAGE_ADMIN, true);
         } else {
-            header("Location: http://$host$uri/login-fail-2", true);
+            header("Location: http://$host$uri/login-fail-1", true);
         }
     }
 } else {

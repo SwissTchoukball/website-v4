@@ -3,10 +3,7 @@
     if (isset($_GET['error'])) {
         switch ($_GET['error']) {
             case 1:
-                $messageErreurLogin = "Vous n'êtes pas dans la base de données.";
-                break;
-            case 2:
-                $messageErreurLogin = "Mot de passe incorrect";
+                $messageErreurLogin = "Nom d'utilisateur, adresse e-mail ou mot de passe incorrect.";
                 break;
             case 3:
                 $messageErreurLogin = "Erreur de sécurité.";
