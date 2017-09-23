@@ -11,24 +11,33 @@ statInsererPageSurf(__FILE__);
         $record = mysql_fetch_array($recordset);
 
         $requeteModifierInfos = "UPDATE `Personne` SET `adresse`='" . $_POST["adresse"] . "',
-																							     `numPostal`='" . $_POST["numPostal"] . "',
-																									 `ville`='" . $_POST["ville"] . "',
-																									 `telephone`='" . $_POST["telephone"] . "',
-																									 `portable`='" . $_POST["portable"] . "',
-																									 `email`='" . $_POST["email"] . "',
-																									 `idClub`='" . $_POST["idClub"] . "',
-																									 `dateNaissance`='" . $_POST["annee"] . "-" . $_POST["mois"] . "-" . $_POST["jour"] . "'
-																				WHERE `Personne`.`id`='" . $record["id"] . "'";
+            `numPostal`='" . $_POST["numPostal"] . "',
+            `ville`='" . $_POST["ville"] . "',
+            `telephone`='" . $_POST["telephone"] . "',
+            `portable`='" . $_POST["portable"] . "',
+            `email`='" . $_POST["email"] . "',
+            `idClub`='" . $_POST["idClub"] . "',
+            `dateNaissance`='" . $_POST["annee"] . "-" . $_POST["mois"] . "-" . $_POST["jour"] . "'
+			WHERE `Personne`.`id`='" . $record["id"] . "'";
         mysql_query($requeteModifierInfos);
 
-        if ($_POST["ancienPass"] != "" || $_POST["nouveauPass"] != "") {
-            if (md5($_POST["ancienPass"]) == $record["password"]) {
-                $requeteModifierMotDePasse = "UPDATE `Personne` SET `password`='" . md5($_POST["nouveauPass"]) . "' WHERE `Personne`.`id`='" . $record["id"] . "'";
-                mysql_query($requeteModifierMotDePasse);
-                echo "<h4>Modification du mot de passe réussi</h4>";
-            } else {
-                echo "<h4>Votre ancien mot de passe n'est pas valide, impossible de modifier votre mot de passe</h4>";
+
+        if (md5($_POST["ancienPass"]) == $record["password"]) {
+            try {
+                updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
+                printSuccessMessage('Modification du mot de passe réussi');
             }
+            catch (Exception $e) {
+                $errorMessage = $e->getMessage();
+                if ($e->getCode() == 400) {
+                    $errorMessage .= ' Veuillez réessayer.';
+                } else if ($e->getCode() == 500) {
+                    $errorMessage .= ' Contactez le <a href="mailto:webmaster@tchoukball.ch">webmaster</a>';
+                }
+                printErrorMessage($errorMessage);
+            }
+        } else {
+            printErrorMessage('Votre ancien mot de passe n\'est pas valide, impossible de modifier votre mot de passe');
         }
     }
     ?>
@@ -41,76 +50,35 @@ statInsererPageSurf(__FILE__);
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
     $record = mysql_fetch_array($recordset);
-    /*
-    action="<?php echo VAR_HREF_PATH_ADMIN; ?>enregistrer.modification.infos.inc.php"
-    */
-    echo "<SCRIPT language='JavaScript'>
-	 var couleurErreur; couleurErreur='#" . VAR_LOOK_COULEUR_ERREUR_SAISIE . "';
-	 var couleurValide; couleurValide='#" . VAR_LOOK_COULEUR_SAISIE_VALIDE . "';
-	 </SCRIPT>";
-    //<SCRIPT language='JavaScript'>
+
     ?>
-    <SCRIPT language='JavaScript'>
-
+    <script language='javascript'>
+        // TODO: Check each field separatly and on keypress
         function controlerSaisie() {
+            var nbErreur = 0;
 
-            var nbErreur;
-            nbErreur = 0;
-
-            mesInfos.adresse.style.background = couleurValide;
-            mesInfos.ville.style.background = couleurValide;
-            mesInfos.ancienPass.style.background = couleurValide;
-
-            if (mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
+            if (mesInfos.email.value !== "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
                 nbErreur++;
-                mesInfos.email.style.background = couleurErreur;
+                mesInfos.email.classList.add('st-invalid');
             }
             else {
-                mesInfos.email.style.background = couleurValide;
-            }
-            if (mesInfos.numPostal.value == "") {
-                mesInfos.numPostal.style.background = couleurValide;
-            }
-            else {
-                if (isNaN(mesInfos.numPostal.value) || mesInfos.numPostal.value < 1000 || mesInfos.numPostal.value.length != 4) {
-                    nbErreur++;
-                    mesInfos.numPostal.style.background = couleurErreur;
-
-                }
-                else {
-                    mesInfos.numPostal.style.background = couleurValide;
-                }
+                mesInfos.email.classList.remove('st-invalid');
             }
 
-            var epressionReguliereMotDePasse = new RegExp(["^[a-zA-Z0-9_]{8,}"]);
-            var invaliditePassword = !epressionReguliereMotDePasse.test(mesInfos.nouveauPass.value) && mesInfos.nouveauPass.value.length != 0;
-            if (mesInfos.nouveauPass.value != mesInfos.nouveauPassBis.value || invaliditePassword) {
-                if (invaliditePassword)alert("Les caractères spéciaux ne sont pas admis dans le mot de passe (sont également exclus les caractères à accents)");
+            if (mesInfos.nouveauPass.value !== mesInfos.nouveauPassBis.value || mesInfos.nouveauPass.value.length < 8) {
+                // TODO: Do the same validation check as done in PHP.
                 nbErreur++;
-                mesInfos.nouveauPass.style.background = couleurErreur;
-                mesInfos.nouveauPassBis.style.background = couleurErreur;
+                mesInfos.nouveauPass.classList.add('st-invalid');
+                mesInfos.nouveauPassBis.classList.add('st-invalid');
             }
             else {
-                mesInfos.nouveauPass.style.background = couleurValide;
-                mesInfos.nouveauPassBis.style.background = couleurValide;
+                mesInfos.nouveauPass.remove('st-invalid');
+                mesInfos.nouveauPassBis.remove('st-invalid');
             }
 
-            var dateN = new Date(mesInfos.annee.value, mesInfos.mois.value - 1, mesInfos.jour.value);
-            if (dateN.getFullYear() != mesInfos.annee.value || (dateN.getMonth() != mesInfos.mois.value - 1) || dateN.getDate() != mesInfos.jour.value) {
-                nbErreur++;
-                mesInfos.annee.style.background = couleurErreur;
-                mesInfos.mois.style.background = couleurErreur;
-                mesInfos.jour.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.annee.style.background = couleurValide;
-                mesInfos.mois.style.background = couleurValide;
-                mesInfos.jour.style.background = couleurValide;
-            }
-
-            return nbErreur == 0;
+            return nbErreur === 0;
         }
-    </SCRIPT>
+    </script>
 
     <form name="mesInfos" class="st-form" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
@@ -124,8 +92,12 @@ statInsererPageSurf(__FILE__);
             <div class="givenData"><?php echo stripslashes($record["prenom"]); ?></div>
         </fieldset>
         <fieldset>
-            <label>Email</label>
-            <input name="email" type="text" value="<?php echo $record["email"]; ?>" size="35" maxlength="80"
+            <label for="emailField">Email</label>
+            <input name="email"
+                   id="emailField"
+                   type="text"
+                   value="<?php echo $record["email"]; ?>"
+                   size="35"
                    autocomplete="off">
         </fieldset>
         <fieldset>

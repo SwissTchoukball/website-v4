@@ -58,7 +58,9 @@
   }
 
   input, textarea {
-    &.ng-invalid.ng-touched, &.ng-invalid.ng-touched .tags {
+    &.ng-invalid.ng-touched,
+    &.ng-invalid.ng-touched .tags,
+    &.st-invalid {
       background-color: @colorInvalid;
       box-shadow: none;
     }
@@ -80,6 +82,11 @@
       margin-left: 260px;
       height: 30px;
     }
+  }
+
+  .below-submit-text {
+    text-align: center;
+    margin-top: 10px;
   }
 
   select {
@@ -114,7 +121,7 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  input[type=text], textarea, .tags {
+  input[type=text], input[type=password], textarea, .tags {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;

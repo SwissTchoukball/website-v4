@@ -2,7 +2,7 @@
     <div id="adminLinks">
         <?php
         if ($_SESSION["__userLevel__"] < 100) {
-            echo "<a href='/logout'>" . VAR_LANG_DECONNEXION . "</a>";
+            echo "<a href='/logout'>" . VAR_LANG_LOGOUT . "</a>";
 
             if ($admin) {
                 echo " &loz; <a href='" . VAR_HREF_PAGE_PRINCIPALE . "'>" . VAR_LANG_ACCUEIL . "</a>";
@@ -10,7 +10,7 @@
                 echo " &loz; <a href='/admin'>" . VAR_LANG_ADMINISTRATION . "</a>";
             }
         } else {
-            echo "<a href='/login'>" . VAR_LANG_SE_LOGUER . "</a>";
+            echo "<a href='/login'>" . VAR_LANG_LOGIN . "</a>";
         }
         ?>
     </div>

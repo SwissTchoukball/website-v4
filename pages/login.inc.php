@@ -38,6 +38,9 @@
         <label for="autoConnectCheckbox" align="center"><?php echo VAR_LANG_AUTO_CONNECTION; ?></label>
         <input class="couleurCheckBox" id="autoConnectCheckbox" type="checkbox" name="autoConnect">
 
-        <input type="submit" class="button button--primary" name="login" value="<?php echo VAR_LANG_SE_LOGUER; ?>">
+        <input type="submit" class="button button--primary" name="login" value="<?php echo VAR_LANG_LOGIN; ?>">
+        <p class="below-submit-text">
+            <a href="/forgot-password"><?php echo VAR_LANG_I_FORGOT_PASSWORD; ?></a>
+        </p>
     </form>
 </div>

@@ -203,11 +203,16 @@ define("VAR_LANG_SURVOL_TABLEAU", "Fly over the chart for more informations");
 
 // admin
 define("VAR_LANG_USERNAME", "Username");
+define("VAR_LANG_EMAIL", "Email");
 define("VAR_LANG_USERNAME_OR_EMAIL", "Username or email");
 define("VAR_LANG_PASSWORD", "Password");
+define("VAR_LANG_REPEAT_PASSWORD", "Repeat password");
+define("VAR_LANG_SEND_RESET_EMAIL", "Send reset e-mail");
+define("VAR_LANG_RESET_PASSWORD", "Reset my password");
 define("VAR_LANG_AUTO_CONNECTION", "Remember me");
-define("VAR_LANG_SE_LOGUER", "Log in");
-define("VAR_LANG_DECONNEXION", "Log out");
+define("VAR_LANG_LOGIN", "Log in");
+define("VAR_LANG_LOGOUT", "Log out");
+define("VAR_LANG_I_FORGOT_PASSWORD", "I forgot my password");
 
 define("VAR_LANG_NON_SPECIFIE", "Non specifié");
 define("VAR_LANG_NON_DEFINI", "Undefined");

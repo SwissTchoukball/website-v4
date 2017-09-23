@@ -1147,3 +1147,41 @@ function afficherRang(
     }
     return $rangAffiche;
 }
+
+function updatePassword($userId, $newPassword, $newPasswordRepeat)
+{
+    $validationErrors = '';
+    if (strlen($newPassword) < 8) {
+        $validationErrors .= 'Votre mot de passe doit être composé d\'au minimum 8 caractères.<br/>';
+    }
+    if (!preg_match("#[0-9]+#", $newPassword)) {
+        $validationErrors .= 'Votre mot de passe doit contenir au minimum un chiffre<br/>';
+    }
+    if (!preg_match("#[A-Z]+#", $newPassword)) {
+        $validationErrors .= 'Votre mot de passe doit contenir au minimum une lettre en majuscule<br/>';
+    }
+    if (!preg_match("#[a-z]+#", $newPassword)) {
+        $validationErrors .= 'Votre mot de passe doit contenir au minimum une lettre en minuscule<br/>';
+    }
+    if (!preg_match("#[\W]+#", $newPassword)) {
+        $validationErrors .= 'Votre mot de passe doit contenir au minimum un caractère spécial<br/>';
+    }
+
+    if (strlen($validationErrors) > 0) {
+        throw new Exception($validationErrors, 400);
+    }
+
+    if ($newPassword != $newPasswordRepeat) {
+        throw new Exception('Vous n\'avez pas entré deux fois le même mot de passe.', 400);
+    }
+
+    $hashedPassword = md5($newPassword);
+    $updatePasswordQuery = "
+        UPDATE Personne
+        SET password = '$hashedPassword'
+        WHERE id = $userId
+        LIMIT 1";
+    if (!mysql_query($updatePasswordQuery)) {
+        throw new Exception('Erreur lors de la modification du mot de passe.', 500);
+    }
+}

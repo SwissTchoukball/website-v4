@@ -24,35 +24,38 @@ else {
         $recordset = mysql_query($requeteSQL);
         $record = mysql_fetch_array($recordset);
 
-        //$nom=validiteInsertionTextBd($_POST["nom"]);
-        //$prenom=validiteInsertionTextBd($_POST["prenom"]);
         $userLevel = 10;
-        $password = md5($_POST["nouveauPass"]);
         $email = validiteInsertionTextBd($_POST["email"]);
         $idClub = validiteInsertionTextBd($_POST["ClubsFstb"]);
 
         // selection pour le prochain affichage par lettre
         $lettre = substr($record["nom"], 0, 1);
 
-        if ($_POST["nouveauPass"] == "") {
-            $requeteSQL = "UPDATE `Personne` SET
-								`email`='$email',
-								`idClub`='$idClub'
-								WHERE Personne.id='" . $idPersonne . "'";
+        $queryUpdatePerson = "UPDATE `Personne` SET
+                            `email`='$email',
+                            `idClub`='$idClub'
+                            WHERE Personne.id='" . $idPersonne . "'";
+        if (mysql_query($queryUpdatePerson) === false) {
+            printErrorMessage("Erreur de modification de l'e-mail et du club.");
         } else {
-            $requeteSQL = "UPDATE `Personne` SET
-								`password`='$password',
-								`email`='$email',
-								`idClub`='$idClub'
-								WHERE Personne.id='" . $idPersonne . "'";
+            printSuccessMessage("Mise à jour de l'e-mail et du club réussi.");
         }
 
-        //echo $requeteSQL;
 
-        if (mysql_query($requeteSQL) === false) {
-            printErrorMessage("Erreur de modification : contactez le webmaster.");
-        } else {
-            printSuccessMessage("Modification réussie");
+        if ($_POST["nouveauPass"] != "") {
+            try {
+                updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
+                printSuccessMessage('Modification du mot de passe réussi');
+            }
+            catch (Exception $e) {
+                $errorMessage = $e->getMessage();
+                if ($e->getCode() == 400) {
+                    $errorMessage .= ' Veuillez réessayer.';
+                } else if ($e->getCode() == 500) {
+                    $errorMessage .= ' Contactez le <a href="mailto:webmaster@tchoukball.ch">webmaster</a>';
+                }
+                printErrorMessage($errorMessage);
+            }
         }
     }
 

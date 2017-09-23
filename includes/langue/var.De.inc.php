@@ -193,11 +193,16 @@ define("VAR_LANG_SURVOL_TABLEAU", "Survolez le tableau pour avoir plus d'informa
 
 // admin
 define("VAR_LANG_USERNAME", "Benutzername");
+define("VAR_LANG_EMAIL", "E-mail");
 define("VAR_LANG_USERNAME_OR_EMAIL", "Benutzername oder e-mail");
 define("VAR_LANG_PASSWORD", "Passwort");
+define("VAR_LANG_REPEAT_PASSWORD", "Passwort wiederholen");
+define("VAR_LANG_SEND_RESET_EMAIL", "Senden Reset-E-Mail");
+define("VAR_LANG_RESET_PASSWORD", "Mein Passwort zurücksetzen");
 define("VAR_LANG_AUTO_CONNECTION", "Remember me");
-define("VAR_LANG_SE_LOGUER", "Sich einloggen");
-define("VAR_LANG_DECONNEXION", "Sich ausloggen");
+define("VAR_LANG_LOGIN", "Sich einloggen");
+define("VAR_LANG_LOGOUT", "Sich ausloggen");
+define("VAR_LANG_I_FORGOT_PASSWORD", "Ich habe mein passwort vergessen");
 
 define("VAR_LANG_NON_SPECIFIE", "Nicht angegeben");
 define("VAR_LANG_NON_DEFINI", "nicht definiert");
