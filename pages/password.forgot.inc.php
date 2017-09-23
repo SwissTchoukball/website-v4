@@ -45,8 +45,6 @@ if (isset($_POST['email'])) {
         $body .= "Il n'existe toutefois aucun compte avec cette adresse e-mail.";
     }
 
-    echo $body;
-
     $subject = "Réinitialisation de votre mot de passe Swiss Tchoukball";
 
     $from = "From:no-reply@tchoukball.ch\n";
