@@ -1,7 +1,7 @@
 <div><?php
     statInsererPageSurf(__FILE__);
 
-    $requeteSQL = "SELECT *, p.adresse, p.ville, p.email, p.telephone, c.club FROM `Personne` p,`ClubsFstb` c WHERE p.`nom`='" . addslashes($_SESSION["__nom__"]) . "' AND p.`prenom`='" . addslashes($_SESSION["__prenom__"]) . "' AND p.`idClub`=c.`id`";
+    $requeteSQL = "SELECT *, c.club FROM `Personne` p,`ClubsFstb` c WHERE p.`nom`='" . addslashes($_SESSION["__nom__"]) . "' AND p.`prenom`='" . addslashes($_SESSION["__prenom__"]) . "' AND p.`idClub`=c.`id`";
 
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
