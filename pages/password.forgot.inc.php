@@ -24,7 +24,7 @@ if (isset($_POST['email'])) {
         "<strong>" . $email . ".</strong><br />";
 
     if (isset($userId) && isset($username)) {
-        $body .= "<strong>" . $username . "</strong> est le nom d\'utilisateur associé.<br /><br />";
+        $body .= "<strong>" . $username . "</strong> est le nom d'utilisateur associé.<br /><br />";
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
         $passwordResetLink = 'https://tchoukball.ch/reset-password/' . $token;
