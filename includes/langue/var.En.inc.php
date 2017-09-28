@@ -201,7 +201,9 @@ define("VAR_LANG_EDITION", "Edition");
 define("VAR_LANG_SCORE_FINAL", "Final score");
 define("VAR_LANG_SURVOL_TABLEAU", "Fly over the chart for more informations");
 
-// admin
+
+// Login
+define("VAR_LANG_USER", "User");
 define("VAR_LANG_USERNAME", "Username");
 define("VAR_LANG_EMAIL", "Email");
 define("VAR_LANG_USERNAME_OR_EMAIL", "Username or email");
@@ -213,6 +215,10 @@ define("VAR_LANG_AUTO_CONNECTION", "Remember me");
 define("VAR_LANG_LOGIN", "Log in");
 define("VAR_LANG_LOGOUT", "Log out");
 define("VAR_LANG_I_FORGOT_PASSWORD", "I forgot my password");
+
+// Admin home
+define("VAR_LANG_HELLO", "Hello");
+define("VAR_LANG_ADMIN_WELCOME", "Welcome in the admin zone of the Swiss Tchoukball website.");
 
 define("VAR_LANG_NON_SPECIFIE", "Non specifié");
 define("VAR_LANG_NON_DEFINI", "Undefined");
