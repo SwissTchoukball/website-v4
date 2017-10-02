@@ -1,6 +1,10 @@
 <div id="sidebar" class="sidebar">
     <div class="sidebar__username">
-        <?php echo VAR_LANG_USER . ': ' . $_SESSION["__username__"] ?>
+        <?php
+        if ($admin) {
+            echo VAR_LANG_USER . ': ' . $_SESSION["__username__"];
+        }
+        ?>
     </div>
     <?php include($_SERVER["DOCUMENT_ROOT"] . '/includes/nav.php'); ?>
     <div id="partners">
