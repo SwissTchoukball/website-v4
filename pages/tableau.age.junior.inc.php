@@ -80,7 +80,7 @@ function showTableYear($year) {
         <tr>
             <td><?php echo $year - 10; ?></td>
             <td>10</td>
-            <td rowspan="9">Sport des enfants</td>
+            <td rowspan="8">Sport des enfants</td>
         </tr>
         <tr>
             <td rowspan="2"><?php echo $year - 9; ?></td>
