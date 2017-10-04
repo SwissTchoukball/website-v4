@@ -1,11 +1,6 @@
 <?php
 
 if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
-    if (hasAllMembersManagementAccess()) {
-        $idOrigineAdresse = 2; // Swiss Tchoukball
-    } else {
-        $idOrigineAdresse = 11; // Club
-    }
 
     // Vérification date de naissance
     if (checkdate($_POST['birthDateMonth'], $_POST['birthDateDay'], $_POST['birthDateYear'])) {
@@ -134,7 +129,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 $memberInsertRequest =
                     "INSERT INTO `DBDPersonne` (
                         `idStatus`,
-                        `idOrigineAdresse`,
                         `derniereModification`,
                         `modificationPar`,
                         `editor_id`,
@@ -163,7 +157,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                      )
                      VALUES (
                         '" . $statutID . "',
-                        '" . $idOrigineAdresse . "',
                         '" . date('Y-m-d') . "',
                         '" . $_SESSION['__nom__'] . " " . $_SESSION['__prenom__'] . "',
                         '" . $_SESSION['__idUser__'] . "',
@@ -220,7 +213,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
 
                 $memberUpdateRequest = "UPDATE DBDPersonne
                                     SET idStatus='" . $statutID . "',
-                                        idOrigineAdresse=11,
                                         derniereModification='" . date('Y-m-d') . "',
                                         modificationPar='" . $_SESSION['__nom__'] . " " . $_SESSION['__prenom__'] . "',
                                         editor_id=" . $_SESSION["__idUser__"] . ",
