@@ -14,7 +14,7 @@ if ($_SESSION["__userLevel__" > 100]) {
 }
 
 // se faire passer pour la partie admin
-$PHP_SELF = "/admin.php";
+$PHP_SELF = VAR_HREF_PAGE_ADMIN;
 
 // les champs existent ?
 if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["password"])) {

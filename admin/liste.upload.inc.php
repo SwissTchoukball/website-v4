@@ -85,10 +85,10 @@ echo "</p>";
             echo tailleFichier(PATH_UPLOADS . $donneesbis['fichier']);
             echo "</td>";
             echo "<td>";
-            echo "<a href='admin.php?menuselection=" . $menuselection . "&smenuselection=2&modif=" . $donneesbis['id'] . "'>" . VAR_LANG_MODIFIER . "</a>";
+            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=2&modif=" . $donneesbis['id'] . "'>" . VAR_LANG_MODIFIER . "</a>";
             echo "</td>";
             echo "<td>";
-            echo "<a href='admin.php?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&suppr=" . $donneesbis['id'] . "' onclick='return confirm(\"Vous &ecirc;tes sur le point de supprimer cet upload. OK pour supprimer, Annuler pour abandonner.\")'>" . VAR_LANG_SUPPRIMER . "</a>";
+            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&suppr=" . $donneesbis['id'] . "' onclick='return confirm(\"Vous &ecirc;tes sur le point de supprimer cet upload. OK pour supprimer, Annuler pour abandonner.\")'>" . VAR_LANG_SUPPRIMER . "</a>";
             echo "</td>";
             echo "</tr>";
         }
