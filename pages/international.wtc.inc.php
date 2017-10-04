@@ -4,26 +4,6 @@ if ($_SESSION["debug_tracage"]) {
 }
 statInsererPageSurf(__FILE__);
 ?>
-<div class="presentation">
-    <?php /*
-	$retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '33' ORDER BY paragrapheNum");
-    // affiche le texte
-    while($donnees = mysql_fetch_array($retour)) {
-            // entete
-            if($donnees["paragrapheNum"] == 0) {
-                echo "<h4>";
-                afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
-                echo "</h4>";
-            }
-            else{
-                echo "<p>";
-                afficherAvecEncryptageEmail($donnees["paragraphe".$_SESSION["__langue__"]]);
-                echo "</p>";
-            }
-    }
-	*/
-    ?>
-</div>
 <h2>Résultats Suisses</h2>
 <h3 class="alt">Hommes</h3>
 <table class="classementTourFinal">
