@@ -1,7 +1,7 @@
 <h3>Nos vidéos YouTube</h3>
 
 <iframe class="last-yt-video fullWidth"
-        src="http://www.youtube.com/embed?max-results=1&controls=1&showinfo=1&rel=0&listType=user_uploads&list=tchoukballsuisse"
+        src="https://www.youtube.com/embed?max-results=1&controls=1&showinfo=1&rel=0&listType=user_uploads&list=tchoukballsuisse"
         frameborder="0" allowfullscreen></iframe>
 
 
