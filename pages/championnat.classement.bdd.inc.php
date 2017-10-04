@@ -6,7 +6,7 @@
                     <?php
                     $annee = $_POST['annee'];
                     // recherche de la premiere date
-                    $requeteAnnee = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
+                    $requeteAnnee = "SELECT MIN( Calendrier_Evenements.dateDebut ) FROM `Calendrier_Evenements`";
                     $recordset = mysql_query($requeteAnnee) or die ("<H3>Aucune date existe</H3>");
                     $dateMin = mysql_fetch_array($recordset) or die ("<H3>ERREUR extraction</H3>");
                     $anneeMin = annee($dateMin[0]);

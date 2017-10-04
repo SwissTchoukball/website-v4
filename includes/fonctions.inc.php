@@ -489,7 +489,7 @@ function getCurrentSeasonStartYear() {
 
 function getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $selectedSeasonStartYear) {
     // Retrieving the start year of the first championship season
-    $queryMinYear = "SELECT MIN( Agenda_Evenement.dateDebut ) FROM `Agenda_Evenement`";
+    $queryMinYear = "SELECT MIN( Calendrier_Evenements.dateDebut ) FROM `Calendrier_Evenements`";
     $recordset = mysql_query($queryMinYear) or die ("<h3>Aucune date existe</h3>");
     $minDate = mysql_fetch_array($recordset) or die ("<h3>erreur extraction</h3>");
     $minYear = annee($minDate[0]);
