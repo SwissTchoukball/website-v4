@@ -1,11 +1,6 @@
 <?php
 statInsererPageSurf(__FILE__);
 
-echo "<SCRIPT language='JavaScript'>
-	 var couleurErreur; couleurErreur='#" . VAR_LOOK_COULEUR_ERREUR_SAISIE . "';
-	 var couleurValide; couleurValide='#" . VAR_LOOK_COULEUR_SAISIE_VALIDE . "';
-	 </SCRIPT>";
-
 /* RECEPTION ET ENREGISTREMENT DE L'UPLOAD */
 /**
  * function formatFileName
@@ -248,25 +243,25 @@ elseif ($_POST["action"] == "modifierUpload") {
         nbError = 0;
 
         // titre
-        if (modificationUpload.titre.value.length == 0) {
-            modificationUpload.titre.style.background = couleurErreur;
-            if (nbError == 0)modificationUpload.titre.focus();
+        if (modificationUpload.titre.value.length === 0) {
+            modificationUpload.titre.classList.add('st-invalid');
+            if (nbError === 0)modificationUpload.titre.focus();
             nbError++;
         }
         else {
-            modificationUpload.titre.style.background = couleurValide;
+            modificationUpload.titre.classList.remove('st-invalid');
         }
 
         // description
-        if (modificationUpload.description.value.length == 0) {
-            modificationUpload.description.style.background = couleurErreur;
-            if (nbError == 0)modificationUpload.description.focus();
+        if (modificationUpload.description.value.length === 0) {
+            modificationUpload.description.classList.add('st-invalid');
+            if (nbError === 0)modificationUpload.description.focus();
             nbError++;
         }
         else {
-            modificationUpload.description.style.background = couleurValide;
+            modificationUpload.description.classList.remove('st-invalid');
         }
-        return nbError == 0;
+        return nbError === 0;
     }
 
 </SCRIPT>

@@ -151,13 +151,6 @@
         }
     </script>
 
-    <?php
-    echo "<SCRIPT language='JavaScript'>
-	 var couleurErreur; couleurErreur='#" . VAR_LOOK_COULEUR_ERREUR_SAISIE . "';
-	 var couleurValide; couleurValide='#" . VAR_LOOK_COULEUR_SAISIE_VALIDE . "';
-	 </SCRIPT>";
-    ?>
-
     <form name="insererTour" method="post"
           action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
           onSubmit="return validateForm();">

@@ -3,11 +3,6 @@
     <?php echo VAR_LANG_ETAPE_2; ?>
 </h3>
 <script language="Javascript">
-    <?php
-    echo "var couleurErreur='#" . VAR_LOOK_COULEUR_ERREUR_SAISIE . "';";
-    echo "var couleurValide='#" . VAR_LOOK_COULEUR_SAISIE_VALIDE . "';"
-    ?>
-
     function testAutoQualif() {
         var etape2 = document.getElementById("formulaireInsertionCoupeCH");
         <?php

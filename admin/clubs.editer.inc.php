@@ -186,12 +186,10 @@ if ($canEdit) {
 ?>
 <script lang="javascript">
 
-    var couleurErreur;
-    couleurErreur = '#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
-    var couleurValide;
-    couleurValide = '#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
+    var npaField = $("#npa");
+    var emailField = $("#email");
 
-    function checkClubForm() {
+        function checkClubForm() {
 
         var nbError = 0;
 
@@ -199,29 +197,28 @@ if ($canEdit) {
         // NPA
         var regZipCode = new RegExp("^.*?[0-9]{4,}$", "g");
 
-        if ($("#npa").val().length == 0 || regZipCode.test($("#npa").val())) {
-            $("#npa").css('background-color', couleurValide);
-        } else {
-            $("#npa").css('background-color', couleurErreur);
-            if (nbError == 0) $("#npa").focus();
+        if (npaField.val().length !== 0 && !regZipCode.test(npaField.val())) {
+            npaField.addClass('.st-invalid');
+            if (nbError === 0) npaField.focus();
             nbError++;
+        } else {
+            npaField.removeClass('.st-invalid');
         }
 
 
         //email
         var regEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$", "g");
 
-        if ($("#email").val() == "" || regEmail.test($("#email").val())) {
-            $("#email").css('background-color', couleurValide);
-        }
-        else {
-            $("#email").css('background-color', couleurErreur);
-            if (nbError == 0) $("#email").focus();
+        if (emailField.val() !== "" && !regEmail.test(emailField.val())) {
+            emailField.addClass('.st-invalid');
+            if (nbError === 0) emailField.focus();
             alert("L'adresse e-mail est invalide. Elle peut contenir des caractères interdits.");
             nbError++;
+        } else {
+            emailField.removeClass('.st-invalid');
         }
 
-        return nbError == 0;
+        return nbError === 0;
     }
 
 
@@ -229,11 +226,11 @@ if ($canEdit) {
         var addressPreview = $("#addressPreview");
         addressPreview.text("");
         addressPreview.append($("#fullName").val() + "<br />");
-        if ($("#npa").val().length == 4 && $("#city").val().length >= 3) {
-            if ($("#address").val() != "") {
+        if (npaField.val().length === 4 && $("#city").val().length >= 3) {
+            if ($("#address").val() !== "") {
                 addressPreview.append($("#address").val() + "<br />");
             }
-            addressPreview.append($("#npa").val() + " " + $("#city").val());
+            addressPreview.append(npaField.val() + " " + $("#city").val());
         } else {
             addressPreview.append($("#presidentFirstName").val() + " " + $("#presidentLastName").val() + "<br />");
             addressPreview.append($("#presidentAddress").val() + "<br />");
@@ -244,18 +241,18 @@ if ($canEdit) {
     function updateInfoPreview() {
         var infoPreview = $("#infoPreview");
         infoPreview.text("");
-        if ($("#phone").val() != "") {
+        if ($("#phone").val() !== "") {
             infoPreview.append($("#phone").val() + "<br />");
         } else {
-            if ($("#presidentPhone").val() != "") {
+            if ($("#presidentPhone").val() !== "") {
                 infoPreview.append($("#presidentPhone").val() + "<br />");
             }
-            if ($("#presidentMobile").val() != "") {
+            if ($("#presidentMobile").val() !== "") {
                 infoPreview.append($("#presidentMobile").val() + "<br />");
             }
         }
-        if ($("#email").val() != "") {
-            infoPreview.append($("#email").val() + "<br />");
+        if (emailField.val() !== "") {
+            infoPreview.append(emailField.val() + "<br />");
         } else {
             infoPreview.append($("#presidentEmail").val() + "<br />");
         }

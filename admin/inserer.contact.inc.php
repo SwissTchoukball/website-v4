@@ -28,14 +28,6 @@ statInsererPageSurf(__FILE__);
     }
     ?>
 
-
-
-    <?php
-    echo "<SCRIPT language='JavaScript'>
-	 var couleurErreur; couleurErreur='#" . VAR_LOOK_COULEUR_ERREUR_SAISIE . "';
-	 var couleurValide; couleurValide='#" . VAR_LOOK_COULEUR_SAISIE_VALIDE . "';
-	 </SCRIPT>";
-    ?>
     <SCRIPT language='JavaScript'>
 
         function controlerSaisie() {
@@ -43,58 +35,54 @@ statInsererPageSurf(__FILE__);
             var nbErreur;
             nbErreur = 0;
 
-            mesInfos.adresse.style.background = couleurValide;
-            mesInfos.ville.style.background = couleurValide;
-
-            if (mesInfos.email.value != "" && (mesInfos.email.value.indexOf("@") < 1 || mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf(".")))) {
+            if (mesInfos.email.value !== "" &&
+                (
+                    mesInfos.email.value.indexOf("@") < 1 ||
+                    mesInfos.email.value.indexOf("@") >= (mesInfos.email.value.lastIndexOf("."))
+                )
+            ) {
                 nbErreur++;
-                mesInfos.email.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.email.style.background = couleurValide;
-            }
-
-            if (mesInfos.prenom.value.length == 0) {
-                nbErreur++;
-                mesInfos.prenom.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.prenom.style.background = couleurValide;
+                mesInfos.email.classList.add('st-invalid');
+            } else {
+                mesInfos.email.classList.remove('st-invalid');
             }
 
-            if (mesInfos.nom.value.length == 0) {
+            if (mesInfos.prenom.value.length === 0) {
                 nbErreur++;
-                mesInfos.nom.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.nom.style.background = couleurValide;
+                mesInfos.prenom.classList.add('st-invalid');
+            } else {
+                mesInfos.prenom.classList.remove('st-invalid');
             }
 
-            if (mesInfos.username.value.length == 0) {
+            if (mesInfos.nom.value.length === 0) {
                 nbErreur++;
-                mesInfos.username.style.background = couleurErreur;
+                mesInfos.nom.classList.add('st-invalid');
+            } else {
+                mesInfos.nom.classList.remove('st-invalid');
             }
-            else {
-                mesInfos.username.style.background = couleurValide;
+
+            if (mesInfos.username.value.length === 0) {
+                nbErreur++;
+                mesInfos.username.classList.add('st-invalid');
+            } else {
+                mesInfos.username.classList.remove('st-invalid');
             }
 
             if (mesInfos.motDePasse.value.length < 3) {
                 nbErreur++;
-                mesInfos.motDePasse.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.motDePass.style.background = couleurValide;
+                mesInfos.motDePasse.classList.add('st-invalid');
+            } else {
+                mesInfos.motDePasse.classList.remove('st-invalid');
             }
 
-            if (mesInfos.contactClub.checked && mesInfos.idClub.value == 0) {
+            if (mesInfos.contactClub.checked && mesInfos.idClub.value === 0) {
                 nbErreur++;
-                mesInfos.idClub.style.background = couleurErreur;
-            }
-            else {
-                mesInfos.idClub.style.background = couleurValide;
+                mesInfos.idClub.classList.add('st-invalid');
+            } else {
+                mesInfos.idClub.classList.remove('st-invalid');
             }
 
-            return nbErreur == 0;
+            return nbErreur === 0;
         }
     </SCRIPT>
 

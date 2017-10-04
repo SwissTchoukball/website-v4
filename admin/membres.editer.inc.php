@@ -1,10 +1,4 @@
 <script lang="javascript">
-
-    var couleurErreur;
-    couleurErreur = '#<?php echo VAR_LOOK_COULEUR_ERREUR_SAISIE; ?>';
-    var couleurValide;
-    couleurValide = '#<?php echo VAR_LOOK_COULEUR_SAISIE_VALIDE; ?>';
-
     $(function () {
         refereeLevelSelect = $("#DBDArbitre");
         refereeLevelSelect.change(updateRefereeFields);
@@ -31,39 +25,39 @@
         var nbError = 0;
 
         //nom et prénom OU raison sociale
-        if (memberEdit.lastname.value.length == 0 &&
-            memberEdit.firstname.value.length == 0 &&
-            memberEdit.companyName.value.length != 0) {
-            memberEdit.lastname.style.background = couleurValide;
-            memberEdit.firstname.style.background = couleurValide;
-            memberEdit.companyName.style.background = couleurValide;
-        } else if (memberEdit.lastname.value.length == 0 &&
-            memberEdit.firstname.value.length == 0 &&
-            memberEdit.companyName.value.length == 0) {
-            memberEdit.lastname.style.background = couleurErreur;
-            memberEdit.firstname.style.background = couleurErreur;
-            memberEdit.companyName.style.background = couleurErreur;
-            if (nbError == 0)memberEdit.lastname.focus();
+        if (memberEdit.lastname.value.length === 0 &&
+            memberEdit.firstname.value.length === 0 &&
+            memberEdit.companyName.value.length !== 0) {
+            memberEdit.lastname.classList.remove('st-invalid');
+            memberEdit.firstname.classList.remove('st-invalid');
+            memberEdit.companyName.classList.remove('st-invalid');
+        } else if (memberEdit.lastname.value.length === 0 &&
+            memberEdit.firstname.value.length === 0 &&
+            memberEdit.companyName.value.length === 0) {
+            memberEdit.lastname.classList.add('st-invalid');
+            memberEdit.firstname.classList.add('st-invalid');
+            memberEdit.companyName.classList.add('st-invalid');
+            if (nbError === 0)memberEdit.lastname.focus();
             nbError++;
         } else {
             // nom
-            if (memberEdit.lastname.value.length == 0) {
-                memberEdit.lastname.style.background = couleurErreur;
-                if (nbError == 0)memberEdit.lastname.focus();
+            if (memberEdit.lastname.value.length === 0) {
+                memberEdit.lastname.classList.add('st-invalid');
+                if (nbError === 0)memberEdit.lastname.focus();
                 nbError++;
             }
             else {
-                memberEdit.lastname.style.background = couleurValide;
+                memberEdit.lastname.classList.remove('st-invalid');
             }
 
             // prenom
-            if (memberEdit.firstname.value.length == 0) {
-                memberEdit.firstname.style.background = couleurErreur;
-                if (nbError == 0)memberEdit.firstname.focus();
+            if (memberEdit.firstname.value.length === 0) {
+                memberEdit.firstname.classList.add('st-invalid');
+                if (nbError === 0)memberEdit.firstname.focus();
                 nbError++;
             }
             else {
-                memberEdit.firstname.style.background = couleurValide;
+                memberEdit.firstname.classList.remove('st-invalid');
             }
         }
 
@@ -71,39 +65,23 @@
         var regZipCode = new RegExp("^.*?[0-9]{4,}$", "g");
 
         if (memberEdit.zipCode.value.length > 0 && !regZipCode.test(memberEdit.zipCode.value)) {
-            memberEdit.zipCode.style.background = couleurErreur;
-            if (nbError == 0)memberEdit.zipCode.focus();
+            memberEdit.zipCode.classList.add('st-invalid');
+            if (nbError === 0)memberEdit.zipCode.focus();
             nbError++;
         } else {
-            memberEdit.zipCode.style.background = couleurValide;
+            memberEdit.zipCode.classList.remove('st-invalid');
         }
-
-        // Ville
-        /*
-         // Il en fait valide qu'une ville puisse contenir des chiffres. p.ex. : Genève 26
-         var regCityContainNumber = new RegExp("^.*[0-9]+.*$");
-
-         if(memberEdit.city.value.length == 0 || regCityContainNumber.test(memberEdit.city.value)){
-         memberEdit.city.style.background=couleurErreur;
-         if(nbError==0)memberEdit.city.focus();
-         nbError++;
-         }
-         else{
-         memberEdit.city.style.background=couleurValide;
-         }
-         */
 
         //email
         var regEmail = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-zA-Z]{2,4}$", "g");
 
-        if (regEmail.test(memberEdit.email.value) || memberEdit.email.value == "") {
-            memberEdit.email.style.background = couleurValide;
-        }
-        else {
-            memberEdit.email.style.background = couleurErreur;
-            if (nbError == 0)memberEdit.email.focus();
+        if (!regEmail.test(memberEdit.email.value) && memberEdit.email.value !== "") {
+            memberEdit.email.classList.add('st-invalid');
+            if (nbError === 0)memberEdit.email.focus();
             alert("L'adresse e-mail est invalide. Elle peut contenir des caractères interdits.");
             nbError++;
+        } else {
+            memberEdit.email.classList.remove('st-invalid');
         }
 
         //date de naissance
@@ -111,39 +89,38 @@
             memberEdit.birthDateMonth.value - 1,
             memberEdit.birthDateDay.value);
 
-        if (memberEdit.birthDateYear.value == 0 &&
-            memberEdit.birthDateMonth.value == 0 &&
-            memberEdit.birthDateDay.value == 0 &&
-            memberEdit.statutID.value != 2) {
+        if (memberEdit.birthDateYear.value === 0 &&
+            memberEdit.birthDateMonth.value === 0 &&
+            memberEdit.birthDateDay.value === 0 &&
+            memberEdit.statutID.value !== 2) {
             // Si la date de naissance n'est pas précisé et le statut du membre n'est pas actif/junior alors c'est ok.
-            memberEdit.birthDateYear.style.background = couleurValide;
-            memberEdit.birthDateMonth.style.background = couleurValide;
-            memberEdit.birthDateDay.style.background = couleurValide;
-
-        } else if (dateN.getFullYear() != memberEdit.birthDateYear.value ||
-            (dateN.getMonth() != memberEdit.birthDateMonth.value - 1) ||
-            dateN.getDate() != memberEdit.birthDateDay.value) {
-            memberEdit.birthDateYear.style.background = couleurErreur;
-            memberEdit.birthDateMonth.style.background = couleurErreur;
-            memberEdit.birthDateDay.style.background = couleurErreur;
-            if (nbError == 0)memberEdit.birthDateMonth.focus();
+            memberEdit.birthDateYear.classList.remove('st-invalid');
+            memberEdit.birthDateMonth.classList.remove('st-invalid');
+            memberEdit.birthDateDay.classList.remove('st-invalid');
+        } else if (dateN.getFullYear() !== memberEdit.birthDateYear.value ||
+            (dateN.getMonth() !== memberEdit.birthDateMonth.value - 1) ||
+            dateN.getDate() !== memberEdit.birthDateDay.value) {
+            memberEdit.birthDateYear.classList.add('st-invalid');
+            memberEdit.birthDateMonth.classList.add('st-invalid');
+            memberEdit.birthDateDay.classList.add('st-invalid');
+            if (nbError === 0)memberEdit.birthDateMonth.focus();
             nbError++;
         } else {
-            memberEdit.birthDateYear.style.background = couleurValide;
-            memberEdit.birthDateMonth.style.background = couleurValide;
-            memberEdit.birthDateDay.style.background = couleurValide;
+            memberEdit.birthDateYear.classList.remove('st-invalid');
+            memberEdit.birthDateMonth.classList.remove('st-invalid');
+            memberEdit.birthDateDay.classList.remove('st-invalid');
         }
 
         //statut
-        if (memberEdit.statutID.value == 1) {
-            memberEdit.statutID.style.background = couleurErreur;
-            if (nbError == 0)memberEdit.statutID.focus();
+        if (memberEdit.statutID.value === 1) {
+            memberEdit.statutID.classList.add('st-invalid');
+            if (nbError === 0)memberEdit.statutID.focus();
             nbError++;
         } else {
-            memberEdit.statutID.style.background = couleurValide;
+            memberEdit.statutID.classList.remove('st-invalid');
         }
 
-        return nbError == 0;
+        return nbError === 0;
     }
 
     function restreindreNumeroTelFax(input) {
@@ -169,7 +146,7 @@
 
     function autoStatutUpdate() {
         autoStatut = document.getElementById("autoStatut");
-        if (memberEdit.statutID.value == 2) {
+        if (memberEdit.statutID.value === 2) {
             if (<?php echo date('Y'); ?> -memberEdit.birthDateYear.value >= 21) {
                 autoStatut.innerHTML = "Membre actif";
             } else {
@@ -180,7 +157,7 @@
         }
 
         // Change of status for the Tchoukup
-        if (memberEdit.statutID.value == 4) { // Membre passif
+        if (memberEdit.statutID.value === 4) { // Membre passif
             memberEdit.DBDCHTB.value = 5; // TUP E-mail
             memberEdit.DBDCHTB.disabled = true;
         } else {
@@ -189,7 +166,7 @@
 
         // Change of status and visibility for the Kids sport category
         var age = computeAge();
-        if (memberEdit.statutID.value == 2 && age.years <= 15) {
+        if (memberEdit.statutID.value === 2 && age.years <= 15) {
             $(memberEdit.kidsSportCat).show();
             $('[for=kidsSportCat]').show();
         }
@@ -221,12 +198,12 @@
         country = document.getElementById("DBDPays");
 
         var text = "<strong>Aperçu de l'adresse</strong> :<br />";
-        if (companyName.value != "") {
+        if (companyName.value !== "") {
             text += companyName.value + "<br />";
         }
 
-        if (firstname.value != "" || lastname.value != "") {
-            if (title.value != 1) {
+        if (firstname.value !== "" || lastname.value !== "") {
+            if (title.value !== 1) {
                 text += title.options[title.selectedIndex].innerHTML + "<br />";
             }
             text += firstname.value + " " + lastname.value + "<br />";
@@ -234,13 +211,13 @@
 
         text += address1.value + "<br />";
 
-        if (address2.value != "") {
+        if (address2.value !== "") {
             text += address2.value + "<br />";
         }
 
         text += zipCode.value + " " + city.value + "<br />";
 
-        if (country.value != "42") {
+        if (country.value !== "42") {
             text += country.options[country.selectedIndex].innerHTML;
         }
 
@@ -249,9 +226,9 @@
 
     function updateTchoukupDelivery() {
         tupd = $("#tchoukupDelivery");
-        if (memberEdit.DBDCHTB.value == 2) { // TUP Papier + E-mail
+        if (memberEdit.DBDCHTB.value === 2) { // TUP Papier + E-mail
             tupd.show();
-            if (memberEdit.statutID.value == 2) { // Membre actif ou junior
+            if (memberEdit.statutID.value === 2) { // Membre actif ou junior
                 tupd.find("p").html("tchouk<sup>up</sup> envoyé au club");
             } else {
                 tupd.find("p").html("tchouk<sup>up</sup> envoyé à l'adresse indiqué ci-dessus.");

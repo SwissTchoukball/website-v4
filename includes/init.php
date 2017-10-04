@@ -74,9 +74,6 @@ include "markdown.php";
 // fonctions
 include "fonctions.inc.php";
 
-// variables du look
-include "var.look.inc.php";
-
 // gestion des langues
 include "langue/langue.inc.php";
 
