@@ -26,7 +26,7 @@ define("VAR_REP_IMAGE_EQUIPE_SUISSE", "/pictures/equipesSuisses/");
 define("VAR_IMAGE_FLYER_PRESENTATION", "/pictures/flyer_presentation_miniature.gif");
 define("VAR_IMAGE_TERRAIN_PRESENTATION", "/pictures/terrain_presentation.gif");
 define("VAR_IMAGE_BANNIERE_ARBITRE", "/pictures/banniere_arbitre.gif");
-define("VAR_IMAGE_LOGO_SWISSOLYMPIC", "/logos/logo_swissolympic.gif");
+define("VAR_IMAGE_LOGO_SWISSOLYMPIC", "/pictures/logos/logo_swissolympic.gif");
 define("VAR_IMAGE_PHOTO_SPONSORING", "/pictures/photo_page_commission.sponsoring.jpg");
 define("VAR_IMG_NEWS_LETTER_PICT", "/pictures/newsLetterPicture.jpg");
 define("VAR_IMG_TAIWAN_2004", "/pictures/Taiwan2004.jpg");
