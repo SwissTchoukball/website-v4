@@ -97,9 +97,9 @@
             memberEdit.birthDateYear.classList.remove('st-invalid');
             memberEdit.birthDateMonth.classList.remove('st-invalid');
             memberEdit.birthDateDay.classList.remove('st-invalid');
-        } else if (dateN.getFullYear() !== memberEdit.birthDateYear.value ||
-            (dateN.getMonth() !== memberEdit.birthDateMonth.value - 1) ||
-            dateN.getDate() !== memberEdit.birthDateDay.value) {
+        } else if (dateN.getFullYear() !== parseInt(memberEdit.birthDateYear.value) ||
+            (dateN.getMonth() !== parseInt(memberEdit.birthDateMonth.value - 1)) ||
+            dateN.getDate() !== parseInt(memberEdit.birthDateDay.value)) {
             memberEdit.birthDateYear.classList.add('st-invalid');
             memberEdit.birthDateMonth.classList.add('st-invalid');
             memberEdit.birthDateDay.classList.add('st-invalid');
