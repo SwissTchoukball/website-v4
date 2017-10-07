@@ -128,11 +128,24 @@ if ($canEdit) {
             <span class="st-form__side-info tooltip">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
             <span id="addressPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
             <label for="address">Adresse</label>
-            <textarea id="address" name="address" onkeyup="updateAddressPreview();"><?php echo $address; ?></textarea>
+            <textarea id="address"
+                      name="address"
+                      onkeyup="updateAddressPreview();"
+                      placeholder="<?php echo $presidentAddress; ?>"><?php echo $address; ?></textarea> <!-- Do not add line break as it will remove the palceholder -->
             <label for="npa">NPA</label>
-            <input type="text" id="npa" name="npa" onkeyup="updateAddressPreview();" value="<?php echo $npa; ?>"/>
+            <input type="text"
+                   id="npa"
+                   name="npa"
+                   onkeyup="updateAddressPreview();"
+                   value="<?php echo $npa; ?>"
+                   placeholder="<?php echo $presidentNPA; ?>"/>
             <label for="city">Ville</label>
-            <input type="text" id="city" name="city" onkeyup="updateAddressPreview();" value="<?php echo $city; ?>"/>
+            <input type="text"
+                   id="city"
+                   name="city"
+                   onkeyup="updateAddressPreview();"
+                   value="<?php echo $city; ?>"
+                   placeholder="<?php echo $presidentCity; ?>"/>
             <label>Canton</label>
             <?php
             if ($_SESSION['__userLevel__'] <= 0) {
@@ -156,11 +169,25 @@ if ($canEdit) {
                 class="st-form__side-info tooltip">Si aucune information n'est indiquée, celles du ou de la président-e sont utilisées.</span>
             <span id="infoPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
             <label for="phone">Téléphone</label>
-            <input type="text" id="phone" name="phone" onkeyup="updateInfoPreview();" value="<?php echo $phone; ?>"/>
+            <input type="text"
+                   id="phone"
+                   name="phone"
+                   onkeyup="updateInfoPreview();"
+                   value="<?php echo $phone; ?>"
+                   placeholder="<?php echo $presidentPhone != "" ? $presidentPhone : $presidentMobile; ?>"/>
             <label for="email">E-mail</label>
-            <input type="text" id="email" name="email" onkeyup="updateInfoPreview();" value="<?php echo $email; ?>"/>
+            <input type="text"
+                   id="email"
+                   name="email"
+                   onkeyup="updateInfoPreview();"
+                   value="<?php echo $email; ?>"
+                   placeholder="<?php echo $presidentEmail; ?>"/>
             <label for="url">Site web</label>
-            <input type="text" id="url" name="url" onkeyup="updateInfoPreview();" value="<?php echo $url; ?>"/>
+            <input type="text"
+                   id="url"
+                   name="url"
+                   onkeyup="updateInfoPreview();"
+                   value="<?php echo $url; ?>"/>
         </fieldset>
         <input type="hidden" name="clubID" value="<?php echo $clubID; ?>"/>
         <input type="hidden" name="postType" value="<?php echo $postType; ?>"/>
