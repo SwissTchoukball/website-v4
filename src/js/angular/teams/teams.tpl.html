@@ -1,6 +1,9 @@
 <div ng-if="!$ctrl.selectedTeam">
     <!-- Registered teams -->
     <h3>Équipes inscrites</h3>
+    <div ng-if="!$ctrl.teamsLoaded">
+        Chargement en cours...
+    </div>
     <div ng-repeat="edition in $ctrl.editions">
         <h2 ng-if="edition.teams.length > 0">
             Saison {{edition.season.name}}, {{edition.category.name}}

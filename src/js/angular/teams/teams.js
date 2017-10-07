@@ -12,6 +12,8 @@ angular
 
                 var $ctrl = this;
 
+                $ctrl.teamsLoaded = false;
+
                 backendService.getEditions()
                     .then(function(editions) {
                         $ctrl.editions = editions.map(function(edition) {
@@ -28,6 +30,7 @@ angular
                                     });
                                     $ctrl.editions[editionIndex].teams.push(team);
                                 });
+                                $ctrl.teamsLoaded = true;
                             });
                     });
 
