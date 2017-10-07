@@ -28,7 +28,7 @@ if ($_SESSION["__userLevel__"] == 100 && isset($_COOKIE["login"])) {
     $cookie = $_COOKIE["login"];
 
     $requeteSQL = "SELECT p.id, nom, prenom, username, userLevel, password, idClub, gestionMembresClub, c.nbIdClub
-                   FROM `Personne` p, `ClubsFstb` c
+                   FROM `Personne` p, `clubs` c
                    WHERE p.`username`='" . $cookie["username"] . "' AND p.`idClub`=c.`id`";
     $recordset = mysql_query($requeteSQL);
     $record = mysql_fetch_array($recordset);

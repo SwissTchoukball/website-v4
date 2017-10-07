@@ -15,7 +15,7 @@ if ($_SESSION['__nbIdClub__'] == 15 && !isAdmin()) { //15 = Club indéfini
         "SELECT c.`club`,
                p.`nom`,
                p.`prenom`
-        FROM `DBDPersonne` p, `ClubsFstb` c
+        FROM `DBDPersonne` p, `clubs` c
         WHERE p.`idCHTB` = 2
         AND p.`idClub` = c.`nbIdClub`
         AND c.`statusId` = 1 -- Membre d'un club adhérent actif

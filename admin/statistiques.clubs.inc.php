@@ -1,11 +1,11 @@
 <div class="stats-clubs">
     <?php
     echo "<h4>Nombre de clubs</h4>";
-    $requeteNombreClubs = "SELECT COUNT(*) AS nbClubsFSTB FROM ClubsFstb WHERE statusId = 1 OR statusId = 2";
+    $requeteNombreClubs = "SELECT COUNT(*) AS nbClubs FROM clubs WHERE statusId = 1 OR statusId = 2";
     $retour = mysql_query($requeteNombreClubs);
     $donnee = mysql_fetch_assoc($retour);
-    $nbClubsFSTB = $donnee['nbClubsFSTB'];
-    echo "<p>Il y a " . $nbClubsFSTB . " clubs membres de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".</p>";
+    $nbClubs = $donnee['nbClubs'];
+    echo "<p>Il y a " . $nbClubs . " clubs membres de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".</p>";
 
     echo "<h4>Nombre de membres par club</h4>";
     $requeteNombreMembresParClub =
@@ -19,7 +19,7 @@
 			COUNT(if(p.idStatus=23,1,NULL)) AS nbMembresVIP,
 			COUNT(if(p.idStatus!=3 AND p.idStatus!=4 AND p.idStatus!=5 AND p.idStatus!=6 AND p.idStatus!=23,1,NULL)) AS nbMembresAutres,
 			COUNT(p.idDbdPersonne) AS nbMembresTotal
-		 FROM ClubsFstb c
+		 FROM clubs c
 		 LEFT OUTER JOIN DBDPersonne p ON c.nbIdClub = p.idClub
 		 WHERE c.statusId = 1 OR c.statusId = 2
 		 GROUP BY p.idClub ";
@@ -138,7 +138,7 @@
 			COUNT(if(p.idStatus=6 && p.idSexe=2,1,NULL)) AS nbHJuniors,
 			COUNT(if(p.idStatus=6 && p.idSexe=3,1,NULL)) AS nbFJuniors,
 			COUNT(if(p.idStatus=6 && p.idSexe=1,1,NULL)) AS nbIJuniors
-		 FROM DBDPersonne p, ClubsFstb c
+		 FROM DBDPersonne p, clubs c
 		 WHERE (p.idStatus = 3 OR p.idStatus = 6)
 		 	AND c.nbIdClub = p.idClub
 		 	AND (c.statusId = 1 OR c.statusId = 2)";

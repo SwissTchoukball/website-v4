@@ -11,7 +11,7 @@ statInsererPageSurf(__FILE__);
         $username = validiteInsertionTextBd($_POST["username"]);
         $password = md5($_POST["motDePasse"]);
         $email = validiteInsertionTextBd($_POST["email"]);
-        $idClub = validiteInsertionTextBd($_POST["ClubsFstb"]);
+        $idClub = validiteInsertionTextBd($_POST["clubs"]);
 
         $requeteSQL = "INSERT INTO `Personne` ( `nom` , `prenom`, `username`,
 						`password` , `email` , `idClub`)
@@ -105,7 +105,7 @@ statInsererPageSurf(__FILE__);
         // attention, pour garder une validité des données, les présidents
         // de club ne peuvent pas modifier leur club s'il sont de simple utilsiateur
 
-        /*$requeteSQLClub="SELECT * FROM ClubsFstb ORDER BY club";
+        /*$requeteSQLClub="SELECT * FROM clubs ORDER BY club";
         $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");
 
         echo "<select name='idClub'>";

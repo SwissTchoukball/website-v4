@@ -37,7 +37,7 @@ if ($newClub) {
 						   ct.id AS idCanton, ct.nomCanton" . $_SESSION['__langue__'] . " AS nomCanton,
 						   pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident, pres.npa AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident, pres.telPrive AS telephonePresident, pres.portable AS portablePresident,
 						   CONCAT(editor.prenom, editor.nom) AS lastEditorName
-					FROM ClubsFstb c
+					FROM clubs c
 					LEFT OUTER JOIN Canton ct ON c.canton = ct.id
 					LEFT OUTER JOIN DBDPersonne pres ON c.idPresident = pres.idDbdPersonne
 					LEFT OUTER JOIN Personne editor ON c.lastEditorID = editor.id

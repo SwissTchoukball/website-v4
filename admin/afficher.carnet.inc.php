@@ -26,7 +26,7 @@ else {
 
         $userLevel = 10;
         $email = validiteInsertionTextBd($_POST["email"]);
-        $idClub = validiteInsertionTextBd($_POST["ClubsFstb"]);
+        $idClub = validiteInsertionTextBd($_POST["clubs"]);
 
         // selection pour le prochain affichage par lettre
         $lettre = substr($record["nom"], 0, 1);

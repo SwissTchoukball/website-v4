@@ -1,8 +1,8 @@
 <div id="membres"><?php
     statInsererPageSurf(__FILE__);
 
-    //$clubRequest = "SELECT nbIdClub AS idClub, gestionMembresClub, club FROM Personne, ClubsFstb WHERE Personne.nom='".$_SESSION["__nom__"]."' AND Personne.prenom='".$_SESSION["__prenom__"]."' AND Personne.idClub=ClubsFstb.id";
-    $clubRequest = "SELECT club FROM ClubsFstb WHERE nbIdClub=" . $_SESSION["__nbIdClub__"];
+    //$clubRequest = "SELECT nbIdClub AS idClub, gestionMembresClub, club FROM Personne, clubs WHERE Personne.nom='".$_SESSION["__nom__"]."' AND Personne.prenom='".$_SESSION["__prenom__"]."' AND Personne.idClub=clubs.id";
+    $clubRequest = "SELECT club FROM clubs WHERE nbIdClub=" . $_SESSION["__nbIdClub__"];
     $clubResult = mysql_query($clubRequest);
     $clubData = mysql_fetch_assoc($clubResult);
 

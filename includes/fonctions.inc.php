@@ -174,7 +174,7 @@ function getReferees($orderByLevel = false)
                              cl.club AS clubName
                       FROM Arbitres a
                       LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = a.personId
-                      LEFT OUTER JOIN ClubsFstb cl ON cl.nbIdClub = p.idClub" .
+                      LEFT OUTER JOIN clubs cl ON cl.nbIdClub = p.idClub" .
         $queryPartOrderBy;
     if (!$referessData = mysql_query($refereesQuery)) {
         $errorReferee = array();
@@ -506,11 +506,11 @@ function afficherListeClubs($selectedClubId, $typeId)
 {
     $requeteListeClubs =
         "SELECT c.id, c.nbIdClub, c.club, c.statusId, cs.name" . $_SESSION['__langue__'] . " AS statusName
-         FROM ClubsFstb c, clubs_status cs
+         FROM clubs c, clubs_status cs
          WHERE c.statusId = cs.id
          ORDER BY statusId, club";
     $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requête pour l'affichage de la liste des clubs</h4>");
-    echo "<select name='ClubsFstb'>";
+    echo "<select name='clubs'>";
     $previousClubStatusId = 0;
     while ($club = mysql_fetch_assoc($reponse)) {
         $nomClub = $club['club'];

@@ -29,7 +29,7 @@ $clubsRequest = "SELECT
                     $clubsRequestPart_nbMembresParStatut
                     c.statusId,
                     cs.fixedFeeAmount
-                 FROM clubs_status cs, ClubsFstb c
+                 FROM clubs_status cs, clubs c
                  LEFT OUTER JOIN DBDPersonne p
                     ON p.idClub = c.nbIdClub
                  WHERE (c.statusId = 1 OR c.statusId = 2)

@@ -10,7 +10,7 @@
     <?php
     $queryClubs =
         "SELECT c.id, c.nomComplet, c.adresse, c.npa, c.ville, c.email, c.telephone, c.statusId, cs.name" . $_SESSION['__langue__'] . " AS status, c.url
-			 FROM ClubsFstb c, clubs_status cs
+			 FROM clubs c, clubs_status cs
 			 WHERE c.id!=0
 			 	AND c.statusId = cs.id
 			 ORDER BY c.statusId, c.nomPourTri";

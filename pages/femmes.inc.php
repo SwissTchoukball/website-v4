@@ -19,7 +19,7 @@ $afficherNumero = false;
     $query = getTeamQuery(2);
     $recordset = mysql_query($query) or die ("<H1>mauvaise requete</H1>");
 
-    //$requeteSQL = "SELECT *, `equipeFemme` AS `idPosteEquipe` FROM `Personne`, `ClubsFstb` WHERE `equipeFemme`>'0' AND `ClubsFstb`.`id`=`Personne`.`idClub` ORDER BY `equipeFemme`, `nom`, `prenom`";
+    //$requeteSQL = "SELECT *, `equipeFemme` AS `idPosteEquipe` FROM `Personne`, `clubs` WHERE `equipeFemme`>'0' AND `clubs`.`id`=`Personne`.`idClub` ORDER BY `equipeFemme`, `nom`, `prenom`";
     //$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
 
     while ($record = mysql_fetch_array($recordset)) {

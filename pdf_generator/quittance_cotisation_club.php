@@ -21,7 +21,7 @@ if (!isset($_GET['annee']) || !is_numeric($_GET['annee'])) {
 $annee = $_GET['annee'];
 
 $queryClub = "SELECT c.club, c.nomComplet, cc.montant, cc.datePaiement, cc.nbMembresActifs, cc.nbMembresJuniors, cc.nbMembresSoutiens, cc.nbMembresPassifs, cc.nbMembresVIP
-			  FROM ClubsFstb c, Cotisations_Clubs cc
+			  FROM clubs c, Cotisations_Clubs cc
 			  WHERE c.id = " . $_SESSION['__idClub__'] . "
 			  AND c.nbIdClub = cc.idClub
 			  AND cc.annee = " . $annee . "

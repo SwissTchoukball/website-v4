@@ -40,7 +40,7 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         SELECT rcc.from_clubID, rcc.to_clubID, rcc.idDbdPersonne, p.nom AS lastName, p.prenom AS firstName,
         u.email AS authorEmail, CONCAT_WS(' ', u.prenom, u.nom) AS authorName,
         cs.club AS sourceClubName, ct.club AS targetClubName 
-        FROM DBDRequetesChangementClub rcc, DBDPersonne p, Personne u, ClubsFstb cs, ClubsFstb ct
+        FROM DBDRequetesChangementClub rcc, DBDPersonne p, Personne u, clubs cs, clubs ct
         WHERE rcc.id = $updatedTransferId
         AND rcc.userID = u.id
         AND rcc.from_clubID = cs.nbIdClub
@@ -105,7 +105,7 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         if ($transferAccepted) {
             $getRelatedClubsManagersQuery = "
                 SELECT p.email
-                FROM Personne p, ClubsFstb c
+                FROM Personne p, clubs c
                 WHERE (c.nbIdClub = $targetClubId || c.nbIdClub = $sourceClubId)
                 AND c.id = p.idClub
                 AND p.gestionMembresClub = 1";
@@ -137,7 +137,7 @@ $transferRequestsQuery = "
   SELECT rcc.id, rcc.accepted, UNIX_TIMESTAMP(rcc.datetime) AS timestamp, u.username,
   p.idDbdPersonne AS idPerson, p.nom AS lastName, p.prenom AS firstName, p.raisonSociale AS companyName,
   co.nbIdClub AS idClubOrigin, co.club AS nameClubOrigin, ct.nbIdClub AS idClubTarget, ct.club AS nameClubTarget
-  FROM DBDRequetesChangementClub rcc, DBDPersonne p, ClubsFstb co, ClubsFstb ct, Personne u
+  FROM DBDRequetesChangementClub rcc, DBDPersonne p, clubs co, clubs ct, Personne u
   WHERE rcc.idDbdPersonne = p.idDbdPersonne
   AND rcc.from_clubID = co.nbIdClub
   AND rcc.to_clubID = ct.nbIdClub

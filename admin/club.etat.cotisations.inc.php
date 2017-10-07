@@ -14,9 +14,9 @@
 
         //Affichage de la liste des clubs avec leur état actuel de paiemenet de cotisations
         $clubQuery =
-            "SELECT Cotisations_Clubs.id, annee, ClubsFstb.club, Cotisations_Clubs.idClub, montant, datePaiement
-			 FROM Cotisations_Clubs, ClubsFstb
-			 WHERE Cotisations_Clubs.idClub=ClubsFstb.nbIdClub
+            "SELECT Cotisations_Clubs.id, annee, clubs.club, Cotisations_Clubs.idClub, montant, datePaiement
+			 FROM Cotisations_Clubs, clubs
+			 WHERE Cotisations_Clubs.idClub=clubs.nbIdClub
 			 	AND annee>='" . $anneePassee . "'
 			 ORDER BY annee DESC";
         $result = mysql_query($clubQuery);

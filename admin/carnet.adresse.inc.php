@@ -35,9 +35,9 @@ $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
 							 c.`club` LIKE '%" . $tok . "%'";
             $tok = strtok(" ");
         }
-        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE (" . $possibilite . ") AND p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
+        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c WHERE (" . $possibilite . ") AND p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
     } else {
-        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `ClubsFstb` c WHERE p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
+        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c WHERE p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
     }
     //echo $requeteSQL;
     $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");

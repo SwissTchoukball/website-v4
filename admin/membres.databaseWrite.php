@@ -52,7 +52,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     if (!$noName) {
         // Vérification existance nom et prénom (+indication club)
         // TODO: Gérer de multiples personnes avec le même nom.
-        $duplicateNameRequest = "SELECT club, idDbdPersonne FROM `DBDPersonne`, `ClubsFstb` WHERE `nom` LIKE '" . $lastname . "' AND `prenom` LIKE '" . $firstname . "' AND `nbIdClub`=`idClub` AND `idDbdPersonne`!=" . $_POST['memberID'] . " LIMIT 1";
+        $duplicateNameRequest = "SELECT club, idDbdPersonne FROM `DBDPersonne`, `clubs` WHERE `nom` LIKE '" . $lastname . "' AND `prenom` LIKE '" . $firstname . "' AND `nbIdClub`=`idClub` AND `idDbdPersonne`!=" . $_POST['memberID'] . " LIMIT 1";
         $duplicateNameResult = mysql_query($duplicateNameRequest);
         if (mysql_num_rows($duplicateNameResult) > 0) {
             $duplicateName = mysql_fetch_assoc($duplicateNameResult);
@@ -74,7 +74,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     $mobile = validiteInsertionTextBd($_POST['mobile']);
     $fax = validiteInsertionTextBd($_POST['fax']);
     $email = strtolower(validiteInsertionTextBd($_POST['email']));
-    $clubID = validiteInsertionTextBd($_POST['ClubsFstb']);
+    $clubID = validiteInsertionTextBd($_POST['clubs']);
     $languageID = validiteInsertionTextBd($_POST['DBDLangue']);
     $sexID = validiteInsertionTextBd($_POST['DBDSexe']);
     $tchoukupID = validiteInsertionTextBd($_POST['DBDCHTB']);
@@ -290,9 +290,9 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     }
 } elseif ($_POST['postType'] == "transfer-request") {
     //On ne vérifie pas que la personne qui fait la demande soit du club entrant ou sortant. Ce n'est qu'une demande.
-    if (isValidClubID($_POST['currentClubID']) && isValidClubID($_POST['ClubsFstb'])) {
+    if (isValidClubID($_POST['currentClubID']) && isValidClubID($_POST['clubs'])) {
         $transferRequestQuery = "INSERT INTO `DBDRequetesChangementClub` (`userID`, `idDbdPersonne`, `from_clubID`, `to_clubID`, `datetime`)
-                                 VALUES (" . $_SESSION['__idUser__'] . ", " . $_POST['memberID'] . ", " . $_POST['currentClubID'] . ", " . $_POST['ClubsFstb'] . ", '" . date('Y-m-d H:i:s') . "')";
+                                 VALUES (" . $_SESSION['__idUser__'] . ", " . $_POST['memberID'] . ", " . $_POST['currentClubID'] . ", " . $_POST['clubs'] . ", '" . date('Y-m-d H:i:s') . "')";
         if (mysql_query($transferRequestQuery)) {
             $requestID = mysql_insert_id();
             //Envoi d'un e-mail pour avertir le webmaster
@@ -315,6 +315,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             echo '<p class="error">Erreur lors de l\'enregistrement de la demande de transfert.<br />' . mysql_error() . '</p>';
         }
     } else {
-        echo '<p class="notification notification--error">ID invalide<br />' . htmlentities($_POST['currentClubID'] . ' ' . $_POST['ClubsFstb']) . '</p>';
+        echo '<p class="notification notification--error">ID invalide<br />' . htmlentities($_POST['currentClubID'] . ' ' . $_POST['clubs']) . '</p>';
     }
 }

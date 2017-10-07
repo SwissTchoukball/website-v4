@@ -21,7 +21,7 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
     $usernameLogin = strtolower(mysql_real_escape_string(strip_tags($_POST["username"])));
 
     $requeteSQL = "SELECT p.id, nom, prenom, username, userLevel, password, idClub, gestionMembresClub, c.nbIdClub
-                   FROM `Personne` p, `ClubsFstb` c
+                   FROM `Personne` p, `clubs` c
                    WHERE (p.`username`='" . $usernameLogin . "' OR p.email = '" . $usernameLogin . "')
                    AND p.`idClub`=c.`id`";
     $resultatSQL = mysql_query($requeteSQL);

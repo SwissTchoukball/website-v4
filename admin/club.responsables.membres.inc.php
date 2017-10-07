@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <?php
-    $membersManagersRequest = "SELECT p.nom, p.prenom, c.club, p.email FROM Personne p, ClubsFstb c WHERE p.idClub=c.id AND p.gestionMembresClub=1 ORDER BY c.club";
+    $membersManagersRequest = "SELECT p.nom, p.prenom, c.club, p.email FROM Personne p, clubs c WHERE p.idClub=c.id AND p.gestionMembresClub=1 ORDER BY c.club";
     //echo $membersRequest;
     $allEmails = "";
     $membersManagersResult = mysql_query($membersManagersRequest);

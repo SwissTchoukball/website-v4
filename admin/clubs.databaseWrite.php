@@ -34,7 +34,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
             $autoIncrementQuery = "SELECT `AUTO_INCREMENT`
 									FROM  INFORMATION_SCHEMA.TABLES
 									WHERE TABLE_SCHEMA = 'kuix_tchoukball1'
-									AND   TABLE_NAME   = 'ClubsFstb'";
+									AND   TABLE_NAME   = 'clubs'";
             $autoIncrementData = mysql_query($autoIncrementQuery);
             $autoIncrementArray = mysql_fetch_assoc($autoIncrementData);
             $autoIncrement = $autoIncrementArray['AUTO_INCREMENT'];
@@ -43,7 +43,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 
             $memberID = $_POST['memberID'];
             $clubInsertRequest =
-                "INSERT INTO `ClubsFstb`(
+                "INSERT INTO `clubs`(
                     `id`,
                     `club`,
                     `nomComplet`,
@@ -87,7 +87,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
         } elseif ($_POST['postType'] == "editClub") { // Modification of an already existing club
 
 
-            $clubUpdateRequest = "UPDATE ClubsFstb
+            $clubUpdateRequest = "UPDATE clubs
 									SET adresse='" . $address . "',
 										npa=" . $npa . ",
 										ville='" . $city . "',

@@ -1,6 +1,6 @@
 <?php
 
-$memberQuery = "SELECT p.idDbdPersonne AS id, p.nom, p.prenom, p.raisonSociale, c.nbIdClub AS idClubActuel, c.club AS nomClubActuel FROM DBDPersonne p, ClubsFstb c WHERE p.idDbdPersonne=" . $_GET['transfer-request'] . " AND p.idClub=c.nbIdClub LIMIT 1";
+$memberQuery = "SELECT p.idDbdPersonne AS id, p.nom, p.prenom, p.raisonSociale, c.nbIdClub AS idClubActuel, c.club AS nomClubActuel FROM DBDPersonne p, clubs c WHERE p.idDbdPersonne=" . $_GET['transfer-request'] . " AND p.idClub=c.nbIdClub LIMIT 1";
 if ($memberResource = mysql_query($memberQuery)) {
     $member = mysql_fetch_assoc($memberResource);
     if ($member['prenom'] == "" && $member['nom'] == "") {
@@ -40,7 +40,7 @@ if ($memberResource = mysql_query($memberQuery)) {
 ?>
 <script type="text/javascript">
     function updateNewClubName() {
-        var newClubName = $("select[name=ClubsFstb] option:selected").text();
+        var newClubName = $("select[name=clubs] option:selected").text();
         $("input[name=newClubName]").attr("value", newClubName);
     }
 </script>

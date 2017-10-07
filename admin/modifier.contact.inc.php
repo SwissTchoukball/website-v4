@@ -3,7 +3,7 @@ statInsererPageSurf(__FILE__);
 ?>
 
 <?php
-$requeteSQL = "SELECT *, p.email FROM Personne p, ClubsFstb c WHERE p.id='" . $modificationId . "' AND p.idClub=c.id";
+$requeteSQL = "SELECT *, p.email FROM Personne p, clubs c WHERE p.id='" . $modificationId . "' AND p.idClub=c.id";
 $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete A</H1>");
 $record = mysql_fetch_array($recordset);
 

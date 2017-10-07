@@ -5,7 +5,7 @@ function getTeamQuery($teamID)
 				  FROM CadreNational_Membres cnm
 				  LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = cnm.idPersonne
 				  LEFT OUTER JOIN CadreNational_Fonctions cnf ON cnf.id = cnm.idFonction
-				  LEFT OUTER JOIN ClubsFstb clubs ON clubs.nbIdClub = p.idClub
+				  LEFT OUTER JOIN clubs clubs ON clubs.nbIdClub = p.idClub
 				  WHERE cnm.idEquipe=" . $teamID . "
 				  AND (ISNULL(cnm.dateFin) OR cnm.dateFin >= CURDATE())
 				  ORDER BY cnm.idFonction, p.nom, p.prenom";

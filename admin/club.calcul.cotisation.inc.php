@@ -30,7 +30,7 @@
 						$clubRequestPart_nbMembresParStatut
 						c.statusId,
 						cs.fixedFeeAmount
-					FROM clubs_status cs, ClubsFstb c
+					FROM clubs_status cs, clubs c
 					LEFT OUTER JOIN DBDPersonne p
 						ON p.idClub = c.nbIdClub
 					WHERE " . $clubRequestPart_WHERE . "
@@ -62,7 +62,7 @@
             <select name="club" title="Choisir un club" onChange="document.clubSwitcher.submit();">
                 <option value="15">Choisir un club</option>
                 <?php
-                $clubsRequest = "SELECT nbIdClub, club FROM ClubsFstb WHERE statusId = 1 OR statusId = 2 ORDER BY club";
+                $clubsRequest = "SELECT nbIdClub, club FROM clubs WHERE statusId = 1 OR statusId = 2 ORDER BY club";
                 $clubsResult = mysql_query($clubsRequest);
                 while ($clubsData = mysql_fetch_assoc($clubsResult)) {
                     $selected = "";

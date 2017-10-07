@@ -84,7 +84,7 @@ $requeteSQL =
 			p.`telPrive` AS telephonePresident, cl.`telephone` AS telephoneClub, p.`portable` AS portablePresident,
 			cl.`id` AS idClub, cl.`club`, cl.`nomComplet` AS nomClub, cl.`canton`,
 			ca.`nomCanton{$_SESSION["__langue__"]}` AS nomCanton
-	FROM `DBDPersonne` p, `ClubsFstb` cl, `Canton` ca
+	FROM `DBDPersonne` p, `clubs` cl, `Canton` ca
 	WHERE cl.`idPresident`=p.`idDbdPersonne`
 		AND cl.`canton`=ca.`id`
 		AND (cl.`statusId`=1 OR cl.`statusId`=2)

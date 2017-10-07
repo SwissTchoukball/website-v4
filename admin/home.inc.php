@@ -3,7 +3,7 @@ statInsererPageSurf(__FILE__);
 
 $userQuery = "
     SELECT p.nom, p.prenom, p.username, c.club, c.id AS clubId
-    FROM `Personne` p,`ClubsFstb` c
+    FROM `Personne` p,`clubs` c
     WHERE p.`username`='" . addslashes($_SESSION["__username__"]) . "'
     AND p.`idClub`=c.`id`";
 

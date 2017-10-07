@@ -702,7 +702,7 @@ if ($canEdit) {
                 afficherListeClubs($clubID, "nbIdClub");
             } else {
                 ?>
-                <input type="hidden" name="ClubsFstb" value="<?php echo $clubID; ?>"/>
+                <input type="hidden" name="clubs" value="<?php echo $clubID; ?>"/>
                 <?php
             }
             ?>

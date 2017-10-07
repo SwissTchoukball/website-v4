@@ -104,7 +104,7 @@ statInsererPageSurf(__FILE__);
             <label>Club</label>
             <?php
             if ($_SESSION["__userLevel__"] < 10) {
-                $requeteSQLClub = "SELECT * FROM ClubsFstb ORDER BY club";
+                $requeteSQLClub = "SELECT * FROM clubs ORDER BY club";
                 $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");
 
                 echo "<select name='idClub'>";
@@ -126,7 +126,7 @@ statInsererPageSurf(__FILE__);
                 echo "</select>";
             } // interdiction de modifier le club
             else {
-                $requeteSQLClub = "SELECT * FROM `Personne`, `ClubsFstb` WHERE `Personne`.`id`='" . $record["id"] . "' AND `Personne`.`idClub`=`ClubsFstb`.`id`";
+                $requeteSQLClub = "SELECT * FROM `Personne`, `clubs` WHERE `Personne`.`id`='" . $record["id"] . "' AND `Personne`.`idClub`=`clubs`.`id`";
                 $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");
 
                 $recordClub = mysql_fetch_array($recordsetClub);
