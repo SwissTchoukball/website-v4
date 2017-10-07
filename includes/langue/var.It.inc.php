@@ -239,8 +239,6 @@ define("VAR_LANG_DBD_RAISON_SOCIALE", "Aziendo");
 define("VAR_LANG_DBD_MEDIA_TYPE", "Tipo di media");
 define("VAR_LANG_DBD_MEDIA_CANTON", "Media cantone/stato");
 
-define("VAR_LANG_CLUB_FSTB", "Societ&agrave;");
-
 define("VAR_LANG_LIST_MODIFIER",
     "La modifica di un'entrata cambierà il valore di tutte le risorse che usano questo valore.");
 define("VAR_LANG_LIST_INSERER",

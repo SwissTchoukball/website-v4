@@ -241,8 +241,6 @@ define("VAR_LANG_DBD_RAISON_SOCIALE", "Firmenbezeichnung");
 define("VAR_LANG_DBD_MEDIA_TYPE", "Type de m&eacute;dia");
 define("VAR_LANG_DBD_MEDIA_CANTON", "Kanton/Staat des Mediums");
 
-define("VAR_LANG_CLUB_FSTB", "Verein");
-
 define("VAR_LANG_LIST_MODIFIER",
     "Die Veränderung einer Eingabe führt zur Veränderung des Wertes aller Ressourcen, die diesen Wert gebrauchen. ");
 define("VAR_LANG_LIST_INSERER",
