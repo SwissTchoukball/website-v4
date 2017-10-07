@@ -8,9 +8,11 @@
     tchouk<sup>up</sup> et que les membres ayant quitté le club cessent de le recevoir.</p>
 
 <h4>Aide à la promotion régionale du tchoukball</h4>
-<p>Dans le cadre de sa politique d'information et de promotion du tchoukball, la FSTB soutient les clubs qui désirent
-    envoyer le tchouk<sup>up</sup> à leurs contacts-clé. Ainsi, <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?> offre
-    un abonnement par 20 membres actifs. Profitez donc d'abonner gratuitement vos VIPs !</p>
+<p>
+    Dans le cadre de sa politique d'information et de promotion du tchoukball, Swiss Tchoukball soutient les clubs qui
+    désirent envoyer le tchouk<sup>up</sup> à leurs contacts-clé. Ainsi, <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?>
+    offre un abonnement par 20 membres actifs. Profitez donc d'abonner gratuitement vos VIPs !
+</p>
 
 <h4>Définition des catégories</h4>
 <dl>
