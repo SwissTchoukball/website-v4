@@ -17,8 +17,11 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
     $status = isValidID($_POST['clubs_status']) ? $_POST['clubs_status'] : 3;
     $phone = validiteInsertionTextBd($_POST['phone']);
     $email = validiteInsertionTextBd($_POST['email']);
+    $emailsOfficialComm = validiteInsertionTextBd($_POST['emailsOfficialComm']);
+    $emailsTournamentComm = validiteInsertionTextBd($_POST['emailsTournamentComm']);
     $url = validiteInsertionTextBd($_POST['url']);
-
+    $committeeComposition = validiteInsertionTextBd($_POST['committeeComposition']);
+    $coachJSID = isValidID($_POST['coachJSID']) ? $_POST['coachJSID'] : 'NULL';
 
     if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
         echo "<p class='notification notification--error'>Procédure annulée.</p>";
@@ -54,7 +57,11 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                     `canton`,
                     `telephone`,
                     `email`,
+                    `emailsOfficialComm`,
+                    `emailsTournamentComm`,
                     `url`,
+                    `committeeComposition`,
+                    `coachJSID`,
                     `statusId`,
                     `lastEdit`,
                     `lastEditorID`
@@ -70,7 +77,11 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                     " . $cantonID . ",
                     '" . $phone . "',
                     '" . $email . "',
+                    '" . $emailsOfficialComm . "',
+                    '" . $emailsTournamentComm . "',
                     '" . $url . "',
+                    '" . $committeeComposition . "',
+                    " . $coachJSID . ",
                     " . $status . ",
                     '" . date('Y-m-d') . "',
                     " . $_SESSION['__idUser__'] . "
@@ -93,7 +104,11 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
 										ville='" . $city . "',
 										telephone='" . $phone . "',
 										email='" . $email . "',
+										emailsOfficialComm='" . $emailsOfficialComm . "',
+										emailsTournamentComm='" . $emailsTournamentComm . "',
 										url='" . $url . "',
+										committeeComposition='" . $committeeComposition . "',
+										coachJSID=" . $coachJSID . ",
 										lastEdit='" . date('Y-m-d') . "',
 										lastEditorID=" . $_SESSION['__idUser__'];
             if ($_SESSION['__userLevel__'] <= 0) {
@@ -110,6 +125,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                 echo "<p class='notification notification--success'>Modification réussie.</p>";
             } else {
                 echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                //echo "<p class='notification'>" . mysql_error() . "</p>";
                 $nbError++;
             }
             $clubToEditID = $clubID;
