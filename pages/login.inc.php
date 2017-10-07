@@ -27,7 +27,8 @@
                autocorrect="off"
                autocapitalize="off"
                spellcheck="false"
-               size="35"/>
+               size="35"
+               autofocus/>
 
         <label for="passwordInput"><?php echo VAR_LANG_PASSWORD; ?></label>
         <input name="password"
