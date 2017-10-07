@@ -32,7 +32,7 @@ $webmasterTo = 'webmaster@tchoukball.ch';
 $webmasterSubject = "Message d'anniversaire " . VAR_LANG_ASSOCIATION_NAME;
 
 $query = "SELECT nom, prenom, dateNaissance, idSexe,
-                 TIMESTAMPDIFF(YEAR, dateNaissance, CURDATE()) AS age, email, emailFSTB
+                 TIMESTAMPDIFF(YEAR, dateNaissance, CURDATE()) AS age, email, emailFederation
           FROM Benevoles
           WHERE DATE_ADD(dateNaissance, INTERVAL YEAR(CURDATE())-YEAR(dateNaissance) YEAR) = CURDATE()
           AND suspendu = 0";
@@ -41,8 +41,8 @@ if ($result) {
     if (mysql_num_rows($result) > 0) {
         $webmasterMessage = "Des messages d'anniversaire ont été envoyés à:" . "\r\n";
         while ($person = mysql_fetch_assoc($result)) {
-            if ($person['emailFSTB'] != '') {
-                $to = $person['emailFSTB'];
+            if ($person['emailFederation'] != '') {
+                $to = $person['emailFederation'];
                 $validEmail = true;
             } elseif ($person['email'] != '') {
                 $to = $person['email'];

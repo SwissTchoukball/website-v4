@@ -309,7 +309,7 @@ if ($newMember) {
         $mobile = "";
         $fax = "";
         $email = "";
-        $emailFSTB = "";
+        $emailFederation = "";
         $birthDate = "0000-00-00";
         $companyName = "";
         $countryID = 42; //Suisse
@@ -335,7 +335,7 @@ if ($newMember) {
     // Toute modification de cette requête devrait être aussi appliquée dans le fichier membres.supprimer.inc.php
     // TODO: Make it DRY
     $memberRequest = "SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
-                             nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
+                             nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFederation,
                              dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
                              dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
                              a.startCountingPointsOnEvenYears,
@@ -416,7 +416,7 @@ if ($newMember) {
             $mobile = $member['portable'];
             $fax = $member['fax'];
             $email = $member['email'];
-            $emailFSTB = $member['emailFSTB'];
+            $emailFederation = $member['emailFederation'];
             $birthDate = $member['dateNaissance'] == null ? '0000-00-00' : $member['dateNaissance'];
             $companyName = $member['raisonSociale'];
             $countryID = $member['idPays'];
@@ -581,15 +581,15 @@ if ($canEdit) {
             <label for="email">E-mail</label>
             <input type="text" id="email" id="email" name="email" value="<?php echo $email; ?>"/>
             <?php
-            if ($emailFSTB != '') {
+            if ($emailFederation != '') {
                 ?>
-                <label for="emailFSTB">E-mail fédération</label>
+                <label for="emailFederation">E-mail fédération</label>
                 <?php
                 if (hasAllMembersManagementAccess()) {
-                    echo '<input type="text" id="emailFSTB" id="emailFSTB" name="emailFSTB" value="' . $emailFSTB . '" />';
+                    echo '<input type="text" id="emailFederation" id="emailFederation" name="emailFederation" value="' . $emailFederation . '" />';
                 } else {
-                    echo '<p><a href="mailto:' . $emailFSTB . '">' . $emailFSTB . '</a></p>';
-                    echo '<input type="hidden" name="emailFSTB" value="' . $emailFSTB . '" />';
+                    echo '<p><a href="mailto:' . $emailFederation . '">' . $emailFederation . '</a></p>';
+                    echo '<input type="hidden" name="emailFederation" value="' . $emailFederation . '" />';
                 }
             }
             ?>

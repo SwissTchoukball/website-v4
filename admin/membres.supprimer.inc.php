@@ -6,7 +6,7 @@
 // TODO: Make it DRY
 $requestMembre =
     "SELECT idStatus, derniereModification, modificationPar, p.idClub, idLangue, idSexe, idCivilite,
-			nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFSTB,
+			nom, prenom, adresse, cp, npa, ville, telPrive, telProf, portable, fax, email, emailFederation,
 			dateNaissance, raisonSociale, idPays, idCHTB, a.levelId AS niveauArbitreID,
 			dbda.descriptionArbitre" . $_SESSION['__langue__'] . " AS niveauArbitre, a.public AS arbitrePublic,
 			a.startCountingPointsOnEvenYears,

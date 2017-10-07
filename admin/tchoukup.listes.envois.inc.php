@@ -13,7 +13,7 @@
 <?php
 $emailDispatchQuery =
     "SELECT DISTINCT
-      IF(LENGTH(p.`emailFSTB`)>0, p.`emailFSTB`, p.`email`) AS 'email',
+      IF(LENGTH(p.`emailFederation`)>0, p.`emailFederation`, p.`email`) AS 'email',
       IF(
         LENGTH(p.`raisonSociale`)>0,
         IF(
@@ -28,7 +28,7 @@ $emailDispatchQuery =
     AND p.`idCivilite` = c.`idCivilite`
     AND (
       (p.`email` != '' AND p.`email` IS NOT NULL)
-      OR (p.`emailFSTB` != '' AND p.`emailFSTB` IS NOT NULL)
+      OR (p.`emailFederation` != '' AND p.`emailFederation` IS NOT NULL)
     )
     ORDER BY p.`idClub`, p.`nom`, p.`prenom`";
 

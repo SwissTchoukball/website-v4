@@ -127,8 +127,8 @@ function showPerson($person, $hidePicture = false, $hidePostalAddress = false, $
         echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
     }
 
-    if ($person["emailFSTB"] != '') {
-        $email = $person["emailFSTB"];
+    if ($person["emailFederation"] != '') {
+        $email = $person["emailFederation"];
     } else if ($person["email"] != '') {
         $email = $person["email"];
     } else {
@@ -170,7 +170,7 @@ function getReferees($orderByLevel = false)
     $queryPartOrderBy .= 'p.nom, p.prenom';
 
     $refereesQuery = "SELECT a.personId, a.levelId, a.hidden, a.public,
-                             p.nom, p.prenom, p.telPrive, p.portable, p.email, p.emailFSTB AS emailFederation, p.numeroCompte,
+                             p.nom, p.prenom, p.telPrive, p.portable, p.email, p.emailFederation AS emailFederation, p.numeroCompte,
                              cl.club AS clubName
                       FROM Arbitres a
                       LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = a.personId
@@ -539,7 +539,7 @@ function afficherListeClubs($selectedClubId, $typeId)
 
 function showHead($objectID, $table, $objectNameAttr)
 {
-    $query = "SELECT t." . $objectNameAttr . " AS objectName, p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville, p.emailFSTB, p.email, p.telPrive, p.portable
+    $query = "SELECT t." . $objectNameAttr . " AS objectName, p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville, p.emailFederation, p.email, p.telPrive, p.portable
               FROM " . $table . " t
               LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = t.idResponsable
               WHERE t.id = " . $objectID . "
@@ -611,7 +611,7 @@ function showCommitteeMember($committeeMember)
 function showTeamCoaches($teamId)
 {
     $query = "SELECT p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville,
-              p.emailFSTB, p.email, p.telPrive, p.portable, p.idSexe,
+              p.emailFederation, p.email, p.telPrive, p.portable, p.idSexe,
               cnf.titreH" . $_SESSION["__langue__"] . " AS maleTitle, 
               cnf.titreF" . $_SESSION["__langue__"] . " AS femaleTitle
               FROM CadreNational_Membres cnm
@@ -676,7 +676,7 @@ function showCommission($commission)
 
 function showFunctionPerson($functionID)
 {
-    $query = "SELECT f.titreH" . $_SESSION['__langue__'] . " AS titreH, f.titreF" . $_SESSION['__langue__'] . " AS titreF, p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville, p.emailFSTB, p.email, p.telPrive, p.portable, p.idSexe
+    $query = "SELECT f.titreH" . $_SESSION['__langue__'] . " AS titreH, f.titreF" . $_SESSION['__langue__'] . " AS titreF, p.idDbdPersonne, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville, p.emailFederation, p.email, p.telPrive, p.portable, p.idSexe
               FROM FonctionsAutres_Repartition fr
               LEFT OUTER JOIN FonctionsAutres f ON f.id = fr.idFonctionAutre
               LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = fr.idPersonne
