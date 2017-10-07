@@ -1075,16 +1075,6 @@ function slugify($str)
     return $slug;
 }
 
-function ajouterLogAnnuaireFSTB($idPersonne, $field, $old_value, $new_value)
-{
-    if ($old_value != $new_value) {
-        $query = "INSERT INTO DBDLog (idDbdPersonne, field, userID, old_value, new_value) VALUES (" . $idPersonne . ", '" . $field . "', " . $_SESSION['__idUser__'] . ", '" . addslashes($old_value) . "', '" . addslashes($new_value) . "')";
-        return mysql_query($query);
-    } else {
-        return true;
-    }
-}
-
 function ajouterSSiPluriel($word, $number)
 {
     if ($number > 1) {
