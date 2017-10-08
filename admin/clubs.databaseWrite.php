@@ -127,7 +127,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                 $from = "From:no-reply@tchoukball.ch\n";
                 $from .= "MIME-version: 1.0\n";
                 $from .= "Content-type: text/html; charset= iso-8859-1\n";
-                $destinataireMail = "communication@tchoukball.ch";
+                $destinataireMail = "resp.communication@tchoukball.ch";
                 mail($destinataireMail, "Modification club", "Les club " . $shortName . " a été modifié.", $from);
             } else {
                 echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";

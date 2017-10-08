@@ -6,6 +6,8 @@ $mailingListQuery =
 $mailingListResource = mysql_query($mailingListQuery);
 
 $officialCommMailingList = "comite@tchoukball.ch, Comité Swiss Tchoukball\n";
+$officialCommMailingList .= "resp.developpement@tchoukball.ch, Responsable commission développement\n";
+
 $tournamentsCommMailingList = "comite@tchoukball.ch, Comité Swiss Tchoukball\n";
 
 /**
