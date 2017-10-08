@@ -19,7 +19,7 @@
     }
 
     ?>
-    <form name="log" method="post" action="/gestionLogin.php" class="st-form">
+    <form name="log" method="post" action="/gestionLogin.php?redirect=<?php echo urlencode($_GET['redirect']); ?>" class="st-form">
         <label for="usernameInput"><?php echo VAR_LANG_USERNAME_OR_EMAIL; ?></label>
         <input name="username"
                id="usernameInput"

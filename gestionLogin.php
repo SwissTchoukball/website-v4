@@ -5,12 +5,17 @@ require('config.php');
 
 include "includes/var.href.inc.php";
 
+$afterLoginTarget = VAR_HREF_PAGE_ADMIN;
+if (isset($_GET['redirect'])) {
+    $afterLoginTarget = urldecode($_GET['redirect']);
+}
 
 $host = $_SERVER['HTTP_HOST'];
 $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
-if ($_SESSION["__userLevel__" > 100]) {
-    header("Location: http://$host$uri" . VAR_HREF_PAGE_ADMIN, true);
+// If already logged in (logged in from another window and stayed on the login page in this window)
+if ($_SESSION["__userLevel__"] < 100) {
+    header("Location: http://$host$uri" . $afterLoginTarget, true);
 }
 
 // se faire passer pour la partie admin
@@ -64,7 +69,7 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
                            VALUES ('" . $record["username"] . "', '" . $maintenant["year"] . "-" . $maintenant["mon"] . "-" . $maintenant["mday"] . "', '" . $maintenant["hours"] . ":" . $maintenant["minutes"] . ":" . $maintenant["seconds"] . "')";
             mysql_query($requeteSQL);
 
-            header("Location: http://$host$uri" . VAR_HREF_PAGE_ADMIN, true);
+            header("Location: http://$host$uri" . $afterLoginTarget, true);
         } else {
             header("Location: http://$host$uri/login-fail-1", true);
         }
