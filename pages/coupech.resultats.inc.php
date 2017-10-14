@@ -47,6 +47,7 @@
         $nomCategorie = $donneesAnnee['nom' . $_SESSION['__langue__']];
         $nbSetsGagnants = $donneesAnnee['nbSetsGagnants'];
         $nbEquipes = $donneesAnnee['nbEquipes'];
+        $dateTirage = $donneesAnnee['dateTirage'];
         if ($nbCategories > 1) {
             echo "<h3>" . $nomCategorie . "</h3>";
         }
@@ -72,6 +73,13 @@
                 echo '<a href="/lieu/' . $donneesJournee['idLieu'] . '">' . $donneesJournee['nomLieu'] . ', ' . $donneesJournee['ville'] . '</a>';
                 echo '</div>';
             }
+        }
+
+        // Information about the draw (tirage au sort)
+        if ($dateTirage >= date('Y-m-d')) {
+            echo "<p class='swiss-cup__draw-announcement'>" .
+                "Le tirage au sort pour le placement des équipes dans le tableau de départ aura lieu " .
+                date_sql2date_joli($dateTirage, 'le', $_SESSION['__langue__']) . ".</p>";
         }
 
         //Calcul du nombre de matchs (pour l'instant inutile, à supprimer ou à utiliser dans l'admin)
@@ -401,7 +409,7 @@
     ?>
 
     <iframe
-        src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fcoupesuisse&width=360&colorscheme=light&show_faces=false&stream=false&header=false&height=77"
+        src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fcoupesuisse&width=360&colorscheme=light&show_faces=false&stream=false&header=false&height=77"
         scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:360px; height:77px;"
         allowTransparency="true"></iframe>
 
