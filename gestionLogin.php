@@ -6,7 +6,7 @@ require('config.php');
 include "includes/var.href.inc.php";
 
 $afterLoginTarget = VAR_HREF_PAGE_ADMIN;
-if (isset($_GET['redirect'])) {
+if (isset($_GET['redirect']) && $_GET['redirect'] != '') {
     $afterLoginTarget = urldecode($_GET['redirect']);
 }
 
