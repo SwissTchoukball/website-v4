@@ -106,9 +106,9 @@ $queries['all-individuels'] =
          OR (cl.`statusId` = 1 AND (p.`idStatus` = 3 OR p.`idStatus` = 6)) -- Membres actifs ou juniors d'un club
          OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membre non-passif hors-club
     ORDER BY `nom`, `prenom`";
-$listsHeaders['envois-individuels'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
+$listsHeaders['all-individuels'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
-$listsAttributes['envois-individuels'] = [
+$listsAttributes['all-individuels'] = [
     'raisonSociale',
     'descriptionCiviliteFr',
     'nom',
