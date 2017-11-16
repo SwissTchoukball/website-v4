@@ -4,13 +4,13 @@
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Envois individuels (standard)
     </a><br/>
-    <a href="admin/tchoukup.export.tsv.php?query=nb-tchoukup-colis-par-club">
-        <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
-        Nombre de Tchouk<sup>up</sup> par colis par club
-    </a>
     <a href="admin/tchoukup.export.tsv.php?query=all-individuels">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Envois individuels (étendu pour TGI)
+    </a><br/>
+    <a href="admin/tchoukup.export.tsv.php?query=nb-tchoukup-colis-par-club">
+        <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
+        Nombre de Tchouk<sup>up</sup> par colis par club
     </a>
 </p>
 <h2>Envois par e-mail</h2>
