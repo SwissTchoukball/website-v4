@@ -565,19 +565,20 @@ function showDomainHead($domainID)
 
 function showCommitteeMember($committeeMember)
 {
-    echo "<div class='two-col-card'>";
+    echo "<div class='committee-member'>";
 
     if ($committeeMember['idSexe'] == 3) {
         $functionTitle = $committeeMember['titreF'];
     } else {
         $functionTitle = $committeeMember['titreH'];
     }
+    echo '<div class="committee-member__person">';
     echo "<h2>" . $functionTitle . "</h2>";
-    echo '<div class="two-col-card__content">';
 
     showPerson($committeeMember);
 
-    echo "<div class='two-col-card__content__second-column'>";
+    echo "</div>";
+    echo "<div class='committee-member__accountabilities'>";
     $responsabilitiesQuery = "SELECT cr.nom" . $_SESSION['__langue__'] . " AS nom, cr.lien
                               FROM Comite_Responsabilites cr
                               WHERE cr.idResponsable=" . $committeeMember['idDbdPersonne'];
@@ -603,7 +604,6 @@ function showCommitteeMember($committeeMember)
         echo '</li>';
     }
     echo "</ul>";
-    echo "</div>";
     echo "</div>";
     echo "</div>";
 }
@@ -636,17 +636,18 @@ function showTeamCoaches($teamId)
 
 function showCommission($commission)
 {
-    echo "<div class='two-col-card' id='c" . $commission["id"] . "'>";
+    echo "<div class='commission' id='c" . $commission["id"] . "'>";
+    echo '<div class="commission__head">';
     echo $commission["lien"] != '' ? '<a href="' . $commission["lien"] . '">' : '';
     echo "<h2>" . $commission["nomCommission"] . "</h2>";
     echo $commission["lien"] != '' ? '</a>' : '';
 
-    echo '<div class="two-col-card__content">';
     if ($commission['idDbdPersonne'] != null) {
         showPerson($commission);
     }
 
-    echo "<div class='two-col-card__content__second-column'>";
+    echo "</div>";
+    echo "<div class='commission__members'>";
     $membersQuery = "SELECT *
                     FROM Commission_Membre cm, DBDPersonne p
                     WHERE cm.idPersonne = p.idDbdPersonne
@@ -669,7 +670,6 @@ function showCommission($commission)
     } else {
         echo "<br />"; //Pour que les langues s'affichent dans la première colonne
     }
-    echo "</div>";
     echo "</div>";
     echo "</div>";
 }
