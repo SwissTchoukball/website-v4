@@ -29,7 +29,7 @@ function printBlankSlateMessage($message)
 //nom du fichier
 function tailleFichier($file)
 {
-    $size = filesize($file);
+    $size = filesize($_SERVER["DOCUMENT_ROOT"] . $file);
     $sizes = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB');
     $ext = $sizes[0];
     for ($i = 1; (($i < count($sizes)) && ($size >= 1024)); $i++) {

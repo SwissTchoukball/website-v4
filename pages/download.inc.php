@@ -78,7 +78,10 @@ while ($record = mysql_fetch_array($recordset)) {
             echo "lien";
             echo "</a></td>";
         } elseif (is_file($_ENV["DOCUMENT_ROOT"] . PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[$i][0] . "_" . $record["fichier"])) {
-            echo "<td class='center'><a href='" . PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[$i][0] . "_" . $record["fichier"] . "'>" . tailleFichier($_ENV["DOCUMENT_ROOT"] . PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[$i][0] . "_" . $record["fichier"]) . "</a></td>";
+            echo "<td class='center'>" .
+                "<a href='" . PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[$i][0] . "_" . $record["fichier"] . "'>" .
+                tailleFichier(PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[$i][0] . "_" . $record["fichier"]) .
+                "</a></td>";
         } else {
             echo "<td><p>&nbsp;</p></td>";
         }
