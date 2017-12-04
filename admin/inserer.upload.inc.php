@@ -313,11 +313,11 @@ elseif ($_POST["action"] == "modifierUpload") {
                 $image = false;
             }
             ?>
-            <h3>Modification d'un fichier uploadÈ</h3>
+            <h3>Modification d'un fichier uploadé</h3>
             <?php
         }
         if ($image) {
-            echo "<img src='" . PATH_UPLOADS . "/vignettes/thumb_" . $fichier . "' alt='" . $titre . "' />";
+            echo "<img src='" . PATH_UPLOADS . "vignettes/thumb_" . $fichier . "' alt='" . $titre . "' />";
         }
         ?>
 </div><br/>
