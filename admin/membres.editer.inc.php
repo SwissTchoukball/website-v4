@@ -37,13 +37,17 @@
             memberEdit.lastname.classList.add('st-invalid');
             memberEdit.firstname.classList.add('st-invalid');
             memberEdit.companyName.classList.add('st-invalid');
-            if (nbError === 0)memberEdit.lastname.focus();
+            if (nbError === 0) {
+                memberEdit.lastname.focus();
+            }
             nbError++;
         } else {
             // nom
             if (memberEdit.lastname.value.length === 0) {
                 memberEdit.lastname.classList.add('st-invalid');
-                if (nbError === 0)memberEdit.lastname.focus();
+                if (nbError === 0) {
+                    memberEdit.lastname.focus();
+                }
                 nbError++;
             }
             else {
@@ -53,7 +57,9 @@
             // prenom
             if (memberEdit.firstname.value.length === 0) {
                 memberEdit.firstname.classList.add('st-invalid');
-                if (nbError === 0)memberEdit.firstname.focus();
+                if (nbError === 0) {
+                    memberEdit.firstname.focus();
+                }
                 nbError++;
             }
             else {
@@ -66,7 +72,9 @@
 
         if (memberEdit.zipCode.value.length > 0 && !regZipCode.test(memberEdit.zipCode.value)) {
             memberEdit.zipCode.classList.add('st-invalid');
-            if (nbError === 0)memberEdit.zipCode.focus();
+            if (nbError === 0) {
+                memberEdit.zipCode.focus();
+            }
             nbError++;
         } else {
             memberEdit.zipCode.classList.remove('st-invalid');
@@ -77,7 +85,9 @@
 
         if (!regEmail.test(memberEdit.email.value) && memberEdit.email.value !== "") {
             memberEdit.email.classList.add('st-invalid');
-            if (nbError === 0)memberEdit.email.focus();
+            if (nbError === 0) {
+                memberEdit.email.focus();
+            }
             alert("L'adresse e-mail est invalide. Elle peut contenir des caractères interdits.");
             nbError++;
         } else {
@@ -89,10 +99,10 @@
             memberEdit.birthDateMonth.value - 1,
             memberEdit.birthDateDay.value);
 
-        if (memberEdit.birthDateYear.value === 0 &&
-            memberEdit.birthDateMonth.value === 0 &&
-            memberEdit.birthDateDay.value === 0 &&
-            memberEdit.statutID.value !== 2) {
+        if (memberEdit.birthDateYear.value === '0' &&
+            memberEdit.birthDateMonth.value === '0' &&
+            memberEdit.birthDateDay.value === '0' &&
+            memberEdit.statutID.value !== '2') {
             // Si la date de naissance n'est pas précisé et le statut du membre n'est pas actif/junior alors c'est ok.
             memberEdit.birthDateYear.classList.remove('st-invalid');
             memberEdit.birthDateMonth.classList.remove('st-invalid');
@@ -103,7 +113,9 @@
             memberEdit.birthDateYear.classList.add('st-invalid');
             memberEdit.birthDateMonth.classList.add('st-invalid');
             memberEdit.birthDateDay.classList.add('st-invalid');
-            if (nbError === 0)memberEdit.birthDateMonth.focus();
+            if (nbError === 0) {
+                memberEdit.birthDateMonth.focus();
+            }
             nbError++;
         } else {
             memberEdit.birthDateYear.classList.remove('st-invalid');
@@ -112,9 +124,11 @@
         }
 
         //statut
-        if (memberEdit.statutID.value === 1) {
+        if (memberEdit.statutID.value === '1') {
             memberEdit.statutID.classList.add('st-invalid');
-            if (nbError === 0)memberEdit.statutID.focus();
+            if (nbError === 0) {
+                memberEdit.statutID.focus();
+            }
             nbError++;
         } else {
             memberEdit.statutID.classList.remove('st-invalid');
