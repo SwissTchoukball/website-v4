@@ -13,6 +13,10 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
+        <td></td>
+        <td>Castellanza (IT), 2018</td>
+    </tr>
+    <tr>
         <td>5èmes</td>
         <td>Ji&ccaron;ín (CZ), 2016</td>
     </tr>
@@ -48,6 +52,10 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
+        <td></td>
+        <td>Castellanza (IT), 2018</td>
+    </tr>
+    <tr>
         <td>1ères</td>
         <td>Ji&ccaron;ín (CZ), 2016</td>
     </tr>
@@ -81,6 +89,10 @@ statInsererPageSurf(__FILE__);
     <tr>
         <th>Position</th>
         <th>Édition</th>
+    </tr>
+    <tr>
+        <td></td>
+        <td>Castellanza (IT), 2018</td>
     </tr>
     <tr>
         <td>2èmes</td>
