@@ -14,7 +14,7 @@ statInsererPageSurf(__FILE__);
 function formatFileName($aFileName, $aMaxLength = 50)
 {
     $aFileName = strToLower(subStr($aFileName, 0, $aMaxLength));
-    $aFileName = ereg_replace('[^a-zA-Z0-9,._\+\()\-]', '_', $aFileName);
+    $aFileName = preg_replace('/[^a-zA-Z0-9,._\+\()\-]/', '_', $aFileName);
 
     return $aFileName;
 } // end of function formatFileName() /2
