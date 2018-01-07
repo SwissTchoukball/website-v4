@@ -55,6 +55,7 @@ sftp-config.json
 
 # Website config file #
 #######################
+settings.ini.php
 config.php
 config-dev.php
 
