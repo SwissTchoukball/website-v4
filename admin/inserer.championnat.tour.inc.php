@@ -254,10 +254,6 @@
                 $retourA = mysql_query($requeteA);
                 $donneesA = mysql_fetch_array($retourA);
                 echo "<td>" . $donneesA['club'] . "</td>";
-                /*$requeteA = "SELECT * FROM Personne WHERE id=".$donnees['idResponsable']."";
-                $retourA = mysql_query($requeteA);
-                $donneesA = mysql_fetch_array($retourA);
-                echo "<td>".$donneesA['prenom']." ".$donneesA['nom']."</td>";*/
                 echo "<script language='JavaScript'>arrayOfSelectionned[" . $donnees["idEquipe"] . "]=false;</script>";
                 echo "</tr>";
             }

@@ -104,7 +104,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $idMemberToEdit = $_POST['memberID'];
         }
     } else {
-        if (hasAllMembersManagementAccess() || ($_SESSION['__nbIdClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+        // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+        if (hasAllMembersManagementAccess() || ($_SESSION['__nbIdClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) {
             $newMember = false;
             if ($_POST['memberID'] == 0 && $_POST['postType'] == "newMember") { // New member to add
                 $memberID = $_POST['memberID'];
@@ -289,7 +290,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
         }
     }
 } elseif ($_POST['postType'] == "transfer-request") {
-    //On ne vérifie pas que la personne qui fait la demande soit du club entrant ou sortant. Ce n'est qu'une demande.
+    // On ne vérifie pas que la personne qui fait la demande soit du club entrant ou sortant. Ce n'est qu'une demande.
     if (isValidClubID($_POST['currentClubID']) && isValidClubID($_POST['clubs'])) {
         $transferRequestQuery = "INSERT INTO `DBDRequetesChangementClub` (`userID`, `idDbdPersonne`, `from_clubID`, `to_clubID`, `datetime`)
                                  VALUES (" . $_SESSION['__idUser__'] . ", " . $_POST['memberID'] . ", " . $_POST['currentClubID'] . ", " . $_POST['clubs'] . ", '" . date('Y-m-d H:i:s') . "')";
@@ -307,7 +308,6 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $from .= "Content-type: text/html; charset= iso-8859-1\n";
             if (mail($destinataireMail, $objectMail, $messageMail, $from)) {
                 echo '<p class="notification notification--success">Demande de transfert envoyée. Elle sera traitée prochainement et vous serez tenu informé de son exécution.</p>';
-                //echo '<p class="notification">mail('.$destinataireMail.', '.$objectMail.', '.$messageMail.', '.$from.')</p>';
             } else {
                 echo '<p class="notification notification--error">La demande de transfert a été enregistrée, mais dû à une erreur, le webmaster n\'a pas automatiquement été averti, veuillez <a href="mailto:webmaster@tchoukball.ch">le contacter</a> s\'il vous plaît.</p>';
             }

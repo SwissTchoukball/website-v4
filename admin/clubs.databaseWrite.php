@@ -23,16 +23,23 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
     $committeeComposition = validiteInsertionTextBd($_POST['committeeComposition']);
     $coachJSID = isValidID($_POST['coachJSID']) ? $_POST['coachJSID'] : 'NULL';
 
-    if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
+    // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club,
+    // sinon on affiche le formulaire de modification du club.
+    if ($nbError > 0) {
         echo "<p class='notification notification--error'>Procédure annulée.</p>";
         if ($clubID == 0) {
             $newClub = true;
         } else {
             $clubToEditID = $clubID;
         }
-    } else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+    }
+    // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+    else if ($_SESSION['__userLevel__'] <= 0 ||
+        ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) {
         $newClub = false;
-        if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) { // New club to add, only by admins
+
+        // New club to add, only by admins
+        if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) {
             //Getting the auto-increment value for the shitty club double ID
             $autoIncrementQuery = "SELECT `AUTO_INCREMENT`
 									FROM  INFORMATION_SCHEMA.TABLES
