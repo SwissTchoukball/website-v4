@@ -23,7 +23,7 @@ $PHP_SELF = VAR_HREF_PAGE_ADMIN;
 // les champs existent ?
 if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["password"])) {
     try {
-        $user = UserService::getByUsernameOrEmail($_POST['username']);
+        $user = UserService::getUserByUsernameOrEmail($_POST['username']);
     }
     catch (Exception $exception) {
         // SQL error
@@ -37,29 +37,9 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
         exit();
     }
 
-    if (md5($_POST["password"]) == $user['password']) {
-        $_SESSION["__nom__"] = $user['nom'];
-        $_SESSION["__prenom__"] = $user['prenom'];
-        $_SESSION["__idUser__"] = $user['id'];
-        $_SESSION["__username__"] = $user['username'];
-        $_SESSION["__userLevel__"] = $user['userLevel'];
-        $_SESSION['__authdata__'] = base64_encode($user['username'] . ':' . $user['password']);
-        $_SESSION["__idClub__"] = $user['idClub'];
-        $_SESSION["__nbIdClub__"] = $user['nbIdClub'];
-        $_SESSION["__gestionMembresClub__"] = $user['gestionMembresClub'];
+    $isLoggedIn = UserService::login($user, md5($_POST["password"]), $_POST["autoConnect"] != "");
 
-        // gestion de l'autoconnexion par cookie
-        if ($_POST["autoConnect"] != "") {
-            // creation du cookie
-            $troisMois = time() + (3600 * 24 * 30) * 3;
-
-            setcookie("login[username]", $_SESSION["__username__"], $troisMois, "/");
-            setcookie("login[password]", $user["password"], $troisMois, "/");
-        }
-
-        // Insertion du login dans l'historique des logins
-        UserService::logLogin($user['username']);
-
+    if ($isLoggedIn) {
         header("Location: http://$host$uri" . $afterLoginTarget, true);
     } else {
         // Wrong password
