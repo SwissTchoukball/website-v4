@@ -16,32 +16,14 @@ $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
     }
 </script>
 
-<table class="st-table"><?php
-
-    if ($motsRecherches != "") {
-
-        // separation des mots
-        $tok = strtok($motsRecherches, " ");
-        $possibilite = "";
-        $nbFois = 0;
-        while ($tok) {
-            if ($nbFois > 0) {
-                $possibilite .= " OR ";
-            }
-            $nbFois++;
-            $possibilite .= "p.`nom` LIKE '%" . $tok . "%' OR
-							 p.`prenom` LIKE '%" . $tok . "%' OR
-							 p.`email` LIKE '%" . $tok . "%' OR
-							 c.`club` LIKE '%" . $tok . "%'";
-            $tok = strtok(" ");
-        }
-        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c WHERE (" . $possibilite . ") AND p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
-    } else {
-        $requeteSQL = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c WHERE p.`idClub`=c.`id` ORDER BY `nom`, `prenom`";
+<table class="st-table">
+    <?php
+    try {
+        $users = UserService::getUserList($_POST['motsRecherches']);
     }
-    //echo $requeteSQL;
-    $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
-
+    catch(Exception $exception) {
+        die($exception->getMessage());
+    }
 
     echo "<tr>";
     echo "<th>Personne</th>";
@@ -51,16 +33,16 @@ $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
         echo "<th>Fonctions avancées</th>";
     }
     echo "</tr>";
-    while ($record = mysql_fetch_array($recordset)) {
+    foreach ($users as $user) {
         echo "<tr>";
 
-        echo "<td>" . stripslashes($record["nom"]) . "&nbsp;" . stripslashes($record["prenom"]) . "</td>";
+        echo "<td>" . stripslashes($user["nom"]) . "&nbsp;" . stripslashes($user["prenom"]) . "</td>";
 
-        echo "<td>" . $record["club"] . "</td>";
+        echo "<td>" . $user["club"] . "</td>";
 
         echo "<td>";
-        if ($record["email"] != "") {
-            echo email($record["email"]);
+        if ($user["email"] != "") {
+            echo email($user["email"]);
         } else {
             echo "&nbsp;";
         }
@@ -68,15 +50,16 @@ $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
 
         if ($_SESSION["__userLevel__"] <= 5) {
             echo "<td>";
-            if ($record['userLevel'] > 0) {
-                echo "<a href='?" . VAR_HREF_LIEN_MENU . "=2&modificationId=" . $record["idPersonne"] . "'>modifier</a>";
+            if ($user['userLevel'] > 0) {
+                echo "<a href='?" . VAR_HREF_LIEN_MENU . "=2&modificationId=" . $user["idPersonne"] . "'>modifier</a>";
             }
-            if ($record['userLevel'] > 9) {
+            if ($user['userLevel'] > 9) {
                 echo "<br />";
-                echo "<a href='?" . VAR_HREF_LIEN_MENU . "=2&suppressionId=" . $record["idPersonne"] . "' onClick='return validerSuppression();'>supprimer</a>";
+                echo "<a href='?" . VAR_HREF_LIEN_MENU . "=2&suppressionId=" . $user["idPersonne"] . "' onClick='return validerSuppression();'>supprimer</a>";
             }
             echo "</td>";
         }
         echo "</tr>";
     }
-    ?></table>
+    ?>
+</table>

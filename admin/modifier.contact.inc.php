@@ -3,9 +3,7 @@ statInsererPageSurf(__FILE__);
 ?>
 
 <?php
-$requeteSQL = "SELECT *, p.email FROM Personne p, clubs c WHERE p.id='" . $modificationId . "' AND p.idClub=c.id";
-$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete A</H1>");
-$record = mysql_fetch_array($recordset);
+$user = UserService::getUserById($modificationId)
 
 ?>
 <script language='javascript'>
@@ -21,7 +19,8 @@ $record = mysql_fetch_array($recordset);
             mesInfos.email.classList.remove('st-invalid');
         }
 
-        if (mesInfos.nouveauPass.value !== mesInfos.nouveauPassBis.value || mesInfos.nouveauPass.value.length < 8) {
+        if (mesInfos.nouveauPass.value !== mesInfos.nouveauPassBis.value ||
+            (mesInfos.nouveauPass.value.length < 8 && mesInfos.nouveauPass.value.length > 0)) {
             // TODO: Do the same validation check as done in PHP.
             nbErreur++;
             mesInfos.nouveauPass.classList.add('st-invalid');
@@ -40,29 +39,29 @@ $record = mysql_fetch_array($recordset);
       action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
     <fieldset>
         <label>Nom d'utilisateur</label>
-        <div class="givenData"><?php echo stripslashes($record["username"]); ?></div>
+        <div class="givenData"><?php echo stripslashes($user["username"]); ?></div>
         <?php
         if (isAdmin()) {
             ?>
             <label>Niveau d'accès</label>
-            <div class="givenData"><?php echo $record["userLevel"]; ?></div>
+            <div class="givenData"><?php echo $user["userLevel"]; ?></div>
             <?php
         }
         ?>
         <label>Nom</label>
-        <div class="givenData"><?php echo stripslashes($record["nom"]); ?></div>
+        <div class="givenData"><?php echo stripslashes($user["nom"]); ?></div>
         <label>Prénom</label>
-        <div class="givenData"><?php echo stripslashes($record["prenom"]); ?></div>
+        <div class="givenData"><?php echo stripslashes($user["prenom"]); ?></div>
     </fieldset>
     <fieldset>
         <label for="emailField">Email</label>
         <input name="email" id="emailField" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-               value="<?php echo $record["email"]; ?>" size="35" maxlength="80">
+               value="<?php echo $user["email"]; ?>" size="35" maxlength="80">
     </fieldset>
     <fieldset>
         <label>Club</label>
         <?php
-        afficherListeClubs($record["idClub"], "id");
+        afficherListeClubs($user["idClub"], "id");
         ?>
     </fieldset>
     <fieldset>

@@ -1,6 +1,7 @@
 <?php
 
 require_once $_SERVER["DOCUMENT_ROOT"] . '/includes/DB.class.php';
+require_once $_SERVER["DOCUMENT_ROOT"] . '/includes/Helper.class.php';
 
 class UserService
 {
@@ -11,7 +12,8 @@ class UserService
         $db->bind('username', $usernameOrEmail);
         $db->bind('email', $usernameOrEmail);
 
-        $query = "SELECT p.id, nom, prenom, username, userLevel, password, idClub, gestionMembresClub, c.nbIdClub
+        $query = "SELECT p.id, nom, prenom, username, p.email, userLevel, password, idClub, gestionMembresClub,
+                    c.nbIdClub, c.club AS clubName
                    FROM `Personne` p, `clubs` c
                    WHERE (p.`username`= :username OR p.email = :email)
                    AND p.`idClub`=c.`id`";
@@ -22,6 +24,104 @@ class UserService
         } catch (PDOException $exception) {
             throw $exception;
         }
+    }
+
+    public static function getUserById($userId) {
+        $db = new DB();
+
+        $db->bind('userId', $userId);
+
+        $query = "SELECT p.id, nom, prenom, username, p.email, userLevel, password, idClub, gestionMembresClub,
+                    c.nbIdClub, c.club AS clubName
+                   FROM `Personne` p, `clubs` c
+                   WHERE p.`id`= :userId
+                   AND p.`idClub`=c.`id`";
+
+        return $db->query($query)[0];
+    }
+
+    public static function getUserList($searchTerms) {
+        $query = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c";
+
+        if ($searchTerms != "") {
+            // separate terms
+            $tok = strtok($searchTerms, " ");
+            $wherePart = "";
+            while ($tok) {
+                $wherePart .= "p.`nom` LIKE '%" . $tok . "%' OR
+							 p.`prenom` LIKE '%" . $tok . "%' OR
+							 p.`email` LIKE '%" . $tok . "%' OR
+							 c.`club` LIKE '%" . $tok . "%' OR";
+                $wherePart = substr($wherePart, 0, -3); // Removing the "OR" left at the end.
+
+                $tok = strtok(" ");
+            }
+            $query .= " WHERE (" . $wherePart . ") AND";
+        } else {
+            $query .= " WHERE";
+        }
+
+        $query .= " p.`idClub`=c.`id` ORDER BY `nom`, `prenom";
+
+        $db = new DB();
+
+        return $db->query($query);
+    }
+
+    public static function addUser($user) {
+        $db = new DB();
+
+        // We could simply put the $user variable in bindMore,
+        //but like this we discard anything else that could be in $user.
+        $db->bindMore([
+            'lastName' => $user['lastname'],
+            'firstName' => $user['firstname'],
+            'username' => $user['username'],
+            'hashedPassword' => $user['hashedPassword'],
+            'email' => $user['email'],
+            'clubId' => $user['clubId']
+        ]);
+
+        $query = "INSERT INTO `Personne` ( `nom` , `prenom`, `username`, `password` , `email` , `idClub`)
+					VALUES (:lastName, :firstName, :username, :hashedPassword, :email, :clubId)";
+
+        return $db->query($query);
+    }
+
+    public static function updateUser($userId, $email, $clubId) {
+        if (!Helper::isValidId($userId)) {
+            throw new Exception('The provided user ID is not valid');
+        }
+
+        if (!Helper::isValidId($clubId)) {
+            throw new Exception('The provided club ID is not valid');
+        }
+
+        $db = new DB();
+        $db->bind('userId', $userId);
+        $db->bind('email', $email);
+        $db->bind('clubId', $clubId);
+
+        $query = "UPDATE `Personne` SET `email`=:email, `idClub`=:clubId WHERE Personne.id=:userId";
+
+        return $db->query($query);
+    }
+
+    public static function deleteUser($userId) {
+        if ($_SESSION["__userLevel__"] !== 0) {
+            throw new Exception('You do not have enough rights to delete users');
+        }
+
+        if (!Helper::isValidId($userId)) {
+            throw new Exception('The provided user ID is not valid');
+        }
+
+        $db = new DB();
+        $db->bind('userId', $userId);
+
+        $query = "DELETE FROM Personne WHERE id=:userId";
+
+        return $db->query($query);
     }
 
     public static function login($user, $hashedPassword, $stayLoggedIn)

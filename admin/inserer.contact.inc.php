@@ -6,24 +6,20 @@ statInsererPageSurf(__FILE__);
 
     if ($_POST["action"] == "inserer") {
 
-        $nom = validiteInsertionTextBd($_POST["nom"]);
-        $prenom = validiteInsertionTextBd($_POST["prenom"]);
-        $username = validiteInsertionTextBd($_POST["username"]);
-        $password = md5($_POST["motDePasse"]);
-        $email = validiteInsertionTextBd($_POST["email"]);
-        $idClub = validiteInsertionTextBd($_POST["clubs"]);
+        $user = [
+            'lastname' => $_POST['nom'],
+            'firstname' => $_POST['prenom'],
+            'username' => $_POST['username'],
+            'hashedPassword' => md5($_POST["motDePasse"]),
+            'email' => $_POST['email'],
+            'clubId' => $_POST['clubs']
+        ];
 
-        $requeteSQL = "INSERT INTO `Personne` ( `nom` , `prenom`, `username`,
-						`password` , `email` , `idClub`)
-					VALUES (
-						'$nom', '$prenom', '$username', '$password',
-					 '$email', '$idClub')";
-
-
-        if (mysql_query($requeteSQL) === false) {
-            printErrorMessage("Erreur d'insertion. Contactez le webmaster.<br />" . mysql_error() . "<br />" . $requeteSQL);
-        } else {
+        try {
+            UserService::addUser($user);
             printSuccessMessage("Insertion réussie");
+        } catch (Exception $exception) {
+            printErrorMessage("Erreur d'insertion. Contactez le webmaster.<br />" . $exception->getMessage());
         }
     }
     ?>
@@ -94,7 +90,8 @@ statInsererPageSurf(__FILE__);
         <label for="lastNameInput">Nom</label>
         <input name="nom" id="lastNameInput" type="text" value="" size="35" maxlength="35">
         <label for="usernameInput">Nom d'utilisateur</label>
-        <input name="username" id="usernameInput" type="text" value="" size="35" maxlength="35" autocomplete="off" autocorrect="off"
+        <input name="username" id="usernameInput" type="text" value="" size="35" maxlength="35" autocomplete="off"
+               autocorrect="off"
                autocapitalize="off" spellcheck="false">
         <br/>
         <label for="emailInput">E-mail</label>

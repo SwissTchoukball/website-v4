@@ -3,29 +3,19 @@ statInsererPageSurf(__FILE__);
 ?>
 <div>
     <?php
+    $user = UserService::getUserById($_SESSION['__idUser__']);
+
     if ($_POST["action"] == "modifier") {
+        UserService::updateUser($_SESSION['__idUser__'], $_POST["email"], $_POST["idClub"]);
+        printSuccessMessage('Profil modifié.');
 
-        $requeteSQL = "SELECT * FROM `Personne` WHERE `Personne`.`nom`='" . addslashes($_SESSION["__nom__"]) . "' AND `Personne`.`prenom`='" . addslashes($_SESSION["__prenom__"]) . "'";
-
-        $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
-        $record = mysql_fetch_array($recordset);
-
-        $requeteModifierInfos = "UPDATE `Personne` SET `adresse`='" . $_POST["adresse"] . "',
-            `numPostal`='" . $_POST["numPostal"] . "',
-            `ville`='" . $_POST["ville"] . "',
-            `telephone`='" . $_POST["telephone"] . "',
-            `portable`='" . $_POST["portable"] . "',
-            `email`='" . $_POST["email"] . "',
-            `idClub`='" . $_POST["idClub"] . "',
-            `dateNaissance`='" . $_POST["annee"] . "-" . $_POST["mois"] . "-" . $_POST["jour"] . "'
-			WHERE `Personne`.`id`='" . $record["id"] . "'";
-        mysql_query($requeteModifierInfos);
-
-
-        if (md5($_POST["ancienPass"]) == $record["password"]) {
+        // Password update
+        if (is_string($_POST['nouveauPass']) &&
+            strlen($_POST['nouveauPass']) > 0 &&
+            md5($_POST["ancienPass"]) == $user["password"]) {
             try {
-                UserService::updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
-                printSuccessMessage('Modification du mot de passe réussi');
+                UserService::updatePassword($_SESSION['__idUser__'], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
+                printSuccessMessage('Mot de passe modifié');
             }
             catch (Exception $e) {
                 $errorMessage = $e->getMessage();
@@ -36,20 +26,10 @@ statInsererPageSurf(__FILE__);
                 }
                 printErrorMessage($errorMessage);
             }
-        } else {
-            printErrorMessage('Votre ancien mot de passe n\'est pas valide, impossible de modifier votre mot de passe');
+        } else if (strlen($_POST['nouveauPass']) > 0) {
+            printErrorMessage('Votre ancien mot de passe n\'est pas valide.');
         }
     }
-    ?>
-
-
-
-    <?php
-    $requeteSQL = "SELECT * FROM `Personne` WHERE `Personne`.`nom`='" . addslashes($_SESSION["__nom__"]) . "' AND `Personne`.`prenom`='" . addslashes($_SESSION["__prenom__"]) . "'";
-
-    $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
-
-    $record = mysql_fetch_array($recordset);
 
     ?>
     <script language='javascript'>
@@ -65,7 +45,8 @@ statInsererPageSurf(__FILE__);
                 mesInfos.email.classList.remove('st-invalid');
             }
 
-            if (mesInfos.nouveauPass.value !== mesInfos.nouveauPassBis.value || mesInfos.nouveauPass.value.length < 8) {
+            if (mesInfos.nouveauPass.value !== mesInfos.nouveauPassBis.value ||
+                (mesInfos.nouveauPass.value.length < 8 && mesInfos.nouveauPass.value.length > 0)) {
                 // TODO: Do the same validation check as done in PHP.
                 nbErreur++;
                 mesInfos.nouveauPass.classList.add('st-invalid');
@@ -85,18 +66,18 @@ statInsererPageSurf(__FILE__);
           onSubmit="return controlerSaisie();">
         <fieldset>
             <label>Nom d'utilisateur</label>
-            <div class="givenData"><?php echo stripslashes($record["username"]); ?></div>
+            <div class="givenData"><?php echo stripslashes($_SESSION["__username__"]); ?></div>
             <label>Nom</label>
-            <div class="givenData"><?php echo stripslashes($record["nom"]); ?></div>
+            <div class="givenData"><?php echo stripslashes($_SESSION["__nom__"]); ?></div>
             <label>Prénom</label>
-            <div class="givenData"><?php echo stripslashes($record["prenom"]); ?></div>
+            <div class="givenData"><?php echo stripslashes($_SESSION["__prenom__"]); ?></div>
         </fieldset>
         <fieldset>
             <label for="emailField">Email</label>
             <input name="email"
                    id="emailField"
                    type="text"
-                   value="<?php echo $record["email"]; ?>"
+                   value="<?php echo $user["email"]; ?>"
                    size="35"
                    autocomplete="off">
         </fieldset>
@@ -116,7 +97,7 @@ statInsererPageSurf(__FILE__);
                         $club = VAR_LANG_NON_SPECIFIE;
                     }
 
-                    if ($recordClub["id"] == $record["idClub"]) {
+                    if ($recordClub["id"] == $user["idClub"]) {
                         echo "<option selected value='" . $recordClub["id"] . "'>" . $club . "</option>";
                     } else {
                         echo "<option value='" . $recordClub["id"] . "'>" . $club . "</option>";
@@ -126,17 +107,13 @@ statInsererPageSurf(__FILE__);
                 echo "</select>";
             } // interdiction de modifier le club
             else {
-                $requeteSQLClub = "SELECT * FROM `Personne`, `clubs` WHERE `Personne`.`id`='" . $record["id"] . "' AND `Personne`.`idClub`=`clubs`.`id`";
-                $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");
-
-                $recordClub = mysql_fetch_array($recordsetClub);
-                $club = $recordClub["club"];
-                if ($club == "") {
-                    $club = VAR_LANG_NON_SPECIFIE;
+                $clubName = $user["clubName"];
+                if ($clubName == "") {
+                    $clubName = VAR_LANG_NON_SPECIFIE;
                 }
-                echo "<input name='idClub' type='hidden' value='" . $recordClub["id"] . "'>";
+                echo "<input name='idClub' type='hidden' value='" . $user["idClub"] . "'>";
                 // affiche le club
-                echo "<div class=\"givenData\">" . $club . "</div>";
+                echo "<div class=\"givenData\">" . $clubName . "</div>";
             }
 
             ?>
