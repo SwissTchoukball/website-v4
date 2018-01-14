@@ -52,7 +52,7 @@ if (isset($_POST['token']) &&
 
     try {
         $userId = getUserIdFromPasswordResetToken($token);
-        updatePassword($userId, $_POST['password'], $_POST['passwordRepeat']);
+        UserService::updatePassword($userId, $_POST['password'], $_POST['passwordRepeat']);
         markPasswordResetTokenAsUsed($token);
         printSuccessMessage('Mot de passe modifié. <a href="/login">Se connecter</a>');
     } catch (Exception $e) {

@@ -44,7 +44,7 @@ else {
 
         if ($_POST["nouveauPass"] != "") {
             try {
-                updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
+                UserService::updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
                 printSuccessMessage('Modification du mot de passe réussi');
             }
             catch (Exception $e) {

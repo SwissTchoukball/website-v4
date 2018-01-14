@@ -1,24 +1,23 @@
 <?php
 if (isset($_POST['email'])) {
 
-    $email = strtolower(mysql_real_escape_string(strip_tags($_POST["email"])));
+    $email = strtolower(strip_tags($_POST["email"]));
 
     // Get user ID
     unset($userId);
-    $queryUser = "SELECT id, username FROM Personne WHERE email='$email'";
-    if (!$userResource = mysql_query($queryUser)) {
+    try {
+        $user = UserService::getUserByUsernameOrEmail($email);
+    }
+    catch(Exception $exception) {
         printErrorMessage(
             'Erreur lors de la récupération de vos informations.' .
             'Contactez le <a href="mailto:webmaster@tchoukball.ch">webmaster</a>'
         );
         exit;
-    } else {
-        if (mysql_num_rows($userResource) == 1) {
-            $user = mysql_fetch_assoc($userResource);
-            $userId = $user['id'];
-            $username = $user['username'];
-        }
     }
+
+    $userId = $user['id'];
+    $username = $user['username'];
 
     $body = "Une demande de réinitialisation de mot de passe a été faite pour " .
         "<strong>" . $email . ".</strong><br />";
@@ -33,11 +32,10 @@ if (isset($_POST['email'])) {
 
         $expirationDate = (new \DateTime())->modify('+1 day');
 
-        // Save password reset request in DB
-        $queryPasswordResetRequest =
-            "INSERT INTO password_reset (userId, expirationDate, token)
-             VALUES(" . $userId. ", '" . $expirationDate->format('c') . "', '" . $token . "')";
-        if (!mysql_query($queryPasswordResetRequest)) {
+        try {
+            UserService::savePasswordResetRequest($userId, $expirationDate, $token);
+        }
+        catch(Exception $exception) {
             printErrorMessage('Erreur lors de la sauvegarde la demande de réinitialisation.');
             exit;
         }

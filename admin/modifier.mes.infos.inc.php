@@ -24,7 +24,7 @@ statInsererPageSurf(__FILE__);
 
         if (md5($_POST["ancienPass"]) == $record["password"]) {
             try {
-                updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
+                UserService::updatePassword($record["id"], $_POST['nouveauPass'], $_POST['nouveauPassBis']);
                 printSuccessMessage('Modification du mot de passe réussi');
             }
             catch (Exception $e) {
