@@ -19,14 +19,6 @@ $afficherNumero = false;
     $query = getTeamQuery(1);
     $recordset = mysql_query($query) or die ("<H1>mauvaise requete</H1>");
 
-    /*$requeteSQL = "SELECT *, `equipeHomme` AS `idPosteEquipe`
-                   FROM `Personne`, `clubs`
-                   WHERE `equipeHomme`>'0'
-                   AND `clubs`.`id`=`Personne`.`idClub`
-                   ORDER BY `equipeHomme`, `nom`, `prenom`";
-    $recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");*/
-
-
     while ($record = mysql_fetch_array($recordset)) {
         afficherPersonneTeam($record, "_port", $afficherNumero);
     }
