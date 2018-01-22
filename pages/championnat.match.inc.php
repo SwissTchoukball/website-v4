@@ -51,7 +51,9 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
         $price = $match['prixEntree'];
         $attendance = $match['nbSpectateurs'];
 
-        $gMapsURL = 'https://maps.google.com/maps?q=' . urlencode($match['adresse'] . ', ' . $match['npa'] . ' ' . $match['ville']) . '&amp;num=1&amp;t=m&amp;ie=UTF8&amp;output=embed';
+        $gMapsURL = 'https://www.google.com/maps/embed/v1/place?q=' .
+            urlencode(utf8_encode($match['adresse'] . ', ' . $match['npa'] . ' ' . $match['ville'])) .
+            '&amp;key=' . GOOGLE_API_KEY;
 
         $flickrSetId = $match['flickrSetId'];
 

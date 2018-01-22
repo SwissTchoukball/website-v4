@@ -16,7 +16,9 @@ if (isset($_GET['venueID']) && isValidMatchID($_GET['venueID'])) {
         echo '<p class="notification notification--error">Erreur lors de la récupération des données du lieu.<br />Requête: ' . $venueQuery . '<br />Message: ' . mysql_error() . '</p>';
     } else {
         $venue = mysql_fetch_assoc($venueData);
-        $gMapsURL = 'https://maps.google.com/maps?q=' . urlencode($venue['adresse'] . ', ' . $venue['npa'] . ' ' . $venue['ville']) . '&amp;num=1&amp;t=m&amp;ie=UTF8&amp;output=embed';
+        $gMapsURL = 'https://www.google.com/maps/embed/v1/place?q=' .
+            urlencode(utf8_encode($venue['adresse'] . ', ' . $venue['npa'] . ' ' . $venue['ville'])) .
+            '&amp;key=' . GOOGLE_API_KEY;
         ?>
         <div class="venue">
             <h1><?php echo $venue['nom'] ?></h1>
