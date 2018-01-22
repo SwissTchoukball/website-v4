@@ -29,5 +29,6 @@ mysql_set_charset('latin1');
 setlocale(LC_MONETARY, 'fr_CH');
 date_default_timezone_set('Europe/Zurich');
 
-// Enter Flickr API key here
+// Enter API keys here
 define("FLICKR_API_KEY", "");
+define("GOOGLE_API_KEY", "");
