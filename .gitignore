@@ -80,9 +80,10 @@ pictures/schema_championnat_*
 vendor/
 node_modules/
 
-# Build files #
+# Build/log files #
 ###############
 build/*
+includes/logs/*
 
 bin/*
 !sql_updates/*.sql
