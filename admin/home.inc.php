@@ -1,19 +1,10 @@
 <?php
 statInsererPageSurf(__FILE__);
 
-$userQuery = "
-    SELECT p.nom, p.prenom, p.username, c.club, c.id AS clubId
-    FROM `Personne` p,`clubs` c
-    WHERE p.`username`='" . addslashes($_SESSION["__username__"]) . "'
-    AND p.`idClub`=c.`id`";
-
-$userResource = mysql_query($userQuery) or die(printErrorMessage('Erreur lors de l\'accès à vos données'));
-$user = mysql_fetch_array($userResource);
-
 ?>
 <div class="homepage-admin">
-    <img class="logoClub" src="<?php echo VAR_IMAGE_LOGO_CLUBS . $user['clubId'] . '.png'; ?>" />
-    <h1><?php echo VAR_LANG_HELLO . ' ' . $user["prenom"]; ?></h1>
+    <img class="logoClub" src="<?php echo VAR_IMAGE_LOGO_CLUBS . $_SESSION['__idClub__'] . '.png'; ?>" />
+    <h1><?php echo VAR_LANG_HELLO . ' ' . $_SESSION["__prenom__"]; ?></h1>
     <p><?php echo VAR_LANG_ADMIN_WELCOME; ?></p>
     <p>
         Pour en savoir plus sur le fonctionnement de la fédération, vous pouvez consulter
