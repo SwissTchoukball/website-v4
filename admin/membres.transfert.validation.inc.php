@@ -103,21 +103,17 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
         printSuccessMessage('Transfert de ' . $transferingPersonName . ' ' . $transferStatusString);
         $recipientsEmails = [$authorEmail];
         if ($transferAccepted) {
-            $getRelatedClubsManagersQuery = "
-                SELECT p.email
-                FROM Personne p, clubs c
-                WHERE (c.nbIdClub = $targetClubId || c.nbIdClub = $sourceClubId)
-                AND c.id = p.idClub
-                AND p.gestionMembresClub = 1";
-            if ($relatedClubsManagersResource = mysql_query($getRelatedClubsManagersQuery)) {
-                while ($clubManager = mysql_fetch_assoc($relatedClubsManagersResource)) {
+            try {
+                $clubManagers = UserService::getClubManagers([$targetClubId, $sourceClubId]);
+
+                foreach ($clubManagers as $clubManager) {
                     array_push($recipientsEmails, $clubManager['email']);
                 }
             }
-            else {
+            catch(Exception $exception) {
                 printErrorMessage(
                     'Erreur lors de la récupération des adresses e-mails des gestionaires de membres des clubs concernés.',
-                    mysql_error()
+                    $exception->getMessage()
                 );
             }
         }

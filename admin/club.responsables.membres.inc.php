@@ -8,27 +8,33 @@
     </thead>
     <tbody>
     <?php
-    $membersManagersRequest = "SELECT p.nom, p.prenom, c.club, p.email FROM Personne p, clubs c WHERE p.idClub=c.id AND p.gestionMembresClub=1 ORDER BY c.club";
-    //echo $membersRequest;
+    try {
+        $clubManagers = UserService::getClubManagers();
+    }
+    catch(Exception $exception) {
+        printErrorMessage($exception->getMessage());
+        die($exception->getMessage());
+    }
+
     $allEmails = "";
-    $membersManagersResult = mysql_query($membersManagersRequest);
-    while ($membersManagers = mysql_fetch_assoc($membersManagersResult)) {
-        $membersManagerEmail = $membersManagers['email'];
-        if ($membersManagerEmail != "") {
-            $allEmails .= $membersManagers['email'] . ",";
+
+    foreach ($clubManagers as $clubManager) {
+        $clubManagerEmail = $clubManager['email'];
+        if ($clubManagerEmail != "") {
+            $allEmails .= $clubManagerEmail . ",";
         }
         ?>
         <tr>
-            <td><?php echo $membersManagers['club']; ?></td>
+            <td><?php echo $clubManager['clubName']; ?></td>
             <td>
                 <?php
-                if ($membersManagerEmail != "") {
-                    echo '<a href="mailto:' . $membersManagerEmail . '">';
+                if ($clubManagerEmail != "") {
+                    echo '<a href="mailto:' . $clubManagerEmail . '">';
                 }
 
-                echo '<strong>' . $membersManagers['nom'] . '</strong> ' . $membersManagers['prenom'];
+                echo '<strong>' . $clubManager['nom'] . '</strong> ' . $clubManager['prenom'];
 
-                if ($membersManagerEmail != "") {
+                if ($clubManagerEmail != "") {
                     echo '</a>';
                 }
                 ?>

@@ -68,6 +68,23 @@ class UserService
         return $db->query($query);
     }
 
+    public static function getClubManagers($clubIds = []) {
+        $query = "SELECT p.id, p.nom, p.prenom, p.username, p.email, p.userLevel, p.idClub, c.club AS clubName
+          FROM Personne p, clubs c";
+
+        if (is_array($clubIds) && sizeof($clubIds) > 0) {
+            $query .= " WHERE c.nbIdClub IN (" . implode(",", $clubIds) . ") AND";
+        } else {
+            $query .= " WHERE";
+        }
+
+        $query .= " c.id = p.idClub AND p.gestionMembresClub = 1 ORDER BY c.nomPourTri";
+
+        $db = new DB();
+
+        return $db->query($query);
+    }
+
     public static function addUser($user) {
         $db = new DB();
 
