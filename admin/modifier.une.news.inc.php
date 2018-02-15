@@ -5,7 +5,7 @@ $requeteSQL = "SELECT * FROM News WHERE id = '$idNewsCourrante'";
 $recordset = mysql_query($requeteSQL);
 $record = mysql_fetch_array($recordset);
 ?>
-<form name="form1" method="post" action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
+<form name="form1" method="post" action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
     <table class="tableauInsererNews">
         <?php
         for ($i = 0; $i < count($VAR_TABLEAU_DES_LANGUES); $i++) {

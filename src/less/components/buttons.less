@@ -16,6 +16,10 @@
     color: white;
     border: none;
 
+    a& {
+      color: white;
+    }
+
     &:active {
       background-color: @colorPrimaryDarken;
     }
@@ -30,10 +34,15 @@
     background-color: transparent;
     color: @colorLessImportant;
 
+    a& {
+      color: @colorLessImportant;
+    }
+
     &:active {
       background-color: @colorGrayVeryLight;
     }
   }
+
 }
 
 .emoji-button {

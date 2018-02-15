@@ -67,6 +67,8 @@ include "statistique.inc.php";
 
 require_once("phpFlickr.php");
 
+require_once $_SERVER["DOCUMENT_ROOT"] . "/includes/Navigation.class.php";
+
 ///////////////////////
 // !Maintenance TOTALE
 ///////////////////////
@@ -86,13 +88,23 @@ if ($admin && $_SESSION["__userLevel__"] >= 100) {
 
 // Menu normal ou menu admin
 if ($_SESSION["__userLevel__"] < 100 && $admin) {
-    $typemenu = "MenuAdmin";
+    $navigation = new Navigation('admin');
+
 } else {
-    $typemenu = "Menu";
+    $navigation = new Navigation('main');
 }
 
 // regarder si les numéros des menus et/ou sous menus sont correct
-include "validite.menu.inc.php";
+try {
+    if (isset($_GET[VAR_HREF_LIEN_MENU])) {
+        $navigation->setCurrentMenuItemById($_GET[VAR_HREF_LIEN_MENU]);
+    } elseif (isset($_GET["menuselection"]) && isset($_GET["smenuselection"])) {
+        // We keep this for backward compatibility, but no link from the website should use these query strings anymore.
+        $navigation->setCurrentMenuItemByParentIdAndOrder($_GET["menuselection"], $_GET["smenuselection"]);
+    }
+} catch (Exception $exception) {
+    header("HTTP/1.0 500 Internal Server Error", true, 500);
+}
 
 // !Paramétrage du contenu de <head>
 $titre = "";
@@ -104,13 +116,7 @@ if ($devWebsite) {
 if (isset($_GET["login"])) {
     $titre .= " | Login";
 } else {
-    $retour = mysql_query("SELECT nom" . $_SESSION["__langue__"] . " FROM " . $typemenu . " WHERE sousMenuDeId='" . $menuselection . "' AND ordre='" . $smenuselection . "'");
-    while ($donnees = mysql_fetch_array($retour)) {
-        if ($menuselection != 1 || $smenuselection != 0 || $admin) {
-            //Pas la page d'accueil
-            $titre .= " | " . strip_tags($donnees["nom" . $_SESSION["__langue__"]]);
-        }
-    }
+    $titre .= " | " . strip_tags($navigation->getCurrentMenuItem()['name']);
 }
 $description = "Site de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ". Le tchoukball est un sport pour tous. Accessible, intense, tactique et fair-play, il est le sport de demain.";
 $facebook_type = "website";
@@ -120,7 +126,6 @@ if (isset($newsIdSelection) && $newsIdSelection != "") {
     //Page NEWS
     $news = mysql_fetch_assoc(mysql_query("SELECT id, titre" . $_SESSION["__langue__"] . " AS titre, corps" . $_SESSION["__langue__"] . " AS corps FROM `News` WHERE `Id`='" . $newsIdSelection . "'"));
     $titre .= " : " . strip_tags($news['titre']);
-    //$description = strip_tags(sizeNewsManager($news['corps'],$tailleDescription,$news['id']));
     $description = truncateHtml(markdown($news['corps']), $tailleDescription, " ...");
     $description = str_replace("’", "'", $description);
     $description = strip_tags($description);

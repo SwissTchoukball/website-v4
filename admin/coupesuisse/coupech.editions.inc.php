@@ -1,8 +1,8 @@
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&ajouter"><img
             src="/admin/images/ajouter.png" alt="Ajouter une édition"/> Ajouter une édition</a></div>
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
             src="/admin/images/liste.png" alt="Liste des éditions"/> Liste des éditions</a></div>
 <br/>
 <?php
@@ -78,7 +78,7 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
         }
     </script>
     <form method="post"
-          action="?menuselection=<?php echo $_GET['menuselection']; ?>&amp;smenuselection=<?php echo $_GET['smenuselection']; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           class="insererEditionCoupeCH">
         <fieldset>
             <legend>Informations de base</legend>
@@ -325,10 +325,10 @@ if (isset($_GET['ajouter']) OR isset($_GET['modifier'])) {
                     <?php echo $donneesListe['nom' . $_SESSION['__langue__']]; ?>
                 </td>
                 <td class="modifier"><a
-                        href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $donneesListe['idEvenement']; ?>"><img
+                        href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&modifier=<?php echo $donneesListe['idEvenement']; ?>"><img
                             src="/admin/images/modifier.png" alt="modifier"/></a></td>
                 <td class="supprimer"><a
-                        href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&supprimer=<?php echo $donneesListe['idEvenement']; ?>"
+                        href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&supprimer=<?php echo $donneesListe['idEvenement']; ?>"
                         onClick='return confirm("Vous êtes sur le point de supprimer cette édition \n OK pour supprimer, Annuler pour abandonner.");'><img
                             src="/admin/images/supprimer.png" alt="supprimer"/></a></td>
             </tr>

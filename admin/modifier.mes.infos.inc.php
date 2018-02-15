@@ -62,7 +62,7 @@ statInsererPageSurf(__FILE__);
     </script>
 
     <form name="mesInfos" class="st-form" method="post"
-          action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return controlerSaisie();">
         <fieldset>
             <label>Nom d'utilisateur</label>

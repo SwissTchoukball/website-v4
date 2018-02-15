@@ -492,7 +492,7 @@ if ($canEdit) {
     <form method="post"
           onsubmit="return checkMemberForm();"
           name="memberEdit"
-          action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&details"
           class="st-form">
         <fieldset>
             <?php
@@ -860,7 +860,7 @@ if ($canEdit) {
     </form>
     <?php
     if (!$newMember) {
-        echo '<p><a href="?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection .
+        echo '<p><a href="?' . $navigation->getCurrentPageLinkQueryString() .
             '&transfer-request=' . $memberID . '">Faire une demande pour transférer ' . $name . ' dans un autre club.
              </a></p>';
 
@@ -882,8 +882,7 @@ if ($canEdit) {
             if (!$isInvolvedInFederation) {
                 ?>
                 <p class="tooltip-container">
-                    <a href="?menuselection=<?php echo $menuselection;
-                    ?>&smenuselection=<?php echo $smenuselection;
+                    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString();
                     ?>&delete=<?php echo $memberID; ?>"
                        onclick="return confirm('Voulez-vous vraiment supprimer <?php echo $name; ?> ?');">
                         Supprimer <?php echo $name; ?>

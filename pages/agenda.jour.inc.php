@@ -33,12 +33,12 @@
     }
     ?>
     <span class="calendrierPrecedant"><a
-            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&jour=<?php echo $jourPrecedant; ?>&mois=<?php echo $moisPrecedant; ?>&annee=<?php echo $anneePrecedante; ?>#navigationCalendrier"
+            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&affichage=calendrier&jour=<?php echo $jourPrecedant; ?>&mois=<?php echo $moisPrecedant; ?>&annee=<?php echo $anneePrecedante; ?>#navigationCalendrier"
             title="Jour précédant"><img src="pictures/calendrier.precedant.png" alt="Jour précédant"/></a></span>
     <span
         class="titreCalendrier"><?php echo ucfirst($jourDeLaSemaine[$jourSemaineJour]) . " " . $jour . " " . ucfirst($moisDeLAnnee[$mois]) . " " . $annee; ?></span>
     <span class="calendrierSuivant"><a
-            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&jour=<?php echo $jourSuivant; ?>&mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>#navigationCalendrier"
+            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&affichage=calendrier&jour=<?php echo $jourSuivant; ?>&mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>#navigationCalendrier"
             title="Jour suivant"><img src="pictures/calendrier.suivant.png" alt="Jour suivant"/></a></span>
 </div>
 <div id="blocCalendrierJour">
@@ -49,7 +49,7 @@
         while ($donnees = mysql_fetch_array($retour)) {
             echo "<tr>";
             echo "<td class='jourEntierJour' style='background-color: " . $donnees['couleur'] . ";'>";
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white;'>" . $donnees['titre'] . "</span></a>";
+            echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white;'>" . $donnees['titre'] . "</span></a>";
             echo "</td>";
             echo "</tr>";
         }

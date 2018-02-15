@@ -57,7 +57,7 @@
                 }
 
                 echo "<tr>";
-                echo "<td><a href=?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&modMatch=" . $donnees['idMatch'] . ">" . $equipeA . " - " . $equipeB . "</a></td>";
+                echo "<td><a href=?" . $navigation->getCurrentPageLinkQueryString() . "&modMatch=" . $donnees['idMatch'] . ">" . $equipeA . " - " . $equipeB . "</a></td>";
                 echo "<td>" . $typeMatch . "</td>";
                 echo "</tr>";
             }

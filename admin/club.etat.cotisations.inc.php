@@ -1,6 +1,6 @@
 <h4>Situation actuelle</h4>
 <form id="etatCotisations" method="post"
-      action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
+      action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
     <table class="st-table">
         <tr>
             <th>Saison</th>

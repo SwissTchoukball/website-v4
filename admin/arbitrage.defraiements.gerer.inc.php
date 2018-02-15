@@ -17,7 +17,7 @@ $queryVersements = "SELECT av.id, p.nom, p.prenom, av.datePaiement, av.montantPa
 
 if ($versements = mysql_query($queryVersements)) {
     while ($versement = mysql_fetch_assoc($versements)) {
-        echo '<tr class="clickable-row" data-href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&modifier=' . $versement['id'] . '">';
+        echo '<tr class="clickable-row" data-href="?' .  $navigation->getCurrentPageLinkQueryString() . '&modifier=' . $versement['id'] . '">';
         echo '<td>' . $versement['prenom'] . ' ' . $versement['nom'] . '</td>';
         echo '<td>' . date_sql2date($versement['datePaiement']) . '</td>';
         echo '<td>CHF ' . $versement['montantPaye'] . '</td>';

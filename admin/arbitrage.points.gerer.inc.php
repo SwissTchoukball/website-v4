@@ -20,7 +20,7 @@ $queryPoints = "SELECT ap.id, p.nom, p.prenom, ap.date, atp.typesPoints" . $_SES
 
 if ($points = mysql_query($queryPoints)) {
     while ($point = mysql_fetch_assoc($points)) {
-        echo '<tr class="clickable-row" data-href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&modifier=' . $point['id'] . '">';
+        echo '<tr class="clickable-row" data-href="?' .  $navigation->getCurrentPageLinkQueryString() . '&modifier=' . $point['id'] . '">';
         echo '<td>' . $point['prenom'] . ' ' . $point['nom'] . '</td>';
         echo '<td>' . date_sql2date($point['date']) . '</td>';
         echo '<td>' . $point['typePoint'] . '</td>';

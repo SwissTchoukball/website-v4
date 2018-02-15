@@ -63,7 +63,7 @@
 
     </script>
     <form name="form" method="post"
-          action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return controleInsertion();">
         <table class="tableauInsererNews">
             <?php

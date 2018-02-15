@@ -51,7 +51,7 @@
             ?>
         </td>
         <td class="action">
-            <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&edit=<?php echo $clubID; ?>"><img
+            <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&edit=<?php echo $clubID; ?>"><img
                     src="/admin/images/modifier.png" alt="Modifier un club"/></a>
         </td>
         </tr>

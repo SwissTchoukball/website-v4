@@ -128,7 +128,7 @@
 
     <table>
         <form name="translateText"
-              action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" method="post"
+              action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>" method="post"
               onsubmit="if(!isDataModified()){alert('rien à modifier'); return false;}">
             <table border="0" align="center">
 
@@ -164,7 +164,7 @@
         </form>
         <div align="center">
             <form name="annuler" onsubmit="return validForm();" method="post"
-                  action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"><input
+                  action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><input
                     type="submit" class="button button--cancel" value="<?php echo VAR_LANG_ANNULER ?>"></form>
         </div>
 

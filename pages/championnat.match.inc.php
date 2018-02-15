@@ -1,6 +1,5 @@
 <?php
 if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
-    //echo '<p><a href="?menuselection='.$menuselection.'&smenuselection='.$smenuselection.'">Retour au programme</a></p>';
     $referees = getReferees();
     // ------------------------------------------ //
     // ! Affichage d'un match

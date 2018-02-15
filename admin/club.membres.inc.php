@@ -25,11 +25,11 @@
         echo "<p class='notification'>Vous ne pouvez pas faire de modification car le paiement de la cotisation n'a pas encore été confirmé.</p>";
     } else {
         ?>
-        <p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img
+        <p><a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&new"><img
                     src="/admin/images/ajouter.png" alt="Ajouter un membre"/> Ajouter un membre</a><br/>
-            <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"><img
+            <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
                     src="/admin/images/liste.png" alt="Liste des membres simple"/> Liste des membres simple</a><br/>
-            <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&details"><img
+            <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&details"><img
                     src="/admin/images/liste.png" alt="Liste des membres détaillée"/> Liste des membres
                 détaillée</a><br/>
             <a href="admin/club.export.excel.php"><img src="/admin/images/document_excel.png" alt="Liste Excel"/> Liste

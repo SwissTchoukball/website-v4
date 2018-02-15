@@ -21,7 +21,7 @@
             $categorie = $donneesCat['nom' . $_SESSION['__langue__']];
 
             echo "<tr>";
-            echo "<td><a href=?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&modAnnee=" . $donnees['annee'] . "&modCat=" . $donnees['idCategorie'] . ">" . $donnees['annee'] . "</a></td>";
+            echo "<td><a href=?" . $navigation->getCurrentPageLinkQueryString() . "&modAnnee=" . $donnees['annee'] . "&modCat=" . $donnees['idCategorie'] . ">" . $donnees['annee'] . "</a></td>";
             echo "<td>" . $categorie . "</td>";
             echo "</tr>";
         }

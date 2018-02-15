@@ -107,7 +107,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
 ?>
 <h3><?php echo $formLegend; ?></h3>
 <form method="post" onsubmit="return checkClubForm();" name="clubEdit"
-      action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"
+      action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
       class="st-form">
     <fieldset>
         <label for="shortName">Nom court</label>

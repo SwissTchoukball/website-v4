@@ -75,9 +75,9 @@ if (!isset($_POST['idMatch'])) {
 
 }
 ?>
-<p class="center"><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">Modifier
+<p class="center"><a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">Modifier
         d'autres matchs</a></p><br/>
 <p class="center"><a
-        href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&modAnnee=<?php echo $_POST['annee']; ?>&modCat=<?php echo $_POST['idCategorie']; ?>">Modifier
+        href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&modAnnee=<?php echo $_POST['annee']; ?>&modCat=<?php echo $_POST['idCategorie']; ?>">Modifier
         d'autres matchs de la même édition</a></p>
 

@@ -76,7 +76,7 @@ if (hasRefereeManagementAccess()) {
     <?php
     echo '<h2>' . $titleAction . ' de points d\'arbitres</h2>';
 
-    echo '<form name="editRefereePoints" action="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&gerer" method="post" class="st-form">';
+    echo '<form name="editRefereePoints" action="?' .  $navigation->getCurrentPageLinkQueryString() . '&gerer" method="post" class="st-form">';
 
     echo '<label for="refereeID">' . ucfirst(VAR_LANG_ARBITRE) . '</label>';
     echo '<select name="refereeID" id="refereeID">';
@@ -106,7 +106,7 @@ if (hasRefereeManagementAccess()) {
 
 
     if ($action == 'edit') {
-        echo '<a href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&delete=' . $pointsID . '"  onclick="return confirm(\'Voulez-vous vraiment supprimer ces points ?\')">Supprimer ces points</a>';
+        echo '<a href="?' .  $navigation->getCurrentPageLinkQueryString() . '&delete=' . $pointsID . '"  onclick="return confirm(\'Voulez-vous vraiment supprimer ces points ?\')">Supprimer ces points</a>';
         echo '<p>Ajouté par ' . $creatorName . '. Dernière modification par ' . $lastEditorName . '</p>';
     }
 

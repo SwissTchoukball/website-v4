@@ -364,18 +364,6 @@ function formatterTextEnHTML($text)
     return $text;
 }
 
-function gardemenuselection($menuselection, $smenuselection)
-{
-    $text = "";
-    if ($menuselection != "") {
-        $text = "&menuselection=" . $menuselection;
-    }
-    if ($menuselection != "" && $smenuselection != "") {
-        $text = $text . "&smenuselection=" . $smenuselection;
-    }
-    return $text;
-}
-
 
 ///////////////////////////////////////////////// FONCTIONS AVEC SQL ///////////////////////////////////////////////////
 
@@ -906,16 +894,6 @@ function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $co
         }
     }
     return $truncate;
-}
-
-
-function sizeNewsManager($text, $nbchar, $newsId)
-{
-    if (strlen($text) > $nbchar) {
-        return substr($text, 0,
-                $nbchar) . "... " . "<p class='lireSuiteArticle'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?menuselection=1&smenuselection=1&newsIdSelection=" . $newsId . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
-    }
-    return $text;
 }
 
 function getLastYouTubeVideoID($channel)

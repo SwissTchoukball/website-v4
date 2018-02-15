@@ -39,7 +39,7 @@
     }
     ?>
     <span class="calendrierPrecedant"><a
-            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourPrecedant; ?>&mois=<?php echo $moisPrecedant; ?>&annee=<?php echo $anneePrecedante; ?>#navigationCalendrier"
+            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&affichage=calendrier&semaine&jour=<?php echo $jourPrecedant; ?>&mois=<?php echo $moisPrecedant; ?>&annee=<?php echo $anneePrecedante; ?>#navigationCalendrier"
             title="Semaine précédante"><img src="pictures/calendrier.precedant.png"
                                             alt="Semaine précédante"/></a></span>
     <span class="titreCalendrier">
@@ -53,7 +53,7 @@
         ?>
 	</span>
     <span class="calendrierSuivant"><a
-            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&affichage=calendrier&semaine&jour=<?php echo $jourSuivant; ?>&mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>#navigationCalendrier"
+            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&affichage=calendrier&semaine&jour=<?php echo $jourSuivant; ?>&mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>#navigationCalendrier"
             title="Semaine suivante"><img src="pictures/calendrier.suivant.png" alt="Semaine suivante"/></a></span>
 </div>
 <table id="calendrierSemaine">
@@ -77,7 +77,7 @@
         echo "<td" . $classDuJour . ">";
         echo "<div class='jourDeLaSemaine'>";
         if ($affichageParJour) {
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&affichage=calendrier&jour=" . $jourAffiche . "&mois=" . $mois . "&annee=" . $annee . "'>";
+            echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "&affichage=calendrier&jour=" . $jourAffiche . "&mois=" . $mois . "&annee=" . $annee . "'>";
         }
         echo ucfirst($jourDeLaSemaine[$k]) . " " . $jourAffiche;
         if ($affichageParJour) {
@@ -103,9 +103,9 @@
         $retour = mysql_query($requete);
         while ($donnees = mysql_fetch_array($retour)) {
             if ($donnees['jourEntier'] == 1) {
-                echo "<div class='calendrierSemaineEvenement' style='background-color: " . $donnees['couleur'] . "; text-align:center;'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white'>" . $donnees['titre'] . "</span></a></div>";
+                echo "<div class='calendrierSemaineEvenement' style='background-color: " . $donnees['couleur'] . "; text-align:center;'><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color:white'>" . $donnees['titre'] . "</span></a></div>";
             } else {
-                echo "<div class='calendrierSemaineEvenement'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color: " . $donnees['couleur'] . "'>" . time_sql2heure($donnees['heureDebut']) . "-" . time_sql2heure($donnees['heureFin']) . " : " . $donnees['titre'] . "</span></a></div>";
+                echo "<div class='calendrierSemaineEvenement'><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&idEvenement=" . $donnees['idEvent'] . "'><span style='color: " . $donnees['couleur'] . "'>" . time_sql2heure($donnees['heureDebut']) . "-" . time_sql2heure($donnees['heureFin']) . " : " . $donnees['titre'] . "</span></a></div>";
             }
         }
         if (isset($categorieCochee[4])) { // Championnat{

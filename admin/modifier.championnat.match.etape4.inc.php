@@ -302,19 +302,16 @@ if (!isset($_POST['idMatch'])) {
     include('championnat.miseajour.equipes.tour.inc.php');
 }
 ?>
-<form name="remodification" action="">
-    <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
-    <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
-    <p class="center"><input type="submit" class="button" value="Modifier d'autres matchs"/></p>
-</form>
-<form name="remodificationMemePhase" action="">
-    <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
-    <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
-    <input type="hidden" name="saison" value="<?php echo $saison; ?>"/>
-    <input type="hidden" name="idCat" value="<?php echo $idCategorie; ?>"/>
-    <input type="hidden" name="idTour" value="<?php echo $idTour; ?>"/>
-    <input type="hidden" name="idGroupe" value="<?php echo $idGroupe; ?>"/>
-    <p class="center"><input type="submit" class="button button--primary" value="Modifier d'autres matchs de la même phase"/></p>
-</form>
+<p class="center">
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
+       class="button">
+        Modifier d'autres matchs
+    </a>
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&saison=<?php echo $saison;
+        ?>&idCat=<?php echo $idCategorie; ?>&idTour=<?php echo $idTour; ?>&idGroupe=<?php echo $idGroupe; ?>"
+       class="button button--primary">
+        Modifier d'autres matchs de la même phase
+    </a>
+</p>
 
 

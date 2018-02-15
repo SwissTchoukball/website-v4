@@ -48,7 +48,7 @@ if (
 
 printMessage("Attention ! En cliquant sur <em>Envoyer</em>, l'e-mail sera envoyé sans autre avertissement.");
 printMessage("Ne pas oublier de mettre à jour la liste de discussion avant d'envoyer");
-$formAction = '?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection;
+$formAction = '?' . $navigation->getCurrentPageLinkQueryString();
 echo '<form action="' . $formAction . '" method="post" class="st-form">';
 echo '<label for="recipient">Destinataire</label>';
 echo '<select name="recipient" id="recipient">';

@@ -17,7 +17,7 @@ if ($memberResource = mysql_query($memberQuery)) {
     ?>
     <h3>Demande de transfert pour <?php echo $name; ?></h3>
     <form class="st-form" method="post" onchange="updateNewClubName();" name="transfer-request"
-          action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
         <label>Club d'origine</label>
         <p class="givenData"><?php echo $currentClubName; ?></p>
 

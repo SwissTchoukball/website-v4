@@ -54,7 +54,7 @@ if ($nbMembersPerPage == null) {
 
 if ($showPagination) {
     //Information for pagination
-    $href = '?menuselection=' . $menuselection . '&smenuselection=' . $smenuselection . '&details';
+    $href = '?' . $navigation->getCurrentPageLinkQueryString() . '&details';
 
     if (isset($_GET['page'])) {
         $page = $_GET['page'];
@@ -104,8 +104,7 @@ if ($showPagination) {
 ?>
 <form class="st-form st-form--oneline" method="get">
     <input type="search" name="keywords" placeholder="Recherche"/>
-    <input type="hidden" name="menuselection" value="<?php echo $menuselection ?>"/>
-    <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
+    <input type="hidden" name="lien" value="<?php echo $navigation->getCurrentMenuItem()['id']; ?>"/>
     <input type="submit" class="button button--primary" value="Rechercher"/>
 </form>
 <?php
@@ -115,7 +114,7 @@ $preselectionListQuery = "SELECT * FROM DBDRequetesPreselection ORDER BY nom";
 if ($preselectionListData = mysql_query($preselectionListQuery)) {
     ?>
     <form class="st-form" method="post"
-          action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
         <select name="preselectionID" onchange="submit();" title="Présélection">
             <option value="0">-</option>
             <?php
@@ -250,9 +249,9 @@ while ($member = mysql_fetch_assoc($data)) {
     ?>
 
     <td class="action">
-        <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&edit=<?php echo $idMembre; ?>"><img
+        <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&edit=<?php echo $idMembre; ?>"><img
                 src="/admin/images/modifier.png" alt="Modifier un membre"/></a>
-        <!--<a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&delete=<?php echo $membersData['idDbdPersonne']; ?>" onclick='return confirm("Voulez-vous vraiment supprimer<?php echo $membersData['prenom']; ?><?php echo $membersData['nom']; ?> ?");'><img src="/admin/images/supprimer.png" alt="Supprimer un membre"/></a>-->
+        <!--<a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&delete=<?php echo $membersData['idDbdPersonne']; ?>" onclick='return confirm("Voulez-vous vraiment supprimer<?php echo $membersData['prenom']; ?><?php echo $membersData['nom']; ?> ?");'><img src="/admin/images/supprimer.png" alt="Supprimer un membre"/></a>-->
     </td>
     <?php
     echo "</tr>";

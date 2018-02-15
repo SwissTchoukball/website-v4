@@ -159,7 +159,7 @@ foreach ($matchesByReferee as $refereeID => $referee) {
         }
         echo '<td class="' . $leftToPayClass . '">CHF ' . $leftToPay;
         if ($leftToPay > 0) {
-            echo '<a href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'];
+            echo '<a href="?' . $navigation->getCurrentPageLinkQueryString();
             echo '&ajouter&saison=' . $season . '&id=' . $refereeID . '&montant=' . $leftToPay . '">';
             echo ' <img src="/admin/images/ajouter.png" alt="Ajouter un versement" height="14px" /></a>';
         }

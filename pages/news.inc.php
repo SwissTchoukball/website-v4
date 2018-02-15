@@ -114,12 +114,12 @@ if ($newsIdSelection == "") {
 
     //&& $limitsup>0 && $limitinf>0
     if ($limitsup < mysql_num_rows($recordset) && $limitinf >= 0 && $limitsup > $limitinf) {
-        echo "<p class='newsPrecedentes'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?menuselection=1&smenuselection=1&limitinf=" . ($limitinf + $NB_NEWS_AFFICHEES) . "&limitsup=" . ($limitsup + $NB_NEWS_AFFICHEES) . "'>&lt;&lt;&nbsp;" . VAR_LANG_NEWS_PRECEDENTES . "</a></p>";
+        echo "<p class='newsPrecedentes'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . $navigation->getCurrentPageLinkQueryString() . "&limitinf=" . ($limitinf + $NB_NEWS_AFFICHEES) . "&limitsup=" . ($limitsup + $NB_NEWS_AFFICHEES) . "'>&lt;&lt;&nbsp;" . VAR_LANG_NEWS_PRECEDENTES . "</a></p>";
     } else {
         echo "<p>&nbsp;</p>";
     }
     if ($limitinf >= $NB_NEWS_AFFICHEES && $limitinf >= 0 && $limitsup > $limitinf) {
-        echo "<p class='newsSuivantes'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?menuselection=1&smenuselection=1&limitinf=" . ($limitinf - $NB_NEWS_AFFICHEES) . "&limitsup=" . ($limitsup - $NB_NEWS_AFFICHEES) . "'>" . VAR_LANG_NEWS_SUIVANTES . "&nbsp;&gt;&gt;</a></p>";
+        echo "<p class='newsSuivantes'><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . $navigation->getCurrentPageLinkQueryString() . "&limitinf=" . ($limitinf - $NB_NEWS_AFFICHEES) . "&limitsup=" . ($limitsup - $NB_NEWS_AFFICHEES) . "'>" . VAR_LANG_NEWS_SUIVANTES . "&nbsp;&gt;&gt;</a></p>";
     } else {
         echo "<p>&nbsp;</p>";
     }

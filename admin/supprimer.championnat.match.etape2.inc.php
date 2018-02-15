@@ -13,7 +13,7 @@ if (!(isset($_POST['saison']) AND isset($_POST['categorie']) AND isset($_POST['t
     $idGroupe = $_POST['idGroupe'];
     ?>
     <form name="supprimerMatch" method="post"
-          action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return testQqchASupprimer();">
         <table class="st-table">
             <?php

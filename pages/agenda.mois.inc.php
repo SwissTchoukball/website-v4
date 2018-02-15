@@ -97,7 +97,7 @@
             echo "<div class='jourDuMois'>";
             if ($affichageParJour) {
                 //URL non supportée
-                echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&affichage=calendrier&jour=" . $jourDuMois . "&mois=" . $mois . "&annee=" . $annee . "'>";
+                echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "&affichage=calendrier&jour=" . $jourDuMois . "&mois=" . $mois . "&annee=" . $annee . "'>";
             }
             echo $jourDuMois;
             if ($affichageParJour) {

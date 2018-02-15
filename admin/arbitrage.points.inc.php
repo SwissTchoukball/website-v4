@@ -3,14 +3,14 @@
 if (hasRefereeManagementAccess()) {
     ?>
     <div>
-        <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
+        <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&ajouter"><img
                 src="/admin/images/ajouter.png" alt="Ajouter des points"/> Ajouter des points</a></div>
     <div>
-        <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&gerer"><img
+        <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&gerer"><img
                 src="/admin/images/modifier.png" alt="Gérer les points distribués"/> Gérer les points distribués</a>
     </div>
     <div>
-        <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
+        <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
                 src="/admin/images/liste.png" alt="Liste des points distribués"/> Liste des points distribués</a></div>
     <br/>
     <?php

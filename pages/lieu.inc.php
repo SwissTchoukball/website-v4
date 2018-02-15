@@ -1,6 +1,5 @@
 <?php
 if (isset($_GET['venueID']) && isValidMatchID($_GET['venueID'])) {
-    //echo '<p><a href="?menuselection='.$menuselection.'&smenuselection='.$smenuselection.'">Retour au programme</a></p>';
     // ------------------------------------------ //
     // ! Affichage d'un match
     // ------------------------------------------ //

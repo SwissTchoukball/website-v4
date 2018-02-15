@@ -115,7 +115,7 @@ if (isset($_GET['ajouter'])) {
 <?php
 echo '<h2>' . $titleAction . ' d\'un versement</h2>';
 
-echo '<form name="editPayment" action="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&gerer" method="post" class="st-form">';
+echo '<form name="editPayment" action="?' . $navigation->getCurrentPageLinkQueryString() . '&gerer" method="post" class="st-form">';
 
 echo '<label for="refereeID">' . ucfirst(VAR_LANG_ARBITRE) . '</label>';
 echo '<select name="refereeID" id="refereeID">';
@@ -141,7 +141,7 @@ echo '</form>';
 
 
 if ($action == 'edit') {
-    echo '<a href="?menuselection=' . $_GET['menuselection'] . '&smenuselection=' . $_GET['smenuselection'] . '&delete=' . $paymentID . '"  onclick="return confirm(\'Voulez-vous vraiment supprimer ce versement ?\')">Supprimer ce versement</a>';
+    echo '<a href="?' .  $navigation->getCurrentPageLinkQueryString() . '&delete=' . $paymentID . '"  onclick="return confirm(\'Voulez-vous vraiment supprimer ce versement ?\')">Supprimer ce versement</a>';
     echo '<p>Dernière modification par ' . $userName . '</p>';
 }
 ?>

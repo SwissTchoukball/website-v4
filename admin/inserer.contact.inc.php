@@ -83,7 +83,7 @@ statInsererPageSurf(__FILE__);
     </SCRIPT>
 
     <form class="st-form" name="mesInfos" method="post"
-          action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return controlerSaisie();">
         <label for="firstNameInput">Prénom</label>
         <input name="prenom" id="firstNameInput" type="text" value="" size="35" maxlength="35">

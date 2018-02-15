@@ -3,9 +3,9 @@
     statInsererPageSurf(__FILE__);
     ?>
 
-    <p><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>&new"><img
+    <p><a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&new"><img
                 src="/admin/images/ajouter.png" alt="Ajouter un club"/> Ajouter un club</a><br/>
-        <a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"><img
+        <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
                 src="/admin/images/liste.png" alt="Liste des clubs"/> Liste des clubs</a></p>
 
     <?php

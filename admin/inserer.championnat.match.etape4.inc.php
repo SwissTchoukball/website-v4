@@ -64,6 +64,6 @@ if (!isset($_POST['nbMatchs'])) {
     // l'include ne sert à rien là car on ne peut pas mettre de score en ajoutant un match, donc cela ne change rien aux calculs des points.
 }
 ?>
-<p class="center"><a href="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">Insérer
+<p class="center"><a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">Insérer
         d'autres matchs</a></p>
 

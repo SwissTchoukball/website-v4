@@ -29,7 +29,7 @@
             if ($titre == "") {
                 $titre = $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]];
             }
-            echo "<td><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&supprimerNewsID=" . $record["id"] . "' onClick='confirm(\"Êtes-vous sur de supprimer cette news ?\")'>" . $titre . "</a></td>";
+            echo "<td><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&supprimerNewsID=" . $record["id"] . "' onClick='confirm(\"Êtes-vous sur de supprimer cette news ?\")'>" . $titre . "</a></td>";
             echo "</tr>";
         }
         ?>

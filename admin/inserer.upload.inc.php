@@ -270,7 +270,7 @@ elseif ($_POST["action"] == "modifierUpload") {
 <div class="center">
 
     <form name="modificationUpload" method="post" onSubmit="return controlerSaisie();"
-          action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           enctype="multipart/form-data">
         <?php
         if (!isset($_GET['modif'])) {

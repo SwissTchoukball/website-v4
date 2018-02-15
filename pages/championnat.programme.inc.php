@@ -111,8 +111,6 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
-        <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
     </form>
 
     <?php

@@ -5,7 +5,7 @@
 </h3>
 
 <form id="supprimerMatchs" method="post"
-      action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection; ?>"
+      action="<?php echo "?" . $navigation->getCurrentPageLinkQueryString(); ?>"
       onSubmit="return testQqchAModifier();">
     <p>Phase dans laquelle il y a des matchs à supprimer :</p>
     <table class="st-table">

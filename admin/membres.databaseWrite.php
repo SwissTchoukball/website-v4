@@ -57,7 +57,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
         if (mysql_num_rows($duplicateNameResult) > 0) {
             $duplicateName = mysql_fetch_assoc($duplicateNameResult);
             echo "<p class='notification notification--error'>Un &laquo; " . $firstname . " " . $lastname . " &raquo; existe déjà dans la base de données et est membre du club &laquo; " . $duplicateName['club'] . " &raquo;.<br />";
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&transfer-request=" . $duplicateName['idDbdPersonne'] . "'>Demandez à le transférer</a>.</p>";
+            echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "&transfer-request=" . $duplicateName['idDbdPersonne'] . "'>Demandez à le transférer</a>.</p>";
             $nbError++;
         }
     }
@@ -302,7 +302,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $messageMail = $_SESSION['__prenom__'] . " " . $_SESSION['__nom__'] . " demande un transfert pour <strong>" . htmlentities($_POST['memberName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong>.<br /><br />";
             $messageMail .= "Club d'origine : <strong>" . htmlentities($_POST['currentClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
             $messageMail .= "Nouveau club : <strong>" . htmlentities($_POST['newClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
-            $messageMail .= "Gestion des transferts : https://tchoukball.ch/admin.php?menuselection=55&smenuselection=30";
+            $messageMail .= "Gestion des transferts : https://tchoukball.ch/admin.php?lien=81";
             $from = "From:no-reply@tchoukball.ch\n";
             $from .= "MIME-version: 1.0\n";
             $from .= "Content-type: text/html; charset= iso-8859-1\n";

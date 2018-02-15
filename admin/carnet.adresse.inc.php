@@ -2,7 +2,7 @@
 statInsererPageSurf(__FILE__);
 $motsRecherches = mysql_real_escape_string($_POST['motsRecherches']);
 ?>
-<form action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>" method="post"><br>
+<form action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>" method="post"><br>
     <p align='center'>
         <input type="text" title="Search" name="motsRecherches" size="35" value='<?php echo $motsRecherches; ?>'>
         <input type="submit" class="button button--primary" value="Rechercher">

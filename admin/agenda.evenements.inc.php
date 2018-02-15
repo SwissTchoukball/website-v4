@@ -1,15 +1,15 @@
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&ajouter"><img
             src="/admin/images/ajouter.png" alt="Ajouter un événement"/> Ajouter un événement</a></div>
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
             src="/admin/images/liste.png" alt="Liste des événements"/> Liste des événements</a></div>
 
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&masques"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&masques"><img
             src="/admin/images/masquer.png" alt="Liste des événements masqués"/> Liste des événements masqués</a></div>
 <form name="formRechercheEvenement"
-      action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"
+      action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
       method="post">
     <div>
         <img src="/admin/images/rechercher.png" alt="Rechercher un événement"/>
@@ -37,7 +37,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
         }
         function enregistrerModification() {
             var editerEvenement = document.getElementById("editerEvenement");
-            editerEvenement.action = "?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>";
+            editerEvenement.action = "?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>";
         }
     </script>
 
@@ -140,7 +140,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
 
 
     <form class="st-form" id="editerEvenement" name="editerEvenement" method="post"
-          action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $_GET['modifier']; ?>">
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&modifier=<?php echo $_GET['modifier']; ?>">
         <fieldset>
             <legend>Ajouter un événement</legend>
             <label for="titre">Titre</label>
@@ -474,10 +474,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter']) OR isset($_POST['verific
                         ?>
                     </td>
                     <td class="modifier"><a
-                            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $donnees['idEvent']; ?>"><img
+                            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&modifier=<?php echo $donnees['idEvent']; ?>"><img
                                 src="/admin/images/modifier.png" alt="modifier"/></a></td>
                     <td class="supprimer"><a
-                            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&supprimer=<?php echo $donnees['idEvent']; ?>"
+                            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&supprimer=<?php echo $donnees['idEvent']; ?>"
                             onClick='return confirm("Vous êtes sur le point de supprimer cet événement \n OK pour supprimer, Annuler pour abandonner.");'><img
                                 src="/admin/images/supprimer.png" alt="supprimer"/></a></td>
                     <td class="categorie" style='background-color: #<?php echo $donnees['couleur'] ?>'></td>

@@ -36,7 +36,7 @@ $user = UserService::getUserById($modificationId)
 </script>
 
 <form name="mesInfos" class="st-form" method="post" onSubmit="return controlerSaisie();"
-      action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>">
+      action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
     <fieldset>
         <label>Nom d'utilisateur</label>
         <div class="givenData"><?php echo stripslashes($user["username"]); ?></div>

@@ -100,7 +100,7 @@ if (!isset($_GET['saison']) OR !isset($_GET['idCat']) OR !isset($_GET['idTour'])
         $retourB = mysql_query($requeteB);
         $donneesB = mysql_fetch_array($retourB);
         $nomEquipeB = $donneesB['equipe'];
-        echo "<td class='center'><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&idMatch=" . $donnees['idMatch'] . "'>" . $nomEquipeA . "-" . $nomEquipeB . "</a></td>";
+        echo "<td class='center'><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&idMatch=" . $donnees['idMatch'] . "'>" . $nomEquipeA . "-" . $nomEquipeB . "</a></td>";
         echo "<td class='center'>" . $donnees['journee'] . "</td>";
         echo "</tr>";
         $i++;

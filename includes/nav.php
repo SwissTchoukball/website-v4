@@ -1,34 +1,32 @@
 <nav id="main-nav">
     <?php
-    $navQuery = "SELECT sm.id, m.nom" . $_SESSION['__langue__'] . " AS menu,
-                    sm.nom" . $_SESSION['__langue__'] . " AS sousmenu, m.id AS sousMenuDeId,
-                    sm.ordre, m.userLevel AS parentUserLevel, sm.userLevel,
-                    sm.urlRewriting AS link, m.urlRewriting AS parentLink, sm.lienExterneSite AS isExternalLink
-             FROM " . $typemenu . " m
-             LEFT OUTER JOIN " . $typemenu . " sm ON sm.sousMenuDeId = m.id
-             WHERE m.sousMenuDeId = -1
-             ORDER BY m.ordre, sm.ordre";
-    if (!$navResult = mysql_query($navQuery)) {
-        printErrorMessage('Erreur lors du chargement du menu');
-    } else {
+    try {
+        $menu = $navigation->getMenu();
+    } catch (Exception $exception) {
+        printErrorMessage('Erreur lors du chargement du menu.<br>' + $exception->getMessage());
+        die();
+    }
+
+    $currentPage = $navigation->getCurrentMenuItem();
+
         $previousNavParentItemID = 0;
-        while ($nav = mysql_fetch_assoc($navResult)) {
-            $navParentItemID = $nav['sousMenuDeId'];
-            $navItemOrder = $nav['ordre'];
-            $navParentItemName = $nav['menu'];
-            $navItemName = $nav['sousmenu'];
-            $navParentUserLevel = $nav['parentUserLevel'];
-            $navUserLevel = $nav['userLevel'];
-            if ($nav['link'] != '') {
-                $navLink = $nav['link'];
+        foreach($menu as $menuItem) {
+            $navParentItemID = $menuItem['sousMenuDeId'];
+            $navItemOrder = $menuItem['ordre'];
+            $navParentItemName = $menuItem['menu'];
+            $navItemName = $menuItem['sousmenu'];
+            $navParentUserLevel = $menuItem['parentUserLevel'];
+            $navUserLevel = $menuItem['userLevel'];
+            if ($menuItem['link'] != '') {
+                $navLink = $menuItem['link'];
             } else {
                 $srcFile = $admin ? 'admin.php' : 'index.php';
-                $navLink = $srcFile . '?menuselection=' . $navParentItemID . '&smenuselection=' . $navItemOrder;
+                $navLink = $srcFile . '?lien=' . $menuItem['id'];
             }
-            if (!$nav['isExternalLink']) {
+            if (!$menuItem['isExternalLink']) {
                 $navLink = '/' . $navLink;
             }
-            $navParentLink = $nav['parentLink'];
+            $navParentLink = $menuItem['parentLink'];
 
 
             if ($navParentUserLevel >= $_SESSION['__userLevel__']) {
@@ -37,7 +35,7 @@
                         echo '</ul>';
                     }
 
-                    echo $menuselection == $navParentItemID ? '<h1 class="open">' : '<h1>';
+                    echo $currentPage['parentId'] == $navParentItemID ? '<h1 class="open">' : '<h1>';
 
                     if (is_null($navItemOrder) && $navParentLink != '') {
                         echo '<a href="/' . $navParentLink . '">' . $navParentItemName . '</a>';
@@ -46,18 +44,17 @@
                     }
 
                     echo '</h1>';
-                    echo $menuselection == $navParentItemID ? '<ul style="display: block;">' : '<ul>';
+                    echo $currentPage['parentId'] == $navParentItemID ? '<ul style="display: block;">' : '<ul>';
 
                 }
 
                 if ($navUserLevel >= $_SESSION['__userLevel__']) {
-                    $navItemClass = ($menuselection == $navParentItemID && $smenuselection == $navItemOrder) ? 'open' : '';
+                    $navItemClass = ($currentPage['parentId'] == $navParentItemID && $currentPage['menuOrder'] == $navItemOrder) ? 'open' : '';
                     echo '<li><a href="' . $navLink . '" class="' . $navItemClass . '">' . $navItemName . '</a></li>';
                 }
             }
 
             $previousNavParentItemID = $navParentItemID;
         }
-    }
     ?>
 </nav>

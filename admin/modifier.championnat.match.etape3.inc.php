@@ -536,7 +536,7 @@ if (!isset($_GET['idMatch'])) {
 
     </script>
     <form name="modifierUnMatch"
-          action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           method="post" onSubmit="return validateForm();">
         <table border="0" align="center" id="score">
             <tr>

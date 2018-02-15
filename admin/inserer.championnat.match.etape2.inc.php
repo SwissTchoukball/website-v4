@@ -28,7 +28,7 @@ if ($nbMatchs > 1) {
     $retour = mysql_query($requete);
 
     while ($donnees = mysql_fetch_array($retour)) {
-        $lien = "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&saison=" . $donnees['saison'] . "&idCat=" . $donnees['idCategorie'] . "&idTour=" . $donnees['idTour'] . "&idGroupe=" . $donnees['idGroupe'] . "&nbMatchs=" . $_POST['nbMatchs'];
+        $lien = "?" . $navigation->getCurrentPageLinkQueryString() . "&saison=" . $donnees['saison'] . "&idCat=" . $donnees['idCategorie'] . "&idTour=" . $donnees['idTour'] . "&idGroupe=" . $donnees['idGroupe'] . "&nbMatchs=" . $_POST['nbMatchs'];
         echo "<tr>";
         echo "<td class='center'><a href='" . $lien . "'>" . VAR_LANG_CHAMPIONNAT . " " . $donnees['saison'] . "-" . ($donnees['saison'] + 1) . "</a></td>";
         $requeteA = "SELECT categorie" . $_SESSION["__langue__"] . " FROM Championnat_Categories WHERE idCategorie=" . $donnees['idCategorie'];

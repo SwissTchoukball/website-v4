@@ -162,7 +162,7 @@ if (!isset($_GET['nbMatchs']) OR !isset($_GET['saison']) OR !isset($_GET['idCat'
         ?>
     </script>
     <form id="insererMatchForm" method="post"
-          action="<?php echo "?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection; ?>"
+          action="<?php echo "?" . $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return validateForm();">
         <?php
         echo "<table class='st-table'>";

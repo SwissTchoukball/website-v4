@@ -15,7 +15,7 @@ while ($record = mysql_fetch_array($recordset)) {
     if ($titre == "") {
         $titre = $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]];
     }
-    echo "<td><a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&modifierNewsID=" . $record["id"] . "'>" . $titre . "</a></td>";
+    echo "<td><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&modifierNewsID=" . $record["id"] . "'>" . $titre . "</a></td>";
     echo "</tr>";
 }
 ?>

@@ -1,11 +1,11 @@
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&ajouter"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&ajouter"><img
             src="/admin/images/ajouter.png" alt="Ajouter des vacances"/> Ajouter des vacances</a></div>
 <div>
-    <a href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"><img
+    <a href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"><img
             src="/admin/images/liste.png" alt="Liste des vacances"/> Liste des vacances</a></div>
 <form name="formRechercheVacances"
-      action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>"
+      action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
       method="post">
     <div>
         <img src="/admin/images/rechercher.png" alt="Rechercher des vacances"/>
@@ -47,7 +47,7 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
     ?>
 
     <form class="st-form" name="editerVacances" method="post"
-          action="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>">
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
         <fieldset>
             <label for="nom">Nom</label>
             <input type="text" id="nom" name="nom" size="30" autofocus="autofocus"
@@ -213,10 +213,10 @@ if (isset($_GET['modifier']) OR isset($_GET['ajouter'])) {
                     <td><?php echo $donnees['abreviation']; ?></td>
                     <td><?php echo date_sql2date($donnees['dateDebut']) . " - " . date_sql2date($donnees['dateFin']); ?></td>
                     <td class="modifier"><a
-                            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&modifier=<?php echo $donnees['id']; ?>"><img
+                            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&modifier=<?php echo $donnees['id']; ?>"><img
                                 src="/admin/images/modifier.png" alt="modifier"/></a></td>
                     <td class="supprimer"><a
-                            href="?menuselection=<?php echo $_GET['menuselection']; ?>&smenuselection=<?php echo $_GET['smenuselection']; ?>&supprimer=<?php echo $donnees['id']; ?>"
+                            href="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>&supprimer=<?php echo $donnees['id']; ?>"
                             onclick='return confirm("Vous &ecirc;tes sur le point de supprimer ces vacances \n OK pour supprimer, Annuler pour abandonner.")'><img
                                 src="/admin/images/supprimer.png" alt="supprimer"/></a></td>
                 </tr>

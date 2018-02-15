@@ -19,11 +19,11 @@ if (isset($_GET['classement'])) {
     $classement = 'B'; // Classer par type de fichier
 }
 if ($classement == 'B') {
-    echo "<p class='center'>Classer par <a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&classement=A'>type d'information</a> / type de fichier</p>";
+    echo "<p class='center'>Classer par <a href='?" . $navigation->getCurrentPageLinkQueryString() . "&classement=A'>type d'information</a> / type de fichier</p>";
     $typeSource = 'TypeFichiers';
     $sansTout = '';
 } elseif ($classement == 'A') {
-    echo "<p class='center'>Classer par type d'information / <a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&classement=B'>type de fichier</a></p>";
+    echo "<p class='center'>Classer par type d'information / <a href='?" . $navigation->getCurrentPageLinkQueryString() . "&classement=B'>type de fichier</a></p>";
     $typeSource = 'TypeInformation';
     $sansTout = 'WHERE id>0';
 }
@@ -85,10 +85,10 @@ echo "</p>";
             echo tailleFichier(PATH_UPLOADS . $donneesbis['fichier']);
             echo "</td>";
             echo "<td>";
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=2&modif=" . $donneesbis['id'] . "'>" . VAR_LANG_MODIFIER . "</a>";
+            echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "'>" . VAR_LANG_MODIFIER . "</a>";
             echo "</td>";
             echo "<td>";
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&suppr=" . $donneesbis['id'] . "' onclick='return confirm(\"Vous &ecirc;tes sur le point de supprimer cet upload. OK pour supprimer, Annuler pour abandonner.\")'>" . VAR_LANG_SUPPRIMER . "</a>";
+            echo "<a href='?" . $navigation->getCurrentPageLinkQueryString() . "&suppr=" . $donneesbis['id'] . "' onclick='return confirm(\"Vous &ecirc;tes sur le point de supprimer cet upload. OK pour supprimer, Annuler pour abandonner.\")'>" . VAR_LANG_SUPPRIMER . "</a>";
             echo "</td>";
             echo "</tr>";
         }

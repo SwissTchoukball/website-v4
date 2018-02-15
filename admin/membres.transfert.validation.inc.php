@@ -166,13 +166,11 @@ $transferRequestsQuery = "
             } else if ($transfertRequest['accepted'] === '0') {
                 echo '&#x274C;';
             } else {
-                echo '<a href="?menuselection=' . $menuselection .
-                    '&smenuselection=' . $smenuselection .
+                echo '<a href="?' . $navigation->getCurrentPageLinkQueryString() .
                     '&accept-transfer=' . $transfertRequest['id'] .
                     '">&#x2705;</a>';
                 echo ' ';
-                echo '<a href="?menuselection=' . $menuselection .
-                    '&smenuselection=' . $smenuselection .
+                echo '<a href="?' . $navigation->getCurrentPageLinkQueryString() .
                     '&refuse-transfer=' . $transfertRequest['id'] .
                     '">&#x274C;</a>';
             }

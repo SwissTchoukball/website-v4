@@ -30,7 +30,7 @@
     }
     ?>
     <form name="supprimerTour" method="post"
-          action="<?php echo "?menuselection=$menuselection&smenuselection=$smenuselection"; ?>"
+          action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>"
           onSubmit="return testQqchASupprimer();">
         <table class="st-table">
             <?php
