@@ -305,7 +305,7 @@ if ($newMember) {
     if ($nbError == 0) { //Initialisation uniquement si premier remplissage.
         $statutID = 3; //Membre actif
         if (hasAllMembersManagementAccess()) {
-            $clubID = 15;
+            $clubID = null;
         } else {
             $clubID = $_SESSION['__nbIdClub__'];
         }
@@ -713,7 +713,7 @@ if ($canEdit) {
                 ?>
                 <label>Club</label>
                 <?php
-                afficherListeClubs($clubID, "nbIdClub");
+                afficherListeClubs($clubID);
             } else {
                 ?>
                 <input type="hidden" name="clubs" value="<?php echo $clubID; ?>"/>

@@ -77,80 +77,69 @@
 <?php
 echo "<img class='swissMap' src='" . VAR_IMAGE_CARTE_SUISSE . "' alt='carte de la suisse' border='0' usemap='#carteSuisseCantons' />";
 
-$requeteSQL =
-    "SELECT p.`nom`, p.`prenom`, p.`adresse` AS adressePresident, cl.`adresse` AS adresseClub, p.`npa` AS npaPresident,
-			cl.`npa` AS npaClub, p.`ville` AS villePresident, cl.`ville` AS villeClub, p.`email` AS emailPresident,
-			cl.`email` AS emailClub, cl.`url`, cl.`facebookUsername`, cl.`twitterUsername`,
-			p.`telPrive` AS telephonePresident, cl.`telephone` AS telephoneClub, p.`portable` AS portablePresident,
-			cl.`id` AS idClub, cl.`club`, cl.`nomComplet` AS nomClub, cl.`canton`,
-			ca.`nomCanton{$_SESSION["__langue__"]}` AS nomCanton
-	FROM `DBDPersonne` p, `clubs` cl, `Canton` ca
-	WHERE cl.`idPresident`=p.`idDbdPersonne`
-		AND cl.`canton`=ca.`id`
-		AND (cl.`statusId`=1 OR cl.`statusId`=2)
-	ORDER BY nomCanton, cl.`club`";
-$recordset = mysql_query($requeteSQL) or die ("<H1>mauvaise requete</H1>");
+$excludeNonMembers = true;
+$orderByCanton = true;
+$clubs = ClubService::getClubList($excludeNonMembers, $orderByCanton);
 
 echo "<p>";
-printf(VAR_LANG_NB_CLUBS, mysql_num_rows($recordset));
+printf(VAR_LANG_NB_CLUBS, ClubService::getNumberOfClubs($excludeNonMembers));
 echo "</p>";
 
-$canton = "";
-$nbFois = 0;
-while ($record = mysql_fetch_array($recordset)) {
+$currentCantonId = "";
+foreach ($clubs as $club) {
 
-    if ($canton != $record["nomCanton"]) {
-        echo "<h2 id='canton" . $record["canton"] . "' class='alt'>" . $record["nomCanton"] . "</h2>";
+    if ($currentCantonId != $club->cantonId) {
+        echo "<h2 id='canton" . $club->cantonId . "' class='alt'>" . $club->cantonName . "</h2>";
     }
 
     echo "<div class='club'>";
-    if (file_exists($_SERVER["DOCUMENT_ROOT"] . VAR_IMAGE_LOGO_CLUBS . "" . $record["idClub"] . ".png")) {
-        $idLogo = $record["idClub"];
+    if (file_exists($_SERVER["DOCUMENT_ROOT"] . VAR_IMAGE_LOGO_CLUBS . "" . $club->id . ".png")) {
+        $idLogo = $club->id;
     } else {
         $idLogo = 0;
     }
-    echo "<h3>" . $record["club"] . "</h3>";
+    echo "<h3>" . $club->shortName . "</h3>";
     echo '<div class="contactInformation">';
-    echo $record['nomClub'] . "<br />";
-    if (strlen($record["npaClub"]) == 4 && strlen($record["villeClub"]) >= 3) {
-        echo $record["adresseClub"] != null ? $record["adresseClub"] . "<br>" : "";
-        echo $record["npaClub"] . "&nbsp;" . $record["villeClub"] . "<br /><br />";
+    echo $club->fullName . "<br />";
+    if (strlen($club->npa) == 4 && strlen($club->city) >= 3) {
+        echo $club->address != null ? $club->address . "<br>" : "";
+        echo $club->npa . "&nbsp;" . $club->city . "<br /><br />";
     } else {
-        echo stripslashes($record["prenom"]) . "&nbsp;" . stripslashes($record["nom"]) . "<br />";
-        echo $record["adressePresident"] . "<br>";
-        echo $record["npaPresident"] . "&nbsp;" . $record["villePresident"] . "<br /><br />";
+        echo stripslashes($club->president['firstName']) . "&nbsp;" . stripslashes($club->president['lastName']) . "<br />";
+        echo $club->president['address'] . "<br>";
+        echo $club->president['npa'] . "&nbsp;" . $club->president['city'] . "<br /><br />";
     }
-    if ($record['emailClub'] != "") {
-        echo email($record["emailClub"]);
-    } else if ($record["emailPresident"] != "") {
-        echo email($record["emailPresident"]);
+    if ($club->email != "") {
+        echo email($club->email);
+    } else if ($club->president['email'] != "") {
+        echo email($club->president['email']);
     }
     echo "<br />";
-    if ($record['telephoneClub'] != "") {
-        echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephoneClub"]) . "'>" . $record['telephoneClub'] . "</a><br />";
+    if ($club->phoneNumber != "") {
+        echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($club->phoneNumber) . "'>" . $club->phoneNumber . "</a><br />";
     } else {
-        if ($record["telephonePresident"] != "") {
-            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($record["telephonePresident"]) . "'>" . $record["telephonePresident"] . "</a><br />";
+        if ($club->president['phoneNumber'] != "") {
+            echo "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($club->president['phoneNumber']) . "'>" . $club->president['phoneNumber'] . "</a><br />";
         }
-        if ($record["portablePresident"] != "") {
-            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($record["portablePresident"]) . "'>" . $record["portablePresident"] . "</a><br />";
+        if ($club->president['mobilePhoneNumber'] != "") {
+            echo "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($club->president['mobilePhoneNumber']) . "'>" . $club->president['mobilePhoneNumber'] . "</a><br />";
         }
     }
 
     // lien sur le site du club
-    if ($record["url"] != "") {
-        echo "<a class='website side-icon-left' href='" . addhttp($record["url"]) . "' target='_blank'>" . $record["url"] . "</a><br />";
+    if ($club->url != "") {
+        echo "<a class='website side-icon-left' href='" . addhttp($club->url) . "' target='_blank'>" . $club->url . "</a><br />";
     }
-    if ($record["facebookUsername"] != "") {
-        echo "<a class='facebook side-icon-left' href='" . addhttp("facebook.com/" . $record["facebookUsername"]) . "' target='_blank'>" . $record["facebookUsername"] . "</a><br />";
+    if ($club->facebookUsername != "") {
+        echo "<a class='facebook side-icon-left' href='" . addhttp("facebook.com/" . $club->facebookUsername) . "' target='_blank'>" . $club->facebookUsername . "</a><br />";
     }
-    if ($record["twitterUsername"] != "") {
-        echo "<a class='twitter side-icon-left' href='" . addhttp("twitter.com/" . $record["twitterUsername"]) . "' target='_blank'>@" . $record["twitterUsername"] . "</a><br />";
+    if ($club->twitterUsername != "") {
+        echo "<a class='twitter side-icon-left' href='" . addhttp("twitter.com/" . $club->twitterUsername) . "' target='_blank'>@" . $club->twitterUsername . "</a><br />";
     }
     echo '</div>';
     echo "<img class='logoClub' src='" . VAR_IMAGE_LOGO_CLUBS . "" . $idLogo . ".png' />";
     echo "</div>";
-    $canton = $record["nomCanton"];
+    $currentCantonId = $club->cantonId;
 }
 
 // fin du tableau

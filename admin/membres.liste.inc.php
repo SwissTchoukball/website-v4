@@ -74,8 +74,10 @@ if ($clubToShowId != null) {
 
 $querySelectToList = "SELECT p.idDbdPersonne, p.raisonSociale, p.nom, p.prenom, p.adresse, p.cp, p.npa, p.ville, p.suspendu, pa.idPays, pa.descriptionPays" . $_SESSION["__langue__"] . " AS pays, sx.idSexe, sx.descriptionSexe" . $_SESSION['__langue__'] . " AS genre, sx.imageFilename AS imageGenre, p.telPrive, p.telProf, p.portable, p.email, c.nbIdClub AS idClub, c.club AS nomClub, st.descriptionStatus" . $_SESSION["__langue__"] . " AS statut, p.idLangue, p.dateNaissance, tup.descriptionCHTB" . $_SESSION["__langue__"] . " AS tchoukup, p.idCHTB AS idTchoukup";
 $querySelectToCount = "SELECT COUNT(*) AS totalNbMembers";
-$queryFrom = "FROM DBDStatus st, DBDPays pa, DBDCHTB tup, DBDSexe sx, clubs c, DBDPersonne p LEFT OUTER JOIN Arbitres a ON p.idDbdPersonne = a.personId";
-$queryWhere = "WHERE " . $queryClubPart . " p.idStatus=st.idStatus AND p.idPays=pa.idPays AND p.idCHTB=tup.idCHTB AND p.idClub=c.nbIdClub AND p.idSexe=sx.idSexe";
+$queryFrom = "FROM DBDStatus st, DBDPays pa, DBDCHTB tup, DBDSexe sx, DBDPersonne p
+                LEFT OUTER JOIN clubs c ON p.idClub = c.nbIdClub
+                LEFT OUTER JOIN Arbitres a ON p.idDbdPersonne = a.personId";
+$queryWhere = "WHERE " . $queryClubPart . " p.idStatus=st.idStatus AND p.idPays=pa.idPays AND p.idCHTB=tup.idCHTB AND p.idSexe=sx.idSexe";
 if ($querySearch != "") {
     $queryWhere .= " AND (" . $querySearch . ")";
 }
@@ -223,7 +225,7 @@ while ($member = mysql_fetch_assoc($data)) {
         <td>
             <?php
             //If we don't list the members of a specific club, then show for each member in which club she is.
-            if ($clubToShowId == null && $idClub != 15) {
+            if ($clubToShowId == null && $idClub != null) {
                 echo $nomClub . "<br />";
             }
             echo $statut;

@@ -12,7 +12,7 @@
 
     $newClub = isset($_GET['new']);
     $nbError = 0;
-    if (isset($_POST['clubID']) && isValidClubID($_POST['clubID'])) {
+    if (isset($_POST['postType'])) {
         include("admin/clubs.databaseWrite.php");
         if ($nbError == 0) {
             include('admin/clubs.liste.inc.php');

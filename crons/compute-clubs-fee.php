@@ -25,7 +25,7 @@ $nbMembresPourUnAbonnementVIPOffert = 20;
 /* CLUBS REQUEST */
 $clubsRequest = "SELECT
                     c.nbIdClub AS idClub,
-                    c.club AS name,
+                    c.club AS shortName,
                     $clubsRequestPart_nbMembresParStatut
                     c.statusId,
                     cs.fixedFeeAmount
@@ -105,9 +105,9 @@ while ($club = mysql_fetch_assoc($clubsResult)) {
          )";
 
     if (mysql_query($saveClubFeeQuery)) {
-        echo "<p><strong>" . $club['name'] . "</strong> Fee: CHF " . $totalFee . "</p>";
+        echo "<p><strong>" . $club['shortName'] . "</strong> Fee: CHF " . $totalFee . "</p>";
     } else {
-        echo "<p>Error while saving the fee for <strong>" . $club['name'] . "</strong>.</p>";
+        echo "<p>Error while saving the fee for <strong>" . $club['shortName'] . "</strong>.</p>";
         echo "<pre>" . mysql_error() . "</pre>";
     }
 }

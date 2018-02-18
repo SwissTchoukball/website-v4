@@ -1,56 +1,9 @@
 <div class="stats-clubs">
     <?php
     echo "<h4>Nombre de clubs</h4>";
-    $requeteNombreClubs = "SELECT COUNT(*) AS nbClubs FROM clubs WHERE statusId = 1 OR statusId = 2";
-    $retour = mysql_query($requeteNombreClubs);
-    $donnee = mysql_fetch_assoc($retour);
-    $nbClubs = $donnee['nbClubs'];
-    echo "<p>Il y a " . $nbClubs . " clubs membres de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".</p>";
+    echo "<p>Il y a " . ClubService::getNumberOfClubs() . " clubs membres de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".</p>";
 
     echo "<h4>Nombre de membres par club</h4>";
-    $requeteNombreMembresParClub =
-        "SELECT
-			c.club,
-			c.nbIdClub AS id,
-			COUNT(if(p.idStatus=3,1,NULL)) AS nbMembresActifs,
-			COUNT(if(p.idStatus=6,1,NULL)) AS nbMembresJuniors,
-			COUNT(if(p.idStatus=5,1,NULL)) AS nbMembresSoutiens,
-			COUNT(if(p.idStatus=4,1,NULL)) AS nbMembresPassifs,
-			COUNT(if(p.idStatus=23,1,NULL)) AS nbMembresVIP,
-			COUNT(if(p.idStatus!=3 AND p.idStatus!=4 AND p.idStatus!=5 AND p.idStatus!=6 AND p.idStatus!=23,1,NULL)) AS nbMembresAutres,
-			COUNT(p.idDbdPersonne) AS nbMembresTotal
-		 FROM clubs c
-		 LEFT OUTER JOIN DBDPersonne p ON c.nbIdClub = p.idClub
-		 WHERE c.statusId = 1 OR c.statusId = 2
-		 GROUP BY p.idClub ";
-    if (isset($_GET['ordre'])) {
-        $ordre = $_GET['ordre'];
-        if ($ordre == "ID") {
-            $requeteNombreMembresParClub .= "ORDER BY id DESC";
-        } elseif ($ordre == "club") {
-            $requeteNombreMembresParClub .= "ORDER BY club ASC";
-        } elseif ($ordre == "actifs") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresActifs DESC";
-        } elseif ($ordre == "juniors") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresJuniors DESC";
-        } elseif ($ordre == "soutiens") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresSoutiens DESC";
-        } elseif ($ordre == "passifs") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresPassifs DESC";
-        } elseif ($ordre == "VIP") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresVIP DESC";
-        } elseif ($ordre == "autres") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresAutres DESC";
-        } elseif ($ordre == "total") {
-            $requeteNombreMembresParClub .= "ORDER BY nbMembresTotal DESC";
-        }
-        $requeteNombreMembresParClub .= ", club ASC";
-    } else {
-        $requeteNombreMembresParClub .= "ORDER BY c.nomPourTri ASC";
-    }
-
-    //echo $requeteNombreMembresParClub;
-    $retour = mysql_query($requeteNombreMembresParClub);
     echo "<table>";
     echo "<tr>";
     echo "<th><a href='?" . $navigation->getCurrentPageLinkQueryString() . "&ordre=id'>ID</a></th>";
@@ -70,34 +23,25 @@
     $totalMembresVIP = 0;
     $totalMembresAutre = 0;
 
-    while ($donnees = mysql_fetch_assoc($retour)) {
+    $clubs = ClubService::getClubsStats($_GET['ordre']);
+    foreach ($clubs as $club) {
         echo "<tr>";
-        echo "<td>" . $donnees['id'] . "</td>";
-        echo "<td>" . $donnees['club'] . "</td>";
-        echo "<td>" . $donnees['nbMembresActifs'] . "</td>";
-        echo "<td>" . $donnees['nbMembresJuniors'] . "</td>";
-        echo "<td>" . $donnees['nbMembresSoutiens'] . "</td>";
-        echo "<td>" . $donnees['nbMembresPassifs'] . "</td>";
-        echo "<td>" . $donnees['nbMembresVIP'] . "</td>";
-        echo "<td>" . $donnees['nbMembresAutres'] . "</td>";
-        echo "<td>" . $donnees['nbMembresTotal'] . "</td>";
+        echo "<td>" . $club['id'] . "</td>";
+        echo "<td>" . $club['club'] . "</td>";
+        echo "<td>" . $club['nbMembresActifs'] . "</td>";
+        echo "<td>" . $club['nbMembresJuniors'] . "</td>";
+        echo "<td>" . $club['nbMembresSoutiens'] . "</td>";
+        echo "<td>" . $club['nbMembresPassifs'] . "</td>";
+        echo "<td>" . $club['nbMembresVIP'] . "</td>";
+        echo "<td>" . $club['nbMembresAutres'] . "</td>";
+        echo "<td>" . $club['nbMembresTotal'] . "</td>";
         echo "</tr>";
-        $totalMembresActifs += $donnees['nbMembresActifs'];
-        $totalMembresJuniors += $donnees['nbMembresJuniors'];
-        $totalMembresSoutiens += $donnees['nbMembresSoutiens'];
-        $totalMembresPassifs += $donnees['nbMembresPassifs'];
-        $totalMembresVIP += $donnees['nbMembresVIP'];
-        $totalMembresAutre += $donnees['nbMembresAutres'];
-
-        /*if(isset($_GET['save']) && $_SESSION['__userLevel__'] == 0) {
-            $saveStatisticsQuery = "INSERT INTO DBDStatsClubs (idClub, date, nbMembresActifs, nbMembresJuniors, nbMembresSoutiens, nbMembresPassifs, nbMembresVIP, nbMembresAutres) VALUES (".$donnees['id'].", '".date('Y-m-d')."', ".$donnees['nbMembresActifs'].", ".$donnees['nbMembresJuniors'].", ".$donnees['nbMembresSoutiens'].", ".$donnees['nbMembresPassifs'].", ".$donnees['nbMembresVIP'].", ".$donnees['nbMembresAutres'].")";
-            //echo $saveStatisticsQuery."<br />";
-            if (mysql_query($saveStatisticsQuery)) {
-                echo "<p class='notification notification--success'>Statistiques de \"".$donnees['club']."\" enregistrées.</p>";
-            } else {
-                echo "<p class='notification notification--error'>Erreur lors de l'enregistrement des statistiques pour \"".$donnees['club']."\".<br />Les statistiques ont peut-être déjà été enregistrées aujourd'hui.</p>";
-            }
-        }*/
+        $totalMembresActifs += $club['nbMembresActifs'];
+        $totalMembresJuniors += $club['nbMembresJuniors'];
+        $totalMembresSoutiens += $club['nbMembresSoutiens'];
+        $totalMembresPassifs += $club['nbMembresPassifs'];
+        $totalMembresVIP += $club['nbMembresVIP'];
+        $totalMembresAutre += $club['nbMembresAutres'];
     }
     echo "<tr>";
     echo "<th colspan='2'>TOTAUX</th>";
@@ -130,29 +74,16 @@
 
 
     echo "<h4>Répartition Hommes/Femmes</h4>";
-    $requeteRepartitionSexes =
-        "SELECT
-			COUNT(if(p.idStatus=3 && p.idSexe=2,1,NULL)) AS nbHActifs,
-			COUNT(if(p.idStatus=3 && p.idSexe=3,1,NULL)) AS nbFActifs,
-			COUNT(if(p.idStatus=3 && p.idSexe=1,1,NULL)) AS nbIActifs,
-			COUNT(if(p.idStatus=6 && p.idSexe=2,1,NULL)) AS nbHJuniors,
-			COUNT(if(p.idStatus=6 && p.idSexe=3,1,NULL)) AS nbFJuniors,
-			COUNT(if(p.idStatus=6 && p.idSexe=1,1,NULL)) AS nbIJuniors
-		 FROM DBDPersonne p, clubs c
-		 WHERE (p.idStatus = 3 OR p.idStatus = 6)
-		 	AND c.nbIdClub = p.idClub
-		 	AND (c.statusId = 1 OR c.statusId = 2)";
-    $retourRepartitionSexes = mysql_query($requeteRepartitionSexes);
-    $donneesRepSexes = mysql_fetch_assoc($retourRepartitionSexes);
+    $genderDistribution = ClubService::getGenderDistribution();
 
-    $nbHActifs = $donneesRepSexes['nbHActifs'];
-    $nbFActifs = $donneesRepSexes['nbFActifs'];
-    $nbIActifs = $donneesRepSexes['nbIActifs'];
+    $nbHActifs = $genderDistribution['nbHActifs'];
+    $nbFActifs = $genderDistribution['nbFActifs'];
+    $nbIActifs = $genderDistribution['nbIActifs'];
     $totalActifs = $nbHActifs + $nbFActifs + $nbIActifs;
 
-    $nbHJuniors = $donneesRepSexes['nbHJuniors'];
-    $nbFJuniors = $donneesRepSexes['nbFJuniors'];
-    $nbIJuniors = $donneesRepSexes['nbIJuniors'];
+    $nbHJuniors = $genderDistribution['nbHJuniors'];
+    $nbFJuniors = $genderDistribution['nbFJuniors'];
+    $nbIJuniors = $genderDistribution['nbIJuniors'];
     $totalJuniors = $nbHJuniors + $nbFJuniors + $nbIJuniors;
 
     $nbHActifsEtJuniors = $nbHActifs + $nbHJuniors;

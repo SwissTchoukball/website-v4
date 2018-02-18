@@ -1,93 +1,26 @@
 <?php
 
-$clubID = 0;
-$shortName = isset($shortName) ? $shortName : "";
-$fullName = isset($fullName) ? $fullName : "";
-$nameForSorting = isset($nameForSorting) ? $nameForSorting : "";
-$address = isset($address) ? $address : "";
-$npa = isset($npa) ? $npa : "";
-$city = isset($city) ? $city : "";
-$cantonID = isset($cantonID) ? $cantonID : "";
-$cantonName = "";
-$status = isset($status) ? $status : 1;
-$email = isset($email) ? $email : "";
-$emailsOfficialComm = isset($emailsOfficialComm) ? $emailsOfficialComm : "";
-$emailsTournamentComm = isset($emailsTournamentComm) ? $emailsTournamentComm : "";
-$phone = isset($phone) ? $phone : "";
-$url = isset($url) ? $url : "";
-$committeeComposition = isset($committeeComposition) ? $committeeComposition : "";
-$coachJSID = isset($coachJSID) ? $coachJSID : null;
-$lastEdit = "";
-$lastEditorName = "";
-$presidentFirstName = "";
-$presidentLastName = "";
-$presidentAddress = "";
-$presidentNPA = "";
-$presidentCity = "";
-$presidentEmail = "";
-$presidentPhone = "";
-$presidentMobile = "";
-
 $formLegend = "Nouveau club";
 $sendButtonValue = VAR_LANG_INSERER;
 $postType = "newClub";
 
-if (isset($idClubToEdit)) {
-    $clubRequest =
-        "SELECT c.id, c.club, c.nomComplet, c.nomPourTri, c.statusId, c.adresse, c.npa, c.ville, c.telephone, c.url,
-            c.email, c.emailsOfficialComm, c.emailsTournamentComm, c.committeeComposition, c.coachJSID,
-            c.lastEdit, ct.id AS idCanton, ct.nomCanton{$_SESSION['__langue__']} AS nomCanton,
-            pres.nom AS nomPresident, pres.prenom AS prenomPresident, pres.adresse AS adressePresident,
-            pres.npa AS npaPresident, pres.ville AS villePresident, pres.email AS emailPresident,
-            pres.telPrive AS telephonePresident, pres.portable AS portablePresident,
-            CONCAT(editor.prenom, editor.nom) AS lastEditorName
-        FROM clubs c
-        LEFT OUTER JOIN Canton ct ON c.canton = ct.id
-        LEFT OUTER JOIN DBDPersonne pres ON c.idPresident = pres.idDbdPersonne
-        LEFT OUTER JOIN Personne editor ON c.lastEditorID = editor.id
-        WHERE c.id={$idClubToEdit}";
-    //echo '<p class="notification">'.$clubRequest.'</p>';
-    if (!$clubResult = mysql_query($clubRequest)) {
-        echo '<p class="notification notification--error">' . mysql_error() . '</p>';
-    } else if (mysql_num_rows($clubResult) == 0) {
-        echo '<p class="notification notification--error">Aucun club correspondant</p>';
-    } else {
-        $club = mysql_fetch_assoc($clubResult);
-        if ($_SESSION['__idClub__'] == $club['id'] || $_SESSION['__userLevel__'] <= 5) {
-            $clubID = $club['id'];
-            $shortName = $club['club'];
-            $fullName = $club['nomComplet'];
-            $nameForSorting = $club['nomPourTri'];
-            $address = $club['adresse'];
-            $npa = $club['npa'];
-            $city = $club['ville'];
-            $cantonID = $club['idCanton'];
-            $cantonName = $club['nomCanton'];
-            $status = $club['statusId'];
-            $email = $club['email'];
-            $emailsOfficialComm = $club['emailsOfficialComm'];
-            $emailsTournamentComm = $club['emailsTournamentComm'];
-            $phone = $club['telephone'];
-            $url = $club['url'];
-            $committeeComposition = $club['committeeComposition'];
-            $coachJSID = $club['coachJSID'];
-            $lastEdit = $club['lastEdit'];
-            $lastEditorName = $club['lastEditorName'];
-            $presidentFirstName = $club['prenomPresident'];
-            $presidentLastName = $club['nomPresident'];
-            $presidentAddress = $club['adressePresident'];
-            $presidentNPA = $club['npaPresident'];
-            $presidentCity = $club['villePresident'];
-            $presidentEmail = $club['emailPresident'];
-            $presidentPhone = $club['telephonePresident'];
-            $presidentMobile = $club['portablePresident'];
-            $formLegend = $fullName;
-            $sendButtonValue = VAR_LANG_MODIFIER;
-            $postType = "editClub";
+if (isset($idClubToEdit) && isValidClubID($idClubToEdit)) {
+    try {
+        $retrievedClub = ClubService::getClub($idClubToEdit);
+        if ($retrievedClub) {
+            if ($_SESSION['__idClub__'] == $retrievedClub->id || $_SESSION['__userLevel__'] <= 5) {
+                $club = $retrievedClub;
+                $formLegend = $club->fullName;
+                $sendButtonValue = VAR_LANG_MODIFIER;
+                $postType = "editClub";
+            } else {
+                printErrorMessage('Vous ne pouvez pas modifier ce club.');
+            }
         } else {
-            echo "<br />";
-            echo "<p class='notification notification--error'>Vous ne pouvez modifier que votre club.</p>";
+            printErrorMessage('Aucun club correspondant.');
         }
+    } catch (Exception $exception) {
+        printErrorMessage($exception->getMessage());
     }
 }
 
@@ -114,11 +47,11 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <?php
         if ($_SESSION['__userLevel__'] <= 0) {
             ?>
-            <input type="text" name="shortName" id="shortName" value="<?php echo $shortName; ?>"/>
+            <input type="text" name="shortName" id="shortName" value="<?php echo $club->shortName; ?>"/>
             <?php
         } else {
             ?>
-            <p class="givenData"><?php echo $shortName; ?></p>
+            <p class="givenData"><?php echo $club->shortName; ?></p>
             <?php
         }
         ?>
@@ -126,20 +59,20 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <?php
         if ($_SESSION['__userLevel__'] <= 0) {
             ?>
-            <input type="text" name="fullName" id="fullName" value="<?php echo $fullName; ?>"/>
+            <input type="text" name="fullName" id="fullName" value="<?php echo $club->fullName; ?>"/>
             <?php
         } else {
             ?>
-            <p class="givenData"><?php echo $fullName; ?></p>
+            <p class="givenData"><?php echo $club->fullName; ?></p>
             <!-- Hidden inputs useful only for address preview -->
-            <input type="hidden" id="fullName" value="<?php echo $fullName; ?>"/>
+            <input type="hidden" id="fullName" value="<?php echo $club->fullName; ?>"/>
             <?php
         }
 
         if ($_SESSION['__userLevel__'] <= 0) {
             ?>
-            <label for="nameForSorting">Nom pour tri</label>
-            <input type="text" name="nameForSorting" id="nameForSorting" value="<?php echo $nameForSorting; ?>"/>
+            <label for="sortName">Nom pour tri</label>
+            <input type="text" name="sortName" id="sortName" value="<?php echo $club->sortName; ?>"/>
             <?php
         }
         ?>
@@ -151,28 +84,28 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <textarea id="address"
                   name="address"
                   onkeyup="updateAddressPreview();"
-                  placeholder="<?php echo $presidentAddress; ?>"><?php echo $address; ?></textarea> <!-- Do not add line break as it will remove the palceholder -->
+                  placeholder="<?php echo $club->president['address']; ?>"><?php echo $club->address; ?></textarea> <!-- Do not add line break as it will remove the palceholder -->
         <label for="npa">NPA</label>
         <input type="text"
                id="npa"
                name="npa"
                onkeyup="updateAddressPreview();"
-               value="<?php echo $npa; ?>"
-               placeholder="<?php echo $presidentNPA; ?>"/>
+               value="<?php echo $club->npa; ?>"
+               placeholder="<?php echo $club->president['npa']; ?>"/>
         <label for="city">Ville</label>
         <input type="text"
                id="city"
                name="city"
                onkeyup="updateAddressPreview();"
-               value="<?php echo $city; ?>"
-               placeholder="<?php echo $presidentCity; ?>"/>
+               value="<?php echo $club->city; ?>"
+               placeholder="<?php echo $club->president['city']; ?>"/>
         <label>Canton</label>
         <?php
         if ($_SESSION['__userLevel__'] <= 0) {
-            afficherdropDownListe("Canton", "id", "nomCanton", $cantonID, true); // => <select name="Canton" ...
+            afficherdropDownListe("Canton", "id", "nomCanton", $club->cantonId, true); // => <select name="Canton" ...
         } else {
             ?>
-            <p class="givenData"><?php echo $cantonName; ?></p>
+            <p class="givenData"><?php echo $club->cantonName; ?></p>
             <?php
         }
 
@@ -180,7 +113,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
             ?>
             <label for="status">Statut</label>
             <?php
-            afficherdropDownListe("clubs_status", "id", "name", $status, true);
+            afficherdropDownListe("clubs_status", "id", "name", $club->statusId, true);
         }
         ?>
     </fieldset>
@@ -194,21 +127,21 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
                id="phone"
                name="phone"
                onkeyup="updateInfoPreview();"
-               value="<?php echo $phone; ?>"
-               placeholder="<?php echo $presidentPhone != "" ? $presidentPhone : $presidentMobile; ?>"/>
+               value="<?php echo $club->phoneNumber; ?>"
+               placeholder="<?php echo $club->president['phoneNumber'] != "" ? $club->president['phoneNumber'] : $club->president['mobilePhoneNumber']; ?>"/>
         <label for="email">E-mail</label>
         <input type="text"
                id="email"
                name="email"
                onkeyup="updateInfoPreview();"
-               value="<?php echo $email; ?>"
-               placeholder="<?php echo $presidentEmail; ?>"/>
+               value="<?php echo $club->email; ?>"
+               placeholder="<?php echo $club->president['email']; ?>"/>
         <label for="url">Site web</label>
         <input type="text"
                id="url"
                name="url"
                onkeyup="updateInfoPreview();"
-               value="<?php echo $url; ?>"/>
+               value="<?php echo $club->url; ?>"/>
     </fieldset>
     <fieldset>
         <span class="st-form__side-info tooltip">
@@ -217,14 +150,14 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <label for="committeeComposition">Comité</label>
         <textarea id="committeeComposition"
                   name="committeeComposition"
-                  class="st-form__big-textarea"><?php echo $committeeComposition; ?></textarea>
+                  class="st-form__big-textarea"><?php echo $club->committeeComposition; ?></textarea>
 
         <label for="coachJS">Coach J+S</label>
         <select id="coachJS" name="coachJSID">
             <option value="null">Pas de Coach J+S</option>
             <?php
             foreach ($JSCoaches as $JSCoach) {
-                $selected = $JSCoach['personId'] == $coachJSID ? 'selected' : '';
+                $selected = $JSCoach['personId'] == $club->coachJSID ? 'selected' : '';
                 echo "<option value='{$JSCoach['personId']}' {$selected}>{$JSCoach['fullname']}</option>";
             }
             ?>
@@ -241,7 +174,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <input type="text"
                id="emailsOfficialComm"
                name="emailsOfficialComm"
-               value="<?php echo $emailsOfficialComm; ?>"/>
+               value="<?php echo $club->officialCommMailingList; ?>"/>
 
         <label for="emailsTournamentComm">
             E-mails informations tournois<br>
@@ -250,26 +183,26 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         <input type="text"
                id="emailsTournamentComm"
                name="emailsTournamentComm"
-               value="<?php echo $emailsTournamentComm; ?>"/>
+               value="<?php echo $club->tournamentsCommMailingList; ?>"/>
     </fieldset>
-    <input type="hidden" name="clubID" value="<?php echo $clubID; ?>"/>
+    <input type="hidden" name="clubID" value="<?php echo $club->id; ?>"/>
     <input type="hidden" name="postType" value="<?php echo $postType; ?>"/>
 
     <input type="submit" class="button button--primary" value="<?php echo $sendButtonValue; ?>"/>
     <!-- Hidden inputs useful only for address preview -->
-    <input type="hidden" id="presidentFirstName" value="<?php echo $presidentFirstName; ?>"/>
-    <input type="hidden" id="presidentLastName" value="<?php echo $presidentLastName; ?>"/>
-    <input type="hidden" id="presidentAddress" value="<?php echo $presidentAddress; ?>"/>
-    <input type="hidden" id="presidentNPA" value="<?php echo $presidentNPA; ?>"/>
-    <input type="hidden" id="presidentCity" value="<?php echo $presidentCity; ?>"/>
-    <input type="hidden" id="presidentEmail" value="<?php echo $presidentEmail; ?>"/>
-    <input type="hidden" id="presidentPhone" value="<?php echo $presidentPhone; ?>"/>
-    <input type="hidden" id="presidentMobile" value="<?php echo $presidentMobile; ?>"/>
+    <input type="hidden" id="presidentFirstName" value="<?php echo $club->president['firstName']; ?>"/>
+    <input type="hidden" id="presidentLastName" value="<?php echo $club->president['lastName']; ?>"/>
+    <input type="hidden" id="presidentAddress" value="<?php echo $club->president['address']; ?>"/>
+    <input type="hidden" id="presidentNPA" value="<?php echo $club->president['npa']; ?>"/>
+    <input type="hidden" id="presidentCity" value="<?php echo $club->president['city']; ?>"/>
+    <input type="hidden" id="presidentEmail" value="<?php echo $club->president['email']; ?>"/>
+    <input type="hidden" id="presidentPhone" value="<?php echo $club->president['phoneNumber']; ?>"/>
+    <input type="hidden" id="presidentMobile" value="<?php echo $club->president['mobilePhoneNumber']; ?>"/>
 </form>
 <?php
 if (!$newMember) {
     ?>
-    <p>Dernière modification le <?php echo date_sql2date($lastEdit); ?> par <?php echo $lastEditorName; ?></p>
+    <p>Dernière modification le <?php echo date_sql2date($club->lastEdit); ?> par <?php echo $club->lastEditorName; ?></p>
     <?php
 }
 ?>

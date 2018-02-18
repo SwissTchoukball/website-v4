@@ -298,7 +298,6 @@ function validiteInsertionTextBd($text)
     $text = ltrim($text);
     $text = rtrim($text);
     $text = strip_tags($text);
-    $text = mysql_real_escape_string($text);
     $text = htmlspecialchars($text, ENT_COMPAT, 'ISO-8859-1');
     return $text;
 }
@@ -490,37 +489,28 @@ function getChampionshipSeasonsOptionsForSelect($currentSeasonStartYear, $select
  * @param {int} $selectedClubId The club id selected in the list
  * @param {string} $typeId Must be 'id' or 'nbIdClub'
  */
-function afficherListeClubs($selectedClubId, $typeId)
+function afficherListeClubs($selectedClubId)
 {
-    $requeteListeClubs =
-        "SELECT c.id, c.nbIdClub, c.club, c.statusId, cs.name" . $_SESSION['__langue__'] . " AS statusName
-         FROM clubs c, clubs_status cs
-         WHERE c.statusId = cs.id
-         ORDER BY statusId, club";
-    $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requête pour l'affichage de la liste des clubs</h4>");
+    $excludeNonMembers = false;
+    $clubs = ClubService::getClubList($excludeNonMembers);
     echo "<select name='clubs'>";
+    echo "<option value='NULL'>" . VAR_LANG_NON_SPECIFIE . "</option>";
     $previousClubStatusId = 0;
-    while ($club = mysql_fetch_assoc($reponse)) {
-        $nomClub = $club['club'];
-        $idClub = $club[$typeId];
-        if ($previousClubStatusId != $club['statusId']) {
+    foreach ($clubs as $club) {
+        if ($previousClubStatusId != $club->statusId) {
             if ($previousClubStatusId != 0) {
                 echo "</optgroup>";
             }
-            echo "<optgroup label='" . $club['statusName'] . "'>";
+            echo "<optgroup label='" . $club->statusName . "'>";
         }
 
-        if ($nomClub == "") {
-            $nomClub = VAR_LANG_NON_SPECIFIE;
+        $selected = "";
+        if ($club->id == $selectedClubId) {
+            $selected = "selected='selected'";
         }
 
-        if ($idClub == $selectedClubId) {
-            $selected = " selected='selected'";
-        } else {
-            $selected = "";
-        }
-        echo "<option value='" . $idClub . "'" . $selected . ">" . $nomClub . "</option>";
-        $previousClubStatusId = $club['statusId'];
+        echo "<option value='" . $club->id . "' " . $selected . ">" . $club->sortName . " (" . $club->shortName . ")</option>";
+        $previousClubStatusId = $club->statusId;
     }
     echo "</select>";
 }

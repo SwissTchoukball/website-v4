@@ -61,7 +61,7 @@ $user = UserService::getUserById($modificationId)
     <fieldset>
         <label>Club</label>
         <?php
-        afficherListeClubs($user["idClub"], "id");
+        afficherListeClubs($user["idClub"]);
         ?>
     </fieldset>
     <fieldset>

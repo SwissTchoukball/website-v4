@@ -1,6 +1,10 @@
 <?php
 
-$memberQuery = "SELECT p.idDbdPersonne AS id, p.nom, p.prenom, p.raisonSociale, c.nbIdClub AS idClubActuel, c.club AS nomClubActuel FROM DBDPersonne p, clubs c WHERE p.idDbdPersonne=" . $_GET['transfer-request'] . " AND p.idClub=c.nbIdClub LIMIT 1";
+$memberQuery = "SELECT p.idDbdPersonne AS id, p.nom, p.prenom, p.raisonSociale, c.nbIdClub AS idClubActuel, c.club AS nomClubActuel
+      FROM DBDPersonne p, clubs c
+      LEFT OUTER JOIN clubs c ON p.idClub=c.nbIdClub 
+      WHERE p.idDbdPersonne=" . $_GET['transfer-request'] . "
+      LIMIT 1";
 if ($memberResource = mysql_query($memberQuery)) {
     $member = mysql_fetch_assoc($memberResource);
     if ($member['prenom'] == "" && $member['nom'] == "") {
@@ -9,7 +13,7 @@ if ($memberResource = mysql_query($memberQuery)) {
         $name = $member['prenom'] . ' ' . $member['nom'];
     }
 
-    if ($member['idClubActuel'] == 15) {
+    if ($member['idClubActuel'] == null) {
         $currentClubName = "Aucun club";
     } else {
         $currentClubName = $member['nomClubActuel'];
@@ -22,7 +26,7 @@ if ($memberResource = mysql_query($memberQuery)) {
         <p class="givenData"><?php echo $currentClubName; ?></p>
 
         <label>Nouveau club</label>
-        <?php afficherListeClubs($member['idClubActuel'], "nbIdClub"); ?>
+        <?php afficherListeClubs($member['idClubActuel']); ?>
         <input type="hidden" name="memberID" value="<?php echo $member['id']; ?>"/>
         <input type="hidden" name="memberName" value="<?php echo $name; ?>"/>
         <input type="hidden" name="currentClubID" value="<?php echo $member['idClubActuel']; ?>"/>

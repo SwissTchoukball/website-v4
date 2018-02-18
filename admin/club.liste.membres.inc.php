@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION['__nbIdClub__'] == 15) { //15 = Club indéfini
+if ($_SESSION['__nbIdClub__'] == null) { // Club indéfini
     echo "<p class='notification'>Aucun club n'est associé à votre compte.</p>";
 } else {
     include('admin/club.statistiques.membres.inc.php');

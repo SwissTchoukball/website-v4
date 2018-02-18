@@ -250,10 +250,7 @@
                 echo "<tr>";
                 echo "<td width='20' class='center'><input onclick='checkBoxActive(this);' type='checkbox' name='participant[]' value='" . $donnees["idEquipe"] . "' class='couleurCheckBox'></td>";
                 echo "<td class='center'>" . $donnees["equipe"] . "</td>";
-                $requeteA = "SELECT * FROM clubs WHERE id=" . $donnees['idClub'];
-                $retourA = mysql_query($requeteA);
-                $donneesA = mysql_fetch_array($retourA);
-                echo "<td>" . $donneesA['club'] . "</td>";
+                echo "<td>" . ClubService::getClub($donnees['idClub'])->shortName . "</td>";
                 echo "<script language='JavaScript'>arrayOfSelectionned[" . $donnees["idEquipe"] . "]=false;</script>";
                 echo "</tr>";
             }

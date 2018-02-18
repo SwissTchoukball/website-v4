@@ -19,6 +19,8 @@ $ST_WEBSITE_VERSION = "4.6.0";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+define("VAR_CCP_ASSOCIATION", "20-8957-2");
+
 // images définies
 define("VAR_IMG_DRBRANDT", "/pictures/drbrandt.gif");
 define("VAR_REP_IMAGE_EQUIPE_SUISSE", "/pictures/equipesSuisses/");

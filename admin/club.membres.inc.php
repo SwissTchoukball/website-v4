@@ -1,12 +1,6 @@
 <div id="membres"><?php
     statInsererPageSurf(__FILE__);
 
-    $clubRequest = "SELECT club FROM clubs WHERE nbIdClub=" . $_SESSION["__nbIdClub__"];
-    $clubResult = mysql_query($clubRequest);
-    $clubData = mysql_fetch_assoc($clubResult);
-
-    $clubName = $clubData['club'];
-
     //Vérification si le montant de la cotisation est bloqué et non-payé.
     $unpaidFees = false;
     $resultCheckIfUnpaidFees = mysql_query("SELECT datePaiement FROM Cotisations_Clubs WHERE idClub=" . $_SESSION['__nbIdClub__']);
@@ -17,7 +11,7 @@
     }
 
 
-    echo "<h4>" . $clubName . "</h4><br />";
+    echo "<h4>" . $_SESSION["__clubName__"] . "</h4><br />";
 
     if (!$_SESSION['__gestionMembresClub__']) {
         echo "<p class='notification'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club (Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes)</p>";

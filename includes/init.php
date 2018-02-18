@@ -34,6 +34,9 @@ include "markdown.php";
 // pour encode une adresse email en javascript
 include "email.encode.inc.php";
 
+// Models
+include "models/models.php";
+
 // DB services
 include_once 'services/services.php';
 

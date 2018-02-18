@@ -2,7 +2,7 @@
 <p>Si la base de données a été modifiée après que nous ayons transmis la commande à l'imprimeur, il se peut que le
     nombre de Tchouk<sup>up</sup> que vous recevez ne corresponde pas au nombre de personnes listées ici.</p>
 <?php
-if ($_SESSION['__nbIdClub__'] == 15 && !isAdmin()) { //15 = Club indéfini
+if ($_SESSION['__nbIdClub__'] == null && !isAdmin()) { // Club indéfini
     echo "<p class='notification'>Aucun club n'est associé à votre compte.</p>";
 } elseif ($_SESSION["__gestionMembresClub__"] || isAdmin()) {
     if (isAdmin() && isset($_GET['clubId']) && is_numeric($_GET['clubId'])) {

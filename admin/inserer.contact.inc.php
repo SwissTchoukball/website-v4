@@ -98,35 +98,7 @@ statInsererPageSurf(__FILE__);
         <input name="email" id="emailInput" type="text" value="" size="35" maxlength="80" autocomplete="off">
         <br/>
         <label>Club</label>
-        <?php
-        // attention, pour garder une validité des données, les présidents
-        // de club ne peuvent pas modifier leur club s'il sont de simple utilsiateur
-
-        /*$requeteSQLClub="SELECT * FROM clubs ORDER BY club";
-        $recordsetClub = mysql_query($requeteSQLClub) or die ("<H1>mauvaise requete</H1>");
-
-        echo "<select name='idClub'>";
-
-            while($recordClub = mysql_fetch_array($recordsetClub)){
-
-                $club = $recordClub["club"];
-                if($club==""){
-                    $club=VAR_LANG_NON_SPECIFIE;
-                }
-
-                if($recordClub["id"] == $record["idClub"]){
-                    echo "<option selected value='".$recordClub["id"]."'>".$club."</option>";
-                }
-                else{
-                    echo "<option value='".$recordClub["id"]."'>".$club."</option>";
-                }
-
-            }
-        echo "</select>";	*/
-        afficherListeClubs(0, "id");
-
-
-        ?>
+        <?php afficherListeClubs(null); ?>
         <br/>
         <label for="passwordInput">Mot de passe<br/>(min 8 caractères)</label>
         <input name="motDePasse" id="passwordInput" type="password" maxlength="255" size="35" autocomplete="off">

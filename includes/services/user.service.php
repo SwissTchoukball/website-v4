@@ -14,9 +14,9 @@ class UserService
 
         $query = "SELECT p.id, nom, prenom, username, p.email, userLevel, password, idClub, gestionMembresClub,
                     c.nbIdClub, c.club AS clubName
-                   FROM `Personne` p, `clubs` c
-                   WHERE (p.`username`= :username OR p.email = :email)
-                   AND p.`idClub`=c.`id`";
+                   FROM `Personne` p
+                   LEFT OUTER JOIN `clubs` c ON p.`idClub`=c.`id`
+                   WHERE (p.`username`= :username OR p.email = :email)";
 
         // TODO: remove try-catch block as simply forwarding the exception is automatically done.
         try {
@@ -33,15 +33,17 @@ class UserService
 
         $query = "SELECT p.id, nom, prenom, username, p.email, userLevel, password, idClub, gestionMembresClub,
                     c.nbIdClub, c.club AS clubName
-                   FROM `Personne` p, `clubs` c
-                   WHERE p.`id`= :userId
-                   AND p.`idClub`=c.`id`";
+                   FROM `Personne` p
+                   LEFT OUTER JOIN `clubs` c ON p.`idClub`=c.`id`
+                   WHERE p.`id`= :userId";
 
         return $db->query($query)[0];
     }
 
     public static function getUserList($searchTerms) {
-        $query = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel FROM `Personne` p, `clubs` c";
+        $query = "SELECT *, p.`email`, p.`id` AS `idPersonne`, p.userLevel
+            FROM `Personne` p
+            LEFT OUTER JOIN `clubs` c ON p.`idClub`=c.`id`";
 
         if ($searchTerms != "") {
             // separate terms
@@ -56,12 +58,10 @@ class UserService
 
                 $tok = strtok(" ");
             }
-            $query .= " WHERE (" . $wherePart . ") AND";
-        } else {
-            $query .= " WHERE";
+            $query .= " WHERE (" . $wherePart . ")";
         }
 
-        $query .= " p.`idClub`=c.`id` ORDER BY `nom`, `prenom";
+        $query .= " ORDER BY `nom`, `prenom";
 
         $db = new DB();
 
@@ -151,6 +151,7 @@ class UserService
             $_SESSION["__userLevel__"] = $user['userLevel'];
             $_SESSION['__authdata__'] = base64_encode($user['username'] . ':' . $user['password']);
             $_SESSION["__idClub__"] = $user['idClub'];
+            $_SESSION["__clubName__"] = $user['clubName'];
             $_SESSION["__nbIdClub__"] = $user['nbIdClub'];
             $_SESSION["__gestionMembresClub__"] = $user['gestionMembresClub'];
 

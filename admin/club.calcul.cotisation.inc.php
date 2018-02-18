@@ -47,7 +47,7 @@
     $clubStatusId = $clubData['statusId'];
     $montantCotisationFixe = $clubData['fixedFeeAmount'];
     if (mysql_num_rows($clubResult) == 0) {
-        $clubId = 15;
+        $clubId = null;
     }
 
     //Donner l'autorisation de changer de club si l'utilisateur est membre du comité.
@@ -60,7 +60,7 @@
         <form name="clubSwitcher" method="post"
               action="?<?php echo $navigation->getCurrentPageLinkQueryString(); ?>">
             <select name="club" title="Choisir un club" onChange="document.clubSwitcher.submit();">
-                <option value="15">Choisir un club</option>
+                <option value="NULL">Choisir un club</option>
                 <?php
                 $clubsRequest = "SELECT nbIdClub, club FROM clubs WHERE statusId = 1 OR statusId = 2 ORDER BY club";
                 $clubsResult = mysql_query($clubsRequest);
@@ -87,7 +87,7 @@
             $isManager = false;
         }
     }
-    if ($_SESSION["__nbIdClub__"] == 15 AND $_SESSION['__userLevel__'] > 5) {
+    if ($_SESSION["__nbIdClub__"] == null AND $_SESSION['__userLevel__'] > 5) {
         echo "<p class='notification'>Aucun club n'est associé à votre compte.</p>";
     } else if (!$isManager) {
         echo "<p class='notification'>Vous n'êtes pas reconnu en tant que gestionnaire des membres de votre club. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a> si vous l'êtes.</p>";
@@ -200,22 +200,21 @@
                 "SELECT c.annee, cc.montant, cc.datePaiement, ccLastYear.datePaiement AS datePaiementAnneePassee,
 					    c.etatMembresAu, c.delaiSupprimerMembres, c.delaiPayer
 				 FROM Cotisations c
-				 LEFT OUTER JOIN Cotisations_Clubs ccLastYear
-				 	ON ccLastYear.annee = c.annee - 1
-				 	AND ccLastYear.idClub = " . $clubId . "
 				 LEFT OUTER JOIN Cotisations_Clubs cc
 				 	ON cc.annee = c.annee
-				 	AND cc.idClub = ccLastYear.idClub
-				 WHERE c.annee >= '" . $anneePassee . "'
-				 	AND c.annee < '" . date('Y') . "'
+				 	AND cc.idClub = {$clubId}
+				 LEFT OUTER JOIN Cotisations_Clubs ccLastYear
+				 	ON ccLastYear.annee = c.annee - 1
+				 	AND ccLastYear.idClub = cc.idClub
+				 WHERE c.annee < '" . date('Y') . "'
 				 ORDER BY c.annee DESC";
             //echo $requeteEtatCotisation;
 
             $retourEtatCotisation = mysql_query($requeteEtatCotisation);
             while ($etatCotisation = mysql_fetch_assoc($retourEtatCotisation)) {
-                if ($etatCotisation['annee'] < $anneePassee && $etatCotisation['datePaiement'] != null) {
-                    //Ne rien afficher si l'année passée est en ordre.
-                } else {
+//                if ($etatCotisation['annee'] < $anneePassee && $etatCotisation['datePaiement'] != null) {
+//                    //Ne rien afficher si l'année passée est en ordre.
+//                } else {
                     $saisonCotisationAnneeDebut = $etatCotisation['annee'];
                     $saisonCotisationAnneeFin = $etatCotisation['annee'] + 1;
                     echo "<h4>Cotisation " . $saisonCotisationAnneeDebut . "-" . $saisonCotisationAnneeFin . "</h4>";
@@ -244,7 +243,7 @@
                         if (!$etatCotisation['datePaiement']) {
                             $unpaidFeeMessage = "Montant de " . $etatCotisation['montant'] . " CHF <strong>non-payé</strong>.<br />" .
                                 "Votre club a jusqu'" . date_sql2date_joli($etatCotisation['delaiPayer'], "au",
-                                    $_SESSION['__langue__']) . " pour s'en acquitter.";
+                                    $_SESSION['__langue__']) . " pour s'en acquitter sur le CCP de " . VAR_LANG_ASSOCIATION_NAME . " : <strong>" . VAR_CCP_ASSOCIATION . "</strong>" ;
 
                             if ($today < $etatCotisation['delaiPayer']) {
                                 printMessage($unpaidFeeMessage);
@@ -252,21 +251,18 @@
                                 printErrorMessage($unpaidFeeMessage);
                             }
                         } else {
-                            printSuccessMessage(
-                                "Montant de " . $etatCotisation['montant'] . " CHF <strong>payé</strong> le " . date_sql2date($etatCotisation['datePaiement']) . ". " .
-                                "<a href='/pdf_generator/quittance_cotisation_club.php?annee=" . $saisonCotisationAnneeDebut . "'>Télécharger la quittance</a>"
-                            );
+                            $paidFeeMessage = "Montant de " . $etatCotisation['montant'] . " CHF <strong>payé</strong> le " . date_sql2date($etatCotisation['datePaiement']) . ". ";
+                            if ($etatCotisation['annee'] >= 2015) {
+                                // We didn't save the numbers of member per categories before season 2015-2016
+                                $paidFeeMessage .= "<a href='/pdf_generator/quittance_cotisation_club.php?annee=" . $saisonCotisationAnneeDebut . "'>Télécharger la quittance</a>";
+                            }
+                            printSuccessMessage($paidFeeMessage);
                         }
                     }
                     echo "<br />";
-                }
+//                }
             }
         }
-        ?>
-        <h3>CCP <?php echo VAR_LANG_ASSOCIATION_NAME; ?></h3>
-        <div class='ccp-number'>20-8957-2</div>
-        <?php
     }
-
     ?>
 </div>
