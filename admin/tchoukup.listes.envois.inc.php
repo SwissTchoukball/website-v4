@@ -4,6 +4,10 @@
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Envois individuels (standard)
     </a><br/>
+    <a href="admin/tchoukup.export.tsv.php?query=individuels-juniors">
+        <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
+        Envois individuels juniors
+    </a><br/>
     <a href="admin/tchoukup.export.tsv.php?query=all-individuels">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
         Envois individuels (étendu pour TGI)

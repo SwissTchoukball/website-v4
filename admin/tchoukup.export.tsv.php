@@ -103,12 +103,47 @@ $queries['all-individuels'] =
     AND p.`idClub` = cl.`nbIdClub`
     AND (p.`idStatus` = 5 -- Membres soutiens (club ou hors-club)
          OR p.`idStatus` = 23 -- Membres VIPs (club ou hors-club)
-         OR (cl.`statusId` = 1 AND (p.`idStatus` = 3 OR p.`idStatus` = 6)) -- Membres actifs ou juniors d'un club
+         OR (cl.`statusId` = 1 AND (p.`idStatus` = 3 OR p.`idStatus` = 6)) -- Membres actifs ou juniors d'un club actif
          OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membre non-passif hors-club
     ORDER BY `nom`, `prenom`";
 $listsHeaders['all-individuels'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
 $listsAttributes['all-individuels'] = [
+    'raisonSociale',
+    'descriptionCiviliteFr',
+    'nom',
+    'prenom',
+    'adresse',
+    'cp',
+    'npa',
+    'ville',
+    'descriptionPaysFr'
+];
+
+$queries['individuels-juniors'] =
+    "SELECT p.`raisonSociale`,
+           c.`descriptionCiviliteFr`,
+           p.`nom`,
+           p.`prenom`,
+           p.`adresse`,
+           p.`cp`,
+           p.`npa`,
+           p.`ville`,
+           pa.`descriptionPaysFr`
+    FROM `DBDPersonne` p, `DBDCivilite` c, `DBDPays` pa, `clubs` cl
+    WHERE `idCHTB` = 2
+    AND p.`dateOfDeath` IS NULL
+    AND p.`idCivilite` = c.`idCivilite`
+    AND p.`idPays` = pa.`idPays`
+    AND p.`idClub` = cl.`nbIdClub`
+    AND (p.`idStatus` = 5 -- Membres soutiens (club ou hors-club)
+         OR p.`idStatus` = 23 -- Membres VIPs (club ou hors-club)
+         OR (cl.`statusId` = 1 AND p.`idStatus` = 6) -- Membres juniors d'un club actif
+         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membre non-passif hors-club
+    ORDER BY `nom`, `prenom`";
+$listsHeaders['individuels-juniors'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
+    "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
+$listsAttributes['individuels-juniors'] = [
     'raisonSociale',
     'descriptionCiviliteFr',
     'nom',
