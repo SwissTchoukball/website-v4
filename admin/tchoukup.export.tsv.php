@@ -33,11 +33,11 @@ $queries['envois-individuels'] =
     AND p.`idCivilite` = c.`idCivilite`
     AND p.`idPays` = pa.`idPays`
     AND p.`idClub` = cl.`nbIdClub`
-    AND (p.`idStatus` = 5 -- Membre soutien (club ou hors-club)
-         OR p.`idStatus` = 23 -- Membre vip (club ou hors-club)
-         OR (p.`idStatus` != 4 AND p.`idClub` = 15) -- Membre non-passif hors-club
-         OR p.`idClub` = 4 -- Membres du TBC Genève
-         OR (p.`idClub` = 29 AND p.`idStatus` = 6)) -- Membres juniors du TBC Vernier
+    AND (p.`idStatus` = 5 -- Membres soutien (club ou hors-club)
+         OR p.`idStatus` = 23 -- Membres VIP (club ou hors-club)
+         OR (cl.`statusId` = 1 AND p.`idStatus` = 6) -- Membres juniors d'un club actif
+         OR (p.`idClub` = 4 AND (p.`idStatus` = 3 OR p.`idStatus` = 6)) -- Membres du TBC Genève
+         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membres non-passif hors-club
     ORDER BY `nom`, `prenom`";
 $listsHeaders['envois-individuels'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
@@ -66,8 +66,8 @@ $queries['nb-tchoukup-colis-par-club'] =
     AND membres.`dateOfDeath` IS NULL
     AND membres.`idClub` = c.`nbIdClub`
     AND dest.`idDbdPersonne` = c.`idPresident`
-    AND c.`statusId` = 1 -- Membre d'un club actif
-    AND (membres.`idStatus` = 3 OR membres.`idStatus` = 6) -- membre actif ou junior
+    AND c.`statusId` = 1 -- Membres d'un club actif
+    AND (membres.`idStatus` = 3 OR membres.`idStatus` = 6) -- Membres actif ou junior
     AND membres.`idClub` != 4 -- Pas membre du TBC Genève (car dans les envois individuels)
     AND !(membres.`idClub` = 29 AND membres.`idStatus` = 6) -- Pas membre junior du TBC Vernier (car dans les envois individuels)
     GROUP BY membres.`idClub`
@@ -104,7 +104,7 @@ $queries['all-individuels'] =
     AND (p.`idStatus` = 5 -- Membres soutiens (club ou hors-club)
          OR p.`idStatus` = 23 -- Membres VIPs (club ou hors-club)
          OR (cl.`statusId` = 1 AND (p.`idStatus` = 3 OR p.`idStatus` = 6)) -- Membres actifs ou juniors d'un club actif
-         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membre non-passif hors-club
+         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membres non-passif hors-club
     ORDER BY `nom`, `prenom`";
 $listsHeaders['all-individuels'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
@@ -139,7 +139,7 @@ $queries['individuels-juniors'] =
     AND (p.`idStatus` = 5 -- Membres soutiens (club ou hors-club)
          OR p.`idStatus` = 23 -- Membres VIPs (club ou hors-club)
          OR (cl.`statusId` = 1 AND p.`idStatus` = 6) -- Membres juniors d'un club actif
-         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membre non-passif hors-club
+         OR (p.`idStatus` != 4 AND p.`idClub` = 15)) -- Membres non-passif hors-club
     ORDER BY `nom`, `prenom`";
 $listsHeaders['individuels-juniors'] = "Raison sociale \t Civilité \t Nom \t Prénom \t Adresse (ligne 1)" .
     "\t Adresse (ligne 2) \t NPA \t Localité \t Pays\n";
