@@ -2,15 +2,15 @@
 <p>
     <a href="admin/tchoukup.export.tsv.php?query=envois-individuels">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
-        Envois individuels (standard)
+        Envois individuels (juniors + TBC Genève adultes)
     </a><br/>
     <a href="admin/tchoukup.export.tsv.php?query=individuels-juniors">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
-        Envois individuels juniors
+        Envois individuels (juniors)
     </a><br/>
     <a href="admin/tchoukup.export.tsv.php?query=all-individuels">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
-        Envois individuels (étendu pour TGI)
+        Envois individuels (juniors + adultes)
     </a><br/>
     <a href="admin/tchoukup.export.tsv.php?query=nb-tchoukup-colis-par-club">
         <img src="/admin/images/document_excel.png" alt="Fichier Excel"/>
