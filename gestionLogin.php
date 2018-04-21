@@ -10,12 +10,13 @@ if (isset($_GET['redirect']) && $_GET['redirect'] != '') {
     $afterLoginTarget = urldecode($_GET['redirect']);
 }
 
+$protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
 $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
 // If already logged in (logged in from another window and stayed on the login page in this window)
 if ($_SESSION["__userLevel__"] < 100) {
-    header("Location: http://$host$uri" . $afterLoginTarget, true);
+    header("Location: $protocol://$host$uri" . $afterLoginTarget, true);
 }
 
 // se faire passer pour la partie admin
@@ -31,11 +32,11 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
                    AND p.`idClub`=c.`id`";
     $resultatSQL = mysql_query($requeteSQL);
     if (!$resultatSQL) {
-        header("Location: http://$host$uri/login-fail-4", true);
+        header("Location: $protocol://$host$uri/login-fail-4", true);
     } else {
         $record = mysql_fetch_array($resultatSQL);
         if ($record === false) {
-            header("Location: http://$host$uri/login-fail-1", true);
+            header("Location: $protocol://$host$uri/login-fail-1", true);
             exit();
         }
 
@@ -69,11 +70,11 @@ if (isset($_POST["login"]) && isset($_POST["username"]) && isset($_POST["passwor
                            VALUES ('" . $record["username"] . "', '" . $maintenant["year"] . "-" . $maintenant["mon"] . "-" . $maintenant["mday"] . "', '" . $maintenant["hours"] . ":" . $maintenant["minutes"] . ":" . $maintenant["seconds"] . "')";
             mysql_query($requeteSQL);
 
-            header("Location: http://$host$uri" . $afterLoginTarget, true);
+            header("Location: $protocol://$host$uri" . $afterLoginTarget, true);
         } else {
-            header("Location: http://$host$uri/login-fail-1", true);
+            header("Location: $protocol://$host$uri/login-fail-1", true);
         }
     }
 } else {
-    header("Location: http://$host$uri/login-fail-3", true);
+    header("Location: $protocol://$host$uri/login-fail-3", true);
 }

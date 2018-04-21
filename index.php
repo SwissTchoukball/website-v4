@@ -10,7 +10,7 @@
           content="Tchoukball : Sport pour tous. venez decouvrir ce nouveau sport qui est le sport de demain. Site officiel de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?>. En français. Auf Deutsch. In English. In italiano."/>
     <meta name="Revisit-after" content="14 days">
     <meta http-equiv="Content-Language" content="<?php echo strtolower($_SESSION["__langue__"]); ?>">
-    <meta name="Identifier-url" content="http://www.tchoukball.ch">
+    <meta name="Identifier-url" content="https://tchoukball.ch">
     <!-- Icon for Pinned Tabs (Safari 9) -->
     <link rel="mask-icon" href="website_icon.svg" color="#e2001a">
     <!-- Favicons -->
@@ -33,7 +33,7 @@
     <!-- /Favicons -->
     <!-- Facebook metatags -->
     <meta property="og:title" content="<?php echo VAR_LANG_ASSOCIATION_NAME . $titre; ?>"/>
-    <meta property="og:image" content="http://www.tchoukball.ch/pictures/Logo-SwissTchoukball_500.png"/>
+    <meta property="og:image" content="https://tchoukball.ch/pictures/Logo-SwissTchoukball_500.png"/>
     <meta property="og:type" content="<?php echo $facebook_type; ?>"/>
     <meta property="og:url" content="<?php echo "http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]; ?>"/>
     <meta property="og:site_name" content="<?php echo VAR_LANG_ASSOCIATION_NAME; ?>"/>
@@ -44,7 +44,7 @@
     <link rel="stylesheet" type="text/css" href="/build/master.css?v=<?php echo $ST_WEBSITE_VERSION; ?>">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="alternate" type="application/rss+xml"
-          href="http://www.tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php"/>
+          href="https://tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php"/>
 </head>
 <body>
 <div id="fb-root"></div>

@@ -53,7 +53,7 @@ if ($newsIdSelection != "") {
         if ($record['image'] != 0) { // On affiche l'image si il y en a une.
             $retour = mysql_query("SELECT * FROM Uploads WHERE id='" . $record['image'] . "'");
             $donnees = mysql_fetch_array($retour);
-            echo "<img src='http://www.tchoukball.ch/uploads/" . $donnees['fichier'] . "' alt='" . $donnees['titre'] . "' " . $positionImage . " />";
+            echo "<img src='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' alt='" . $donnees['titre'] . "' " . $positionImage . " />";
         }
         //afficherAvecEncryptageEmail($corps);
         echo markdown($corps);
@@ -61,12 +61,12 @@ if ($newsIdSelection != "") {
         echo "</div>";
         ?>
         <div class="socialButtons">
-            <a href="http://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
                data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
                data-lang="fr">Tweet</a>
-            <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+            <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
             <div class="fb-share-button"
-                 data-href="http://www.tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
+                 data-href="https://tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
                  data-layout="button"
                  data-size="small"
                  data-mobile-iframe="true">

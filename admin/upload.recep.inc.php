@@ -103,11 +103,11 @@ if (isSet($_POST['submitFile'])) {
                         $uploadReussi = true;
                         ?>
                         Votre fichier se trouve &agrave; l'adresse suivante: <a
-                            href="http://www.tchoukball.ch/uploads/<?php echo $destination_file; ?>" target="_blank">http://www.tchoukball.ch/uploads/<?php echo $destination_file; ?></a>
+                            href="https://tchoukball.ch/uploads/<?php echo $destination_file; ?>" target="_blank">tchoukball.ch/uploads/<?php echo $destination_file; ?></a>
                         <br/>
                         <?php
 
-                        $url_entier = 'http://www.tchoukball.ch/uploads/' . $destination_file . '';
+                        $url_entier = 'https://tchoukball.ch/uploads/' . $destination_file . '';
 
 
                         // CrÈation de la miniature

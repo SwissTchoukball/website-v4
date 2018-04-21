@@ -94,8 +94,8 @@ if ($_POST["action"] == "insererUpload") {
                             $uploadReussi = true;
                             ?>
                             Votre fichier se trouve &agrave; l'adresse suivante: <a
-                                href="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<?php echo $destination_file; ?>"
-                                target="_blank">http://<?php echo $_SERVER["HTTP_HOST"]; ?>
+                                href="//<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/<?php echo $destination_file; ?>"
+                                target="_blank"><?php echo $_SERVER["HTTP_HOST"]; ?>
                                 /uploads/<?php echo $destination_file; ?></a><br/>
                             <?php
 
@@ -149,7 +149,7 @@ if ($_POST["action"] == "insererUpload") {
                                 }
                                 ?>
                                 <img
-                                    src="http://<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/vignettes/<?php echo $thumb_destination_file; ?>"
+                                    src="//<?php echo $_SERVER["HTTP_HOST"]; ?>/uploads/vignettes/<?php echo $thumb_destination_file; ?>"
                                     alt="Miniature de l'image uploadÈe"/><br/><br/>
                                 <?php
                                 echo 'Vignette valide et upload&eacute;e correctement.<br />';

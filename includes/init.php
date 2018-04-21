@@ -97,9 +97,10 @@ if ($ETAT_EN_MAINTENANCE_TOTALE) {
 
 // Redirecting to login if trying to access admin while being disconnected
 if ($admin && $_SESSION["__userLevel__"] >= 100) {
+    $protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
     $redirectUrl = urlencode($_SERVER['REQUEST_URI']);
-    header("Location: http://$host/index.php?login&redirect=$redirectUrl");
+    header("Location: $protocol://$host/index.php?login&redirect=$redirectUrl");
 }
 
 // Menu normal ou menu admin

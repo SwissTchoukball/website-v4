@@ -11,6 +11,7 @@ if (isset($_COOKIE["login"])) {
 }
 session_destroy();
 
+$protocol = $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ? 'https' : 'http';
 $host = $_SERVER['HTTP_HOST'];
 $uri = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-header("Location: http://$host$uri/" . VAR_HREF_PAGE_PRINCIPALE, true);
+header("Location: $protocol://$host$uri" . VAR_HREF_PAGE_PRINCIPALE, true);

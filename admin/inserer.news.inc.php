@@ -87,8 +87,8 @@
                 <tr>
                     <td colspan="2">
                         <h4>Explication rapide :</h4>
-                        <p>Lien : <strong>[voici le lien](http://www.tchoukball.ch)</strong> donnera : <a
-                                href="http://www.tchoukball.ch" target="_blank">voici le lien</a><br/>
+                        <p>Lien : <strong>[voici le lien](https://tchoukball.ch)</strong> donnera : <a
+                                href="https://tchoukball.ch" target="_blank">voici le lien</a><br/>
                             Italique : <strong>*</strong>text en italique<strong>*</strong> donnera : <em>text en
                                 italic</em><br/>
                             Gras : <strong>**</strong>text en gras<strong>**</strong> donnera : <strong>text en
@@ -108,7 +108,7 @@
             <?php
             $retour = mysql_query("SELECT * FROM Uploads WHERE type='jpg' OR type='jpeg' OR type='png' OR type='gif' ORDER BY date DESC");
             while ($donnees = mysql_fetch_array($retour)) {
-                echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'> <label for='" . $donnees['id'] . "'><a href='http://www.tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
+                echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'> <label for='" . $donnees['id'] . "'><a href='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
             }
             ?>
         </div>
