@@ -9,11 +9,6 @@ while ($donnees = mysql_fetch_array($retour)) {
 }
 
 ?>
-<iframe
-    src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FEuropean-Winners-Cup%2F154520307917335&amp;width=600&amp;colorscheme=light&amp;show_faces=false&amp;stream=false&amp;header=false&amp;height=62"
-    scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:600px; height:62px;"
-    allowTransparency="true"></iframe>
-
 <p style="clear:right;"></p>
 <h2>Résultats suisses</h2>
 <h3 class="alt">Traiskirchen (AUT) 2018</h3>
