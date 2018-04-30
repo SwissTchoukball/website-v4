@@ -683,14 +683,16 @@ function showFunctionPerson($functionID)
               WHERE f.id = " . $functionID . "
               AND (ISNULL(fr.dateFin) OR fr.dateFin >= CURDATE()) AND (ISNULL(fr.dateDebut) OR fr.dateDebut < CURDATE())";
     if ($result = mysql_query($query)) {
-        $person = mysql_fetch_assoc($result);
-        if ($person['idSexe'] == 3) {
-            $functionTitle = $person['titreF'];
-        } else {
-            $functionTitle = $person['titreH'];
+        if (mysql_num_rows($result) > 0) {
+            $person = mysql_fetch_assoc($result);
+            if ($person['idSexe'] == 3) {
+                $functionTitle = $person['titreF'];
+            } else {
+                $functionTitle = $person['titreH'];
+            }
+            echo '<h2>' . $functionTitle . '</h2>';
+            showPerson($person);
         }
-        echo '<h2>' . $functionTitle . '</h2>';
-        showPerson($person);
     } else {
         printErrorMessage("Erreur lors de la récupération de la personne");
     }
