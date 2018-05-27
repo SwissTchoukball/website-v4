@@ -33,6 +33,11 @@
             } elseif ($tour == 10000 OR $tour == 2000 OR $tour == 3000 OR $tour == 4000 OR $categorie == 0) {
                 $groupe = 0;
             }
+            if (isset($_POST["rankingStart"]) && is_numeric($_POST["rankingStart"])) {
+                $rankingStart = $_POST["rankingStart"];
+            } else {
+                $rankingStart = 'NULL';
+            }
 
             $requete = "SELECT * FROM Championnat_Tours WHERE " .
                 "saison=" . $saison . " AND idCategorie=" . $categorie . " AND idTour=" . $tour . " AND idGroupe=" . $groupe;
@@ -43,7 +48,7 @@
             if ($nbResultat <= 0) {
 
                 // Insertion du tour
-                $requete = "INSERT INTO Championnat_Tours VALUES ('', " . $saison . ", " . $tour . ", " . $categorie . ", " . $groupe . ")";
+                $requete = "INSERT INTO Championnat_Tours VALUES ('', " . $saison . ", " . $tour . ", " . $categorie . ", " . $groupe . ", " . $rankingStart . ")";
                 mysql_query($requete);
 
                 //idGroupe ChampionnatGroupe
@@ -231,6 +236,12 @@
                         }
                         ?>
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="right"><label for="rankingStart">Classement commence par la position</label></td>
+                <td>
+                    <input type="number" name="rankingStart" id="rankingStart" step="1" min="1" placeholder="Laisser vide si 1"/>
                 </td>
             </tr>
         </table>

@@ -93,7 +93,7 @@ echo "</ul>";
 
 
 /* Requête définissant les de classements à faire et leur type puis execution d'une boucle pour chaque classement */
-$requete = "SELECT DISTINCT idCategorie, idTour, noGroupe FROM Championnat_Equipes_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie, idTour DESC";
+$requete = "SELECT DISTINCT idCategorie, idTour, idGroupe AS noGroupe, rankingStart FROM Championnat_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie, idTour DESC";
 if ($debug) {
     echo "<br /><br />Tours : " . $requete;
 }
@@ -102,6 +102,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     $idCategorie = $donneesNbClassement['idCategorie'];
     $idTour = $donneesNbClassement['idTour'];
     $noGroupe = $donneesNbClassement['noGroupe'];
+    $rankingStart = $donneesNbClassement['rankingStart'];
     if ($debug) {
         echo "<h4>ID TOUR : " . $idTour . "</h4>";
     }
@@ -281,6 +282,9 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
 
         for ($k = 1; $k < count($tableau); $k++) {
             $ranking = $k + $rankingShift;
+            if ($rankingStart != null) {
+                $ranking = ($k - 1) + $rankingStart;
+            }
             $idEquipe = $tableau[$k][1];
             $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $selectedSeasonStartYear . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
             if ($debug) {
@@ -311,7 +315,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             }
             echo "</tr>";
 
-            $dernierClassement = $k + $rankingShift;
+            $dernierClassement = $ranking;
         }
     } else { //Tour final. Il faut aussi classer par le type de match.
         $requeteC = "SELECT DISTINCT cm.saison, cm.idCategorie, cm.idTour, cm.noGroupe, cet.idEquipe, idTypeMatch, points, goolaverage, nbMatchJoue, nbMatchGagne, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, position, equipe
