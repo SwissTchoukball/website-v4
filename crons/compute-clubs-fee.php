@@ -75,9 +75,9 @@ while ($club = mysql_fetch_assoc($clubsResult)) {
         $totalFee += $club['fixedFeeAmount'];
     }
     // Computing the number of offered VIP subscriptions and reducing the fee accordingly.
-    $maxNbOfferedVISubscriptions = floor(($club['nbMembresParStatut' . "[$idActifs]"] + $club['nbMembresParStatut' . "[$idJuniors]"]) / $nbMembersToGetAFreeVIPSubscription + 1);
-    $nbOfferedVISubscriptions = min($maxNbOfferedVISubscriptions, $club['nbMembresParStatut' . "[$idVIP]"]);
-    $VIPReduction = $nbOfferedVISubscriptions * (-$VIPFeeAmount);
+    $maxNbOfferedVIPSubscriptions = floor(($club['nbMembresParStatut' . "[$idActifs]"] + $club['nbMembresParStatut' . "[$idJuniors]"]) / $nbMembersToGetAFreeVIPSubscription + 1);
+    $nbOfferedVIPSubscriptions = min($maxNbOfferedVIPSubscriptions, $club['nbMembresParStatut' . "[$idVIP]"]);
+    $VIPReduction = $nbOfferedVIPSubscriptions * (-$VIPFeeAmount);
     $totalFee += $VIPReduction;
 
 //    echo $club['name'] . ': ' . $totalFee . '<br>';
@@ -88,21 +88,35 @@ while ($club = mysql_fetch_assoc($clubsResult)) {
             idClub,
             montant,
             nbMembresActifs,
+            montantMembresActifs,
             nbMembresJuniors,
+            montantMembresJuniors,
             nbMembresSoutiens,
+            montantMembresSoutiens,
             nbMembresPassifs,
-            nbMembresVIP
+            montantMembresPassifs,
+            nbMembresVIP,
+            nbMembresVIPOfferts,
+            montantMembresVIP
          )
          VALUES (
             '" . (date('Y') - 1) . "',
             " . $club['idClub'] . ",
             " . $totalFee . ",
             " . $club['nbMembresParStatut[3]'] . ",
+            " . $feeAmountByStatus[3] . ",
             " . $club['nbMembresParStatut[6]'] . ",
+            " . $feeAmountByStatus[6] . ",
             " . $club['nbMembresParStatut[5]'] . ",
+            " . $feeAmountByStatus[5] . ",
             " . $club['nbMembresParStatut[4]'] . ",
-            " . $club['nbMembresParStatut[23]'] . "
+            " . $feeAmountByStatus[4] . ",
+            " . $club['nbMembresParStatut[23]'] . ",
+            " . $nbOfferedVIPSubscriptions . ",
+            " . $feeAmountByStatus[23] . "
          )";
+
+    echo $saveClubFeeQuery;
 
     if (mysql_query($saveClubFeeQuery)) {
         echo "<p><strong>" . $club['name'] . "</strong> Fee: CHF " . $totalFee . "</p>";

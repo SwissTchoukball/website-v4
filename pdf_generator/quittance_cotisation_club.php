@@ -20,7 +20,9 @@ if (!isset($_GET['annee']) || !is_numeric($_GET['annee'])) {
 
 $annee = $_GET['annee'];
 
-$queryClub = "SELECT c.club, c.nomComplet, cc.montant, cc.datePaiement, cc.nbMembresActifs, cc.nbMembresJuniors, cc.nbMembresSoutiens, cc.nbMembresPassifs, cc.nbMembresVIP
+$queryClub = "SELECT c.club, c.nomComplet, cc.montant, cc.datePaiement, cc.nbMembresActifs, cc.nbMembresJuniors,
+            cc.nbMembresSoutiens, cc.nbMembresPassifs, cc.nbMembresVIP, cc.nbMembresVIPOfferts, cc.montantMembresActifs,
+            cc.montantMembresJuniors, cc.montantMembresSoutiens, cc.montantMembresPassifs, cc.montantMembresVIP
 			  FROM clubs c, Cotisations_Clubs cc
 			  WHERE c.id = " . $_SESSION['__idClub__'] . "
 			  AND c.nbIdClub = cc.idClub
@@ -49,14 +51,13 @@ $nbMembresActifsJuniors = $nbMembresActifs + $nbMembresJuniors;
 
 $nbMembresPourUnAbonnementVIPOffert = 20;
 
-$cotisationMembreActif = 25;
-$cotisationMembreJunior = 15;
-$cotisationMembreSoutien = 10;
-$cotisationMembrePassif = 0;
-$cotisationMembreVIP = 10;
+$cotisationMembreActif = $club['montantMembresActifs'];
+$cotisationMembreJunior = $club['montantMembresJuniors'];
+$cotisationMembreSoutien = $club['montantMembresSoutiens'];
+$cotisationMembrePassif = $club['montantMembresPassifs'];
+$cotisationMembreVIP = $club['montantMembresVIP'];
 
-$nbAbonnementVIPOffertsMax = floor($nbMembresActifsJuniors / $nbMembresPourUnAbonnementVIPOffert + 1);
-$nbAbonnementVIPOfferts = min($nbAbonnementVIPOffertsMax, $nbMembresVIP);
+$nbAbonnementVIPOfferts = $club['nbMembresVIPOfferts'];
 
 $totalMembresActifs = $nbMembresActifs * $cotisationMembreActif;
 $totalMembresJuniors = $nbMembresJuniors * $cotisationMembreJunior;
@@ -90,7 +91,7 @@ $content .= "<table>" .
     "<tr><td>Membres VIP offerts</td><td>CHF -" . $cotisationMembreVIP . "</td><td>" . $nbAbonnementVIPOfferts . "</td><td>CHF " . $reductionVIP . "</td></tr>" .
     "<tr><th colspan=\"3\">Total</th><th>CHF " . $amount . "</th></tr>" .
     "</table>";
-$content .= "<p>Payé le " . date_sql2date($paymentDate) . ".</p>";
+$content .= "<p>Date de paiement : " . date_sql2date($paymentDate) . ".</p>";
 
 include("generate_pdf.php");
 
