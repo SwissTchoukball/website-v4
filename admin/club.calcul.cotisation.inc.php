@@ -200,22 +200,18 @@
                 "SELECT c.annee, cc.montant, cc.datePaiement, ccLastYear.datePaiement AS datePaiementAnneePassee,
 					    c.etatMembresAu, c.delaiSupprimerMembres, c.delaiPayer
 				 FROM Cotisations c
-				 LEFT OUTER JOIN Cotisations_Clubs ccLastYear
-				 	ON ccLastYear.annee = c.annee - 1
-				 	AND ccLastYear.idClub = " . $clubId . "
 				 LEFT OUTER JOIN Cotisations_Clubs cc
 				 	ON cc.annee = c.annee
-				 	AND cc.idClub = ccLastYear.idClub
-				 WHERE c.annee >= '" . $anneePassee . "'
-				 	AND c.annee < '" . date('Y') . "'
+				 	AND cc.idClub = " . $clubId . "
+				 LEFT OUTER JOIN Cotisations_Clubs ccLastYear
+				 	ON ccLastYear.annee = c.annee - 1
+				 	AND ccLastYear.idClub = cc.idClub
+				 WHERE c.annee < '" . date('Y') . "'
 				 ORDER BY c.annee DESC";
             //echo $requeteEtatCotisation;
 
             $retourEtatCotisation = mysql_query($requeteEtatCotisation);
             while ($etatCotisation = mysql_fetch_assoc($retourEtatCotisation)) {
-                if ($etatCotisation['annee'] < $anneePassee && $etatCotisation['datePaiement'] != null) {
-                    //Ne rien afficher si l'année passée est en ordre.
-                } else {
                     $saisonCotisationAnneeDebut = $etatCotisation['annee'];
                     $saisonCotisationAnneeFin = $etatCotisation['annee'] + 1;
                     echo "<h4>Cotisation " . $saisonCotisationAnneeDebut . "-" . $saisonCotisationAnneeFin . "</h4>";
@@ -252,14 +248,15 @@
                                 printErrorMessage($unpaidFeeMessage);
                             }
                         } else {
-                            printSuccessMessage(
-                                "Montant de " . $etatCotisation['montant'] . " CHF <strong>payé</strong> le " . date_sql2date($etatCotisation['datePaiement']) . ". " .
-                                "<a href='/pdf_generator/quittance_cotisation_club.php?annee=" . $saisonCotisationAnneeDebut . "'>Télécharger la quittance</a>"
-                            );
+                            $paidFeeMessage = "Montant de " . $etatCotisation['montant'] . " CHF <strong>payé</strong> le " . date_sql2date($etatCotisation['datePaiement']) . ". ";
+                            if ($etatCotisation['annee'] >= 2015) {
+                                // We didn't save the numbers of member per categories before season 2015-2016
+                                $paidFeeMessage .= "<a href='/pdf_generator/quittance_cotisation_club.php?annee=" . $saisonCotisationAnneeDebut . "'>Télécharger la quittance</a>";
+                            }
+                            printSuccessMessage($paidFeeMessage);
                         }
                     }
                     echo "<br />";
-                }
             }
         }
         ?>
