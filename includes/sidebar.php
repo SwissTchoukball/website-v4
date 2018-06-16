@@ -9,7 +9,7 @@
     <?php include($_SERVER["DOCUMENT_ROOT"] . '/includes/nav.php'); ?>
     <div id="partners">
         <?php
-        echo "Nos partenaires";
+        echo "<div class='sidebar__sponsors-title'>Nos partenaires</div>";
         $requeteSQL = "SELECT * FROM Sponsors WHERE afficherFooter>='1' ORDER BY afficherFooter";
         $recordset = mysql_query($requeteSQL);
         while ($record = mysql_fetch_array($recordset)) {
