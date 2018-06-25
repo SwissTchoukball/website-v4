@@ -102,7 +102,7 @@ function afficherAvecEncryptageEmail($text)
     echo encryptageEmail($text) . "<br />";
 }
 
-function showPerson($person, $hidePicture = false, $hidePostalAddress = false, $hideLanguages = false)
+function showPerson($person, $hidePicture = false, $hideLanguages = false)
 {
     echo '<div class="person-panel">';
     // Affichage de la photo
@@ -120,12 +120,6 @@ function showPerson($person, $hidePicture = false, $hidePostalAddress = false, $
 
     // Affichage des coordonnées
     echo '<span class="person-panel__name">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
-
-    if (!$hidePostalAddress) {
-        echo $person["adresse"] . "<br>";
-        echo $person["cp"] != '' ? $person["cp"] . "<br>" : '';
-        echo $person["npa"] . "&nbsp;" . $person["ville"] . "<br /><br />";
-    }
 
     if ($person["emailFederation"] != '') {
         $email = $person["emailFederation"];
@@ -627,7 +621,7 @@ function showTeamCoaches($teamId)
                 $title = $coach['maleTitle'];
             }
             echo '<h2>' . $title . '</h2>';
-            showPerson($coach, false, true, true);
+            showPerson($coach, false, true);
         }
     } else {
         printErrorMessage("Erreur lors de la récupération des responsables");
