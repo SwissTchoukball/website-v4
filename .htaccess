@@ -1,6 +1,8 @@
 php_flag "allow_url_fopen" "On"
 php_flag "allow_url_include" "On"
 
+Redirect 301 /.well-known/change-password https://tchoukball.ch/admin.php?menuselection=1&smenuselection=2
+
 Options +FollowSymlinks
 RewriteEngine on
 
