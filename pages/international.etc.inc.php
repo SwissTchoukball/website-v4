@@ -13,7 +13,7 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>3èmes</td>
         <td>Castellanza (IT), 2018</td>
     </tr>
     <tr>
@@ -52,7 +52,7 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>2èmes</td>
         <td>Castellanza (IT), 2018</td>
     </tr>
     <tr>
@@ -91,7 +91,7 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>3èmes</td>
         <td>Castellanza (IT), 2018</td>
     </tr>
     <tr>
