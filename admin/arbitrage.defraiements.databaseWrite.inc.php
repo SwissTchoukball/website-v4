@@ -1,4 +1,37 @@
 <?php
+
+function sendPaymentMailToReferee($refereeId, $paymentDate, $amountPaid) {
+    $refereeQuery = "SELECT p.prenom, p.email, p.emailFederation FROM DBDPersonne p WHERE p.idDbdPersonne = $refereeId LIMIT 1";
+    $refereeResouce = mysql_query($refereeQuery);
+    if (!$refereeResouce) {
+        printErrorMessage("Erreur lors de la récupération des informations de l'arbitre. Il n'a pas pu être informé.");
+        return;
+    }
+
+    $referee = mysql_fetch_assoc($refereeResouce);
+
+    $refereeEmail = $referee['emailFederation'];
+    if ($referee['emailFederation'] == '' && $referee['email'] != '') {
+        $refereeEmail = $referee['email'];
+    }
+
+    $recipients = $refereeEmail . ", admin@tchoukball.ch";
+    $subject = "Paiement défraiement arbitre";
+    $body = "Bonjour " . $referee['prenom'] . ",<br><br>";
+    $body .= "Nous avons envoyé l'ordre de paiement de <strong>CHF " . $amountPaid . "</strong> sur votre compte afin de vous défrayer pour vos arbitrages. ";
+    $body .= "Le versement sera effectué <strong>" . date_sql2date_joli($paymentDate, "le", "Fr", false) . "</strong>.<br><br>";
+    $body .= "Merci pour votre engagement en tant qu'arbitre de la fédération !<br><br>";
+    $body .= "Salutations sportives<br><br>Swiss Tchoukball - Secteur finances";
+    $from = "From:finances@tchoukball.ch\n";
+    $from .= "MIME-version: 1.0\n";
+    $from .= "Content-type: text/html; charset= iso-8859-1\n";
+    if (mail($recipients, $subject, $body, $from)) {
+        echo '<p class="notification notification--success">L\'arbitre a été informé par e-mail.</p>';
+    } else {
+        echo '<p class="notification notification--error">L\'arbitre n\'a pas pu être informé à cause d\'une erreur lors de l\'envoi de l\'e-mail. Le webmaster n\'a pas automatiquement été averti, veuillez <a href="mailto:webmaster@tchoukball.ch">le contacter</a> s\'il vous plaît.</p>';
+    }
+}
+
 if (isset($_POST['add']) || isset($_POST['edit'])) {
     $paymentID = isValidID($_POST['paymentID']) ? $_POST['paymentID'] : false;
     $refereeID = isValidID($_POST['refereeID']) ? $_POST['refereeID'] : false;
@@ -20,6 +53,7 @@ if (isset($_POST['add']) || isset($_POST['edit'])) {
                                VALUES (" . $refereeID . ", " . $seasonID . ", " . $amountPaid . ", '" . $paymentDate . "', " . $_SESSION['__idUser__'] . ")";
             if (mysql_query($queryAddPayment)) {
                 printSuccessMessage("Insertion du versement réussie.");
+                sendPaymentMailToReferee($refereeID, $paymentDate, $amountPaid);
             } else {
                 printErrorMessage("L'insertion du versement n'a pas aboutie.<br />" . mysql_error() . "<br />" . $queryAddPayment);
             }
