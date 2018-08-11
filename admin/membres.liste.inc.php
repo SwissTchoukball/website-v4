@@ -31,8 +31,8 @@ if (isset($_GET['keywords'])) {
     }
 }
 
-//Handling pre-selection
-if (isset($_POST['preselectionID'])) {
+if (isset($_POST['preselectionID']) && $_POST['preselectionID'] != 0) {
+    //Handling pre-selection
     $preselectionID = mysql_real_escape_string($_POST['preselectionID']);
 
     $preselectionQuery = "SELECT where_clause FROM DBDRequetesPreselection WHERE id=" . $preselectionID . " LIMIT 1";
@@ -44,6 +44,11 @@ if (isset($_POST['preselectionID'])) {
 
         $nbMembersPerPage = null; //Pour pas qu'il y ait de pagination, afin que le liens des e-mails contienne tout le monde.
     }
+} else if (isset($_POST['statutID']) && $_POST['statutID'] != 0) {
+    //Handling status
+    $statutID = mysql_real_escape_string($_POST['statutID']);
+
+    $querySearch = 'p.idStatus=' . $statutID;
 }
 
 if ($nbMembersPerPage == null) {
@@ -116,7 +121,8 @@ if ($preselectionListData = mysql_query($preselectionListQuery)) {
     ?>
     <form class="st-form" method="post"
           action="?menuselection=<?php echo $menuselection; ?>&smenuselection=<?php echo $smenuselection; ?>">
-        <select name="preselectionID" onchange="submit();" title="Présélection">
+        <label for="preselectionID">Présélection</label>
+        <select name="preselectionID" id="preselectionID" onchange="submit();" title="Présélection">
             <option value="0">-</option>
             <?php
             while ($preselection = mysql_fetch_assoc($preselectionListData)) {
@@ -126,6 +132,31 @@ if ($preselectionListData = mysql_query($preselectionListQuery)) {
                     $selected = '';
                 }
                 echo '<option value="' . $preselection['id'] . '"' . $selected . '>' . $preselection['nom'] . '</option>';
+            }
+            ?>
+        </select>
+        <label for="statutID">Statut</label>
+        <select id="statutID" name="statutID" onchange="submit();">
+            <option value="0">-</option>
+            <option value="2"<?php echo ($statutID == 3 || $statutID == 6) ? "selected" : ""; ?>>
+                Membre actif/junior
+            </option>
+            <?php
+            $queryStatut = "SELECT `idStatus` AS id, `descriptionStatus" . $_SESSION['__langue__'] . "` AS nom
+                                        FROM `DBDStatus`
+                                        WHERE `idStatus`!=1 AND `idStatus`!=3 AND `idStatus`!=6 ORDER BY nom";
+            if ($dataStatut = mysql_query($queryStatut)) {
+                while ($statut = mysql_fetch_assoc($dataStatut)) {
+                    if (hasAllMembersManagementAccess() ||
+                        $statut['id'] == 4 ||
+                        $statut['id'] == 5 ||
+                        $statut['id'] == 23
+                    ) {
+                        echo '<option value="' . $statut['id'] . '">' . $statut['nom'] . '</option>';
+                    }
+                }
+            } else {
+                echo '<option value="null">ERREUR</option>';
             }
             ?>
         </select>
