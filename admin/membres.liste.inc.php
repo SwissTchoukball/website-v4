@@ -109,7 +109,7 @@ if ($showPagination) {
 
 //Search form
 ?>
-<form class="st-form st-form--oneline" method="get">
+<form class="st-form st-form--oneline st-form--centered" method="get">
     <input type="search" name="keywords" placeholder="Recherche"/>
     <input type="hidden" name="menuselection" value="<?php echo $menuselection ?>"/>
     <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
