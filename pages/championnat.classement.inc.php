@@ -78,7 +78,12 @@ while ($donnesNomTour = mysql_fetch_array($retourNomTour)) {
 
 
 /* Requête pour afficher la liste des ligues */
-$requete = "SELECT DISTINCT idCategorie FROM Championnat_Equipes_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie";
+$requete =
+    "SELECT DISTINCT idCategorie
+     FROM Championnat_Equipes_Tours
+     WHERE saison=" . $selectedSeasonStartYear . "
+     AND idCategorie != 8
+     ORDER BY idCategorie";
 if ($debug) {
     echo "<br /><br />Liste ligues : " . $requete;
 }
@@ -93,7 +98,12 @@ echo "</ul>";
 
 
 /* Requête définissant les de classements à faire et leur type puis execution d'une boucle pour chaque classement */
-$requete = "SELECT DISTINCT idCategorie, idTour, idGroupe AS noGroupe, rankingStart FROM Championnat_Tours WHERE saison=" . $selectedSeasonStartYear . " ORDER BY idCategorie, idTour DESC";
+$requete =
+    "SELECT DISTINCT idCategorie, idTour, idGroupe AS noGroupe, rankingStart
+     FROM Championnat_Tours
+     WHERE saison=" . $selectedSeasonStartYear . "
+     AND idCategorie != 8
+     ORDER BY idCategorie, idTour DESC";
 if ($debug) {
     echo "<br /><br />Tours : " . $requete;
 }

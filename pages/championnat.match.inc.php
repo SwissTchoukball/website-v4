@@ -8,7 +8,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
     $matchID = $_GET['matchID'];
     //TODO: se faire la réflexion s'il ne serait pas mieux de faire une requête séparée pour les arbitres...
     $matchQuery = "SELECT e1.idEquipe AS idEquipeA, e2.idEquipe AS idEquipeB, e1.equipe AS nomEquipeA, e2.equipe AS nomEquipeB, m.pointsA, m.pointsB,
-						  m.saison, c.categorie" . $_SESSION['__langue__'] . " AS nomCategorie, m.idTour, tt.tour" . $_SESSION['__langue__'] . " AS nomTour, m.noGroupe, m.journee, m.idTypeMatch, tm.type" . $_SESSION['__langue__'] . " AS nomTypeMatch,
+						  m.saison, c.idCategorie, c.categorie" . $_SESSION['__langue__'] . " AS nomCategorie, m.idTour, tt.tour" . $_SESSION['__langue__'] . " AS nomTour, m.noGroupe, m.journee, m.idTypeMatch, tm.type" . $_SESSION['__langue__'] . " AS nomTypeMatch,
 						  m.dateDebut, m.heureDebut, l.id AS idLieu, l.nom AS nomLieu, l.adresse, l.npa, l.ville, m.prixEntree, m.nbSpectateurs, m.flickrSetId
 				   FROM Championnat_Matchs m
 				   LEFT OUTER JOIN Championnat_Equipes e1 ON m.equipeA = e1.idEquipe
@@ -33,6 +33,7 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
         $recordedScoreB = $match['pointsB'];
 
         $saison = $match['saison'];
+        $idCategorie = $match['idCategorie'];
         $nomCategorie = $match['nomCategorie'];
         $idTour = $match['idTour'];
         $nomTour = $match['nomTour'];
@@ -161,17 +162,21 @@ if (isset($_GET['matchID']) && isValidMatchID($_GET['matchID'])) {
                 $finSaison = $saison + 1;
                 echo VAR_LANG_SAISON . ' ' . $saison . '-' . $finSaison;
                 echo ' - ' . $nomCategorie;
-                echo ' - ' . $nomTour;
-                if ($noGroupe != 0) {
-                    echo ' - ' . VAR_LANG_GROUPE . ' ' . $noGroupe;
-                }
-                if ($idTypeMatch != 0) {
-                    echo ' - ' . $nomTypeMatch;
-                }
-                if ($idTour > 1000) {
-                    echo ' - ' . VAR_LANG_ACTE . ' ' . chif_rome($journee);
-                } else {
-                    echo ' - ' . VAR_LANG_JOURNEE . ' ' . $journee;
+
+                // We don't show more information for friendly games
+                if ($idCategorie != 8) {
+                    echo ' - ' . $nomTour;
+                    if ($noGroupe != 0) {
+                        echo ' - ' . VAR_LANG_GROUPE . ' ' . $noGroupe;
+                    }
+                    if ($idTypeMatch != 0) {
+                        echo ' - ' . $nomTypeMatch;
+                    }
+                    if ($idTour > 1000) {
+                        echo ' - ' . VAR_LANG_ACTE . ' ' . chif_rome($journee);
+                    } else {
+                        echo ' - ' . VAR_LANG_JOURNEE . ' ' . $journee;
+                    }
                 }
                 ?>
             </p>

@@ -84,7 +84,7 @@ if ($nbTours == 0) {
             }
         }
 
-        if ($idTour != 2000) {
+        if ($idTour != 2000 && $idCategorie != 8) {
             if ($donnees['idGroupe'] < 2) {
                 $retourB = mysql_query("SELECT tour" . $_SESSION['__langue__'] . " FROM Championnat_Types_Tours WHERE idTour=" . $donnees['idTour'] . "");
                 $donneesB = mysql_fetch_array($retourB);
@@ -106,18 +106,18 @@ if ($nbTours == 0) {
                 echo "<h4>" . VAR_LANG_GROUPE . " " . $donnees['idGroupe'] . "</h4>";
             }
             echo "<table class='resultatsTour'>";
-            echo "<tr><th class='center'>";
-            if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
-                ?>
-                Description
-                <?php
-            } else {
-                ?>
-                Journée
-                <?php
+            echo "<tr>";
+            // We don't show the day column for friendly game
+            if ($idCategorie != 8) {
+                echo "<th class='center'>";
+                if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
+                    echo 'Description';
+                } else {
+                    echo 'Journée';
+                }
+                echo '</th>';
             }
-            echo '</th>' .
-                '<th class="right">Club recevant</th>' .
+            echo '<th class="right">Club recevant</th>' .
                 '<th class="center">Score</th>' .
                 '<th>Club visiteur</th>' .
                 '</tr>';
@@ -128,21 +128,24 @@ if ($nbTours == 0) {
                     $matchClass = 'journeeImpair';
                 }
                 echo "<tr class='" . $matchClass . "'>";
-                echo "<td class='center' height='20px'>";
-                if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
-                    $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donneesC['idTypeMatch'];
-                    $retourD = mysql_query($requeteD);
-                    $donneesD = mysql_fetch_array($retourD);
-                    echo $donneesD['type' . $_SESSION['__langue__']];
-                } else {
-                    if ($tableauJournees[$donneesC['journee']] != 'oui') {
-                        $tableauJournees[$donneesC['journee']] = 'oui';
-                        if ($donneesC['journee'] != 0) {
-                            echo $donneesC['journee'];
+                // We don't show the day column for friendly game
+                if ($idCategorie != 8) {
+                    echo "<td class='center' height='20px'>";
+                    if ($idTour == 10000 OR $idTour == 2000 OR $idTour == 3000 OR $idTour == 4000) {
+                        $requeteD = "SELECT * FROM Championnat_Types_Matchs WHERE idTypeMatch=" . $donneesC['idTypeMatch'];
+                        $retourD = mysql_query($requeteD);
+                        $donneesD = mysql_fetch_array($retourD);
+                        echo $donneesD['type' . $_SESSION['__langue__']];
+                    } else {
+                        if ($tableauJournees[$donneesC['journee']] != 'oui') {
+                            $tableauJournees[$donneesC['journee']] = 'oui';
+                            if ($donneesC['journee'] != 0) {
+                                echo $donneesC['journee'];
+                            }
                         }
                     }
+                    echo "</td>";
                 }
-                echo "</td>";
                 echo "<td class='right'>";
                 $requeteD = "SELECT equipe FROM Championnat_Equipes WHERE idEquipe=" . $donneesC['equipeA'];
                 $retourD = mysql_query($requeteD);
