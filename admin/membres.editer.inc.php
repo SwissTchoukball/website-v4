@@ -403,7 +403,7 @@ if ($newMember) {
 
                 $today = date('Y-m-d');
 
-                $canDelete = $today < $deletionPeriodData['delaiSupprimerMembres'] &&
+                $canDelete = $today <= $deletionPeriodData['delaiSupprimerMembres'] &&
                     $deletionPeriodData['datePaiementAnneePassee'] != null;
             }
 
