@@ -71,9 +71,15 @@ if (($transferAccepted === 1 || $transferAccepted === 0) && isset($updatedTransf
 
     // Doing the actual transfer if accepted
     if ($transferAccepted === 1) {
+        $changeMemberStatus = '';
+        if ($targetClubId == 15) {
+            // Setting status to "Membre passif" is target club is "Undefined"
+            $changeMemberStatus = ', idStatus = 4';
+        }
         $updateMemberRequest = "
             UPDATE DBDPersonne
             SET idClub = $targetClubId
+            $changeMemberStatus
             WHERE idDbdPersonne = $transferingPersonId
             LIMIT 1";
 
