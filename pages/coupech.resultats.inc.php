@@ -59,7 +59,7 @@
     				   LEFT OUTER JOIN Lieux l ON l.id = j.idLieu
     				   WHERE j.idEvenement = " . $idEvenement;
         $retourJournee = mysql_query($requeteJournee);
-        $nbJournees = mysql_num_rows($retourJournee);
+        $showDayNumbers = mysql_num_rows($retourJournee) > 1;
         $j = 1;
         // We loop over all the "days" for the current category
         while ($swissCupDay = mysql_fetch_array($retourJournee)) {
@@ -71,7 +71,7 @@
             $j++;
             if (!is_null($swissCupDay['dateDebut']) && !is_null($swissCupDay['idLieu'])) {
                 echo '<div class="descriptionJournee">';
-                if ($nbJournees > 1) {
+                if ($showDayNumbers) {
                     echo 'Journée ' . $swissCupDay['no'] . '<br />';
                 }
                 echo '<strong>' . date_sql2date_joli($swissCupDay['dateDebut'], '',
@@ -105,17 +105,40 @@
         // Initinalisation du compteur pour savoir on est quelle journée
         $idJournee = 0;
 
-        //Récupépation des informations sur tout les matchs de l'édition.
-        $requete = "SELECT eA.idEquipe AS idEquipeA, eB.idEquipe AS idEquipeB, eA.nomEquipe AS nomEquipeA, eB.nomEquipe AS nomEquipeB, m.*, j.*, l.nom AS nomLieu, l.ville,
-    			tm.nom" . $_SESSION["__langue__"] . " AS nomTypeMatch, tf.texte" . $_SESSION["__langue__"] . " AS texteTypeForfait
-			  FROM CoupeCH_Matchs m
-			  LEFT OUTER JOIN CoupeCH_Equipes eA ON m.equipeA = eA.idEquipe
-			  LEFT OUTER JOIN CoupeCH_Equipes eB ON m.equipeB = eB.idEquipe
-			  LEFT OUTER JOIN CoupeCH_Types_Matchs tm ON m.idTypeMatch = tm.idTypeMatch
-			  LEFT OUTER JOIN CoupeCH_Journees j ON m.idJournee = j.idJournee
-			  LEFT OUTER JOIN CoupeCH_Types_Forfaits tf ON m.idTypeForfait = tf.idTypeForfait
-			  LEFT OUTER JOIN Lieux l ON j.idLieu = l.id
-			  WHERE " . $rechercheMatch;
+        // Récupépation des informations sur tout les matchs de l'édition.
+        // We take the matches which are hapenning during an official days, and those who aren't
+        $requete = "
+            SELECT eA.idEquipe AS idEquipeA, eB.idEquipe AS idEquipeB, eA.nomEquipe AS nomEquipeA, eB.nomEquipe AS nomEquipeB,
+            m.idMatch, m.idTypeMatch, m.ordre, j.dateDebut, TIME_FORMAT(m.heureDebut, '%H:%i:%s') AS heureDebut,
+            j.idLieu, m.idTypeForfait, m.autoQualification, m.forfait, m.disqualification,
+            m.scoreA1, m.scoreB1, m.scoreA2, m.scoreB2, m.scoreA3, m.scoreB3, m.scoreA4, m.scoreB4, m.scoreA5, m.scoreB5,
+            j.no AS noJournee,
+            l.nom AS nomLieu, l.ville,
+    		tm.nom{$_SESSION["__langue__"]} AS nomTypeMatch, tf.texte{$_SESSION["__langue__"]} AS texteTypeForfait
+			FROM CoupeCH_Matchs m
+			LEFT OUTER JOIN CoupeCH_Equipes eA ON m.equipeA = eA.idEquipe
+			LEFT OUTER JOIN CoupeCH_Equipes eB ON m.equipeB = eB.idEquipe
+			LEFT OUTER JOIN CoupeCH_Types_Matchs tm ON m.idTypeMatch = tm.idTypeMatch
+			LEFT OUTER JOIN CoupeCH_Journees j ON m.idJournee = j.idJournee
+			LEFT OUTER JOIN CoupeCH_Types_Forfaits tf ON m.idTypeForfait = tf.idTypeForfait
+			LEFT OUTER JOIN Lieux l ON j.idLieu = l.id
+			WHERE m.idEvenement = {$idEvenement} AND m.idJournee IS NOT NULL
+			UNION
+			SELECT eA.idEquipe AS idEquipeA, eB.idEquipe AS idEquipeB, eA.nomEquipe AS nomEquipeA, eB.nomEquipe AS nomEquipeB,
+            m.idMatch, m.idTypeMatch, m.ordre, m.dateDebut, TIME_FORMAT(m.heureDebut, '%H:%i:%s') AS heureDebut,
+            m.idLieu, m.idTypeForfait, m.autoQualification, m.forfait, m.disqualification,
+            m.scoreA1, m.scoreB1, m.scoreA2, m.scoreB2, m.scoreA3, m.scoreB3, m.scoreA4, m.scoreB4, m.scoreA5, m.scoreB5,
+            NULL AS noJournee,
+            l.nom AS nomLieu, l.ville,
+    		tm.nom{$_SESSION["__langue__"]} AS nomTypeMatch, tf.texte{$_SESSION["__langue__"]} AS texteTypeForfait
+			FROM CoupeCH_Matchs m
+			LEFT OUTER JOIN CoupeCH_Equipes eA ON m.equipeA = eA.idEquipe
+			LEFT OUTER JOIN CoupeCH_Equipes eB ON m.equipeB = eB.idEquipe
+			LEFT OUTER JOIN CoupeCH_Types_Matchs tm ON m.idTypeMatch = tm.idTypeMatch
+			LEFT OUTER JOIN CoupeCH_Types_Forfaits tf ON m.idTypeForfait = tf.idTypeForfait
+			LEFT OUTER JOIN Lieux l ON m.idLieu = l.id
+			WHERE m.idEvenement = {$idEvenement} AND m.idJournee IS NULL
+			";
         //echo $requete;
         $retour = mysql_query($requete);
         // We loop over each match for the current category
@@ -160,7 +183,7 @@
             }
 
             // Récupération des informations sur la journée
-            $noJournee = $match['no'];
+            $noJournee = $match['noJournee'];
             if (!is_null($match['nomLieu']) && !is_null($match['ville'])) {
                 $lieu = $match['nomLieu'] . ', ' . $match['ville'];
             } else {
@@ -206,7 +229,9 @@
                 <div class="informationsBoxEquipes"><?php echo VAR_LANG_SURVOL_TABLEAU; ?></div>
             </div>
             <div class="informationsMatch" id="infomatch<?php echo $match['idMatch']; ?>">
-                <div class="informationsBoxJournee"><?php echo VAR_LANG_JOURNEE . " " . $noJournee; ?></div>
+                <div class="informationsBoxJournee">
+                    <?php echo !$showDayNumbers || is_null($noJournee) ? '' : VAR_LANG_JOURNEE . " " . $noJournee; ?>
+                </div>
                 <div class="informationsBoxTypeMatch"><?php echo $typeMatch . $numeroMatch; ?></div>
                 <?php
                 if ($match['autoQualification'] == null) {
@@ -286,9 +311,9 @@
             $requeteExistenceMatchs = "SELECT m.idMatch
 								   FROM CoupeCH_Matchs m, CoupeCH_Types_Matchs tm
 								   WHERE m.idTypeMatch=tm.idTypeMatch
-								   AND (" . $rechercheMatch . ")
-								   AND (tm.meilleurePlaceAtteignable = " . $meilleurePlaceAtteignable . "
-								    	OR meilleurePlaceAtteignable = " . $meilleurePlaceAtteignableBis . ")";
+								   AND m.idEvenement = {$idEvenement}
+								   AND (tm.meilleurePlaceAtteignable = {$meilleurePlaceAtteignable}
+								    	OR meilleurePlaceAtteignable = {$meilleurePlaceAtteignableBis})";
             //echo $requeteExistenceMatchs;
             $retourExistenceMatchs = mysql_query($requeteExistenceMatchs);
 
@@ -330,7 +355,7 @@
                     }
                     $rechercheTypeMatch .= " AND (meilleurePlaceAtteignable = " . $meilleurePlaceAtteignable . " OR meilleurePlaceAtteignable = " . $meilleurePlaceAtteignableBis . ")";
 
-                    $requete = "SELECT * FROM CoupeCH_Matchs m, CoupeCH_Types_Matchs tm WHERE m.idTypeMatch=tm.idTypeMatch AND (" . $rechercheMatch . ") AND (" . $rechercheTypeMatch . ") ORDER BY m.ordre";
+                    $requete = "SELECT * FROM CoupeCH_Matchs m, CoupeCH_Types_Matchs tm WHERE m.idTypeMatch=tm.idTypeMatch AND m.idEvenement = {$idEvenement} AND {$rechercheTypeMatch} ORDER BY m.ordre";
                     //echo $requete;
                     $retour = mysql_query($requete);
                     while ($match = mysql_fetch_array($retour)) {

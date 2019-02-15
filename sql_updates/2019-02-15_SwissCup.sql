@@ -1,0 +1,17 @@
+ALTER TABLE `CoupeCH_Matchs` ADD `idEvenement` INT(11)  NULL  DEFAULT NULL  AFTER `idMatch`;
+ALTER TABLE `CoupeCH_Matchs` ADD `idLieu` INT(11)  NULL  DEFAULT NULL  AFTER `scoreB5`;
+ALTER TABLE `CoupeCH_Matchs` ADD `dateDebut` DATE  NULL  AFTER `autoQualification`;
+ALTER TABLE `CoupeCH_Matchs` ADD `dateFin` DATE  NULL  AFTER `dateDebut`;
+UPDATE CoupeCH_Matchs SET idEvenement = 1 WHERE idJournee = 1 OR idJournee = 2;
+UPDATE CoupeCH_Matchs SET idEvenement = 2 WHERE idJournee = 3 OR idJournee = 4;
+UPDATE CoupeCH_Matchs SET idEvenement = 3 WHERE idJournee = 5 OR idJournee = 6;
+UPDATE CoupeCH_Matchs SET idEvenement = 4 WHERE idJournee = 7 OR idJournee = 8;
+UPDATE CoupeCH_Matchs SET idEvenement = 5 WHERE idJournee = 9 OR idJournee = 10;
+UPDATE CoupeCH_Matchs SET idEvenement = 6 WHERE idJournee = 11 OR idJournee = 12;
+UPDATE CoupeCH_Matchs SET idEvenement = 7 WHERE idJournee = 13 OR idJournee = 14;
+UPDATE CoupeCH_Matchs SET idEvenement = 8 WHERE idJournee = 15 OR idJournee = 16;
+UPDATE CoupeCH_Matchs SET idEvenement = 9 WHERE idJournee = 17 OR idJournee = 18;
+UPDATE CoupeCH_Matchs SET idEvenement = 10 WHERE idJournee = 19 OR idJournee = 20;
+UPDATE CoupeCH_Matchs SET idEvenement = 11 WHERE idJournee = 21 OR idJournee = 22;
+ALTER TABLE `CoupeCH_Matchs` CHANGE `idEvenement` `idEvenement` INT(11)  NOT NULL;
+ALTER TABLE `CoupeCH_Matchs` CHANGE `idJournee` `idJournee` INT(11)  NULL;
