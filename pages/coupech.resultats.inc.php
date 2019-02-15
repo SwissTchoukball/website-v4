@@ -58,6 +58,7 @@
     				   LEFT OUTER JOIN Lieux l ON l.id = j.idLieu
     				   WHERE j.idEvenement = " . $idEvenement;
         $retourJournee = mysql_query($requeteJournee);
+        $nbJournees = mysql_num_rows($retourJournee);
         $j = 1;
         while ($donneesJournee = mysql_fetch_array($retourJournee)) {
             if ($j == 1) {
@@ -68,8 +69,10 @@
             $j++;
             if (!is_null($donneesJournee['dateDebut']) && !is_null($donneesJournee['idLieu'])) {
                 echo '<div class="descriptionJournee">';
-                echo '<strong>Journée ' . $donneesJournee['no'] . '</strong><br />';
-                echo date_sql2date_joli($donneesJournee['dateDebut'], '', $_SESSION['__langue__']) . '<br />';
+                if ($nbJournees > 1) {
+                    echo 'Journée ' . $donneesJournee['no'] . '<br />';
+                }
+                echo '<strong>' . date_sql2date_joli($donneesJournee['dateDebut'], '', $_SESSION['__langue__']) . '</strong><br />';
                 echo '<a href="/lieu/' . $donneesJournee['idLieu'] . '">' . $donneesJournee['nomLieu'] . ', ' . $donneesJournee['ville'] . '</a>';
                 echo '</div>';
             }
