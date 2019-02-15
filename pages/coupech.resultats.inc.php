@@ -18,11 +18,11 @@
                     <?php
                     $requete = "SELECT annee FROM CoupeCH_Evenements ORDER BY annee DESC";
                     $retour = mysql_query($requete);
-                    while ($donnees = mysql_fetch_array($retour)) {
-                        if ($annee == $donnees['annee']) {
-                            echo "<option selected = 'selected' value = '" . $donnees['annee'] . "'>" . $donnees['annee'] . "</option>";
+                    while ($swissCupEvent = mysql_fetch_array($retour)) {
+                        if ($annee == $swissCupEvent['annee']) {
+                            echo "<option selected = 'selected' value = '" . $swissCupEvent['annee'] . "'>" . $swissCupEvent['annee'] . "</option>";
                         } else {
-                            echo "<option value = '" . $donnees['annee'] . "'>" . $donnees['annee'] . "</option>";
+                            echo "<option value = '" . $swissCupEvent['annee'] . "'>" . $swissCupEvent['annee'] . "</option>";
                         }
                     }
                     ?>
@@ -41,13 +41,14 @@
     $requeteAnnee = "SELECT * FROM CoupeCH_Evenements e, CoupeCH_Categories c WHERE c.idCategorie = e.idCategorie AND e.annee = " . $annee;
     $retourAnnee = mysql_query($requeteAnnee);
     $nbCategories = mysql_num_rows($retourAnnee);
-    while ($donneesAnnee = mysql_fetch_array($retourAnnee)) {
-        $idEvenement = $donneesAnnee['idEvenement'];
-        $idCategorie = $donneesAnnee['idCategorie'];
-        $nomCategorie = $donneesAnnee['nom' . $_SESSION['__langue__']];
-        $nbSetsGagnants = $donneesAnnee['nbSetsGagnants'];
-        $nbEquipes = $donneesAnnee['nbEquipes'];
-        $dateTirage = $donneesAnnee['dateTirage'];
+    // We loop over all the Swiss Cup categories for the selected year
+    while ($eventCategory = mysql_fetch_array($retourAnnee)) {
+        $idEvenement = $eventCategory['idEvenement'];
+        $idCategorie = $eventCategory['idCategorie'];
+        $nomCategorie = $eventCategory['nom' . $_SESSION['__langue__']];
+        $nbSetsGagnants = $eventCategory['nbSetsGagnants'];
+        $nbEquipes = $eventCategory['nbEquipes'];
+        $dateTirage = $eventCategory['dateTirage'];
         if ($nbCategories > 1) {
             echo "<h3>" . $nomCategorie . "</h3>";
         }
@@ -60,20 +61,21 @@
         $retourJournee = mysql_query($requeteJournee);
         $nbJournees = mysql_num_rows($retourJournee);
         $j = 1;
-        while ($donneesJournee = mysql_fetch_array($retourJournee)) {
+        // We loop over all the "days" for the current category
+        while ($swissCupDay = mysql_fetch_array($retourJournee)) {
             if ($j == 1) {
-                $rechercheMatch = "m.idJournee = " . $donneesJournee['idJournee'];
+                $rechercheMatch = "m.idJournee = " . $swissCupDay['idJournee'];
             } else {
-                $rechercheMatch .= " OR m.idJournee = " . $donneesJournee['idJournee'];
+                $rechercheMatch .= " OR m.idJournee = " . $swissCupDay['idJournee'];
             }
             $j++;
-            if (!is_null($donneesJournee['dateDebut']) && !is_null($donneesJournee['idLieu'])) {
+            if (!is_null($swissCupDay['dateDebut']) && !is_null($swissCupDay['idLieu'])) {
                 echo '<div class="descriptionJournee">';
                 if ($nbJournees > 1) {
-                    echo 'Journée ' . $donneesJournee['no'] . '<br />';
+                    echo 'Journée ' . $swissCupDay['no'] . '<br />';
                 }
-                echo '<strong>' . date_sql2date_joli($donneesJournee['dateDebut'], '', $_SESSION['__langue__']) . '</strong><br />';
-                echo '<a href="/lieu/' . $donneesJournee['idLieu'] . '">' . $donneesJournee['nomLieu'] . ', ' . $donneesJournee['ville'] . '</a>';
+                echo '<strong>' . date_sql2date_joli($swissCupDay['dateDebut'], '', $_SESSION['__langue__']) . '</strong><br />';
+                echo '<a href="/lieu/' . $swissCupDay['idLieu'] . '">' . $swissCupDay['nomLieu'] . ', ' . $swissCupDay['ville'] . '</a>';
                 echo '</div>';
             }
         }
@@ -115,26 +117,27 @@
 			  WHERE " . $rechercheMatch;
         //echo $requete;
         $retour = mysql_query($requete);
-        while ($donnees = mysql_fetch_array($retour)) {
+        // We loop over each match for the current category
+        while ($match = mysql_fetch_array($retour)) {
 
             // Détermination du nom des équipes.
             $equipeA = VAR_LANG_INCONNU;
             $equipeB = VAR_LANG_INCONNU;
 
-            if ($donnees['autoQualification'] == "B") {
+            if ($match['autoQualification'] == "B") {
                 $equipeA = "-";
             } else {
-                if ($donnees['autoQualification'] == "A") {
+                if ($match['autoQualification'] == "A") {
                     $equipeB = "-";
                 }
             }
 
-            if ($donnees['idEquipeA'] != 0) {
-                $equipeA = $donnees['nomEquipeA'];
+            if ($match['idEquipeA'] != 0) {
+                $equipeA = $match['nomEquipeA'];
             }
 
-            if ($donnees['idEquipeB'] != 0) {
-                $equipeB = $donnees['nomEquipeB'];
+            if ($match['idEquipeB'] != 0) {
+                $equipeB = $match['nomEquipeB'];
             }
 
             // Détermination du score final
@@ -143,9 +146,9 @@
             if ($nbSetsGagnants > 0) { // Jeu en set
                 $maxSets = ($nbSetsGagnants * 2) - 1; //nombre de sets que l'on peut jouer au maximum. ATTENTION!!! La base de données supporte jusqu'à 3 sets gagnants, il faudra rajouter des colonnes si il y a + de sets gagnants.
                 for ($i = 1; $i <= $maxSets; $i++) {
-                    if ($donnees['scoreA' . $i] > $donnees['scoreB' . $i]) {
+                    if ($match['scoreA' . $i] > $match['scoreB' . $i]) {
                         $scoreFinalA++;
-                    } elseif ($donnees['scoreA' . $i] < $donnees['scoreB' . $i]) {
+                    } elseif ($match['scoreA' . $i] < $match['scoreB' . $i]) {
                         $scoreFinalB++;
                     }
                 }
@@ -156,37 +159,37 @@
             }
 
             // Récupération des informations sur la journée
-            $noJournee = $donnees['no'];
-            if (!is_null($donnees['nomLieu']) && !is_null($donnees['ville'])) {
-                $lieu = $donnees['nomLieu'] . ', ' . $donnees['ville'];
+            $noJournee = $match['no'];
+            if (!is_null($match['nomLieu']) && !is_null($match['ville'])) {
+                $lieu = $match['nomLieu'] . ', ' . $match['ville'];
             } else {
                 $lieu = '&nbsp;';
             }
-            $idLieu = $donnees['idLieu'];
+            $idLieu = $match['idLieu'];
 
-            $typeMatch = $donnees['nomTypeMatch'];
-            if ($donnees['idTypeMatch'] == 16 ||
-                $donnees['idTypeMatch'] == 8 ||
-                $donnees['idTypeMatch'] == 4 ||
-                $donnees['idTypeMatch'] == 2 ||
-                $donnees['idTypeMatch'] == 52 ||
-                $donnees['idTypeMatch'] == 94 ||
-                $donnees['idTypeMatch'] == 92 ||
-                $donnees['idTypeMatch'] == 132
+            $typeMatch = $match['nomTypeMatch'];
+            if ($match['idTypeMatch'] == 16 ||
+                $match['idTypeMatch'] == 8 ||
+                $match['idTypeMatch'] == 4 ||
+                $match['idTypeMatch'] == 2 ||
+                $match['idTypeMatch'] == 52 ||
+                $match['idTypeMatch'] == 94 ||
+                $match['idTypeMatch'] == 92 ||
+                $match['idTypeMatch'] == 132
             ) {
-                $numeroMatch = " " . $donnees['ordre'];
+                $numeroMatch = " " . $match['ordre'];
             } else {
                 $numeroMatch = "";
             }
 
-            $dateSQL = $donnees['dateDebut'];
+            $dateSQL = $match['dateDebut'];
 
             if (!is_null($dateSQL)) {
                 //Transformation de la forme de la date et de l'heure
                 $date = date_sql2date($dateSQL); //Date SQL en Date normale
                 $date = preg_replace('#(.+)-(.+)-(.+)#', '$1.$2.$3', $date); //Remplacement des - par des .
-                if ($donnees['heureDebut'] != '00:00:00') {
-                    $heure = substr($donnees['heureDebut'], 0, 5); //Heure sans les secondes
+                if ($match['heureDebut'] != '00:00:00') {
+                    $heure = substr($match['heureDebut'], 0, 5); //Heure sans les secondes
                     $heure = preg_replace('#(.+):(.+)#', '$1h$2', $heure); //Remplacement du : par h
                 } else {
                     $heure = '';
@@ -201,41 +204,41 @@
             <div class="informationsMatch" id="messageInitial">
                 <div class="informationsBoxEquipes"><?php echo VAR_LANG_SURVOL_TABLEAU; ?></div>
             </div>
-            <div class="informationsMatch" id="infomatch<?php echo $donnees['idMatch']; ?>">
+            <div class="informationsMatch" id="infomatch<?php echo $match['idMatch']; ?>">
                 <div class="informationsBoxJournee"><?php echo VAR_LANG_JOURNEE . " " . $noJournee; ?></div>
                 <div class="informationsBoxTypeMatch"><?php echo $typeMatch . $numeroMatch; ?></div>
                 <?php
-                if ($donnees['autoQualification'] == null) {
+                if ($match['autoQualification'] == null) {
                     echo '<div class = "informationsBoxEquipes">' . $equipeA . ' - ' . $equipeB . '</div>';
                 }
 
                 $equipeCasSpecial = '';
-                if ($donnees['autoQualification'] == "A" || $donnees['forfait'] == "A" || $donnees['disqualification'] == "A") {
+                if ($match['autoQualification'] == "A" || $match['forfait'] == "A" || $match['disqualification'] == "A") {
                     $equipeCasSpecial = $equipeA;
-                } elseif ($donnees['autoQualification'] == "B" || $donnees['forfait'] == "B" || $donnees['disqualification'] == "B") {
+                } elseif ($match['autoQualification'] == "B" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
                     $equipeCasSpecial = $equipeB;
                 }
 
                 if ($equipeCasSpecial != '') {
-                    echo '<div class = "informationsBoxScore">' . $equipeCasSpecial . ' ' . $donnees['texteTypeForfait'] . '</div>';
+                    echo '<div class = "informationsBoxScore">' . $equipeCasSpecial . ' ' . $match['texteTypeForfait'] . '</div>';
                 }
 
-                if (in_array($donnees['idTypeForfait'], array(4, 5))) {
-                    echo '<div class = "informationsBoxScore">' . $donnees['texteTypeForfait'] . '</div>';
+                if (in_array($match['idTypeForfait'], array(4, 5))) {
+                    echo '<div class = "informationsBoxScore">' . $match['texteTypeForfait'] . '</div>';
                 }
 
                 // Affichage du score
-                if ($donnees['autoQualification'] == null &&
-                    $donnees['forfait'] == null &&
-                    $donnees['disqualification'] == null &&
+                if ($match['autoQualification'] == null &&
+                    $match['forfait'] == null &&
+                    $match['disqualification'] == null &&
                     !($scoreFinalA == 0 && $scoreFinalB == 0)
                 ) {
                     echo '<div class = "informationsBoxScore">' . VAR_LANG_SCORE_FINAL . ' : ' . $scoreFinalA . ' - ' . $scoreFinalB . '</div>';
 
                     if ($showSetsScore) {
                         for ($i = 1; $i <= $maxSets; $i++) { //boucle pour chaque set
-                            if (!($donnees['scoreA' . $i] == 0 && $donnees['scoreB' . $i] == 0)) { //On n'affiche pas le score si il est nul.
-                                echo '<div class = "informationsBoxSet">Set ' . $i . ' : ' . $donnees['scoreA' . $i] . ' - ' . $donnees['scoreB' . $i] . '</div>';
+                            if (!($match['scoreA' . $i] == 0 && $match['scoreB' . $i] == 0)) { //On n'affiche pas le score si il est nul.
+                                echo '<div class = "informationsBoxSet">Set ' . $i . ' : ' . $match['scoreA' . $i] . ' - ' . $match['scoreB' . $i] . '</div>';
                             }
                         }
                     }
@@ -243,10 +246,10 @@
                 ?>
                 <div class="informationsBoxDate">
                     <?php
-                    if ($donnees['dateDebut'] != '0000-00-00') {
+                    if ($match['dateDebut'] != '0000-00-00') {
                         echo $date;
                     }
-                    if ($donnees['heureDebut'] != "00:00:00") {
+                    if ($match['heureDebut'] != "00:00:00") {
                         echo " à " . $heure;
                     }
                     ?>
@@ -296,7 +299,8 @@
                 $idTypeMatch = $nbEquipes / 2;
 
                 $c = 1;
-                for ($k = $kInitial; $k <= 4; $k++) { // Boucle sur chaque colonne de l'arbre
+                // We loop over each column of the tree
+                for ($k = $kInitial; $k <= 4; $k++) {
 
                     if ($k == 1) {
                         $classColonne = 'colonneHuitiemes';
@@ -328,32 +332,32 @@
                     $requete = "SELECT * FROM CoupeCH_Matchs m, CoupeCH_Types_Matchs tm WHERE m.idTypeMatch=tm.idTypeMatch AND (" . $rechercheMatch . ") AND (" . $rechercheTypeMatch . ") ORDER BY m.ordre";
                     //echo $requete;
                     $retour = mysql_query($requete);
-                    while ($donnees = mysql_fetch_array($retour)) {
-                        $idMatch = $donnees['idMatch'];
+                    while ($match = mysql_fetch_array($retour)) {
+                        $idMatch = $match['idMatch'];
                         // Détermination du nom des équipes.
-                        if ($donnees['equipeA'] == 0) {
-                            if ($donnees['idTypeForfait'] == 3) {
+                        if ($match['equipeA'] == 0) {
+                            if ($match['idTypeForfait'] == 3) {
                                 $equipeA = "-";
                             } else {
                                 $equipeA = "";
                             }
                         } else {
-                            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe = " . $donnees['equipeA'];
+                            $requeteEquipeA = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe = " . $match['equipeA'];
                             $retourEquipeA = mysql_query($requeteEquipeA);
-                            $donneesEquipeA = mysql_fetch_array($retourEquipeA);
-                            $equipeA = $donneesEquipeA['nomEquipe'];
+                            $teamA = mysql_fetch_array($retourEquipeA);
+                            $equipeA = $teamA['nomEquipe'];
                         }
-                        if ($donnees['equipeB'] == 0) {
-                            if ($donnees['idTypeForfait'] == 3) {
+                        if ($match['equipeB'] == 0) {
+                            if ($match['idTypeForfait'] == 3) {
                                 $equipeB = "-";
                             } else {
                                 $equipeB = "";
                             }
                         } else {
-                            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe = " . $donnees['equipeB'];
+                            $requeteEquipeB = "SELECT nomEquipe FROM CoupeCH_Equipes WHERE idEquipe = " . $match['equipeB'];
                             $retourEquipeB = mysql_query($requeteEquipeB);
-                            $donneesEquipeB = mysql_fetch_array($retourEquipeB);
-                            $equipeB = $donneesEquipeB['nomEquipe'];
+                            $teamB = mysql_fetch_array($retourEquipeB);
+                            $equipeB = $teamB['nomEquipe'];
                         }
 
                         // Détermination du core final
@@ -362,9 +366,9 @@
                         if ($nbSetsGagnants > 0) { //Jeu en set
                             $maxSets = ($nbSetsGagnants * 2) - 1; //nombre de sets que l'on peut jouer au maximum. ATTENTION!!! La base de données supporte jusqu'à 3 sets gagnants, il faudra rajouter des colonnes si il y a + de set gagnants.
                             for ($i = 1; $i <= $maxSets; $i++) {
-                                if ($donnees['scoreA' . $i] > $donnees['scoreB' . $i]) {
+                                if ($match['scoreA' . $i] > $match['scoreB' . $i]) {
                                     $scoreFinalA++;
-                                } elseif ($donnees['scoreA' . $i] < $donnees['scoreB' . $i]) {
+                                } elseif ($match['scoreA' . $i] < $match['scoreB' . $i]) {
                                     $scoreFinalB++;
                                 }
                             }
@@ -379,10 +383,10 @@
                         } elseif ($scoreFinalA < $scoreFinalB) {
                             $resultatA = "perdant";
                             $resultatB = "gagnant";
-                        } elseif ($donnees['autoQualification'] == "A" || $donnees['forfait'] == "B" || $donnees['disqualification'] == "B") {
+                        } elseif ($match['autoQualification'] == "A" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
                             $resultatA = "gagnant";
                             $resultatB = "perdant";
-                        } elseif ($donnees['autoQualification'] == "B" || $donnees['forfait'] == "A" || $donnees['disqualification'] == "A") {
+                        } elseif ($match['autoQualification'] == "B" || $match['forfait'] == "A" || $match['disqualification'] == "A") {
                             $resultatA = "perdant";
                             $resultatB = "gagnant";
                         } else {
