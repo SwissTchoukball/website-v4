@@ -74,7 +74,8 @@
                 if ($nbJournees > 1) {
                     echo 'Journée ' . $swissCupDay['no'] . '<br />';
                 }
-                echo '<strong>' . date_sql2date_joli($swissCupDay['dateDebut'], '', $_SESSION['__langue__']) . '</strong><br />';
+                echo '<strong>' . date_sql2date_joli($swissCupDay['dateDebut'], '',
+                        $_SESSION['__langue__']) . '</strong><br />';
                 echo '<a href="/lieu/' . $swissCupDay['idLieu'] . '">' . $swissCupDay['nomLieu'] . ', ' . $swissCupDay['ville'] . '</a>';
                 echo '</div>';
             }
@@ -148,7 +149,7 @@
                 for ($i = 1; $i <= $maxSets; $i++) {
                     if ($match['scoreA' . $i] > $match['scoreB' . $i]) {
                         $scoreFinalA++;
-                    } elseif ($match['scoreA' . $i] < $match['scoreB' . $i]) {
+                    } else if ($match['scoreA' . $i] < $match['scoreB' . $i]) {
                         $scoreFinalB++;
                     }
                 }
@@ -215,7 +216,7 @@
                 $equipeCasSpecial = '';
                 if ($match['autoQualification'] == "A" || $match['forfait'] == "A" || $match['disqualification'] == "A") {
                     $equipeCasSpecial = $equipeA;
-                } elseif ($match['autoQualification'] == "B" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
+                } else if ($match['autoQualification'] == "B" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
                     $equipeCasSpecial = $equipeB;
                 }
 
@@ -268,10 +269,10 @@
             if ($a == 1) {
                 $classArbre = 'arbreCoupeHuitiemes';
                 $nbEquipes = 16;
-            } elseif ($a == 5 || $a == 13) {
+            } else if ($a == 5 || $a == 13) {
                 $classArbre = 'arbreCoupeDemis';
                 $nbEquipes = 4;
-            } elseif ($a == 9) {
+            } else if ($a == 9) {
                 $classArbre = 'arbreCoupeQuarts';
                 $nbEquipes = 8;
             }
@@ -304,11 +305,11 @@
 
                     if ($k == 1) {
                         $classColonne = 'colonneHuitiemes';
-                    } elseif ($k == 2) {
+                    } else if ($k == 2) {
                         $classColonne = 'colonneQuarts';
-                    } elseif ($k == 3) {
+                    } else if ($k == 3) {
                         $classColonne = 'colonneDemis';
-                    } elseif ($k == 4) {
+                    } else if ($k == 4) {
                         $classColonne = 'colonneFinales';
                     }
 
@@ -368,7 +369,7 @@
                             for ($i = 1; $i <= $maxSets; $i++) {
                                 if ($match['scoreA' . $i] > $match['scoreB' . $i]) {
                                     $scoreFinalA++;
-                                } elseif ($match['scoreA' . $i] < $match['scoreB' . $i]) {
+                                } else if ($match['scoreA' . $i] < $match['scoreB' . $i]) {
                                     $scoreFinalB++;
                                 }
                             }
@@ -380,13 +381,13 @@
                         if ($scoreFinalA > $scoreFinalB) {
                             $resultatA = "gagnant";
                             $resultatB = "perdant";
-                        } elseif ($scoreFinalA < $scoreFinalB) {
+                        } else if ($scoreFinalA < $scoreFinalB) {
                             $resultatA = "perdant";
                             $resultatB = "gagnant";
-                        } elseif ($match['autoQualification'] == "A" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
+                        } else if ($match['autoQualification'] == "A" || $match['forfait'] == "B" || $match['disqualification'] == "B") {
                             $resultatA = "gagnant";
                             $resultatB = "perdant";
-                        } elseif ($match['autoQualification'] == "B" || $match['forfait'] == "A" || $match['disqualification'] == "A") {
+                        } else if ($match['autoQualification'] == "B" || $match['forfait'] == "A" || $match['disqualification'] == "A") {
                             $resultatA = "perdant";
                             $resultatB = "gagnant";
                         } else {
