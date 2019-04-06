@@ -12,6 +12,21 @@ while ($donnees = mysql_fetch_array($retour)) {
 
 ?>
 <h2>Résultats suisses</h2>
+<h3 class="alt">Rovello (IT) 2019</h3>
+<table class="classementTourFinal">
+    <tr>
+        <th>Position</th>
+        <th>Équipe</th>
+    </tr>
+    <tr>
+        <td>3ème</td>
+        <td>Val-de-Ruz Flyers</td>
+    </tr>
+    <tr>
+        <td>4ème</td>
+        <td>Lausanne Olympic</td>
+    </tr>
+</table>
 <h3 class="alt">Varsovie (PL) 2018</h3>
 <table class="classementTourFinal">
     <tr>

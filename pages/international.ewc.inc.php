@@ -11,6 +11,21 @@ while ($donnees = mysql_fetch_array($retour)) {
 ?>
 <p style="clear:right;"></p>
 <h2>Résultats suisses</h2>
+<h3 class="alt">Radevormwald (DE) 2019</h3>
+<table class="classementTourFinal">
+    <tr>
+        <th>Position</th>
+        <th>Équipe</th>
+    </tr>
+    <tr>
+        <td>2ème</td>
+        <td>Meyrin Panthers</td>
+    </tr>
+    <tr>
+        <td>4ème</td>
+        <td>La Chaux-de-Fonds Beehives</td>
+    </tr>
+</table>
 <h3 class="alt">Traiskirchen (AUT) 2018</h3>
 <table class="classementTourFinal">
     <tr>
