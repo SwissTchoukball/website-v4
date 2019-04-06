@@ -241,7 +241,16 @@ function afficherArbitre($referee)
 
 function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
 {
-    if ($categoryID == 1 || $categoryID == 2) { // League A or B, the only championship leagues accounted for currently
+    // League A or B, or friendly games are the only championship categories accounted for currently.
+    if ($categoryID == 1 || $categoryID == 2 || $categoryID == 8) {
+        // For league A or B, the category ID is the same as the refereePointsType ID.
+        $refereePointsTypeId = $categoryID;
+        // Friendly game
+        if ($categoryID == 8) {
+            $refereePointsTypeId = 5;
+        }
+        // TODO: move the manual mapping above into the DB.
+
         $pointsComputationQuery = "SELECT a.personId, SUM(tp.pointsArbitrage) AS pointsArbitrageTotal
                                    FROM Arbitres a
                                    LEFT OUTER JOIN DBDPersonne p ON p.idDbdPersonne = a.personId
@@ -254,15 +263,14 @@ function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
 
         if ($referees = mysql_query($pointsComputationQuery)) {
             while ($referee = mysql_fetch_assoc($referees)) {
-                // With only league A and B, we can use the $categoryID as idTypePoints, but with new leagues it won't be possible anymore
                 $removingPreviousPointsRecord = "DELETE FROM Arbitres_Points
                                                  WHERE idArbitre = " . $referee['personId'] . "
                                                  AND idSaison = " . $season . "
-                                                 AND idTypePoints = " . $categoryID;
+                                                 AND idTypePoints = " . $refereePointsTypeId;
                 if (mysql_query($removingPreviousPointsRecord)) {
                     $savePointsQuery = "INSERT INTO Arbitres_Points (idArbitre, idSaison, idTypePoints, points, date, creator, lastEditor)
                                         VALUES (" . $referee['personId'] . ",
-                                                " . $season . ", " . $categoryID . ",
+                                                " . $season . ", " . $refereePointsTypeId . ",
                                                 " . $referee['pointsArbitrageTotal'] . ",
                                                 '" . date('Y-m-d') . "',
                                                 " . $_SESSION['__idUser__'] . ",
