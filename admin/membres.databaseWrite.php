@@ -74,6 +74,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     $mobile = validiteInsertionTextBd($_POST['mobile']);
     $fax = validiteInsertionTextBd($_POST['fax']);
     $email = strtolower(validiteInsertionTextBd($_POST['email']));
+    $emailFederation = strtolower(validiteInsertionTextBd($_POST['emailFederation']));
     $clubID = validiteInsertionTextBd($_POST['clubs']);
     $languageID = validiteInsertionTextBd($_POST['DBDLangue']);
     $sexID = validiteInsertionTextBd($_POST['DBDSexe']);
@@ -147,6 +148,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         `portable`,
                         `fax`,
                         `email`,
+                        `emailFederation`,
                         `dateNaissance`,
                         `raisonSociale`,
                         `idPays`,
@@ -175,6 +177,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         '" . $mobile . "',
                         '" . $fax . "',
                         '" . $email . "',
+                        '" . $emailFederation . "',
                         '" . $birthDate . "',
                         '" . $companyName . "',
                         '" . $countryID . "',
@@ -230,6 +233,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                                         portable='" . $mobile . "',
                                         fax='" . $fax . "',
                                         email='" . $email . "',
+                                        emailFederation='" . $emailFederation . "',
                                         dateNaissance='" . $birthDate . "',
                                         raisonSociale='" . $companyName . "',
                                         idPays='" . $countryID . "',
