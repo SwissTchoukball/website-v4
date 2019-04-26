@@ -595,7 +595,7 @@ if ($canEdit) {
             <label for="email">E-mail</label>
             <input type="text" id="email" id="email" name="email" value="<?php echo $email; ?>"/>
             <?php
-            if ($emailFederation != '') {
+            if ($emailFederation != '' || hasAllMembersManagementAccess()) {
                 ?>
                 <label for="emailFederation">E-mail fédération</label>
                 <?php
