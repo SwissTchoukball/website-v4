@@ -1,6 +1,6 @@
 <?php
-echo "<p class='imageFlottanteDroite'><a href='" . VAR_LANG_DOC_FLYER_PRESENTATION . "'><img src=" . VAR_IMAGE_FLYER_PRESENTATION . " border='0' ></a><br />";
-echo "<a href='" . VAR_LANG_DOC_FLYER_PRESENTATION . "'>" . VAR_LANG_DOC_NOM_LIEN_FLYER_PRESENTATION . "</a></p>";
+echo "<p class='imageFlottanteDroite'><a href='/" . VAR_LANG_DOC_FLYER_PRESENTATION . "'><img src=" . VAR_IMAGE_FLYER_PRESENTATION . " border='0' ></a><br />";
+echo "<a href='/" . VAR_LANG_DOC_FLYER_PRESENTATION . "'>" . VAR_LANG_DOC_NOM_LIEN_FLYER_PRESENTATION . "</a></p>";
 
 $retour = mysql_query("SELECT * FROM TextCorpPage WHERE IdTextCorpPage = '2' ORDER BY paragrapheNum");
 // affiche le texte
