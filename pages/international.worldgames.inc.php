@@ -10,7 +10,7 @@ statInsererPageSurf(__FILE__);
     // affiche le texte
     while ($donnees = mysql_fetch_array($retour)) {
         if ($donnees["paragrapheNum"] == 1) {
-            echo "<a href='http://www.worldgames2009.tw/'><img src='pictures/logo-WG09-large.jpg' style='margin-left: 67px;' alt='logo World Games' /></a>";
+            echo "<a href='http://www.worldgames2009.tw/' class='international__competition-logo'><img src='pictures/logo-WG09-large.jpg' alt='logo World Games' /></a>";
             echo "<a href='http://phototchouk.com/photoTchouk/v/2007/20071108_WarmUP/PremJour/20071109_WarmUpPremJour_MCarnal_0026.jpg.html'><img class='imageFlottanteDroite' src='http://phototchouk.com/photoTchouk/d/32093-1/20071109_WarmUpPremJour_MCarnal_0026.jpg' alt='World Games Warm Up in 2007' width='400px' height='267px' title='Match Taiwan - Italie lors des Warm Up des World Games à Taiwan en 2007'/></a>";
         }
         if ($donnees["paragrapheNum"] == 2) {
