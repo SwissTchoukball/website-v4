@@ -729,7 +729,7 @@ if (!isset($_GET['idMatch'])) {
                                 title="Arbitre C période <?php echo $p; ?>"
                                 id="periodRefereeC[<?php echo $p; ?>]"<?php printf($automaticRefereeSetter, 'C'); ?>>
                             <option value="">Arbitre C</option>
-                            <?php printRefereesOptionsList($referees, $$periodRefereeC[$p]); ?>
+                            <?php printRefereesOptionsList($referees, $periodRefereeC[$p]); ?>
                         </select>
                     </td>
                 </tr>
