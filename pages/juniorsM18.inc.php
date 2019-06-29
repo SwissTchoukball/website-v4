@@ -7,7 +7,7 @@ statInsererPageSurf(__FILE__);
 $afficherNumero = false;
 ?>
 <div class="equipe-es">
-    <div class="photo-equipe-es"><img src="<?php /*echo VAR_IMAGE_PHOTOS_EQUIPES_PATH . "m18.jpg"; */?>">
+    <div class="photo-equipe-es"><img src="<?php echo VAR_IMAGE_PHOTOS_EQUIPES_PATH . "m18.jpg"; ?>">
     </div>
     <div class="legende-photo-equipe-es"></div>
 </div>
