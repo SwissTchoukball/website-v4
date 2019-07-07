@@ -13,6 +13,9 @@ RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} !(tchoukball.ch|localhost)
 RewriteRule (.*) https://tchoukball.ch/$1 [R=301,L]
 
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
 RewriteRule ^document/(.*)$ /documents/$1 [R=301,NC,L]
 
 RewriteRule ^apple-touch-icon(.*)$ /favicons/apple-touch-icon$1 [L]
