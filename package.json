@@ -5,11 +5,13 @@
     "type": "git",
     "url": "https://github.com/swisstchoukball/website"
   },
+  "scripts": {
+    "build:less": "lessc src/less/master.less build/master.css"
+  },
   "devDependencies": {
     "bower": "1.7.9",
     "less": "2.7.1",
     "gulp": "3.9.1",
-    "gulp-less": "3.1.0",
     "gulp-concat": "2.6.0",
     "gulp-uglify": "1.5.4",
     "gulp-sourcemaps": "1.6.0"

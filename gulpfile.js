@@ -1,7 +1,6 @@
 'use strict';
 
 var gulp = require('gulp');
-var less = require('gulp-less');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
@@ -14,9 +13,6 @@ var files = {
         'src/js/angular/**/*Module.js',
         'src/js/angular/**/*Config.js',
         'src/js/angular/**/*.js'
-    ],
-    less: [
-        'src/less/master.less'
     ],
     jsLib: [
         'vendor/bower/angular/angular.min.js',
@@ -50,11 +46,5 @@ gulp.task('jsLib', function() {
         .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(concat('lib.min.js'))
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('build/'));
-});
-
-gulp.task('less', function() {
-    return gulp.src(files.less)
-        .pipe(less())
         .pipe(gulp.dest('build/'));
 });
