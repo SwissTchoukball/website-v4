@@ -1,118 +1,119 @@
 <div class="homepage">
-    <div class="homepage__news">
-        <div class="homepage__news__last">
-            <h1>News</h1>
+    <div class="homepage-block homepage-block__latest-news">
+        <h1>News</h1>
+        <?php
+        $TAILLE_NEWS = 500;
+
+        $lastNewsId = null;
+
+        $requete = mysql_query("SELECT * FROM News ORDER BY premiereNews DESC, Date DESC LIMIT 0,1");
+        while ($donnees = mysql_fetch_array($requete)) {
+            $lastNewsId = $donnees['id'];
+
+            $titre = $donnees['titre' . $_SESSION["__langue__"]];
+            $corps = $donnees['corps' . $_SESSION["__langue__"]];
+            if ($titre == "") {
+                $titre = $donnees['titre' . $VAR_TABLEAU_DES_LANGUES[0][0]];
+            }
+            if ($corps == "") {
+                $corps = $donnees['corps' . $VAR_TABLEAU_DES_LANGUES[0][0]];
+            }
+
+            echo "<h2>" . $titre . "</h2>";
+            echo "<div class='news_body'>";
+            if ($donnees['image'] != 0) { // On affiche l'image si il y en a une.
+                $retourbis = mysql_query("SELECT * FROM Uploads WHERE id='" . $donnees['image'] . "'");
+                $donneesbis = mysql_fetch_array($retourbis);
+                echo "<img src='/uploads/" . $donneesbis['fichier'] . "' alt='" . $donneesbis['titre'] . "' />";
+            }
+            echo truncateHtml(markdown($corps), $TAILLE_NEWS,
+                "... " . "<p class='lireSuiteArticle'><a href='/news/" . $donnees['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>");
+            echo "<p class='news-date'>Posté " . date_sql2date_joli($donnees["date"], "le", "Fr", false) . "</p>";
+            echo "</div>";
+        }
+        ?>
+    </div>
+
+    <div class="homepage-block homepage-block__news-list">
+        <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=51'>" . VAR_LANG_DERNIERES_NEWS . "</a></h2>"; ?>
+        <ul class="homepage__dates-list">
             <?php
-            $TAILLE_NEWS = 500;
-
-            $lastNewsId = null;
-
-            $requete = mysql_query("SELECT * FROM News ORDER BY premiereNews DESC, Date DESC LIMIT 0,1");
+            $requete = mysql_query("SELECT * FROM News WHERE premiereNews != 1 AND id != $lastNewsId ORDER BY date DESC LIMIT 0, 5");
             while ($donnees = mysql_fetch_array($requete)) {
-                $lastNewsId = $donnees['id'];
-
                 $titre = $donnees['titre' . $_SESSION["__langue__"]];
-                $corps = $donnees['corps' . $_SESSION["__langue__"]];
                 if ($titre == "") {
                     $titre = $donnees['titre' . $VAR_TABLEAU_DES_LANGUES[0][0]];
                 }
-                if ($corps == "") {
-                    $corps = $donnees['corps' . $VAR_TABLEAU_DES_LANGUES[0][0]];
-                }
-
-                echo "<h2>" . $titre . "</h2>";
-                echo "<div class='news_body'>";
-                if ($donnees['image'] != 0) { // On affiche l'image si il y en a une.
-                    $retourbis = mysql_query("SELECT * FROM Uploads WHERE id='" . $donnees['image'] . "'");
-                    $donneesbis = mysql_fetch_array($retourbis);
-                    echo "<img src='/uploads/" . $donneesbis['fichier'] . "' alt='" . $donneesbis['titre'] . "' />";
-                }
-                echo truncateHtml(markdown($corps), $TAILLE_NEWS,
-                    "... " . "<p class='lireSuiteArticle'><a href='/news/" . $donnees['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>");
-                echo "<p class='news-date'>Posté " . date_sql2date_joli($donnees["date"], "le", "Fr", false) . "</p>";
-                echo "</div>";
+                echo "<li>";
+                echo "<a href='/news/" . $donnees['id'] . "'>" . $titre . "</a> ";
+                echo "<span class='news-date'>" . date_sql2date_joli($donnees["date"], null,
+                        $_SESSION['__langue__'], false) . "</span>";
+                echo "</li>";
             }
             ?>
-        </div>
-        <div class="homepage__news__rest">
-            <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=51'>" . VAR_LANG_DERNIERES_NEWS . "</a></h2>"; ?>
-            <ul class="homepage__dates-list">
-                <?php
-                $requete = mysql_query("SELECT * FROM News WHERE premiereNews != 1 AND id != $lastNewsId ORDER BY date DESC LIMIT 0, 5");
-                while ($donnees = mysql_fetch_array($requete)) {
-                    $titre = $donnees['titre' . $_SESSION["__langue__"]];
-                    if ($titre == "") {
-                        $titre = $donnees['titre' . $VAR_TABLEAU_DES_LANGUES[0][0]];
-                    }
-                    echo "<li>";
-                    echo "<a href='/news/" . $donnees['id'] . "'>" . $titre . "</a> ";
-                    echo "<span class='news-date'>" . date_sql2date_joli($donnees["date"], null,
-                            $_SESSION['__langue__'], false) . "</span>";
-                    echo "</li>";
-                }
-                ?>
-            </ul>
-        </div>
-        <div class="homepage__news__newsletter">
-            <h2>Newsletter</h2>
-            <script type="text/javascript"
-                    src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
-        </div>
+        </ul>
     </div>
-    <div class="homepage__next-events">
-        <div class="homepage__next-events__others">
-            <?php echo "<h1><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=4'>" . VAR_LANG_PROCHAINS_EVENEMENTS . "</a></h1>"; ?>
-            <ul class="homepage__dates-list">
-                <?php
-                $aujourdhui = date_actuelle();
-                $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
-                while ($donnees = mysql_fetch_array($requete)) {
-                    echo "<li>";
-                    echo "<a href='/evenement/" . $donnees['id'] . "'>" . $donnees["titre"] . "</a><br/>";
-                    echo ucfirst(date_sql2date_joli($donnees["dateDebut"], null, $_SESSION['__langue__']));
-                    if ($donnees['jourEntier'] == 0) {
-                        echo " " . $agenda_a . " " . time_sql2heure($donnees['heureDebut']);
-                    }
-                    echo "</li>";
 
-                }
-                ?>
-            </ul>
-        </div>
-        <div class="homepage__next-events__matches">
-            <?php echo "<h1><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=22'>" . VAR_LANG_PROCHAINS_MATCHS . "</a></h1>"; ?>
-            <ul class="homepage__dates-list">
-                <?php
-                $aujourdhui = date_actuelle();
-                $requete = mysql_query("SELECT * FROM Championnat_Matchs WHERE dateDebut >= '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
-                while ($donnees = mysql_fetch_array($requete)) {
-                    echo "<li>";
-                    echo "<a href='/championnat/match/" . $donnees['idMatch'] . "'>";
-                    $requeteA = "SELECT * FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'];
-                    $retourA = mysql_query($requeteA);
-                    $donneesA = mysql_fetch_array($retourA);
-                    echo $donneesA['equipe'];
-                    echo " - ";
-                    $requeteA = "SELECT * FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'];
-                    $retourA = mysql_query($requeteA);
-                    $donneesA = mysql_fetch_array($retourA);
-                    echo $donneesA['equipe'];
-                    if ($donnees['dateReportDebut'] != '0000-00-00' AND $donnees['dateReportFin'] != '0000-00-00' AND $donnees['heureReportDebut'] != '00:00:00' AND $donnees['heureReportFin'] != '00:00:00') {
-                        echo " : Match reporté au " . date_sql2date($donnees['dateReportDebut']);
-                    }
-                    echo "</a><br/>";
-                    echo ucfirst(date_sql2date_joli($donnees["dateDebut"], null, $_SESSION['__langue__'], true));
-                    if ($donnees['jourEntier'] == 0) {
-                        echo " " . $agenda_a . " " . time_sql2heure($donnees['heureDebut']);
-                    }
-                    echo "</li>";
-
-                }
-                ?>
-            </ul>
-        </div>
+    <div class="homepage-block homepage-block__newsletter">
+        <h2>Newsletter</h2>
+        <script type="text/javascript"
+                src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
     </div>
-    <div class="homepage__championship-ranking">
+
+    <div class="homepage-block homepage-block__next-events">
+        <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=4'>" . VAR_LANG_PROCHAINS_EVENEMENTS . "</a></h2>"; ?>
+        <ul class="homepage__dates-list">
+            <?php
+            $aujourdhui = date_actuelle();
+            $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
+            while ($donnees = mysql_fetch_array($requete)) {
+                echo "<li>";
+                echo "<a href='/evenement/" . $donnees['id'] . "'>" . $donnees["titre"] . "</a><br/>";
+                echo ucfirst(date_sql2date_joli($donnees["dateDebut"], null, $_SESSION['__langue__']));
+                if ($donnees['jourEntier'] == 0) {
+                    echo " " . $agenda_a . " " . time_sql2heure($donnees['heureDebut']);
+                }
+                echo "</li>";
+
+            }
+            ?>
+        </ul>
+    </div>
+
+    <div class="homepage-block homepage-block__next-matches">
+        <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=22'>" . VAR_LANG_PROCHAINS_MATCHS . "</a></h2>"; ?>
+        <ul class="homepage__dates-list">
+            <?php
+            $aujourdhui = date_actuelle();
+            $requete = mysql_query("SELECT * FROM Championnat_Matchs WHERE dateDebut >= '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
+            while ($donnees = mysql_fetch_array($requete)) {
+                echo "<li>";
+                echo "<a href='/championnat/match/" . $donnees['idMatch'] . "'>";
+                $requeteA = "SELECT * FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeA'];
+                $retourA = mysql_query($requeteA);
+                $donneesA = mysql_fetch_array($retourA);
+                echo $donneesA['equipe'];
+                echo " - ";
+                $requeteA = "SELECT * FROM Championnat_Equipes WHERE idEquipe=" . $donnees['equipeB'];
+                $retourA = mysql_query($requeteA);
+                $donneesA = mysql_fetch_array($retourA);
+                echo $donneesA['equipe'];
+                if ($donnees['dateReportDebut'] != '0000-00-00' AND $donnees['dateReportFin'] != '0000-00-00' AND $donnees['heureReportDebut'] != '00:00:00' AND $donnees['heureReportFin'] != '00:00:00') {
+                    echo " : Match reporté au " . date_sql2date($donnees['dateReportDebut']);
+                }
+                echo "</a><br/>";
+                echo ucfirst(date_sql2date_joli($donnees["dateDebut"], null, $_SESSION['__langue__'], true));
+                if ($donnees['jourEntier'] == 0) {
+                    echo " " . $agenda_a . " " . time_sql2heure($donnees['heureDebut']);
+                }
+                echo "</li>";
+
+            }
+            ?>
+        </ul>
+    </div>
+
+    <div class="homepage-block homepage-block__championship-ranking">
 
         <?php
 

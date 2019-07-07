@@ -1,26 +1,17 @@
 .homepage {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
   font-size: 1.1em;
 
-  & > * {
-    flex: 1 1;
-    margin: 0 10px;
-  }
-  & > :first-child {
-    margin-left: 0;
-  }
-  & > :last-child {
-    margin-right: 0;
-  }
-
-  &__news {
-
-    &__last {
+  .homepage-block {
+    &__latest-news {
+      grid-column-start: 1;
+      grid-column-end: 3;
       text-align: justify;
-      padding-right: 4px;
       line-height: 1.5;
-      margin-bottom: 20px;
+      font-size: 1.2em;
 
       h2 {
         text-align: left;
@@ -45,11 +36,12 @@
       }
     }
 
-    &__rest {
-
+    &__news-list {
+      grid-row-start: 2;
     }
 
     &__newsletter {
+      grid-row-start: 3;
       form {
         text-align: center;
 
@@ -78,40 +70,49 @@
         }
       }
     }
+
+    &__next-events {
+      grid-row-start: 2;
+      grid-column-start: 2;
+    }
+
+    &__next-matches {
+      grid-row-start: 2;
+      grid-column-start: 3;
+    }
+
+    &__championship-ranking {
+      grid-row-start: 1;
+      grid-column-start: 3;
+
+      h2 {
+        font-size: 17px;
+      }
+
+      iframe {
+        margin-bottom: 20px;
+      }
+
+      &__table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+
+        &__rank {
+          width: 20px;
+          text-align: right;
+        }
+
+        tr:nth-child(odd) {
+          background-color: @colorTableAltBackground;
+        }
+
+        td {
+          padding: .3em;
+        }
+      }
+    }
   }
-
-  &__championship-ranking {
-    padding-left: 5px;
-    text-align: left;
-
-    h2 {
-      font-size: 17px;
-    }
-    iframe {
-      margin-bottom: 20px;
-    }
-
-    &__table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 15px;
-
-      &__rank {
-        width: 20px;
-        text-align: right;
-      }
-
-      tr:nth-child(odd) {
-        background-color: @colorTableAltBackground;
-      }
-
-      td {
-        padding: .3em;
-      }
-    }
-  }
-
-  &__next-events {}
 
   &__dates-list {
     list-style-type: none;
