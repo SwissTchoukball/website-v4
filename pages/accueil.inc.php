@@ -1,5 +1,13 @@
-<div class="homepage">
-    <div class="homepage-block homepage-block__latest-news">
+<?php
+    $showAnnouncement = false;
+?>
+<div class="homepage <?php echo $showAnnouncement ? 'homepage--with-announcement' : ''; ?>">
+    <div class="homepage-block homepage-block--announcement <?php echo $showAnnouncement ? '' : 'homepage-block--hidden'; ?>">
+        <a href="https://wtc2019.tchoukball.ch" target="_blank" class="homepage-block--announcement__cta">
+            Suivez la Suisse aux championnats du monde !
+        </a>
+    </div>
+    <div class="homepage-block homepage-block--latest-news">
         <h1>News</h1>
         <?php
         $TAILLE_NEWS = 500;
@@ -34,7 +42,7 @@
         ?>
     </div>
 
-    <div class="homepage-block homepage-block__news-list">
+    <div class="homepage-block homepage-block--news-list">
         <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=51'>" . VAR_LANG_DERNIERES_NEWS . "</a></h2>"; ?>
         <ul class="homepage__dates-list">
             <?php
@@ -54,13 +62,13 @@
         </ul>
     </div>
 
-    <div class="homepage-block homepage-block__newsletter">
+    <div class="homepage-block homepage-block--newsletter">
         <h2>Newsletter</h2>
         <script type="text/javascript"
                 src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
     </div>
 
-    <div class="homepage-block homepage-block__next-events">
+    <div class="homepage-block homepage-block--next-events">
         <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=4'>" . VAR_LANG_PROCHAINS_EVENEMENTS . "</a></h2>"; ?>
         <ul class="homepage__dates-list">
             <?php
@@ -80,7 +88,7 @@
         </ul>
     </div>
 
-    <div class="homepage-block homepage-block__next-matches">
+    <div class="homepage-block homepage-block--next-matches">
         <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=22'>" . VAR_LANG_PROCHAINS_MATCHS . "</a></h2>"; ?>
         <ul class="homepage__dates-list">
             <?php
@@ -113,7 +121,7 @@
         </ul>
     </div>
 
-    <div class="homepage-block homepage-block__championship-ranking">
+    <div class="homepage-block homepage-block--championship-ranking">
 
         <?php
 
@@ -327,7 +335,7 @@
                 if ((!isset($noGroupePrecedenteBoucle) OR $noGroupePrecedenteBoucle != $noGroupe) AND $noGroupe != 0) {
                     echo '<h5>' . VAR_LANG_GROUPE . ' ' . $noGroupe . '</h5>';
                 }
-                echo "<table class='homepage-block__championship-ranking__table'>";
+                echo "<table class='homepage-block--championship-ranking__table'>";
 
                 if ($idTour != 10000) { // Pas un tour final
                     $i = 1;
@@ -351,7 +359,7 @@
                         $retourEquipeClassement = mysql_query($requete);
                         $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
                         echo "<tr style='" . $style . "'>";
-                        echo "<td class='homepage-block__championship-ranking__table__rank'>" . afficherRang($idTour,
+                        echo "<td class='homepage-block--championship-ranking__table__rank'>" . afficherRang($idTour,
                                 $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
                                 ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
                                 $nbMatchGagnantPromoReleg,
@@ -409,7 +417,7 @@
                         $equipe = $donneesC['equipe'];
                         echo "<tr style='" . $style . "'>";
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
-                        echo "<td class='homepage-block__championship-ranking__table__rank'>" . afficherRang($idTour,
+                        echo "<td class='homepage-block--championship-ranking__table__rank'>" . afficherRang($idTour,
                                 $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                                 $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $position) . "</td>";
                         echo "<td>" . $equipe . "</td>";
