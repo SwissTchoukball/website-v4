@@ -46,7 +46,8 @@
                     }
                     echo "<li>";
                     echo "<a href='/news/" . $donnees['id'] . "'>" . $titre . "</a> ";
-                    echo "<span class='news-date'>" . date_sql2date_joli($donnees["date"], null, $_SESSION['__langue__'], false) . "</span>";
+                    echo "<span class='news-date'>" . date_sql2date_joli($donnees["date"], null,
+                            $_SESSION['__langue__'], false) . "</span>";
                     echo "</li>";
                 }
                 ?>
@@ -54,8 +55,8 @@
         </div>
         <div class="homepage__news__newsletter">
             <h2>Newsletter</h2>
-                <script type="text/javascript"
-                        src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
+            <script type="text/javascript"
+                    src="https://newsletter.infomaniak.com/external/webform-script/eyJpdiI6Ik1xcUhhbHFBeFwvNzBmaDI1dEpjdUd1T282ZGtHMjJQd0FGK2ZVOTlSN2FvPSIsInZhbHVlIjoic3BuMGFHR2VOMTZBNkdkY205azFyMTJjbHpBb0VNc2diQllyazU5QlVTOD0iLCJtYWMiOiIyYTNhOWEzODM0MzAxMDM5MTU5NjFhMWRjN2Q0OWU3Mzc5MDEzZjU1YWMyYjU3MjU2NTZlM2QwZTkwNjA4YjIzIn0="></script>
         </div>
     </div>
     <div class="homepage__next-events">
@@ -307,7 +308,7 @@
 
                 if (($idTour == 4000 AND $nbMatchGagnantPlayoff > 1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout > 1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg > 1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal > 1)) { // Play-off, Play-out, Promotion/Relegation ou tour final de + de 1 match
                     $typeClassement = 1;
-                } elseif (($idTour == 4000 AND $nbMatchGagnantPlayoff == 1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout == 1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg == 1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal == 1)) { // Play-off, Play-out, Promotion/Relegation, tour final de 1 match
+                } else if (($idTour == 4000 AND $nbMatchGagnantPlayoff == 1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout == 1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg == 1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal == 1)) { // Play-off, Play-out, Promotion/Relegation, tour final de 1 match
                     $typeClassement = 2;
                 } else { //Tour normal
                     $typeClassement = 3;
@@ -349,8 +350,10 @@
                         $retourEquipeClassement = mysql_query($requete);
                         $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
                         echo "<tr style='" . $style . "'>";
-                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
-                                ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']), $nbMatchGagnantPromoReleg,
+                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour,
+                                $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
+                                ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
+                                $nbMatchGagnantPromoReleg,
                                 $nbMatchGagnantTourFinal, $ranking) . "</td>";
                         echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
                         echo "</tr>";
@@ -405,7 +408,8 @@
                         $equipe = $donneesC['equipe'];
                         echo "<tr style='" . $style . "'>";
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
-                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
+                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour,
+                                $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                                 $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $position) . "</td>";
                         echo "<td>" . $equipe . "</td>";
                         echo "</tr>";
