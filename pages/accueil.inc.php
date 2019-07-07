@@ -327,7 +327,7 @@
                 if ((!isset($noGroupePrecedenteBoucle) OR $noGroupePrecedenteBoucle != $noGroupe) AND $noGroupe != 0) {
                     echo '<h5>' . VAR_LANG_GROUPE . ' ' . $noGroupe . '</h5>';
                 }
-                echo "<table class='homepage__championship-ranking__table'>";
+                echo "<table class='homepage-block__championship-ranking__table'>";
 
                 if ($idTour != 10000) { // Pas un tour final
                     $i = 1;
@@ -351,7 +351,7 @@
                         $retourEquipeClassement = mysql_query($requete);
                         $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
                         echo "<tr style='" . $style . "'>";
-                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour,
+                        echo "<td class='homepage-block__championship-ranking__table__rank'>" . afficherRang($idTour,
                                 $typeClassement, $donneesEquipeClassement['nbMatchGagne'],
                                 ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
                                 $nbMatchGagnantPromoReleg,
@@ -409,7 +409,7 @@
                         $equipe = $donneesC['equipe'];
                         echo "<tr style='" . $style . "'>";
                         $nbMatchGagnant = $nbMatchGagnantTourFinal;
-                        echo "<td class='homepage__championship-ranking__table__rank'>" . afficherRang($idTour,
+                        echo "<td class='homepage-block__championship-ranking__table__rank'>" . afficherRang($idTour,
                                 $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
                                 $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $position) . "</td>";
                         echo "<td>" . $equipe . "</td>";
