@@ -90,23 +90,6 @@ if ($_SESSION['__langue__'] != 'En') {
 
 <?php
 include('includes/footer.php');
-
-if ($_SESSION["__userLevel__"] < 100) {
-    echo "<div class='admin-menu-overlay'>";
-    if ($admin) {
-        echo "<a href='" . VAR_HREF_PAGE_PRINCIPALE . "'>" . VAR_LANG_ACCUEIL . "</a>";
-    } else {
-        echo "<a href='/admin'>" . VAR_LANG_ADMINISTRATION . "</a>";
-    }
-    echo "</div>";
-    ?>
-
-    <script type="text/javascript">
-        var stAuthdata = '<?php echo $_SESSION['__authdata__']; ?>';
-    </script>
-
-    <?php
-}
 ?>
 
 <script src="/build/lib.min.js?v=<?php echo $ST_WEBSITE_VERSION; ?>" charset="utf-8"></script>
