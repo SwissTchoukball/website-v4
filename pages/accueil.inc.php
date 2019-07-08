@@ -10,7 +10,7 @@
     <div class="homepage-block homepage-block--latest-news">
         <h1>News</h1>
         <?php
-        $TAILLE_NEWS = 500;
+        $TAILLE_NEWS = 600;
 
         $lastNewsId = null;
 
