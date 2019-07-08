@@ -1,5 +1,5 @@
 <?php
-    $showAnnouncement = false;
+    $showAnnouncement = true;
 ?>
 <div class="homepage <?php echo $showAnnouncement ? 'homepage--with-announcement' : ''; ?>">
     <div class="homepage-block homepage-block--announcement <?php echo $showAnnouncement ? '' : 'homepage-block--hidden'; ?>">
