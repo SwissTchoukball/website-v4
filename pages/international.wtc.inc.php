@@ -13,6 +13,11 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
+        <td>5èmes</td>
+        <td>Salle</td>
+        <td>Nilai, 2019</td>
+    </tr>
+    <tr>
         <td>4èmes</td>
         <td>Salle</td>
         <td>Ferrara, 2011</td>
@@ -61,6 +66,11 @@ statInsererPageSurf(__FILE__);
         <th>Édition</th>
     </tr>
     <tr>
+        <td>4èmes</td>
+        <td>Salle</td>
+        <td>Nilai, 2019</td>
+    </tr>
+    <tr>
         <td>2èmes</td>
         <td>Salle</td>
         <td>Ferrara, 2011</td>
@@ -102,6 +112,11 @@ statInsererPageSurf(__FILE__);
         <th>Position</th>
         <th>Terrain</th>
         <th>Édition</th>
+    </tr>
+    <tr>
+        <td>4èmes</td>
+        <td>Salle</td>
+        <td>Singapour, 2019</td>
     </tr>
     <tr>
         <td>3èmes</td>
