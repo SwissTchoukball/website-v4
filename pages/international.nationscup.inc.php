@@ -1,4 +1,4 @@
-<a href='http://www.geneva-indoors.com/' class='international__competition-logo'><img src='pictures/logo-TGI-NationsCup.png' alt='logo Nations Cup by Tchoukball Geneva Indoors' /></a>
+<a href='http://www.geneva-indoors.com/' class='international__competition-logo'><img src='/pictures/logo-TGI-NationsCup.png' alt='logo Nations Cup by Tchoukball Geneva Indoors' /></a>
 <div><?php echo getSimplePageContent(112); ?></div>
 <h2>Résultats suisses</h2>
 <h3 class="alt">Hommes</h3>
