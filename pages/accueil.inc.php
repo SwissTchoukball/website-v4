@@ -14,7 +14,7 @@
 
         $lastNewsId = null;
 
-        $requete = mysql_query("SELECT * FROM News ORDER BY premiereNews DESC, Date DESC LIMIT 0,1");
+        $requete = mysql_query("SELECT * FROM News WHERE published = 1 ORDER BY premiereNews DESC, Date DESC LIMIT 0,1");
         while ($donnees = mysql_fetch_array($requete)) {
             $lastNewsId = $donnees['id'];
 
@@ -46,7 +46,7 @@
         <?php echo "<h2><a href='" . VAR_HREF_PAGE_PRINCIPALE . "?" . VAR_HREF_LIEN_MENU . "=51'>" . VAR_LANG_DERNIERES_NEWS . "</a></h2>"; ?>
         <ul class="homepage__dates-list">
             <?php
-            $requete = mysql_query("SELECT * FROM News WHERE premiereNews != 1 AND id != $lastNewsId ORDER BY date DESC LIMIT 0, 5");
+            $requete = mysql_query("SELECT * FROM News WHERE published = 1 AND premiereNews != 1 AND id != $lastNewsId ORDER BY date DESC LIMIT 0, 5");
             while ($donnees = mysql_fetch_array($requete)) {
                 $titre = $donnees['titre' . $_SESSION["__langue__"]];
                 if ($titre == "") {

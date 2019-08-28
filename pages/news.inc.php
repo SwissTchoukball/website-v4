@@ -27,7 +27,7 @@ if ($newsIdSelection != "") {
         $limitsup = $NB_NEWS_AFFICHEES;
     }
 
-    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `date` DESC LIMIT $limitinf, $limitsup";
+    $requeteSelect = "SELECT * FROM `News` WHERE published = 1 ORDER BY premiereNews DESC, `date` DESC LIMIT $limitinf, $limitsup";
 }
 //$recordset = mysql_query($requeteSelect) or die ("<H1>mauvaise requete</H1>");
 $recordset = @mysql_query($requeteSelect);
@@ -35,7 +35,7 @@ $recordset = @mysql_query($requeteSelect);
 if ($newsIdSelection != "") {
     if (mysql_num_rows($recordset) == 0) {
         printMessage(VAR_LANG_NEWS_NON_TROUVEE);
-        $requeteSelect = "SELECT * FROM `News` WHERE `date` >= '" . $YaUneAnnee . "' ORDER BY premiereNews DESC, `date` DESC LIMIT 6";
+        $requeteSelect = "SELECT * FROM `News` WHERE `date` >= '" . $YaUneAnnee . "' AND `published` = 1 ORDER BY premiereNews DESC, `date` DESC LIMIT 6";
     } else {
         $record = mysql_fetch_array($recordset);
         $date = date_sql2date($record["date"]);
@@ -109,7 +109,7 @@ if ($newsIdSelection != "") {
 // bas de page
 if ($newsIdSelection == "") {
 
-    $requeteSelect = "SELECT * FROM `News` ORDER BY premiereNews DESC, `date` DESC";
+    $requeteSelect = "SELECT * FROM `News` WHERE published = 1 ORDER BY premiereNews DESC, `date` DESC";
     $recordset = @mysql_query($requeteSelect);
 
     //&& $limitsup>0 && $limitinf>0

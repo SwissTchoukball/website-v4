@@ -29,6 +29,7 @@ $langIdentifier = $lang == 'en' ? $lang : $lang . '-CH';
 $query1 =
     "SELECT id, titreFr, titre$langForDb AS titre, date, corpsFr, corps$langForDb AS corps
      FROM News
+     WHERE published = 1
      ORDER BY date DESC
      LIMIT 0, 10";
 $result1 = mysql_query($query1);
