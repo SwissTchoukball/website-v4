@@ -135,7 +135,7 @@ define("VAR_LANG_TOUT", "Tout");
 //define("VAR_LANG_PRESSE","Presse");
 
 // news
-define("VAR_LANG_NEWS_NON_TROUVEE", "La news demand&eacute;e n'existe pas dans la base de donn&eacute;es.");
+define("VAR_LANG_NEWS_NON_TROUVEE", "News inexistante");
 define("VAR_LANG_NEWS_SUIVANTES", "News suivantes");
 define("VAR_LANG_NEWS_PRECEDENTES", "News pr&eacute;c&eacute;dentes");
 define("VAR_LANG_NEWS_BACK_TO_NEWS", "Revenir aux news");

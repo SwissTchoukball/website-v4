@@ -47,37 +47,42 @@ if ($newsIdSelection != "") {
         if ($corps == "") {
             $corps = $record['corps' . $VAR_TABLEAU_DES_LANGUES[0][0]];
         }
-        echo "<h2>" . formatterTextEnHTML($titre) . "</h2>";
-        echo "<div class='news_body'>";
-        $positionImage = "class='imageFlottanteDroite'";
-        if ($record['image'] != 0) { // On affiche l'image si il y en a une.
-            $retour = mysql_query("SELECT * FROM Uploads WHERE id='" . $record['image'] . "'");
-            $donnees = mysql_fetch_array($retour);
-            echo "<img src='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' alt='" . $donnees['titre'] . "' " . $positionImage . " />";
-        }
-        //afficherAvecEncryptageEmail($corps);
-        echo markdown($corps);
-        echo "<p class='date'>Posté " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
-        echo "</div>";
-        ?>
-        <div class="socialButtons">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
-               data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
-               data-lang="fr">Tweet</a>
-            <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
-            <div class="fb-share-button"
-                 data-href="https://tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
-                 data-layout="button"
-                 data-size="small"
-                 data-mobile-iframe="true">
-                <a class="fb-xfbml-parse-ignore"
-                   target="_blank"
-                   href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
-                    Share
-                </a>
+
+        if (!$record['published'] && !isAdmin()) {
+            printMessage(VAR_LANG_NEWS_NON_TROUVEE);
+        } else {
+            echo "<h2>" . formatterTextEnHTML($titre) . "</h2>";
+            echo "<div class='news_body'>";
+            $positionImage = "class='imageFlottanteDroite'";
+            if ($record['image'] != 0) { // On affiche l'image si il y en a une.
+                $retour = mysql_query("SELECT * FROM Uploads WHERE id='" . $record['image'] . "'");
+                $donnees = mysql_fetch_array($retour);
+                echo "<img src='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' alt='" . $donnees['titre'] . "' " . $positionImage . " />";
+            }
+            //afficherAvecEncryptageEmail($corps);
+            echo markdown($corps);
+            echo "<p class='date'>Posté " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
+            echo "</div>";
+            ?>
+            <div class="socialButtons">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
+                   data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
+                   data-lang="fr">Tweet</a>
+                <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+                <div class="fb-share-button"
+                     data-href="https://tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
+                     data-layout="button"
+                     data-size="small"
+                     data-mobile-iframe="true">
+                    <a class="fb-xfbml-parse-ignore"
+                       target="_blank"
+                       href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
+                        Share
+                    </a>
+                </div>
             </div>
-        </div>
-        <?php
+            <?php
+        }
     }
 
 

@@ -146,7 +146,7 @@ define("VAR_LANG_TOUT", "All");
 //define("VAR_LANG_PRESSE","Press");
 
 // news
-define("VAR_LANG_NEWS_NON_TROUVEE", "The news does exist in the data base.");
+define("VAR_LANG_NEWS_NON_TROUVEE", "News non-existent");
 define("VAR_LANG_NEWS_SUIVANTES", "Next news");
 define("VAR_LANG_NEWS_PRECEDENTES", "Previous news");
 define("VAR_LANG_NEWS_BACK_TO_NEWS", "Back to news");
