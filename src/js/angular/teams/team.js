@@ -86,6 +86,11 @@ angular
                     }
                 };
 
+                $ctrl.canEditTeam = function() {
+                    // Hacky way to hide the form. If the user cannot see the payment date, he cannot add edit the team
+                    return $ctrl.team.feePaymentDate !== undefined;
+                }
+
                 $ctrl._removePlayer = function(playerId) {
                     $ctrl.players = $ctrl.players.filter(function(player) {
                         return player.id !== playerId;

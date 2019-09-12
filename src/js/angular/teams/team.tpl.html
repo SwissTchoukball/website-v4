@@ -38,7 +38,7 @@
             <span class="label label--negative" ng-if="!player.licensePaymentDate">Non-licencié</span>
             <span class="emoji-button"
                   ng-click="$ctrl.removeLicense(player)"
-                  ng-if="!player.licensePaymentDate"
+                  ng-if="!player.licensePaymentDate && $ctrl.canEditTeam()"
                   title="Supprimer le joueur">
                 &#x274C;
             </span>
@@ -47,8 +47,7 @@
     </li>
 </ul>
 
-<!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
-<form ng-if="$ctrl.team.feePaymentDate !== undefined"
+<form ng-if="$ctrl.canEditTeam()"
       name="addPlayersForm"
       class="st-form"
       novalidate>
