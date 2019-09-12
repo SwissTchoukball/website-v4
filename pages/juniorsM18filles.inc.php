@@ -14,14 +14,14 @@ $afficherNumero = false;
 
 <div class="liste-joueur-es">
     <?php
-    include "affichage.team.inc.php";
-
-    $query = getTeamQuery(5);
-    $recordset = mysql_query($query) or die ("<H1>mauvaise requete</H1>");
-
-    while ($record = mysql_fetch_array($recordset)) {
-        afficherPersonneTeam($record, "_port", $afficherNumero);
-    }
+//    include "affichage.team.inc.php";
+//
+//    $query = getTeamQuery(5);
+//    $recordset = mysql_query($query) or die ("<H1>mauvaise requete</H1>");
+//
+//    while ($record = mysql_fetch_array($recordset)) {
+//        afficherPersonneTeam($record, "_port", $afficherNumero);
+//    }
     ?>
 </div>
 
