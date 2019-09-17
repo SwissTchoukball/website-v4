@@ -81,7 +81,8 @@ $querySelectToList = "SELECT p.idDbdPersonne, p.raisonSociale, p.nom, p.prenom, 
 $querySelectToCount = "SELECT COUNT(*) AS totalNbMembers";
 $queryFrom = "FROM DBDStatus st, DBDPays pa, DBDCHTB tup, DBDSexe sx, clubs c, DBDPersonne p
               LEFT OUTER JOIN Arbitres a ON p.idDbdPersonne = a.personId
-              LEFT OUTER JOIN ExpertsJS e ON p.idDbdPersonne = e.idPersonne";
+              LEFT OUTER JOIN ExpertsJS e ON p.idDbdPersonne = e.idPersonne
+              LEFT OUTER JOIN coach_js cjs ON p.idDbdPersonne = cjs.personId";
 $queryWhere = "WHERE " . $queryClubPart . " p.idStatus=st.idStatus AND p.idPays=pa.idPays AND p.idCHTB=tup.idCHTB AND p.idClub=c.nbIdClub AND p.idSexe=sx.idSexe";
 if ($querySearch != "") {
     $queryWhere .= " AND (" . $querySearch . ")";
