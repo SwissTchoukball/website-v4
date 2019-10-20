@@ -756,6 +756,7 @@ function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
     $srcImg = str_replace("è", "e", $srcImg);
     $srcImg = str_replace("ü", "u", $srcImg);
     $srcImg = str_replace("ä", "a", $srcImg);
+    $srcImg = str_replace("ö", "o", $srcImg);
     $srcImg = str_replace("ô", "o", $srcImg);
     $srcImg = str_replace("ë", "e", $srcImg);
     $srcImg = str_replace("ï", "i", $srcImg);
