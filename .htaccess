@@ -56,6 +56,7 @@ RewriteRule ^championnat/resultats/([0-9]{4})-[0-9]{4}/?$  /index.php?lien=23&ye
 RewriteRule ^championnat/formule/?$  /index.php?lien=66 [L]
 RewriteRule ^championnat/match/?$  /index.php?lien=99 [L]
 RewriteRule ^championnat/match/([0-9]+)/?$  /index.php?lien=99&matchID=$1 [L]
+RewriteRule ^competitions-feminines/?$  /index.php?lien=114 [L]
 RewriteRule ^lieu/([0-9]+)/?$  /index.php?lien=94&venueID=$1 [L]
 RewriteRule ^comite/?$  /index.php?lien=14 [L]
 RewriteRule ^comite-executif/?$  /index.php?lien=14 [L]
