@@ -43,7 +43,7 @@ include('championnat.fonctions.tri.classement.E.inc.php');
 include('championnat.fonctions.tri.classement.F.inc.php');
 
 
-$debug = isAdmin(); // isAdmin()
+$debug = false; // isAdmin()
 
 /* Sélection de la politique des points de l'année choisie. */
 
