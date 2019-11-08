@@ -8,19 +8,19 @@ $lastSeason = ($seasonStartYear - 1) . '-' . $seasonStartYear;
 
 $shownSeason = $thisSeason;
 
-$leagueAFormulaImagePath = '/pictures/schema_championnat_%s.svg';
+$leagueAFormulaImagePath = '/pictures/formule_championnat-ligueA-%s.svg';
 if (!is_file($_SERVER['DOCUMENT_ROOT'] . sprintf($leagueAFormulaImagePath, $thisSeason))) {
     $leagueAFormulaImagePath = sprintf($leagueAFormulaImagePath, $lastSeason);
     $shownSeason = $lastSeason;
 }
 
-$leagueBFormulaImagePath = '/pictures/schema_championnat_%s.svg';
+$leagueBFormulaImagePath = '/pictures/formule_championnat-ligueB-%s.svg';
 if (!is_file($_SERVER['DOCUMENT_ROOT'] . sprintf($leagueBFormulaImagePath, $thisSeason))) {
     $leagueBFormulaImagePath = sprintf($leagueBFormulaImagePath, $lastSeason);
     $shownSeason = $lastSeason;
 }
 
-$promotionRelegationFormulaImagePath = '/pictures/schema_championnat_%s.svg';
+$promotionRelegationFormulaImagePath = '/pictures/formule_championnat-promotion-relegation-%s.svg';
 if (!is_file($_SERVER['DOCUMENT_ROOT'] . sprintf($promotionRelegationFormulaImagePath, $thisSeason))) {
     $promotionRelegationFormulaImagePath = sprintf($promotionRelegationFormulaImagePath, $lastSeason);
     $shownSeason = $lastSeason;
