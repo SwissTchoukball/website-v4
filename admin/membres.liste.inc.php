@@ -48,7 +48,7 @@ if (isset($_POST['preselectionID']) && $_POST['preselectionID'] != 0) {
     //Handling status
     $statutID = mysql_real_escape_string($_POST['statutID']);
 
-    if ($statutID === 2) {
+    if ($statutID == 2) {
         $querySearch = 'p.idStatus=3 OR p.idStatus=6';
     } else {
         $querySearch = 'p.idStatus=' . $statutID;
