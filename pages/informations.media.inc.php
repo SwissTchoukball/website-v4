@@ -27,10 +27,9 @@ while ($record = mysql_fetch_array($recordset)) {
         $nbFois++;
     }
     $pressReleaseUrl = PATH_DOCUMENTS . $VAR_TABLEAU_DES_LANGUES[0][0] . "_" . $record["fichier"];
-    $pressReleaseTitle = $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]];
+    $pressReleaseTitle = $record["titre" . $_SESSION["__langue__"]];
     if (is_file($root . PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"])) {
         $pressReleaseUrl = PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"];
-        $pressReleaseTitle = $record["titre" . $_SESSION["__langue__"]];
     }
 
     // We don't add the path prefix if it is already a full path
