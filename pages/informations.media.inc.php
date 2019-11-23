@@ -31,6 +31,11 @@ while ($record = mysql_fetch_array($recordset)) {
         $pressReleaseUrl = PATH_DOCUMENTS . $_SESSION["__langue__"] . "_" . $record["fichier"];
     }
 
+    // We don't add the path prefix if it is already a full path
+    if (preg_match('#^https?:\/\/#i', $record["fichier"]) === 1) {
+        $pressReleaseUrl = $record["fichier"];
+    }
+
     echo "<li>" . date_sql2date($record["date"]) . " : <a href='" . $pressReleaseUrl . "'>" . $record["titre" . $VAR_TABLEAU_DES_LANGUES[0][0]] . "</a></li>";
 }
 echo "</ul>";
