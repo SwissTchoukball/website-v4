@@ -8,7 +8,7 @@
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>3èmes</td>
         <td>2019</td>
     </tr>
     <tr>
@@ -55,7 +55,7 @@
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>2èmes</td>
         <td>2019</td>
     </tr>
     <tr>
@@ -102,7 +102,7 @@
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>1ers</td>
         <td>2019</td>
     </tr>
     <tr>
@@ -145,7 +145,7 @@
         <th>Édition</th>
     </tr>
     <tr>
-        <td></td>
+        <td>7èmes</td>
         <td>2019</td>
     </tr>
     <tr>
