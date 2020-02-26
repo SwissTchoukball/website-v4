@@ -441,7 +441,7 @@
     } // fin de la boucle pour chaque catégorie
     ?>
 
-    <?php showCommissionHead(3); ?>
+    <?php showCommissionHead(21); ?>
 
     <iframe
             src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fcoupesuisse&width=360&colorscheme=light&show_faces=false&stream=false&header=false&height=77"
