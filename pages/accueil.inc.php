@@ -73,7 +73,7 @@
         <ul class="homepage__dates-list">
             <?php
             $aujourdhui = date_actuelle();
-            $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 ORDER BY dateDebut LIMIT 0, 7");
+            $requete = mysql_query("SELECT * FROM Calendrier_Evenements WHERE dateDebut > '" . $aujourdhui . "' AND dateDebut != 0 AND visible = 1 ORDER BY dateDebut LIMIT 0, 7");
             while ($donnees = mysql_fetch_array($requete)) {
                 echo "<li>";
                 echo "<a href='/evenement/" . $donnees['id'] . "'>" . $donnees["titre"] . "</a><br/>";
