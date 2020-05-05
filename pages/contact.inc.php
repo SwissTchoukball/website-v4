@@ -34,8 +34,6 @@ statInsererPageSurf(__FILE__);
     <div class="contenuContact"><?php echo email("coupesuisse@tchoukball.ch"); ?></div>
     <div class="typeContact">Responsable arbitrage</div>
     <div class="contenuContact"><?php echo email("arbitrage@tchoukball.ch"); ?></div>
-    <div class="typeContact">Juniors</div>
-    <div class="contenuContact"><?php echo email("juniors@tchoukball.ch"); ?></div>
     <div class="typeContact">Multimédia</div>
     <div class="contenuContact"><?php echo email("multimedia@tchoukball.ch"); ?></div>
     <div class="typeContact">Rédaction du Tchouk<sup>up</sup></div>
