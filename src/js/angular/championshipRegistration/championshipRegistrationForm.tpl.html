@@ -6,9 +6,8 @@
         Inscription de l'équipe <em>{{$ctrl.teamName}}</em> correctement enregistrée.
     </p>
     <p class="notification">
-        Merci d'effectuer le paiement des <strong>CHF {{$ctrl.getTotalCost()}}</strong>
-        d'ici au <strong>{{$ctrl.edition.paymentDeadline | amDateFormat:'DD.MM.YYYY'}}</strong>
-        sur le CCP de Swiss Tchoukball: <strong>20-8957-2</strong>.
+        Vous recevrez une facture pour régler les  <strong>CHF {{$ctrl.edition.teamRegistrationFee}}</strong> de frais d'inscription
+        et les <strong>CHF {{$ctrl.getTotalLicensesCost()}}</strong> pour valider les licences de vos joueurs.
     </p>
     <button class="button button--primary"
             ng-click="$ctrl.goBack()">
