@@ -24,7 +24,8 @@
 <h3>{{$ctrl.players.length}} joueuses ou joueurs</h3>
 <!-- Hacky way to hide the form. If the user cannot see the payment date, he cannot add players -->
 <p class="notification" ng-if="$ctrl.unpaidLicensesCost > 0">
-    Vous recevrez une facture pour régler les <strong>CHF {{$ctrl.unpaidLicensesCost}}</strong> restant pour valider les licences de vos joueurs.
+    Merci d'effectuer le paiement des <strong>CHF {{$ctrl.unpaidLicensesCost}}</strong> restant
+    sur le CCP de Swiss Tchoukball, <strong>20-8957-2</strong>, pour valider les licences de vos joueurs.
 </p>
 <ul>
     <li ng-repeat="player in $ctrl.players">
