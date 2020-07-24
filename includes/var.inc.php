@@ -1,13 +1,13 @@
 <?php
 
 ///////////////////////////////////////////// variable d'etat.  /////////////////////////////////////////////
-// pour supprimer l'acces a la partie admin... pour pouvoir utilisé la partie admin en temp que super
+// pour supprimer l'acces a la partie admin... pour pouvoir utilisï¿½ la partie admin en temp que super
 // utilisateur (userLevel = 0), il faut avoir un cookie d'auto connexion.
 $ETAT_ADMIN_EN_MAINTENANCE = false;
 // pour tout le site
 $ETAT_EN_MAINTENANCE_TOTALE = false;
 
-// afficher le programme ou afficher un texte pour dire que le championnat n'a pas encore commencé
+// afficher le programme ou afficher un texte pour dire que le championnat n'a pas encore commencï¿½
 $ETAT_PROGRAMME_CHAMPIONNAT_COMMENCE = true;
 
 // possibilite d'inserer/modifier/supprimer directement un evenement championnat.
@@ -15,11 +15,11 @@ $ETAT_ACCESS_EVENT_CHAMPIONNAT = false;
 
 
 
-$ST_WEBSITE_VERSION = "4.7.2";
+$ST_WEBSITE_VERSION = "4.7.3";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// images définies
+// images dï¿½finies
 define("VAR_IMG_DRBRANDT", "/pictures/drbrandt.gif");
 define("VAR_REP_IMAGE_EQUIPE_SUISSE", "/pictures/equipesSuisses/");
 define("VAR_IMAGE_FLYER_PRESENTATION", "/pictures/flyer_presentation_miniature.gif");
