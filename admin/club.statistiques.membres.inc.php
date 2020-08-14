@@ -14,8 +14,6 @@ $statData = mysql_fetch_assoc($statResult);
 $nbActiveMembers = $statData['nbActiveAdultsMembers'] + $statData['nbJuniorMembers'];
 $totalNbMembers = $nbActiveMembers + $statData['nbPassiveMembres'] + $statData['nbSupportMembres'] + $statData['nbVIPMembres'];
 
-echo "<br />";
-
 //Affichage des statistiques uniquement s'il y a des membres actifs.
 if ($nbActiveMembers != 0) {
     echo '<p>';
@@ -42,5 +40,3 @@ if ($nbActiveMembers != 0) {
     echo $statData['nbVIPMembres'] . ' ' . ajouterSSiPluriel("membre", $statData['nbVIPMembres']) . ' VIP';
     echo '</p>';
 }
-
-echo "<br />";

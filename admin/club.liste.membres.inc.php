@@ -1,7 +1,8 @@
 <?php
-if ($_SESSION['__nbIdClub__'] == 15) { //15 = Club indéfini
-    echo "<p class='notification'>Aucun club n'est associé à votre compte.</p>";
+if ($_SESSION['__nbIdClub__'] == 15) { //15 = Club indï¿½fini
+    echo "<p class='notification'>Aucun club n'est associï¿½ ï¿½ votre compte.</p>";
 } else {
+    echo '<p>Pour toute <strong>question sur la gestion des membres</strong>, vous pouvez consulter <a href="https://wiki.tchoukball.ch/Gestion_des_membres_de_club" title="FAQ sur la gestion des membres de club" target="_blank">notre FAQ dÃ©diÃ©e</a>.</p>';
     include('admin/club.statistiques.membres.inc.php');
 
     $showDetails = isset($_GET['details']);
