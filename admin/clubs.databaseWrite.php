@@ -24,15 +24,15 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
     $coachJSID = isValidID($_POST['coachJSID']) ? $_POST['coachJSID'] : 'NULL';
 
     if ($nbError > 0) {
-        // Erreur. Si c'ï¿½tait un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
-        echo "<p class='notification notification--error'>Procï¿½dure annulï¿½e.</p>";
+        // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
+        echo "<p class='notification notification--error'>Procédure annulée.</p>";
         if ($clubID == 0) {
             $showClubCreationForm = true;
         } else {
             $clubToEditID = $clubID;
         }
     } else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) {
-        // Pas d'erreur. On vï¿½rifie bien que c'est une personne autorisï¿½e qui procï¿½de ï¿½ l'ajout ou la modification
+        // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
         $showClubCreationForm = false;
         if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) {
             /**
@@ -94,11 +94,11 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                     " . $_SESSION['__idUser__'] . "
                 )";
             $clubInsertResult = mysql_query($clubInsertRequest);
-            if ($clubInsertResult) { // Tout s'est bien passï¿½.
-                echo "<p class='notification notification--success'>Insertion rï¿½ussie.</p>";
+            if ($clubInsertResult) { // Tout s'est bien passé.
+                echo "<p class='notification notification--success'>Insertion réussie.</p>";
                 $clubToEditID = $newClubID;
             } else {
-                echo "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de donnï¿½es.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de données.</p>";
                 $nbError++;
                 $showClubCreationForm = true;
             }
@@ -136,8 +136,8 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
             $clubUpdateRequest .= " WHERE id=" . $clubID;
             //echo "<p class='notification'>".$clubUpdateRequest."</p>";
             $clubUpdateResult = mysql_query($clubUpdateRequest);
-            if ($clubUpdateResult) { // Tout s'est bien passï¿½.
-                echo "<p class='notification notification--success'>Modification rï¿½ussie.</p>";
+            if ($clubUpdateResult) { // Tout s'est bien passé.
+                echo "<p class='notification notification--success'>Modification réussie.</p>";
 
                 /**
                  * Sending an email to Swiss Tchoukball to inform about the change.
@@ -193,13 +193,13 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                 $destinataireMail = "resp.communication@tchoukball.ch";
                 mail($destinataireMail, "Modification du {$clubNameForEmail}", $body, $from);
             } else {
-                echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de donnï¿½es. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
                 //echo "<p class='notification'>" . mysql_error() . "</p>";
                 $nbError++;
             }
             $clubToEditID = $clubID;
         } else {
-            echo '<p class="notification notification--error">Action indï¿½finie.</p>';
+            echo '<p class="notification notification--error">Action indéfinie.</p>';
             //Ne devrait pas arriver
         }
     } else {

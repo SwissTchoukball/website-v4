@@ -145,7 +145,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
         ?>
     </fieldset>
     <fieldset>
-        <span class="st-form__side-info tooltip">Si aucune adresse correcte n'est indiquï¿½e, celle du ou de la prï¿½sident-e est utilisï¿½e.</span>
+        <span class="st-form__side-info tooltip">Si aucune adresse correcte n'est indiquée, celle du ou de la président-e est utilisée.</span>
         <span id="addressPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
         <label for="address">Adresse</label>
         <textarea id="address"
@@ -186,10 +186,10 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
     </fieldset>
     <fieldset>
         <span class="st-form__side-info tooltip">
-            Si aucune information n'est indiquï¿½e, celles du ou de la prï¿½sident-e sont utilisï¿½es.
+            Si aucune information n'est indiquée, celles du ou de la président-e sont utilisées.
         </span>
         <span id="infoPreview" class="tooltip"><!-- rempli avec du Javascript --></span>
-        <label for="phone">Tï¿½lï¿½phone</label>
+        <label for="phone">Téléphone</label>
         <input type="text"
                id="phone"
                name="phone"
@@ -212,9 +212,9 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
     </fieldset>
     <fieldset>
         <span class="st-form__side-info tooltip">
-            Indiquez nom, prï¿½nom, fonction, tï¿½lï¿½phone et e-mail de chaque membre de votre comitï¿½.
+            Indiquez nom, prénom, fonction, téléphone et e-mail de chaque membre de votre comité.
         </span>
-        <label for="committeeComposition">Comitï¿½</label>
+        <label for="committeeComposition">Comité</label>
         <textarea id="committeeComposition"
                   name="committeeComposition"
                   class="st-form__big-textarea"><?php echo $committeeComposition; ?></textarea>
@@ -232,7 +232,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
     </fieldset>
     <fieldset>
         <span class="st-form__side-info tooltip">
-            Sï¿½parez les adresses e-mails par des virgules.
+            Séparez les adresses e-mails par des virgules.
         </span>
         <label for="emailsOfficialComm">
             E-mails communication officielles<br>
@@ -269,7 +269,7 @@ while($row = mysql_fetch_assoc($JSCoachesResource)) {
 <?php
 if (!$newMember) {
     ?>
-    <p>Derniï¿½re modification le <?php echo date_sql2date($lastEdit); ?> par <?php echo $lastEditorName; ?></p>
+    <p>Dernière modification le <?php echo date_sql2date($lastEdit); ?> par <?php echo $lastEditorName; ?></p>
     <?php
 }
 ?>
@@ -301,7 +301,7 @@ if (!$newMember) {
         if (emailField.val() !== "" && !regEmail.test(emailField.val())) {
             emailField.addClass('.st-invalid');
             if (nbError === 0) emailField.focus();
-            alert("L'adresse e-mail est invalide. Elle peut contenir des caractï¿½res interdits.");
+            alert("L'adresse e-mail est invalide. Elle peut contenir des caractères interdits.");
             nbError++;
         } else {
             emailField.removeClass('.st-invalid');
