@@ -10,7 +10,7 @@
 
     <?php
 
-    $newClub = isset($_GET['new']);
+    $showClubCreationForm = isset($_GET['new']);
     $nbError = 0;
     if (isset($_POST['clubID']) && isValidClubID($_POST['clubID'])) {
         include("admin/clubs.databaseWrite.php");
@@ -22,7 +22,7 @@
     } elseif (isset($_GET['edit']) && isValidClubID($_GET['edit'])) { //édition demandé && id conforme
         $idClubToEdit = $_GET['edit'];
         include("admin/clubs.editer.inc.php");
-    } elseif ($newClub) { //ajout
+    } elseif ($showClubCreationForm) { //ajout
         include("admin/clubs.editer.inc.php");
     } elseif (isset($_GET['delete']) && isValidClubID($_GET['delete'])) { //suppression demandé && id conforme
         include("admin/clubs.supprimer.inc.php");

@@ -23,16 +23,23 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
     $committeeComposition = validiteInsertionTextBd($_POST['committeeComposition']);
     $coachJSID = isValidID($_POST['coachJSID']) ? $_POST['coachJSID'] : 'NULL';
 
-    if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
-        echo "<p class='notification notification--error'>Procédure annulée.</p>";
+    if ($nbError > 0) {
+        // Erreur. Si c'ï¿½tait un ajout, on veut afficher le formulaire pour nouveau club, sinon on affiche le formulaire de modification du club.
+        echo "<p class='notification notification--error'>Procï¿½dure annulï¿½e.</p>";
         if ($clubID == 0) {
-            $newClub = true;
+            $showClubCreationForm = true;
         } else {
             $clubToEditID = $clubID;
         }
-    } else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
-        $newClub = false;
-        if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) { // New club to add, only by admins
+    } else if ($_SESSION['__userLevel__'] <= 0 || ($clubID != 0 && $_SESSION['__idClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) {
+        // Pas d'erreur. On vï¿½rifie bien que c'est une personne autorisï¿½e qui procï¿½de ï¿½ l'ajout ou la modification
+        $showClubCreationForm = false;
+        if ($clubID == 0 && $_POST['postType'] == "newClub" && $_SESSION['__userLevel__'] <= 0) {
+            /**
+             * CREATING A NEW CLUB
+             * Only by admins
+             */
+
             //Getting the auto-increment value for the shitty club double ID
             $autoIncrementQuery = "SELECT `AUTO_INCREMENT`
 									FROM  INFORMATION_SCHEMA.TABLES
@@ -87,16 +94,24 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                     " . $_SESSION['__idUser__'] . "
                 )";
             $clubInsertResult = mysql_query($clubInsertRequest);
-            if ($clubInsertResult) { // Tout s'est bien passé.
-                echo "<p class='notification notification--success'>Insertion réussie.</p>";
+            if ($clubInsertResult) { // Tout s'est bien passï¿½.
+                echo "<p class='notification notification--success'>Insertion rï¿½ussie.</p>";
                 $clubToEditID = $newClubID;
             } else {
-                echo "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de données.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de donnï¿½es.</p>";
                 $nbError++;
-                $newClub = true;
+                $showClubCreationForm = true;
             }
-        } elseif ($_POST['postType'] == "editClub") { // Modification of an already existing club
+        } elseif ($_POST['postType'] == "editClub") {
+            /**
+             * EDITING AN EXISTING CLUB
+             */
 
+            if (!$clubCurrentDataResult = mysql_query("SELECT * FROM clubs WHERE id={$clubID}")) {
+                echo '<p class="notification notification--error">Erreur lors de le récupération des données actuelles du club.<br>' . mysql_error() . '</p>';
+            } else {
+                $clubCurrentData = mysql_fetch_object($clubCurrentDataResult);
+            }
 
             $clubUpdateRequest = "UPDATE clubs
 									SET adresse='" . $address . "',
@@ -121,22 +136,70 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
             $clubUpdateRequest .= " WHERE id=" . $clubID;
             //echo "<p class='notification'>".$clubUpdateRequest."</p>";
             $clubUpdateResult = mysql_query($clubUpdateRequest);
-            if ($clubUpdateResult) { // Tout s'est bien passé.
-                echo "<p class='notification notification--success'>Modification réussie.</p>";
+            if ($clubUpdateResult) { // Tout s'est bien passï¿½.
+                echo "<p class='notification notification--success'>Modification rï¿½ussie.</p>";
+
+                /**
+                 * Sending an email to Swiss Tchoukball to inform about the change.
+                 * For this we need to know what changed.
+                 */
+
+                $clubNameForEmail = $shortName;
+                $clubChanges = "<h4>Modifications</h4><p>";
+                
+                if (isset($clubCurrentData)) {
+                    $clubNameForEmail = $clubCurrentData->club;
+                    if ($clubCurrentData->address != $address || ($clubCurrentData->npa != $npa && $npa != 'NULL') || $clubCurrentData->ville != $city) {
+                        $clubChanges .= "Adresse : " .
+                        "{$clubCurrentData->address}, {$clubCurrentData->npa} {$clubCurrentData->ville}" .
+                        " -> {$address}, {$npa} {$city}<br/>";
+                    }
+                    if ($clubCurrentData->telephone != $phone) {
+                        $clubChanges .= "Numéro de télépone : {$clubCurrentData->telephone} -> {$phone}<br/>";
+                    }
+                    if ($clubCurrentData->email != $email) {
+                        $clubChanges .= "Adresse email publique : {$clubCurrentData->email} -> {$email}<br/>";
+                    }
+                    if ($clubCurrentData->emailsOfficialComm != $emailsOfficialComm) {
+                        $clubChanges .= "Adresses emails pour la communication officielle : {$clubCurrentData->emailsOfficialComm} -> {$emailsOfficialComm}<br/>";
+                    }
+                    if ($clubCurrentData->emailsTournamentComm != $emailsTournamentComm) {
+                        $clubChanges .= "Adresses emails pour les tournois : {$clubCurrentData->emailsTournamentComm} -> {$emailsTournamentComm}<br/>";
+                    }
+                    if ($clubCurrentData->url != $url) {
+                        $clubChanges .= "Site web : {$clubCurrentData->url} -> {$url}<br/>";
+                    }
+                    if ($clubCurrentData->committeeComposition != $_POST['committeeComposition']) {
+                        // Here we compared directly with the query param because `validiteInsertionTextBd` was adding different line breaks
+                        $clubChanges .= "Composition du comité :<br/>" . 
+                        "<em>Avant</em> :<br/>" . nl2br($clubCurrentData->committeeComposition) . "<br/>" .
+                        "<em>Après</em> :<br/>" . nl2br($_POST['committeeComposition']) . "<br/><br/>";
+                    }
+                    if ($clubCurrentData->coachJSID != $coachJSID) {
+                        $clubChanges .= "Le coach J+S a été modifié<br/>";
+                    }
+                } else {
+                    $clubChanges .= "Aucune information n'a pu être récupérée sur l'état du club avant les modifications";
+                }
+                
+                $clubChanges .= "</p>";
+                $body = "<p>Le club <strong>{$clubNameForEmail}</strong> a été modifié.</p>{$clubChanges}";
+
+                // echo $body;
 
                 $from = "From:no-reply@tchoukball.ch\n";
                 $from .= "MIME-version: 1.0\n";
                 $from .= "Content-type: text/html; charset= iso-8859-1\n";
                 $destinataireMail = "resp.communication@tchoukball.ch";
-                mail($destinataireMail, "Modification club", "Les club " . $shortName . " a été modifié.", $from);
+                mail($destinataireMail, "Modification du {$clubNameForEmail}", $body, $from);
             } else {
-                echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de donnï¿½es. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
                 //echo "<p class='notification'>" . mysql_error() . "</p>";
                 $nbError++;
             }
             $clubToEditID = $clubID;
         } else {
-            echo '<p class="notification notification--error">Action indéfinie.</p>';
+            echo '<p class="notification notification--error">Action indï¿½finie.</p>';
             //Ne devrait pas arriver
         }
     } else {
