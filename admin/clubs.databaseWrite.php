@@ -175,7 +175,7 @@ if ($_POST['postType'] == "newClub" || $_POST['postType'] == "editClub") {
                         "<em>Avant</em> :<br/>" . nl2br($clubCurrentData->committeeComposition) . "<br/>" .
                         "<em>Après</em> :<br/>" . nl2br($_POST['committeeComposition']) . "<br/><br/>";
                     }
-                    if ($clubCurrentData->coachJSID != $coachJSID) {
+                    if ($clubCurrentData->coachJSID != $coachJSID && $coachJSID != 'NULL') {
                         $clubChanges .= "Le coach J+S a été modifié<br/>";
                     }
                 } else {
