@@ -30,12 +30,12 @@ function showTableYear($year) {
         <tr>
             <td><?php echo $year - 20; ?></td>
             <td>20</td>
-            <td rowspan="12">Sport des jeunes</td>
+            <td rowspan="10">Sport des jeunes</td>
         </tr>
         <tr>
             <td><?php echo $year - 19; ?></td>
             <td>19</td>
-            <td rowspan="19">Membres juniors</td>
+            <td rowspan="15">Membres juniors</td>
         </tr>
         <tr>
             <td><?php echo $year - 18; ?></td>
@@ -57,25 +57,20 @@ function showTableYear($year) {
         <tr>
             <td><?php echo $year - 14; ?></td>
             <td>14</td>
-            <td rowspan="2">M15</td>
+            <td rowspan="3">M15</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $year - 13; ?></td>
-            <td rowspan="2">13</td>
-        </tr>
-        <tr>
-            <td rowspan="3">Noir</td>
+            <td><?php echo $year - 13; ?></td>
+            <td>13</td>
         </tr>
         <tr>
             <td><?php echo $year - 12; ?></td>
             <td>12</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $year - 11; ?></td>
-            <td rowspan="2">11</td>
-        </tr>
-        <tr>
-            <td rowspan="3">Rouge</td>
+            <td><?php echo $year - 11; ?></td>
+            <td>11</td>
+            <td rowspan="2">M12</td>
         </tr>
         <tr>
             <td><?php echo $year - 10; ?></td>
@@ -83,22 +78,18 @@ function showTableYear($year) {
             <td rowspan="8">Sport des enfants</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $year - 9; ?></td>
-            <td rowspan="2">9</td>
-        </tr>
-        <tr>
-            <td rowspan="3">Bleu</td>
+            <td><?php echo $year - 9; ?></td>
+            <td>9</td>
+            <td rowspan="2">M10</td>
         </tr>
         <tr>
             <td><?php echo $year - 8; ?></td>
             <td>8</td>
         </tr>
         <tr>
-            <td rowspan="2"><?php echo $year - 7; ?></td>
-            <td rowspan="2">7</td>
-        </tr>
-        <tr>
-            <td rowspan="3">Vert</td>
+            <td><?php echo $year - 7; ?></td>
+            <td>7</td>
+            <td rowspan="3">M8</td>
         </tr>
         <tr>
             <td><?php echo $year - 6; ?></td>
