@@ -2,11 +2,11 @@
 
 if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
 
-    // Vérification date de naissance
+    // Vï¿½rification date de naissance
     if (checkdate($_POST['birthDateMonth'], $_POST['birthDateDay'], $_POST['birthDateYear'])) {
         $birthDate = $_POST['birthDateYear'] . "-" . $_POST['birthDateMonth'] . "-" . $_POST['birthDateDay'];
     } elseif ($_POST['birthDateMonth'] == 0 && $_POST['birthDateDay'] == 0 && $_POST['birthDateYear'] == 0 && $_POST['statutID'] != 2) {
-        // Si la date de naissance n'est pas précisé et le statut du membre n'est pas actif/junior, alors c'est ok.
+        // Si la date de naissance n'est pas prï¿½cisï¿½ et le statut du membre n'est pas actif/junior, alors c'est ok.
         $birthDate = 'NULL';
     } else { //avertissement Javascript
         $birthDate = 'NULL';
@@ -14,10 +14,10 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
         $nbError++;
     }
 
-    //Vérification et calcul statut
-    if ($_POST['statutID'] == 1) { // Non spécifié (avertissement Javascript)
+    //Vï¿½rification et calcul statut
+    if ($_POST['statutID'] == 1) { // Non spï¿½cifiï¿½ (avertissement Javascript)
         $statutID = 3; //Membre actif
-        echo "<p class='notification notification--error'>Statut non spécifié.</p>";
+        echo "<p class='notification notification--error'>Statut non spï¿½cifiï¿½.</p>";
         $nbError++;
     } elseif ($_POST['statutID'] != 2) { // Pas membre actif/junior
         $statutID = $_POST['statutID'];
@@ -34,30 +34,30 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     }
 
 
-    //Vérification nom et prénom non vide
+    //Vï¿½rification nom et prï¿½nom non vide
     $noName = false;
     $lastname = validiteInsertionTextBd(titleCase($_POST['lastname']));
     $firstname = validiteInsertionTextBd(titleCase($_POST['firstname']));
     $companyName = validiteInsertionTextBd($_POST['companyName']);
     if ($lastname == "" && $firstname == "" && $companyName != "") {
-        //C'est ok de ne pas mettre de nom et prénom si raison sociale définie.
+        //C'est ok de ne pas mettre de nom et prï¿½nom si raison sociale dï¿½finie.
         $noName = true;
     } elseif ($lastname == "" && $firstname == "" && $companyName == "") {
-        echo "<p class='notification notification--error'>Il faut préciser un nom et un prénom OU une raison sociale.</p>";
+        echo "<p class='notification notification--error'>Il faut prï¿½ciser un nom et un prï¿½nom OU une raison sociale.</p>";
     } elseif ($lastname == "" || $firstname == "") {
-        echo "<p class='notification notification--error'>Nom ou prénom manquant.</p>";
+        echo "<p class='notification notification--error'>Nom ou prï¿½nom manquant.</p>";
         $nbError++;
     }
 
     if (!$noName) {
-        // Vérification existance nom et prénom (+indication club)
-        // TODO: Gérer de multiples personnes avec le même nom.
+        // Vï¿½rification existance nom et prï¿½nom (+indication club)
+        // TODO: Gï¿½rer de multiples personnes avec le mï¿½me nom.
         $duplicateNameRequest = "SELECT club, idDbdPersonne FROM `DBDPersonne`, `clubs` WHERE `nom` LIKE '" . $lastname . "' AND `prenom` LIKE '" . $firstname . "' AND `nbIdClub`=`idClub` AND `idDbdPersonne`!=" . $_POST['memberID'] . " LIMIT 1";
         $duplicateNameResult = mysql_query($duplicateNameRequest);
         if (mysql_num_rows($duplicateNameResult) > 0) {
             $duplicateName = mysql_fetch_assoc($duplicateNameResult);
-            echo "<p class='notification notification--error'>Un &laquo; " . $firstname . " " . $lastname . " &raquo; existe déjà dans la base de données et est membre du club &laquo; " . $duplicateName['club'] . " &raquo;.<br />";
-            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&transfer-request=" . $duplicateName['idDbdPersonne'] . "'>Demandez à le transférer</a>.</p>";
+            echo "<p class='notification notification--error'>Un &laquo; " . $firstname . " " . $lastname . " &raquo; existe dï¿½jï¿½ dans la base de donnï¿½es et est membre du club &laquo; " . $duplicateName['club'] . " &raquo;.<br />";
+            echo "<a href='?menuselection=" . $menuselection . "&smenuselection=" . $smenuselection . "&transfer-request=" . $duplicateName['idDbdPersonne'] . "'>Demandez ï¿½ le transfï¿½rer</a>.</p>";
             $nbError++;
         }
     }
@@ -97,20 +97,20 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
     }
 
 
-    if ($nbError > 0) { // Erreur. Si c'était un ajout, on veut afficher le formulaire pour nouveau membre, sinon on affiche le formulaire de modification du membre.
-        echo "<p class='notification notification--error'>Procédure annulée.</p>";
+    if ($nbError > 0) { // Erreur. Si c'ï¿½tait un ajout, on veut afficher le formulaire pour nouveau membre, sinon on affiche le formulaire de modification du membre.
+        echo "<p class='notification notification--error'>Procï¿½dure annulï¿½e.</p>";
         if ($_POST['memberID'] == 0) {
             $newMember = true;
         } else {
             $idMemberToEdit = $_POST['memberID'];
         }
     } else {
-        if (hasAllMembersManagementAccess() || ($_SESSION['__nbIdClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vérifie bien que c'est une personne autorisée qui procède à l'ajout ou la modification
+        if (hasAllMembersManagementAccess() || ($_SESSION['__nbIdClub__'] == $clubID && $_SESSION['__gestionMembresClub__'])) { // Pas d'erreur. On vï¿½rifie bien que c'est une personne autorisï¿½e qui procï¿½de ï¿½ l'ajout ou la modification
             $newMember = false;
             if ($_POST['memberID'] == 0 && $_POST['postType'] == "newMember") { // New member to add
                 $memberID = $_POST['memberID'];
-                //TODO: Autoriser la modification du nom, prénom raison sociale que si ce n'est pas un bénévole Swiss Tchoukball
-                //TODO: Autoriser la modification des coordonnées que si ce n'est pas un membre du comité.
+                //TODO: Autoriser la modification du nom, prï¿½nom raison sociale que si ce n'est pas un bï¿½nï¿½vole Swiss Tchoukball
+                //TODO: Autoriser la modification des coordonnï¿½es que si ce n'est pas un membre du comitï¿½.
 
                 if (hasAllMembersManagementAccess()) {
                     $sensitiveAttributesForQuery =
@@ -187,8 +187,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         $sensitiveValuesForQuery
                      )";
                 $memberInsertResult = mysql_query($memberInsertRequest);
-                if ($memberInsertResult) { // Tout s'est bien passé.
-                    printSuccessMessage("Insertion de la personne réussie.");
+                if ($memberInsertResult) { // Tout s'est bien passï¿½.
+                    printSuccessMessage("Insertion de la personne rï¿½ussie.");
                     $idMemberToEdit = mysql_insert_id();
 
                     // Insertion des informations d'arbitrage
@@ -203,8 +203,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                     }
 
                 } else {
-                    $errorMessage = "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de données.";
-                    $errorMessage .= "<br/>Requête: " . $memberInsertRequest;
+                    $errorMessage = "<p class='notification notification--error'>Erreur lors de l'insertion dans la base de donnï¿½es.";
+                    $errorMessage .= "<br/>Requï¿½te: " . $memberInsertRequest;
                     $errorMessage .= "<br/>Message: " . mysql_error();
                     printErrorMessage($errorMessage);
                     $nbError++;
@@ -249,8 +249,8 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 $memberUpdateRequest .= " WHERE idDbdPersonne=" . $memberID;
                 //echo "<p class='notification'>".$memberUpdateRequest."</p>";
                 $memberUpdateResult = mysql_query($memberUpdateRequest);
-                if ($memberUpdateResult) { // Tout s'est bien passé.
-                    echo "<p class='notification notification--success'>Modification réussie.</p>";
+                if ($memberUpdateResult) { // Tout s'est bien passï¿½.
+                    echo "<p class='notification notification--success'>Modification rï¿½ussie.</p>";
 
                     // Insertion des informations d'arbitrage
                     if (hasRefereeManagementAccess()) {
@@ -276,7 +276,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                         }
                     }
                 } else {
-                    echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de données. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
+                    echo "<p class='notification notification--error'>Erreur lors de la modification dans la base de donnï¿½es. Contactez le <a href='mailto:webmaster@tchoukball.ch'>webmaster</a>.</p>";
                     if ($_SESSION['__userLevel__'] == 0) {
                         printMessage(mysql_error());
                         printMessage($memberUpdateRequest);
@@ -285,7 +285,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
                 }
                 $idMemberToEdit = $_POST['memberID'];
             } else {
-                echo '<p class="notification notification--error">Action indéfinie.</p>';
+                echo '<p class="notification notification--error">Action indï¿½finie.</p>';
                 //Ne devrait pas arriver
             }
         } else {
@@ -293,7 +293,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
         }
     }
 } elseif ($_POST['postType'] == "transfer-request") {
-    //On ne vérifie pas que la personne qui fait la demande soit du club entrant ou sortant. Ce n'est qu'une demande.
+    //On ne vï¿½rifie pas que la personne qui fait la demande soit du club entrant ou sortant. Ce n'est qu'une demande.
     if (isValidClubID($_POST['currentClubID']) && isValidClubID($_POST['clubs'])) {
         $transferRequestQuery = "INSERT INTO `DBDRequetesChangementClub` (`userID`, `idDbdPersonne`, `from_clubID`, `to_clubID`, `datetime`)
                                  VALUES (" . $_SESSION['__idUser__'] . ", " . $_POST['memberID'] . ", " . $_POST['currentClubID'] . ", " . $_POST['clubs'] . ", '" . date('Y-m-d H:i:s') . "')";
@@ -305,15 +305,15 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $messageMail = $_SESSION['__prenom__'] . " " . $_SESSION['__nom__'] . " demande un transfert pour <strong>" . htmlentities($_POST['memberName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong>.<br /><br />";
             $messageMail .= "Club d'origine : <strong>" . htmlentities($_POST['currentClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
             $messageMail .= "Nouveau club : <strong>" . htmlentities($_POST['newClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
-            $messageMail .= "Gestion des transferts : https://tchoukball.ch/admin.php?menuselection=55&smenuselection=30";
+            $messageMail .= "<a href='https://tchoukball.ch/admin.php?menuselection=55&smenuselection=30'>Gestion des transferts</a>";
             $from = "From:no-reply@tchoukball.ch\n";
             $from .= "MIME-version: 1.0\n";
             $from .= "Content-type: text/html; charset= iso-8859-1\n";
             if (mail($destinataireMail, $objectMail, $messageMail, $from)) {
-                echo '<p class="notification notification--success">Demande de transfert envoyée. Elle sera traitée prochainement et vous serez tenu informé de son exécution.</p>';
+                echo '<p class="notification notification--success">Demande de transfert envoyï¿½e. Elle sera traitï¿½e prochainement et vous serez tenu informï¿½ de son exï¿½cution.</p>';
                 //echo '<p class="notification">mail('.$destinataireMail.', '.$objectMail.', '.$messageMail.', '.$from.')</p>';
             } else {
-                echo '<p class="notification notification--error">La demande de transfert a été enregistrée, mais dû à une erreur, le webmaster n\'a pas automatiquement été averti, veuillez <a href="mailto:webmaster@tchoukball.ch">le contacter</a> s\'il vous plaît.</p>';
+                echo '<p class="notification notification--error">La demande de transfert a ï¿½tï¿½ enregistrï¿½e, mais dï¿½ ï¿½ une erreur, le webmaster n\'a pas automatiquement ï¿½tï¿½ averti, veuillez <a href="mailto:webmaster@tchoukball.ch">le contacter</a> s\'il vous plaï¿½t.</p>';
             }
         } else {
             echo '<p class="error">Erreur lors de l\'enregistrement de la demande de transfert.<br />' . mysql_error() . '</p>';
