@@ -711,6 +711,17 @@ function getSimplePageContent($menuId) {
     return Markdown($pageData['body']);
 }
 
+function getSimplePageFunctionId($menuId) {
+    $query = "SELECT p.functionId
+        FROM IdTextCorpPage p
+        WHERE p.menuId = $menuId";
+    $resource = mysql_query($query);
+
+    $pageData = mysql_fetch_assoc($resource);
+
+    return $pageData['functionId'];
+}
+
 function showPagination($currentPage, $totalNumberOfPages, $href, $pointerName = "page")
 {
     if ($currentPage < 3) {
