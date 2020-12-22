@@ -86,7 +86,7 @@ function encryptageEmail($text)
 
         // affiche le javascript pour le mailto
         codage($baliseTotaleA);
-        // tronquage du text affichï¿½
+        // tronquage du text affiché
         $text = substr($text, $positionFinTagA, strlen($text) - $positionFinTagA);
         // rehcerche d'un mailto dans la suite du text
         $debut = strpos($text, $chaineATrouver);
@@ -118,7 +118,7 @@ function showPerson($person, $hidePicture = false, $hideLanguages = false)
         }
     }
 
-    // Affichage des coordonnï¿½es
+    // Affichage des coordonnées
     echo '<span class="person-panel__name">' . stripslashes($person["prenom"]) . "&nbsp;" . stripslashes($person["nom"]) . "</span><br />";
 
     if ($person["emailFederation"] != '') {
@@ -134,7 +134,7 @@ function showPerson($person, $hidePicture = false, $hideLanguages = false)
     echo $person['telPrive'] != '' ? "<a class='phone side-icon-left' href='tel:" . formatPhoneNumber($person["telPrive"]) . "'>" . $person["telPrive"] . "</a><br />" : '';
     echo $person['portable'] != '' ? "<a class='mobile side-icon-left' href='tel:" . formatPhoneNumber($person["portable"]) . "'>" . $person["portable"] . "</a><br />" : '';
 
-    // Affichage des langues parlï¿½es
+    // Affichage des langues parlées
     if (!$hideLanguages) {
         $spokenLanguagesQuery = "SELECT l.idLangue, l.descriptionLangue" . $_SESSION['__langue__'] . " as descriptionLangue
                                  FROM DBDLangue l, RegroupementLangueParle rlp
@@ -173,7 +173,7 @@ function getReferees($orderByLevel = false)
     if (!$referessData = mysql_query($refereesQuery)) {
         $errorReferee = array();
         $errorReferee['levelId'] = 0;
-        $errorReferee['nom'] = 'Erreur lors de la rï¿½cupï¿½ration des arbitres';
+        $errorReferee['nom'] = 'Erreur lors de la récupération des arbitres';
         $referees[0] = $errorReferee;
     } else {
         while ($referee = mysql_fetch_assoc($referessData)) {
@@ -276,21 +276,21 @@ function computeAndSaveRefereeChampionshipPoints($season, $categoryID)
                                                 " . $_SESSION['__idUser__'] . ",
                                                 " . $_SESSION['__idUser__'] . ")";
                     if (!mysql_query($savePointsQuery)) {
-                        printErrorMessage('Problï¿½me lors de l\'ajout des nouvelles valeurs.');
+                        printErrorMessage('Problème lors de l\'ajout des nouvelles valeurs.');
                         die();
                     }
                 } else {
-                    printErrorMessage('Problï¿½me lors de la suppression des anciennes valeurs.');
+                    printErrorMessage('Problème lors de la suppression des anciennes valeurs.');
                     die();
                 }
             }
             // If we get here, it means everything was done without problems
-            printSuccessMessage('Les points d\'arbitres ont ï¿½tï¿½ correctement comptabilisï¿½s.');
+            printSuccessMessage('Les points d\'arbitres ont été correctement comptabilisés.');
         } else {
-            printErrorMessage('Problï¿½me lors du calcul des points d\'arbitre.');
+            printErrorMessage('Problème lors du calcul des points d\'arbitre.');
         }
     } else {
-        printMessage('Les points d\'arbitres ne sont pas comptï¿½s pour la catï¿½gorie souhaitï¿½e.');
+        printMessage('Les points d\'arbitres ne sont pas comptés pour la catégorie souhaitée.');
     }
 }
 
@@ -320,30 +320,30 @@ function validiteInsertionTextAvecTagHTML($text)
 function formatterText($text)
 {
 
-    $text = str_replace('ï¿½', '&agrave;', $text);
-    $text = str_replace('ï¿½', '&eacute;', $text);
-    $text = str_replace('ï¿½', '&egrave;', $text);
-    $text = str_replace('ï¿½', '&uuml;', $text);
-    $text = str_replace('ï¿½', '&ouml;', $text);
-    $text = str_replace('ï¿½', '&auml;', $text);
-    $text = str_replace('ï¿½', '&ccedil;', $text);
+    $text = str_replace('à', '&agrave;', $text);
+    $text = str_replace('é', '&eacute;', $text);
+    $text = str_replace('è', '&egrave;', $text);
+    $text = str_replace('ü', '&uuml;', $text);
+    $text = str_replace('ö', '&ouml;', $text);
+    $text = str_replace('ä', '&auml;', $text);
+    $text = str_replace('ç', '&ccedil;', $text);
     $text = htmlspecialchars($text, ENT_QUOTES, 'ISO-8859-1');
 
     $text = nl2br($text);
     return str_replace('"', '\"', $text);
 }
 
-// les representations html des carctï¿½re speciaux seront a nouveau direct
+// les representations html des carctère speciaux seront a nouveau direct
 function nomsNormauxSansCodageHTML($text)
 {
 
-    $text = str_replace('&agrave;', 'ï¿½', $text);
-    $text = str_replace('&eacute;', 'ï¿½', $text);
-    $text = str_replace('&egrave;', 'ï¿½', $text);
-    $text = str_replace('&uuml;', 'ï¿½', $text);
-    $text = str_replace('&ouml;', 'ï¿½', $text);
-    $text = str_replace('&auml;', 'ï¿½', $text);
-    $text = str_replace('&ccedil;', 'ï¿½', $text);
+    $text = str_replace('&agrave;', 'à', $text);
+    $text = str_replace('&eacute;', 'é', $text);
+    $text = str_replace('&egrave;', 'è', $text);
+    $text = str_replace('&uuml;', 'ü', $text);
+    $text = str_replace('&ouml;', 'ö', $text);
+    $text = str_replace('&auml;', 'ä', $text);
+    $text = str_replace('&ccedil;', 'ç', $text);
 
     return $text;
 }
@@ -354,13 +354,13 @@ function nomsNormauxSansCodageHTML($text)
 function formatterTextEnHTML($text)
 {
 
-    $text = str_replace('ï¿½', '&agrave;', $text);
-    $text = str_replace('ï¿½', '&eacute;', $text);
-    $text = str_replace('ï¿½', '&egrave;', $text);
-    $text = str_replace('ï¿½', '&uuml;', $text);
-    $text = str_replace('ï¿½', '&ouml;', $text);
-    $text = str_replace('ï¿½', '&auml;', $text);
-    $text = str_replace('ï¿½', '&ccedil;', $text);
+    $text = str_replace('à', '&agrave;', $text);
+    $text = str_replace('é', '&eacute;', $text);
+    $text = str_replace('è', '&egrave;', $text);
+    $text = str_replace('ü', '&uuml;', $text);
+    $text = str_replace('ö', '&ouml;', $text);
+    $text = str_replace('ä', '&auml;', $text);
+    $text = str_replace('ç', '&ccedil;', $text);
 
     $text = nl2br($text);
     return $text;
@@ -444,7 +444,7 @@ function afficherdropDownListeDesactivable(
 function printManualRefereePointsTypesSelect($selectedValue, $selectName)
 {
     $query = "SELECT id, typesPoints" . $_SESSION["__langue__"] . " AS nom FROM Arbitres_Types_Points WHERE ajoutManuel=1 ORDER BY nom";
-    $resultOptions = mysql_query($query) or die (printErrorMessage('Problï¿½me lors de la rï¿½cupï¿½ration des types de points'));
+    $resultOptions = mysql_query($query) or die (printErrorMessage('Problème lors de la récupération des types de points'));
 
     echo "<select id='" . $selectName . "' name='" . $selectName . "'>";
 
@@ -511,7 +511,7 @@ function afficherListeClubs($selectedClubId, $typeId)
          FROM clubs c, clubs_status cs
          WHERE c.statusId = cs.id
          ORDER BY statusId, club";
-    $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requï¿½te pour l'affichage de la liste des clubs</h4>");
+    $reponse = mysql_query($requeteListeClubs) or die("<h4>Erreur : Mauvaise requête pour l'affichage de la liste des clubs</h4>");
     echo "<select name='clubs'>";
     $previousClubStatusId = 0;
     while ($club = mysql_fetch_assoc($reponse)) {
@@ -551,7 +551,7 @@ function showHead($objectID, $table, $objectNameAttr)
         echo '<h2>' . VAR_LANG_RESPONSABLE . ' ' . $person['objectName'] . '</h2>';
         showPerson($person);
     } else {
-        printErrorMessage("Erreur lors de la rï¿½cupï¿½ration du responsable");
+        printErrorMessage("Erreur lors de la récupération du responsable");
     }
 }
 
@@ -632,7 +632,7 @@ function showTeamCoaches($teamId)
             showPerson($coach, false, true);
         }
     } else {
-        printErrorMessage("Erreur lors de la rï¿½cupï¿½ration des responsables");
+        printErrorMessage("Erreur lors de la récupération des responsables");
     }
 }
 
@@ -670,7 +670,7 @@ function showCommission($commission)
         }
         echo "</ul>";
     } else {
-        echo "<br />"; //Pour que les langues s'affichent dans la premiï¿½re colonne
+        echo "<br />"; //Pour que les langues s'affichent dans la première colonne
     }
     echo "</div>";
     echo "</div>";
@@ -696,7 +696,7 @@ function showFunctionPerson($functionID)
             showPerson($person);
         }
     } else {
-        printErrorMessage("Erreur lors de la rï¿½cupï¿½ration de la personne");
+        printErrorMessage("Erreur lors de la récupération de la personne");
     }
 }
 
@@ -709,17 +709,6 @@ function getSimplePageContent($menuId) {
     $pageData = mysql_fetch_assoc($resource);
 
     return Markdown($pageData['body']);
-}
-
-function getSimplePageFunctionId($menuId) {
-    $query = "SELECT p.functionId
-        FROM IdTextCorpPage p
-        WHERE p.menuId = $menuId";
-    $resource = mysql_query($query);
-
-    $pageData = mysql_fetch_assoc($resource);
-
-    return $pageData['functionId'];
 }
 
 function showPagination($currentPage, $totalNumberOfPages, $href, $pointerName = "page")
@@ -763,16 +752,16 @@ function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
     } else {
         $srcImg = VAR_REP_IMAGE_EQUIPE_SUISSE . $prenom . "_" . $nom . $extensionPhotos . "." . $extensionFileName;
     }
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "u", $srcImg);
-    $srcImg = str_replace("ï¿½", "a", $srcImg);
-    $srcImg = str_replace("ï¿½", "o", $srcImg);
-    $srcImg = str_replace("ï¿½", "o", $srcImg);
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "i", $srcImg);
-    $srcImg = str_replace("ï¿½", "n", $srcImg);
-    $srcImg = str_replace("ï¿½", "c", $srcImg);
+    $srcImg = str_replace("é", "e", $srcImg);
+    $srcImg = str_replace("è", "e", $srcImg);
+    $srcImg = str_replace("ü", "u", $srcImg);
+    $srcImg = str_replace("ä", "a", $srcImg);
+    $srcImg = str_replace("ö", "o", $srcImg);
+    $srcImg = str_replace("ô", "o", $srcImg);
+    $srcImg = str_replace("ë", "e", $srcImg);
+    $srcImg = str_replace("ï", "i", $srcImg);
+    $srcImg = str_replace("ñ", "n", $srcImg);
+    $srcImg = str_replace("ç", "c", $srcImg);
     $srcImg = str_replace(" ", "", $srcImg);
     $srcImg = str_replace("'", "", $srcImg);
     return $srcImg;
@@ -780,14 +769,14 @@ function nomPhotoValide($nom, $prenom, $extensionPhotos, $extensionFileName)
 
 function nomFichierPhotoValide($srcImg)
 {
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "u", $srcImg);
-    $srcImg = str_replace("ï¿½", "a", $srcImg);
-    $srcImg = str_replace("ï¿½", "o", $srcImg);
-    $srcImg = str_replace("ï¿½", "e", $srcImg);
-    $srcImg = str_replace("ï¿½", "n", $srcImg);
-    $srcImg = str_replace("ï¿½", "c", $srcImg);
+    $srcImg = str_replace("é", "e", $srcImg);
+    $srcImg = str_replace("è", "e", $srcImg);
+    $srcImg = str_replace("ü", "u", $srcImg);
+    $srcImg = str_replace("ä", "a", $srcImg);
+    $srcImg = str_replace("ô", "o", $srcImg);
+    $srcImg = str_replace("ë", "e", $srcImg);
+    $srcImg = str_replace("ñ", "n", $srcImg);
+    $srcImg = str_replace("ç", "c", $srcImg);
     $srcImg = str_replace(" ", "", $srcImg);
     $srcImg = str_replace("'", "", $srcImg);
     return strtolower($srcImg);
@@ -795,16 +784,16 @@ function nomFichierPhotoValide($srcImg)
 
 function rewrite($label)
 {
-    /* Expression rï¿½guliï¿½re permettant le changement des caractï¿½res accentuï¿½s en
-    * caractï¿½res non accentuï¿½s.
+    /* Expression régulière permettant le changement des caractères accentués en
+    * caractères non accentués.
     */
     $search = array(
-        '@[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]@i',
-        '@[ï¿½ï¿½ï¿½ï¿½ï¿½]@i',
-        '@[ï¿½ï¿½ï¿½ï¿½]@i',
-        '@[ï¿½ï¿½ï¿½ï¿½ï¿½]@i',
-        '@[ï¿½ï¿½ï¿½ï¿½]@i',
-        '@[ï¿½]@i',
+        '@[éèêëÊË]@i',
+        '@[àâäÂÄ]@i',
+        '@[îïÎÏ]@i',
+        '@[ûùüÛÜ]@i',
+        '@[ôöÔÖ]@i',
+        '@[ç]@i',
         '@[^a-zA-Z0-9]@'
     );
     $replace = array('e', 'a', 'i', 'u', 'o', 'c', ' ');
@@ -1114,7 +1103,7 @@ function addhttp($url)
 /**
  * afficherRang function.
  *
- * Affiche le rang au championnat selon les paramï¿½tres
+ * Affiche le rang au championnat selon les paramètres
  *
  * @access public
  * @param mixed $idTour
@@ -1140,7 +1129,7 @@ function afficherRang(
         if ($nbMatchGagne == $nbMatchGagnantPromoReleg) {
             $rangAffiche = "Promu";
         } else if ($nbMatchPerdu == $nbMatchGagnantPromoReleg) {
-            $rangAffiche = "Relï¿½guï¿½";
+            $rangAffiche = "Relégué";
         }
     } else if ($idTour == 4000) {
         if ($nbMatchGagne == $nbMatchGagnantTourFinal) {
@@ -1158,7 +1147,7 @@ function updatePassword($userId, $newPassword, $newPasswordRepeat)
 {
     $validationErrors = '';
     if (strlen($newPassword) < 8) {
-        $validationErrors .= 'Votre mot de passe doit ï¿½tre composï¿½ d\'au minimum 8 caractï¿½res.<br/>';
+        $validationErrors .= 'Votre mot de passe doit être composé d\'au minimum 8 caractères.<br/>';
     }
     if (!preg_match("#[0-9]+#", $newPassword)) {
         $validationErrors .= 'Votre mot de passe doit contenir au minimum un chiffre<br/>';
@@ -1170,7 +1159,7 @@ function updatePassword($userId, $newPassword, $newPasswordRepeat)
         $validationErrors .= 'Votre mot de passe doit contenir au minimum une lettre en minuscule<br/>';
     }
     if (!preg_match("#[\W]+#", $newPassword)) {
-        $validationErrors .= 'Votre mot de passe doit contenir au minimum un caractï¿½re spï¿½cial<br/>';
+        $validationErrors .= 'Votre mot de passe doit contenir au minimum un caractère spécial<br/>';
     }
 
     if (strlen($validationErrors) > 0) {
@@ -1178,7 +1167,7 @@ function updatePassword($userId, $newPassword, $newPasswordRepeat)
     }
 
     if ($newPassword != $newPasswordRepeat) {
-        throw new Exception('Vous n\'avez pas entrï¿½ deux fois le mï¿½me mot de passe.', 400);
+        throw new Exception('Vous n\'avez pas entré deux fois le même mot de passe.', 400);
     }
 
     $hashedPassword = md5($newPassword);
