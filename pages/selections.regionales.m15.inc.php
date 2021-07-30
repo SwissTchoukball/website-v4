@@ -4,7 +4,7 @@ if ($_SESSION["debug_tracage"]) {
 }
 statInsererPageSurf(__FILE__);
 
-echo '<div>' . getSimplePageContent(17) . '</div>';
+echo '<div>' . getSimplePageContent(47) . '</div>';
 
 showFunctionPerson(12);
 showFunctionPerson(13);
