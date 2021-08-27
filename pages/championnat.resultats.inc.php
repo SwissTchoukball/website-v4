@@ -1,8 +1,5 @@
 <?php
-// $currentSeasonStartYear = getCurrentSeasonStartYear();
-
-// We lock the season to 2020-2021 as the following seasons are handled in Leverade and shown in the new website
-$currentSeasonStartYear = 2020;
+$currentSeasonStartYear = getCurrentSeasonStartYear();
 
 // Set the selected year
 if (isset($_GET['year']) && is_numeric($_GET['year'])) {
