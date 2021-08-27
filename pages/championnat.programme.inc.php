@@ -14,14 +14,14 @@ if (isset($_GET['year']) && is_numeric($_GET['year'])) {
 }
 
 
-//Récupération de la liste des arbitres
+//Rï¿½cupï¿½ration de la liste des arbitres
 $referees = getReferees();
 
 if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($_GET['venueID']) || !isValidVenueID($_GET['venueID']))) {
     // ------------------------------------------ //
     // ! Affichage du programme
     // ------------------------------------------ //
-    ?>
+?>
 
     <script type="text/javascript">
         function updateSelection() {
@@ -38,12 +38,12 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
         }
     </script>
     <form onsubmit="$event.preventDefault()">
-        <input type="hidden" name="lien" value="<?php echo $idPage; ?>"/>
+        <input type="hidden" name="lien" value="<?php echo $idPage; ?>" />
         <table class="formagenda">
             <tr>
                 <td align="right" width="50%"><label for="seasonSelector"><?php echo VAR_LANG_SAISON; ?> :</label></td>
                 <td align="left">
-                    <select name="annee" id="seasonSelector" title="Année" onChange="updateSelection();">
+                    <select name="annee" id="seasonSelector" title="Annï¿½e" onChange="updateSelection();">
                         <?php
                         if ($showFutureGamesOnly) {
                             echo "<option selected='selected' value='Avenir'>" . VAR_LANG_RENCONTRES_A_VENIR . "</option>";
@@ -111,11 +111,21 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>"/>
-        <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>"/>
+        <input type="hidden" name="menuselection" value="<?php echo $menuselection; ?>" />
+        <input type="hidden" name="smenuselection" value="<?php echo $smenuselection; ?>" />
     </form>
 
     <?php
+
+    if ($selectedSeasonStartYear >= 2021) {
+    ?>
+        <p class="center" style="margin-top: 50px; font-size: 20px;">Toutes les informations sur le championnat se trouvent dÃ©sormais sur Leverade.</p>
+        <p class="center" style="margin-top: 30px;">
+            <a href="https://leverade.com/fr/manager/swisstchoukball/tournaments" class="button button--primary" style="color: white;">AccÃ©der Ã  Leverade</a>
+        </p>
+        <?php
+        exit();
+    }
 
     // affichage des dates
     if ($showFutureGamesOnly) {
@@ -160,13 +170,13 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
     // echo $requete;
     $retour = mysql_query($requete);
     if (!$retour) {
-        printErrorMessage("Erreur lors de la récupération de la liste des matchs.<br />Message : " . mysql_error() . "<br />Requête : " . $requete);
+        printErrorMessage("Erreur lors de la rï¿½cupï¿½ration de la liste des matchs.<br />Message : " . mysql_error() . "<br />Requï¿½te : " . $requete);
     } else {
         $nbMatchs = mysql_num_rows($retour);
         if ($nbMatchs == 0) {
-            printBlankSlateMessage("Aucun match planifié pour la sélection.");
+            printBlankSlateMessage("Aucun match planifiï¿½ pour la sï¿½lection.");
         } else {
-            ?>
+        ?>
 
             <table class="agenda">
                 <tr>
@@ -189,7 +199,8 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                         $donnees['idArbitreCTiers2'],
                         $donnees['idArbitreCTiers3']
                     );
-                    $arbitresMatchs = array_replace($arbitresMatchs,
+                    $arbitresMatchs = array_replace(
+                        $arbitresMatchs,
                         array_fill_keys(
                             array_keys($arbitresMatchs, ''),
                             0
@@ -210,7 +221,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                     }
 
 
-                    ?>
+                ?>
                     <tr id="M<?php echo $donnees['idMatch']; ?>" class="<?php echo $rowClass; ?>">
                         <td class="center"><?php echo $dateToPrint; ?></td>
                         <td>
@@ -219,8 +230,8 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                             echo '<strong>' . $donnees['equipeA'] . " - " . $donnees['equipeB'] . "</strong> ";
                             echo '</a>';
                             echo "<span class='categorieProgrammeChampionnat'>" . $donnees['categorie'] . "</span>";
-                            if ($donnees['dateReportDebut'] != '0000-00-00' AND $donnees['dateReportFin'] != '0000-00-00' AND $donnees['heureReportDebut'] != '00:00:00' AND $donnees['heureReportFin'] != '00:00:00') {
-                                echo " : Match reporté au " . date_sql2date($donnees['dateReportDebut']);
+                            if ($donnees['dateReportDebut'] != '0000-00-00' and $donnees['dateReportFin'] != '0000-00-00' and $donnees['heureReportDebut'] != '00:00:00' and $donnees['heureReportFin'] != '00:00:00') {
+                                echo " : Match reportï¿½ au " . date_sql2date($donnees['dateReportDebut']);
                             }
                             ?>
                             <div class="arbitres" style="display: none;">
@@ -243,7 +254,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                                 if ($refereesString != '') {
                                     echo $refereesString;
                                 } else {
-                                    echo 'Aucun arbitre indiqué pour le moment.';
+                                    echo 'Aucun arbitre indiquï¿½ pour le moment.';
                                 }
                                 ?>
                             </div>
@@ -253,7 +264,7 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                             if ($donnees['idLieu'] > 0) {
                                 echo '<a href="/lieu/' . $donnees['idLieu'] . '">' . $donnees['nomLieu'] . ", " . $donnees['ville'] . '</a>';
                             } else {
-                                echo 'Non défini';
+                                echo 'Non dï¿½fini';
                             }
                             ?>
                         </td>
@@ -264,16 +275,13 @@ if ((!isset($_GET['matchID']) || !isValidMatchID($_GET['matchID'])) && (!isset($
                             <?php echo heure($donnees['heureFin']) . ':' . minute($donnees['heureFin']); ?>
                         </td>
                     </tr>
-                    <?php
+                <?php
                     $previousMatchDate = $donnees['dateDebut'];
                 }
                 ?>
             </table>
-            <?php
+<?php
         }
     }
 }
 ?>
-
-
-

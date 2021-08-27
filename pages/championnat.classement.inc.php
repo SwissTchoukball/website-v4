@@ -32,6 +32,16 @@ if (isset($_GET['year']) && is_numeric($_GET['year'])) {
 
 <?php
 
+if ($selectedSeasonStartYear >= 2021) {
+?>
+    <p class="center" style="margin-top: 50px; font-size: 20px;">Toutes les informations sur le championnat se trouvent dÃ©sormais sur Leverade.</p>
+    <p class="center" style="margin-top: 30px;">
+        <a href="https://leverade.com/fr/manager/swisstchoukball/tournaments" class="button button--primary" style="color: white;">AccÃ©der Ã  Leverade</a>
+    </p>
+    <?php
+    exit();
+}
+
 
 // Affichage classement
 
@@ -45,7 +55,7 @@ include('championnat.fonctions.tri.classement.F.inc.php');
 
 $debug = false; // isAdmin()
 
-/* Sélection de la politique des points de l'année choisie. */
+/* Sï¿½lection de la politique des points de l'annï¿½e choisie. */
 
 $retourAnnee = mysql_query("SELECT * FROM Championnat_Saisons WHERE saison=" . $selectedSeasonStartYear);
 $donnees = mysql_fetch_array($retourAnnee);
@@ -60,7 +70,7 @@ $nbMatchGagnantPromoReleg = $donnees['nbMatchGagnantPromoReleg'];
 
 $dernierClassement = 0;
 
-/* Requête pour les noms de Catégorie et Tour afin de pas devoir les chercher à chaque fois avec une requête */
+/* Requï¿½te pour les noms de Catï¿½gorie et Tour afin de pas devoir les chercher ï¿½ chaque fois avec une requï¿½te */
 
 $requeteNomCategorie = "SELECT idCategorie AS id, categorie" . $_SESSION['__langue__'] . " AS nom FROM Championnat_Categories";
 $retourNomCategorie = mysql_query($requeteNomCategorie);
@@ -77,7 +87,7 @@ while ($donnesNomTour = mysql_fetch_array($retourNomTour)) {
 }
 
 
-/* Requête pour afficher la liste des ligues */
+/* Requï¿½te pour afficher la liste des ligues */
 $requete =
     "SELECT DISTINCT idCategorie
      FROM Championnat_Equipes_Tours
@@ -97,7 +107,7 @@ while ($ligue = mysql_fetch_array($retourListeLigues)) {
 echo "</ul>";
 
 
-/* Requête définissant les de classements à faire et leur type puis execution d'une boucle pour chaque classement */
+/* Requï¿½te dï¿½finissant les de classements ï¿½ faire et leur type puis execution d'une boucle pour chaque classement */
 $requete =
     "SELECT DISTINCT idCategorie, idTour, idGroupe AS noGroupe, rankingStart
      FROM Championnat_Tours
@@ -134,18 +144,18 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     }
     $retourTriPoints = mysql_query($requete);
     $a = 0;
-    while ($donneesTriPoints = mysql_fetch_array($retourTriPoints)) { // Vérification du nombre de points pour chaque équipe
-        if ($a == 0 OR $donneesTriPoints['points'] != $points) { // SI première équipe OU équipe précédante n'a pas le même nombre de points
+    while ($donneesTriPoints = mysql_fetch_array($retourTriPoints)) { // Vï¿½rification du nombre de points pour chaque ï¿½quipe
+        if ($a == 0 or $donneesTriPoints['points'] != $points) { // SI premiï¿½re ï¿½quipe OU ï¿½quipe prï¿½cï¿½dante n'a pas le mï¿½me nombre de points
             $a++; // Nouveau groupe de tri par points
-            $b = 1; // Réinitialisation du numéro d'équipe du groupe
+            $b = 1; // Rï¿½initialisation du numï¿½ro d'ï¿½quipe du groupe
             $points = $donneesTriPoints['points']; // Nombre de point qu'a le groupe de tri par points
         }
-        $groupeTriPoints[$a][$b] = $donneesTriPoints['idEquipe']; //ID d'équipe placé dans un groupe de tri par points
-        $b++; //Nouveau numéro d'équipe
+        $groupeTriPoints[$a][$b] = $donneesTriPoints['idEquipe']; //ID d'ï¿½quipe placï¿½ dans un groupe de tri par points
+        $b++; //Nouveau numï¿½ro d'ï¿½quipe
     } // Fin boucle Tri Points
-    $groupeTriPoints[0] = $a; //la position 0 du tableau étant libre, on peut lui donner le nombre de groupes a égalités pour la fonction.
+    $groupeTriPoints[0] = $a; //la position 0 du tableau ï¿½tant libre, on peut lui donner le nombre de groupes a ï¿½galitï¿½s pour la fonction.
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités de points :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s de points :</strong><br />";
         print_array($groupeTriPoints);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -156,7 +166,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
 
     $tableau = triParPointsInterne($informations, $groupeTriPoints, $debug);
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités de points interne :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s de points interne :</strong><br />";
         print_array($tableau);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -166,7 +176,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
 
     $tableau = triDifferenceScorePointsInterne($informations, $tableau, $debug);
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités de différence de points(score) interne :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s de diffï¿½rence de points(score) interne :</strong><br />";
         print_array($tableau);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -175,7 +185,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     }
     $tableau = triScorePointsMarquesInterne($informations, $tableau, $debug);
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités de points marqués interne :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s de points marquï¿½s interne :</strong><br />";
         print_array($tableau);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -184,7 +194,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     }
     $tableau = triDifferenceScorePoints($informations, $tableau, $debug);
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités de goalaverage :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s de goalaverage :</strong><br />";
         print_array($tableau);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -202,7 +212,7 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
     }
     $tableau = triEgaliteParfaite($informations, $tableau, $debug);
     if ($debug) {
-        echo "<br /><strong>Tableau de groupement des égalités parfaite :</strong><br />";
+        echo "<br /><strong>Tableau de groupement des ï¿½galitï¿½s parfaite :</strong><br />";
         print_array($tableau);
         echo "<br />";
         $etatMemoire = memory_get_usage();
@@ -213,34 +223,34 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
 
     /* AFFICHAGE CLASSEMENT */
 
-    if (($idTour == 4000 AND $nbMatchGagnantPlayoff > 1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout > 1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg > 1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal > 1)) { // Play-off, Play-out, Promotion/Relegation ou tour final de + de 1 match
+    if (($idTour == 4000 and $nbMatchGagnantPlayoff > 1) or ($idTour == 3000 and $nbMatchGagnantPlayout > 1) or ($idTour == 2000 and $nbMatchGagnantPromoReleg > 1) or ($idTour == 10000 and $nbMatchGagnantTourFinal > 1)) { // Play-off, Play-out, Promotion/Relegation ou tour final de + de 1 match
         $typeClassement = 1;
-    } elseif (($idTour == 4000 AND $nbMatchGagnantPlayoff == 1) OR ($idTour == 3000 AND $nbMatchGagnantPlayout == 1) OR ($idTour == 2000 AND $nbMatchGagnantPromoReleg == 1) OR ($idTour == 10000 AND $nbMatchGagnantTourFinal == 1)) { // Play-off, Play-out, Promotion/Relegation, tour final de 1 match
+    } elseif (($idTour == 4000 and $nbMatchGagnantPlayoff == 1) or ($idTour == 3000 and $nbMatchGagnantPlayout == 1) or ($idTour == 2000 and $nbMatchGagnantPromoReleg == 1) or ($idTour == 10000 and $nbMatchGagnantTourFinal == 1)) { // Play-off, Play-out, Promotion/Relegation, tour final de 1 match
         $typeClassement = 2;
     } else { //Tour normal
         $typeClassement = 3;
     }
 
-    if (!isset($idCategoriePrecedenteBoucle) OR $idCategoriePrecedenteBoucle != $idCategorie) {
+    if (!isset($idCategoriePrecedenteBoucle) or $idCategoriePrecedenteBoucle != $idCategorie) {
         $idTourPrecedenteBoucle = 0;
         $noGroupePrecedenteBoucle = 0;
         echo "<h2 id='" . slugify($nomCategorie[$idCategorie]) . "' class='alt'>" . $nomCategorie[$idCategorie] . "</h2>";
     }
-    if ((!isset($idTourPrecedenteBoucle) OR $idTourPrecedenteBoucle != $idTour) AND $idTour != 2000) {
+    if ((!isset($idTourPrecedenteBoucle) or $idTourPrecedenteBoucle != $idTour) and $idTour != 2000) {
         $noGroupePrecedenteBoucle = 0;
         echo "<h3>" . $nomTour[$idTour] . "</h3>";
     }
-    if ((!isset($noGroupePrecedenteBoucle) OR $noGroupePrecedenteBoucle != $noGroupe) AND $noGroupe != 0) {
+    if ((!isset($noGroupePrecedenteBoucle) or $noGroupePrecedenteBoucle != $noGroupe) and $noGroupe != 0) {
         echo "<h4>" . VAR_LANG_GROUPE . " " . $noGroupe . "</h4>";
     }
 
-    if ($typeClassement == 1 OR $typeClassement == 3) {
+    if ($typeClassement == 1 or $typeClassement == 3) {
         echo "<table class='classementTour'>";
-        ?>
+    ?>
         <tr>
             <th>
                 <?php
-                if ($idTour == 2000 AND $typeClassement == 1) {
+                if ($idTour == 2000 and $typeClassement == 1) {
                     echo "Promu";
                 } else {
                     echo "Position";
@@ -248,22 +258,22 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
                 ?>
             </th>
             <th>Equipes</th>
-            <th>Joué</th>
-            <th>Gagné</th>
+            <th>Jouï¿½</th>
+            <th>Gagnï¿½</th>
             <?php if ($typeClassement == 3) { ?>
                 <th>Nul</th> <?php } ?>
             <th>Perdu</th>
             <th>Forfait</th>
-            <th>Marqué</th>
-            <th>Reçu</th>
+            <th>Marquï¿½</th>
+            <th>Reï¿½u</th>
             <th>Diff.</th>
             <?php if ($typeClassement == 3) { ?>
                 <th>Points</th> <?php } ?>
         </tr>
-        <?php
+    <?php
     } elseif ($typeClassement == 2) {
         echo "<table class='classementTourFinal'>";
-        ?>
+    ?>
         <tr>
             <th>
                 <?php
@@ -276,16 +286,18 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             </th>
             <th>Equipes</th>
         </tr>
-        <?php
+<?php
     }
 
 
     if ($idTour != 10000) { // Pas un tour final
         $rankingShift = 0;
-        if ($idTour != 1 &&
+        if (
+            $idTour != 1 &&
             isset($idTourPrecedenteBoucle) &&
             $idTourPrecedenteBoucle == $idTour &&
-            $noGroupePrecedenteBoucle != $noGroupe) {
+            $noGroupePrecedenteBoucle != $noGroupe
+        ) {
             // We continue the ranking from the previous group
             $rankingShift = $dernierClassement;
         }
@@ -298,14 +310,20 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             $idEquipe = $tableau[$k][1];
             $requete = "SELECT equipe, nbMatchJoue, nbMatchGagne, nbMatchNul, nbMatchPerdu, nbMatchForfait, nbPointMarque, nbPointRecu, goolaverage, points FROM Championnat_Equipes, Championnat_Equipes_Tours WHERE Championnat_Equipes.idEquipe=" . $idEquipe . " AND Championnat_Equipes_Tours.idEquipe=Championnat_Equipes.idEquipe AND saison=" . $selectedSeasonStartYear . " AND idCategorie=" . $idCategorie . " AND idTour=" . $idTour . " AND noGroupe=" . $noGroupe;
             if ($debug) {
-                echo "<br /><br />Affichage des équipes qui ne sont pas à égalité : " . $requete;
+                echo "<br /><br />Affichage des ï¿½quipes qui ne sont pas ï¿½ ï¿½galitï¿½ : " . $requete;
             }
             $retourEquipeClassement = mysql_query($requete);
             $donneesEquipeClassement = mysql_fetch_array($retourEquipeClassement);
             echo "<tr>";
-            echo "<td>" . afficherRang($idTour, $typeClassement,
-                    $donneesEquipeClassement['nbMatchGagne'], ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
-                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $ranking) . "</td>";
+            echo "<td>" . afficherRang(
+                $idTour,
+                $typeClassement,
+                $donneesEquipeClassement['nbMatchGagne'],
+                ($donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait']),
+                $nbMatchGagnantPromoReleg,
+                $nbMatchGagnantTourFinal,
+                $ranking
+            ) . "</td>";
             echo "<td>" . $donneesEquipeClassement['equipe'] . "</td>";
             if ($typeClassement != 2) {
                 $nbMatchJoue = $donneesEquipeClassement['nbMatchGagne'] + $donneesEquipeClassement['nbMatchNul'] + $donneesEquipeClassement['nbMatchPerdu'] + $donneesEquipeClassement['nbMatchForfait'];
@@ -370,8 +388,15 @@ while ($donneesNbClassement = mysql_fetch_array($retourNbClassement)) {
             } else {
                 $rang = $position;
             }
-            echo "<td>" . afficherRang($idTour, $typeClassement, $nbMatchGagne, $nbMatchPerdu + $nbMatchForfait,
-                    $nbMatchGagnantPromoReleg, $nbMatchGagnantTourFinal, $rang) . "</td>";
+            echo "<td>" . afficherRang(
+                $idTour,
+                $typeClassement,
+                $nbMatchGagne,
+                $nbMatchPerdu + $nbMatchForfait,
+                $nbMatchGagnantPromoReleg,
+                $nbMatchGagnantTourFinal,
+                $rang
+            ) . "</td>";
             echo "<td>" . $equipe . "</td>";
             if ($typeClassement != 2) {
                 echo "<td>" . $nbMatchJoue . "</td>";
