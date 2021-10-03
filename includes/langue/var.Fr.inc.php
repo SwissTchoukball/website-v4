@@ -121,7 +121,7 @@ define("VAR_LANG_DOMAINES_RESPONSABILITE", "Domaines de responsabilit&eacute;");
 define("VAR_LANG_DOMAINE_RESPONSABILITE", "Domaine de responsabilit&eacute;");
 
 //clubs
-define("VAR_LANG_NB_CLUBS", "Il y a %d clubs adhérants à " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".");
+define("VAR_LANG_NB_CLUBS", "Il y a %d clubs adhérents à " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ".");
 
 // Telechargement
 define("VAR_LANG_DOC_NOM_LIEN_FLYER_PRESENTATION",
