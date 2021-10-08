@@ -105,7 +105,7 @@ if ($newsIdSelection != "") {
         echo truncateHtml(markdown($corps), $TAILLE_NEWS,
                 "... ");
         echo "<p><a href='/news/" . $record['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
-        echo "<p class='news-date'>Post� " . date_sql2date_joli($record["date"], "le", "Fr", false) . "</p>";
+        echo "<p class='news-date'>Post&eacute; " . date_sql2date_joli($record["date"], "le", "Fr", false) . "</p>";
         echo "</div>";
         $nbNews++;
     }
