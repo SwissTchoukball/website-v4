@@ -61,11 +61,11 @@ if ($newsIdSelection != "") {
             }
             //afficherAvecEncryptageEmail($corps);
             echo markdown($corps);
-            echo "<p class='date'>Posté " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
+            echo "<p class='date'>Postï¿½ " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
             echo "</div>";
             ?>
             <div class="socialButtons">
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="/news/<?php echo $newsIdSelection; ?>"
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
                    data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
                    data-lang="fr">Tweet</a>
                 <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
@@ -105,7 +105,7 @@ if ($newsIdSelection != "") {
         echo truncateHtml(markdown($corps), $TAILLE_NEWS,
                 "... ");
         echo "<p><a href='/news/" . $record['id'] . "'>" . VAR_LANG_LIRE_SUITE_ARTICLE . "</a></p>";
-        echo "<p class='news-date'>Posté " . date_sql2date_joli($record["date"], "le", "Fr", false) . "</p>";
+        echo "<p class='news-date'>Postï¿½ " . date_sql2date_joli($record["date"], "le", "Fr", false) . "</p>";
         echo "</div>";
         $nbNews++;
     }
