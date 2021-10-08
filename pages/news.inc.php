@@ -61,7 +61,7 @@ if ($newsIdSelection != "") {
             }
             //afficherAvecEncryptageEmail($corps);
             echo markdown($corps);
-            echo "<p class='date'>Post� " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
+            echo "<p class='date'>Post&eacute; " . date_sql2date_joli($record["date"], "le", "Fr") . "</p>";
             echo "</div>";
             ?>
             <div class="socialButtons">
