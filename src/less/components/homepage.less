@@ -35,7 +35,7 @@
     &--latest-news {
       grid-row-start: first-line;
       grid-column-start: 1;
-      grid-column-end: 3;
+      grid-column-end: 4;
       text-align: justify;
       line-height: 1.5;
       font-size: 1.2em;
@@ -68,7 +68,8 @@
     }
 
     &--newsletter {
-      grid-row-start: third-line;
+      grid-row-start: second-line;
+      grid-column-start: 3;
       form {
         text-align: center;
 
@@ -104,11 +105,17 @@
     }
 
     &--next-matches {
+      // Hiding the next matches as the championship data is now on Leverade and will never be shown on this website.
+      // (It will be on the new one)
+      display: none;
       grid-row-start: second-line;
       grid-column-start: 3;
     }
 
     &--championship-ranking {
+      // Hiding the ranking as the championship data is now on Leverade and will never be shown on this website.
+      // (It will be on the new one)
+      display: none;
       grid-row-start: first-line;
       grid-column-start: 3;
 
