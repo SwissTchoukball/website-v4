@@ -548,8 +548,10 @@ function showHead($objectID, $table, $objectNameAttr)
               LIMIT 1";
     if ($result = mysql_query($query)) {
         $person = mysql_fetch_assoc($result);
-        echo '<h2>' . VAR_LANG_RESPONSABLE . ' ' . $person['objectName'] . '</h2>';
-        showPerson($person);
+        if (mysql_num_rows($result) > 0) {
+            echo '<h2>' . VAR_LANG_RESPONSABLE . ' ' . $person['objectName'] . '</h2>';
+            showPerson($person);
+        }
     } else {
         printErrorMessage("Erreur lors de la récupération du responsable");
     }
