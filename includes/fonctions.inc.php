@@ -548,7 +548,7 @@ function showHead($objectID, $table, $objectNameAttr)
               LIMIT 1";
     if ($result = mysql_query($query)) {
         $person = mysql_fetch_assoc($result);
-        if (mysql_num_rows($result) > 0 || !$person["prenom"]) {
+        if (mysql_num_rows($result) > 0 || $person["prenom"]) {
             echo '<h2>' . VAR_LANG_RESPONSABLE . ' ' . $person['objectName'] . '</h2>';
             showPerson($person);
         }
