@@ -8,7 +8,7 @@
         if (isset($_POST['annee']) && is_numeric($_POST['annee'])) {
             $annee = $_POST['annee'];
         } else {
-            $annee = $mostRecentEdition['year'];
+            $annee = 2022;
         }
         ?>
         <form name="resultatsCoupeCH" action="" method="post">
