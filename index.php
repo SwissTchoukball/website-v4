@@ -3,14 +3,15 @@
 <html lang="<?php echo strtolower($_SESSION["__langue__"]); ?>">
 <head prefix="og: http://ogp.me/ns#">
     <title><?php echo $title; ?></title>
+    <meta name="robots" content="noindex">
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
     <meta name="keywords"
-          content="Tchouk, Tchoukball, Tchouk-ball, Fair-play, Sport, sport pour tous, prix thulin, site officiel, official web site, Swiss Tchoukball, FSTB, Fï¿½dï¿½ration Suisse de Tchoukball, Schweizerischer Tchoukball, Swiss Tchoukball Federation, Federazione Svizzera di Tchoukball"/>
+          content="Tchouk, Tchoukball, Tchouk-ball, Fair-play, Sport, sport pour tous, prix thulin, site officiel, official web site, Swiss Tchoukball, FSTB, Fédération Suisse de Tchoukball, Schweizerischer Tchoukball, Swiss Tchoukball Federation, Federazione Svizzera di Tchoukball"/>
     <meta name="description"
-          content="Tchoukball : Sport pour tous. venez decouvrir ce nouveau sport qui est le sport de demain. Site officiel de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?>. En franï¿½ais. Auf Deutsch. In English. In italiano."/>
+          content="Tchoukball : Sport pour tous. venez decouvrir ce nouveau sport qui est le sport de demain. Site officiel de <?php echo VAR_LANG_ASSOCIATION_NAME_ARTICLE; ?>. En français. Auf Deutsch. In English. In italiano."/>
     <meta name="Revisit-after" content="14 days">
     <meta http-equiv="Content-Language" content="<?php echo strtolower($_SESSION["__langue__"]); ?>">
-    <meta name="Identifier-url" content="https://tchoukball.ch">
+    <meta name="Identifier-url" content="https://v4.tchoukball.ch">
     <!-- Icon for Pinned Tabs (Safari 9) -->
     <link rel="mask-icon" href="website_icon.svg" color="#e2001a">
     <!-- Favicons -->
@@ -33,7 +34,7 @@
     <!-- /Favicons -->
     <!-- Open graph metatags -->
     <meta property="og:title" content="<?php echo VAR_LANG_ASSOCIATION_NAME . $titre; ?>"/>
-    <meta property="og:image" content="https://tchoukball.ch/pictures/Logo-SwissTchoukball_500.png"/>
+    <meta property="og:image" content="https://v4.tchoukball.ch/pictures/Logo-SwissTchoukball_500.png"/>
     <meta property="og:type" content="<?php echo $open_graph_type; ?>"/>
     <meta property="og:url" content="<?php echo "http://" . $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]; ?>"/>
     <meta property="og:site_name" content="<?php echo VAR_LANG_ASSOCIATION_NAME; ?>"/>
@@ -42,7 +43,7 @@
     <link rel="stylesheet" type="text/css" href="/build/master.css?v=<?php echo $ST_WEBSITE_VERSION; ?>">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="alternate" type="application/rss+xml"
-          href="https://tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php"/>
+          href="https://v4.tchoukball.ch/rss<?php echo $_SESSION["__langue__"]; ?>.php"/>
 </head>
 <body>
 

@@ -108,7 +108,7 @@
             <?php
             $retour = mysql_query("SELECT * FROM Uploads WHERE type='jpg' OR type='jpeg' OR type='png' OR type='gif' ORDER BY date DESC");
             while ($donnees = mysql_fetch_array($retour)) {
-                echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'> <label for='" . $donnees['id'] . "'><a href='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
+                echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'> <label for='" . $donnees['id'] . "'><a href='https://v4.tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
             }
             ?>
         </div>

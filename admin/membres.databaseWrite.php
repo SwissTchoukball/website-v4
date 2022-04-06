@@ -305,7 +305,7 @@ if ($_POST['postType'] == "newMember" || $_POST['postType'] == "editMember") {
             $messageMail = $_SESSION['__prenom__'] . " " . $_SESSION['__nom__'] . " demande un transfert pour <strong>" . htmlentities($_POST['memberName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong>.<br /><br />";
             $messageMail .= "Club d'origine : <strong>" . htmlentities($_POST['currentClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
             $messageMail .= "Nouveau club : <strong>" . htmlentities($_POST['newClubName'], ENT_COMPAT | ENT_HTML401, 'ISO-8859-1') . "</strong><br /><br />";
-            $messageMail .= "<a href='https://tchoukball.ch/admin.php?menuselection=55&smenuselection=30'>Gestion des transferts</a>";
+            $messageMail .= "<a href='https://v4.tchoukball.ch/admin.php?menuselection=55&smenuselection=30'>Gestion des transferts</a>";
             $from = "From:no-reply@tchoukball.ch\n";
             $from .= "MIME-version: 1.0\n";
             $from .= "Content-type: text/html; charset= iso-8859-1\n";

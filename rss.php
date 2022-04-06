@@ -38,7 +38,7 @@ echo '<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>
 <title>Swiss Tchoukball</title>
-<link>https://tchoukball.ch/news</link>
+<link>https://v4.tchoukball.ch/news</link>
 <description>Swiss Tchoukball News</description>
 <language>' . $langIdentifier . '</language>'; // ici on remplit les informations
 
@@ -67,7 +67,7 @@ for ($i = 0; $i < 10; $i++) {
 
     $title = htmlspecialchars($title, ENT_COMPAT, 'UTF-8'); // fonction pour le titre
     $author = "info@tchoukball.ch"; // fonction pour l'auteur
-    $link = "https://tchoukball.ch/news/" . $row["id"]; // fonction pour le lien
+    $link = "https://v4.tchoukball.ch/news/" . $row["id"]; // fonction pour le lien
     $description = Markdown($description); // fonction pour le contenu de la news
     $date = date_sql2RFC_2822($row["date"]); // fonction pour la date de publication de la news
 
