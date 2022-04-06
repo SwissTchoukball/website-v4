@@ -1,6 +1,11 @@
 #php_flag "allow_url_fopen" "On"
 #php_flag "allow_url_include" "On"
 
+AuthName "Ancien site web"
+AuthType Basic
+AuthUserFile "/home/clients/6129dcc8ef93de6705be359b5ebc0041/htpasswd/v4.tchoukball.ch/.htpasswd"
+Require valid-user
+
 Redirect 301 /.well-known/change-password https://v4.tchoukball.ch/admin.php?menuselection=1&smenuselection=2
 Redirect 301 /competitions-feminines /championnat-feminin
 
