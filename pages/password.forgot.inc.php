@@ -27,7 +27,7 @@ if (isset($_POST['email'])) {
         $body .= "<strong>" . $username . "</strong> est le nom d'utilisateur associé.<br /><br />";
 
         $token = bin2hex(openssl_random_pseudo_bytes(16));
-        $passwordResetLink = 'https://tchoukball.ch/reset-password/' . $token;
+        $passwordResetLink = 'https://v4.tchoukball.ch/reset-password/' . $token;
         $body .= '<a href="' . $passwordResetLink . '">' . 'Réinitialiser mon mot de passe</a><br /><br />';
         $body .= 'Ce lien est valide 24h.';
 

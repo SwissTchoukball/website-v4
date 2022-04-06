@@ -56,7 +56,7 @@ $record = mysql_fetch_array($recordset);
             } else {
                 $checked = "";
             }
-            echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'" . $checked . "> <label for='" . $donnees['id'] . "'><a href='https://tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
+            echo "<input type='radio' name='image' value='" . $donnees['id'] . "' id='" . $donnees['id'] . "'" . $checked . "> <label for='" . $donnees['id'] . "'><a href='https://v4.tchoukball.ch/uploads/" . $donnees['fichier'] . "' target='_blank'>" . $donnees['titre'] . "</a></label><br />";
         }
         ?>
     </div>
