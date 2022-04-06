@@ -85,3 +85,6 @@ build/*
 
 bin/*
 !sql_updates/*.sql
+.vscode
+settings.ini.php
+php-ini-overrides.ini
