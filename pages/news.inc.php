@@ -69,17 +69,6 @@ if ($newsIdSelection != "") {
                    data-text="<?php echo strip_tags($titre); ?>" data-count="none" data-via="SwissTchoukball"
                    data-lang="fr">Tweet</a>
                 <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
-                <div class="fb-share-button"
-                     data-href="https://tchoukball.ch/news/<?php echo $newsIdSelection; ?>"
-                     data-layout="button"
-                     data-size="small"
-                     data-mobile-iframe="true">
-                    <a class="fb-xfbml-parse-ignore"
-                       target="_blank"
-                       href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">
-                        Share
-                    </a>
-                </div>
             </div>
             <?php
         }

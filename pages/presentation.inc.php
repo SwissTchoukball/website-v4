@@ -28,11 +28,3 @@ while ($donnees = mysql_fetch_array($retour)) {
     $entete++;
 }
 ?>
-<div class="fb-page" data-href="https://www.facebook.com/tchoukball" data-small-header="true"
-     data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false">
-    <div class="fb-xfbml-parse-ignore">
-        <blockquote cite="https://www.facebook.com/tchoukball"><a
-                href="https://www.facebook.com/tchoukball">Tchoukball</a></blockquote>
-    </div>
-</div>
-

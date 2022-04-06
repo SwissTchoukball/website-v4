@@ -136,7 +136,7 @@ if (isset($_GET["login"])) {
     }
 }
 $description = "Site de " . VAR_LANG_ASSOCIATION_NAME_ARTICLE . ". Le tchoukball est un sport pour tous. Accessible, intense, tactique et fair-play, il est le sport de demain.";
-$facebook_type = "website";
+$open_graph_type = "website";
 $tailleDescription = 300;
 /*if($menuselection==1 && $smenuselection==0 && !$admin){//Page Accueil
     $titreNews = mysql_fetch_assoc(mysql_query("SELECT titre".$_SESSION["__langue__"]." AS titre FROM News ORDER by premiereNews DESC, Date DESC LIMIT 0,1"));
@@ -146,7 +146,7 @@ elseif(isset($newsIdSelection) && $newsIdSelection!=""){ //Page NEWS
     $news = mysql_fetch_assoc(mysql_query("SELECT id, titre".$_SESSION["__langue__"]." AS titre, corps".$_SESSION["__langue__"]." AS corps FROM `News` WHERE `Id`='".$newsIdSelection."'"));
     $titre.= " : ".strip_tags($news['titre']);
     $description = strip_tags(sizeNewsManager($news['corps'],$tailleDescription,$news['id']));
-    $facebook_type = "article";
+    $open_graph_type = "article";
 }*/
 if (isset($newsIdSelection) && $newsIdSelection != "") {
     //Page NEWS
@@ -156,15 +156,12 @@ if (isset($newsIdSelection) && $newsIdSelection != "") {
     $description = truncateHtml(markdown($news['corps']), $tailleDescription, " ...");
     $description = str_replace("’", "'", $description);
     $description = strip_tags($description);
-    $facebook_type = "article";
+    $open_graph_type = "article";
 }
 $title = $prefixDev . VAR_LANG_ASSOCIATION_NAME . $titre;
 
 
-// !Facebook Javascript SDK
 // Locale code
-// The basic format is ll_CC, where ll is a two-letter language code, and CC is a two-letter country code.
-// See https://developers.facebook.com/docs/internationalization/#locales
 $locale_code_ISOlanguage = strtolower($_SESSION["__langue__"]);
 if ($locale_code_ISOlanguage == "en") {
     $locale_code = $locale_code_ISOlanguage . "_US";

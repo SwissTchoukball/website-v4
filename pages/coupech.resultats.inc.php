@@ -453,11 +453,6 @@
 
     <?php showCommissionHead(21); ?>
 
-    <iframe
-            src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fcoupesuisse&width=360&colorscheme=light&show_faces=false&stream=false&header=false&height=77"
-            scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:360px; height:77px;"
-            allowTransparency="true"></iframe>
-
     <script language="JavaScript" type="text/javascript">
         // Javascript pour afficher la box d'information sur un match.
         var current;

@@ -19,10 +19,6 @@ echo "Email" . " : ";
 echo emailperso('redaction@tchoukball.ch', 'redaction@tchoukball.ch', 'Contact depuis tchoukball.ch');
 echo '</p>';
 
-
-//! Facebook like box
-echo '<div class="fb-page" data-href="https://www.facebook.com/tchoukup" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/tchoukup"><a href="https://www.facebook.com/tchoukup">Tchoukup</a></blockquote></div></div>';
-
 //! Archives
 $requete = "SELECT * FROM `Download` WHERE idType=8 AND visible=1 ORDER BY `id` DESC";
 $recordset = mysql_query($requete) or die ("<H3>Aucune date existe</H3>");
